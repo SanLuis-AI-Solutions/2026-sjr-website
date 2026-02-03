@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Jewelry Journal - Susie's Jewelry Repair</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#7a2e3a",
+              "background-light": "#FAF7F2",
+              "background-dark": "#1e1416",
+              "pale-gold": "#D4AF37",
+              "deep-plum": "#5E2230"
+            },
+            fontFamily: {
+              "display": ["Newsreader", "serif"],
+              "sans": ["Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-50 flex items-center bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md px-4 py-3 justify-between border-b border-primary/10">
+<div class="text-primary dark:text-white flex size-10 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-primary dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center font-display italic">Susie's</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex cursor-pointer items-center justify-center text-primary dark:text-white">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="@container">
+<div class="relative w-full h-[260px] bg-[#FAF7F2] overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-multiply" data-alt="High-key photography of elegant diamond necklace" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADrHE-z9MkorsXd47mwZnWXNA6UHnwMHt1UGJJfwIf9enjtZiFeY-Op1qCUc21lpDOer36JwrR3dfWVwBda36f7RApk-vHyfHxBSOdcKutSoZFfoRrp5aimSo-zUZeF-FMNEDcBPZPbyup8_3tcyj5DE_tLGrAIAzLKsSqpErLSrwDuxiSeAS-y3-TmhdSAJ4GDFzBDwqD0HQTfKDpqN0nZTrbm57embOnskl0S7jLSiWy39-lN77iaFWeorsy-b3TC0Sm_DhybkqO');"></div>
+<div class="relative h-full flex flex-col items-center justify-center px-6 text-center">
+<h1 class="text-primary text-5xl font-bold leading-tight tracking-tight italic">The Jewelry Journal</h1>
+<p class="text-primary/70 text-sm mt-2 tracking-widest uppercase font-sans">Houston, Texas</p>
+</div>
+</div>
+</div>
+<!-- Categories / Chips -->
+<div class="flex gap-4 p-4 overflow-x-auto no-scrollbar bg-background-light dark:bg-background-dark">
+<div class="flex flex-col items-center shrink-0 border-b border-pale-gold/40 pb-1">
+<p class="text-primary dark:text-white text-sm font-semibold leading-normal">Repair Tips</p>
+</div>
+<div class="flex flex-col items-center shrink-0 border-b border-transparent pb-1">
+<p class="text-primary/60 dark:text-white/60 text-sm font-medium leading-normal">Watch Care</p>
+</div>
+<div class="flex flex-col items-center shrink-0 border-b border-transparent pb-1">
+<p class="text-primary/60 dark:text-white/60 text-sm font-medium leading-normal">Diamond Guide</p>
+</div>
+<div class="flex flex-col items-center shrink-0 border-b border-transparent pb-1">
+<p class="text-primary/60 dark:text-white/60 text-sm font-medium leading-normal">Vintage Restoration</p>
+</div>
+<div class="flex flex-col items-center shrink-0 border-b border-transparent pb-1">
+<p class="text-primary/60 dark:text-white/60 text-sm font-medium leading-normal">Custom Design</p>
+</div>
+</div>
+<!-- Featured Post -->
+<div class="px-4 py-6">
+<h2 class="text-primary dark:text-white text-xs uppercase tracking-[0.2em] font-bold mb-4">Featured Story</h2>
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-sm bg-white dark:bg-background-dark/40 overflow-hidden border border-primary/5">
+<div class="w-full aspect-[16/9] bg-center bg-cover" data-alt="Close up of watchmaker repairing luxury timepiece" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDucCfcWYAT2ayzCAwJz93BAfTt8EuJaPsp2zaNbzptkQgQZ8DO4gcRfc0RtrEjzP2KCpuaIJ-Sp18T4bSy51WJbuLQoGNFtWEz2qDlZRanE3J8u-eO0vTpKv4CpwOEVGvrC4kPF8jVT10l0N9ZsK5K6_-3Rz7tDnDgwFMxD45xrYBH_nxgQLalLJBWCojLrjgEXpk3pm07hSdF4Sh2L9vYiT4yWCVAaIadllQws-sPJSgyE9WqvxpN7pO0B_DAcTlIm72as5uDQX8H');"></div>
+<div class="flex w-full flex-col p-6 gap-2">
+<p class="text-primary dark:text-white text-2xl font-bold leading-tight italic">Restoring Timeless Heirlooms</p>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed font-sans">Discover the meticulous process of bringing vintage timepieces back to life with our master horologists.</p>
+<div class="mt-4">
+<button class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-semibold tracking-wide">Read More</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Blog Grid -->
+<div class="px-4 pb-8">
+<h2 class="text-primary dark:text-white text-xs uppercase tracking-[0.2em] font-bold mb-4">Latest Insights</h2>
+<div class="grid grid-cols-1 gap-6">
+<!-- Grid Item 1 -->
+<div class="flex gap-4 items-center bg-white dark:bg-background-dark/40 p-3 rounded-xl border border-primary/5 shadow-sm">
+<div class="w-24 h-24 shrink-0 bg-center bg-cover rounded-lg" data-alt="Sparkling round cut diamond in tweezers" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZhdBd1Ag5gvhxTcB8tjMly3DIisivbqI-Q01YdLT4wFhrlcGkMq6dqz5PiFZ7h-s9_pBzcZ-cMoH7d49aJnIAMeQbIBDLWIsVbocAgrHZ-rXhi0CYe-fVLcxMzkKeQPAiCK_uMlyMCfRyA-QBwvpgMdXP4NQNn_WPnPKvMNmWRD5z0AskcQqP67LV-LaJACji6tiJTYjMxYwS4IEVwIbjDEk8XS7YYtbo3aVlu_mj0g9q71ww4SJ9UnP7Coke9sk4lHpXW-Q_X46I');"></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary dark:text-white text-lg font-bold leading-tight italic">The 4Cs of Diamond Care</p>
+<p class="text-primary/70 text-sm font-sans font-medium">Read More →</p>
+</div>
+</div>
+<!-- Grid Item 2 -->
+<div class="flex gap-4 items-center bg-white dark:bg-background-dark/40 p-3 rounded-xl border border-primary/5 shadow-sm">
+<div class="w-24 h-24 shrink-0 bg-center bg-cover rounded-lg" data-alt="Gold wedding bands on a white surface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqlPJlH3dJkalooOM2V4VTo1W3WtW8pyB3kdWQ0PfeySV_aodAxiOZlp2i38bLb0YgUXzohd8JJ9oJkq0hcxS5ZBmxzTNEeVxBU0ju9Qa_UdynZWaNIcyw3mu860x_MojcWWN5c9oyd9iuNqthCTaenVJoBIhkiS3yczQP6X47Kn9rTKueeTx11qZ_mPAlVbn2low1Wwfr2PaMT1PKIRWNGhknESA3LyKJlocnwES2i1u39TYaA-bnLLNwwpVXHo27NbAT4sTp_Cym');"></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary dark:text-white text-lg font-bold leading-tight italic">Resizing Your Precious Bands</p>
+<p class="text-primary/70 text-sm font-sans font-medium">Read More →</p>
+</div>
+</div>
+<!-- Grid Item 3 -->
+<div class="flex gap-4 items-center bg-white dark:bg-background-dark/40 p-3 rounded-xl border border-primary/5 shadow-sm">
+<div class="w-24 h-24 shrink-0 bg-center bg-cover rounded-lg" data-alt="Antique pearl necklace in a velvet box" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5vpcwXLsLpx82WaC8Qf1WvH55lwb7nTatM6ZuXYTN3Eswt8q9xbI8hmPTgeFlNKNKtgrVXq0ccmWbD0iRq5IF4nXXihJqqTjYxkYBG3y-9-IbwUdBEgHmvj06z3uVqV6PNvoo5KhNY-4gJz8QfgE_GQf0BqlU3yXXljh58qoOMAYXXGQaXc6KbkL61R9g6GDeWM_mMR-Y6Jb3GM8rvuQziZ_GO-905CWl9rCMRH9o-32_wFyTaDWBkWaBYQG37FvlNUrGozNpzBru');"></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary dark:text-white text-lg font-bold leading-tight italic">Caring for Natural Pearls</p>
+<p class="text-primary/70 text-sm font-sans font-medium">Read More →</p>
+</div>
+</div>
+<!-- Grid Item 4 -->
+<div class="flex gap-4 items-center bg-white dark:bg-background-dark/40 p-3 rounded-xl border border-primary/5 shadow-sm">
+<div class="w-24 h-24 shrink-0 bg-center bg-cover rounded-lg" data-alt="Polishing silver jewelry with a soft cloth" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtEqB3rcz8Tc5HvyApvKe5Hju7oIU2EKsXwcVKLjuhda7JiR8ck17zDMua9o79NLBOgUQ0vp3H4MvzBkyNxuG-5Wu1sXKPoMrhPPdU1_5HoZP-AMFHdoeeaRKq2aCmGvuFkOxfesNGo_opkR8RMbAFyjfBG4YkIYdjao2-vvMAWTA8mL9Va9D4ZZLqpTtSqK9C5-5dxuxglg2KaaxVQypF5HsWxSFQ_gQjJWt-oNgwFFtCPn_XFySxdfBIf5YcGCN8vYmH8CeKhuDa');"></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary dark:text-white text-lg font-bold leading-tight italic">DIY Safe Cleaning Methods</p>
+<p class="text-primary/70 text-sm font-sans font-medium">Read More →</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Lead Capture -->
+<div class="mx-4 my-8 p-8 bg-[#FAF7F2] border border-pale-gold/30 rounded-2xl text-center flex flex-col items-center gap-4">
+<h3 class="text-primary text-xl font-bold leading-tight italic">Join our Newsletter for Expert Care Tips</h3>
+<p class="text-primary/70 text-sm font-sans">Receive monthly insights on jewelry preservation and exclusive Houston store offers.</p>
+<div class="w-full flex flex-col gap-3 mt-2">
+<input class="w-full h-12 px-4 rounded-lg border-primary/20 bg-white/50 focus:border-primary focus:ring-0 text-primary" placeholder="Email Address" type="email"/>
+<button class="bg-primary text-white h-12 rounded-lg font-bold tracking-wide uppercase text-sm">Subscribe</button>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-deep-plum px-6 py-12 text-center">
+<div class="mb-8">
+<h2 class="text-pale-gold text-2xl font-bold italic mb-2">Susie's Jewelry Repair</h2>
+<p class="text-pale-gold/70 text-sm font-sans uppercase tracking-widest">Houston's Premier Restoration House</p>
+</div>
+<div class="flex justify-center gap-6 mb-8 text-pale-gold/80">
+<span class="material-symbols-outlined">camera_alt</span>
+<span class="material-symbols-outlined">mail</span>
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="text-pale-gold/50 text-xs font-sans tracking-wide">
+<p>© 2024 Susie's Jewelry Repair. All Rights Reserved.</p>
+<p class="mt-2">Privacy Policy • Terms of Service</p>
+</div>
+</footer>
+</body></html>

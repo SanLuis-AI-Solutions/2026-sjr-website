@@ -1,0 +1,124 @@
+import { BUSINESS, SERVICES } from "./constants";
+
+type Service = (typeof SERVICES)[number] & {
+  short_summary?: string;
+};
+type ServiceFaq = {
+  question: string;
+  answer: string;
+};
+
+export function localBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
+    name: BUSINESS.name,
+    url: "https://www.susiesjewelryrepair.com/",
+    logo: "https://www.susiesjewelryrepair.com/logo.png",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZBEnv5lBMoo4GR7XvEais8YU7jNYeFpuZQorD9Xdw9lxy6n-DwQEVgU2ET8CTp_EdIcXvwwYrLl7bsAzkRZyfEw8DEO9Gsjf6uhWJ2Wid_waT5QRnDCHPXAlkt7zO1LHiweiyFC7wv-smvi0ahWOhPNjhrDcUWDrS90SNLAdAFutaUITFE_adoNoXgppWreQE_-nJ6srITzdw0spj72FzG3ZT56vFD747Eyfh0XsliuMGQ86Dgrrv-W0_utrfqU-ZWESpC7sUJG3",
+    telephone: BUSINESS.phone,
+    email: BUSINESS.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: BUSINESS.address.street,
+      addressLocality: BUSINESS.address.city,
+      addressRegion: BUSINESS.address.state,
+      postalCode: BUSINESS.address.zip,
+      addressCountry: "US",
+    },
+    openingHoursSpecification: (BUSINESS.hours || []).map((h) => {
+      const hoursStr = h.hours || "";
+      const times = hoursStr.includes("–") ? hoursStr.split("–") : hoursStr.split("-");
+      const parseTime = (t: string) => {
+        const cleaned = t.trim();
+        if (cleaned.toLowerCase() === "closed") return null;
+        const [time, period] = cleaned.split(" ");
+        const [hoursRaw, minutes] = (time || "0:0").split(":").map(Number);
+        let hours = hoursRaw;
+        if (period === "PM" && hours !== 12) hours += 12;
+        if (period === "AM" && hours === 12) hours = 0;
+        return `${String(hours).padStart(2, "0")}:${String(minutes || 0).padStart(2, "0")}`;
+      };
+
+      const opens = parseTime(times[0] || "");
+      const closes = times[1] ? parseTime(times[1]) : opens;
+
+      return {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [h.day],
+        opens: opens || "00:00",
+        closes: closes || "00:00",
+      };
+    }),
+  };
+}
+
+export function servicesSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Jewelry Repair Services",
+    itemListElement: (SERVICES || []).map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.name,
+        description: service.summary,
+      },
+    })),
+  };
+}
+
+export function faqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Do you repair jewelry in-house?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, all repairs are performed on-site.",
+        },
+      },
+    ],
+  };
+}
+export function serviceSchema(service: Service | undefined) {
+  if (!service) return {};
+  const summary = service.summary || service.short_summary || "";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `https://www.susiesjewelryrepair.com/services/${service.slug}#service`,
+    name: service.name,
+    description: summary,
+    provider: {
+      "@type": "JewelryStore",
+      name: BUSINESS.name,
+    },
+    areaServed: (BUSINESS.serviceAreas || []).map((area) => ({
+      "@type": "City",
+      name: area,
+    })),
+  };
+}
+
+export function serviceFaqSchema(service: (Service & { faqs?: ServiceFaq[] }) | undefined) {
+  if (!service || !service.faqs) return {};
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: (service.faqs || []).map((faq: ServiceFaq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}

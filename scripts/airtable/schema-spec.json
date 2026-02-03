@@ -1,0 +1,57 @@
+{
+  "baseId": "app6ogTLP23Fy37bR",
+  "tables": {
+    "Services": [
+      "name",
+      "slug",
+      "category",
+      "short_summary",
+      "image",
+      "long_description",
+      "includes",
+      "common_requests",
+      "faqs",
+      "price_note",
+      "priority",
+      "active",
+      "meta_title",
+      "meta_description",
+      "geo_city",
+      "geo_state",
+      "geo_area",
+      "updated_at"
+    ],
+    "FAQs": ["question", "answer", "service", "priority", "active"],
+    "Testimonials": [
+      "customer_name",
+      "quote",
+      "rating",
+      "service",
+      "location",
+      "active",
+      "sort"
+    ],
+    "Gallery": [
+      "title",
+      "image",
+      "alt_text",
+      "service",
+      "category",
+      "active",
+      "sort"
+    ],
+    "Blog": [
+      "title",
+      "slug",
+      "excerpt",
+      "body",
+      "hero_image",
+      "tags",
+      "publish_date",
+      "status",
+      "meta_title",
+      "meta_description"
+    ],
+    "Site Settings": ["key", "value", "notes"]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": 10,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/18277865047607243696\",\"title\":\"Home\",\"visibility\":\"PRIVATE\",\"createTime\":\"2026-02-01T06:40:02.932873Z\",\"updateTime\":\"2026-02-01T19:22:51.421833Z\",\"projectType\":\"PROJECT_DESIGN\",\"thumbnailScreenshot\":{\"name\":\"projects/18277865047607243696/files/9d2d617013f84258b02f7f2795fdb108\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AOfcidVq-zoi2xtG4rSpJMJ_XjzFrHlxgW5K1AS28rmfxcqkK0KJ9RNhMcoXdyt-jdD3Tlr28z_BwKCzzclrz38dkR7gu8k8utX8zxfmdEJJGZEcfNhgIIFegOFVB8FEeZ8vLxi7QGm2Lc17CA_DmneLCYWns5TVEybc2qEXMSuRlsO2rqaQgiitqnee9s09GAf3Z8QrwsLAROccm15F-Eh2SV8qS0fqtA20b0CkLAmdSQi1kiK3HJ2efr8aIz8y\"},\"origin\":\"STITCH\",\"deviceType\":\"MOBILE\",\"designTheme\":{\"colorMode\":\"DARK\",\"font\":\"MANROPE\",\"roundness\":\"ROUND_EIGHT\",\"customColor\":\"#da0b3f\",\"saturation\":3},\"screenInstances\":[{\"id\":\"1bf1237017214213832c921fbf180d34\",\"sourceScreen\":\"projects/18277865047607243696/screens/1bf1237017214213832c921fbf180d34\",\"width\":390,\"height\":3188},{\"id\":\"28ae447576cf40028e601ca9abf6e7d7\",\"sourceScreen\":\"projects/18277865047607243696/screens/28ae447576cf40028e601ca9abf6e7d7\",\"y\":19391,\"width\":390,\"height\":3461},{\"id\":\"38c264e3f18a4f3a980f20aaa4fe407a\",\"sourceScreen\":\"projects/18277865047607243696/screens/38c264e3f18a4f3a980f20aaa4fe407a\",\"y\":11760,\"width\":390,\"height\":1885},{\"id\":\"3b48a9c20f594a29b12c5237b99adaf2\",\"sourceScreen\":\"projects/18277865047607243696/screens/3b48a9c20f594a29b12c5237b99adaf2\",\"y\":6801,\"width\":390,\"height\":2877},{\"id\":\"7278af3abd4f49fd86b73fbc21e07fd2\",\"sourceScreen\":\"projects/18277865047607243696/screens/7278af3abd4f49fd86b73fbc21e07fd2\",\"y\":17607,\"width\":390,\"height\":1528},{\"id\":\"7d323c0988d94dd2bbfe8c16bc9a8df4\",\"sourceScreen\":\"projects/18277865047607243696/screens/7d323c0988d94dd2bbfe8c16bc9a8df4\",\"y\":9934,\"width\":390,\"height\":1570},{\"id\":\"a59693a4d1a14e219f80f5c080343897\",\"sourceScreen\":\"projects/18277865047607243696/screens/a59693a4d1a14e219f80f5c080343897\",\"y\":13901,\"width\":390,\"height\":1432},{\"id\":\"ae5bb398fe3f412aba13e05e9629e72c\",\"sourceScreen\":\"projects/18277865047607243696/screens/ae5bb398fe3f412aba13e05e9629e72c\",\"y\":15589,\"width\":390,\"height\":1762},{\"id\":\"cdc226296ae541d1a25d25fc1ab75352\",\"sourceScreen\":\"projects/18277865047607243696/screens/cdc226296ae541d1a25d25fc1ab75352\",\"y\":3444,\"width\":390,\"height\":3101},{\"id\":\"d491e7bddff1435886ce85f88d97de4d\",\"sourceScreen\":\"projects/18277865047607243696/screens/d491e7bddff1435886ce85f88d97de4d\",\"y\":23108,\"width\":390,\"height\":3004}],\"metadata\":{\"userRole\":\"OWNER\"}}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "createTime": "2026-02-01T06:40:02.932873Z",
+      "designTheme": {
+        "colorMode": "DARK",
+        "customColor": "#da0b3f",
+        "font": "MANROPE",
+        "roundness": "ROUND_EIGHT",
+        "saturation": 3
+      },
+      "deviceType": "MOBILE",
+      "metadata": {
+        "userRole": "OWNER"
+      },
+      "name": "projects/18277865047607243696",
+      "origin": "STITCH",
+      "projectType": "PROJECT_DESIGN",
+      "screenInstances": [
+        {
+          "height": 3188,
+          "id": "1bf1237017214213832c921fbf180d34",
+          "sourceScreen": "projects/18277865047607243696/screens/1bf1237017214213832c921fbf180d34",
+          "width": 390
+        },
+        {
+          "height": 3461,
+          "id": "28ae447576cf40028e601ca9abf6e7d7",
+          "sourceScreen": "projects/18277865047607243696/screens/28ae447576cf40028e601ca9abf6e7d7",
+          "width": 390,
+          "y": 19391
+        },
+        {
+          "height": 1885,
+          "id": "38c264e3f18a4f3a980f20aaa4fe407a",
+          "sourceScreen": "projects/18277865047607243696/screens/38c264e3f18a4f3a980f20aaa4fe407a",
+          "width": 390,
+          "y": 11760
+        },
+        {
+          "height": 2877,
+          "id": "3b48a9c20f594a29b12c5237b99adaf2",
+          "sourceScreen": "projects/18277865047607243696/screens/3b48a9c20f594a29b12c5237b99adaf2",
+          "width": 390,
+          "y": 6801
+        },
+        {
+          "height": 1528,
+          "id": "7278af3abd4f49fd86b73fbc21e07fd2",
+          "sourceScreen": "projects/18277865047607243696/screens/7278af3abd4f49fd86b73fbc21e07fd2",
+          "width": 390,
+          "y": 17607
+        },
+        {
+          "height": 1570,
+          "id": "7d323c0988d94dd2bbfe8c16bc9a8df4",
+          "sourceScreen": "projects/18277865047607243696/screens/7d323c0988d94dd2bbfe8c16bc9a8df4",
+          "width": 390,
+          "y": 9934
+        },
+        {
+          "height": 1432,
+          "id": "a59693a4d1a14e219f80f5c080343897",
+          "sourceScreen": "projects/18277865047607243696/screens/a59693a4d1a14e219f80f5c080343897",
+          "width": 390,
+          "y": 13901
+        },
+        {
+          "height": 1762,
+          "id": "ae5bb398fe3f412aba13e05e9629e72c",
+          "sourceScreen": "projects/18277865047607243696/screens/ae5bb398fe3f412aba13e05e9629e72c",
+          "width": 390,
+          "y": 15589
+        },
+        {
+          "height": 3101,
+          "id": "cdc226296ae541d1a25d25fc1ab75352",
+          "sourceScreen": "projects/18277865047607243696/screens/cdc226296ae541d1a25d25fc1ab75352",
+          "width": 390,
+          "y": 3444
+        },
+        {
+          "height": 3004,
+          "id": "d491e7bddff1435886ce85f88d97de4d",
+          "sourceScreen": "projects/18277865047607243696/screens/d491e7bddff1435886ce85f88d97de4d",
+          "width": 390,
+          "y": 23108
+        }
+      ],
+      "thumbnailScreenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AOfcidVq-zoi2xtG4rSpJMJ_XjzFrHlxgW5K1AS28rmfxcqkK0KJ9RNhMcoXdyt-jdD3Tlr28z_BwKCzzclrz38dkR7gu8k8utX8zxfmdEJJGZEcfNhgIIFegOFVB8FEeZ8vLxi7QGm2Lc17CA_DmneLCYWns5TVEybc2qEXMSuRlsO2rqaQgiitqnee9s09GAf3Z8QrwsLAROccm15F-Eh2SV8qS0fqtA20b0CkLAmdSQi1kiK3HJ2efr8aIz8y",
+        "name": "projects/18277865047607243696/files/9d2d617013f84258b02f7f2795fdb108"
+      },
+      "title": "Home",
+      "updateTime": "2026-02-01T19:22:51.421833Z",
+      "visibility": "PRIVATE"
+    }
+  }
+}

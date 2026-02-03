@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand Palette - Strict Adherence */
+  --background: #faf7f2; /* Cream/Off-White */
+  --foreground: #181112; /* Soft Black */
+  --brand-burgundy: #7a2e3a; /* Brand Burgundy */
+  --brand-burgundy-deep: #5e2230; /* Secondary/Footer */
+  --brand-gold: #d1b882; /* Luxury Accents */
+  --stone-200: #e2d5d7; /* Neutrals - Dividers */
+  --stone-600: #4a3a3c; /* Neutrals - Subtext */
+  
+  /* Glass-morphism Defaults */
+  --glass-bg: rgba(250, 247, 242, 0.7);
+  --glass-border: rgba(209, 184, 130, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-burgundy: var(--brand-burgundy);
+  --color-brand-burgundy-deep: var(--brand-burgundy-deep);
+  --color-brand-gold: var(--brand-gold);
+  --color-stone-200: var(--stone-200);
+  --color-stone-600: var(--stone-600);
+  
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+}
+
+/* Base Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-playfair), serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Luxury UI Utilities */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.parallax-reflow {
+  will-change: transform;
+  transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micro-interaction {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.micro-interaction:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 20s ease-in-out infinite alternate;
+}
+
+.reveal-ready .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-ready .reveal-on-scroll.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@supports (animation-timeline: view()) {
+  html:not(.reveal-ready) .reveal-on-scroll {
+    opacity: 0;
+    animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+}
+
+.reveal-delay-1 { animation-delay: 0.05s; }
+.reveal-delay-2 { animation-delay: 0.12s; }
+.reveal-delay-3 { animation-delay: 0.18s; }
+.reveal-delay-4 { animation-delay: 0.24s; }
+
+@media (min-width: 768px) {
+  .parallax-hero {
+    background-attachment: fixed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up, .animate-slow-zoom, .micro-interaction {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .reveal-ready .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

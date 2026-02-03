@@ -1,0 +1,27 @@
+{
+  "id": 11,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/18277865047607243696/screens/3c42107b10ce4b22b5f8d51bf71a93f3\",\"title\":\"Home\",\"screenshot\":{\"name\":\"projects/18277865047607243696/files/aff79894d5f34bf3b7d3bc508bf15c63\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AOfcidXxyC9o7tDJZwK498D-hLmlMetMbTl7RJmDZ7l6bZKSwrNspQ5hGbJQJIxBQSZ9DPgYGn-D4zHtViYjA0AfRHANLTANCMRKlnVfjkEDcEMiePK1Y1FMU36oa5dIKev8Bi4D1URepMDXj1mEN7QXOQtKA2XMHxfIrDyiNcECk_kaCTxMo3kGA3Vhh4JjZtBBlgcjMixDCF-rl9cXYtQ1u9IFE5ESbCA5-KMarvW7Z3qNOrJ1kmvm2IAktOMe\"},\"htmlCode\":{\"name\":\"projects/18277865047607243696/files/1f1997649e1f4e84a9f4203c567b4c55\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzU4ZjAxM2Y5ZDA4YzQ2OWM5ZjhjNzRlYTA5YzQwMTMxEgsSBxCp86eUmgUYAZIBJAoKcHJvamVjdF9pZBIWQhQxODI3Nzg2NTA0NzYwNzI0MzY5Ng&filename=&opi=96797242\"},\"width\":\"780\",\"height\":\"6672\",\"deviceType\":\"MOBILE\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "MOBILE",
+      "height": "6672",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzU4ZjAxM2Y5ZDA4YzQ2OWM5ZjhjNzRlYTA5YzQwMTMxEgsSBxCp86eUmgUYAZIBJAoKcHJvamVjdF9pZBIWQhQxODI3Nzg2NTA0NzYwNzI0MzY5Ng&filename=&opi=96797242",
+        "name": "projects/18277865047607243696/files/1f1997649e1f4e84a9f4203c567b4c55"
+      },
+      "name": "projects/18277865047607243696/screens/3c42107b10ce4b22b5f8d51bf71a93f3",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AOfcidXxyC9o7tDJZwK498D-hLmlMetMbTl7RJmDZ7l6bZKSwrNspQ5hGbJQJIxBQSZ9DPgYGn-D4zHtViYjA0AfRHANLTANCMRKlnVfjkEDcEMiePK1Y1FMU36oa5dIKev8Bi4D1URepMDXj1mEN7QXOQtKA2XMHxfIrDyiNcECk_kaCTxMo3kGA3Vhh4JjZtBBlgcjMixDCF-rl9cXYtQ1u9IFE5ESbCA5-KMarvW7Z3qNOrJ1kmvm2IAktOMe",
+        "name": "projects/18277865047607243696/files/aff79894d5f34bf3b7d3bc508bf15c63"
+      },
+      "title": "Home",
+      "width": "780"
+    }
+  }
+}

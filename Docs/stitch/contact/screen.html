@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7a2e3a",
+                        "accent-gold": "#D1B882",
+                        "deep-plum": "#5E2230",
+                        "background-light": "#FAF7F2",
+                        "background-dark": "#1e1416",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Newsreader', serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#181112] dark:text-white transition-colors duration-300">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between">
+<div class="text-primary dark:text-accent-gold flex size-10 items-center justify-center">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-primary dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center font-display">Susie's Jewelry Repair</h2>
+<div class="size-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="max-w-md mx-auto pb-12">
+<!-- Hero Section -->
+<section class="px-4 py-8">
+<div class="relative overflow-hidden rounded-xl bg-white dark:bg-[#2a1d1f] shadow-sm">
+<div class="absolute inset-0 opacity-20 bg-cover bg-center" data-alt="Close up of elegant diamond rings on white fabric" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaDb7y9ByZ8V3iLEzYSwDz2e4bUsKDiGHs0cD9P2n38Si2oQhawjXsdG3pSJPAl4P7R88lpRh4_jRI1H9ErFhJetE3t8Wc3AHpR5KUkZMz__hKISPWtu3-emNqrudGXjkhlo1DNApapds-UzwLfstnvfzs8sOP_dEEeUTVnKIfU0x3suhrPwe21Mmj8jbn-3ws0hQGYAwqRJ6UnL70mfljUMIeooWN6jDYIVZ3LbXbMkcAd0iNCtmk5pqxzPZSljzWivT3_ZthKE6s");'>
+</div>
+<div class="relative p-8 flex flex-col items-start min-h-[180px] justify-center">
+<h1 class="text-primary dark:text-accent-gold text-4xl font-display font-medium italic">Get in Touch</h1>
+<p class="mt-2 text-primary/70 dark:text-white/70 max-w-[240px]">Expert restoration for your most cherished pieces in Houston.</p>
+</div>
+</div>
+</section>
+<!-- Quick Actions Row -->
+<section class="px-4 mb-8 flex justify-center gap-8">
+<a class="flex flex-col items-center group" href="tel:7135550123">
+<span class="text-primary dark:text-accent-gold font-bold border-b-2 border-primary/30 group-hover:border-primary transition-all pb-1">Call Now</span>
+</a>
+<a class="flex flex-col items-center group" href="#">
+<span class="text-primary dark:text-accent-gold font-bold border-b-2 border-primary/30 group-hover:border-primary transition-all pb-1">Get Directions</span>
+</a>
+</section>
+<!-- Info Block -->
+<section class="px-4 space-y-4">
+<!-- Address Card -->
+<div class="bg-white dark:bg-[#2a1d1f] p-4 rounded-lg border border-accent-gold/20 flex items-center gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary dark:text-accent-gold">location_on</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm uppercase tracking-widest text-primary/50 dark:text-white/40 font-semibold">Address</p>
+<p class="text-primary dark:text-white font-display text-lg">123 Luxury Lane, Houston, TX 77002</p>
+</div>
+</div>
+<!-- Phone Card -->
+<div class="bg-white dark:bg-[#2a1d1f] p-4 rounded-lg border border-accent-gold/20 flex items-center gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary dark:text-accent-gold">call</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm uppercase tracking-widest text-primary/50 dark:text-white/40 font-semibold">Phone</p>
+<p class="text-primary dark:text-white font-display text-lg">(713) 555-0123</p>
+</div>
+</div>
+<!-- Hours Card -->
+<div class="bg-white dark:bg-[#2a1d1f] p-4 rounded-lg border border-accent-gold/20 flex items-center gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary dark:text-accent-gold">schedule</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm uppercase tracking-widest text-primary/50 dark:text-white/40 font-semibold">Hours</p>
+<p class="text-primary dark:text-white font-display text-lg">Mon-Fri 10-6, Sat 10-4</p>
+</div>
+</div>
+</section>
+<!-- Map Preview -->
+<section class="px-4 mt-6">
+<div class="w-full h-48 rounded-xl overflow-hidden grayscale contrast-75 brightness-110 dark:invert" data-location="Houston, TX" style="">
+<img alt="Map view of downtown Houston" class="w-full h-full object-cover" data-alt="Light colored map showing Houston location pins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz1oi2twvUgrzUXwKjU_RX7CUjEfycNj3quhe1vrqRehc-zOGf8oTqk-rR8HxKflQPCjFSBQ19vC2OHWfjG5iRHbfdWQ9etVxFKopJ-rlnFIcKB3zORhhdASn23AZ_xS8jx72OBeHPYIXY4t3qplMeBzZk7oALLgSF9QVKyS3bztYaCMBonHf97Znks7ZrSgYjDa5fKKfKVKKJsf1xth9bIQ3v0EdfyI7tr9a4h4_JPX1GCsflwjaLxBMUnOHL2IvdlI9KImY62EEm"/>
+</div>
+</section>
+<!-- Contact Form -->
+<section class="px-4 mt-10">
+<div class="bg-white dark:bg-[#2a1d1f] p-6 rounded-xl shadow-sm border border-accent-gold/10">
+<h3 class="text-2xl font-display text-primary dark:text-accent-gold mb-6">Send a Message</h3>
+<form class="space-y-4">
+<div>
+<label class="block text-xs uppercase tracking-widest text-primary/60 dark:text-white/50 mb-1 ml-1 font-bold">Full Name</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-accent-gold/20 rounded-lg focus:ring-primary focus:border-primary text-primary dark:text-white px-4 py-3 placeholder:text-primary/30" placeholder="Susie Q" type="text"/>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-widest text-primary/60 dark:text-white/50 mb-1 ml-1 font-bold">Phone Number</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-accent-gold/20 rounded-lg focus:ring-primary focus:border-primary text-primary dark:text-white px-4 py-3 placeholder:text-primary/30" placeholder="(713) 000-0000" type="tel"/>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-widest text-primary/60 dark:text-white/50 mb-1 ml-1 font-bold">Email Address</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-accent-gold/20 rounded-lg focus:ring-primary focus:border-primary text-primary dark:text-white px-4 py-3 placeholder:text-primary/30" placeholder="hello@example.com" type="email"/>
+</div>
+<div>
+<label class="block text-xs uppercase tracking-widest text-primary/60 dark:text-white/50 mb-1 ml-1 font-bold">Message</label>
+<textarea class="w-full bg-background-light dark:bg-background-dark border-accent-gold/20 rounded-lg focus:ring-primary focus:border-primary text-primary dark:text-white px-4 py-3 placeholder:text-primary/30" placeholder="How can we help you today?" rows="4"></textarea>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-xs text-green-600">verified_user</span>
+<span class="text-[10px] uppercase tracking-wider text-primary/50 dark:text-white/40 font-bold">Secure Form • We respond within 2 hours</span>
+</div>
+</form>
+</div>
+</section>
+<!-- Primary CTAs -->
+<section class="px-4 mt-8 space-y-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg transition-all active:scale-[0.98]">
+                Get Fast Quote
+            </button>
+<button class="w-full border-2 border-accent-gold text-primary dark:text-accent-gold font-bold py-4 rounded-lg hover:bg-accent-gold/5 transition-all">
+                Book a Repair
+            </button>
+</section>
+<!-- FAQ Teaser -->
+<section class="px-4 mt-8 text-center">
+<a class="text-primary/70 dark:text-white/60 text-sm italic border-b border-primary/20 pb-1" href="#">
+                Have more questions? Visit our FAQ
+            </a>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-deep-plum text-accent-gold py-12 px-6">
+<div class="max-w-md mx-auto flex flex-col items-center gap-6">
+<h2 class="font-display text-2xl font-bold tracking-tight italic">Susie's</h2>
+<div class="flex gap-6">
+<span class="material-symbols-outlined">share</span>
+<span class="material-symbols-outlined">thumb_up</span>
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-[0.2em] font-medium opacity-80">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+<a href="#">Shipping</a>
+</div>
+<p class="text-[10px] opacity-40 mt-4">© 2024 Susie's Jewelry Repair. All Rights Reserved.</p>
+</div>
+</footer>
+</body></html>

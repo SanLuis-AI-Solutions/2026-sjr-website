@@ -30,6 +30,17 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# local artifacts
+/logs
+
+# python cache
+__pycache__/
+*.pyc
+
+# agent temp files
+.agent/stitch-init.log
+.agent/skills/ui-ux-pro-max/tmp-*
+
 # env files (can opt-in for committing if needed)
 .env*
 
