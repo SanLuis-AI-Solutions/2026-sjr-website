@@ -44,6 +44,17 @@ Use this to decide how heavy the process should be.
 - External services: `github`, `supabase-mcp-server`, `google-workspace`, `vercel`
 - Design exploration: `stitch` (if screens are needed)
 
+## Auto‑Router (task → best starting bundle)
+| Task Type | Workflows | Agents | Skills | MCPs |
+| --- | --- | --- | --- | --- |
+| Visual redesign | `/plan` → `/ui-ux-pro-max` → `/qa-gate` | `frontend-specialist` + `orchestrator` | `ui-ux-pro-max`, `frontend-design`, `scroll-experience` | `chrome_devtools`, `stitch` |
+| New page build | `/plan` → `/create` → `/qa-gate` | `frontend-specialist` | `react-patterns`, `nextjs-best-practices` | `chrome_devtools` |
+| SEO/service expansion | `/sequential-plan` → `/seo-growth-plan` → `/qa-gate` | `seo-specialist` + `content-strategist` | `seo-fundamentals`, `schema-markup`, `geo-fundamentals` | `context7`, `google-maps` |
+| Bug / runtime error | `/debug` → `/qa-gate` | `debugger` | `systematic-debugging` | `chrome_devtools` |
+| Performance regression | `/debug` → `/qa-gate` | `performance-optimizer` | `web-performance-optimization` | `chrome_devtools` |
+| Analytics tracking | `/analytics-implementation` | `analytics-lead` | `analytics-tracking`, `ga4-analytics` | `context7` |
+| Content strategy | `/blog-strategy` | `content-strategist` | `blog-content-strategy`, `keyword-research` | `context7` |
+
 ## Multi‑Tool Orchestration Examples
 ### Design iteration (large visual change)
 - Workflows: `/plan` → `/ui-ux-pro-max` → `/qa-gate`
