@@ -62,6 +62,11 @@ Use this to decide how heavy the process should be.
 | Lead‑gen optimization | `/conversion-optimization` → `/qa-gate` | `conversion-optimizer` | `form-cro`, `analytics-tracking` | `chrome_devtools`, `context7` |
 | Schema update | `/seo-growth-plan` → `/qa-gate` | `seo-specialist` | `schema-markup`, `seo-fundamentals` | `context7` |
 | Security check | `/security-gate` | `security-auditor` | `vulnerability-scanner`, `compliance-governance` | `context7` |
+| Accessibility audit | `/audit-and-fix` | `security-auditor` | `accessibility-auditor`, `web-design-guidelines` | `chrome_devtools` |
+| Performance audit | `/debug` → `/qa-gate` | `performance-optimizer` | `performance-profiling`, `web-performance-optimization` | `chrome_devtools` |
+| Database migration | `/plan` → `/qa-gate` | `database-architect` | `database-design`, `prisma-expert` | `supabase-mcp-server` |
+| Repo automation | `/repo-automation` | `repo-automation-specialist` | `github-workflow-automation` | `github` |
+| Release readiness | `/qa-gate` → `/handoff` | `sre-specialist` | `verification-before-completion`, `deployment-procedures` | `vercel` |
 
 ## Multi‑Tool Orchestration Examples
 ### Design iteration (large visual change)
