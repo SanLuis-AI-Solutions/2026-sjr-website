@@ -49,12 +49,8 @@ $handoffTemplate = @"
 $operatingTemplate = @"
 # Adaptive Operating Model (Agents + Skills + Workflows + MCPs)
 
-## Selection Rules
-1. Clarify scope + risk
-2. Pick primary workflow (optional)
-3. Pick best agent (if needed)
-4. Pick minimal skills
-5. Use MCPs only if needed
+See the canonical template at:
+C:\Users\ninef\.codex\templates\OPERATING_MODEL.md
 "@
 
 $readmeTemplate = @"
@@ -78,7 +74,12 @@ if (-not (Test-Path $handoffPath)) {
 }
 
 if (-not (Test-Path $operatingPath)) {
-  $operatingTemplate | Set-Content $operatingPath
+  $globalTemplate = Join-Path $env:USERPROFILE ".codex\templates\OPERATING_MODEL.md"
+  if (Test-Path $globalTemplate) {
+    Copy-Item -Force $globalTemplate $operatingPath
+  } else {
+    $operatingTemplate | Set-Content $operatingPath
+  }
 }
 
 if (-not (Test-Path $readmePath)) {
