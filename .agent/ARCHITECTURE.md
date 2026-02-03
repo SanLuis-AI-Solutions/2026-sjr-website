@@ -325,3 +325,11 @@ skill-name/
 ## MCP Configuration
 Use C:\Users\ninef\.codex\config.toml for MCP server connections.
 
+## Bootstrap Repo (Global Source of Truth)
+Canonical bootstrap repo (Option 2):
+- Path: C:\Users\ninef\SanLuis Solutions projects\sanluis-bootstrap
+- Override path with env var: CODEX_BOOTSTRAP_REPO
+
+`/installall` will auto-sync from the bootstrap repo via:
+`C:\Users\ninef\.codex\scripts\sync-bootstrap.ps1`
+

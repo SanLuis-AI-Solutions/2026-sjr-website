@@ -3,15 +3,52 @@
 # - Optionally overlays a global env file (user-managed)
 # - Prints warnings for missing critical files
 
+param(
+  [string]$ProjectRoot = (Get-Location).Path
+)
+
 $ErrorActionPreference = "Stop"
 
-$projectRoot = Get-Location
-$envExample = Join-Path $projectRoot ".env.example"
-$envLocal = Join-Path $projectRoot ".env.local"
+$projectRoot = $ProjectRoot
+$envExample = Join-Path $ProjectRoot ".env.example"
+$envLocal = Join-Path $ProjectRoot ".env.local"
 $globalEnv = Join-Path $env:USERPROFILE ".codex\env\.env.local"
-$packageJson = Join-Path $projectRoot "package.json"
-$nodeModules = Join-Path $projectRoot "node_modules"
+$globalEnvExample = Join-Path $env:USERPROFILE ".codex\env\.env.example"
+$packageJson = Join-Path $ProjectRoot "package.json"
+$nodeModules = Join-Path $ProjectRoot "node_modules"
 $missing = @()
+
+function Get-EnvKeys([string]$path) {
+  $keys = @()
+  foreach ($line in Get-Content $path) {
+    if ($line -match '^[A-Za-z_][A-Za-z0-9_]*=') {
+      $keys += $line.Split('=', 2)[0]
+    }
+  }
+  return $keys | Select-Object -Unique
+}
+
+if (-not (Test-Path $envExample)) {
+  if (Test-Path $globalEnvExample) {
+    Copy-Item -Force $globalEnvExample $envExample
+    Write-Host "Created .env.example from global template"
+  } else {
+    $sourceForExample = $null
+    if (Test-Path $globalEnv) {
+      $sourceForExample = $globalEnv
+    } elseif (Test-Path $envLocal) {
+      $sourceForExample = $envLocal
+    }
+
+    if ($sourceForExample) {
+      $keys = Get-EnvKeys $sourceForExample
+      if ($keys.Count -gt 0) {
+        $keys | ForEach-Object { "$_=" } | Set-Content $envExample
+        Write-Host "Created .env.example from $sourceForExample (keys only)"
+      }
+    }
+  }
+}
 
 if (Test-Path $envExample) {
   if (-not (Test-Path $envLocal)) {
@@ -74,7 +111,8 @@ if (-not (Test-Path $masterConfig)) {
   Write-Warning "Missing MCP master config: $masterConfig"
 }
 
-if (Test-Path $packageJson) {
+$packageJsonExists = Test-Path $packageJson
+if ($packageJsonExists) {
   if (-not (Test-Path $nodeModules)) {
     Write-Host "Installing npm dependencies..."
     try {
@@ -122,7 +160,8 @@ $summary = [ordered]@{
   "EnvLocal"          = (Test-Path $envLocal)
   "GlobalEnv"         = (Test-Path $globalEnv)
   "MasterMcpConfig"   = (Test-Path $masterConfig)
-  "NodeModules"       = (Test-Path $nodeModules)
+  "PackageJson"       = $packageJsonExists
+  "NodeModules"       = if ($packageJsonExists) { (Test-Path $nodeModules) } else { "n/a (no package.json)" }
   "MissingEnvKeys"    = if ($missing.Count -gt 0) { $missing -join ", " } else { "none" }
 }
 

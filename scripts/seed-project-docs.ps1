@@ -10,6 +10,7 @@ New-Item -ItemType Directory -Force -Path $docsDir | Out-Null
 $restartPath = Join-Path $docsDir "RESTART.md"
 $handoffPath = Join-Path $docsDir "HANDOFF.md"
 $operatingPath = Join-Path $docsDir "OPERATING_MODEL.md"
+$operatingRootPath = Join-Path $Target "OPERATING_MODEL.md"
 $readmePath = Join-Path $Target "README.md"
 
 $restartTemplate = @"
@@ -73,12 +74,19 @@ if (-not (Test-Path $handoffPath)) {
   $handoffTemplate | Set-Content $handoffPath
 }
 
-if (-not (Test-Path $operatingPath)) {
+if (-not (Test-Path $operatingPath) -or -not (Test-Path $operatingRootPath)) {
   $globalTemplate = Join-Path $env:USERPROFILE ".codex\templates\OPERATING_MODEL.md"
+  $sourceTemplate = $operatingTemplate
   if (Test-Path $globalTemplate) {
-    Copy-Item -Force $globalTemplate $operatingPath
-  } else {
-    $operatingTemplate | Set-Content $operatingPath
+    $sourceTemplate = Get-Content $globalTemplate -Raw
+  }
+
+  if (-not (Test-Path $operatingPath)) {
+    $sourceTemplate | Set-Content $operatingPath
+  }
+
+  if (-not (Test-Path $operatingRootPath)) {
+    $sourceTemplate | Set-Content $operatingRootPath
   }
 }
 

@@ -27,7 +27,8 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\instal
 2. **Catalog + docs sync (global)**
 
 - Catalogs are synced to `C:\Users\ninef\.codex\catalogs` and copied into the project root when available.
-- Starter docs are seeded if missing (Docs/RESTART.md, Docs/HANDOFF.md, README.md).
+- Starter docs are seeded if missing (Docs/RESTART.md, Docs/HANDOFF.md, Docs/OPERATING_MODEL.md, README.md, and OPERATING_MODEL.md in the project root).
+- `.agent/ARCHITECTURE.md` is seeded from the global template if missing.
 
 3. **Project bootstrap (env + MCP hints + deps)**
 
@@ -47,6 +48,10 @@ powershell -ExecutionPolicy Bypass -File "./scripts/project-bootstrap.ps1"
 ./scripts/mcp-disable-broken.ps1
 ./scripts/mcp-healthcheck.ps1
 ```
+
+**Notes**
+- If `.env.example` is missing, bootstrap will create it from the global env (keys only) or a global template.
+- If MCP scripts are missing in `./scripts`, `/installall` seeds them from `C:\Users\ninef\.codex\scripts`.
 
 6. **Global MCP readiness check**
 
