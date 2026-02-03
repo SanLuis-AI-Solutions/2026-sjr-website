@@ -11,6 +11,7 @@ $envLocal = Join-Path $projectRoot ".env.local"
 $globalEnv = Join-Path $env:USERPROFILE ".codex\env\.env.local"
 $packageJson = Join-Path $projectRoot "package.json"
 $nodeModules = Join-Path $projectRoot "node_modules"
+$missing = @()
 
 if (Test-Path $envExample) {
   if (-not (Test-Path $envLocal)) {
@@ -102,7 +103,6 @@ if ((Test-Path $envExample) -and (Test-Path $envLocal)) {
     }
   }
 
-  $missing = @()
   foreach ($key in $requiredKeys) {
     if (-not $localMap.ContainsKey($key)) {
       $missing += $key
@@ -114,4 +114,20 @@ if ((Test-Path $envExample) -and (Test-Path $envLocal)) {
   if ($missing.Count -gt 0) {
     Write-Warning ("Missing or empty env keys in .env.local: " + ($missing -join ", "))
   }
+}
+
+$summary = [ordered]@{
+  "ProjectRoot"       = $projectRoot
+  "EnvExample"        = (Test-Path $envExample)
+  "EnvLocal"          = (Test-Path $envLocal)
+  "GlobalEnv"         = (Test-Path $globalEnv)
+  "MasterMcpConfig"   = (Test-Path $masterConfig)
+  "NodeModules"       = (Test-Path $nodeModules)
+  "MissingEnvKeys"    = if ($missing.Count -gt 0) { $missing -join ", " } else { "none" }
+}
+
+Write-Host ""
+Write-Host "Bootstrap summary:"
+foreach ($item in $summary.GetEnumerator()) {
+  Write-Host ("- {0}: {1}" -f $item.Key, $item.Value)
 }

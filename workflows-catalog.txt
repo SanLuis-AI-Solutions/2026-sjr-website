@@ -268,10 +268,11 @@ How to use this catalog (for NotebookLM):
     - Next steps
 
 - /installall
-  Description: Install global skills, agents, workflows, run project bootstrap, and run MCP preflight.
+  Description: Install global skills, agents, workflows, sync catalogs/docs, run project bootstrap, and run MCP preflight.
   Uses skills: (not specified)
   Steps:
     - Install global assets into .agent/
+    - Sync catalogs + seed starter docs
     - Run project bootstrap (env overlay + deps)
     - Run MCP preflight script
     - If Docker MCP is unstable, disable broken servers and re-check

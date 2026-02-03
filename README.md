@@ -11,7 +11,7 @@ New project bootstrap:
 ```powershell
 /installall
 ```
-This syncs global skills/agents/workflows, runs project bootstrap (env overlay + deps), and checks MCP health.
+This syncs global skills/agents/workflows, syncs catalogs + starter docs, runs project bootstrap (env overlay + deps), and checks MCP health.
 
 First, run the development server:
 

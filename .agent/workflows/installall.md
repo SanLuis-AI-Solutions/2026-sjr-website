@@ -24,26 +24,31 @@ Run this in the project root:
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\installall.ps1"
 ```
 
-2. **Project bootstrap (env + MCP hints + deps)**
+2. **Catalog + docs sync (global)**
+
+- Catalogs are synced to `C:\Users\ninef\.codex\catalogs` and copied into the project root when available.
+- Starter docs are seeded if missing (Docs/RESTART.md, Docs/HANDOFF.md, README.md).
+
+3. **Project bootstrap (env + MCP hints + deps)**
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File "./scripts/project-bootstrap.ps1"
 ```
 
-3. **MCP preflight**
+4. **MCP preflight**
 
 ```powershell
 ./scripts/mcp-healthcheck.ps1
 ```
 
-4. **Docker MCP stabilization (if needed)**
+5. **Docker MCP stabilization (if needed)**
 
 ```powershell
 ./scripts/mcp-disable-broken.ps1
 ./scripts/mcp-healthcheck.ps1
 ```
 
-5. **Global MCP readiness check**
+6. **Global MCP readiness check**
 
 - Confirm MCP config is global at `C:\Users\ninef\.codex\config.toml`
 - If MCPs are missing or disabled, fix them in the global config (not in the repo)
