@@ -39,6 +39,7 @@ Key routes:
 - Plan: `Docs/PLAN-sjr-website.md`
 - Stitch prompt: `Docs/STITCH_PROMPT.md`
 - Project brief: `PROJECT_BRIEF.md`
+- Operating model: `Docs/OPERATING_MODEL.md`
 
 ## MCP Preflight
 Run at session start:

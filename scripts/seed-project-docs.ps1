@@ -9,6 +9,7 @@ New-Item -ItemType Directory -Force -Path $docsDir | Out-Null
 
 $restartPath = Join-Path $docsDir "RESTART.md"
 $handoffPath = Join-Path $docsDir "HANDOFF.md"
+$operatingPath = Join-Path $docsDir "OPERATING_MODEL.md"
 $readmePath = Join-Path $Target "README.md"
 
 $restartTemplate = @"
@@ -45,6 +46,17 @@ $handoffTemplate = @"
 3.
 "@
 
+$operatingTemplate = @"
+# Adaptive Operating Model (Agents + Skills + Workflows + MCPs)
+
+## Selection Rules
+1. Clarify scope + risk
+2. Pick primary workflow (optional)
+3. Pick best agent (if needed)
+4. Pick minimal skills
+5. Use MCPs only if needed
+"@
+
 $readmeTemplate = @"
 Project README
 
@@ -63,6 +75,10 @@ if (-not (Test-Path $restartPath)) {
 
 if (-not (Test-Path $handoffPath)) {
   $handoffTemplate | Set-Content $handoffPath
+}
+
+if (-not (Test-Path $operatingPath)) {
+  $operatingTemplate | Set-Content $operatingPath
 }
 
 if (-not (Test-Path $readmePath)) {
