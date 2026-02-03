@@ -9,6 +9,8 @@ $projectRoot = Get-Location
 $envExample = Join-Path $projectRoot ".env.example"
 $envLocal = Join-Path $projectRoot ".env.local"
 $globalEnv = Join-Path $env:USERPROFILE ".codex\env\.env.local"
+$packageJson = Join-Path $projectRoot "package.json"
+$nodeModules = Join-Path $projectRoot "node_modules"
 
 if (Test-Path $envExample) {
   if (-not (Test-Path $envLocal)) {
@@ -69,6 +71,19 @@ if (Test-Path $globalEnv) {
 $masterConfig = Join-Path $env:USERPROFILE ".mcp-master-config.json"
 if (-not (Test-Path $masterConfig)) {
   Write-Warning "Missing MCP master config: $masterConfig"
+}
+
+if (Test-Path $packageJson) {
+  if (-not (Test-Path $nodeModules)) {
+    Write-Host "Installing npm dependencies..."
+    try {
+      npm install
+    } catch {
+      Write-Warning "npm install failed. Please run manually."
+    }
+  } else {
+    Write-Host "node_modules already present"
+  }
 }
 
 if ((Test-Path $envExample) -and (Test-Path $envLocal)) {

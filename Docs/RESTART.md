@@ -16,6 +16,9 @@ Use this to restart the project and working environment without re‑doing setup
 
 ## Commands (PowerShell)
 ```powershell
+# install all global assets + bootstrap
+/installall
+
 # healthcheck MCPs
 ./scripts/mcp-healthcheck.ps1
 

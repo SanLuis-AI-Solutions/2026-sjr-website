@@ -24,10 +24,10 @@ Run this in the project root:
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\installall.ps1"
 ```
 
-2. **Project bootstrap (env + MCP hints)**
+2. **Project bootstrap (env + MCP hints + deps)**
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\project-bootstrap.ps1"
+powershell -ExecutionPolicy Bypass -File "./scripts/project-bootstrap.ps1"
 ```
 
 3. **MCP preflight**

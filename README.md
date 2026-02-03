@@ -1,7 +1,7 @@
 Susie’s Jewelry Repair — premium lead‑gen website (Next.js + Tailwind).
 
 Status: Active
-Last updated: 2026-02-02
+Last updated: 2026-02-03
 Source of truth for plan: Docs/PLAN-sjr-website.md
 Document index: DECISIONS.md
 
@@ -11,7 +11,7 @@ New project bootstrap:
 ```powershell
 /installall
 ```
-This syncs global skills/agents/workflows, runs project bootstrap, and checks MCP health.
+This syncs global skills/agents/workflows, runs project bootstrap (env overlay + deps), and checks MCP health.
 
 First, run the development server:
 
