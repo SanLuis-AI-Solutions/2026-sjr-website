@@ -57,6 +57,11 @@ Use this to decide how heavy the process should be.
 | Stitch exploration | `/plan` → `/stitch-design-to-react` | `frontend-specialist` + `orchestrator` | `design-md`, `react:components` | `stitch` |
 | Airtable → Supabase sync | `/plan` → `/sync-docs` | `data-engineer` + `database-architect` | `data-pipelines`, `database-design` | `airtable`, `supabase-mcp-server` |
 | Vercel deploy | `/qa-gate` → `/deploy` | `devops-engineer` | `deployment-procedures`, `observability-stack` | `vercel` |
+| MCP health + recovery | `/preflight` → `/audit-and-fix` | `sre-specialist` | `observability-stack`, `systematic-debugging` | `MCP_DOCKER`, `context7` |
+| Content migration | `/plan` → `/sync-docs` | `content-strategist` | `documentation-templates`, `blog-content-strategy` | `google-workspace`, `github` |
+| Lead‑gen optimization | `/conversion-optimization` → `/qa-gate` | `conversion-optimizer` | `form-cro`, `analytics-tracking` | `chrome_devtools`, `context7` |
+| Schema update | `/seo-growth-plan` → `/qa-gate` | `seo-specialist` | `schema-markup`, `seo-fundamentals` | `context7` |
+| Security check | `/security-gate` | `security-auditor` | `vulnerability-scanner`, `compliance-governance` | `context7` |
 
 ## Multi‑Tool Orchestration Examples
 ### Design iteration (large visual change)
