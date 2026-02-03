@@ -54,6 +54,9 @@ Use this to decide how heavy the process should be.
 | Performance regression | `/debug` → `/qa-gate` | `performance-optimizer` | `web-performance-optimization` | `chrome_devtools` |
 | Analytics tracking | `/analytics-implementation` | `analytics-lead` | `analytics-tracking`, `ga4-analytics` | `context7` |
 | Content strategy | `/blog-strategy` | `content-strategist` | `blog-content-strategy`, `keyword-research` | `context7` |
+| Stitch exploration | `/plan` → `/stitch-design-to-react` | `frontend-specialist` + `orchestrator` | `design-md`, `react:components` | `stitch` |
+| Airtable → Supabase sync | `/plan` → `/sync-docs` | `data-engineer` + `database-architect` | `data-pipelines`, `database-design` | `airtable`, `supabase-mcp-server` |
+| Vercel deploy | `/qa-gate` → `/deploy` | `devops-engineer` | `deployment-procedures`, `observability-stack` | `vercel` |
 
 ## Multi‑Tool Orchestration Examples
 ### Design iteration (large visual change)
