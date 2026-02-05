@@ -24,6 +24,10 @@ Run this in the project root:
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\installall.ps1"
 ```
 
+**Auto-verify MCP**
+- `installall` now checks Docker readiness and whether Codex can see MCP servers.
+- If it warns, restart Docker Desktop or Codex CLI.
+
 2. **Catalog + docs sync (global)**
 
 - Catalogs are synced to `C:\Users\ninef\.codex\catalogs` and copied into the project root when available.
