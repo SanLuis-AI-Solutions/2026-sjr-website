@@ -138,7 +138,23 @@ export const SERVICES = [
       "Quick refresh before events"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/jewelry-cleaning.png",
-    faqs: [],
+    faqs: [
+      {
+        question: "Is ultrasonic cleaning safe for all jewelry?",
+        answer:
+          "Not always. Some gemstones and materials (like pearls or pieces with fragile settings) require gentler methods. We inspect your piece first and choose the safest cleaning approach.",
+      },
+      {
+        question: "How often should I have my jewelry professionally cleaned?",
+        answer:
+          "For everyday rings and bracelets, a professional clean and inspection every 6–12 months is a good rule of thumb. We will also check prongs and settings during the visit.",
+      },
+      {
+        question: "Can you remove scratches or dullness?",
+        answer:
+          "We can often reduce light scratches and restore shine through professional polishing. Deep scratches or heavy wear may require additional refinishing, which we will confirm before work begins.",
+      },
+    ],
   },
   {
     slug: "necklace-repair",
@@ -162,7 +178,23 @@ export const SERVICES = [
       "Safety chain install"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/necklace-repair.png",
-    faqs: [],
+    faqs: [
+      {
+        question: "Can you repair delicate or thin chains?",
+        answer:
+          "Yes. We repair delicate chains carefully and can reinforce the repair point when appropriate to help it last.",
+      },
+      {
+        question: "Will the repair be visible?",
+        answer:
+          "We finish repairs to blend with the existing metal and polish so the seam is as discreet as possible. We will explain what is realistic based on the chain style and metal.",
+      },
+      {
+        question: "Do you replace clasps?",
+        answer:
+          "Yes. We can replace worn or broken clasps and recommend the best clasp style for security and ease of use.",
+      },
+    ],
   },
   {
     slug: "bracelet-repair",
@@ -186,7 +218,23 @@ export const SERVICES = [
       "Safety chain install"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/bracelet-repair.jpg",
-    faqs: [],
+    faqs: [
+      {
+        question: "Can you fix a broken link or clasp?",
+        answer:
+          "Yes. We repair broken links, rebuild weak points, and replace or adjust clasps so your bracelet wears securely again.",
+      },
+      {
+        question: "Can you adjust the fit of a bracelet?",
+        answer:
+          "Often, yes. Depending on the style, we can add or remove links or adjust length. Bring any extra links if you have them.",
+      },
+      {
+        question: "Can you add a safety chain?",
+        answer:
+          "Yes. A safety chain is a great option for added security, especially for bracelets you wear daily.",
+      },
+    ],
   },
   {
     slug: "pearl-restringing",
@@ -210,7 +258,23 @@ export const SERVICES = [
       "Clasp upgrade"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/pearl-restringing.png",
-    faqs: [],
+    faqs: [
+      {
+        question: "How often should pearls be restrung?",
+        answer:
+          "It depends on wear, but many strands benefit from restringing every 1–2 years. If the string looks stretched, frayed, or discolored, it is time.",
+      },
+      {
+        question: "Do you knot between each pearl?",
+        answer:
+          "Yes. Hand-knotting helps protect pearls by preventing them from rubbing and keeps spacing consistent.",
+      },
+      {
+        question: "Can you adjust the length or replace the clasp?",
+        answer:
+          "Yes. We can often adjust length during restringing and can inspect, clean, or upgrade the clasp if needed.",
+      },
+    ],
   },
   {
     slug: "custom-design",
@@ -234,7 +298,23 @@ export const SERVICES = [
       "Matching sets"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/custom-design.jpg",
-    faqs: [],
+    faqs: [
+      {
+        question: "How long does custom design take?",
+        answer:
+          "Most custom projects take around 7 business days once the design is approved. If your piece needs special sourcing or additional steps, we will confirm timing up front.",
+      },
+      {
+        question: "Can you use my existing stones or gold?",
+        answer:
+          "Yes. We can often reuse stones and, in some cases, your existing metal. We evaluate everything during the consultation and recommend the best approach for durability and finish.",
+      },
+      {
+        question: "What does the process look like?",
+        answer:
+          "We start with a consultation, confirm the design direction, then build and finish the piece with clear updates. Final pricing and timeline are confirmed before any work begins.",
+      },
+    ],
   },
   {
     slug: "heirloom-restoration",
@@ -258,6 +338,22 @@ export const SERVICES = [
       "General restoration"
     ],
     image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
-    faqs: [],
+    faqs: [
+      {
+        question: "Will you preserve the original look of my heirloom?",
+        answer:
+          "Yes. Our goal is to strengthen and restore while keeping the original character. We explain any tradeoffs before you approve work.",
+      },
+      {
+        question: "Can you repair antique or fragile pieces?",
+        answer:
+          "Often, yes. We inspect the piece, identify weak points, and recommend the safest repair plan for long-term wear.",
+      },
+      {
+        question: "Is restoration done in-house?",
+        answer:
+          "Yes. Repairs are performed in-house so your piece is not shipped out.",
+      },
+    ],
   },
 ];

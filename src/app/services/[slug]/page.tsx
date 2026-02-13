@@ -9,7 +9,7 @@ import { getFaqsByService, getServiceBySlug, getServices } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 
-const UPDATED_DATE = "February 1, 2026";
+const UPDATED_DATE = "February 13, 2026";
 
 type PageProps = {
   params: {
