@@ -7,7 +7,7 @@ export function getSupabaseEnv() {
   return { url, key };
 }
 
-export async function supabaseGet(path, params = "") {
+export async function supabaseGet(path: string, params = "") {
   const { url, key } = getSupabaseEnv();
   const target = `${url}/rest/v1/${path}${params}`;
   const res = await fetch(target, {

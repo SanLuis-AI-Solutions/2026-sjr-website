@@ -1,7 +1,13 @@
 import { getServices } from "@/lib/content";
 import { SERVICES } from "@/lib/constants";
 
-export async function resolveServiceImage(service) {
+type ServiceLike = {
+  slug?: string;
+  image_url?: string | null;
+  image?: string | null;
+};
+
+export async function resolveServiceImage(service: ServiceLike | null | undefined) {
   if (!service) return null;
   if (service.image_url) return service.image_url;
   if (service.image) return service.image;

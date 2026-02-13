@@ -1,10 +1,49 @@
 import { SiteShell } from "@/components/site-shell";
+import { GaConversionTracker } from "@/components/analytics/ga-tracker";
+import { Suspense } from "react";
 
-export default function BookPage() {
+export default function BookPage({
+  searchParams,
+}: {
+  searchParams?: { submitted?: string; error?: string; pending?: string; id?: string };
+}) {
+  const submitted = searchParams?.submitted === "1";
+  const error = searchParams?.error === "1";
+  const pending = searchParams?.pending === "1";
+  const bookingEventName = pending
+    ? "booking_submit_pending"
+    : "booking_submit_success";
   return (
     <SiteShell>
       <section className="bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
+          <Suspense fallback={null}>
+            <GaConversionTracker
+              active={submitted}
+              eventName={bookingEventName}
+              submissionId={searchParams?.id}
+              leadType="booking"
+              status={pending ? "pending" : "success"}
+            />
+          </Suspense>
+          {submitted ? (
+            <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+              <p className="font-semibold">
+                {pending ? "Booking request received." : "Booking requested."}
+              </p>
+              <p className="mt-1 text-emerald-800">
+                We will confirm availability and send details to your email.
+              </p>
+            </div>
+          ) : null}
+          {error ? (
+            <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+              <p className="font-semibold">We could not book that time.</p>
+              <p className="mt-1 text-rose-800">
+                Please try a different time or call us for immediate help.
+              </p>
+            </div>
+          ) : null}
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             Book a Repair
           </p>
@@ -20,6 +59,14 @@ export default function BookPage() {
             method="post"
             className="mt-8 grid gap-4 rounded-lg border border-stone-200 bg-stone-100 p-6"
           >
+            <input
+              type="text"
+              name="company"
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             <input
               type="text"
               name="name"

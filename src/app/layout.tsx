@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
+import { GaFirstTouchCapture } from "@/components/analytics/ga-tracker";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -28,10 +31,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
+        {gaMeasurementId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', '${gaMeasurementId}');
+              `}
+            </Script>
+          </>
+        ) : null}
         {children}
+        <Suspense fallback={null}>
+          <GaFirstTouchCapture />
+        </Suspense>
         <ScrollRevealManager />
       </body>
     </html>

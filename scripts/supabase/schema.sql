@@ -77,3 +77,63 @@ create table if not exists site_settings (
   value text,
   notes text
 );
+
+-- Lead capture tables (operational)
+
+create table if not exists quote_requests (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null,
+  email text not null,
+  phone text,
+  details text not null,
+  -- Array of uploaded assets: [{ bucket, path, original_name, mime, size, object_url, public_url }]
+  attachments jsonb,
+  status text not null default 'new',
+  source text,
+  page_url text,
+  user_agent text,
+  ip text
+);
+
+create index if not exists quote_requests_created_at_idx on quote_requests(created_at desc);
+create index if not exists quote_requests_status_idx on quote_requests(status);
+
+create table if not exists booking_requests (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null,
+  email text not null,
+  phone text,
+  date date not null,
+  time time not null,
+  details text,
+  status text not null default 'new',
+  source text,
+  page_url text,
+  user_agent text,
+  ip text,
+  calendar_event jsonb,
+  error text
+);
+
+create index if not exists booking_requests_created_at_idx on booking_requests(created_at desc);
+create index if not exists booking_requests_status_idx on booking_requests(status);
+
+create table if not exists contact_requests (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null,
+  email text not null,
+  phone text,
+  preferred_contact text,
+  message text not null,
+  status text not null default 'new',
+  source text,
+  page_url text,
+  user_agent text,
+  ip text
+);
+
+create index if not exists contact_requests_created_at_idx on contact_requests(created_at desc);
+create index if not exists contact_requests_status_idx on contact_requests(status);

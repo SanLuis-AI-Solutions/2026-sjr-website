@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { normalizeTimeZone } from "@/lib/timezone";
 
 type BookingInput = {
   name: string;
@@ -9,18 +10,34 @@ type BookingInput = {
   details?: string;
 };
 
-const TIMEZONE = process.env.GOOGLE_CALENDAR_TIMEZONE || "America/Chicago";
+const TIMEZONE = normalizeTimeZone(process.env.GOOGLE_CALENDAR_TIMEZONE);
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
+
+function normalizePrivateKey(value?: string) {
+  if (!value) return null;
+  let key = value.trim();
+  if (
+    (key.startsWith("\"") && key.endsWith("\"")) ||
+    (key.startsWith("'") && key.endsWith("'"))
+  ) {
+    key = key.slice(1, -1);
+  }
+  key = key.replace(/\\n/g, "\n").replace(/\r\n/g, "\n");
+  return key;
+}
 
 function getAuth() {
   const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(
-    /\\n/g,
-    "\n"
-  );
+  const privateKey = normalizePrivateKey(process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY);
 
   if (!clientEmail || !privateKey) {
     throw new Error("Missing Google service account credentials.");
+  }
+
+  if (!privateKey.includes("BEGIN") || !privateKey.includes("PRIVATE KEY")) {
+    throw new Error(
+      "Google service account private key is not a PEM key. Expected a value like '-----BEGIN PRIVATE KEY-----...'."
+    );
   }
 
   return new google.auth.JWT({

@@ -3,7 +3,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, Testimonials } from "@/components/home-sections";
-import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { localBusinessSchema, servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 
@@ -19,7 +18,6 @@ export default async function Home() {
         <InHouseBadge />
         <ProcessSteps />
         <ServicesGrid services={services} />
-        <BeforeAfterSlider />
         <CraftStory />
         <Testimonials />
         <HomeFaq />
