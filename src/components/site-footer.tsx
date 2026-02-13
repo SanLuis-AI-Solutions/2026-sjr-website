@@ -11,7 +11,7 @@ export function SiteFooter() {
               Susie’s <span className="text-brand-gold">Repair</span>
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-relaxed">
-              Pasadena’s premier atelier for luxury watch and jewelry restorations. Master craftsmanship, performed entirely in-house.
+              In-house watch and jewelry repair in Pasadena. Master craftsmanship with clear communication and fast turnaround.
             </p>
           </div>
 
@@ -42,8 +42,8 @@ export function SiteFooter() {
             </div>
 
             <div>
-              <h4 className="mb-6 font-serif text-lg text-white">Atelier Info</h4>
-              <p className="text-sm italic text-stone-400">Located in the heart of Pasadena.</p>
+              <h4 className="mb-6 font-serif text-lg text-white">Location</h4>
+              <p className="text-sm italic text-stone-400">Pasadena, California.</p>
               <address className="mt-4 flex flex-col gap-2 text-sm not-italic font-sans letter-spacing-wide">
                 <span>{BUSINESS.address.street}</span>
                 <span>{BUSINESS.address.city}, {BUSINESS.address.state}</span>
