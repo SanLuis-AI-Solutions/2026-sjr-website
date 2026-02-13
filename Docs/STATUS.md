@@ -32,6 +32,7 @@ Update cadence: weekly (or after major milestones).
 - Service detail data: normalized Supabase json-ish arrays (prevents “includes” rendering as a single blob string).
 - Support pages: added `/privacy` and `/terms` pages so footer links are not broken.
 - Home cleanup: removed the unused “Repair Impact” (before/after slider) component from the repo to prevent accidental reintroduction.
+- Started a structured Services hub refresh artifact (`Docs/artifacts/ui/2026-02-13--services-hub-refresh/`) to drive a premium redesign without drifting from the site system.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
