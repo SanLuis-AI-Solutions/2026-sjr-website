@@ -277,14 +277,6 @@ export default async function ServicesPage() {
                                     {service.summary || service.short_summary}
                                   </p>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                  <Link
-                                    href={`/services/${service.slug}`}
-                                    className="text-xs font-bold uppercase tracking-[0.35em] text-brand-gold hover:text-brand-burgundy"
-                                  >
-                                    View details →
-                                  </Link>
-                                </div>
                               </div>
 
                               <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -314,18 +306,18 @@ export default async function ServicesPage() {
                                 </div>
                               </div>
 
-                              <div className="mt-6 flex flex-wrap gap-3">
+                              <div className="mt-6 flex flex-wrap items-center gap-4">
                                 <Link
-                                  href="/quote"
-                                  className="rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+                                  href={`/services/${service.slug}`}
+                                  className="micro-interaction inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-900 hover:border-brand-gold/50 hover:text-brand-burgundy"
                                 >
-                                  Get Fast Quote
+                                  View details
                                 </Link>
                                 <Link
-                                  href="/book"
-                                  className="rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10"
+                                  href="/quote"
+                                  className="text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy hover:text-brand-burgundy-deep"
                                 >
-                                  Book a Repair
+                                  Get quote →
                                 </Link>
                               </div>
                             </div>
@@ -340,6 +332,27 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
+      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
+        <div className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/quote"
+              className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+            >
+              Quote
+            </Link>
+            <Link
+              href="/book"
+              className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+            >
+              Book
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="h-24 md:hidden" aria-hidden="true" />
     </SiteShell>
   );
 }
