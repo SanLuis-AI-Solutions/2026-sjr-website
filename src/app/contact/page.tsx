@@ -13,9 +13,10 @@ export default function ContactPage({
 
   return (
     <SiteShell>
-      <section className="bg-white py-16">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
-          <div>
+      <section className="relative overflow-hidden bg-stone-100 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
+          <div className="reveal-on-scroll">
             <Suspense fallback={null}>
               <GaConversionTracker
                 active={submitted}
@@ -50,7 +51,7 @@ export default function ContactPage({
             <p className="mt-4 text-sm text-stone-600">
               Call, email, or send a quick note. We’ll guide you to the next step.
             </p>
-            <div className="mt-6 space-y-2 text-sm text-stone-600">
+            <div className="mt-8 space-y-2 text-sm text-stone-600">
               <a href={`tel:${BUSINESS.phone}`} className="block hover:text-brand-burgundy">
                 {BUSINESS.phone}
               </a>
@@ -66,7 +67,7 @@ export default function ContactPage({
           <form
             action="/api/contact"
             method="post"
-            className="rounded-lg border border-stone-200 bg-stone-100 p-6"
+            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
           >
             <input
               type="text"
