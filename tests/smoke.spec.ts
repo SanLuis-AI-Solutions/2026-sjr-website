@@ -101,3 +101,15 @@ test("mobile service detail: includes + faqs render", async ({ page }) => {
 
   guard.assertNoErrors("service detail: jewelry-cleaning");
 });
+
+test("legal pages: privacy + terms exist", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/privacy", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Privacy Policy/i })).toBeVisible();
+
+  await page.goto("/terms", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Terms of Service/i })).toBeVisible();
+
+  guard.assertNoErrors("privacy/terms");
+});

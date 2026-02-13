@@ -30,6 +30,7 @@ Update cadence: weekly (or after major milestones).
 - Conversion pages: aligned Contact page layout styling with Quote/Book (consistent mobile-first feel).
 - Service detail content: added service-specific FAQs for all 9 services (more trust + less uncertainty on mobile).
 - Service detail data: normalized Supabase json-ish arrays (prevents “includes” rendering as a single blob string).
+- Support pages: added `/privacy` and `/terms` pages so footer links are not broken.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
