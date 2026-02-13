@@ -43,10 +43,14 @@ export function SiteFooter() {
 
             <div>
               <h4 className="mb-6 font-serif text-lg text-white">Location</h4>
-              <p className="text-sm italic text-stone-400">Pasadena, California.</p>
+              <p className="text-sm italic text-stone-400">
+                {BUSINESS.address.city}, {BUSINESS.address.state}.
+              </p>
               <address className="mt-4 flex flex-col gap-2 text-sm not-italic font-sans letter-spacing-wide">
                 <span>{BUSINESS.address.street}</span>
-                <span>{BUSINESS.address.city}, {BUSINESS.address.state}</span>
+                <span>
+                  {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
+                </span>
                 <span className="mt-4 text-brand-gold">{BUSINESS.phone}</span>
               </address>
             </div>
