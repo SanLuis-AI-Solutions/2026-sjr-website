@@ -82,3 +82,22 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
 
   guard.assertNoErrors("home -> quote");
 });
+
+test("mobile service detail: includes + faqs render", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/jewelry-cleaning", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Jewelry Cleaning/i })).toBeVisible();
+
+  // Includes list should have multiple items (not a single stringified blob).
+  const includesItems = page.locator('[data-testid="service-includes"] li');
+  await expect(includesItems).toHaveCount(4);
+
+  // FAQs should exist (service-specific now).
+  await expect(page.getByRole("heading", { name: /Answers about/i })).toBeVisible();
+  await expect(
+    page.getByText(/Is ultrasonic cleaning safe for all jewelry/i)
+  ).toBeVisible();
+
+  guard.assertNoErrors("service detail: jewelry-cleaning");
+});

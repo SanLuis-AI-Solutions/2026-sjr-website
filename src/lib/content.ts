@@ -18,6 +18,48 @@ function withFallbackArray<T>(value: unknown, fallback: T[]): T[] {
   return fallback;
 }
 
+function normalizeStringArray(value: unknown): string[] | null {
+  // Supabase data can occasionally come back as:
+  // - a single-element array containing a JSON stringified array
+  // - a JSON stringified array (string)
+  // Normalize those cases into a real string[].
+  if (Array.isArray(value)) {
+    if (value.every((v) => typeof v === "string")) {
+      if (value.length === 1) {
+        const s = (value[0] as string).trim();
+        if (s.startsWith("[") && s.endsWith("]")) {
+          try {
+            const parsed = JSON.parse(s);
+            if (Array.isArray(parsed) && parsed.every((v) => typeof v === "string")) {
+              return parsed;
+            }
+          } catch {
+            // ignore
+          }
+        }
+      }
+      return value as string[];
+    }
+    return null;
+  }
+
+  if (typeof value === "string") {
+    const s = value.trim();
+    if (s.startsWith("[") && s.endsWith("]")) {
+      try {
+        const parsed = JSON.parse(s);
+        if (Array.isArray(parsed) && parsed.every((v) => typeof v === "string")) {
+          return parsed;
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  return null;
+}
+
 function mergeServiceRecord(fallback: any, record: any) {
   if (!record) return fallback;
 
@@ -32,20 +74,23 @@ function mergeServiceRecord(fallback: any, record: any) {
 
   // Supabase stores these as jsonb arrays. Keep fallback arrays when missing/empty.
   merged.long_description = withFallbackArray<string>(
-    record.long_description,
+    normalizeStringArray(record.long_description),
     fallback.long_description || fallback.longDescription || []
   );
   merged.longDescription = withFallbackArray<string>(
-    record.longDescription,
+    normalizeStringArray(record.longDescription),
     fallback.longDescription || fallback.long_description || []
   );
-  merged.includes = withFallbackArray<string>(record.includes, fallback.includes || []);
+  merged.includes = withFallbackArray<string>(
+    normalizeStringArray(record.includes),
+    fallback.includes || []
+  );
   merged.common_requests = withFallbackArray<string>(
-    record.common_requests,
+    normalizeStringArray(record.common_requests),
     fallback.common_requests || fallback.commonRequests || []
   );
   merged.commonRequests = withFallbackArray<string>(
-    record.commonRequests,
+    normalizeStringArray(record.commonRequests),
     fallback.commonRequests || fallback.common_requests || []
   );
 

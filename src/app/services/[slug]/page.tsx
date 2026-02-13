@@ -308,7 +308,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Includes
             </div>
-            <ul className="mt-4 space-y-3 text-sm text-stone-600">
+            <ul
+              className="mt-4 space-y-3 text-sm text-stone-600"
+              data-testid="service-includes"
+            >
               {(service.includes || []).map((item: string) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
@@ -320,7 +323,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 Common requests
               </div>
-              <ul className="mt-3 space-y-2 text-sm text-stone-600">
+              <ul
+                className="mt-3 space-y-2 text-sm text-stone-600"
+                data-testid="service-common-requests"
+              >
                 {(service.commonRequests || service.common_requests || []).map((item: string) => (
                   <li key={item}>• {item}</li>
                 ))}

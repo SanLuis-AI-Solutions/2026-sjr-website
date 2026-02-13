@@ -29,6 +29,7 @@ Update cadence: weekly (or after major milestones).
 - Conversion pages: upgraded Quote + Booking pages to premium two-column layout, visible labels, better mobile autofill, and clearer next-step trust cues.
 - Conversion pages: aligned Contact page layout styling with Quote/Book (consistent mobile-first feel).
 - Service detail content: added service-specific FAQs for all 9 services (more trust + less uncertainty on mobile).
+- Service detail data: normalized Supabase json-ish arrays (prevents “includes” rendering as a single blob string).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
