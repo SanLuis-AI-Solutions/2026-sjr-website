@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
@@ -20,6 +21,26 @@ type FaqItem = {
   question: string;
   answer: string;
 };
+
+function svgDataUri(title: string) {
+  const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900">` +
+    `<defs>` +
+    `<linearGradient id="g" x1="0" x2="1" y1="0" y2="1">` +
+    `<stop offset="0" stop-color="#faf7f2"/>` +
+    `<stop offset="1" stop-color="#e9d6c7"/>` +
+    `</linearGradient>` +
+    `</defs>` +
+    `<rect width="1200" height="900" fill="url(#g)"/>` +
+    `<circle cx="980" cy="170" r="260" fill="#d1b882" opacity="0.25"/>` +
+    `<circle cx="260" cy="720" r="320" fill="#7a2e3a" opacity="0.10"/>` +
+    `<text x="72" y="780" font-size="54" font-family="Georgia, serif" fill="#2b2621" opacity="0.85">` +
+    `${safe}` +
+    `</text>` +
+    `</svg>`;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
 
 function buildFallbackFaqs(serviceName: string): FaqItem[] {
   return [
@@ -80,8 +101,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const resolvedFaqs =
-    Array.isArray(faqs) && faqs.length > 0 ? faqs : buildFallbackFaqs(service.name);
+  const embeddedFaqs = (service as any).faqs as FaqItem[] | undefined;
+  const resolvedFaqs = Array.isArray(faqs) && faqs.length > 0
+    ? faqs
+    : Array.isArray(embeddedFaqs) && embeddedFaqs.length > 0
+      ? embeddedFaqs
+      : buildFallbackFaqs(service.name);
   const relatedServices = services
     .filter((item) => item.slug !== service.slug)
     .slice(0, 4);
@@ -92,12 +117,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     formatTimeEstimate((service as any).time_estimate ?? (service as any).timeEstimate ?? null) ??
     formatTimeEstimate((service as any).timeEstimate ?? null);
 
+  const isWatchRepair = slug === "watch-repair";
+  const heroImageSrc =
+    (service as any).image_url || (service as any).image || svgDataUri(service.name);
+
   return (
     <SiteShell>
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
-          <div>
+          <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Service Detail
             </p>
@@ -137,24 +166,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/quote"
-                className="rounded-lg bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-burgundy-deep"
+                className="micro-interaction rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep"
               >
                 Get Fast Quote
               </Link>
               <Link
                 href="/book"
-                className="rounded-lg border border-brand-gold px-6 py-3 text-sm font-semibold text-brand-burgundy transition hover:bg-brand-gold/10"
+                className="micro-interaction rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10"
               >
                 Book a Repair
               </Link>
             </div>
           </div>
-          <div className="relative">
-            <div
-              className="h-[320px] rounded-2xl border border-stone-200 bg-cover bg-center shadow-sm md:h-[380px]"
-              style={{ backgroundImage: `url('${service.image_url || service.image || ""}')` }}
-              aria-hidden="true"
-            />
+          <div className="relative reveal-on-scroll">
+            <div className="relative h-[320px] overflow-hidden rounded-3xl border border-stone-200 shadow-[0_28px_70px_rgba(58,25,16,0.18)] md:h-[380px]">
+              <Image
+                src={heroImageSrc}
+                alt={service.name}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+            </div>
             <div className="absolute -bottom-8 left-6 right-6 rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
               <div className="text-xs uppercase tracking-[0.25em] text-brand-burgundy">
                 In-house assessment
@@ -181,6 +216,47 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 {paragraph}
               </p>
             ))}
+
+            {isWatchRepair ? (
+              <div className="mt-10 rounded-3xl border border-stone-200 bg-stone-100/60 p-6">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Service Options
+                </div>
+                <p className="mt-3 text-sm text-stone-600">
+                  Choose the right level of service. We confirm pricing and timing before work begins.
+                </p>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-stone-200 bg-white/80 p-5 shadow-sm">
+                    <div className="font-serif text-xl text-stone-900">Battery Replacement</div>
+                    <p className="mt-2 text-sm text-stone-600">
+                      Often completed while you wait, with seal inspection when applicable.
+                    </p>
+                    <ul className="mt-4 space-y-2 text-sm text-stone-600">
+                      <li>• Fresh battery + function check</li>
+                      <li>• Basic gasket inspection</li>
+                      <li>• Optional pressure test (when applicable)</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-2xl border border-stone-200 bg-white/80 p-5 shadow-sm">
+                    <div className="font-serif text-xl text-stone-900">Full Service</div>
+                    <p className="mt-2 text-sm text-stone-600">
+                      Recommended for slow running, moisture, or overdue maintenance.
+                    </p>
+                    <ul className="mt-4 space-y-2 text-sm text-stone-600">
+                      <li>• Movement cleaning + lubrication</li>
+                      <li>• Worn parts evaluation (if needed)</li>
+                      <li>• Regulation + final testing</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/70 p-4 text-sm text-stone-600">
+                  <span className="font-semibold text-stone-900">Water resistance note:</span>{" "}
+                  pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions.
+                </div>
+              </div>
+            ) : null}
           </div>
           <div className="rounded-2xl border border-stone-200 bg-stone-100/60 p-6">
             {(startingAt || timeEstimate) && (
@@ -205,6 +281,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="mt-6 border-t border-stone-200 pt-4" />
               </>
             )}
+
+            {isWatchRepair ? (
+              <div className="mb-6">
+                <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                  What to bring
+                </div>
+                <ul className="mt-4 space-y-3 text-sm text-stone-600">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                    The watch (and any extra links if you have them)
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                    A quick note on the issue: slow/fast, stopping, moisture, crown/stem, crystal
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                    Any recent service history (optional, but helpful)
+                  </li>
+                </ul>
+                <div className="mt-6 border-t border-stone-200 pt-4" />
+              </div>
+            ) : null}
+
             <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Includes
             </div>
@@ -285,15 +385,18 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </h2>
           <div className="mt-8 space-y-4">
             {resolvedFaqs.map((faq: FaqItem) => (
-              <div
+              <details
                 key={faq.question}
-                className="rounded-xl border border-stone-200 bg-stone-100/60 p-5"
+                className="group rounded-2xl border border-stone-200 bg-stone-100/60 p-5"
               >
-                <div className="font-semibold text-stone-900">
-                  {faq.question}
-                </div>
-                <p className="mt-2 text-sm text-stone-600">{faq.answer}</p>
-              </div>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-stone-900">
+                  <span>{faq.question}</span>
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-500 transition group-open:rotate-45 group-open:text-brand-burgundy">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm text-stone-600">{faq.answer}</p>
+              </details>
             ))}
           </div>
         </div>
@@ -332,6 +435,27 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </section>
 
       <CtaBand />
+
+      {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
+      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
+        <div className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/quote"
+              className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+            >
+              Quote
+            </Link>
+            <Link
+              href="/book"
+              className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+            >
+              Book
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="h-24 md:hidden" aria-hidden="true" />
 
       <script
         type="application/ld+json"
