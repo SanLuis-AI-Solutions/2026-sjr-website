@@ -113,3 +113,25 @@ test("legal pages: privacy + terms exist", async ({ page }) => {
 
   guard.assertNoErrors("privacy/terms");
 });
+
+test("services hub: finder search routes to service detail", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  await expect(
+    page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
+  ).toBeVisible();
+
+  await page.getByRole("searchbox", { name: /Search services/i }).fill("watch");
+  const finder = page.getByTestId("service-finder");
+  const match = finder
+    .getByRole("link", { name: /Watch Repair & Battery Replacement/i })
+    .first();
+  await expect(match).toBeVisible();
+  await match.click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /Watch Repair/i })
+  ).toBeVisible();
+
+  guard.assertNoErrors("services finder");
+});

@@ -34,6 +34,7 @@ Update cadence: weekly (or after major milestones).
 - Home cleanup: removed the unused “Repair Impact” (before/after slider) component from the repo to prevent accidental reintroduction.
 - Started a structured Services hub refresh artifact (`Docs/artifacts/ui/2026-02-13--services-hub-refresh/`) to drive a premium redesign without drifting from the site system.
 - Services hub: reduced per-card CTA noise and added a mobile sticky conversion bar (Quote/Book) for cleaner directory browsing.
+- Services hub: added "Find your service" search + made the directory collapsible on mobile (faster discovery without scroll fatigue).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

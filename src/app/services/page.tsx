@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
+import { ServiceFinder } from "@/components/service-finder";
 
 export default async function ServicesPage() {
   const services = await getServicesWithImages();
@@ -67,6 +68,16 @@ export default async function ServicesPage() {
     (featured?.image_url as string) ||
     (featured?.image as string) ||
     svgDataUri(featured?.name || "Watch Repair");
+  const finderItems = (services as any[]).map((s) => ({
+    name: String(s.name || ""),
+    slug: String(s.slug || ""),
+    summary: String(s.summary || s.short_summary || ""),
+    keywords: Array.isArray(s.commonRequests)
+      ? s.commonRequests
+      : Array.isArray(s.common_requests)
+        ? s.common_requests
+        : null,
+  }));
   return (
     <SiteShell>
       <div id="top" className="sr-only" />
@@ -132,6 +143,8 @@ export default async function ServicesPage() {
                 </Link>
               </div>
             </div>
+
+            <ServiceFinder services={finderItems} />
           </div>
 
           <div className="relative reveal-on-scroll">
@@ -176,7 +189,54 @@ export default async function ServicesPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
             <aside className="reveal-on-scroll lg:sticky lg:top-28 lg:self-start">
-              <div className="rounded-3xl border border-stone-200 bg-stone-100/60 p-6">
+              {/* Mobile: collapse directory so the page doesn't feel heavy before the content. */}
+              <div className="lg:hidden">
+                <details className="rounded-3xl border border-stone-200 bg-stone-100/60 p-5">
+                  <summary className="cursor-pointer list-none">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                          Directory
+                        </div>
+                        <p className="mt-1 text-sm text-stone-600">
+                          Tap to jump to a category.
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-stone-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-600">
+                        Open
+                      </span>
+                    </div>
+                  </summary>
+                  <div className="mt-5 space-y-2">
+                    {groups.map((g) => (
+                      <a
+                        key={g.id}
+                        href={`#group-${g.id}`}
+                        className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+                      >
+                        {g.label}
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-6 border-t border-stone-200 pt-6">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                      Not sure?
+                    </div>
+                    <p className="mt-2 text-sm text-stone-600">
+                      Upload a photo and we will confirm pricing and timing.
+                    </p>
+                    <Link
+                      href="/quote"
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+                    >
+                      Get Fast Quote
+                    </Link>
+                  </div>
+                </details>
+              </div>
+
+              {/* Desktop: keep a persistent sticky directory for quick navigation. */}
+              <div className="hidden rounded-3xl border border-stone-200 bg-stone-100/60 p-6 lg:block">
                 <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Directory
                 </div>
