@@ -138,6 +138,17 @@ if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
   }
 }
 
+# Repo-local network checks (only in CI mode to avoid local/offline friction).
+if ($Ci) {
+  $audit = Join-Path $root 'scripts/audit-images.ps1'
+  if (Test-Path $audit) {
+    $anyChecks = $true
+    Write-ReportLine ""
+    Write-ReportLine "### Network checks"
+    $allOk = (InvokeStep 'Audit images (scripts/audit-images.ps1)' { pwsh -File $audit -ProjectRoot $root }) -and $allOk
+  }
+}
+
 # Python checks (best-effort).
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
   Write-ReportLine ""

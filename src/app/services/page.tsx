@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
-import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
+import Image from "next/image";
+import { ServicesGrid } from "@/components/services-grid";
 
 export default async function ServicesPage() {
   const services = await getServicesWithImages();
@@ -15,7 +16,7 @@ export default async function ServicesPage() {
               Services
             </p>
             <h1 className="mt-3 font-serif text-4xl text-stone-900">
-              In‑house repairs with transparent pricing
+              Choose your repair service.
             </h1>
             <p className="mt-4 max-w-2xl text-sm text-stone-600">
               All work is performed locally with master‑level care. Ask for a
@@ -47,98 +48,66 @@ export default async function ServicesPage() {
                 Book a Repair
               </Link>
             </div>
+
+            <div className="mt-10 reveal-on-scroll">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-stone-500">
+                Jump to a service
+              </p>
+              <div className="mt-3 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {services.map((s: any) => (
+                  <Link
+                    key={s.slug}
+                    href={`#service-${s.slug}`}
+                    className="shrink-0 rounded-full border border-stone-200 bg-white px-4 py-2 text-[11px] font-semibold text-stone-700 transition hover:border-brand-gold/60 hover:text-brand-burgundy"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
           <div className="relative reveal-on-scroll">
-            <div
-              className="h-[320px] rounded-2xl border border-stone-200 bg-cover bg-center shadow-sm md:h-[380px]"
-              style={{
-                backgroundImage:
-                  "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTHAFksQKw1RHywD2pW79qW96wBxOfYhr58a-xcgLwvoHAQt7Tj7cwUZZA8mMFyhcG6hUeE7tfx6Qthbgjuel0HIdQ2eDUsPqn2Z60rRMuQaJUK5m0Su8hgl_hEAfPL3WuM4F4YOakawldxzfB9O_3VoYBaXBwx2Xmf2rMew14HPL-M_X6J0MDtZ4il9H9Obfv3WWTJWVdIHV0y2Q35mom5cDvU6M_EvkidgO8zhZo8p0UYfm-I48JOsGr84gZdmn1a43ciaTAOSTC')",
-              }}
-              aria-hidden="true"
-            />
+            <div className="relative h-[320px] overflow-hidden rounded-2xl border border-stone-200 shadow-sm md:h-[380px]">
+              <Image
+                src={services?.[0]?.image_url || services?.[0]?.image || "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20width%3D'1200'%20height%3D'900'%3E%3Crect%20width%3D'1200'%20height%3D'900'%20fill%3D'%23faf7f2'/%3E%3C/svg%3E"}
+                alt="Jewelry repair workbench"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-burgundy/10 via-transparent to-brand-gold/20" />
+            </div>
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <div
-                className="h-28 rounded-xl border border-stone-200 bg-cover bg-center shadow-sm"
-                style={{
-                  backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuASUeinXNm7VbDGm6RZ_5n4DeDScYuC8pIKvDRuw8id5vHJI-kLbUx19MSXQ7qh2VmkjtinhZ19PKr46JLw-U_m3GRyLKZKt5OK0lybRtsGm5oPjHteSS732er3XXV2-yCu8jid148aOjrTolvGaqSElqdVGml43_LYvOidjN3i1yH-XeQujSbwD32WfkZyUCpJaRjuJK0TJZ44vIKSXmrdo-PAlG7T9PEPveBiPYdSZO0e33c8_5Ur8vgfOfRNvBdOSVDln8qnkOso')",
-                }}
-                aria-hidden="true"
-              />
-              <div
-                className="h-28 rounded-xl border border-stone-200 bg-cover bg-center shadow-sm"
-                style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1518544887872-6d1d3ed4b799?auto=format&fit=crop&w=800&q=80')",
-                }}
-                aria-hidden="true"
-              />
+              <div className="relative h-28 overflow-hidden rounded-xl border border-stone-200 shadow-sm">
+                <Image
+                  src={services?.[1]?.image_url || services?.[1]?.image || "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20width%3D'800'%20height%3D'600'%3E%3Crect%20width%3D'800'%20height%3D'600'%20fill%3D'%23f3ece5'/%3E%3C/svg%3E"}
+                  alt="Repair detail"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative h-28 overflow-hidden rounded-xl border border-stone-200 shadow-sm">
+                <Image
+                  src={services?.[2]?.image_url || services?.[2]?.image || "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20width%3D'800'%20height%3D'600'%3E%3Crect%20width%3D'800'%20height%3D'600'%20fill%3D'%23efe2d7'/%3E%3C/svg%3E"}
+                  alt="Finished jewelry"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="space-y-8">
-            {services.map((service, index) => (
-              <article
-                key={service.slug}
-                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:flex`}
-              >
-                <div
-                  className="h-48 w-full bg-cover bg-center md:h-auto md:w-64"
-                  style={{ backgroundImage: `url('${service.image_url || service.image}')` }}
-                  aria-hidden="true"
-                />
-                <div className="flex-1 p-6">
-                  <div className="flex flex-wrap items-start justify-between gap-4">
-                    <h2 className="font-serif text-2xl text-stone-900">
-                      {service.name}
-                    </h2>
-                    <Link
-                      href={`/services/${service.slug}`}
-                      className="text-sm font-semibold text-brand-burgundy hover:text-brand-burgundy-deep"
-                    >
-                      View details →
-                    </Link>
-                  </div>
-                  <p className="mt-3 text-sm text-stone-600">
-                    {service.summary || service.short_summary}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-600">
-                    <span className="rounded-full border border-stone-200 px-3 py-1">
-                      In‑house repair
-                    </span>
-                    {(() => {
-                      const startingAt = formatStartingAt(
-                        (service as any).starting_price ?? (service as any).startingPrice ?? null
-                      );
-                      return (
-                        <span className="rounded-full border border-stone-200 px-3 py-1">
-                          {startingAt ? `Starts at ${startingAt}` : "Starting‑at pricing"}
-                        </span>
-                      );
-                    })()}
-                    {(() => {
-                      const timeEstimate = formatTimeEstimate(
-                        (service as any).time_estimate ?? (service as any).timeEstimate ?? null
-                      );
-                      if (!timeEstimate) return null;
-                      return (
-                        <span className="rounded-full border border-stone-200 px-3 py-1">
-                          Typical: {timeEstimate}
-                        </span>
-                      );
-                    })()}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesGrid
+        services={services as any}
+        kicker="All Services"
+        title="In-house repair services"
+        id="services-grid"
+      />
     </SiteShell>
   );
 }

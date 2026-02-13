@@ -32,6 +32,10 @@ jobs:
       - name: Verify (build)
         run: npm run -s build
 
+      - name: Audit image URLs (Supabase public assets)
+        shell: pwsh
+        run: pwsh -File scripts/audit-images.ps1
+
       # This deploy path does NOT rely on Vercel Git integration.
       # Add repo secret: VERCEL_TOKEN
       - name: Deploy to Vercel (production)
