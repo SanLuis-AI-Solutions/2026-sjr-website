@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function ScrollRevealManager() {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -24,6 +27,11 @@ export function ScrollRevealManager() {
       return;
     }
 
+    if (typeof IntersectionObserver === "undefined") {
+      elements.forEach((el) => el.classList.add("reveal-visible"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -36,10 +44,14 @@ export function ScrollRevealManager() {
       { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    // On route transitions, this component remains mounted, but the DOM changes.
+    // Re-scan and observe any new elements that haven't been revealed yet.
+    elements.forEach((el) => {
+      if (!el.classList.contains("reveal-visible")) observer.observe(el);
+    });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }

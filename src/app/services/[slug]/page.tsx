@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
-import { getFaqsByService, getServiceBySlug } from "@/lib/content";
+import { getFaqsByService, getServiceBySlug, getServices } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
+import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 
 const UPDATED_DATE = "February 1, 2026";
 
@@ -14,6 +15,31 @@ type PageProps = {
     slug: string;
   };
 };
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+function buildFallbackFaqs(serviceName: string): FaqItem[] {
+  return [
+    {
+      question: `How long does ${serviceName.toLowerCase()} usually take?`,
+      answer:
+        "Most pieces are assessed the same day. Final timing depends on parts and repair complexity, and we confirm that before work begins.",
+    },
+    {
+      question: "Is the repair done in-house?",
+      answer:
+        "Yes. All repair work is completed in our Pasadena shop by our in-house team, so your piece is not shipped out.",
+    },
+    {
+      question: "Can I get a quote before I commit?",
+      answer:
+        "Yes. Use our Fast Quote form or visit the shop for a free assessment, and we will provide clear starting-at pricing before you approve work.",
+    },
+  ];
+}
 
 export function generateStaticParams() {
   return SERVICES.map((service) => ({ slug: service.slug }));
@@ -44,12 +70,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const service = await getServiceBySlug(slug);
-  const faqs = await getFaqsByService(slug);
+  const [service, faqs, services] = await Promise.all([
+    getServiceBySlug(slug),
+    getFaqsByService(slug),
+    getServices(),
+  ]);
 
   if (!service) {
     notFound();
   }
+
+  const resolvedFaqs =
+    Array.isArray(faqs) && faqs.length > 0 ? faqs : buildFallbackFaqs(service.name);
+  const relatedServices = services
+    .filter((item) => item.slug !== service.slug)
+    .slice(0, 4);
+  const startingAt =
+    formatStartingAt((service as any).starting_price ?? (service as any).startingPrice ?? null) ??
+    formatStartingAt((service as any).startingPrice ?? null);
+  const timeEstimate =
+    formatTimeEstimate((service as any).time_estimate ?? (service as any).timeEstimate ?? null) ??
+    formatTimeEstimate((service as any).timeEstimate ?? null);
 
   return (
     <SiteShell>
@@ -66,6 +107,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <p className="mt-4 max-w-2xl text-sm text-stone-600">
               {service.summary || service.short_summary}
             </p>
+            {(startingAt || timeEstimate) && (
+              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-600">
+                {startingAt && (
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
+                    Starts at {startingAt}
+                  </span>
+                )}
+                {timeEstimate && (
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
+                    Typical: {timeEstimate}
+                  </span>
+                )}
+              </div>
+            )}
+            <div className="mt-6 rounded-xl border border-brand-gold/30 bg-white/80 p-4">
+              <h2 className="text-sm font-semibold text-stone-900">
+                Need {service.name} in {BUSINESS.address.city}?
+              </h2>
+              <p className="mt-2 text-sm text-stone-600">
+                Yes. We provide in-house {service.name.toLowerCase()} with
+                transparent pricing, clear timing, and local pickup at our{" "}
+                {BUSINESS.address.city} shop.
+              </p>
+            </div>
             <p className="mt-4 text-xs uppercase tracking-[0.3em] text-stone-600">
               Last updated {UPDATED_DATE}
             </p>
@@ -118,6 +183,28 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             ))}
           </div>
           <div className="rounded-2xl border border-stone-200 bg-stone-100/60 p-6">
+            {(startingAt || timeEstimate) && (
+              <>
+                <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                  Pricing & timing
+                </div>
+                <div className="mt-4 grid gap-3 text-sm text-stone-600">
+                  {startingAt && (
+                    <div className="flex items-center justify-between rounded-lg border border-stone-200 bg-white/80 px-4 py-3">
+                      <span className="font-semibold text-stone-900">Starting at</span>
+                      <span>{startingAt}</span>
+                    </div>
+                  )}
+                  {timeEstimate && (
+                    <div className="flex items-center justify-between rounded-lg border border-stone-200 bg-white/80 px-4 py-3">
+                      <span className="font-semibold text-stone-900">Typical turnaround</span>
+                      <span>{timeEstimate}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-6 border-t border-stone-200 pt-4" />
+              </>
+            )}
             <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Includes
             </div>
@@ -137,6 +224,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 {(service.commonRequests || service.common_requests || []).map((item: string) => (
                   <li key={item}>• {item}</li>
                 ))}
+              </ul>
+            </div>
+            <div className="mt-6 border-t border-stone-200 pt-4">
+              <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                Why customers choose us
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-stone-600">
+                <li>• In-house repairs with no outsourcing</li>
+                <li>• Same-day assessments on most pieces</li>
+                <li>• Clear approval before work starts</li>
               </ul>
             </div>
           </div>
@@ -187,7 +284,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             Answers about {service.name}.
           </h2>
           <div className="mt-8 space-y-4">
-            {faqs.map((faq: { question: string; answer: string }) => (
+            {resolvedFaqs.map((faq: FaqItem) => (
               <div
                 key={faq.question}
                 className="rounded-xl border border-stone-200 bg-stone-100/60 p-5"
@@ -197,6 +294,38 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
                 <p className="mt-2 text-sm text-stone-600">{faq.answer}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-stone-100 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                Related services
+              </p>
+              <h2 className="mt-2 font-serif text-2xl text-stone-900">
+                Compare nearby repair options
+              </h2>
+            </div>
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-brand-burgundy hover:text-brand-burgundy-deep"
+            >
+              View all services →
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {relatedServices.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/services/${item.slug}`}
+                className="rounded-xl border border-stone-200 bg-white p-4 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy"
+              >
+                {item.name}
+              </Link>
             ))}
           </div>
         </div>
@@ -213,7 +342,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceFaqSchema(service)),
+          __html: JSON.stringify(serviceFaqSchema({ ...service, faqs: resolvedFaqs })),
         }}
       />
     </SiteShell>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
+import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 
 export default async function ServicesPage() {
   const services = await getServicesWithImages();
@@ -9,7 +10,7 @@ export default async function ServicesPage() {
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
-          <div>
+          <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Services
             </p>
@@ -47,7 +48,7 @@ export default async function ServicesPage() {
               </Link>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative reveal-on-scroll">
             <div
               className="h-[320px] rounded-2xl border border-stone-200 bg-cover bg-center shadow-sm md:h-[380px]"
               style={{
@@ -81,10 +82,10 @@ export default async function ServicesPage() {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-6">
           <div className="space-y-8">
-            {services.map((service) => (
+            {services.map((service, index) => (
               <article
                 key={service.slug}
-                className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm md:flex"
+                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:flex`}
               >
                 <div
                   className="h-48 w-full bg-cover bg-center md:h-auto md:w-64"
@@ -110,9 +111,27 @@ export default async function ServicesPage() {
                     <span className="rounded-full border border-stone-200 px-3 py-1">
                       In‑house repair
                     </span>
-                    <span className="rounded-full border border-stone-200 px-3 py-1">
-                      Starting‑at pricing
-                    </span>
+                    {(() => {
+                      const startingAt = formatStartingAt(
+                        (service as any).starting_price ?? (service as any).startingPrice ?? null
+                      );
+                      return (
+                        <span className="rounded-full border border-stone-200 px-3 py-1">
+                          {startingAt ? `Starts at ${startingAt}` : "Starting‑at pricing"}
+                        </span>
+                      );
+                    })()}
+                    {(() => {
+                      const timeEstimate = formatTimeEstimate(
+                        (service as any).time_estimate ?? (service as any).timeEstimate ?? null
+                      );
+                      if (!timeEstimate) return null;
+                      return (
+                        <span className="rounded-full border border-stone-200 px-3 py-1">
+                          Typical: {timeEstimate}
+                        </span>
+                      );
+                    })()}
                   </div>
                 </div>
               </article>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 
 type ServiceItem = {
   slug?: string;
@@ -9,6 +10,10 @@ type ServiceItem = {
   text?: string;
   image?: string | null;
   image_url?: string | null;
+  starting_price?: number | string | null;
+  startingPrice?: number | string | null;
+  time_estimate?: string | null;
+  timeEstimate?: string | null;
 };
 
 type ServicesGridProps = {
@@ -39,6 +44,10 @@ export function ServicesGrid({ services }: ServicesGridProps) {
             const name = service.name || "Untitled Service";
             const summary = service.summary || service.short_summary || service.text || "";
             const image = service.image || service.image_url || null;
+            const startingPriceRaw = service.starting_price ?? service.startingPrice ?? null;
+            const timeEstimateRaw = service.time_estimate ?? service.timeEstimate ?? null;
+            const startingAt = formatStartingAt(startingPriceRaw);
+            const timeEstimate = formatTimeEstimate(timeEstimateRaw);
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
 
             return (
@@ -73,8 +82,18 @@ export function ServicesGrid({ services }: ServicesGridProps) {
                   <div className="mt-6 flex flex-wrap gap-4 border-t border-stone-200 pt-6">
                     <div className="flex flex-col">
                       <span className="text-[10px] uppercase tracking-widest text-stone-400">Starts At</span>
-                      <span className="font-sans text-sm font-semibold text-brand-burgundy">$25+</span>
+                      <span className="font-sans text-sm font-semibold text-brand-burgundy">
+                        {startingAt ?? "Request quote"}
+                      </span>
                     </div>
+                    {timeEstimate && (
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-widest text-stone-400">Turnaround</span>
+                        <span className="font-sans text-sm font-semibold text-neutral-900">
+                          {timeEstimate}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {service.slug && (

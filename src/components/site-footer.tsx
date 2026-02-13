@@ -34,7 +34,7 @@ export function SiteFooter() {
             <div>
               <h4 className="mb-6 font-serif text-lg text-white">Company</h4>
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
-                <Link href="/about" className="transition-colors hover:text-brand-gold">About Our Atelier</Link>
+                <Link href="/about" className="transition-colors hover:text-brand-gold">About Us</Link>
                 <Link href="/faq" className="transition-colors hover:text-brand-gold">F.A.Q.</Link>
                 <Link href="/contact" className="transition-colors hover:text-brand-gold">Connect</Link>
                 <Link href="/blog" className="transition-colors hover:text-brand-gold">Journal</Link>

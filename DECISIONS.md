@@ -32,7 +32,7 @@ Lightweight decision log.
 - Consequences: Docs/PLAN-susies-jewelry-repair.md is now deprecated and kept only for history.
 
 ## 2026-02-02
-- Decision: Service architecture is a hub + individual service detail pages (10 services total).
+- Decision: Service architecture is a hub + individual service detail pages (9 services total).
 - Rationale: Stronger SEO/GEO/AEO targeting and clearer user intent.
 - Alternatives: Single combined services page only.
 - Consequences: Requires service-specific content, FAQs, and schema per service page.
