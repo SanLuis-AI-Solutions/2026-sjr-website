@@ -32,6 +32,7 @@ yarn-error.log*
 
 # local artifacts
 /logs
+/.health
 
 # python cache
 __pycache__/
@@ -41,11 +42,12 @@ __pycache__/
 .agent/stitch-init.log
 .agent/skills/ui-ux-pro-max/tmp-*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files (never commit secrets)
+.env.local
+.env.*.local
 
 # vercel
-.vercel
+.vercel/
 
 # typescript
 *.tsbuildinfo
@@ -53,4 +55,5 @@ next-env.d.ts
 
 .worktrees/
 
-.worktrees/
+# editor settings
+.vscode/

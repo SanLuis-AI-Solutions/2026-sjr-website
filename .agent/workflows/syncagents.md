@@ -6,4 +6,4 @@
 - Run `syncagents` to merge local and global agents.
 - Conflicts resolve by most recent file timestamp.
 
-This keeps `C:\Users\ninef\.codex\agents` and `.agent/agents` in lockstep.
+This keeps `%USERPROFILE%\.codex\agents` and `.agent/agents` in lockstep.

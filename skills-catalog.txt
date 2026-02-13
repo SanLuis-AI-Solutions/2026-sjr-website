@@ -164,6 +164,24 @@ How to use this catalog (for NotebookLM):
   Outputs:
     - Checklist and recommended actions for design-md
 
+- enhance-prompt
+  Description: Transform rough UI ideas into polished, Stitch-optimized prompts (includes DESIGN.md context when present).
+  What it does:
+    - Turn vague UI requests into structured Stitch prompts
+    - Add platform/page-type/layout details and UX keywords
+    - Inject a project's DESIGN.md design system block when available
+  Outputs:
+    - Stitch-ready prompt text (optionally written to a file like next-prompt.md)
+
+- stitch-loop
+  Description: Iterate on screens/pages using Stitch with a simple baton file loop (next-prompt.md), optionally with browser-based visual verification.
+  What it does:
+    - Read a baton prompt (frontmatter + prompt body) and generate a screen via Stitch
+    - Download screenshot + HTML artifacts and integrate into a repo
+    - Update the baton with the next task to keep iteration moving
+  Outputs:
+    - Consistent Stitch iterations + captured artifacts (HTML + screenshots)
+
 - docker-expert
   Description: Domain skill for docker-expert tasks and guidance.
   What it does:
@@ -360,6 +378,15 @@ How to use this catalog (for NotebookLM):
   Outputs:
     - Checklist and recommended actions for react-components
 
+- remotion
+  Description: Generate walkthrough videos from Stitch projects using Remotion (smooth transitions, zooming, and text overlays).
+  What it does:
+    - Retrieve Stitch screen screenshots in sequence
+    - Assemble a Remotion composition for a polished walkthrough video
+    - Render a shareable MP4 (via Remotion MCP or CLI)
+  Outputs:
+    - Video composition skeleton + rendered walkthrough video
+
 - react-patterns
   Description: Domain skill for react-patterns tasks and guidance.
   What it does:
@@ -415,6 +442,15 @@ How to use this catalog (for NotebookLM):
     - Provide analysis, steps, and recommendations for tailwind-patterns use cases.
   Outputs:
     - Checklist and recommended actions for tailwind-patterns
+
+- shadcn-ui
+  Description: Build with shadcn/ui (component discovery, installation, customization, and best practices; optional MCP-assisted component lookup).
+  What it does:
+    - Discover available components/blocks and their dependencies
+    - Install components into the repo (owned source code) and customize variants
+    - Apply a consistent Tailwind + design-token approach for dashboards/forms
+  Outputs:
+    - Recommended components/blocks and an integration checklist
 
 - tdd-workflow
   Description: Domain skill for tdd-workflow tasks and guidance.

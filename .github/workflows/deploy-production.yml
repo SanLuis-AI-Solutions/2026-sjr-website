@@ -1,0 +1,44 @@
+name: Deploy Production (Vercel)
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Verify (build)
+        run: npm run -s build
+
+      # This deploy path does NOT rely on Vercel Git integration.
+      # Add repo secret: VERCEL_TOKEN
+      - name: Deploy to Vercel (production)
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_WhqqnF14OMjd8EfHj7lVzx7A
+          VERCEL_PROJECT_ID: prj_a7IPNCaE1nzmcO8ojPqyDLP0wIti
+        run: |
+          npx vercel deploy --prod --yes --token="$VERCEL_TOKEN"
+

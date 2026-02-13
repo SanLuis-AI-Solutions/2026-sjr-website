@@ -439,30 +439,39 @@ How to use this catalog (for NotebookLM):
   Description: Workflow for /status tasks and structured delivery.
   Uses skills: (not specified)
   Steps:
-    - Clarify scope and inputs
-    - Run the core analysis or implementation
-    - Summarize findings
-    - Deliver next actions
+    - Run `scripts/status.ps1`
+    - Review git + env readiness + stack detection
+    - Use output to decide next workflow (/plan, /debug, /qa-gate, etc.)
   Outputs:
-    - Summary
-    - Findings
-    - Recommended actions
-    - Next steps
+    - Evidence-based status snapshot
 
-- /stitch-design-to-react
-  Description: Workflow for /stitch-design-to-react tasks and structured delivery.
+- /ui-artifact-loop
+  Description: Multi-model UI loop (Codex leads; Gemini Fast explores; Gemini Pro + Stitch converges; Opus reviews) with repo-committed artifacts.
   Uses skills: (not specified)
   Steps:
-    - 1. Select Stitch project and target screens
-    - 2. Generate DESIGN.md from the design system
-    - 3. Generate React components for screens
-    - 4. Validate token consistency and component mapping
-    - 5. Deliver artifacts and next steps
+    - 1. Create `Docs/artifacts/ui/YYYY-MM-DD--<slug>/` and write `00-brief.md`
+    - 2. Generate 3-7 UI directions with Gemini Fast (`01-gemini-fast-options.md`)
+    - 3. Choose 1 direction (Codex) and record the decision in `00-brief.md`
+    - 4. Generate Stitch screens + save IDs/URLs (`02-stitch-links.md`)
+    - 5. Opus critique with change requests (`03-opus-review.md`)
+    - 6. Implement, verify (`npm run build`), and document (`04-implementation-notes.md`)
   Outputs:
-    - DESIGN.md (design system source of truth)
-    - React component set
-    - Validation notes
-    - Next-step checklist
+    - Artifact folder with 00-04 files (brief, options, Stitch links, Opus review, implementation notes)
+    - Verification notes (build + smoke checks)
+
+- /stitch-design-to-react
+  Description: Stitch -> artifact capture -> React component conversion (Vite/React).
+  Uses skills: `design-md` (optional), `react:components`
+  Steps:
+    - 1. Create or reuse an artifact folder (`Docs/artifacts/ui/...`)
+    - 2. Use Stitch MCP to fetch screen metadata and capture screenshot/HTML links (`02-stitch-links.md`)
+    - 3. (Optional) Generate or refresh `DESIGN.md` from Stitch
+    - 4. Convert Stitch HTML into modular React components
+    - 5. Integrate, verify (`npm run build`), and write `04-implementation-notes.md`
+  Outputs:
+    - `DESIGN.md` (optional design system source of truth)
+    - React component set + integration wiring
+    - Artifact folder updates + verification notes
 
 - /sync-docs
   Description: Workflow for /sync-docs tasks and structured delivery.
@@ -569,14 +578,11 @@ How to use this catalog (for NotebookLM):
   Description: Preflight checklist to ensure core docs and environment setup are ready.
   Uses skills: (not specified)
   Steps:
-    - 0. Load Project Brief (if present)
-    - 1. Docs check (brief, PRD, decisions, roadmap)
-    - 2. Env check (.env.example)
-    - 3. Workflow readiness
+    - Run `scripts/preflight.ps1`
+    - Resolve missing docs/env keys and rerun
   Outputs:
-    - Checklist status
-    - Missing items
-    - Next actions
+    - PASS/FAIL readiness report
+    - Missing items + next actions
 - /handoff
   Description: Generate a concise handoff summary for a new chat.
   Uses skills: (not specified)
@@ -591,11 +597,22 @@ How to use this catalog (for NotebookLM):
   Description: Quality gate checklist before deploy or milestone handoff.
   Uses skills: (not specified)
   Steps:
-    - 1. Checklist (lint, tests, security, perf, a11y)
-    - 2. Report pass/fail with next actions
+    - Run `scripts/verify.ps1` (or `-Ci`)
+    - Review PASS/FAIL and report output
   Outputs:
-    - QA checklist results
+    - PASS/FAIL verification report
     - Next actions
+
+- /cadence-weekly
+  Description: Weekly KPI/progress loop. Update Docs/STATUS.md and set the next 3 priorities.
+  Uses skills: (not specified)
+  Steps:
+    - Run `/status`
+    - Update `Docs/STATUS.md` (focus, KPIs, shipped, risks, next 3)
+    - Update `Docs/CHANGELOG.md` and `Docs/HANDOFF.md` as needed
+  Outputs:
+    - Updated `Docs/STATUS.md`
+    - Next 3 priorities for the week
 - /prd-review
   Description: Analyze PRD, identify gaps, and optimize before build.
   Uses skills: (not specified)

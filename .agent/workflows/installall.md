@@ -24,15 +24,10 @@ Run this in the project root:
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\scripts\installall.ps1"
 ```
 
-**Auto-verify MCP**
-- `installall` now checks Docker readiness and whether Codex can see MCP servers.
-- If it warns, restart Docker Desktop or Codex CLI.
-
 2. **Catalog + docs sync (global)**
 
-- Catalogs are synced to `C:\Users\ninef\.codex\catalogs` and copied into the project root when available.
+- Catalogs are synced to `%USERPROFILE%\.codex\catalogs` and copied into the project root when available.
 - Starter docs are seeded if missing (Docs/RESTART.md, Docs/HANDOFF.md, Docs/OPERATING_MODEL.md, README.md, and OPERATING_MODEL.md in the project root).
-- `.agent/ARCHITECTURE.md` is seeded from the global template if missing.
 
 3. **Project bootstrap (env + MCP hints + deps)**
 
@@ -55,13 +50,13 @@ powershell -ExecutionPolicy Bypass -File "./scripts/project-bootstrap.ps1"
 
 **Notes**
 - If `.env.example` is missing, bootstrap will create it from the global env (keys only) or a global template.
-- If MCP scripts are missing in `./scripts`, `/installall` seeds them from `C:\Users\ninef\.codex\scripts`.
+- If MCP scripts are missing in `./scripts`, `/installall` seeds them from `%USERPROFILE%\.codex\scripts`.
 
 6. **Global MCP readiness check**
 
-- Confirm MCP config is global at `C:\Users\ninef\.codex\config.toml`
+- Confirm MCP config is global at `%USERPROFILE%\.codex\config.toml`
 - If MCPs are missing or disabled, fix them in the global config (not in the repo)
-- If using the aggregator, confirm `C:\Users\ninef\.mcp-master-config.json` exists and is referenced by `master-aggregator`
+- If using the aggregator, confirm `%USERPROFILE%\.mcp-master-config.json` exists and is referenced by `master-aggregator`
 - Re-run preflight after any changes
 
 ---
@@ -76,9 +71,9 @@ powershell -ExecutionPolicy Bypass -File "./scripts/project-bootstrap.ps1"
 
 ## Notes
 
-- MCP config lives at `C:\Users\ninef\.codex\config.toml`.
+- MCP config lives at `%USERPROFILE%\.codex\config.toml`.
 - Secrets should remain in `.env.local` or the MCP config, not committed.
-- Optional global env overlay path: `C:\Users\ninef\.codex\env\.env.local`
+- Optional global env overlay path: `%USERPROFILE%\.codex\env\.env.local`
 
 ---
 

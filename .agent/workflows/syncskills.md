@@ -6,4 +6,4 @@
 - Run `syncskills` to merge local and global skills.
 - Conflicts resolve by most recent folder timestamp.
 
-This keeps `C:\Users\ninef\.codex\skills` and `.agent/skills` in lockstep.
+This keeps `%USERPROFILE%\.codex\skills` and `.agent/skills` in lockstep.

@@ -12,6 +12,9 @@ $ARGUMENTS
 
 Run a lightweight QA checklist to catch issues early.
 
+This workflow is backed by a script so it can be automated (CI + weekly health):
+- `scripts/verify.ps1`
+
 ---
 
 ## Steps
@@ -23,7 +26,21 @@ Run a lightweight QA checklist to catch issues early.
    - Performance sanity
    - Accessibility sanity
 
-2. **Report**
+2. **Run Verify Script**
+
+From repo root:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\verify.ps1
+```
+
+CI mode (uses `npm ci` when applicable):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\verify.ps1 -Ci
+```
+
+3. **Report**
    - Pass/Fail with next actions
 
 ---

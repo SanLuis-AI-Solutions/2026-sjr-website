@@ -6,4 +6,4 @@
 - Run `syncworkflows` to merge local and global workflows.
 - Conflicts resolve by most recent file timestamp.
 
-This keeps `C:\Users\ninef\.codex\workflows` and `.agent/workflows` in lockstep.
+This keeps `%USERPROFILE%\.codex\workflows` and `.agent/workflows` in lockstep.
