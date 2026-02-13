@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
+import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
 export default function BookPage({
@@ -15,8 +16,9 @@ export default function BookPage({
     : "booking_submit_success";
   return (
     <SiteShell>
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="relative overflow-hidden bg-stone-100 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
           <Suspense fallback={null}>
             <GaConversionTracker
               active={submitted}
@@ -26,38 +28,52 @@ export default function BookPage({
               status={pending ? "pending" : "success"}
             />
           </Suspense>
-          {submitted ? (
-            <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
-              <p className="font-semibold">
-                {pending ? "Booking request received." : "Booking requested."}
-              </p>
-              <p className="mt-1 text-emerald-800">
-                We will confirm availability and send details to your email.
-              </p>
+          <div className="reveal-on-scroll">
+            {submitted ? (
+              <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                <p className="font-semibold">
+                  {pending ? "Booking request received." : "Booking requested."}
+                </p>
+                <p className="mt-1 text-emerald-800">
+                  We will confirm availability and send details to your email.
+                </p>
+              </div>
+            ) : null}
+            {error ? (
+              <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+                <p className="font-semibold">We could not book that time.</p>
+                <p className="mt-1 text-rose-800">
+                  Please try a different time or call us for immediate help.
+                </p>
+              </div>
+            ) : null}
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+              Book a Repair
+            </p>
+            <h1 className="mt-3 font-serif text-4xl text-stone-900">
+              Reserve a free 15‑minute assessment
+            </h1>
+            <p className="mt-4 text-sm text-stone-600">
+              Choose a preferred time and we’ll confirm your booking. We add a 15‑minute buffer
+              between appointments.
+            </p>
+
+            <div className="mt-8 rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600">
+              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Good to know
+              </div>
+              <ul className="mt-3 space-y-2">
+                <li>• Most services are Same Day or Next Day</li>
+                <li>• We confirm bookings within 1 business day</li>
+                <li>• Need help fast? Call {BUSINESS.phone}</li>
+              </ul>
             </div>
-          ) : null}
-          {error ? (
-            <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
-              <p className="font-semibold">We could not book that time.</p>
-              <p className="mt-1 text-rose-800">
-                Please try a different time or call us for immediate help.
-              </p>
-            </div>
-          ) : null}
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-            Book a Repair
-          </p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900">
-            Reserve a free 15‑minute assessment
-          </h1>
-          <p className="mt-4 text-sm text-stone-600">
-            Select a time and we’ll confirm your booking. We add a 15‑minute
-            buffer between appointments.
-          </p>
+          </div>
+
           <form
             action="/api/book"
             method="post"
-            className="mt-8 grid gap-4 rounded-lg border border-stone-200 bg-stone-100 p-6"
+            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
           >
             <input
               type="text"
@@ -67,50 +83,80 @@ export default function BookPage({
               autoComplete="off"
               aria-hidden="true"
             />
-            <input
-              type="text"
-              name="name"
-              placeholder="Full name"
-              className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone"
-              className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-            />
-            <input
-              type="date"
-              name="date"
-              className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-              required
-            />
-            <input
-              type="time"
-              name="time"
-              className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-              required
-            />
-            <textarea
-              name="details"
-              placeholder="Tell us about the repair"
-              className="min-h-[120px] rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm"
-            />
+
+            <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Full name
+              <input
+                type="text"
+                name="name"
+                autoComplete="name"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                placeholder="Your name"
+                required
+              />
+            </label>
+
+            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Email
+              <input
+                type="email"
+                name="email"
+                autoComplete="email"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                placeholder="you@email.com"
+                required
+              />
+            </label>
+
+            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Phone (optional)
+              <input
+                type="tel"
+                name="phone"
+                autoComplete="tel"
+                inputMode="tel"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                placeholder="(281) 555-1234"
+              />
+            </label>
+
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                Date
+                <input
+                  type="date"
+                  name="date"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                  required
+                />
+              </label>
+              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                Time
+                <input
+                  type="time"
+                  name="time"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                  required
+                />
+              </label>
+            </div>
+
+            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Details (optional)
+              <textarea
+                name="details"
+                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                placeholder="What should we know before you arrive?"
+              />
+            </label>
+
             <button
               type="submit"
-              className="mt-2 rounded-lg bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-burgundy-deep"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
             >
-              Book Assessment
+              Request Booking
             </button>
-            <p className="text-xs text-stone-600">
+            <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · We confirm bookings within 1 business day.
             </p>
           </form>

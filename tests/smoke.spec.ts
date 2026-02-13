@@ -68,3 +68,17 @@ test("mobile nav: menu opens and can reach Services", async ({ page }) => {
 
   guard.assertNoErrors("mobile nav menu");
 });
+
+test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.getByRole("link", { name: /Get Fast Quote/i }).first().click();
+
+  await expect(
+    page.getByRole("heading", { name: /Get a transparent starting/i })
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: /Request Quote/i })).toBeVisible();
+
+  guard.assertNoErrors("home -> quote");
+});
