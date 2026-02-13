@@ -25,6 +25,7 @@ Update cadence: weekly (or after major milestones).
 - Services hub: changed “atelier” wording to “workshop” and fixed `Back to top` anchors by adding a real `#top` target.
 - Reliability: added Playwright mobile smoke test and wired it into CI before production deploy (catches broken client-side navigation + core conversion paths).
 - Reliability: hardened Scroll Reveal so streamed content on route transitions can’t stay stuck hidden (MutationObserver re-scan to avoid “Home looks broken after coming from another page”).
+- Mobile UX: implemented a real slide-over mobile menu (Services/About/FAQ/Blog/Contact + Quote/Book CTAs).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

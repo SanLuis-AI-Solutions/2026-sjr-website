@@ -49,3 +49,22 @@ test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
     guard.assertNoErrors(`iteration ${i + 1} (from ${from})`);
   }
 });
+
+test("mobile nav: menu opens and can reach Services", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await expect(
+    page.getByRole("heading", { name: /Your jewelry never leaves our hands/i })
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: /Toggle Menu/i }).click();
+  await expect(page.getByRole("dialog", { name: /Mobile navigation/i })).toBeVisible();
+
+  await page.getByRole("link", { name: /^Services$/ }).click();
+  await expect(
+    page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
+  ).toBeVisible();
+
+  guard.assertNoErrors("mobile nav menu");
+});
