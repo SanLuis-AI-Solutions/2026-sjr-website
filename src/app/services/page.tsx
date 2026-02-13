@@ -69,6 +69,7 @@ export default async function ServicesPage() {
     svgDataUri(featured?.name || "Watch Repair");
   return (
     <SiteShell>
+      <div id="top" className="sr-only" />
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
@@ -80,7 +81,7 @@ export default async function ServicesPage() {
               A curated menu of in-house repairs.
             </h1>
             <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
-              Designed like a luxury atelier: clear options, consistent quality, and a fast path to a quote or booking.
+              Designed like a luxury workshop: clear options, consistent quality, and a fast path to a quote or booking.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-600">
