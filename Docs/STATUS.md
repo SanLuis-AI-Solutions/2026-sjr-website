@@ -18,6 +18,7 @@ Update cadence: weekly (or after major milestones).
 - Home + Services hub + Service detail template (9 services).
 - Lead notifications: email + Google Chat for Contact, Booking, Quote (verified by manual submissions).
 - Email auth: DKIM + DMARC ready.
+- Deployment guardrails: deterministic Vercel deploy script + CI deploy workflow (prevents silent "push but no deploy").
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
