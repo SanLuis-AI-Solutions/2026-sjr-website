@@ -4,7 +4,18 @@ function attachConsoleGuards(page: any) {
   const errors: string[] = [];
 
   page.on("pageerror", (err: Error) => {
-    errors.push(`pageerror: ${err?.message || String(err)}`);
+    const msg = err?.message || String(err);
+    const stack = (err as any)?.stack ? String((err as any).stack) : "";
+    const url = typeof page?.url === "function" ? page.url() : "";
+    errors.push(
+      [
+        `pageerror: ${msg}`,
+        url ? `url: ${url}` : null,
+        stack && !stack.includes(msg) ? `stack: ${stack}` : stack ? `stack: ${stack}` : null,
+      ]
+        .filter(Boolean)
+        .join("\n")
+    );
   });
 
   page.on("console", (msg: any) => {
@@ -131,6 +142,9 @@ test("services hub: finder search routes to service detail", async ({ page }) =>
   await match.click();
   await expect(
     page.getByRole("heading", { level: 1, name: /Watch Repair/i })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/What happens next/i)
   ).toBeVisible();
 
   guard.assertNoErrors("services finder");

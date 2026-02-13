@@ -116,6 +116,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const timeEstimate =
     formatTimeEstimate((service as any).time_estimate ?? (service as any).timeEstimate ?? null) ??
     formatTimeEstimate((service as any).timeEstimate ?? null);
+  const defaultTimeEstimate = slug === "custom-design" ? "7 business days" : "Same Day or Next Day";
+  const timeEstimateDisplay = timeEstimate ?? defaultTimeEstimate;
 
   const isWatchRepair = slug === "watch-repair";
   const heroImageSrc =
@@ -136,16 +138,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <p className="mt-4 max-w-2xl text-sm text-stone-600">
               {service.summary || service.short_summary}
             </p>
-            {(startingAt || timeEstimate) && (
+            {(startingAt || timeEstimateDisplay) && (
               <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-600">
                 {startingAt && (
                   <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
                     Starts at {startingAt}
                   </span>
                 )}
-                {timeEstimate && (
+                {timeEstimateDisplay && (
                   <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                    Typical: {timeEstimate}
+                    Turnaround: {timeEstimateDisplay}
                   </span>
                 )}
               </div>
@@ -155,11 +157,43 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Need {service.name} in {BUSINESS.address.city}?
               </h2>
               <p className="mt-2 text-sm text-stone-600">
-                Yes. We provide in-house {service.name.toLowerCase()} with
-                transparent pricing, clear timing, and local pickup at our{" "}
-                {BUSINESS.address.city} shop.
+                {isWatchRepair
+                  ? "Yes. We service watches in-house with clear options, transparent estimates, and a confirmed pickup timeline before work begins."
+                  : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing, clear timing, and local pickup at our ${BUSINESS.address.city} shop.`}
               </p>
             </div>
+
+            {isWatchRepair ? (
+              <div className="mt-4 rounded-xl border border-stone-200 bg-white/70 p-4">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  What happens next
+                </div>
+                <div className="mt-4 grid gap-3 text-sm text-stone-600 sm:grid-cols-3">
+                  {[
+                    {
+                      title: "Bring your watch",
+                      detail: "Walk in or book. Extra links are helpful.",
+                    },
+                    {
+                      title: "Free assessment",
+                      detail: "We confirm the fix, price, and timing first.",
+                    },
+                    {
+                      title: "Approve, then service",
+                      detail: "Battery is often same day. Full service varies by parts.",
+                    },
+                  ].map((step) => (
+                    <div
+                      key={step.title}
+                      className="rounded-2xl border border-stone-200 bg-white px-4 py-4 shadow-sm"
+                    >
+                      <div className="font-semibold text-stone-900">{step.title}</div>
+                      <div className="mt-2 text-sm text-stone-600">{step.detail}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <p className="mt-4 text-xs uppercase tracking-[0.3em] text-stone-600">
               Last updated {UPDATED_DATE}
             </p>
@@ -259,7 +293,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             ) : null}
           </div>
           <div className="rounded-2xl border border-stone-200 bg-stone-100/60 p-6">
-            {(startingAt || timeEstimate) && (
+            {(startingAt || timeEstimateDisplay) && (
               <>
                 <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                   Pricing & timing
@@ -271,10 +305,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       <span>{startingAt}</span>
                     </div>
                   )}
-                  {timeEstimate && (
+                  {timeEstimateDisplay && (
                     <div className="flex items-center justify-between rounded-lg border border-stone-200 bg-white/80 px-4 py-3">
                       <span className="font-semibold text-stone-900">Typical turnaround</span>
-                      <span>{timeEstimate}</span>
+                      <span>{timeEstimateDisplay}</span>
                     </div>
                   )}
                 </div>
@@ -450,7 +484,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               href="/quote"
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
             >
-              Quote
+              Get Quote
             </Link>
             <Link
               href="/book"

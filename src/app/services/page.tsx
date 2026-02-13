@@ -193,19 +193,19 @@ export default async function ServicesPage() {
               <div className="lg:hidden">
                 <details className="rounded-3xl border border-stone-200 bg-stone-100/60 p-5">
                   <summary className="cursor-pointer list-none">
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    <span className="flex items-center justify-between gap-4">
+                      <span>
+                        <span className="block text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                           Directory
-                        </div>
-                        <p className="mt-1 text-sm text-stone-600">
+                        </span>
+                        <span className="mt-1 block text-sm text-stone-600">
                           Tap to jump to a category.
-                        </p>
-                      </div>
-                      <span className="rounded-full border border-stone-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-600">
+                        </span>
+                      </span>
+                      <span className="shrink-0 rounded-full border border-stone-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-600">
                         Open
                       </span>
-                    </div>
+                    </span>
                   </summary>
                   <div className="mt-5 space-y-2">
                     {groups.map((g) => (
@@ -401,7 +401,7 @@ export default async function ServicesPage() {
               href="/quote"
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
             >
-              Quote
+              Get Quote
             </Link>
             <Link
               href="/book"
