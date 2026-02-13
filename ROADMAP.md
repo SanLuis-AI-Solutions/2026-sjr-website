@@ -1,7 +1,7 @@
 # ROADMAP.md
 
 Status: Active
-Last updated: 2026-02-03
+Last updated: 2026-02-11
 Source of truth for plan: Docs/PLAN-sjr-website.md
 Document index: DECISIONS.md
 
@@ -12,13 +12,14 @@ Document index: DECISIONS.md
 ## Phase 1 - MVP Build
 - [x] Core pages (Home, Services hub, Service detail pages)
 - [x] Migrate Wix media assets to Supabase Storage
-- [ ] Quote + booking flows (Supabase + Google Calendar)
+- [x] Quote + booking flows (Supabase + Google Calendar)
 - [ ] Auth and data layer
 - [ ] QA baseline
 
 ## Phase 2 - Launch
-- [ ] Deployment
-- [ ] Analytics and feedback loop
+- [x] Deployment
+- [x] Analytics and feedback loop (conversion event instrumentation)
+- [x] Contact lead capture + admin triage workflow
 
 ## Phase 3 - Growth
 - [ ] SEO/content

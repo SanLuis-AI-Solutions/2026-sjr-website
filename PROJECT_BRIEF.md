@@ -19,7 +19,7 @@ Redesign susiesjewelryrepair.com into a high‑performance lead‑gen site cente
 
 ## 4) Core features (MVP)
 - Agentic “Fast Quote” photo upload with price range (Gemini + Supabase pricing).
-- Services hub + individual service pages for all offered services.
+- Services hub + individual service pages for all offered services (9 total).
 - Trust signals (In‑House badge, gallery, reviews) + local SEO pages.
 - Answer‑first page formatting and schema (LocalBusiness, Service, FAQPage).
 

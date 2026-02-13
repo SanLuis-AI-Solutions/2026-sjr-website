@@ -2,7 +2,7 @@
 Version: 0.3
 
 Status: Active (source of truth plan)
-Last updated: 2026-02-02
+Last updated: 2026-02-11
 Document index: DECISIONS.md
 
 ## Overview
@@ -14,7 +14,7 @@ WEB (Next.js App Router + Tailwind)
 ## Success Criteria
 - LCP < 1.2s on Home and Services
 - Primary CTAs present above the fold: Get Fast Quote + Book a Repair
-- Services hub + individual service pages for all offered services
+- Services hub + individual service pages for all offered services (9 total)
 - LocalBusiness + Service + FAQPage schema on relevant pages
 - Answer-first section on every service page
 - Booking flow creates Google Calendar event via Workspace integration
@@ -55,7 +55,7 @@ WEB (Next.js App Router + Tailwind)
 
 ### T2 — Content & IA Consolidation (seo-specialist + content-strategist)
 - INPUT: current site services list + project brief goals
-- OUTPUT: IA for pages, hero copy, service list + descriptions, FAQs (10 services)
+- OUTPUT: IA for pages, hero copy, service list + descriptions, FAQs (9 services)
 - VERIFY: page structure and copy map approved
 
 ### T3 — Stitch Exploration (frontend-specialist + design-md)
@@ -111,6 +111,27 @@ WEB (Next.js App Router + Tailwind)
 - Home page redesign in progress (hero + in-house authority + story + testimonials + CTA).
 - Pending: add service images in Airtable and re-sync to populate image_url.
 - Pending: finish layout/design across remaining pages (Services, About, FAQ, Contact, Blog).
+
+## Progress Notes (2026-02-10)
+- Fast Quote: form supports photo uploads; API stores quote request in Supabase and uploads images to Storage (bucket configurable via env).
+- Booking: form submission stored in Supabase; API attempts Google Calendar event creation (pending valid service-account private key + calendar share).
+
+## Progress Notes (2026-02-11)
+- Admin inbox added at `/admin/inbox` (Basic Auth) to review and update quote/booking statuses.
+- Google Chat notifications enabled for new quotes and bookings via webhook.
+- Service detail template polished for all 9 services: answer-first intro, FAQ fallback content, and related-service internal links.
+- GA4 conversion events added for quote and booking success states with first-touch UTM capture.
+- Contact form upgraded to a real submission flow (`/api/contact`) with Supabase capture, optional dedicated Google Chat webhook, GA4 conversion event, and admin inbox status controls.
+- Supabase migration `add_contact_requests_table_20260211` applied to project `lrzrltjlfvvrdvxqqklm`.
+- Deployed to production alias `https://sjr-new-website-aiproject.vercel.app` and smoke-tested `/api/contact` end-to-end (submission + persistence verified).
+- Removed Home page "Repair Impact" (`BeforeAfterSlider`) section and deployed to production.
+- Added SMTP-based lead email notifications for quotes, bookings, and contact submissions (best-effort, non-blocking when SMTP is not configured).
+- Added timezone normalization for booking validation/calendar payloads to avoid hidden-whitespace env issues.
+- Production smoke tests run for `/api/quote`, `/api/book`, and `/api/contact`; all persisted in Supabase, with booking gracefully marked `pending` when Calendar auth fails.
+- Calendar booking fix completed: updated production `GOOGLE_CALENDAR_ID` to `3349b5d01512a5fdea27c0c5e26dd055f2516946d0196ef9b68d4b97a04eabf5@group.calendar.google.com`, de-duplicated stale Vercel env keys, redeployed, and validated live booking status `booked` with a created Google Calendar event.
+- SMTP wiring deployed and production env synced; runtime logs currently show `smtp_send_failed` (`535 Username and Password not accepted`) for Gmail auth, indicating credential/app-password issue rather than app logic.
+- SMTP credentials updated and revalidated: local SMTP connectivity test passed; production quote/booking/contact smoke tests passed with no `smtp_send_failed` runtime logs in the validation window.
+- Added email-auth runbook `Docs/EMAIL_AUTH_SETUP.md` after DNS audit (SPF present, DKIM/DMARC missing) to harden deliverability.
 
 ## Docs Sync Checklist
 - PLAN: Docs/PLAN-sjr-website.md (this file)
