@@ -37,8 +37,9 @@ if (-not $token) {
 }
 
 Write-Host "Deploying to Vercel preview..."
-$url = (npx vercel deploy --yes --token $token).Trim()
+$out = (npx -y vercel@50.15.1 deploy --yes --token $token)
+if (-not $out) { throw "Vercel deploy failed (no output)." }
+$url = ($out | Select-Object -Last 1).Trim()
 Write-Host ""
 Write-Host "Deployed:"
 Write-Host "  $url"
-

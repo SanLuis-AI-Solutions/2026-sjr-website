@@ -40,5 +40,4 @@ jobs:
           VERCEL_ORG_ID: team_WhqqnF14OMjd8EfHj7lVzx7A
           VERCEL_PROJECT_ID: prj_a7IPNCaE1nzmcO8ojPqyDLP0wIti
         run: |
-          npx vercel deploy --prod --yes --token="$VERCEL_TOKEN"
-
+          npx -y vercel@50.15.1 deploy --prod --yes --token="$VERCEL_TOKEN"

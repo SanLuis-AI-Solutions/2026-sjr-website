@@ -58,9 +58,11 @@ if (-not $token) {
 
 Write-Host "Deploying to Vercel production..."
 
+# Pin the CLI version to avoid npm peer resolution issues when "latest" changes.
 # `--yes` avoids prompts; `--prod` targets production.
-$url = (npx vercel deploy --prod --yes --token $token).Trim()
+$out = (npx -y vercel@50.15.1 deploy --prod --yes --token $token)
+if (-not $out) { throw "Vercel deploy failed (no output)." }
+$url = ($out | Select-Object -Last 1).Trim()
 Write-Host ""
 Write-Host "Deployed:"
 Write-Host "  $url"
-
