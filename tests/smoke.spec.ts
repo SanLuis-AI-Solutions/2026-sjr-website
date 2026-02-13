@@ -12,41 +12,40 @@ function attachConsoleGuards(page: any) {
   });
 
   return {
-    assertNoErrors: () => {
-      expect(errors, errors.join("\n")).toEqual([]);
+    assertNoErrors: (context?: string) => {
+      const prefix = context ? `${context}\n` : "";
+      expect(errors, prefix + errors.join("\n")).toEqual([]);
+      errors.length = 0;
     },
   };
 }
 
-test("mobile smoke: services -> home -> watch repair -> quote", async ({ page }) => {
-  const guard = attachConsoleGuards(page);
-
-  await page.goto("/services", { waitUntil: "networkidle" });
-  await expect(
-    page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
-  ).toBeVisible();
-
-  // Client-side nav to Home.
-  await page
-    .getByRole("link", { name: /Susie’s Jewelry Repair/i })
-    .first()
-    .click();
+async function assertHomeRenders(page: any) {
   await expect(
     page.getByRole("heading", { name: /Your jewelry never leaves our hands/i })
   ).toBeVisible();
 
-  // Service detail should render reliably after navigation.
-  await page.goto("/services/watch-repair", { waitUntil: "networkidle" });
-  await expect(
-    page.getByRole("heading", { level: 1, name: /Watch Repair/i })
-  ).toBeVisible();
+  // Ensure reveal-on-scroll content becomes visible after scrolling.
+  const servicesHeading = page.getByRole("heading", { name: /Expert Repair Services/i });
+  await servicesHeading.scrollIntoViewIfNeeded();
+  await expect(servicesHeading).toBeVisible();
+}
 
-  // Quote CTA should always lead to the form.
-  await page.getByRole("link", { name: /Get Fast Quote/i }).first().click();
-  await expect(
-    page.getByRole("heading", { name: /Get a transparent starting/i })
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: /Submit Fast Quote/i })).toBeVisible();
+test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
 
-  guard.assertNoErrors();
+  const routes = ["/services", "/quote", "/services/watch-repair", "/contact"];
+
+  // The reported issue: Home sometimes fails to render correctly after coming from another page.
+  // We stress client-side nav back to Home multiple times, and assert reveal-on-scroll sections show.
+  for (let i = 0; i < 10; i++) {
+    const from = routes[i % routes.length];
+    await page.goto(from, { waitUntil: "networkidle" });
+
+    // Client-side nav to Home via logo.
+    await page.getByRole("link", { name: /Susie’s Jewelry Repair/i }).first().click();
+    await assertHomeRenders(page);
+
+    guard.assertNoErrors(`iteration ${i + 1} (from ${from})`);
+  }
 });

@@ -12,15 +12,15 @@ export function ScrollRevealManager() {
     const root = document.documentElement;
     root.classList.add("reveal-ready");
 
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>(".reveal-on-scroll")
-    );
-
-    if (elements.length === 0) return;
-
     const prefersReduced =
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const getElements = () =>
+      Array.from(document.querySelectorAll<HTMLElement>(".reveal-on-scroll"));
+
+    const elements = getElements();
+    if (elements.length === 0) return;
 
     if (prefersReduced) {
       elements.forEach((el) => el.classList.add("reveal-visible"));
@@ -44,13 +44,35 @@ export function ScrollRevealManager() {
       { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
     );
 
-    // On route transitions, this component remains mounted, but the DOM changes.
-    // Re-scan and observe any new elements that haven't been revealed yet.
-    elements.forEach((el) => {
-      if (!el.classList.contains("reveal-visible")) observer.observe(el);
-    });
+    // Streamed Server Components can insert `.reveal-on-scroll` nodes *after* this effect runs.
+    // If we don't observe those late nodes, they remain `opacity: 0` indefinitely.
+    let scheduled = false;
+    const observePending = () => {
+      scheduled = false;
+      getElements().forEach((el) => {
+        if (!el.classList.contains("reveal-visible")) observer.observe(el);
+      });
+    };
 
-    return () => observer.disconnect();
+    const scheduleObserve = () => {
+      if (scheduled) return;
+      scheduled = true;
+      // Next paint (DOM is more likely to include streamed content).
+      requestAnimationFrame(observePending);
+    };
+
+    // Initial scan.
+    observePending();
+
+    const mutationObserver = new MutationObserver(() => {
+      scheduleObserve();
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      mutationObserver.disconnect();
+      observer.disconnect();
+    };
   }, [pathname]);
 
   return null;
