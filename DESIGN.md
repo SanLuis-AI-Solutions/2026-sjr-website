@@ -16,14 +16,20 @@ Bright, airy luxury with a restrained, boutique‑grade calm. The overall feel i
 - **Soft Paper (#F8F6F6)** — Light text on deep surfaces and gentle section contrast.
 
 ## 3. Typography Rules
-- **Headlines:** Noto Serif; bold but not heavy, with tight tracking to feel refined and editorial.
-- **Body:** Noto Sans; clean, medium‑weight readability with generous line height.
-- **CTA Text:** Slightly increased tracking for a crisp, premium call‑to‑action feel.
+- **Headlines:** Playfair Display; editorial, high‑contrast serif for luxury tone and clear hierarchy.
+- **Body:** Inter; clean, modern sans for readability on mobile and forms.
+- **CTA Text:** Uppercase with increased tracking (≈0.25em–0.35em) to feel crisp and premium.
 
 ## 4. Component Stylings
-* **Buttons:** Subtly rounded corners (rounded‑lg). Primary is filled burgundy with white text and a soft shadow; secondary is a champagne outline with burgundy text. Height ~48px for touch comfort.
-* **Cards/Containers:** Subtly rounded (rounded‑lg) or softly rounded (rounded‑xl). Warm‑white surfaces, thin rose‑dust borders, whisper‑soft shadows.
-* **Inputs/Forms:** Rounded‑lg fields, white background, 1px light border, burgundy focus ring. Forms are grouped into short sections with clear labels and calm spacing.
+* **Buttons:** Pill‑shaped (rounded‑full). Primary is filled burgundy with white text; secondary is champagne outline with burgundy text; both use subtle shadow and micro‑interaction transitions. Height 44–52px on mobile for tap comfort.
+* **Cards/Containers:** Generously rounded (rounded‑3xl). Warm‑white surfaces with thin borders and soft, diffused shadows (premium depth, not “flat SaaS”).
+* **Meta chips:** Pill chips with subtle borders, warm backgrounds, and small uppercase tracking; used to summarize Starting at / Service / Popular without extra CTA noise.
+* **Inputs/Forms:** Rounded fields, white background, 1px light border, burgundy focus ring. Forms are chunked into short sections with clear labels and calm spacing.
 
 ## 5. Layout Principles
 Mobile‑first, single‑column flow with generous whitespace and consistent vertical rhythm. Sections are padded (24–32px), cards align to a clean grid, and CTAs repeat at key decision points without visual clutter. Trust signals live near heroes and forms to reduce hesitation.
+
+### Services Directory Layout
+- Category headings are lightweight (label + description + divider).
+- Each service is its own primary card unit (entire card clickable).
+- Cards include: image, title, one‑line summary, meta chips, and a single arrow affordance.
