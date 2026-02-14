@@ -1,56 +1,39 @@
-# Handoff — SJR Website (Stitch)
+# Handoff — SJR New Website
 
-Date: 2026-02-01
-Project: Susie’s Jewelry Repair (SJR) website
-Stitch project ID: 18277865047607243696
-Palette: Option B “Modern Reserve”
+Date: 2026-02-14
+Repo: `c:\Users\ninef\SanLuis Solutions projects\sjr-new-website-aiproject`
+Branch: `master`
+Production alias: `https://sjr-new-website-aiproject.vercel.app`
 
 ## Current Status (Save Point)
-- All pages regenerated with a premium, consistent Option B system (light, airy, luxury, trust‑forward).
-- Consistent CTA hierarchy, header/footer, trust signals, and form styling across all pages.
-- Primary CTAs site‑wide: “Get Fast Quote” (filled burgundy) + “Book a Repair” (gold outline).
-- All screens saved locally under `Docs/stitch/<page>/`.
-- Index updated: `Docs/stitch-results.json`.
+- GitHub `master` HEAD: `1a011a3` (DESIGN system updated to match current typography + components).
+- Vercel production alias is deployed and in sync with GitHub `master`.
+- Core conversion flows verified on mobile via Playwright smoke tests.
 
-## Latest Screen Outputs (HTML + PNG)
-Open the HTML files to review:
-- `Docs/stitch/home/screen.html`
-- `Docs/stitch/services/screen.html`
-- `Docs/stitch/about/screen.html`
-- `Docs/stitch/faq/screen.html`
-- `Docs/stitch/contact/screen.html`
-- `Docs/stitch/blog/screen.html`
-- `Docs/stitch/quote/screen.html`
-- `Docs/stitch/book-a-repair/screen.html`
-
-Quick previews:
-- `Docs/stitch/home/screenshot.png`
-- `Docs/stitch/services/screenshot.png`
-- `Docs/stitch/about/screenshot.png`
-- `Docs/stitch/faq/screenshot.png`
-- `Docs/stitch/contact/screenshot.png`
-- `Docs/stitch/blog/screenshot.png`
-- `Docs/stitch/quote/screenshot.png`
-- `Docs/stitch/book-a-repair/screenshot.png`
+## What Shipped Today
+- Services hub: each service is its own premium card (clear click surface, image header, stronger contrast).
+- Watch Repair: contrast pass + added craft imagery strip + tightened hero chips (“Service” label).
+- Reliability: memoized content fetches (`getServices`, `getServicesWithImages`, `getFaqsByService`) to reduce hydration mismatch risk.
+- SEO foundation: `sitemap.xml` + `robots.txt` + `metadataBase` wired to `NEXT_PUBLIC_SITE_URL`.
+- Process: added a page contract to reduce churn:
+  - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Key Files
-- Prompt source: `Docs/STITCH_PROMPT.md`
-- Screen index: `Docs/stitch-results.json`
-- Variant history: `Docs/stitch-variants.json`
 - Design system: `DESIGN.md`
+- Status log: `Docs/STATUS.md`
+- Services hub: `src/app/services/page.tsx`
+- Service detail: `src/app/services/[slug]/page.tsx`
+- Deploy guardrails: `scripts/deploy-prod.ps1`
 
-## MCP Health / Stability Notes
-- MCP health check script: `./scripts/mcp-healthcheck.ps1`
-- If any MCP is unstable: `./scripts/mcp-disable-broken.ps1`, then re‑run health check.
-- Critical MCPs expected healthy: google-workspace, chrome_devtools, MCP_DOCKER, google_maps, supabase-mcp-server, github, vercel, context7, sequential-thinking, stitch.
-- Keep ADC enabled for Stitch (uses gcloud ADC). No GOOGLE_APPLICATION_CREDENTIALS file required.
-- Avoid running `stitch-mcp logout --clear-config` or deleting `C:\Users\ninef\.stitch-mcp` to preserve Stitch auth.
+## How to Resume Tomorrow (Next Chat)
+1. Verify repo health: `pwsh -File scripts/verify.ps1`
+2. Run mobile smoke: `npm test`
+3. If deploying: `pwsh -File scripts/deploy-prod.ps1`
+4. Use the contract as the source of truth for Services + Watch Repair:
+   - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
-## How to Resume (Next Chat)
-1) Run `./scripts/mcp-healthcheck.ps1`.
-2) Open `Docs/stitch-results.json` and the HTML files listed above.
-3) If edits are needed, re‑run Stitch with the same Option B palette and consistency rules.
-
-## Next Phase (if proceeding)
-- Convert screens to components and begin implementation (Next.js or preferred stack).
-- Begin implementation of final website (Next.js or preferred stack).
+## Next Optimal Step
+- Run a Web Interface Guidelines audit on:
+  - `src/app/services/page.tsx`
+  - `src/app/services/[slug]/page.tsx`
+  Then fix any interaction/a11y findings, and apply the same service-detail contract pattern to the next flagship page (`/services/ring-sizing`).
