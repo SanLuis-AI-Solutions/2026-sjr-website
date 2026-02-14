@@ -39,6 +39,9 @@ Update cadence: weekly (or after major milestones).
 - Watch Repair: removed “Last updated” + removed the small Includes block (less clutter), redesigned “What to expect” into clear sub-sections with added imagery + reveal animations.
 - Services hub: moved Featured into its own standalone section (cleaner, more luxury-minimal).
 - Copy sweep: replaced “Same-week” wording with “Same Day/Next Day” site-wide.
+- Services hub: simplified service cards so the entire card is clearly clickable (reduced “button-like” sub-elements) and removed the extra “Get quote →” CTA from the Featured section.
+- Watch Repair page: moved “How it works / What happens next” out of the hero into its own section; split “Pricing & timing” into its own dedicated section (separate from “What to expect”).
+- Service detail FAQs: enforce a minimum of 5 FAQ items (pad with safe supplemental questions when upstream data has fewer).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

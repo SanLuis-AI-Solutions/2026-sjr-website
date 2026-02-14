@@ -183,12 +183,6 @@ export default async function ServicesPage() {
                   >
                     View details
                   </Link>
-                  <Link
-                    href="/quote"
-                    className="text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy hover:text-brand-burgundy-deep"
-                  >
-                    Get quote →
-                  </Link>
                 </div>
               </div>
 
@@ -294,10 +288,12 @@ export default async function ServicesPage() {
                           service.image_url || service.image || svgDataUri(service.name);
 
                         return (
-                          <article
+                          <Link
                             key={service.slug}
                             id={`service-${service.slug}`}
-                            className={`scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:grid md:grid-cols-[240px_1fr]`}
+                            className={`group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:grid md:grid-cols-[240px_1fr]`}
+                            href={`/services/${service.slug}`}
+                            aria-label={`View details: ${service.name}`}
                           >
                             <div className="relative h-48 md:h-full">
                               <Image
@@ -321,49 +317,51 @@ export default async function ServicesPage() {
                                 </div>
                               </div>
 
-                              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                                <div className="rounded-2xl border border-stone-200 bg-stone-100/60 px-4 py-3">
-                                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                                     Starting at
-                                  </div>
-                                  <div className="mt-1 text-sm font-semibold text-brand-burgundy">
+                                  </span>
+                                  <span className="font-semibold text-brand-burgundy">
                                     {startingAt ?? "Request quote"}
-                                  </div>
+                                  </span>
                                 </div>
-                                <div className="rounded-2xl border border-stone-200 bg-stone-100/60 px-4 py-3">
-                                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                                <span
+                                  className="hidden h-1 w-1 rounded-full bg-stone-300 sm:inline"
+                                  aria-hidden="true"
+                                />
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                                     Turnaround
-                                  </div>
-                                  <div className="mt-1 text-sm font-semibold text-stone-900">
+                                  </span>
+                                  <span className="font-semibold text-stone-900">
                                     {turnaround ?? "Same Day or Next Day"}
-                                  </div>
+                                  </span>
                                 </div>
-                                <div className="rounded-2xl border border-stone-200 bg-stone-100/60 px-4 py-3">
-                                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                                <span
+                                  className="hidden h-1 w-1 rounded-full bg-stone-300 sm:inline"
+                                  aria-hidden="true"
+                                />
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                                     Popular
-                                  </div>
-                                  <div className="mt-1 text-sm font-semibold text-stone-900">
+                                  </span>
+                                  <span className="font-semibold text-stone-900">
                                     {(service.commonRequests?.[0] as string) || "Assessment"}
-                                  </div>
+                                  </span>
                                 </div>
                               </div>
 
-                              <div className="mt-6 flex flex-wrap items-center gap-4">
-                                <Link
-                                  href={`/services/${service.slug}`}
-                                  className="micro-interaction inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-900 hover:border-brand-gold/50 hover:text-brand-burgundy"
-                                >
-                                  View details
-                                </Link>
-                                <Link
-                                  href="/quote"
-                                  className="text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy hover:text-brand-burgundy-deep"
-                                >
-                                  Get quote →
-                                </Link>
+                              <div className="mt-6 flex items-center gap-3">
+                                <span className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-900 transition group-hover:border-brand-gold/50 group-hover:text-brand-burgundy">
+                                  View details →
+                                </span>
+                                <span className="text-xs uppercase tracking-[0.35em] text-stone-500">
+                                  Tap anywhere
+                                </span>
                               </div>
                             </div>
-                          </article>
+                          </Link>
                         );
                       })}
                     </div>

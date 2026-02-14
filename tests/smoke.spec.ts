@@ -138,9 +138,11 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   await expect(
     page.getByRole("heading", { level: 1, name: /Watch Repair/i })
   ).toBeVisible();
-  await expect(
-    page.getByText(/What happens next/i)
-  ).toBeVisible();
+
+  // Watch page sections below the hero use reveal-on-scroll; scroll to trigger the reveal.
+  const whatNext = page.getByText(/What happens next/i);
+  await whatNext.scrollIntoViewIfNeeded();
+  await expect(whatNext).toBeVisible();
 
   guard.assertNoErrors("services featured link");
 });

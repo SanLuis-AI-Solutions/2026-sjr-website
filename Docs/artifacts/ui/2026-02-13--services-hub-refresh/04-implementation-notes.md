@@ -8,11 +8,15 @@
 - Updated Playwright smoke to validate a clean services -> featured detail flow:
   - File: `tests/smoke.spec.ts`
   - Test: click featured "View details" on `/services`, assert Watch Repair detail loads.
+- Services hub: simplified per-service cards to look less “buttony”:
+  - Make the full card the single, obvious clickable surface.
+  - Replace the three mini “stat boxes” with a clean inline meta row (Starting at / Turnaround / Popular).
+  - Remove the extra “Get quote →” link from the Featured section (keeps discovery calmer).
 
 ## Watch Repair Flagship Pass
-- Added an above-the-fold “What happens next” module to `watch-repair`:
+- Added a dedicated “How it works / What happens next” section to `watch-repair` (moved out of the hero):
   - File: `src/app/services/[slug]/page.tsx`
-  - Goal: make the expected flow and timing obvious without scrolling (mobile-first).
+  - Goal: make the flow and approval point obvious with clean sectioning (mobile-first).
 - Standardized turnaround display defaults:
   - Default: “Same Day or Next Day”
   - Exception: Custom Design: “7 business days”
