@@ -245,7 +245,7 @@ export default async function ServicesPage() {
                   <section
                     key={group.id}
                     id={`group-${group.id}`}
-                    className={`reveal-on-scroll reveal-delay-${(groupIndex % 3) + 1}`}
+                    className={`scroll-mt-[120px] reveal-on-scroll reveal-delay-${(groupIndex % 3) + 1}`}
                   >
                     <div className="flex flex-wrap items-end justify-between gap-4">
                       <div>
