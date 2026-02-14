@@ -78,7 +78,7 @@ export function ProcessSteps() {
               You stay in control at every step, with clear updates and no surprises.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["Same-week service", "In-house only", "Clear estimates"].map(
+              {["Same Day/Next Day service", "In-house only", "Clear estimates"].map(
                 (label) => (
                   <span
                     key={label}

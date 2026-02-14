@@ -28,7 +28,7 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
             Master jeweler craftsmanship performed entirely on-site. Transparent pricing,
-            same-week timing, and meticulous care for heirlooms and daily pieces.
+            Same Day/Next Day timing, and meticulous care for heirlooms and daily pieces.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link

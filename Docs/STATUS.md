@@ -36,6 +36,9 @@ Update cadence: weekly (or after major milestones).
 - Services hub: reduced per-card CTA noise and added a mobile sticky conversion bar (Quote/Book) for cleaner directory browsing.
 - Services hub: removed the “Find your service” module to keep the page cleaner and more luxury-minimal; kept navigation focused on featured + category jump and the directory on desktop.
 - Watch Repair service detail: added an above-the-fold "What happens next" module + standardized turnaround display (Same Day/Next Day default; Custom Design remains 7 business days).
+- Watch Repair: removed “Last updated” + removed the small Includes block (less clutter), redesigned “What to expect” into clear sub-sections with added imagery + reveal animations.
+- Services hub: moved Featured into its own standalone section (cleaner, more luxury-minimal).
+- Copy sweep: replaced “Same-week” wording with “Same Day/Next Day” site-wide.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

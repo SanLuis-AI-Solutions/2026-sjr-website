@@ -89,7 +89,7 @@ export default async function ServicesPage() {
                 In-house work
               </span>
               <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                Same-week timing
+                Same Day/Next Day timing
               </span>
               <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
                 Clear approval
@@ -109,28 +109,6 @@ export default async function ServicesPage() {
               >
                 Book a Repair
               </Link>
-            </div>
-
-            <div className="mt-10 rounded-2xl border border-stone-200 bg-white/70 p-5 shadow-sm backdrop-blur-sm">
-              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                Featured
-              </div>
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <div className="font-serif text-2xl text-stone-900">
-                    {featured?.name || "Watch Repair"}
-                  </div>
-                  <div className="mt-1 text-sm text-stone-600">
-                    {featured?.summary || "Precision servicing for modern and vintage watches."}
-                  </div>
-                </div>
-                <Link
-                  href="/services/watch-repair"
-                  className="text-xs font-bold uppercase tracking-[0.35em] text-brand-gold hover:text-brand-burgundy"
-                >
-                  View details →
-                </Link>
-              </div>
             </div>
           </div>
 
@@ -167,6 +145,69 @@ export default async function ServicesPage() {
                   <div className="mt-2 text-xs text-stone-600">Explore →</div>
                 </a>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured section (standalone, clean, Apple-like). */}
+      <section className="bg-white py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-[0_22px_60px_rgba(58,25,16,0.14)]">
+            <div className="absolute inset-0">
+              <Image
+                src={featuredImage}
+                alt={featured?.name || "Featured service"}
+                fill
+                sizes="100vw"
+                className="object-cover opacity-35"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(250,247,242,0.96),rgba(250,247,242,0.62),rgba(250,247,242,0.20))]" />
+            </div>
+
+            <div className="relative grid gap-8 px-7 py-10 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Featured service
+                </div>
+                <h2 className="mt-4 font-serif text-4xl leading-[1.05] text-stone-900 md:text-5xl">
+                  {featured?.name || "Watch Repair"}
+                </h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 md:text-base">
+                  {featured?.summary || "Precision servicing for modern and vintage watches."}
+                </p>
+                <div className="mt-7 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/services/watch-repair"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-7 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+                  >
+                    View details
+                  </Link>
+                  <Link
+                    href="/quote"
+                    className="text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy hover:text-brand-burgundy-deep"
+                  >
+                    Get quote →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-stone-200 bg-white/70 p-6 backdrop-blur-sm">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  Typical turnaround
+                </div>
+                <div className="mt-2 font-serif text-2xl text-stone-900">
+                  {formatTimeEstimate(featured?.time_estimate ?? featured?.timeEstimate ?? null) ??
+                    "Same Day or Next Day"}
+                </div>
+                <div className="mt-6 h-px bg-stone-200" />
+                <div className="mt-6 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  Best for
+                </div>
+                <p className="mt-2 text-sm text-stone-600">
+                  Battery replacement, crystal issues, moisture checks, and full service when needed.
+                </p>
+              </div>
             </div>
           </div>
         </div>

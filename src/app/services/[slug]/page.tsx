@@ -164,39 +164,63 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
 
             {isWatchRepair ? (
-              <div className="mt-4 rounded-xl border border-stone-200 bg-white/70 p-4">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  What happens next
+              <div className="mt-6 overflow-hidden rounded-3xl border border-stone-200 bg-white/75 shadow-sm reveal-on-scroll">
+                <div className="bg-[linear-gradient(180deg,rgba(209,184,130,0.18),rgba(255,255,255,0))] px-6 py-5">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    How it works
+                  </div>
+                  <div className="mt-2 font-serif text-2xl text-stone-900">
+                    What happens next.
+                  </div>
                 </div>
-                <div className="mt-4 grid gap-3 text-sm text-stone-600 sm:grid-cols-3">
+
+                <div className="grid gap-0 px-6 pb-6 sm:grid-cols-3">
                   {[
                     {
+                      step: "1",
                       title: "Bring your watch",
-                      detail: "Walk in or book. Extra links are helpful.",
+                      detail: "Walk in or book. Extra links help with sizing.",
                     },
                     {
+                      step: "2",
                       title: "Free assessment",
-                      detail: "We confirm the fix, price, and timing first.",
+                      detail: "We confirm the fix, price, and timing before service.",
                     },
                     {
+                      step: "3",
                       title: "Approve, then service",
                       detail: "Battery is often same day. Full service varies by parts.",
                     },
-                  ].map((step) => (
-                    <div
-                      key={step.title}
-                      className="rounded-2xl border border-stone-200 bg-white px-4 py-4 shadow-sm"
-                    >
-                      <div className="font-semibold text-stone-900">{step.title}</div>
-                      <div className="mt-2 text-sm text-stone-600">{step.detail}</div>
-                    </div>
-                  ))}
+                  ].map((item, index) => {
+                    const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                    return (
+                      <div
+                        key={item.step}
+                        className={`reveal-on-scroll ${delayClass} relative border-t border-stone-200 py-6 sm:border-t-0 sm:border-l sm:first:border-l-0`}
+                      >
+                        <div className="px-0 sm:px-5">
+                          <div className="flex items-center gap-3">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow">
+                              {item.step}
+                            </span>
+                            <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                              Step {item.step}
+                            </div>
+                          </div>
+                          <div className="mt-4 font-serif text-xl text-stone-900">
+                            {item.title}
+                          </div>
+                          <p className="mt-2 text-sm leading-7 text-stone-600">
+                            {item.detail}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ) : null}
-            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-stone-600">
-              Last updated {UPDATED_DATE}
-            </p>
+            {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/quote"
@@ -243,54 +267,116 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               What to expect
             </p>
             <h2 className="mt-3 font-serif text-3xl text-stone-900">
-              Clear guidance and careful workmanship.
+              Service options, explained clearly.
             </h2>
-            {(service.longDescription || service.long_description || []).map((paragraph: string) => (
-              <p key={paragraph} className="mt-4 text-sm text-stone-600">
-                {paragraph}
-              </p>
-            ))}
 
             {isWatchRepair ? (
-              <div className="mt-10 rounded-3xl border border-stone-200 bg-stone-100/60 p-6">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Service Options
+              <>
+                <div className="mt-6 grid gap-4">
+                  {[
+                    {
+                      title: "Battery replacement",
+                      eyebrow: "Quick service",
+                      copy:
+                        "Often completed while you wait. We confirm fit and function, and can inspect seals when applicable.",
+                      bullets: [
+                        "Fresh battery + function check",
+                        "Basic gasket inspection",
+                        "Optional pressure test (when applicable)",
+                      ],
+                    },
+                    {
+                      title: "Full service",
+                      eyebrow: "Preventive maintenance",
+                      copy:
+                        "For slow running, moisture, or overdue maintenance. We confirm timing and parts before work begins.",
+                      bullets: [
+                        "Movement cleaning + lubrication",
+                        "Worn parts evaluation (if needed)",
+                        "Regulation + final testing",
+                      ],
+                    },
+                    {
+                      title: "Repairs & parts",
+                      eyebrow: "When something breaks",
+                      copy:
+                        "Crystal, crown/stem, gaskets, and other components. We’ll recommend the safest option and confirm pricing first.",
+                      bullets: [
+                        "Crystal replacement",
+                        "Stem and crown repair",
+                        "Seal and gasket replacement",
+                      ],
+                    },
+                  ].map((block, index) => {
+                    const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                    return (
+                      <article
+                        key={block.title}
+                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-100/60 p-6 shadow-sm`}
+                      >
+                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                          {block.eyebrow}
+                        </div>
+                        <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                          {block.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-stone-600">
+                          {block.copy}
+                        </p>
+                        <ul className="mt-5 space-y-2 text-sm text-stone-600">
+                          {block.bullets.map((b) => (
+                            <li key={b} className="flex items-start gap-3">
+                              <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </article>
+                    );
+                  })}
                 </div>
-                <p className="mt-3 text-sm text-stone-600">
-                  Choose the right level of service. We confirm pricing and timing before work begins.
-                </p>
 
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-stone-200 bg-white/80 p-5 shadow-sm">
-                    <div className="font-serif text-xl text-stone-900">Battery Replacement</div>
-                    <p className="mt-2 text-sm text-stone-600">
-                      Often completed while you wait, with seal inspection when applicable.
-                    </p>
-                    <ul className="mt-4 space-y-2 text-sm text-stone-600">
-                      <li>• Fresh battery + function check</li>
-                      <li>• Basic gasket inspection</li>
-                      <li>• Optional pressure test (when applicable)</li>
-                    </ul>
-                  </div>
-                  <div className="rounded-2xl border border-stone-200 bg-white/80 p-5 shadow-sm">
-                    <div className="font-serif text-xl text-stone-900">Full Service</div>
-                    <p className="mt-2 text-sm text-stone-600">
-                      Recommended for slow running, moisture, or overdue maintenance.
-                    </p>
-                    <ul className="mt-4 space-y-2 text-sm text-stone-600">
-                      <li>• Movement cleaning + lubrication</li>
-                      <li>• Worn parts evaluation (if needed)</li>
-                      <li>• Regulation + final testing</li>
-                    </ul>
-                  </div>
+                <div className="mt-8 grid gap-4 md:grid-cols-2">
+                  {[
+                    {
+                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
+                      alt: "Pocket watch on the jeweler's bench",
+                    },
+                    {
+                      url: heroImageSrc,
+                      alt: service.name,
+                    },
+                  ].map((img) => (
+                    <div
+                      key={img.url}
+                      className="reveal-on-scroll relative h-44 overflow-hidden rounded-3xl border border-stone-200 shadow-sm md:h-52"
+                    >
+                      <Image
+                        src={img.url}
+                        alt={img.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/25 via-transparent to-transparent" />
+                    </div>
+                  ))}
                 </div>
 
-                <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/70 p-4 text-sm text-stone-600">
+                <div className="mt-6 rounded-3xl border border-brand-gold/25 bg-white/70 p-5 text-sm text-stone-600 reveal-on-scroll">
                   <span className="font-semibold text-stone-900">Water resistance note:</span>{" "}
                   pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions.
                 </div>
-              </div>
-            ) : null}
+              </>
+            ) : (
+              (service.longDescription || service.long_description || []).map(
+                (paragraph: string) => (
+                  <p key={paragraph} className="mt-4 text-sm text-stone-600">
+                    {paragraph}
+                  </p>
+                )
+              )
+            )}
           </div>
           <div className="rounded-2xl border border-stone-200 bg-stone-100/60 p-6">
             {(startingAt || timeEstimateDisplay) && (
@@ -339,20 +425,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             ) : null}
 
-            <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-              Includes
-            </div>
-            <ul
-              className="mt-4 space-y-3 text-sm text-stone-600"
-              data-testid="service-includes"
-            >
-              {(service.includes || []).map((item: string) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {!isWatchRepair ? (
+              <>
+                <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                  Includes
+                </div>
+                <ul
+                  className="mt-4 space-y-3 text-sm text-stone-600"
+                  data-testid="service-includes"
+                >
+                  {(service.includes || []).map((item: string) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
             <div className="mt-6 border-t border-stone-200 pt-4">
               <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 Common requests

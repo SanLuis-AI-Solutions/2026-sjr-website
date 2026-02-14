@@ -16,6 +16,10 @@
 - Standardized turnaround display defaults:
   - Default: “Same Day or Next Day”
   - Exception: Custom Design: “7 business days”
+- Removed “Last updated” from service detail hero (conversion-first; less visual noise).
+- For Watch Repair specifically:
+  - Removed the small Includes list in the right rail (kept Common requests + trust items).
+  - Redesigned “What to expect” into separate sections (quick service, full service, repairs/parts) and added supporting imagery.
 
 ## Why
 - 75%+ of traffic is mobile: discovery must be faster than scrolling through grouped sections.
