@@ -49,6 +49,8 @@ Update cadence: weekly (or after major milestones).
 - Watch Repair FAQs: replaced overlapping questions with a more SEO-aligned, non-duplicative set (battery cost/time, crystal replacement, crown/stem, water resistance testing, mechanical service, appointment).
 - Services hub: wrapped each category’s services in a premium container card (shadow + border) so the directory reads like a designed system (closer to the Featured banner quality).
 - SEO foundation: added `sitemap.xml` + `robots.txt`, and wired `metadataBase` to `NEXT_PUBLIC_SITE_URL` so canonical URLs are correct when `susiesjewelryrepair.com` is connected.
+- Services hub: moved emphasis to **individual service cards** (each service is its own premium card unit) and increased contrast/color (subtle burgundy + gold atmosphere) while keeping the page luxury-minimal.
+- Reliability: memoized content fetches (`getServices`, `getServicesWithImages`, `getFaqsByService`) to prevent intermittent hydration mismatches during SSR/streaming.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

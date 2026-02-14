@@ -1,5 +1,6 @@
 import { supabaseGet } from "@/lib/supabase/server";
 import { SERVICES } from "@/lib/constants";
+import { cache } from "react";
 
 function withFallback<T>(value: T | null | undefined, fallback: T): T {
   if (!value || (Array.isArray(value) && value.length === 0)) {
@@ -101,7 +102,7 @@ function mergeServiceRecord(fallback: any, record: any) {
   return merged;
 }
 
-export async function getServices() {
+export const getServices = cache(async function getServices() {
   try {
     const data = await supabaseGet("services", "?select=*&active=eq.true&order=priority.asc");
     if (!Array.isArray(data) || data.length === 0) return SERVICES;
@@ -115,9 +116,9 @@ export async function getServices() {
   } catch {
     return SERVICES;
   }
-}
+});
 
-export async function getServiceBySlug(slug: string) {
+export const getServiceBySlug = cache(async function getServiceBySlug(slug: string) {
   try {
     const data = await supabaseGet(
       "services",
@@ -132,9 +133,9 @@ export async function getServiceBySlug(slug: string) {
   }
 
   return SERVICES.find((service) => service.slug === slug);
-}
+});
 
-export async function getFaqsByService(slug: string) {
+export const getFaqsByService = cache(async function getFaqsByService(slug: string) {
   try {
     const data = await supabaseGet(
       "faqs",
@@ -147,4 +148,4 @@ export async function getFaqsByService(slug: string) {
 
   const fallback = SERVICES.find((service) => service.slug === slug);
   return withFallback(fallback?.faqs || [], []);
-}
+});

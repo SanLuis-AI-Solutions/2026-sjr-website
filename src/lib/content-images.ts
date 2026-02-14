@@ -1,5 +1,6 @@
 import { getServices } from "@/lib/content";
 import { SERVICES } from "@/lib/constants";
+import { cache } from "react";
 
 type ServiceLike = {
   slug?: string;
@@ -15,7 +16,7 @@ export async function resolveServiceImage(service: ServiceLike | null | undefine
   return fallback?.image || null;
 }
 
-export async function getServicesWithImages() {
+export const getServicesWithImages = cache(async function getServicesWithImages() {
   const services = await getServices();
   const resolved = [];
   for (const service of services) {
@@ -23,4 +24,4 @@ export async function getServicesWithImages() {
     resolved.push({ ...service, image_url: imageUrl });
   }
   return resolved;
-}
+});

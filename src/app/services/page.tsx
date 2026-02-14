@@ -193,8 +193,10 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="relative bg-stone-50 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,_rgba(122,46,58,0.08),_transparent_52%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
             <aside className="reveal-on-scroll lg:sticky lg:top-28 lg:self-start">
               {/* Desktop: keep a persistent sticky directory for quick navigation. */}
@@ -233,7 +235,7 @@ export default async function ServicesPage() {
               </div>
             </aside>
 
-            <div className="space-y-12">
+            <div className="space-y-16">
               {groups.map((group, groupIndex) => {
                 const items = group.slugs
                   .map((slug) => servicesBySlug.get(slug))
@@ -245,105 +247,110 @@ export default async function ServicesPage() {
                     id={`group-${group.id}`}
                     className={`reveal-on-scroll reveal-delay-${(groupIndex % 3) + 1}`}
                   >
-                    <div className="overflow-hidden rounded-3xl border border-stone-200 bg-stone-100/60 shadow-[0_18px_55px_rgba(58,25,16,0.12)]">
-                      <div className="border-b border-stone-200 bg-white/70 px-7 py-7 md:px-10">
-                        <div className="flex flex-wrap items-end justify-between gap-4">
-                          <div>
-                            <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
-                              {group.label}
-                            </p>
-                            <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                              {group.description}
-                            </h2>
-                          </div>
-                          <a
-                            href="#top"
-                            className="text-xs font-bold uppercase tracking-[0.35em] text-stone-500 hover:text-brand-burgundy"
+                    <div className="flex flex-wrap items-end justify-between gap-4">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
+                          {group.label}
+                        </p>
+                        <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                          {group.description}
+                        </h2>
+                      </div>
+                      <a
+                        href="#top"
+                        className="text-xs font-bold uppercase tracking-[0.35em] text-stone-500 hover:text-brand-burgundy"
+                      >
+                        Back to top ↑
+                      </a>
+                    </div>
+
+                    <div className="mt-7 h-px bg-[linear-gradient(90deg,rgba(122,46,58,0.25),rgba(209,184,130,0.35),rgba(0,0,0,0))]" />
+
+                    <div className="mt-8 grid gap-6 md:grid-cols-2">
+                      {items.map((service: any) => {
+                        const startingAt = formatStartingAt(
+                          service.starting_price ?? service.startingPrice ?? null
+                        );
+                        const serviceSpeed = formatTimeEstimate(
+                          service.time_estimate ?? service.timeEstimate ?? null
+                        );
+                        const imageSrc =
+                          service.image_url || service.image || svgDataUri(service.name);
+                        const popular =
+                          (service.commonRequests?.[0] as string) || "Assessment";
+                        const isSingle = items.length === 1;
+
+                        return (
+                          <Link
+                            key={service.slug}
+                            id={`service-${service.slug}`}
+                            className={`group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50 ${isSingle ? "md:col-span-2" : ""}`}
+                            href={`/services/${service.slug}`}
+                            aria-label={`View details: ${service.name}`}
                           >
-                            Back to top ↑
-                          </a>
-                        </div>
-                      </div>
+                            <div className="relative h-48">
+                              <Image
+                                src={imageSrc}
+                                alt={service.name}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 520px"
+                                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/65 via-transparent to-transparent" />
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)]" />
+                              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+                                <span className="inline-flex items-center rounded-full border border-brand-gold/35 bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
+                                  In-house
+                                </span>
+                                <span className="inline-flex items-center rounded-full border border-brand-gold/35 bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
+                                  Same Day/Next Day service
+                                </span>
+                              </div>
+                            </div>
 
-                      <div className="px-4 py-6 md:px-6 md:py-8">
-                        <div className="space-y-6">
-                          {items.map((service: any) => {
-                            const startingAt = formatStartingAt(
-                              service.starting_price ?? service.startingPrice ?? null
-                            );
-                            const turnaround = formatTimeEstimate(
-                              service.time_estimate ?? service.timeEstimate ?? null
-                            );
-                            const imageSrc =
-                              service.image_url || service.image || svgDataUri(service.name);
-
-                            return (
-                              <Link
-                                key={service.slug}
-                                id={`service-${service.slug}`}
-                                className="group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/40 hover:shadow-[0_26px_60px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                                href={`/services/${service.slug}`}
-                                aria-label={`View details: ${service.name}`}
-                              >
-                                <div className="md:grid md:grid-cols-[1fr_320px] md:items-stretch">
-                                  <div className="p-7 md:p-9">
-                                    <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                                      Service
-                                    </div>
-                                    <h3 className="mt-3 font-serif text-3xl leading-[1.05] text-stone-900">
-                                      {service.name}
-                                    </h3>
-                                    <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
-                                      {service.summary || service.short_summary}
-                                    </p>
-
-                                    <div className="mt-7 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-600">
-                                      <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
-                                        Starting at{" "}
-                                        <span className="font-semibold text-brand-burgundy">
-                                          {startingAt ?? "Request quote"}
-                                        </span>
-                                      </span>
-                                      <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
-                                        Turnaround{" "}
-                                        <span className="font-semibold text-stone-900">
-                                          {turnaround ?? "Same Day or Next Day"}
-                                        </span>
-                                      </span>
-                                      <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
-                                        Popular{" "}
-                                        <span className="font-semibold text-stone-900">
-                                          {(service.commonRequests?.[0] as string) || "Assessment"}
-                                        </span>
-                                      </span>
-                                    </div>
-
-                                    <div className="mt-9 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                                      View details
-                                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-gold/60 bg-white text-brand-burgundy transition group-hover:bg-brand-gold/10">
-                                        →
-                                      </span>
-                                    </div>
+                            <div className="p-7">
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                                    Service
                                   </div>
-
-                                  <div className="relative p-6 pt-0 md:p-6">
-                                    <div className="relative h-56 overflow-hidden rounded-3xl border border-stone-200 shadow-[0_22px_60px_rgba(58,25,16,0.12)] md:h-full">
-                                      <Image
-                                        src={imageSrc}
-                                        alt={service.name}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 320px"
-                                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                                      />
-                                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
-                                    </div>
-                                  </div>
+                                  <h3 className="mt-3 font-serif text-2xl leading-[1.1] text-stone-900">
+                                    {service.name}
+                                  </h3>
                                 </div>
-                            </Link>
-                            );
-                          })}
-                        </div>
-                      </div>
+                                <span className="mt-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-brand-burgundy transition group-hover:border-brand-gold/60 group-hover:bg-brand-gold/10">
+                                  →
+                                </span>
+                              </div>
+
+                              <p className="mt-4 text-sm leading-7 text-stone-700">
+                                {service.summary || service.short_summary}
+                              </p>
+
+                              <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
+                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
+                                  Starting at{" "}
+                                  <span className="font-semibold text-brand-burgundy">
+                                    {startingAt ?? "Request quote"}
+                                  </span>
+                                </span>
+                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
+                                  Service{" "}
+                                  <span className="font-semibold text-stone-900">
+                                    {serviceSpeed ?? "Same Day or Next Day"}
+                                  </span>
+                                </span>
+                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
+                                  Popular{" "}
+                                  <span className="font-semibold text-stone-900">
+                                    {popular}
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </section>
                 );
