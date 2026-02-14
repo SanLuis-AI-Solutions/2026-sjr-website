@@ -74,24 +74,39 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
   if (slug === "watch-repair") {
     return [
       {
-        question: "Can you pressure test for water resistance?",
+        question: "How much does a watch battery replacement cost?",
         answer:
-          "We can perform pressure testing when appropriate to help confirm sealing at the time of service. Water resistance cannot be guaranteed for all watches or future conditions.",
+          "Pricing depends on the watch type, battery, and any sealing work needed. We’ll confirm options and cost during your in-house assessment before you approve service.",
       },
       {
         question: "How long does a watch battery replacement take?",
         answer:
-          "Many battery replacements are completed the same day. We’ll confirm fit, function, and timing before we begin.",
+          "Many battery replacements are completed the same day. We confirm fit, function, and timing before we begin service.",
       },
       {
-        question: "Do you service automatic and vintage watches?",
+        question: "Can you replace a watch crystal?",
         answer:
-          "Yes. We service modern, automatic, and vintage watches. If a watch requires specialized parts, we confirm availability and timing up front.",
+          "Yes. We can replace cracked or scratched crystals on many watches. We’ll confirm the correct part, pricing, and timing before work begins.",
       },
       {
-        question: "What if you find additional issues during service?",
+        question: "Can you repair a broken watch crown or stem?",
         answer:
-          "We pause and contact you with options and pricing. No additional work is performed without your approval.",
+          "Often, yes. Crown and stem issues can be caused by wear, impact, or water exposure. We’ll assess the safest repair option and confirm pricing first.",
+      },
+      {
+        question: "Can you pressure test or check water resistance after service?",
+        answer:
+          "When appropriate, we can inspect seals and perform pressure testing to help confirm sealing at the time of service. Water resistance can’t be guaranteed for all watches or future conditions.",
+      },
+      {
+        question: "Do you service automatic and mechanical watches?",
+        answer:
+          "Yes. We service modern, automatic, and vintage watches. If specialized parts are needed, we confirm availability and timing up front.",
+      },
+      {
+        question: "Do I need an appointment for watch repair?",
+        answer:
+          "Appointments are optional. Walk-ins are welcome, or you can book a time if you prefer a guaranteed slot.",
       },
     ];
   }
@@ -105,40 +120,49 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
   ];
 }
 
+function canonicalFaqKey(slug: string, question: string): string {
+  const q = (question || "").toLowerCase();
+
+  if (slug === "watch-repair") {
+    if (q.includes("battery") && (q.includes("cost") || q.includes("price") || q.includes("how much")))
+      return "watch:battery:cost";
+    if (q.includes("battery") && (q.includes("how long") || q.includes("take")))
+      return "watch:battery:time";
+    if (q.includes("crystal")) return "watch:crystal";
+    if (q.includes("crown") || q.includes("stem")) return "watch:crown-stem";
+    if (q.includes("pressure") || q.includes("water") || q.includes("resistan") || q.includes("gasket") || q.includes("seal"))
+      return "watch:water-resistance";
+    if (q.includes("automatic") || q.includes("mechanical") || q.includes("movement") || q.includes("manual"))
+      return "watch:mechanical";
+    if (q.includes("appointment") || q.includes("walk in") || q.includes("walk-in") || q.includes("walkins"))
+      return "watch:appointment";
+  }
+
+  return q.replace(/\s+/g, " ").trim();
+}
+
 function ensureMinFaqs(baseFaqs: FaqItem[], slug: string, serviceName: string): FaqItem[] {
+  const basePool = Array.isArray(baseFaqs) ? baseFaqs : [];
+  const target = slug === "watch-repair" ? 7 : 5;
+  const pool =
+    slug === "watch-repair"
+      ? [...buildSupplementalFaqs(slug, serviceName), ...basePool, ...buildFallbackFaqs(serviceName)]
+      : [...basePool, ...buildSupplementalFaqs(slug, serviceName), ...buildFallbackFaqs(serviceName)];
+
   const seen = new Set<string>();
   const out: FaqItem[] = [];
 
-  const basePool = Array.isArray(baseFaqs) ? baseFaqs : [];
-  for (const item of basePool) {
-    const q = (item?.question || "").trim();
-    const a = (item?.answer || "").trim();
-    if (!q || !a) continue;
+  for (const item of pool) {
+    const question = (item?.question || "").trim();
+    const answer = (item?.answer || "").trim();
+    if (!question || !answer) continue;
 
-    const key = q.toLowerCase();
+    const key = canonicalFaqKey(slug, question);
     if (seen.has(key)) continue;
     seen.add(key);
 
-    out.push({ question: q, answer: a });
-  }
-
-  if (out.length >= 5) return out;
-
-  const fillPool = [
-    ...buildSupplementalFaqs(slug, serviceName),
-    ...buildFallbackFaqs(serviceName),
-  ];
-  for (const item of fillPool) {
-    const q = (item?.question || "").trim();
-    const a = (item?.answer || "").trim();
-    if (!q || !a) continue;
-
-    const key = q.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-
-    out.push({ question: q, answer: a });
-    if (out.length >= 5) break;
+    out.push({ question, answer });
+    if (out.length >= target) break;
   }
 
   return out;

@@ -18,12 +18,14 @@
   - Meta chips for Starting at / Turnaround / Popular (scannable, premium).
   - Dedicated image panel with subtle zoom-on-hover.
   - Removed the “Tap anywhere” helper text (felt cheap/technical).
+- Services hub: wrapped each category block inside a premium container (rounded card + subtle shadow) so browsing feels more like designed “banners” than a plain directory.
 
 ## Watch Repair Flagship Pass
 - Added a dedicated “How it works / What happens next” section to `watch-repair` (moved out of the hero):
   - File: `src/app/services/[slug]/page.tsx`
   - Goal: make the flow and approval point obvious with clean sectioning (mobile-first).
 - Watch Repair: moved “Why customers choose us” into its own trust section (separate from Pricing & timing).
+- Watch Repair: refreshed FAQs to avoid repeated topics and better match high-intent queries (battery cost/time, crystal replacement, crown/stem repair, water resistance testing, mechanical service, appointment).
 - Standardized turnaround display defaults:
   - Default: “Same Day or Next Day”
   - Exception: Custom Design: “7 business days”

@@ -46,6 +46,8 @@ Update cadence: weekly (or after major milestones).
 - Services hub: replaced “Same Day/Next Day timing” copy with “Same Day/Next Day service”.
 - Services hub: upgraded service card layout to a more premium split layout with image panel, clearer hierarchy, and a single “View details” affordance (removed “Tap anywhere” text).
 - Watch Repair page: moved “Why customers choose us” into its own trust section (separate from Pricing & timing).
+- Watch Repair FAQs: replaced overlapping questions with a more SEO-aligned, non-duplicative set (battery cost/time, crystal replacement, crown/stem, water resistance testing, mechanical service, appointment).
+- Services hub: wrapped each category’s services in a premium container card (shadow + border) so the directory reads like a designed system (closer to the Featured banner quality).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
