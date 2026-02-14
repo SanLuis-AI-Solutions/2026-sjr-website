@@ -51,6 +51,8 @@ Update cadence: weekly (or after major milestones).
 - SEO foundation: added `sitemap.xml` + `robots.txt`, and wired `metadataBase` to `NEXT_PUBLIC_SITE_URL` so canonical URLs are correct when `susiesjewelryrepair.com` is connected.
 - Services hub: moved emphasis to **individual service cards** (each service is its own premium card unit) and increased contrast/color (subtle burgundy + gold atmosphere) while keeping the page luxury-minimal.
 - Reliability: memoized content fetches (`getServices`, `getServicesWithImages`, `getFaqsByService`) to prevent intermittent hydration mismatches during SSR/streaming.
+- Watch Repair: increased color/contrast with alternating warm-stone sections, added a three-image craft strip, and tightened hero chips (“Service” label) to reduce visual noise while keeping the page premium.
+- Process: added a page contract to reduce churn and keep Services + Watch Repair iteration intentional (`Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

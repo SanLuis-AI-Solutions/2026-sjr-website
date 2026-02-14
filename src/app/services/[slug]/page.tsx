@@ -232,38 +232,39 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-stone-100 py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
+      <section className="relative overflow-hidden bg-stone-50 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
           <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Service Detail
             </p>
-            <h1 className="mt-3 font-serif text-4xl text-stone-900">
+            <h1 className="mt-3 font-serif text-4xl text-stone-950">
               {service.name} in {BUSINESS.address.city}, {BUSINESS.address.state}
             </h1>
-            <p className="mt-4 max-w-2xl text-sm text-stone-600">
+            <p className="mt-4 max-w-2xl text-sm text-stone-700">
               {service.summary || service.short_summary}
             </p>
             {(startingAt || timeEstimateDisplay) && (
-              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-600">
+              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-700">
                 {startingAt && (
-                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
                     Starts at {startingAt}
                   </span>
                 )}
                 {timeEstimateDisplay && (
-                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                    Turnaround: {timeEstimateDisplay}
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
+                    Service: {timeEstimateDisplay}
                   </span>
                 )}
               </div>
             )}
-            <div className="mt-6 rounded-xl border border-brand-gold/30 bg-white/80 p-4">
+            <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/85 p-5 shadow-sm">
               <h2 className="text-sm font-semibold text-stone-900">
                 Need {service.name} in {BUSINESS.address.city}?
               </h2>
-              <p className="mt-2 text-sm text-stone-600">
+              <p className="mt-2 text-sm leading-7 text-stone-700">
                 {isWatchRepair
                   ? "Yes. We service watches in-house with clear options, transparent estimates, and a confirmed pickup timeline before work begins."
                   : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing, clear timing, and local pickup at our ${BUSINESS.address.city} shop.`}
@@ -297,6 +298,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)]" />
             </div>
             <div className="absolute -bottom-8 left-6 right-6 rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
               <div className="text-xs uppercase tracking-[0.25em] text-brand-burgundy">
@@ -311,7 +313,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </section>
 
       {isWatchRepair ? (
-        <section className="bg-white py-16">
+        <section className="relative bg-white py-16">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
           <div className="mx-auto max-w-6xl px-6">
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
@@ -321,7 +324,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <h2 className="mt-3 font-serif text-3xl text-stone-900">
                   What happens next.
                 </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                   Three simple steps, with a clear approval point before any work begins.
                 </p>
 
@@ -347,7 +350,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     return (
                       <article
                         key={item.step}
-                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-100/60 p-6 shadow-sm`}
+                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm`}
                       >
                         <div className="flex items-center gap-3">
                           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow">
@@ -407,13 +410,61 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
               </div>
             </div>
+
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+                  alt: "Workbench and tools in the workshop",
+                  label: "On the bench",
+                },
+                {
+                  url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
+                  alt: "Detailed sketches and precision work",
+                  label: "Precision first",
+                },
+                {
+                  url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
+                  alt: "Watch movement on the jeweler's bench",
+                  label: "Careful finishing",
+                },
+              ].map((img, index) => {
+                const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                return (
+                  <div
+                    key={img.url}
+                    className={`reveal-on-scroll ${delayClass} relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm`}
+                  >
+                    <div className="relative h-44">
+                      <Image
+                        src={img.url}
+                        alt={img.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+                    </div>
+                    <div className="px-5 py-4">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                        {img.label}
+                      </div>
+                      <p className="mt-2 text-sm text-stone-700">
+                        In-house work with a clear approval point before service begins.
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
       ) : null}
 
       {isWatchRepair ? (
         <>
-          <section className="bg-white py-16">
+          <section className="relative bg-stone-50 py-16">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 What to expect
@@ -462,7 +513,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <article
                       key={block.title}
-                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-100/60 p-6 shadow-sm`}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
                     >
                       <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                         {block.eyebrow}
@@ -513,14 +564,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-3xl border border-brand-gold/25 bg-white/70 p-5 text-sm text-stone-600 reveal-on-scroll">
+              <div className="mt-6 rounded-3xl border border-brand-gold/25 bg-white/80 p-5 text-sm text-stone-700 reveal-on-scroll shadow-sm">
                 <span className="font-semibold text-stone-900">Water resistance note:</span>{" "}
                 pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions.
               </div>
             </div>
           </section>
 
-          <section className="bg-stone-100 py-16">
+          <section className="relative bg-white py-16">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 Pricing & timing
@@ -528,12 +580,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <h2 className="mt-3 font-serif text-3xl text-stone-900">
                 Clear estimates. Confirmed pickup.
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                 We confirm pricing, options, and timing before work begins. No surprises.
               </p>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                     Starting at
                   </div>
@@ -544,7 +596,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     Final price depends on parts and condition. We confirm before service.
                   </p>
                 </div>
-                <div className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <div className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                     Typical turnaround
                   </div>
@@ -595,7 +647,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="bg-white py-16">
+          <section className="relative bg-stone-50 py-16">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
@@ -605,7 +658,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <h2 className="mt-3 font-serif text-3xl text-stone-900">
                     In-house service, clear approval, careful finishing.
                   </h2>
-                  <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                     We do the work here in Pasadena. If anything changes during assessment, we pause,
                     explain your options, and only continue with your approval.
                   </p>
@@ -631,13 +684,42 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <div
                       key={item.title}
-                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-100/60 p-6 shadow-sm`}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
                     >
                       <div className="font-serif text-xl text-stone-900">{item.title}</div>
-                      <p className="mt-2 text-sm leading-7 text-stone-600">{item.detail}</p>
+                      <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
                     </div>
                   );
                 })}
+              </div>
+
+              <div className="mt-10 grid gap-4 md:grid-cols-[1fr_1.2fr]">
+                <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-6 shadow-sm">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    Trust note
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-stone-700">
+                    We’ll confirm price and timing before service begins. If parts are needed, we pause and
+                    get your approval before ordering or proceeding.
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-700">
+                    <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2">In-house only</span>
+                    <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2">Clear estimates</span>
+                    <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2">Final checks</span>
+                  </div>
+                </div>
+                <div className="reveal-on-scroll reveal-delay-2 relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+                  <div className="relative h-56 md:h-full">
+                    <Image
+                      src={heroImageSrc}
+                      alt={service.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 60vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
