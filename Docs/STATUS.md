@@ -48,6 +48,7 @@ Update cadence: weekly (or after major milestones).
 - Watch Repair page: moved “Why customers choose us” into its own trust section (separate from Pricing & timing).
 - Watch Repair FAQs: replaced overlapping questions with a more SEO-aligned, non-duplicative set (battery cost/time, crystal replacement, crown/stem, water resistance testing, mechanical service, appointment).
 - Services hub: wrapped each category’s services in a premium container card (shadow + border) so the directory reads like a designed system (closer to the Featured banner quality).
+- SEO foundation: added `sitemap.xml` + `robots.txt`, and wired `metadataBase` to `NEXT_PUBLIC_SITE_URL` so canonical URLs are correct when `susiesjewelryrepair.com` is connected.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

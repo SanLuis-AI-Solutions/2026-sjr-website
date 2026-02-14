@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
 import { GaFirstTouchCapture } from "@/components/analytics/ga-tracker";
+import { getSiteUrl } from "@/lib/site-url";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -21,6 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: "Susie’s Jewelry Repair | Modern Luxury Master Craftsmanship",
   description:
     "Expert in-house jewelry, watch, and eyeglass repairs in Pasadena. Experience modern luxury meets master craftsmanship with transparent pricing and fast turnaround.",
