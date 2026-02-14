@@ -42,6 +42,10 @@ Update cadence: weekly (or after major milestones).
 - Services hub: simplified service cards so the entire card is clearly clickable (reduced “button-like” sub-elements) and removed the extra “Get quote →” CTA from the Featured section.
 - Watch Repair page: moved “How it works / What happens next” out of the hero into its own section; split “Pricing & timing” into its own dedicated section (separate from “What to expect”).
 - Service detail FAQs: enforce a minimum of 5 FAQ items (pad with safe supplemental questions when upstream data has fewer).
+- Services hub: removed the small category quick-link tiles under the hero image (less clutter, more premium).
+- Services hub: replaced “Same Day/Next Day timing” copy with “Same Day/Next Day service”.
+- Services hub: upgraded service card layout to a more premium split layout with image panel, clearer hierarchy, and a single “View details” affordance (removed “Tap anywhere” text).
+- Watch Repair page: moved “Why customers choose us” into its own trust section (separate from Pricing & timing).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

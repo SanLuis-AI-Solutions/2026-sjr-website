@@ -533,7 +533,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     What to bring
@@ -567,17 +567,53 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     ))}
                   </ul>
                 </div>
+              </div>
+            </div>
+          </section>
 
-                <div className="reveal-on-scroll reveal-delay-3 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+          <section className="bg-white py-16">
+            <div className="mx-auto max-w-6xl px-6">
+              <div className="flex flex-wrap items-end justify-between gap-6">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                     Why customers choose us
-                  </div>
-                  <ul className="mt-3 space-y-2 text-sm text-stone-600">
-                    <li>• In-house repairs with no outsourcing</li>
-                    <li>• Same-day assessments on most pieces</li>
-                    <li>• Clear approval before work starts</li>
-                  </ul>
+                  </p>
+                  <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                    In-house service, clear approval, careful finishing.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+                    We do the work here in Pasadena. If anything changes during assessment, we pause,
+                    explain your options, and only continue with your approval.
+                  </p>
                 </div>
+              </div>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {[
+                  {
+                    title: "In-house watch service",
+                    detail: "Your watch stays with our team. No shipping, no outsourcing.",
+                  },
+                  {
+                    title: "Transparent approvals",
+                    detail: "You see the price and timing before work begins. No surprises.",
+                  },
+                  {
+                    title: "Quality checks",
+                    detail: "Function checks and final testing are part of our process before pickup.",
+                  },
+                ].map((item, index) => {
+                  const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                  return (
+                    <div
+                      key={item.title}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-100/60 p-6 shadow-sm`}
+                    >
+                      <div className="font-serif text-xl text-stone-900">{item.title}</div>
+                      <p className="mt-2 text-sm leading-7 text-stone-600">{item.detail}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </section>

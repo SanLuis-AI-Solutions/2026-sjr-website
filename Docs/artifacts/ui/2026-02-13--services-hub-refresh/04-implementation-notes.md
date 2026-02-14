@@ -12,11 +12,18 @@
   - Make the full card the single, obvious clickable surface.
   - Replace the three mini “stat boxes” with a clean inline meta row (Starting at / Turnaround / Popular).
   - Remove the extra “Get quote →” link from the Featured section (keeps discovery calmer).
+- Services hub: removed the small category tiles under the hero image (cleaner, less cluttered).
+- Services hub: upgraded each service card to a more “featured-like” split layout:
+  - Clearer hierarchy (eyebrow + larger title + summary).
+  - Meta chips for Starting at / Turnaround / Popular (scannable, premium).
+  - Dedicated image panel with subtle zoom-on-hover.
+  - Removed the “Tap anywhere” helper text (felt cheap/technical).
 
 ## Watch Repair Flagship Pass
 - Added a dedicated “How it works / What happens next” section to `watch-repair` (moved out of the hero):
   - File: `src/app/services/[slug]/page.tsx`
   - Goal: make the flow and approval point obvious with clean sectioning (mobile-first).
+- Watch Repair: moved “Why customers choose us” into its own trust section (separate from Pricing & timing).
 - Standardized turnaround display defaults:
   - Default: “Same Day or Next Day”
   - Exception: Custom Design: “7 business days”

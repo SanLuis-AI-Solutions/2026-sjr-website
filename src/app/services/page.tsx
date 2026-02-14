@@ -89,7 +89,7 @@ export default async function ServicesPage() {
                 In-house work
               </span>
               <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                Same Day/Next Day timing
+                Same Day/Next Day service
               </span>
               <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
                 Clear approval
@@ -132,20 +132,6 @@ export default async function ServicesPage() {
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-3 gap-3">
-              {groups.slice(0, 3).map((g) => (
-                <a
-                  key={g.id}
-                  href={`#group-${g.id}`}
-                  className="micro-interaction rounded-2xl border border-stone-200 bg-white px-4 py-4 text-left shadow-sm hover:border-brand-gold/40"
-                >
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    {g.label}
-                  </div>
-                  <div className="mt-2 text-xs text-stone-600">Explore →</div>
-                </a>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -277,7 +263,7 @@ export default async function ServicesPage() {
                     </div>
 
                     <div className="mt-6 space-y-6">
-                      {items.map((service: any, index: number) => {
+                      {items.map((service: any) => {
                         const startingAt = formatStartingAt(
                           service.starting_price ?? service.startingPrice ?? null
                         );
@@ -291,74 +277,62 @@ export default async function ServicesPage() {
                           <Link
                             key={service.slug}
                             id={`service-${service.slug}`}
-                            className={`group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:grid md:grid-cols-[240px_1fr]`}
+                            className="group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/40 hover:shadow-[0_26px_60px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                             href={`/services/${service.slug}`}
                             aria-label={`View details: ${service.name}`}
                           >
-                            <div className="relative h-48 md:h-full">
-                              <Image
-                                src={imageSrc}
-                                alt={service.name}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 240px"
-                                className="object-cover"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/35 via-transparent to-transparent" />
-                            </div>
-                            <div className="p-6 md:p-8">
-                              <div className="flex flex-wrap items-start justify-between gap-4">
-                                <div>
-                                  <h3 className="font-serif text-2xl text-stone-900">
-                                    {service.name}
-                                  </h3>
-                                  <p className="mt-3 text-sm leading-relaxed text-stone-600">
-                                    {service.summary || service.short_summary}
-                                  </p>
+                            <div className="md:grid md:grid-cols-[1fr_320px] md:items-stretch">
+                              <div className="p-7 md:p-9">
+                                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                                  Service
                                 </div>
-                              </div>
+                                <h3 className="mt-3 font-serif text-3xl leading-[1.05] text-stone-900">
+                                  {service.name}
+                                </h3>
+                                <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+                                  {service.summary || service.short_summary}
+                                </p>
 
-                              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                                    Starting at
+                                <div className="mt-7 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-600">
+                                  <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
+                                    Starting at{" "}
+                                    <span className="font-semibold text-brand-burgundy">
+                                      {startingAt ?? "Request quote"}
+                                    </span>
                                   </span>
-                                  <span className="font-semibold text-brand-burgundy">
-                                    {startingAt ?? "Request quote"}
+                                  <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
+                                    Turnaround{" "}
+                                    <span className="font-semibold text-stone-900">
+                                      {turnaround ?? "Same Day or Next Day"}
+                                    </span>
+                                  </span>
+                                  <span className="rounded-full border border-stone-200 bg-stone-100/70 px-4 py-2">
+                                    Popular{" "}
+                                    <span className="font-semibold text-stone-900">
+                                      {(service.commonRequests?.[0] as string) || "Assessment"}
+                                    </span>
                                   </span>
                                 </div>
-                                <span
-                                  className="hidden h-1 w-1 rounded-full bg-stone-300 sm:inline"
-                                  aria-hidden="true"
-                                />
-                                <div className="flex items-center gap-2">
-                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                                    Turnaround
-                                  </span>
-                                  <span className="font-semibold text-stone-900">
-                                    {turnaround ?? "Same Day or Next Day"}
-                                  </span>
-                                </div>
-                                <span
-                                  className="hidden h-1 w-1 rounded-full bg-stone-300 sm:inline"
-                                  aria-hidden="true"
-                                />
-                                <div className="flex items-center gap-2">
-                                  <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                                    Popular
-                                  </span>
-                                  <span className="font-semibold text-stone-900">
-                                    {(service.commonRequests?.[0] as string) || "Assessment"}
+
+                                <div className="mt-9 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                                  View details
+                                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-gold/60 bg-white text-brand-burgundy transition group-hover:bg-brand-gold/10">
+                                    →
                                   </span>
                                 </div>
                               </div>
 
-                              <div className="mt-6 flex items-center gap-3">
-                                <span className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-900 transition group-hover:border-brand-gold/50 group-hover:text-brand-burgundy">
-                                  View details →
-                                </span>
-                                <span className="text-xs uppercase tracking-[0.35em] text-stone-500">
-                                  Tap anywhere
-                                </span>
+                              <div className="relative p-6 pt-0 md:p-6">
+                                <div className="relative h-56 overflow-hidden rounded-3xl border border-stone-200 shadow-[0_22px_60px_rgba(58,25,16,0.12)] md:h-full">
+                                  <Image
+                                    src={imageSrc}
+                                    alt={service.name}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 320px"
+                                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+                                </div>
                               </div>
                             </div>
                           </Link>
