@@ -58,6 +58,7 @@ Update cadence: weekly (or after major milestones).
 - Service detail flow tightened for flagship pages by removing the mid-page Service Area block on flagship templates so required section order remains intact.
 - Timing copy normalized to “Same Day/Next Day service” across service cards/chips, service detail timing modules, header microcopy, and booking reassurance copy.
 - Structured data path hardened with a typed schema service object to keep FAQ + Service JSON-LD continuity after the ring-sizing redesign.
+- Canonical/SEO guardrail tightened: `getSiteUrl()` now defaults to the canonical production domain when env vars are missing, instead of falling back to transient Vercel deployment hostnames.
 - Reliability checks completed: `scripts/verify.ps1` PASS and `npm test` PASS (includes mobile smoke, services hub featured-route check, and new ring-sizing flagship section smoke test).
 - Image integrity check completed for Services + Watch Repair + Ring Sizing asset URLs; all audited image URLs returned HTTP 200.
 - Learned:

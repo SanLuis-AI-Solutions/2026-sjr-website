@@ -7,13 +7,9 @@ function normalizeUrl(raw: string) {
 }
 
 export function getSiteUrl() {
-  // Prefer an explicit public site URL. Fall back to the canonical domain.
-  // On Vercel, `VERCEL_URL` is host-only (no protocol).
-  const env =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
+  // Always prefer explicit env values, otherwise fall back to canonical production domain.
+  // This avoids publishing deployment-host canonicals in metadata/sitemaps.
+  const env = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "";
 
   return normalizeUrl(env);
 }
-
