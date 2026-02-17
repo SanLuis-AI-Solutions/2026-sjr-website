@@ -25,10 +25,10 @@ export const SERVICES = [
     slug: "watch-repair",
     name: "Watch Repair & Battery Replacement",
     summary: "Precision servicing for modern and vintage watches.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "From battery replacements to full mechanical service, we repair modern and vintage watches in-house with careful handling and clean finishing.",
-      "Most quick services are completed same day or next day. If your watch needs parts or a full movement overhaul, we will confirm timing and starting-at pricing before any work begins."
+      "Most quick services follow Same Day/Next Day service timing. If your watch needs parts or a full movement overhaul, we confirm timing and starting-at pricing before any work begins."
     ],
     includes: [
       "Complete movement ultrasonic cleaning",
@@ -62,7 +62,7 @@ export const SERVICES = [
     slug: "ring-sizing",
     name: "Ring Sizing & Repair",
     summary: "Comfortable, precise sizing with clean finishes.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "Ensure your rings fit perfectly with our professional sizing services. A ring that's too loose risks being lost, while one that's too tight causes discomfort and can damage the band over time.",
       "We use laser-precision welding and professional finishing techniques to ensure the sizing seam is invisible and the structural integrity of your ring is maintained."
@@ -91,7 +91,7 @@ export const SERVICES = [
     slug: "stone-setting",
     name: "Stone Replacement & Settings",
     summary: "Secure mounts and stone replacements done in-house.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "Restore the brilliance and security of your jewelry with our expert stone setting and prong repair services. A loose stone is a preventable loss.",
       "Whether you're resetting a family heirloom or replacing a lost accent stone, our craftsmen ensure every gemstone is mounted with maximum security and aesthetic balance."
@@ -120,7 +120,7 @@ export const SERVICES = [
     slug: "jewelry-cleaning",
     name: "Jewelry Cleaning & Polishing",
     summary: "Bring back shine with safe, professional cleaning and polishing.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "Remove buildup and restore brilliance with deep cleaning that protects stones and settings.",
       "We inspect every piece as we clean, so you know it is safe and ready to wear."
@@ -160,7 +160,7 @@ export const SERVICES = [
     slug: "necklace-repair",
     name: "Necklace Repair",
     summary: "Repair broken necklaces, clasps, and delicate chains.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "We repair broken necklaces and restore their strength and finish.",
       "From delicate chains to heavier pieces, every repair is reinforced and polished."
@@ -200,7 +200,7 @@ export const SERVICES = [
     slug: "bracelet-repair",
     name: "Bracelet Repair",
     summary: "Fix broken links and clasps for a secure, comfortable fit.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "We restore bracelets so they wear safely and comfortably again.",
       "Every repair is finished to look seamless and last."
@@ -240,7 +240,7 @@ export const SERVICES = [
     slug: "pearl-restringing",
     name: "Pearl Restringing",
     summary: "Fresh silk stringing with secure knots for pearls and beads.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "Pearls should be restrung to keep them safe and evenly spaced.",
       "We use quality silk and hand-knot between pearls for a clean, classic finish."
@@ -320,7 +320,7 @@ export const SERVICES = [
     slug: "heirloom-restoration",
     name: "Heirloom Restorations",
     summary: "Restore treasured pieces with careful, respectful repair.",
-    time_estimate: "Same Day or Next Day",
+    time_estimate: "Same Day/Next Day service",
     longDescription: [
       "We preserve the look and feel of heirlooms while strengthening them for daily wear.",
       "Our repairs focus on safety, longevity, and faithful restoration."

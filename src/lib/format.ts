@@ -21,6 +21,19 @@ export function formatStartingAt(value: unknown): string | null {
 export function formatTimeEstimate(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const cleaned = value.trim();
-  return cleaned.length ? cleaned : null;
-}
+  if (!cleaned.length) return null;
 
+  const normalized = cleaned.replace(/\s+/g, " ").toLowerCase();
+  if (
+    normalized === "same day or next day" ||
+    normalized === "same-day or next-day" ||
+    normalized === "same day/next day" ||
+    normalized === "same-day/next-day" ||
+    normalized === "same day/next day service" ||
+    normalized === "same-day/next-day service"
+  ) {
+    return "Same Day/Next Day service";
+  }
+
+  return cleaned;
+}

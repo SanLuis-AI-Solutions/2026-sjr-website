@@ -61,10 +61,24 @@ function normalizeStringArray(value: unknown): string[] | null {
   return null;
 }
 
-function mergeServiceRecord(fallback: any, record: any) {
+type ServiceRecord = {
+  [key: string]: unknown;
+  name?: string;
+  summary?: string;
+  short_summary?: string;
+  long_description?: string[];
+  longDescription?: string[];
+  includes?: string[];
+  common_requests?: string[];
+  commonRequests?: string[];
+  time_estimate?: string;
+  starting_price?: unknown;
+};
+
+function mergeServiceRecord(fallback: ServiceRecord, record: ServiceRecord | null | undefined) {
   if (!record) return fallback;
 
-  const merged = { ...fallback, ...record };
+  const merged: ServiceRecord = { ...fallback, ...record };
 
   merged.name = withFallbackText(record.name, fallback.name);
   merged.summary = withFallbackText(record.summary, fallback.summary);

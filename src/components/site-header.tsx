@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
   const navItems = [
     { href: "/services", label: "Services" },
     { href: "/about", label: "About" },
@@ -23,11 +21,6 @@ export function SiteHeader() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    // Close on navigation (client transitions).
-    setMenuOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     // Prevent background scroll when the mobile menu is open.
@@ -150,6 +143,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className="rounded-2xl border border-stone-200 bg-white px-5 py-4 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+                  onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
@@ -164,18 +158,20 @@ export function SiteHeader() {
                 <Link
                   href="/quote"
                   className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white"
+                  onClick={() => setMenuOpen(false)}
                 >
                   Get Fast Quote
                 </Link>
                 <Link
                   href="/book"
                   className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+                  onClick={() => setMenuOpen(false)}
                 >
                   Book a Repair
                 </Link>
               </div>
               <p className="mt-4 text-xs text-stone-600">
-                Most services are <span className="font-semibold text-stone-900">Same Day or Next Day</span>.
+                Most services are <span className="font-semibold text-stone-900">Same Day/Next Day service</span>.
               </p>
             </div>
           </div>

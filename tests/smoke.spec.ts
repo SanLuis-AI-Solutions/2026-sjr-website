@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
+import type { ConsoleMessage, Page } from "@playwright/test";
 
-function attachConsoleGuards(page: any) {
+function attachConsoleGuards(page: Page) {
   const errors: string[] = [];
 
   page.on("pageerror", (err: Error) => {
     const msg = err?.message || String(err);
-    const stack = (err as any)?.stack ? String((err as any).stack) : "";
+    const stack = err?.stack ? String(err.stack) : "";
     const url = typeof page?.url === "function" ? page.url() : "";
     errors.push(
       [
@@ -18,7 +19,7 @@ function attachConsoleGuards(page: any) {
     );
   });
 
-  page.on("console", (msg: any) => {
+  page.on("console", (msg: ConsoleMessage) => {
     if (msg.type?.() === "error") errors.push(`console.error: ${msg.text?.() || ""}`);
   });
 
@@ -31,7 +32,7 @@ function attachConsoleGuards(page: any) {
   };
 }
 
-async function assertHomeRenders(page: any) {
+async function assertHomeRenders(page: Page) {
   await expect(
     page.getByRole("heading", { name: /Your jewelry never leaves our hands/i })
   ).toBeVisible();
@@ -145,4 +146,23 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   await expect(whatNext).toBeVisible();
 
   guard.assertNoErrors("services featured link");
+});
+
+test("mobile service detail: ring sizing follows flagship section order", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/ring-sizing", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Ring Sizing/i })).toBeVisible();
+
+  await expect(page.getByText(/How it works/i).first()).toBeVisible();
+  await expect(page.getByText(/What to expect/i).first()).toBeVisible();
+  await expect(page.getByText(/Pricing & timing/i).first()).toBeVisible();
+  await expect(page.getByText(/Why customers choose us/i).first()).toBeVisible();
+  await expect(page.getByText(/^FAQs$/i).first()).toBeVisible();
+  await expect(page.getByText(/Related services/i).first()).toBeVisible();
+
+  await expect(page.getByRole("link", { name: /Get Fast Quote/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Book a Repair/i }).first()).toBeVisible();
+
+  guard.assertNoErrors("service detail: ring-sizing flagship sections");
 });

@@ -63,7 +63,7 @@ export default function BookPage({
                 Good to know
               </div>
               <ul className="mt-3 space-y-2">
-                <li>• Most services are Same Day or Next Day</li>
+                <li>• Most services are Same Day/Next Day service</li>
                 <li>• We confirm bookings within 1 business day</li>
                 <li>• Need help fast? Call {BUSINESS.phone}</li>
               </ul>

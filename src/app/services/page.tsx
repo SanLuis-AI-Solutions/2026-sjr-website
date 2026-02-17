@@ -4,10 +4,24 @@ import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 
+type ServiceListItem = {
+  slug: string;
+  name: string;
+  summary?: string;
+  short_summary?: string;
+  image_url?: string | null;
+  image?: string | null;
+  starting_price?: unknown;
+  startingPrice?: unknown;
+  time_estimate?: unknown;
+  timeEstimate?: unknown;
+  commonRequests?: string[];
+};
+
 export default async function ServicesPage() {
-  const services = await getServicesWithImages();
-  const servicesBySlug = new Map<string, any>();
-  for (const s of services as any[]) servicesBySlug.set(s.slug, s);
+  const services = (await getServicesWithImages()) as ServiceListItem[];
+  const servicesBySlug = new Map<string, ServiceListItem>();
+  for (const s of services) servicesBySlug.set(s.slug, s);
 
   const groups = [
     {
@@ -99,13 +113,13 @@ export default async function ServicesPage() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/quote"
-                className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep"
+                className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Get Fast Quote
               </Link>
               <Link
                 href="/book"
-                className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10"
+                className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book a Repair
               </Link>
@@ -127,7 +141,7 @@ export default async function ServicesPage() {
                 <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/30 bg-white/15 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
                   Typical turnaround
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
-                  {formatTimeEstimate(featured?.time_estimate ?? featured?.timeEstimate ?? null) ?? "Same Day or Next Day"}
+                  {formatTimeEstimate(featured?.time_estimate ?? featured?.timeEstimate ?? null) ?? "Same Day/Next Day service"}
                 </div>
               </div>
             </div>
@@ -165,7 +179,7 @@ export default async function ServicesPage() {
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <Link
                     href="/services/watch-repair"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-7 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-7 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     View details
                   </Link>
@@ -178,7 +192,7 @@ export default async function ServicesPage() {
                 </div>
                 <div className="mt-2 font-serif text-2xl text-stone-900">
                   {formatTimeEstimate(featured?.time_estimate ?? featured?.timeEstimate ?? null) ??
-                    "Same Day or Next Day"}
+                    "Same Day/Next Day service"}
                 </div>
                 <div className="mt-6 h-px bg-stone-200" />
                 <div className="mt-6 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
@@ -212,7 +226,7 @@ export default async function ServicesPage() {
                     <a
                       key={g.id}
                       href={`#group-${g.id}`}
-                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold/50 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     >
                       {g.label}
                     </a>
@@ -227,7 +241,7 @@ export default async function ServicesPage() {
                   </p>
                   <Link
                     href="/quote"
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+                    className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
                   </Link>
@@ -239,7 +253,7 @@ export default async function ServicesPage() {
               {groups.map((group, groupIndex) => {
                 const items = group.slugs
                   .map((slug) => servicesBySlug.get(slug))
-                  .filter(Boolean);
+                  .filter((item): item is ServiceListItem => Boolean(item));
 
                 return (
                   <section
@@ -249,16 +263,16 @@ export default async function ServicesPage() {
                   >
                     <div className="flex flex-wrap items-end justify-between gap-4">
                       <div>
-                        <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
+                        <h2 className="text-3xl text-stone-900">
                           {group.label}
-                        </p>
-                        <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                          {group.description}
                         </h2>
+                        <p className="mt-3 text-sm leading-7 text-stone-700">
+                          {group.description}
+                        </p>
                       </div>
                       <a
                         href="#top"
-                        className="text-xs font-bold uppercase tracking-[0.35em] text-stone-500 hover:text-brand-burgundy"
+                        className="text-xs font-bold uppercase tracking-[0.35em] text-stone-500 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                       >
                         Back to top ↑
                       </a>
@@ -267,7 +281,7 @@ export default async function ServicesPage() {
                     <div className="mt-7 h-px bg-[linear-gradient(90deg,rgba(122,46,58,0.25),rgba(209,184,130,0.35),rgba(0,0,0,0))]" />
 
                     <div className="mt-8 grid gap-6 md:grid-cols-2">
-                      {items.map((service: any) => {
+                      {items.map((service) => {
                         const startingAt = formatStartingAt(
                           service.starting_price ?? service.startingPrice ?? null
                         );
@@ -337,7 +351,7 @@ export default async function ServicesPage() {
                                 <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
                                   Service{" "}
                                   <span className="font-semibold text-stone-900">
-                                    {serviceSpeed ?? "Same Day or Next Day"}
+                                    {serviceSpeed ?? "Same Day/Next Day service"}
                                   </span>
                                 </span>
                                 <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
@@ -366,13 +380,13 @@ export default async function ServicesPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/quote"
-              className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white"
+              className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Get Quote
             </Link>
             <Link
               href="/book"
-              className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+              className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Book
             </Link>

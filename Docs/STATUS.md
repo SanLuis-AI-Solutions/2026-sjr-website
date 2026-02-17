@@ -53,13 +53,21 @@ Update cadence: weekly (or after major milestones).
 - Reliability: memoized content fetches (`getServices`, `getServicesWithImages`, `getFaqsByService`) to prevent intermittent hydration mismatches during SSR/streaming.
 - Watch Repair: increased color/contrast with alternating warm-stone sections, added a three-image craft strip, and tightened hero chips (“Service” label) to reduce visual noise while keeping the page premium.
 - Process: added a page contract to reduce churn and keep Services + Watch Repair iteration intentional (`Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`).
+- Web Interface Guidelines + mobile a11y audit completed for Services hub + Service detail templates; shipped focus-visible upgrades on primary links/CTAs, semantic heading cleanup on Services categories, and skip-link support in `SiteShell`.
+- Ring Sizing (`/services/ring-sizing`) upgraded to flagship detail structure: Hero -> How it works -> What to expect -> Pricing & timing -> Why customers choose us -> FAQs -> Related services + CTA band.
+- Service detail flow tightened for flagship pages by removing the mid-page Service Area block on flagship templates so required section order remains intact.
+- Timing copy normalized to “Same Day/Next Day service” across service cards/chips, service detail timing modules, header microcopy, and booking reassurance copy.
+- Structured data path hardened with a typed schema service object to keep FAQ + Service JSON-LD continuity after the ring-sizing redesign.
+- Reliability checks completed: `scripts/verify.ps1` PASS and `npm test` PASS (includes mobile smoke, services hub featured-route check, and new ring-sizing flagship section smoke test).
+- Image integrity check completed for Services + Watch Repair + Ring Sizing asset URLs; all audited image URLs returned HTTP 200.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
 - Cloudflare MCP still not loading in the active Codex runtime (config fixed; host reload pending).
 - Remaining pages can drift visually if we don’t apply a single shared layout system/patterns.
+- Custom domain launch path is still open: Vercel domain attach (`susiesjewelryrepair.com` + `www`), production `NEXT_PUBLIC_SITE_URL`, and Search Console sitemap submission remain to be finalized.
 
 ## Next Week (Top 3)
-1. Polish Services hub + 2–3 flagship service detail pages (copy, “what to bring”, turnaround, CTA placement).
-2. Polish About + FAQ + Contact pages to match Home’s visual language and improve conversion.
-3. Add sitemap/robots + tighten metadata/OG across all core routes.
+1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
+2. Apply the flagship service-detail contract pattern to the next 1–2 high-intent service pages and keep FAQ intent quality high.
+3. Run a post-deploy UX/a11y regression pass across Home/About/FAQ/Contact with mobile-first CTA and contrast checks.
