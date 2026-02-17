@@ -6,8 +6,8 @@ Branch: `master`
 Production alias: `https://sjr-new-website-aiproject.vercel.app`
 
 ## Current Status (Save Point)
-- GitHub `master` HEAD: `3090ade` (`fix: enforce canonical site url fallback for metadata and sitemap`).
-- Vercel production alias is deployed and in sync with GitHub `master` commit `3090ade`.
+- GitHub `master` HEAD is aligned with local `master` at handoff time.
+- Vercel production alias is deployed and in sync with the latest intended `master` commit for this session.
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## What Shipped Today
