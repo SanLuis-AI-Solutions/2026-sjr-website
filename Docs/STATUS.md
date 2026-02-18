@@ -182,6 +182,7 @@ Update cadence: weekly (or after major milestones).
   - remapped `src/lib/service-visuals.ts` blueprints to reduce repeated cross-page usage (especially prior overuse of `heirloom-restoration.jpg`).
   - updated watch-repair gallery/support imagery to use distinct service visuals instead of repeating prior workshop trio.
   - image-link audit now passes at `OK: 20/20` after expanding the visual library.
+  - mobile visual QA sweep completed with final hero-support dedupe (custom-design moved to `workshopMain`) so all service blueprint `heroSupport` assignments are now unique.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

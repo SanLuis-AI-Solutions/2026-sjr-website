@@ -171,6 +171,9 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `npm run lint` PASS.
     - `npm test` PASS (15/15).
     - `scripts/verify.ps1` PASS.
+  - mobile visual QA follow-up:
+    - audited service blueprint `heroSupport` assignments and removed final duplicate (`custom-design` no longer shares support image with `jewelry-cleaning`).
+    - post-fix verification rerun: `npm run lint` PASS, `npm test` PASS (15/15), `scripts/verify.ps1` PASS.
 
 ## Key Files
 - Design system: `DESIGN.md`

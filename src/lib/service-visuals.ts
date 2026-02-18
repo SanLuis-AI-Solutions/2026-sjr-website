@@ -123,7 +123,7 @@ const BLUEPRINTS: Record<string, ServiceVisualBlueprint> = {
     why: SERVICE_IMAGE_BY_SLUG["pearl-restringing"],
   },
   "custom-design": {
-    heroSupport: AUX_IMAGES.altWorkshopBench,
+    heroSupport: AUX_IMAGES.workshopMain,
     process: [
       SERVICE_IMAGE_BY_SLUG["custom-design"],
       AUX_IMAGES.altJewelerHands,

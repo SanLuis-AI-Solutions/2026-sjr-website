@@ -35,6 +35,7 @@
   - Uploaded 5 additional service images to Supabase (`services/alt-*.jpg`).
   - Updated `src/lib/service-visuals.ts` blueprint assignments to reduce cross-page repeated imagery.
   - Image audit baseline improved from 15 referenced assets to 20 referenced assets (`scripts/audit-images.ps1` -> `OK: 20/20`).
+  - Final mobile QA tweak: removed remaining duplicated `heroSupport` assignment so service blueprints now use unique support imagery per route.
 
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
