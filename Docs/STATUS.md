@@ -106,6 +106,12 @@ Update cadence: weekly (or after major milestones).
   - privacy/terms interactive links updated with explicit focus-visible treatment.
 - Mobile smoke expanded with a quote/book quick-action CTA clarity check (including tap-target baseline).
 - Artifact added: `Docs/artifacts/ui/2026-02-18--conversion-legal-pass/04-implementation-notes.md`.
+- Image diversity pass completed for service-detail visuals:
+  - replaced repeated workshop-image reuse on non-watch service detail pages with rotated, slug-aware service image sets
+  - diversified imagery across `How it works`, `What to expect`, and `Why customers choose us` visual panels
+  - updated one blog hero image to reduce cross-site image repetition.
+- Added smoke guardrail to enforce image variety on non-watch service details (minimum unique service-image count per route).
+- Artifact added: `Docs/artifacts/ui/2026-02-18--image-diversity-pass/04-implementation-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

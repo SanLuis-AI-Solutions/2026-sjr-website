@@ -22,7 +22,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       "How to evaluate in-house craftsmanship, clear approvals, and long-term care before you hand over a meaningful piece.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
     publishedAt: "2026-02-17",
     readTime: "4 min read",
     keyTakeaways: [
@@ -138,4 +138,3 @@ export const BLOG_POSTS: BlogPost[] = [
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((post) => post.slug === slug);
 }
-

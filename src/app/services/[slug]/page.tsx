@@ -39,6 +39,15 @@ type ServiceDetail = {
   faqs?: FaqItem[];
 };
 
+type ServiceVisualSet = {
+  heroSupportImage: string;
+  heroSupportImageAlt: string;
+  processGallery: { url: string; alt: string; label: string }[];
+  expectImages: { url: string; alt: string }[];
+  whyImageSrc: string;
+  whyImageAlt: string;
+};
+
 function svgDataUri(title: string) {
   const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
   const svg =
@@ -57,6 +66,102 @@ function svgDataUri(title: string) {
     `</text>` +
     `</svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function buildServiceVisualSet(
+  slug: string,
+  serviceName: string,
+  heroImageSrc: string,
+  isWatchRepair: boolean
+): ServiceVisualSet {
+  if (isWatchRepair) {
+    const watchSupport =
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg";
+    return {
+      heroSupportImage: watchSupport,
+      heroSupportImageAlt: "Watch on the jeweler's bench",
+      processGallery: [
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+          alt: "Workbench and tools in the workshop",
+          label: "On the bench",
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
+          alt: "Detailed sketches and precision work",
+          label: "Precision first",
+        },
+        {
+          url: watchSupport,
+          alt: "Watch movement on the jeweler's bench",
+          label: "Careful finishing",
+        },
+      ],
+      expectImages: [
+        {
+          url: watchSupport,
+          alt: "Pocket watch on the jeweler's bench",
+        },
+        {
+          url: heroImageSrc,
+          alt: serviceName,
+        },
+      ],
+      whyImageSrc: heroImageSrc,
+      whyImageAlt: serviceName,
+    };
+  }
+
+  const serviceIndex = SERVICES.findIndex((item) => item.slug === slug);
+  const orderedServices =
+    serviceIndex >= 0
+      ? [...SERVICES.slice(serviceIndex + 1), ...SERVICES.slice(0, serviceIndex)]
+      : [...SERVICES];
+
+  const alternatives = orderedServices
+    .map((item) => ({ name: item.name, url: item.image }))
+    .filter((item) => item.url && item.url !== heroImageSrc);
+
+  const pick = (index: number) => alternatives[index] ?? { name: serviceName, url: heroImageSrc };
+
+  const a = pick(0);
+  const b = pick(1);
+  const c = pick(2);
+  const d = pick(3);
+
+  return {
+    heroSupportImage: a.url,
+    heroSupportImageAlt: `${a.name} reference image`,
+    processGallery: [
+      {
+        url: heroImageSrc,
+        alt: serviceName,
+        label: "Service focus",
+      },
+      {
+        url: a.url,
+        alt: `${a.name} craftsmanship detail`,
+        label: "Craft reference",
+      },
+      {
+        url: b.url,
+        alt: `${b.name} finishing detail`,
+        label: "Finishing reference",
+      },
+    ],
+    expectImages: [
+      {
+        url: c.url,
+        alt: `${c.name} bench detail`,
+      },
+      {
+        url: d.url,
+        alt: `${d.name} process detail`,
+      },
+    ],
+    whyImageSrc: b.url,
+    whyImageAlt: `${b.name} in-house result`,
+  };
 }
 
 function buildFallbackFaqs(serviceName: string): FaqItem[] {
@@ -389,52 +494,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 : "We complete the repair in-house, then confirm final checks and pickup timing.",
           },
         ];
-  const heroSupportImage = isWatchRepair
-    ? "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg"
-    : heroImageSrc;
-  const heroSupportImageAlt = isWatchRepair
-    ? "Watch on the jeweler's bench"
-    : `${service.name} in progress at the jeweler's bench`;
+  const visualSet = buildServiceVisualSet(slug, service.name, heroImageSrc, isWatchRepair);
+  const heroSupportImage = visualSet.heroSupportImage;
+  const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const howItWorksSupportCopy = isWatchRepair
     ? "We’ll confirm pricing and pickup timing before service begins."
     : isRingSizing
       ? "We confirm your exact ring size, pricing, and pickup timing before work begins."
       : `We confirm your ${service.name.toLowerCase()} scope, pricing, and pickup timing before work begins.`;
-  const processGallery = isWatchRepair
-    ? [
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-          alt: "Workbench and tools in the workshop",
-          label: "On the bench",
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-          alt: "Detailed sketches and precision work",
-          label: "Precision first",
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-          alt: "Watch movement on the jeweler's bench",
-          label: "Careful finishing",
-        },
-      ]
-    : [
-        {
-          url: heroImageSrc,
-          alt: service.name,
-          label: "Service focus",
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-          alt: "Jeweler performing repair work at the bench",
-          label: "In-house bench work",
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-          alt: "Final finishing details for jewelry repairs",
-          label: "Clean finishing",
-        },
-      ];
+  const processGallery = visualSet.processGallery;
   const expectCards = isWatchRepair
     ? [
         {
@@ -535,27 +603,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             bullets: requestHighlights,
           },
         ];
-  const expectImages = isWatchRepair
-    ? [
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-          alt: "Pocket watch on the jeweler's bench",
-        },
-        {
-          url: heroImageSrc,
-          alt: service.name,
-        },
-      ]
-    : [
-        {
-          url: heroImageSrc,
-          alt: service.name,
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-          alt: "Jeweler performing detailed in-house work",
-        },
-      ];
+  const expectImages = visualSet.expectImages;
+  const whyImageSrc = visualSet.whyImageSrc;
+  const whyImageAlt = visualSet.whyImageAlt;
   const expectNoteLabel = isWatchRepair
     ? "Water resistance note:"
     : isRingSizing
@@ -1073,8 +1123,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="reveal-on-scroll reveal-delay-2 relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
                   <div className="relative h-56 md:h-full">
                     <Image
-                      src={heroImageSrc}
-                      alt={service.name}
+                      src={whyImageSrc}
+                      alt={whyImageAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, 60vw"
                       className="object-cover"

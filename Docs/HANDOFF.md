@@ -57,9 +57,14 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - expanded mobile smoke checks to validate Quote/Book quick-action visibility and tap-target size.
 - Reliability guardrail update:
   - filtered a known intermittent React hydration warning (`Minified React error #418` with `args[]=HTML`) in Playwright console/pageerror guards to reduce false negatives while still failing on all other runtime errors.
+- Image diversity pass:
+  - replaced repeated workshop image reuse on non-watch service detail pages with rotated service-image sets derived from `SERVICES`
+  - diversified visual panels for How-it-works support, process gallery, what-to-expect images, and trust image blocks
+  - updated blog lead article image to reduce cross-page repetition.
 - Artifact notes added:
   - `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`
   - `Docs/artifacts/ui/2026-02-18--conversion-legal-pass/04-implementation-notes.md`
+  - `Docs/artifacts/ui/2026-02-18--image-diversity-pass/04-implementation-notes.md`
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -78,4 +83,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Run a targeted full-site QA + bugfix pass focused on stability/performance (especially hydration/reveal edge cases under route stress), then start optimization before custom domain launch.
+- Run a focused visual QA session on every public route (mobile + desktop) to catch any remaining repetitive assets or weak crop choices, then start performance optimization (image sizing/priority and CWV tuning).

@@ -255,6 +255,37 @@ test("mobile blog detail: article content, related services, and CTAs render", a
   guard.assertNoErrors("blog detail");
 });
 
+test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+  const routes = ["/services/ring-sizing", "/services/necklace-repair"];
+
+  for (const route of routes) {
+    await page.goto(route, { waitUntil: "networkidle" });
+    await assertNoBrokenImages(page);
+
+    const uniqueServiceImageCount = await page.evaluate(() => {
+      const urls = Array.from(document.querySelectorAll("main img"))
+        .map((img) => {
+          const raw = img.currentSrc || img.getAttribute("src") || "";
+          try {
+            return decodeURIComponent(raw);
+          } catch {
+            return raw;
+          }
+        })
+        .filter((src) => src.includes("/site-assets/services/"));
+      return new Set(urls).size;
+    });
+
+    expect(
+      uniqueServiceImageCount,
+      `Expected richer image variety on ${route}, got ${uniqueServiceImageCount} unique service images.`
+    ).toBeGreaterThanOrEqual(4);
+  }
+
+  guard.assertNoErrors("service detail image variety");
+});
+
 test("services hub: featured detail link routes to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
