@@ -72,6 +72,24 @@ Update cadence: weekly (or after major milestones).
 - SEO canonical continuity tightened on Services routes by adding explicit canonical metadata:
   - `/services` -> canonical `/services`
   - `/services/[slug]` -> canonical `/services/<slug>`.
+- Service-detail rollout completed across all remaining services using the flagship structure (not only Watch Repair + Ring Sizing):
+  - `stone-setting`
+  - `jewelry-cleaning`
+  - `necklace-repair`
+  - `bracelet-repair`
+  - `pearl-restringing`
+  - `custom-design`
+  - `heirloom-restoration`
+- Service detail templates now consistently render:
+  1. Hero
+  2. How it works
+  3. What to expect
+  4. Pricing & timing
+  5. Why customers choose us
+  6. FAQs
+  7. Related services + CTA band
+- Custom Design timing exception remains preserved (`7 business days`).
+- Smoke coverage expanded to assert flagship section sequence across all service routes.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

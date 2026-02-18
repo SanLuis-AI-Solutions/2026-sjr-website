@@ -308,14 +308,365 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   const isWatchRepair = slug === "watch-repair";
   const isRingSizing = slug === "ring-sizing";
-  const isFlagshipService = isWatchRepair || isRingSizing;
+  const isCustomDesign = slug === "custom-design";
+  const isFlagshipService = true;
+  const heroImageSrc =
+    service.image_url || service.image || svgDataUri(service.name);
   const commonRequests = (
     service.commonRequests ||
     service.common_requests ||
     []
   ).filter(Boolean);
-  const heroImageSrc =
-    service.image_url || service.image || svgDataUri(service.name);
+  const longDescription = (
+    service.longDescription ||
+    service.long_description ||
+    []
+  ).filter(Boolean);
+  const includes = (service.includes || []).filter(Boolean);
+  const requestHighlights = (
+    commonRequests.length > 0
+      ? commonRequests
+      : ["Assessment", "In-house service", "Clear approvals"]
+  ).slice(0, 3);
+  const howItWorksIntro = isWatchRepair
+    ? "Three simple steps, with a clear approval point before any work begins."
+    : isRingSizing
+      ? "Three simple steps for precise fit, comfort, and a clean final finish."
+      : `Three simple steps for in-house ${service.name.toLowerCase()} with clear timing and approval before work begins.`;
+  const howItWorksSteps = isWatchRepair
+    ? [
+        {
+          step: "1",
+          title: "Bring your watch",
+          detail: "Walk in or book. Extra links help with sizing.",
+        },
+        {
+          step: "2",
+          title: "Free assessment",
+          detail: "We confirm the fix, price, and timing before service.",
+        },
+        {
+          step: "3",
+          title: "Approve, then service",
+          detail: "Same Day/Next Day service is common for battery work. Full service varies by parts.",
+        },
+      ]
+    : isRingSizing
+      ? [
+          {
+            step: "1",
+            title: "Bring your ring",
+            detail: "Walk in or book. Tell us if the fit is tight, loose, or seasonal.",
+          },
+          {
+            step: "2",
+            title: "Sizing assessment",
+            detail: "We measure fit, inspect stones, and confirm pricing before any work.",
+          },
+          {
+            step: "3",
+            title: "Approve, then size",
+            detail: "We complete your sizing with clean finishing and confirm pickup timing.",
+          },
+        ]
+      : [
+          {
+            step: "1",
+            title: `Bring your ${service.name.toLowerCase()}`,
+            detail: "Walk in or book. We quickly review the issue and your priorities.",
+          },
+          {
+            step: "2",
+            title: "In-house assessment",
+            detail: "We confirm scope, starting-at pricing, and service timing before work.",
+          },
+          {
+            step: "3",
+            title: "Approve, then service",
+            detail:
+              isCustomDesign
+                ? "We finalize design direction, then begin build and finishing with clear milestone updates."
+                : "We complete the repair in-house, then confirm final checks and pickup timing.",
+          },
+        ];
+  const heroSupportImage = isWatchRepair
+    ? "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg"
+    : heroImageSrc;
+  const heroSupportImageAlt = isWatchRepair
+    ? "Watch on the jeweler's bench"
+    : `${service.name} in progress at the jeweler's bench`;
+  const howItWorksSupportCopy = isWatchRepair
+    ? "We’ll confirm pricing and pickup timing before service begins."
+    : isRingSizing
+      ? "We confirm your exact ring size, pricing, and pickup timing before work begins."
+      : `We confirm your ${service.name.toLowerCase()} scope, pricing, and pickup timing before work begins.`;
+  const processGallery = isWatchRepair
+    ? [
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+          alt: "Workbench and tools in the workshop",
+          label: "On the bench",
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
+          alt: "Detailed sketches and precision work",
+          label: "Precision first",
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
+          alt: "Watch movement on the jeweler's bench",
+          label: "Careful finishing",
+        },
+      ]
+    : [
+        {
+          url: heroImageSrc,
+          alt: service.name,
+          label: "Service focus",
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+          alt: "Jeweler performing repair work at the bench",
+          label: "In-house bench work",
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
+          alt: "Final finishing details for jewelry repairs",
+          label: "Clean finishing",
+        },
+      ];
+  const expectCards = isWatchRepair
+    ? [
+        {
+          title: "Battery replacement",
+          eyebrow: "Quick service",
+          copy:
+            "Often completed while you wait. We confirm fit and function, and can inspect seals when applicable.",
+          bullets: [
+            "Fresh battery + function check",
+            "Basic gasket inspection",
+            "Optional pressure test (when applicable)",
+          ],
+        },
+        {
+          title: "Full service",
+          eyebrow: "Preventive maintenance",
+          copy:
+            "For slow running, moisture, or overdue maintenance. We confirm timing and parts before work begins.",
+          bullets: [
+            "Movement cleaning + lubrication",
+            "Worn parts evaluation (if needed)",
+            "Regulation + final testing",
+          ],
+        },
+        {
+          title: "Repairs & parts",
+          eyebrow: "When something breaks",
+          copy:
+            "Crystal, crown/stem, gaskets, and other components. We’ll recommend the safest option and confirm pricing first.",
+          bullets: [
+            "Crystal replacement",
+            "Stem and crown repair",
+            "Seal and gasket replacement",
+          ],
+        },
+      ]
+    : isRingSizing
+      ? [
+          {
+            title: "Sizing up",
+            eyebrow: "When your ring is tight",
+            copy:
+              "We add metal as needed and finish the seam cleanly so fit and appearance stay premium.",
+            bullets: [
+              "Fit assessment before sizing",
+              "Metal matched to your ring",
+              "Polish and final comfort check",
+            ],
+          },
+          {
+            title: "Sizing down",
+            eyebrow: "When your ring is loose",
+            copy:
+              "We remove a precise amount, then reshape and finish for secure daily wear.",
+            bullets: [
+              "Measured size reduction",
+              "Roundness and balance check",
+              "Clean finishing at pickup",
+            ],
+          },
+          {
+            title: "Setting safety",
+            eyebrow: "Protecting your stones",
+            copy:
+              "We inspect prongs and stone security before and after sizing, and explain any recommended reinforcement.",
+            bullets: [
+              "Pre-size setting inspection",
+              "Post-size stability check",
+              "Optional refinishing for white gold",
+            ],
+          },
+        ]
+      : [
+          {
+            title: "Service scope",
+            eyebrow: "What we address",
+            copy:
+              longDescription[0] ||
+              `We complete ${service.name.toLowerCase()} in-house with clear recommendations and clean finishing.`,
+            bullets: includes.slice(0, 3),
+          },
+          {
+            title: "In-house process",
+            eyebrow: "How we work",
+            copy:
+              longDescription[1] ||
+              "Every piece is inspected before and after service to confirm quality, safety, and wearability.",
+            bullets: [
+              "Clear approval before work begins",
+              `Typical turnaround: ${timeEstimateDisplay}`,
+              "Final checks before pickup",
+            ],
+          },
+          {
+            title: "Common requests",
+            eyebrow: "What customers ask for most",
+            copy: `Popular ${service.name.toLowerCase()} requests are handled by our in-house team with transparent pricing.`,
+            bullets: requestHighlights,
+          },
+        ];
+  const expectImages = isWatchRepair
+    ? [
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
+          alt: "Pocket watch on the jeweler's bench",
+        },
+        {
+          url: heroImageSrc,
+          alt: service.name,
+        },
+      ]
+    : [
+        {
+          url: heroImageSrc,
+          alt: service.name,
+        },
+        {
+          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
+          alt: "Jeweler performing detailed in-house work",
+        },
+      ];
+  const expectNoteLabel = isWatchRepair
+    ? "Water resistance note:"
+    : isRingSizing
+      ? "Ring sizing note:"
+      : "Service note:";
+  const expectNote = isWatchRepair
+    ? "pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions."
+    : isRingSizing
+      ? "some styles (eternity bands, certain metals, engraved patterns) can have sizing limits. We confirm the safest path before service."
+      : isCustomDesign
+        ? "custom design work includes approval checkpoints before production so you can confirm direction, materials, and final finish."
+        : "timing and final scope may vary by condition, materials, or parts availability. We confirm options before work begins.";
+  const pricingDetailCopy = isWatchRepair
+    ? "Final price depends on parts and condition. We confirm before service."
+    : isRingSizing
+      ? "Final price depends on metal type, size change, and setting checks. We confirm before service."
+      : "Final price depends on materials, condition, and any required parts. We confirm before service.";
+  const turnaroundDetailCopy = isWatchRepair
+    ? "Same Day/Next Day service is common for battery work. Full service varies by parts availability."
+    : isRingSizing
+      ? "Most sizing jobs follow Same Day/Next Day service. Complex structural work may require additional time."
+      : isCustomDesign
+        ? "Custom design projects typically follow a 7 business day timeline after design approval."
+        : "Most requests follow Same Day/Next Day service. Complex structural work or parts sourcing may require additional time.";
+  const whatToBring = isWatchRepair
+    ? [
+        "The watch (and any extra links if you have them)",
+        "A quick note on the issue: slow/fast, stopping, moisture, crown/stem, crystal",
+        "Any recent service history (optional, but helpful)",
+      ]
+    : isRingSizing
+      ? [
+          "The ring and your preferred fit (snug, comfort, or stack fit)",
+          "Any sizing history or recent fit changes (optional)",
+          "If white gold: let us know if you want rhodium refinishing",
+        ]
+      : isCustomDesign
+        ? [
+            "Reference photos or style ideas",
+            "Any stones or jewelry you want to reuse",
+            "Target budget and occasion timeline",
+          ]
+        : [
+            `The ${service.name.toLowerCase()} item you want serviced`,
+            "Any missing parts, notes, or prior service info (if available)",
+            "Your preferred timing and any wear concerns to address",
+          ];
+  const whyHeading = isWatchRepair
+    ? "In-house service, clear approval, careful finishing."
+    : isRingSizing
+      ? "Precise fit, clean finish, and transparent approvals."
+      : `In-house ${service.name.toLowerCase()}, clear approval, careful finishing.`;
+  const whyIntroCopy = isWatchRepair
+    ? "We do the work here in Pasadena. If anything changes during assessment, we pause, explain your options, and only continue with your approval."
+    : isRingSizing
+      ? "Your ring stays with our in-house team in Pasadena. If we identify setting or structural concerns, we pause and review options before continuing."
+      : `Your ${service.name.toLowerCase()} stays with our in-house team in Pasadena. If scope changes during assessment, we pause and review options before continuing.`;
+  const whyCards = isWatchRepair
+    ? [
+        {
+          title: "In-house watch service",
+          detail: "Your watch stays with our team. No shipping, no outsourcing.",
+        },
+        {
+          title: "Transparent approvals",
+          detail: "You see the price and timing before work begins. No surprises.",
+        },
+        {
+          title: "Quality checks",
+          detail: "Function checks and final testing are part of our process before pickup.",
+        },
+      ]
+    : isRingSizing
+      ? [
+          {
+            title: "In-house ring sizing",
+            detail: "Your ring stays in our workshop. No shipping or outsourced handling.",
+          },
+          {
+            title: "Transparent approvals",
+            detail: "You approve price, timing, and method before we begin service.",
+          },
+          {
+            title: "Finish quality checks",
+            detail: "We check fit, shape, and polish before pickup so the ring wears comfortably.",
+          },
+        ]
+      : [
+          {
+            title: "In-house craftsmanship",
+            detail: `Your ${service.name.toLowerCase()} is completed in-house, not outsourced.`,
+          },
+          {
+            title: "Transparent approvals",
+            detail: "You approve pricing and timing before work begins. No surprises.",
+          },
+          {
+            title: "Final quality checks",
+            detail: "We confirm finish, function, and wearability before pickup.",
+          },
+        ];
+  const trustNote = isWatchRepair
+    ? "We’ll confirm price and timing before service begins. If parts are needed, we pause and get your approval before ordering or proceeding."
+    : isRingSizing
+      ? "We confirm final ring size, method, and timing before service. If setting reinforcement is recommended, we review options and wait for approval."
+      : `We confirm ${service.name.toLowerCase()} scope, timing, and pricing before service. If additional work is recommended, we review options and wait for approval.`;
+  const trustBadges = isWatchRepair
+    ? ["In-house only", "Clear estimates", "Final checks"]
+    : isRingSizing
+      ? ["In-house only", "Fit precision", "Setting checks"]
+      : ["In-house only", "Clear estimates", "Final checks"];
   const schemaBase = SERVICES.find((item) => item.slug === service.slug) || SERVICES[0];
   const schemaService = {
     ...schemaBase,
@@ -411,206 +762,120 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {isFlagshipService ? (
-        <section className="relative bg-white py-16">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-                  How it works
-                </p>
-                <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                  What happens next.
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
-                  {isWatchRepair
-                    ? "Three simple steps, with a clear approval point before any work begins."
-                    : "Three simple steps for precise fit, comfort, and a clean final finish."}
-                </p>
+      <section className="relative bg-white py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                How it works
+              </p>
+              <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                What happens next.
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
+                {howItWorksIntro}
+              </p>
 
-                <div className="mt-8 grid gap-4 md:grid-cols-3">
-                  {(isWatchRepair
-                    ? [
-                        {
-                          step: "1",
-                          title: "Bring your watch",
-                          detail: "Walk in or book. Extra links help with sizing.",
-                        },
-                        {
-                          step: "2",
-                          title: "Free assessment",
-                          detail: "We confirm the fix, price, and timing before service.",
-                        },
-                        {
-                          step: "3",
-                          title: "Approve, then service",
-                          detail: "Same Day/Next Day service is common for battery work. Full service varies by parts.",
-                        },
-                      ]
-                    : [
-                        {
-                          step: "1",
-                          title: "Bring your ring",
-                          detail: "Walk in or book. Tell us if the fit is tight, loose, or seasonal.",
-                        },
-                        {
-                          step: "2",
-                          title: "Sizing assessment",
-                          detail: "We measure fit, inspect stones, and confirm pricing before any work.",
-                        },
-                        {
-                          step: "3",
-                          title: "Approve, then size",
-                          detail: "We complete your sizing with clean finishing and confirm pickup timing.",
-                        },
-                      ]
-                  ).map((item, index) => {
-                    const delayClass = `reveal-delay-${(index % 3) + 1}`;
-                    return (
-                      <article
-                        key={item.step}
-                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow">
-                            {item.step}
-                          </span>
-                          <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                            Step {item.step}
-                          </div>
-                        </div>
-                        <div className="mt-4 font-serif text-xl text-stone-900">
-                          {item.title}
-                        </div>
-                        <p className="mt-2 text-sm leading-7 text-stone-600">
-                          {item.detail}
-                        </p>
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm">
-                <div className="relative h-64">
-                  <Image
-                    src={
-                      isWatchRepair
-                        ? "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg"
-                        : heroImageSrc
-                    }
-                    alt={
-                      isWatchRepair
-                        ? "Watch on the jeweler's bench"
-                        : "Ring sizing work at the jeweler's bench"
-                    }
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
-                </div>
-                <div className="px-6 py-6">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                    Typical turnaround
-                  </div>
-                  <div className="mt-2 font-serif text-2xl text-stone-900">
-                    {timeEstimateDisplay}
-                  </div>
-                  <p className="mt-3 text-sm leading-7 text-stone-600">
-                    {isWatchRepair
-                      ? "We’ll confirm pricing and pickup timing before service begins."
-                      : "We confirm your exact ring size, pricing, and pickup timing before work begins."}
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <Link
-                      href="/quote"
-                      className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {howItWorksSteps.map((item, index) => {
+                  const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                  return (
+                    <article
+                      key={item.step}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm`}
                     >
-                      Get Fast Quote
-                    </Link>
-                    <Link
-                      href="/book"
-                      className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      Book Repair
-                    </Link>
-                  </div>
-                </div>
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow">
+                          {item.step}
+                        </span>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                          Step {item.step}
+                        </div>
+                      </div>
+                      <div className="mt-4 font-serif text-xl text-stone-900">
+                        {item.title}
+                      </div>
+                      <p className="mt-2 text-sm leading-7 text-stone-600">
+                        {item.detail}
+                      </p>
+                    </article>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {(isWatchRepair
-                ? [
-                    {
-                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-                      alt: "Workbench and tools in the workshop",
-                      label: "On the bench",
-                    },
-                    {
-                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-                      alt: "Detailed sketches and precision work",
-                      label: "Precision first",
-                    },
-                    {
-                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-                      alt: "Watch movement on the jeweler's bench",
-                      label: "Careful finishing",
-                    },
-                  ]
-                : [
-                    {
-                      url: heroImageSrc,
-                      alt: service.name,
-                      label: "Sizing precision",
-                    },
-                    {
-                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-                      alt: "Ring repair in progress at the workshop bench",
-                      label: "In-house bench work",
-                    },
-                    {
-                      url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-                      alt: "Final finishing details for jewelry repairs",
-                      label: "Clean finishing",
-                    },
-                  ]
-              ).map((img, index) => {
-                const delayClass = `reveal-delay-${(index % 3) + 1}`;
-                return (
-                  <div
-                    key={img.url}
-                    className={`reveal-on-scroll ${delayClass} relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm`}
+            <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm">
+              <div className="relative h-64">
+                <Image
+                  src={heroSupportImage}
+                  alt={heroSupportImageAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+              </div>
+              <div className="px-6 py-6">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  Typical turnaround
+                </div>
+                <div className="mt-2 font-serif text-2xl text-stone-900">
+                  {timeEstimateDisplay}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-stone-600">
+                  {howItWorksSupportCopy}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/quote"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    <div className="relative h-44">
-                      <Image
-                        src={img.url}
-                        alt={img.alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
-                    </div>
-                    <div className="px-5 py-4">
-                      <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                        {img.label}
-                      </div>
-                      <p className="mt-2 text-sm text-stone-700">
-                        {isWatchRepair
-                          ? "In-house work with a clear approval point before service begins."
-                          : "In-house sizing and finishing with a clear approval step before work begins."}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                    Get Fast Quote
+                  </Link>
+                  <Link
+                    href="/book"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Book Repair
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-      ) : null}
+
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {processGallery.map((img, index) => {
+              const delayClass = `reveal-delay-${(index % 3) + 1}`;
+              return (
+                <div
+                  key={`${img.url}-${img.label}`}
+                  className={`reveal-on-scroll ${delayClass} relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm`}
+                >
+                  <div className="relative h-44">
+                    <Image
+                      src={img.url}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+                  </div>
+                  <div className="px-5 py-4">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                      {img.label}
+                    </div>
+                    <p className="mt-2 text-sm text-stone-700">
+                      In-house work with a clear approval point before service begins.
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {isFlagshipService ? (
         <>
@@ -625,78 +890,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </h2>
 
               <div className="mt-6 grid gap-4">
-                {(isWatchRepair
-                  ? [
-                      {
-                        title: "Battery replacement",
-                        eyebrow: "Quick service",
-                        copy:
-                          "Often completed while you wait. We confirm fit and function, and can inspect seals when applicable.",
-                        bullets: [
-                          "Fresh battery + function check",
-                          "Basic gasket inspection",
-                          "Optional pressure test (when applicable)",
-                        ],
-                      },
-                      {
-                        title: "Full service",
-                        eyebrow: "Preventive maintenance",
-                        copy:
-                          "For slow running, moisture, or overdue maintenance. We confirm timing and parts before work begins.",
-                        bullets: [
-                          "Movement cleaning + lubrication",
-                          "Worn parts evaluation (if needed)",
-                          "Regulation + final testing",
-                        ],
-                      },
-                      {
-                        title: "Repairs & parts",
-                        eyebrow: "When something breaks",
-                        copy:
-                          "Crystal, crown/stem, gaskets, and other components. We’ll recommend the safest option and confirm pricing first.",
-                        bullets: [
-                          "Crystal replacement",
-                          "Stem and crown repair",
-                          "Seal and gasket replacement",
-                        ],
-                      },
-                    ]
-                  : [
-                      {
-                        title: "Sizing up",
-                        eyebrow: "When your ring is tight",
-                        copy:
-                          "We add metal as needed and finish the seam cleanly so fit and appearance stay premium.",
-                        bullets: [
-                          "Fit assessment before sizing",
-                          "Metal matched to your ring",
-                          "Polish and final comfort check",
-                        ],
-                      },
-                      {
-                        title: "Sizing down",
-                        eyebrow: "When your ring is loose",
-                        copy:
-                          "We remove a precise amount, then reshape and finish for secure daily wear.",
-                        bullets: [
-                          "Measured size reduction",
-                          "Roundness and balance check",
-                          "Clean finishing at pickup",
-                        ],
-                      },
-                      {
-                        title: "Setting safety",
-                        eyebrow: "Protecting your stones",
-                        copy:
-                          "We inspect prongs and stone security before and after sizing, and explain any recommended reinforcement.",
-                        bullets: [
-                          "Pre-size setting inspection",
-                          "Post-size stability check",
-                          "Optional refinishing for white gold",
-                        ],
-                      },
-                    ]
-                ).map((block, index) => {
+                {expectCards.map((block, index) => {
                   const delayClass = `reveal-delay-${(index % 3) + 1}`;
                   return (
                     <article
@@ -726,28 +920,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                {(isWatchRepair
-                  ? [
-                      {
-                        url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-                        alt: "Pocket watch on the jeweler's bench",
-                      },
-                      {
-                        url: heroImageSrc,
-                        alt: service.name,
-                      },
-                    ]
-                  : [
-                      {
-                        url: heroImageSrc,
-                        alt: service.name,
-                      },
-                      {
-                        url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-                        alt: "Jeweler performing ring work at the bench",
-                      },
-                    ]
-                ).map((img) => (
+                {expectImages.map((img) => (
                   <div
                     key={img.url}
                     className="reveal-on-scroll relative h-44 overflow-hidden rounded-3xl border border-stone-200 shadow-sm md:h-52"
@@ -766,11 +939,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
               <div className="mt-6 rounded-3xl border border-brand-gold/25 bg-white/80 p-5 text-sm text-stone-700 reveal-on-scroll shadow-sm">
                 <span className="font-semibold text-stone-900">
-                  {isWatchRepair ? "Water resistance note:" : "Ring sizing note:"}
+                  {expectNoteLabel}
                 </span>{" "}
-                {isWatchRepair
-                  ? "pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions."
-                  : "some styles (eternity bands, certain metals, engraved patterns) can have sizing limits. We confirm the safest path before service."}
+                {expectNote}
               </div>
             </div>
           </section>
@@ -797,9 +968,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     {startingAt ?? "Request quote"}
                   </div>
                   <p className="mt-3 text-sm leading-7 text-stone-600">
-                    {isWatchRepair
-                      ? "Final price depends on parts and condition. We confirm before service."
-                      : "Final price depends on metal type, size change, and setting checks. We confirm before service."}
+                    {pricingDetailCopy}
                   </p>
                 </div>
                 <div className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
@@ -810,9 +979,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     {timeEstimateDisplay}
                   </div>
                   <p className="mt-3 text-sm leading-7 text-stone-600">
-                    {isWatchRepair
-                      ? "Same Day/Next Day service is common for battery work. Full service varies by parts availability."
-                      : "Most sizing jobs follow Same Day/Next Day service. Complex structural work may require additional time."}
+                    {turnaroundDetailCopy}
                   </p>
                 </div>
               </div>
@@ -823,18 +990,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     What to bring
                   </div>
                   <ul className="mt-4 space-y-3 text-sm text-stone-600">
-                    {(isWatchRepair
-                      ? [
-                          "The watch (and any extra links if you have them)",
-                          "A quick note on the issue: slow/fast, stopping, moisture, crown/stem, crystal",
-                          "Any recent service history (optional, but helpful)",
-                        ]
-                      : [
-                          "The ring and your preferred fit (snug, comfort, or stack fit)",
-                          "Any sizing history or recent fit changes (optional)",
-                          "If white gold: let us know if you want rhodium refinishing",
-                        ]
-                    ).map((item) => (
+                    {whatToBring.map((item) => (
                       <li key={item} className="flex items-start gap-3">
                         <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
                         {item}
@@ -853,9 +1009,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   >
                     {(commonRequests.length > 0
                       ? commonRequests
-                      : isWatchRepair
-                        ? ["Battery replacement", "Crystal replacement", "Crown/stem repair"]
-                        : ["Sizing up", "Sizing down", "Prong/security check"]
+                      : requestHighlights
                     ).map((item: string) => (
                       <li key={item}>• {item}</li>
                     ))}
@@ -874,49 +1028,16 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     Why customers choose us
                   </p>
                   <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                    {isWatchRepair
-                      ? "In-house service, clear approval, careful finishing."
-                      : "Precise fit, clean finish, and transparent approvals."}
+                    {whyHeading}
                   </h2>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
-                    {isWatchRepair
-                      ? "We do the work here in Pasadena. If anything changes during assessment, we pause, explain your options, and only continue with your approval."
-                      : "Your ring stays with our in-house team in Pasadena. If we identify setting or structural concerns, we pause and review options before continuing."}
+                    {whyIntroCopy}
                   </p>
                 </div>
               </div>
 
               <div className="mt-8 grid gap-4 md:grid-cols-3">
-                {(isWatchRepair
-                  ? [
-                      {
-                        title: "In-house watch service",
-                        detail: "Your watch stays with our team. No shipping, no outsourcing.",
-                      },
-                      {
-                        title: "Transparent approvals",
-                        detail: "You see the price and timing before work begins. No surprises.",
-                      },
-                      {
-                        title: "Quality checks",
-                        detail: "Function checks and final testing are part of our process before pickup.",
-                      },
-                    ]
-                  : [
-                      {
-                        title: "In-house ring sizing",
-                        detail: "Your ring stays in our workshop. No shipping or outsourced handling.",
-                      },
-                      {
-                        title: "Transparent approvals",
-                        detail: "You approve price, timing, and method before we begin service.",
-                      },
-                      {
-                        title: "Finish quality checks",
-                        detail: "We check fit, shape, and polish before pickup so the ring wears comfortably.",
-                      },
-                    ]
-                ).map((item, index) => {
+                {whyCards.map((item, index) => {
                   const delayClass = `reveal-delay-${(index % 3) + 1}`;
                   return (
                     <div
@@ -936,15 +1057,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     Trust note
                   </div>
                   <p className="mt-3 text-sm leading-7 text-stone-700">
-                    {isWatchRepair
-                      ? "We’ll confirm price and timing before service begins. If parts are needed, we pause and get your approval before ordering or proceeding."
-                      : "We confirm final ring size, method, and timing before service. If setting reinforcement is recommended, we review options and wait for approval."}
+                    {trustNote}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-700">
-                    {(isWatchRepair
-                      ? ["In-house only", "Clear estimates", "Final checks"]
-                      : ["In-house only", "Fit precision", "Setting checks"]
-                    ).map((badge) => (
+                    {trustBadges.map((badge) => (
                       <span
                         key={badge}
                         className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2"

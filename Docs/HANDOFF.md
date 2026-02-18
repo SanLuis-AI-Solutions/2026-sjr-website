@@ -38,6 +38,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - increased sticky mobile CTA tap targets to meet a 44px+ baseline
   - added explicit canonical metadata on `/services` and `/services/[slug]` to keep canonical paths stable
   - extended Playwright mobile checks for CTA tap target size and image integrity on `/services`, `/services/watch-repair`, `/services/ring-sizing`.
+- Remaining service pages completion pass:
+  - upgraded all other service details to the flagship section contract (How it works -> What to expect -> Pricing & timing -> Why customers choose us -> FAQs -> Related + CTA)
+  - preserved the custom design timing exception (`7 business days`)
+  - expanded Playwright smoke to validate flagship section sequence on every service slug.
 
 ## Key Files
 - Design system: `DESIGN.md`

@@ -121,15 +121,17 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   guard.assertNoErrors("home -> quote");
 });
 
-test("mobile service detail: includes + faqs render", async ({ page }) => {
+test("mobile service detail: what-to-expect content + faqs render", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
   await page.goto("/services/jewelry-cleaning", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1, name: /Jewelry Cleaning/i })).toBeVisible();
 
-  // Includes list should have multiple items (not a single stringified blob).
-  const includesItems = page.locator('[data-testid="service-includes"] li');
-  await expect(includesItems).toHaveCount(4);
+  // The flagship structure should render scoped expectation cards with bullet points.
+  await expect(page.getByText(/What to expect/i).first()).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3, name: /Service scope/i })).toBeVisible();
+  const expectBullets = page.locator("section").filter({ hasText: "What to expect" }).locator("li");
+  await expect(expectBullets.first()).toBeVisible();
 
   // FAQs should exist (service-specific now).
   await expect(page.getByRole("heading", { name: /Answers about/i })).toBeVisible();
@@ -191,6 +193,43 @@ test("mobile service detail: ring sizing follows flagship section order", async 
   await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeVisible();
 
   guard.assertNoErrors("service detail: ring-sizing flagship sections");
+});
+
+test("mobile service detail: all services follow flagship section sequence", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const slugs = [
+    "watch-repair",
+    "ring-sizing",
+    "stone-setting",
+    "jewelry-cleaning",
+    "necklace-repair",
+    "bracelet-repair",
+    "pearl-restringing",
+    "custom-design",
+    "heirloom-restoration",
+  ];
+
+  for (const slug of slugs) {
+    await page.goto(`/services/${slug}`, { waitUntil: "networkidle" });
+
+    await expect(page.getByText(/How it works/i).first()).toBeVisible();
+    await expect(page.getByText(/What to expect/i).first()).toBeVisible();
+    await expect(page.getByText(/Pricing & timing/i).first()).toBeVisible();
+    await expect(page.getByText(/Why customers choose us/i).first()).toBeVisible();
+    await expect(page.getByText(/^FAQs$/i).first()).toBeVisible();
+    await expect(page.getByText(/Related services/i).first()).toBeVisible();
+
+    await expect(page.getByRole("link", { name: /Get Fast Quote/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeVisible();
+
+    if (slug === "custom-design") {
+      await expect(page.getByText(/7 business days/i).first()).toBeVisible();
+    }
+  }
+
+  guard.assertNoErrors("service detail: all flagship section sequences");
 });
 
 test("mobile services pages: quick actions are clear and image assets load", async ({

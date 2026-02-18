@@ -44,3 +44,15 @@ Addendum (same-day follow-up):
 - Added explicit canonical metadata for Services pages:
   - `/services` canonical -> `/services`
   - `/services/[slug]` canonical -> `/services/<slug>`.
+
+Addendum (full services rollout):
+- Promoted the service-detail flagship section structure from Watch/Ring to all remaining service slugs:
+  - stone-setting
+  - jewelry-cleaning
+  - necklace-repair
+  - bracelet-repair
+  - pearl-restringing
+  - custom-design
+  - heirloom-restoration
+- Removed runtime dependence on the old non-flagship branch by rendering flagship flow for all service details with slug-aware content variations.
+- Extended mobile smoke verification to assert flagship section presence across all service detail pages and preserve the custom design timing exception (`7 business days`).
