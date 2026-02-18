@@ -165,8 +165,8 @@ Update cadence: weekly (or after major milestones).
   - FAQ events added: `faq_filter_select`, `faq_search` (with filter/query length/results metadata).
   - Blog events added: `blog_topic_click` (topic filter chips), `article_mid_cta_click` (mid-article quote/book module), `related_read_click` (cross-article navigation).
   - blog topic chips now support query-param filtering (`/blog?topic=<topic>`) so event analysis maps to visible content segmentation.
-  - runtime validation confirms all 5 events fire from actual UI interactions (captured via browser stubbed `window.gtag` + persisted payload checks across navigations).
-  - production GA loader blocker identified: deployed pages currently do not inject GA script/config tags (`window.gtag` absent on production), so events will not reach GA until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set in Vercel production environment and redeployed.
+  - runtime validation confirms all 5 events fire from live UI interactions on production alias (`blog_topic_click`, `faq_filter_select`, `faq_search`, `article_mid_cta_click`, `related_read_click`).
+  - production GA loader issue resolved: `NEXT_PUBLIC_GA_MEASUREMENT_ID` now set in Vercel `production` + `preview`, value sanitized (newline removed), redeployed, and `window.gtag` now initializes correctly on live pages.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)

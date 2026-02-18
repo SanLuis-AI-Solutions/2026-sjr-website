@@ -43,6 +43,10 @@
   - `related_read_click`
 - Link-transition events were validated by persisting captured payloads in `localStorage` before and after navigation.
 
-## Production blocker
-- Observed on production pages: `window.gtag` and `window.dataLayer` are absent and no GA loader script is injected.
-- Implication: events are instrumented in code but cannot reach GA until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is present in Vercel production env and the site is redeployed.
+## Production runtime fix
+- Added `NEXT_PUBLIC_GA_MEASUREMENT_ID` to Vercel `production` + `preview`.
+- First pass saved with CRLF, which caused GA script parse/runtime errors; env var was removed and re-added without newline.
+- Redeployed production alias and re-validated:
+  - GA loader script is present (`https://www.googletagmanager.com/gtag/js?id=G-WLKM8DCB5M`).
+  - `window.gtag` is available on live routes.
+  - Live interactions push expected events to `dataLayer` for all 5 new intents.

@@ -138,9 +138,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `blog_topic_click` fired from topic chip routing.
     - `article_mid_cta_click` fired before route transition to Quote.
     - `related_read_click` fired before route transition to related article.
-  - blocker discovered:
-    - production deploy currently renders no GA loader script (`window.gtag` missing), indicating `NEXT_PUBLIC_GA_MEASUREMENT_ID` is not active in Vercel production runtime.
-    - events are wired correctly in code but will not appear in GA until production env var is set and redeployed.
+  - production runtime fix completed:
+    - `NEXT_PUBLIC_GA_MEASUREMENT_ID` added to Vercel `production` and `preview`.
+    - first save included CRLF and caused runtime script parse errors; value was removed/re-added without newline.
+    - production redeployed and alias updated; live checks now confirm GA loader script + `window.gtag` availability and event pushes to `dataLayer`.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -159,4 +160,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Vercel production env, redeploy, then run a live GA DebugView pass to confirm the 5 intent events arrive in GA before building the 7-day funnel report.
+- Build one GA4 exploration for the new 5-event funnel (`blog_topic_click` -> `article_mid_cta_click`/`related_read_click` and `faq_filter_select` -> `faq_search`) and use it to prioritize the next 2 flagship service-detail pages.
