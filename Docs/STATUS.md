@@ -177,11 +177,16 @@ Update cadence: weekly (or after major milestones).
   - added per-service customer proof blocks with micro-testimonial snippets in the trust section.
   - expanded non-watch/ring FAQ depth from 5 to 7 with intent-driven supplemental coverage (cost, timing, process, risk, and prep intent).
   - added smoke coverage to enforce decision/proof block rendering and 7-FAQ depth for non-watch/ring routes.
+- Service visual differentiation pass shipped (2026-02-18, follow-up iteration):
+  - sourced and uploaded 5 additional service visuals to Supabase `site-assets` (`services/alt-*.jpg`) from legacy brand-owned media.
+  - remapped `src/lib/service-visuals.ts` blueprints to reduce repeated cross-page usage (especially prior overuse of `heirloom-restoration.jpg`).
+  - updated watch-repair gallery/support imagery to use distinct service visuals instead of repeating prior workshop trio.
+  - image-link audit now passes at `OK: 20/20` after expanding the visual library.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)
   - `scripts/verify.ps1` PASS
-  - `scripts/audit-images.ps1` PASS (`OK: 15/15`)
+  - `scripts/audit-images.ps1` PASS (`OK: 20/20`)
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
@@ -192,5 +197,5 @@ Update cadence: weekly (or after major milestones).
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
-2. Run a service-detail visual differentiation sprint focused on reducing image reuse with true per-service photo packs (3-4 unique images each).
+2. Run a service-detail visual QA pass on mobile to verify each route’s first-scroll identity is distinct and premium after the new `alt-*` pack rollout.
 3. Run a post-deploy UX/a11y regression pass across Home/About/FAQ/Contact with mobile-first CTA and contrast checks.

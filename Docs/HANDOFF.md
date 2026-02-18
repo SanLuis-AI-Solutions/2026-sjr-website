@@ -158,6 +158,19 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `npm run lint` PASS (0 errors; existing non-blocking script warnings unchanged).
     - `npm test` PASS (15/15).
     - `scripts/verify.ps1` PASS.
+- Services visual differentiation pass (2026-02-18, same-day):
+  - uploaded 5 additional brand-owned service visuals to Supabase bucket:
+    - `services/alt-watch-workbench.jpg`
+    - `services/alt-jeweler-hands.jpg`
+    - `services/alt-tool-detail.jpg`
+    - `services/alt-ring-closeup.jpg`
+    - `services/alt-workshop-bench.jpg`
+  - remapped service-detail visual blueprints in `src/lib/service-visuals.ts` to reduce repeated cross-page imagery and improve per-route visual identity.
+  - verification snapshot:
+    - `scripts/audit-images.ps1` PASS (`OK: 20/20`).
+    - `npm run lint` PASS.
+    - `npm test` PASS (15/15).
+    - `scripts/verify.ps1` PASS.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -176,4 +189,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Execute a service-page visual differentiation sprint: replace repeated gallery assets with true per-service photo packs (3-4 unique images per service) so each detail page feels distinct at first scroll.
+- Run a focused mobile visual QA sweep across all 9 `/services/[slug]` routes and tighten any remaining repeated-above-the-fold imagery to maximize premium differentiation.

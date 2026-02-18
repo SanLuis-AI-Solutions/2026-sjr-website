@@ -31,7 +31,11 @@
 - Added smoke tests in `tests/smoke.spec.ts` for:
   - decision/proof block visibility on all service routes.
   - 7 FAQ count on non-watch/ring routes.
+- Added visual-library expansion and remap:
+  - Uploaded 5 additional service images to Supabase (`services/alt-*.jpg`).
+  - Updated `src/lib/service-visuals.ts` blueprint assignments to reduce cross-page repeated imagery.
+  - Image audit baseline improved from 15 referenced assets to 20 referenced assets (`scripts/audit-images.ps1` -> `OK: 20/20`).
 
 ## Recommended next pass
-- Build a per-service visual pack (3-4 unique photos per service) to reduce repetition and improve premium feel.
-- Add one unique “value module” per service (e.g., eligibility checklist, repair-vs-replace guidance, or tiered pricing scenarios).
+- Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
+- Add optional per-service mini gallery captions tied to customer intent (“Before visit”, “In progress”, “Finished result”) for stronger narrative clarity.
