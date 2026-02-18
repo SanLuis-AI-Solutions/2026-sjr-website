@@ -5,7 +5,7 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Finish design/copy across remaining core pages (Services, About, FAQ, Contact, Blog).
+- Finish remaining site pages beyond the core set, then run full debug + optimization pass before custom domain launch.
 - Lock booking + quote + contact lead flows and keep notifications reliable.
 - Prepare launch SEO basics (metadata, sitemap/robots, internal linking).
 
@@ -90,12 +90,20 @@ Update cadence: weekly (or after major milestones).
   7. Related services + CTA band
 - Custom Design timing exception remains preserved (`7 business days`).
 - Smoke coverage expanded to assert flagship section sequence across all service routes.
+- Core pages completion pass shipped for About/FAQ/Contact/Blog:
+  - mobile-first quick-action CTA regions standardized (`Get Fast Quote` + `Book Repair`)
+  - page-level metadata + canonical coverage added for `/about`, `/faq`, and `/contact`
+  - Contact form a11y pass aligned with conversion pages (focus-visible states, tap targets, autocomplete/inputMode, semantic success/error messaging)
+  - FAQ page upgraded to intent-driven coverage and FAQPage JSON-LD
+  - Blog index/detail upgraded to real content model with slug-based detail rendering and related-service CTA flow.
+- Wording consistency sweep updated remaining “within the week” phrasing to “Same Day/Next Day service”.
+- Mobile smoke coverage expanded to include `/about`, `/faq`, `/contact`, `/blog`, and `/blog/ring-sizing-guide` with CTA visibility, tap-target checks, and broken-image checks.
+- Audit artifact added: `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
 - Cloudflare MCP still not loading in the active Codex runtime (config fixed; host reload pending).
-- Remaining pages can drift visually if we don’t apply a single shared layout system/patterns.
-- Custom domain launch path is still open: Vercel domain attach (`susiesjewelryrepair.com` + `www`), production `NEXT_PUBLIC_SITE_URL`, and Search Console sitemap submission remain to be finalized.
+- Custom domain launch path remains intentionally deferred until full site completion (per current rollout decision).
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).

@@ -154,6 +154,64 @@ test("legal pages: privacy + terms exist", async ({ page }) => {
   guard.assertNoErrors("privacy/terms");
 });
 
+test("mobile core pages: about, faq, contact, and blog quick actions are clear", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const routes = [
+    { path: "/about", heading: /Family craftsmanship, refined over four decades/i },
+    {
+      path: "/faq",
+      heading: /Answers before you hand over a meaningful piece/i,
+    },
+    { path: "/contact", heading: /Talk to a local expert/i },
+    { path: "/blog", heading: /Repair tips and local guidance/i },
+  ];
+
+  for (const route of routes) {
+    await page.goto(route.path, { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+
+    const quickActions = page.getByRole("region", { name: /Quick actions/i });
+    await expect(quickActions).toBeVisible();
+
+    const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
+    const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+    await expect(quote).toBeVisible();
+    await expect(book).toBeVisible();
+
+    const quoteBox = await quote.boundingBox();
+    const bookBox = await book.boundingBox();
+    expect(quoteBox?.height ?? 0, `Quote tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
+      44
+    );
+    expect(bookBox?.height ?? 0, `Book tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
+      44
+    );
+
+    await assertNoBrokenImages(page);
+  }
+
+  guard.assertNoErrors("core pages quick actions");
+});
+
+test("mobile blog detail: article content, related services, and CTAs render", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/ring-sizing-guide", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Ring Sizing/i })).toBeVisible();
+  await expect(page.getByText(/Key takeaways/i)).toBeVisible();
+  await expect(page.getByText(/Related services/i)).toBeVisible();
+
+  await expect(page.getByRole("link", { name: /^Get Fast Quote$/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /^View Services$/i }).first()).toBeVisible();
+
+  await assertNoBrokenImages(page);
+  guard.assertNoErrors("blog detail");
+});
+
 test("services hub: featured detail link routes to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

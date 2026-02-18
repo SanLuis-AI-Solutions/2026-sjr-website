@@ -1,61 +1,86 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
+import { BLOG_POSTS } from "@/lib/blog";
 
-const posts = [
-  {
-    slug: "how-to-choose-a-jeweler",
-    title: "How to Choose a Trustworthy Jeweler",
-    excerpt: "Key signs of in‑house craftsmanship, transparency, and local trust.",
-    image:
-      "https://images.unsplash.com/photo-1518544887872-6d1d3ed4b799?auto=format&fit=crop&w=1200&q=80",
+export const metadata: Metadata = {
+  title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
+  description:
+    "Practical repair guidance from our Pasadena in-house team: ring sizing, watch care, stone setting safety, and maintenance tips.",
+  alternates: {
+    canonical: "/blog",
   },
-  {
-    slug: "ring-sizing-guide",
-    title: "Ring Sizing: What to Know Before You Resize",
-    excerpt: "Best practices for resizing without compromising the band.",
-    image:
-      "https://images.unsplash.com/photo-1518544801976-3e159e50e5bb?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "watch-battery-replacement",
-    title: "Watch Battery Replacement: Timing & Tips",
-    excerpt: "When to replace, what to expect, and how to protect your watch.",
-    image:
-      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=1200&q=80",
-  },
-];
+};
 
 export default function BlogPage() {
   return (
     <SiteShell>
-      <section className="bg-stone-100 py-16">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="relative overflow-hidden bg-stone-100 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             Blog
           </p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900">
-            Repair tips & local guidance
+          <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">
+            Repair tips and local guidance.
           </h1>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+            Clear, practical advice from our in-house Pasadena team to help you protect your
+            jewelry and watches between visits.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
+            <Link
+              href="/quote"
+              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Get Fast Quote
+            </Link>
+            <Link
+              href="/book"
+              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Book Repair
+            </Link>
+          </div>
+
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {posts.map((post) => (
-              <a
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="rounded-lg border border-stone-200 bg-white p-6 transition hover:shadow-md"
-              >
-                <div
-                  className="mb-4 h-40 w-full rounded-md bg-cover bg-center"
-                  style={{ backgroundImage: `url('${post.image}')` }}
-                  aria-hidden="true"
-                />
-                <h2 className="font-serif text-xl text-stone-900">
-                  {post.title}
-                </h2>
-                <p className="mt-3 text-sm text-stone-600">{post.excerpt}</p>
-                <div className="mt-4 text-xs uppercase tracking-[0.25em] text-brand-gold">
-                  Read more
-                </div>
-              </a>
-            ))}
+            {BLOG_POSTS.map((post, index) => {
+              const delayClass = `reveal-delay-${(index % 3) + 1}`;
+              return (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className={`reveal-on-scroll ${delayClass} group overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2`}
+                >
+                  <div className="relative h-44">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+                  </div>
+
+                  <div className="p-6">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                      {post.readTime}
+                    </div>
+                    <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-stone-500">
+                      {post.publishedAt}
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">{post.title}</h2>
+                    <p className="mt-3 text-sm leading-7 text-stone-600">{post.excerpt}</p>
+                    <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-brand-burgundy">
+                      Read article
+                      <span aria-hidden="true">→</span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

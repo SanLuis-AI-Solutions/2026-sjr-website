@@ -1,32 +1,173 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
+import { CtaBand } from "@/components/cta-band";
+import { BLOG_POSTS, getBlogPostBySlug } from "@/lib/blog";
+import { SERVICES } from "@/lib/constants";
 
-export default function BlogDetailPage() {
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+function formatPublishedDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Article | Susie’s Jewelry Repair",
+      description: "Repair guidance and local service advice from Susie’s Jewelry Repair.",
+      alternates: {
+        canonical: "/blog",
+      },
+    };
+  }
+
+  return {
+    title: `${post.title} | Susie’s Jewelry Repair`,
+    description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+  };
+}
+
+export default async function BlogDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const relatedServices = SERVICES.filter((service) =>
+    post.relatedServiceSlugs.includes(service.slug)
+  ).slice(0, 3);
+
   return (
     <SiteShell>
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-3xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-            Blog Post
-          </p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900">
-            Article Title Placeholder
-          </h1>
-          <p className="mt-4 text-sm text-stone-600">
-            This is a template for future blog automation. Content will be
-            generated and published via the planned workflow.
-          </p>
-          <div className="mt-8 space-y-4 text-sm text-stone-700">
-            <p>
-              Add structured content here: intro, bullet points, and service
-              callouts.
-            </p>
-            <p>
-              Include local keywords and internal links to services and FAQs
-              for SEO.
-            </p>
+      <article className="relative overflow-hidden bg-white pb-16 pt-14">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
+        <div className="relative mx-auto max-w-5xl px-6">
+          <Link
+            href="/blog"
+            className="inline-flex min-h-11 items-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+          >
+            ← Back to Blog
+          </Link>
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Blog Post</p>
+          <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">{post.title}</h1>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600">{post.excerpt}</p>
+
+          <div className="mt-6 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-stone-700">
+            <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2">
+              {post.readTime}
+            </span>
+            <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2">
+              Published{" "}
+              <time dateTime={post.publishedAt}>{formatPublishedDate(post.publishedAt)}</time>
+            </span>
+          </div>
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <div className="relative h-72 overflow-hidden rounded-3xl border border-stone-200 shadow-[0_20px_55px_rgba(58,25,16,0.14)] md:h-96">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent" />
+              </div>
+
+              <div className="mt-10 space-y-8">
+                {post.sections.map((section) => (
+                  <section key={section.heading}>
+                    <h2 className="font-serif text-2xl text-stone-900">{section.heading}</h2>
+                    <div className="mt-3 space-y-4">
+                      {section.body.map((paragraph) => (
+                        <p key={paragraph} className="text-sm leading-7 text-stone-700">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </div>
+
+            <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Key takeaways
+                </p>
+                <ul className="mt-4 space-y-3 text-sm text-stone-700">
+                  {post.keyTakeaways.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Related services
+                </p>
+                <div className="mt-4 space-y-2">
+                  {relatedServices.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="block rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href="/quote"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Get Fast Quote
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    View Services
+                  </Link>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
-      </section>
+      </article>
+
+      <CtaBand />
     </SiteShell>
   );
 }

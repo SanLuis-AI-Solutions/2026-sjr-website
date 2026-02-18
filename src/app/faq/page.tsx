@@ -1,45 +1,137 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Script from "next/script";
 import { SiteShell } from "@/components/site-shell";
+import { BUSINESS } from "@/lib/constants";
 
-const faqs = [
+export const metadata: Metadata = {
+  title: "FAQ | Susie’s Jewelry Repair",
+  description:
+    "Common questions about in-house jewelry and watch repair, timing, pricing, and appointments in Pasadena.",
+  alternates: {
+    canonical: "/faq",
+  },
+};
+
+const FAQS = [
   {
-    q: "Do you repair jewelry in‑house?",
-    a: "Yes. Repairs are completed in‑house so your valuables stay under our care.",
+    q: "Do you repair jewelry and watches in-house?",
+    a: "Yes. All service is performed in-house, so your piece stays under our care from drop-off through final checks.",
   },
   {
     q: "How long does a typical repair take?",
-    a: "Most repairs are completed within the week. We confirm timing during your assessment.",
+    a: "Most services follow Same Day/Next Day service. If parts or structural work are needed, we confirm timing before work begins.",
   },
   {
-    q: "Can I get a price before I come in?",
-    a: "Yes. Submit a Fast Quote request to receive a transparent starting‑at range.",
+    q: "Can I get pricing before I visit?",
+    a: "Yes. Use Fast Quote to get a transparent starting range, then we confirm final scope and pricing after inspection.",
   },
   {
     q: "Do I need an appointment?",
-    a: "Walk‑ins are welcome, and you can also book a 15‑minute assessment online.",
+    a: "Walk-ins are welcome. You can also reserve a free 15-minute assessment if you prefer a scheduled time.",
+  },
+  {
+    q: "Will you contact me before additional work?",
+    a: "Yes. If the repair scope changes after inspection, we pause and get approval first.",
+  },
+  {
+    q: "Do you work on heirloom or sentimental pieces?",
+    a: "Yes. We frequently service heirloom items and explain handling, risk points, and finishing steps before we proceed.",
+  },
+  {
+    q: "Can you size rings with stones?",
+    a: "Often, yes. We inspect settings before and after sizing and recommend reinforcement if needed.",
+  },
+  {
+    q: "How quickly do you respond to online forms?",
+    a: "We typically reply within 1 business day for quote, booking, and contact submissions.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
 
 export default function FaqPage() {
   return (
     <SiteShell>
-      <section className="bg-stone-100 py-16">
-        <div className="mx-auto max-w-5xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-            FAQ
-          </p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900">
-            Answers before you visit
+      <Script
+        id="faq-page-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <section className="relative overflow-hidden bg-stone-100 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">FAQ</p>
+          <h1 className="mt-3 max-w-3xl font-serif text-4xl text-stone-900 md:text-5xl">
+            Answers before you hand over a meaningful piece.
           </h1>
-          <div className="mt-10 space-y-5">
-            {faqs.map((faq) => (
-              <div
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600">
+            Clear guidance on timing, approvals, and in-house repair so you know what to expect
+            before you visit.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
+            <Link
+              href="/quote"
+              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Get Fast Quote
+            </Link>
+            <Link
+              href="/book"
+              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Book Repair
+            </Link>
+          </div>
+
+          <div className="mt-10 space-y-4" aria-label="Frequently asked questions">
+            {FAQS.map((faq) => (
+              <details
                 key={faq.q}
-                className="rounded-lg border border-stone-200 bg-white p-6"
+                className="group rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
               >
-                <h2 className="font-serif text-xl text-stone-900">{faq.q}</h2>
-                <p className="mt-3 text-sm text-stone-600">{faq.a}</p>
-              </div>
+                <summary className="cursor-pointer list-none pr-7 font-serif text-xl text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
+                  {faq.q}
+                  <span className="float-right mt-1 text-brand-burgundy transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-sm leading-7 text-stone-600">{faq.a}</p>
+              </details>
             ))}
+          </div>
+
+          <div className="mt-10 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+            <h2 className="font-serif text-2xl text-stone-900">Still need help?</h2>
+            <p className="mt-3 text-sm text-stone-600">
+              Call us at{" "}
+              <Link
+                href={`tel:${BUSINESS.phone}`}
+                className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                {BUSINESS.phone}
+              </Link>{" "}
+              or send a message and we’ll guide you to the best next step.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       </section>

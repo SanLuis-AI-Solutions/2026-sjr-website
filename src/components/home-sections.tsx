@@ -218,7 +218,8 @@ export function HomeFaq() {
             },
             {
               question: "How long do repairs take?",
-              answer: "Most repairs are completed within the week. Timing depends on the job.",
+              answer:
+                "Most repairs follow Same Day/Next Day service. Timing depends on the job and parts availability.",
             },
             {
               question: "Can I get an estimate before service?",

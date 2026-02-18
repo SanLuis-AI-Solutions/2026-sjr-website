@@ -1,6 +1,6 @@
 # Handoff — SJR New Website
 
-Date: 2026-02-17
+Date: 2026-02-18
 Repo: `c:\Users\ninef\SanLuis Solutions projects\sjr-new-website-aiproject`
 Branch: `master`
 Production alias: `https://sjr-new-website-aiproject.vercel.app`
@@ -42,6 +42,15 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - upgraded all other service details to the flagship section contract (How it works -> What to expect -> Pricing & timing -> Why customers choose us -> FAQs -> Related + CTA)
   - preserved the custom design timing exception (`7 business days`)
   - expanded Playwright smoke to validate flagship section sequence on every service slug.
+- Core pages completion pass:
+  - `/about` redesigned with clearer mobile hierarchy, quick-action CTA pair, canonical metadata, and stronger contact affordances
+  - `/faq` expanded to intent-driven coverage, canonical metadata, FAQPage JSON-LD, and explicit quick-action CTAs
+  - `/contact` upgraded with stronger form accessibility (focus states, autocomplete/inputMode, 44px+ controls), status/alert semantics, and clearer mobile action hierarchy
+  - `/blog` upgraded with quick-action CTA pair and richer card metadata; `/blog/[slug]` now serves real slug-based article content with related service links + CTA flow
+  - wording consistency sweep removed remaining “within the week” phrasing in favor of “Same Day/Next Day service”
+  - Playwright smoke expanded to validate `/about`, `/faq`, `/contact`, `/blog`, and `/blog/ring-sizing-guide` (including broken-image checks and tap target checks).
+- Artifact notes added:
+  - `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -50,6 +59,7 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Service detail: `src/app/services/[slug]/page.tsx`
 - Deploy guardrails: `scripts/deploy-prod.ps1`
 - URL resolver: `src/lib/site-url.ts`
+- Blog content source: `src/lib/blog.ts`
 
 ## How to Resume Tomorrow (Next Chat)
 1. Verify repo health: `pwsh -File scripts/verify.ps1`
@@ -59,7 +69,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Complete custom domain launch path end-to-end:
-  - attach `susiesjewelryrepair.com` + `www` in Vercel production
-  - set/confirm `NEXT_PUBLIC_SITE_URL=https://www.susiesjewelryrepair.com` in Vercel env
-  - submit `https://www.susiesjewelryrepair.com/sitemap.xml` in Google Search Console.
+- Finish the remaining non-core site pages using the same mobile CTA + a11y + metadata contract, then run a full-site smoke/debug pass before any custom domain launch actions.
