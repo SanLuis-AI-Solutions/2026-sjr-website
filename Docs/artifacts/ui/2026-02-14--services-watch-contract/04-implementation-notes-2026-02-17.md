@@ -40,3 +40,7 @@ Addendum (same-day follow-up):
 - Added Playwright smoke coverage for:
   - quick-actions CTA visibility and tap target height (`>=44px`)
   - image load integrity checks on `/services`, `/services/watch-repair`, and `/services/ring-sizing`.
+- Increased sticky mobile CTA vertical padding on Services hub + Service detail so production tap targets clear the 44px baseline consistently.
+- Added explicit canonical metadata for Services pages:
+  - `/services` canonical -> `/services`
+  - `/services/[slug]` canonical -> `/services/<slug>`.

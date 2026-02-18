@@ -253,6 +253,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `Service | ${BUSINESS.name}`,
       description:
         "Explore our in-house jewelry and watch repair services in Pasadena, TX.",
+      alternates: {
+        canonical: "/services",
+      },
     };
   }
 
@@ -264,6 +267,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
   };
 }
 

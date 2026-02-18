@@ -35,6 +35,8 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - improved service-card click clarity by adding explicit `View details` action text
   - added section semantics (`aria-labelledby`) and labeled mobile quick-action regions (`role="region" aria-label="Quick actions"`)
   - removed remaining `Same Day/Next Day service timing` runtime phrasing for consistency
+  - increased sticky mobile CTA tap targets to meet a 44px+ baseline
+  - added explicit canonical metadata on `/services` and `/services/[slug]` to keep canonical paths stable
   - extended Playwright mobile checks for CTA tap target size and image integrity on `/services`, `/services/watch-repair`, `/services/ring-sizing`.
 
 ## Key Files

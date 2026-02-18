@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
@@ -16,6 +17,15 @@ type ServiceListItem = {
   time_estimate?: unknown;
   timeEstimate?: unknown;
   commonRequests?: string[];
+};
+
+export const metadata: Metadata = {
+  title: "Jewelry & Watch Repair Services | Susie’s Jewelry Repair",
+  description:
+    "Browse in-house jewelry and watch repair services with transparent pricing, Same Day/Next Day service on most work, and a fast path to quote or booking.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default async function ServicesPage() {

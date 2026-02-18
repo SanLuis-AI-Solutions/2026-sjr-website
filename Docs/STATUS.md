@@ -69,6 +69,9 @@ Update cadence: weekly (or after major milestones).
   - quick-action CTA visibility
   - tap target height (`>=44px`)
   - no broken images (`naturalWidth > 0` once loaded).
+- SEO canonical continuity tightened on Services routes by adding explicit canonical metadata:
+  - `/services` -> canonical `/services`
+  - `/services/[slug]` -> canonical `/services/<slug>`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
