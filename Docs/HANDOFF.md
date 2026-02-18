@@ -73,6 +73,15 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - Smoke test selector updated for About quick-action landmark exact matching (`tests/smoke.spec.ts`).
   - New artifact note:
     - `Docs/artifacts/ui/2026-02-18--about-refresh-skiplink-image-library/04-implementation-notes.md`
+- About page premium v2 pass (2026-02-18, same-day iteration):
+  - user feedback indicated About still looked too basic compared to legacy site.
+  - rebuilt `src/app/about/page.tsx` with a stronger premium structure:
+    - asymmetric editorial hero
+    - four trust metrics row
+    - manifesto contrast band
+    - explicit 4-step service process
+    - refined timeline cards and visit section
+  - retained mobile-first CTA region semantics and existing smoke-test compatibility.
 
 ## Key Files
 - Design system: `DESIGN.md`

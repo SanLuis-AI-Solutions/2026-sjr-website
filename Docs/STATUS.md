@@ -122,6 +122,14 @@ Update cadence: weekly (or after major milestones).
   - image inventory verified from Supabase `site-assets`: 15 available public assets (9 services + 4 home + 2 before/after), used explicitly instead of random fallback ordering.
 - Smoke checks adjusted for the redesigned About page quick-action landmarks (exact region targeting) and all smoke tests continue to pass.
 - Artifact added: `Docs/artifacts/ui/2026-02-18--about-refresh-skiplink-image-library/04-implementation-notes.md`.
+- About page premium v2 redesign shipped after direct comparison against legacy site:
+  - replaced the still-basic stacked composition with a stronger editorial layout (asymmetric hero, trust metrics, manifesto band, process sequence, and timeline cards).
+  - kept mobile-first CTA clarity and semantics while increasing visual distinctiveness from Home.
+- Verification pass after redesign:
+  - `npm run lint` PASS (0 errors)
+  - `npm test` PASS (13/13)
+  - `scripts/verify.ps1` PASS
+  - `scripts/audit-images.ps1` PASS (`OK: 15/15`)
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

@@ -14,60 +14,93 @@ export const metadata: Metadata = {
   },
 };
 
-const VALUES = [
-  {
-    title: "In-house only",
-    body: "Your jewelry and watches stay with one local team from intake to final checks.",
-  },
-  {
-    title: "Clear approvals",
-    body:
-      "We confirm scope, pricing, and timing before service starts. If anything changes, we pause and ask first.",
-  },
-  {
-    title: "Careful finishing",
-    body:
-      "Repairs are cleaned, checked, and reviewed before pickup so pieces are ready to wear confidently.",
-  },
-];
-
 const TIMELINE = [
   {
     year: "1984",
+    title: "The foundation",
     detail:
-      "Started with a bench, hand tools, and a promise to keep every repair local and transparent.",
+      "Started with a single bench, hand tools, and a commitment to transparent, local craftsmanship.",
   },
   {
     year: "1997",
-    detail: "Opened a dedicated storefront and expanded into full jewelry and watch repair service.",
+    title: "A dedicated storefront",
+    detail:
+      "Opened our first official store and expanded from quick fixes to full-service jewelry and watch repair.",
   },
   {
     year: "2008",
-    detail: "Moved to Fairmont Parkway with a larger workshop and stronger in-house capacity.",
+    title: "Larger workshop",
+    detail:
+      "Moved to Fairmont Parkway, adding capacity while keeping the same family-run service model.",
   },
   {
     year: "Today",
+    title: "Three generations",
     detail:
-      "Three generations continue the craft with modern tools, clear communication, and local accountability.",
+      "The next generation now works side-by-side at the bench, carrying the same standards forward.",
+  },
+];
+
+const PROCESS = [
+  {
+    step: "01",
+    title: "Intake & inspection",
+    detail:
+      "We document condition, review concerns, and explain options in plain language.",
+  },
+  {
+    step: "02",
+    title: "Approval before work",
+    detail:
+      "You approve price and timing first. If scope changes, we pause and ask before continuing.",
+  },
+  {
+    step: "03",
+    title: "In-house craftsmanship",
+    detail:
+      "Your piece stays with our local bench team through repair, refinement, and cleaning.",
+  },
+  {
+    step: "04",
+    title: "Final quality review",
+    detail:
+      "Fit, function, and finish are checked before pickup so your piece is ready to wear.",
+  },
+];
+
+const STANDARDS = [
+  {
+    title: "In-house only",
+    body: "No shipping and no outsourcing. One local team handles your piece start to finish.",
+  },
+  {
+    title: "Clear communication",
+    body: "You get straightforward recommendations, not pressure, and approvals before service starts.",
+  },
+  {
+    title: "Premium finish",
+    body: "Repairs are cleaned, inspected, and refined so results look intentional, not temporary.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-stone-50 py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_45%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(209,184,130,0.18),_transparent_50%)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+      <section className="relative overflow-hidden bg-white pt-16 pb-18">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,_rgba(122,46,58,0.09),_transparent_48%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,_rgba(209,184,130,0.18),_transparent_52%)]" />
+
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-end">
           <div>
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">About</p>
-            <h1 className="mt-3 max-w-2xl font-serif text-4xl text-stone-900 md:text-5xl">
+            <h1 className="mt-3 max-w-3xl text-balance font-serif text-4xl text-stone-950 md:text-5xl">
               Family craftsmanship, refined over four decades.
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-700">
-              Susie’s Jewelry Repair is built on one simple standard: your piece stays local,
-              your approvals stay clear, and your final result is finished with care.
+              Susie’s Jewelry Repair is built for people who expect premium work without guesswork.
+              Your piece stays local, your approvals stay clear, and your finish is checked before pickup.
             </p>
+
             <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
               <Link
                 href="/quote"
@@ -82,94 +115,101 @@ export default function AboutPage() {
                 Book Repair
               </Link>
             </div>
-            <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-stone-700">
-              <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                In-house only
-              </span>
-              <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                Same Day/Next Day service
-              </span>
-              <span className="rounded-full border border-stone-200 bg-white px-4 py-2">
-                No outsourcing
-              </span>
+
+            <div className="mt-6 grid max-w-xl grid-cols-2 gap-3 text-center sm:grid-cols-4">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+                <p className="text-lg font-semibold text-stone-900">40+</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Years</p>
+              </div>
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+                <p className="text-lg font-semibold text-stone-900">3</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Generations</p>
+              </div>
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+                <p className="text-lg font-semibold text-stone-900">In-House</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Repairs</p>
+              </div>
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+                <p className="text-lg font-semibold text-stone-900">Same Day</p>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Service</p>
+              </div>
             </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="relative min-h-[260px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_24px_65px_rgba(58,25,16,0.16)] sm:col-span-2">
-              <Image
-                src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg"
-                alt="Susie's Jewelry Repair in-house workshop"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1e1416]/55 via-transparent to-transparent" />
-            </div>
-            <div className="relative min-h-[170px] overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-              <Image
-                src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg"
-                alt="Detailed repair planning and sketch work"
-                fill
-                sizes="(max-width: 768px) 100vw, 25vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="relative min-h-[170px] overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-              <Image
-                src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/before-after/after-ring.png"
-                alt="Finished ring restoration detail"
-                fill
-                sizes="(max-width: 768px) 100vw, 25vw"
-                className="object-cover"
-              />
-            </div>
+            <article className="sm:col-span-2 overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_26px_70px_rgba(58,25,16,0.18)]">
+              <div className="relative min-h-[300px]">
+                <Image
+                  src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg"
+                  alt="Inside Susie's Jewelry Repair workshop"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1416]/58 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 rounded-xl border border-white/20 bg-black/35 px-4 py-3 backdrop-blur-sm">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                    Local workshop
+                  </p>
+                  <p className="mt-1 text-sm text-white">Pasadena, Texas</p>
+                </div>
+              </div>
+            </article>
+            <article className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+              <div className="relative min-h-[150px]">
+                <Image
+                  src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg"
+                  alt="Repair planning and sketch details"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 24vw"
+                  className="object-cover"
+                />
+              </div>
+            </article>
+            <article className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+              <div className="relative min-h-[150px]">
+                <Image
+                  src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg"
+                  alt="Heirloom restoration detail"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 24vw"
+                  className="object-cover"
+                />
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-14" aria-labelledby="about-story">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1fr_1.1fr] md:items-start">
+      <section className="bg-[#1e1416] py-14" aria-labelledby="about-manifesto">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Our story</p>
-            <h2 id="about-story" className="mt-3 font-serif text-3xl text-stone-900">
-              Built on trust, not handoffs.
+            <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Our manifesto</p>
+            <h2 id="about-manifesto" className="mt-3 text-balance font-serif text-3xl text-white">
+              Premium care should feel precise, calm, and transparent.
             </h2>
           </div>
-          <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-            <h3 className="font-serif text-2xl text-stone-900">What customers can expect</h3>
-            <div className="mt-4 space-y-4 text-sm leading-7 text-stone-700">
-              <p>
-                We are an in-house repair team serving Pasadena families who need dependable
-                jewelry and watch care. Your piece stays under one roof while we assess, repair,
-                and finish.
-              </p>
-              <p>
-                Before work begins, we explain the plan and confirm starting pricing. If scope
-                changes, we pause and ask for approval first.
-              </p>
-            </div>
-          </div>
+          <blockquote className="rounded-3xl border border-white/15 bg-white/6 p-6 text-sm leading-7 text-stone-200">
+            “We treat each piece as if it were our own family’s heirloom. No shortcuts, no rushed
+            handoffs, and no surprises before pickup.”
+          </blockquote>
         </div>
       </section>
 
-      <section className="bg-stone-100 py-14" aria-labelledby="about-values">
+      <section className="bg-stone-50 py-14" aria-labelledby="about-standards">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Our standard</p>
-          <h2 id="about-values" className="mt-3 max-w-3xl font-serif text-3xl text-stone-900">
-            Premium repair quality without premium uncertainty.
+          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our standards</p>
+          <h2 id="about-standards" className="mt-3 max-w-3xl text-balance font-serif text-3xl text-stone-900">
+            What makes our process different from generic repair counters.
           </h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {VALUES.map((item, index) => (
+            {STANDARDS.map((item) => (
               <article
                 key={item.title}
-                className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm"
+                className="rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_16px_46px_rgba(58,25,16,0.10)]"
               >
-                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  0{index + 1}
-                </p>
-                <h3 className="mt-3 font-serif text-2xl text-stone-900">{item.title}</h3>
+                <h3 className="font-serif text-2xl text-stone-900">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-stone-700">{item.body}</p>
               </article>
             ))}
@@ -177,41 +217,80 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14" aria-labelledby="about-timeline">
+      <section className="bg-white py-14" aria-labelledby="about-process">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Our timeline</p>
-          <h2 id="about-timeline" className="mt-3 font-serif text-3xl text-stone-900">
-            A local craft tradition that keeps evolving.
+          <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">How we work</p>
+              <h2 id="about-process" className="mt-3 text-balance font-serif text-3xl text-stone-900">
+                A clear process from first conversation to final pickup.
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-stone-700">
+                Whether you bring a watch, ring, bracelet, or heirloom, the same four-step standard
+                applies every time.
+              </p>
+            </div>
+
+            <ol className="space-y-4">
+              {PROCESS.map((item) => (
+                <li
+                  key={item.step}
+                  className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white">
+                      {item.step}
+                    </span>
+                    <div>
+                      <h3 className="font-serif text-2xl text-stone-900">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-stone-100 py-14" aria-labelledby="about-timeline">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our timeline</p>
+          <h2 id="about-timeline" className="mt-3 text-balance font-serif text-3xl text-stone-900">
+            Four decades of local trust, with the same family standards.
           </h2>
+
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {TIMELINE.map((item) => (
               <article
                 key={item.year}
-                className="rounded-2xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
+                className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
               >
-                <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">{item.year}</p>
-                <p className="mt-3 text-sm leading-7 text-stone-700">{item.detail}</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">{item.year}</p>
+                <h3 className="mt-2 font-serif text-2xl text-stone-900">{item.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-stone-100 py-14" aria-labelledby="about-visit">
+      <section className="bg-white py-14" aria-labelledby="about-visit">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Visit us</p>
+          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
           <h2 id="about-visit" className="mt-3 font-serif text-3xl text-stone-900">
             Stop by our Pasadena workshop.
           </h2>
+
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <article className="rounded-2xl border border-stone-200 bg-white p-5">
+            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Address</h3>
               <p className="mt-3 text-sm leading-7 text-stone-700">
-                {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.state} {" "}
                 {BUSINESS.address.zip}
               </p>
             </article>
-            <article className="rounded-2xl border border-stone-200 bg-white p-5">
+            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Phone</h3>
               <Link
                 href={`tel:${BUSINESS.phone}`}
@@ -220,7 +299,7 @@ export default function AboutPage() {
                 {BUSINESS.phone}
               </Link>
             </article>
-            <article className="rounded-2xl border border-stone-200 bg-white p-5">
+            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Email</h3>
               <Link
                 href={`mailto:${BUSINESS.email}`}
@@ -229,45 +308,6 @@ export default function AboutPage() {
                 {BUSINESS.email}
               </Link>
             </article>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3" role="region" aria-label="Visit quick actions">
-            <Link
-              href="/quote"
-              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </Link>
-            <Link
-              href="/book"
-              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Book Repair
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-14" aria-labelledby="about-cta">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 id="about-cta" className="font-serif text-3xl text-stone-900">
-            Why local families keep coming back
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-stone-700">
-            The same standards apply whether you need a quick sizing adjustment or a complex
-            restoration: honest guidance, careful craftsmanship, and a finished piece you can wear
-            with confidence.
-          </p>
-          <p className="mt-4 text-sm leading-7 text-stone-700">
-            Questions before you visit? Call {BUSINESS.phone} or send a request and we’ll respond
-            with clear next steps.
-          </p>
-          <div className="mt-6">
-            <Link
-              href="/contact"
-              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-800 hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Contact Us
-            </Link>
           </div>
         </div>
       </section>
