@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
-import { BLOG_POSTS } from "@/lib/blog";
+import { BLOG_POSTS, BLOG_TOPICS } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const [featuredPost, ...libraryPosts] = BLOG_POSTS;
+
   return (
     <SiteShell>
       <section className="relative overflow-hidden bg-stone-100 py-16">
@@ -25,7 +27,7 @@ export default function BlogPage() {
           <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">
             Repair tips and local guidance.
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">
+          <p className="mt-4 max-w-2xl text-[15px] leading-7 text-stone-600">
             Clear, practical advice from our in-house Pasadena team to help you protect your
             jewelry and watches between visits.
           </p>
@@ -43,9 +45,62 @@ export default function BlogPage() {
               Book Repair
             </Link>
           </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {BLOG_TOPICS.map((topic) => (
+              <span
+                key={topic}
+                className="rounded-full border border-stone-200 bg-white/85 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-700"
+              >
+                {topic}
+              </span>
+            ))}
+          </div>
+
+          {featuredPost ? (
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="reveal-on-scroll group mt-10 grid overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_22px_64px_rgba(58,25,16,0.15)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_75px_rgba(58,25,16,0.17)] md:grid-cols-[1.1fr_0.9fr] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              <div className="relative min-h-[16rem] md:min-h-[22rem]">
+                <Image
+                  src={featuredPost.image}
+                  alt={featuredPost.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 58vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
+              </div>
+              <div className="flex flex-col justify-between p-6 md:p-8">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                    Featured guide
+                  </p>
+                  <h2 className="mt-3 font-serif text-3xl leading-tight text-stone-900">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="mt-4 text-[15px] leading-7 text-stone-600">{featuredPost.excerpt}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {featuredPost.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-stone-700"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-5 flex items-center justify-between text-[11px] uppercase tracking-[0.25em]">
+                  <span className="font-semibold text-brand-burgundy">{featuredPost.readTime}</span>
+                  <span className="text-stone-500">{featuredPost.publishedAt}</span>
+                </div>
+              </div>
+            </Link>
+          ) : null}
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {BLOG_POSTS.map((post, index) => {
+            {libraryPosts.map((post, index) => {
               const delayClass = `reveal-delay-${(index % 3) + 1}`;
               return (
                 <Link
@@ -71,6 +126,16 @@ export default function BlogPage() {
                     <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-stone-500">
                       {post.publishedAt}
                     </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {post.topics.slice(0, 2).map((topic) => (
+                        <span
+                          key={topic}
+                          className="rounded-full border border-stone-200 bg-stone-50 px-2 py-1 text-[10px] uppercase tracking-[0.18em] text-stone-700"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
                     <h2 className="mt-3 font-serif text-2xl text-stone-900">{post.title}</h2>
                     <p className="mt-3 text-sm leading-7 text-stone-600">{post.excerpt}</p>
                     <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-brand-burgundy">

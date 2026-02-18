@@ -8,8 +8,12 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   image: string;
+  topics: string[];
   publishedAt: string;
+  reviewedAt: string;
   readTime: string;
+  authorName: string;
+  authorRole: string;
   keyTakeaways: string[];
   sections: BlogSection[];
   relatedServiceSlugs: string[];
@@ -23,8 +27,12 @@ export const BLOG_POSTS: BlogPost[] = [
       "How to evaluate in-house craftsmanship, clear approvals, and long-term care before you hand over a meaningful piece.",
     image:
       "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+    topics: ["Trust & Buying", "Heirloom Care"],
     publishedAt: "2026-02-17",
+    reviewedAt: "2026-02-18",
     readTime: "4 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Ask if repairs are done in-house or outsourced.",
       "Get pricing and timing confirmed before work starts.",
@@ -62,8 +70,12 @@ export const BLOG_POSTS: BlogPost[] = [
       "When to size up or down, what affects pricing, and how to protect setting integrity throughout the sizing process.",
     image:
       "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/ring-sizing.jpg",
+    topics: ["Ring Care", "Pricing & Timing"],
     publishedAt: "2026-02-17",
+    reviewedAt: "2026-02-18",
     readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Sizing method depends on metal type, style, and size change.",
       "Stone settings should be checked before and after sizing.",
@@ -101,8 +113,12 @@ export const BLOG_POSTS: BlogPost[] = [
       "What to expect during battery service, when pressure testing matters, and how to reduce avoidable watch damage.",
     image:
       "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/watch-repair.jpg",
+    topics: ["Watch Service", "Preventive Care"],
     publishedAt: "2026-02-17",
+    reviewedAt: "2026-02-18",
     readTime: "4 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Not every battery issue is just a battery issue.",
       "Seal checks and pressure tests matter on water-exposed watches.",
@@ -138,3 +154,7 @@ export const BLOG_POSTS: BlogPost[] = [
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((post) => post.slug === slug);
 }
+
+export const BLOG_TOPICS = Array.from(
+  new Set(BLOG_POSTS.flatMap((post) => post.topics))
+);

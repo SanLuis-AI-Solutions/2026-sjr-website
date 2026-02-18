@@ -3,6 +3,8 @@ import Link from "next/link";
 import Script from "next/script";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { FAQS } from "@/lib/faq";
+import { FaqContent } from "./faq-content";
 
 export const metadata: Metadata = {
   title: "FAQ | Susie’s Jewelry Repair",
@@ -12,41 +14,6 @@ export const metadata: Metadata = {
     canonical: "/faq",
   },
 };
-
-const FAQS = [
-  {
-    q: "Do you repair jewelry and watches in-house?",
-    a: "Yes. All service is performed in-house, so your piece stays under our care from drop-off through final checks.",
-  },
-  {
-    q: "How long does a typical repair take?",
-    a: "Most services follow Same Day/Next Day service. If parts or structural work are needed, we confirm timing before work begins.",
-  },
-  {
-    q: "Can I get pricing before I visit?",
-    a: "Yes. Use Fast Quote to get a transparent starting range, then we confirm final scope and pricing after inspection.",
-  },
-  {
-    q: "Do I need an appointment?",
-    a: "Walk-ins are welcome. You can also reserve a free 15-minute assessment if you prefer a scheduled time.",
-  },
-  {
-    q: "Will you contact me before additional work?",
-    a: "Yes. If the repair scope changes after inspection, we pause and get approval first.",
-  },
-  {
-    q: "Do you work on heirloom or sentimental pieces?",
-    a: "Yes. We frequently service heirloom items and explain handling, risk points, and finishing steps before we proceed.",
-  },
-  {
-    q: "Can you size rings with stones?",
-    a: "Often, yes. We inspect settings before and after sizing and recommend reinforcement if needed.",
-  },
-  {
-    q: "How quickly do you respond to online forms?",
-    a: "We typically reply within 1 business day for quote, booking, and contact submissions.",
-  },
-];
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -94,23 +61,7 @@ export default function FaqPage() {
               Book Repair
             </Link>
           </div>
-
-          <div className="mt-10 space-y-4" aria-label="Frequently asked questions">
-            {FAQS.map((faq, index) => (
-              <details
-                key={faq.q}
-                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
-              >
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 pr-1 font-serif text-[1.18rem] leading-7 text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
-                  <span>{faq.q}</span>
-                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 text-brand-burgundy transition-transform group-open:rotate-45">
-                    <span className="text-base leading-none">+</span>
-                  </span>
-                </summary>
-                <p className="mt-4 text-[15px] leading-7 text-stone-600">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqContent />
 
           <div className="reveal-on-scroll mt-10 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
             <h2 className="font-serif text-2xl text-stone-900">Still need help?</h2>

@@ -107,6 +107,12 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - focused on the lower half to remove remaining "basic" feel after hero approval.
   - replaced plain lower modules with a curated "visit experience" stage, timeline-style next-steps block, and card-based schedule presentation.
   - upgraded form shell with stronger premium framing (accent rail + trust chips + deeper elevation) while preserving existing CTA labels and accessibility behavior.
+- FAQ + Blog intent architecture pass (2026-02-18, same-day iteration):
+  - `/faq` now uses an intent-driven model with category filters + search + quick-answer cards for faster discovery.
+  - FAQ content moved to typed shared data (`src/lib/faq.ts`) and interactive rendering (`src/app/faq/faq-content.tsx`) with direct link-outs to quote/book/service pages.
+  - `/blog` now has a featured guide module and topic chips for stronger value hierarchy and easier scanning.
+  - `/blog/[slug]` now includes `Article` + `BreadcrumbList` JSON-LD, reviewed-by authority metadata, mid-article conversion CTA, and related-read links.
+  - blog content model expanded in `src/lib/blog.ts` with topical + authority metadata.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -125,4 +131,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Apply this same v4 lower-section treatment pattern to `/faq` and `/blog` (not just hero) so all informational pages feel equally premium end-to-end.
+- Expand blog inventory from 3 to at least 9 high-intent service-cluster articles and wire each to matching service pages to compound SEO + conversion gains from the new intent architecture.

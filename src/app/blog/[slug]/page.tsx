@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
@@ -61,9 +62,61 @@ export default async function BlogDetailPage({ params }: PageProps) {
   const relatedServices = SERVICES.filter((service) =>
     post.relatedServiceSlugs.includes(service.slug)
   ).slice(0, 3);
+  const relatedReads = BLOG_POSTS.filter((entry) => entry.slug !== post.slug).slice(0, 2);
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.reviewedAt,
+    author: {
+      "@type": "Person",
+      name: post.authorName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Susie’s Jewelry Repair",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
+    },
+    image: [post.image],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.susiesjewelryrepair.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: post.title,
+        item: `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
+      },
+    ],
+  };
 
   return (
     <SiteShell>
+      <Script
+        id="blog-article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <Script
+        id="blog-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <article className="relative overflow-hidden bg-white pb-16 pt-14">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-5xl px-6">
@@ -85,6 +138,28 @@ export default async function BlogDetailPage({ params }: PageProps) {
               Published{" "}
               <time dateTime={post.publishedAt}>{formatPublishedDate(post.publishedAt)}</time>
             </span>
+            <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2">
+              Reviewed{" "}
+              <time dateTime={post.reviewedAt}>{formatPublishedDate(post.reviewedAt)}</time>
+            </span>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 p-4 text-sm text-stone-700">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+              Reviewed by
+            </p>
+            <p className="mt-2 font-semibold text-stone-900">{post.authorName}</p>
+            <p className="text-stone-600">{post.authorRole}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {post.topics.map((topic) => (
+                <span
+                  key={topic}
+                  className="rounded-full border border-stone-200 bg-white px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-stone-700"
+                >
+                  {topic}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -102,7 +177,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
               </div>
 
               <div className="mt-10 space-y-8">
-                {post.sections.map((section) => (
+                {post.sections.map((section, index) => (
                   <section key={section.heading}>
                     <h2 className="font-serif text-2xl text-stone-900">{section.heading}</h2>
                     <div className="mt-3 space-y-4">
@@ -112,6 +187,30 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         </p>
                       ))}
                     </div>
+                    {index === 0 ? (
+                      <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 p-5">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-brand-burgundy">
+                          Need a repair estimate?
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-stone-700">
+                          We can confirm starting-at pricing and timing before you visit.
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-3">
+                          <Link
+                            href="/quote"
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Get Fast Quote
+                          </Link>
+                          <Link
+                            href="/book"
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Book Repair
+                          </Link>
+                        </div>
+                      </div>
+                    ) : null}
                   </section>
                 ))}
               </div>
@@ -164,6 +263,32 @@ export default async function BlogDetailPage({ params }: PageProps) {
               </div>
             </aside>
           </div>
+
+          {relatedReads.length > 0 ? (
+            <section className="mt-12">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                Related reads
+              </p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {relatedReads.map((entry) => (
+                  <Link
+                    key={entry.slug}
+                    href={`/blog/${entry.slug}`}
+                    className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_16px_38px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                      {entry.readTime}
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">{entry.title}</h2>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">{entry.excerpt}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
+                      Read article <span aria-hidden="true">→</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </article>
 

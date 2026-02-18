@@ -150,6 +150,12 @@ Update cadence: weekly (or after major milestones).
   - redesigned the non-hero portion into a stronger "visit experience" composition with premium section framing.
   - upgraded process flow to timeline-style visual steps and converted hours into styled schedule cards.
   - elevated form presentation with gradient accent rail, trust chips, and deeper card treatment to match flagship quality.
+- FAQ + Blog intent architecture pass shipped:
+  - `/faq` upgraded with interactive intent filters (`Before You Visit`, `Pricing & Timing`, `Repairs by Type`, `After Service`), on-page search, and quick-answer cards.
+  - FAQ answers now include direct service/action links for faster user pathing to quote, booking, and relevant service details.
+  - `/blog` upgraded with featured guide layout and topic taxonomy chips to improve scanability and content intent matching.
+  - `/blog/[slug]` upgraded with Article + Breadcrumb JSON-LD, reviewed-by authority block, reviewed date metadata, mid-article conversion module, and related-read navigation.
+  - blog data model expanded (`topics`, `reviewedAt`, `authorName`, `authorRole`) to support authority and semantic continuity.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
