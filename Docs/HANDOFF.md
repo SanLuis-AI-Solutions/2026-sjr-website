@@ -65,6 +65,14 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`
   - `Docs/artifacts/ui/2026-02-18--conversion-legal-pass/04-implementation-notes.md`
   - `Docs/artifacts/ui/2026-02-18--image-diversity-pass/04-implementation-notes.md`
+- Latest refinement pass (2026-02-18):
+  - About page redesigned to a stronger premium editorial layout while keeping mobile-first CTA clarity and semantic structure (`src/app/about/page.tsx`).
+  - Skip-link visual behavior fixed in `SiteShell`: now reveals only on keyboard-intent focus (`focus-visible`) to prevent the reported floating banner flash during regular navigation (`src/components/site-shell.tsx`).
+  - Service detail image logic moved from dynamic rotation to explicit slug-based visual sets (`src/lib/service-visuals.ts` + `src/app/services/[slug]/page.tsx`) so each service page uses intentional, less repetitive imagery.
+  - Supabase `site-assets` inventory verified (15 assets total) and mapped intentionally in the new visual library.
+  - Smoke test selector updated for About quick-action landmark exact matching (`tests/smoke.spec.ts`).
+  - New artifact note:
+    - `Docs/artifacts/ui/2026-02-18--about-refresh-skiplink-image-library/04-implementation-notes.md`
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -83,4 +91,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Run a focused visual QA session on every public route (mobile + desktop) to catch any remaining repetitive assets or weak crop choices, then start performance optimization (image sizing/priority and CWV tuning).
+- Build and upload a true per-service photo set (target: 3-4 unique real photos per service), wire those URLs into `src/lib/service-visuals.ts`, then run a full mobile+desktop visual QA sweep before performance tuning.

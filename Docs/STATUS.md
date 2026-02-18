@@ -112,12 +112,23 @@ Update cadence: weekly (or after major milestones).
   - updated one blog hero image to reduce cross-site image repetition.
 - Added smoke guardrail to enforce image variety on non-watch service details (minimum unique service-image count per route).
 - Artifact added: `Docs/artifacts/ui/2026-02-18--image-diversity-pass/04-implementation-notes.md`.
+- About page redesign pass shipped (`/about`):
+  - replaced the basic stacked layout with a premium editorial composition (hero mosaic, trust standards, timeline, visit/contact blocks)
+  - preserved mobile-first CTA clarity and heading semantics.
+- Skip-link UX fix shipped:
+  - `SiteShell` skip link now reveals only on `focus-visible` (keyboard intent), preventing the reported top-right visual flash during normal navigation while preserving accessibility.
+- Service-detail image architecture hardened:
+  - replaced dynamic cross-service image rotation with a dedicated slug-based visual library (`src/lib/service-visuals.ts`) so each service detail page uses an intentional image set.
+  - image inventory verified from Supabase `site-assets`: 15 available public assets (9 services + 4 home + 2 before/after), used explicitly instead of random fallback ordering.
+- Smoke checks adjusted for the redesigned About page quick-action landmarks (exact region targeting) and all smoke tests continue to pass.
+- Artifact added: `Docs/artifacts/ui/2026-02-18--about-refresh-skiplink-image-library/04-implementation-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
 - Cloudflare MCP still not loading in the active Codex runtime (config fixed; host reload pending).
 - Custom domain launch path remains intentionally deferred until full site completion (per current rollout decision).
 - Intermittent React hydration warning (`Minified React error #418` with `args[]=HTML`) appears during high-concurrency Playwright service-route stress; smoke guard now filters this known benign warning while still failing on all other console/page errors.
+- Limited source photography remains a quality ceiling: current `site-assets` library has only 15 images, so adding a true per-service photo set (3-4 unique photos per service) is still a pending premium-polish requirement.
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).

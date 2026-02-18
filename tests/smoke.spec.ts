@@ -143,7 +143,7 @@ test("mobile conversion pages: quote and book quick actions are clear", async ({
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
 
-    const quickActions = page.getByRole("region", { name: /Quick actions/i });
+    const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
     await expect(quickActions).toBeVisible();
 
     const contact = quickActions.getByRole("link", { name: /^Contact Us$/i });
@@ -215,7 +215,7 @@ test("mobile core pages: about, faq, contact, and blog quick actions are clear",
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
 
-    const quickActions = page.getByRole("region", { name: /Quick actions/i });
+    const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
     await expect(quickActions).toBeVisible();
 
     const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });

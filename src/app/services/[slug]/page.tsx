@@ -8,6 +8,7 @@ import { BUSINESS, SERVICES } from "@/lib/constants";
 import { getFaqsByService, getServiceBySlug, getServices } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
+import { buildServiceVisualSet } from "@/lib/service-visuals";
 
 type PageProps = {
   params: {
@@ -39,15 +40,6 @@ type ServiceDetail = {
   faqs?: FaqItem[];
 };
 
-type ServiceVisualSet = {
-  heroSupportImage: string;
-  heroSupportImageAlt: string;
-  processGallery: { url: string; alt: string; label: string }[];
-  expectImages: { url: string; alt: string }[];
-  whyImageSrc: string;
-  whyImageAlt: string;
-};
-
 function svgDataUri(title: string) {
   const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
   const svg =
@@ -66,102 +58,6 @@ function svgDataUri(title: string) {
     `</text>` +
     `</svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
-function buildServiceVisualSet(
-  slug: string,
-  serviceName: string,
-  heroImageSrc: string,
-  isWatchRepair: boolean
-): ServiceVisualSet {
-  if (isWatchRepair) {
-    const watchSupport =
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg";
-    return {
-      heroSupportImage: watchSupport,
-      heroSupportImageAlt: "Watch on the jeweler's bench",
-      processGallery: [
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-          alt: "Workbench and tools in the workshop",
-          label: "On the bench",
-        },
-        {
-          url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-          alt: "Detailed sketches and precision work",
-          label: "Precision first",
-        },
-        {
-          url: watchSupport,
-          alt: "Watch movement on the jeweler's bench",
-          label: "Careful finishing",
-        },
-      ],
-      expectImages: [
-        {
-          url: watchSupport,
-          alt: "Pocket watch on the jeweler's bench",
-        },
-        {
-          url: heroImageSrc,
-          alt: serviceName,
-        },
-      ],
-      whyImageSrc: heroImageSrc,
-      whyImageAlt: serviceName,
-    };
-  }
-
-  const serviceIndex = SERVICES.findIndex((item) => item.slug === slug);
-  const orderedServices =
-    serviceIndex >= 0
-      ? [...SERVICES.slice(serviceIndex + 1), ...SERVICES.slice(0, serviceIndex)]
-      : [...SERVICES];
-
-  const alternatives = orderedServices
-    .map((item) => ({ name: item.name, url: item.image }))
-    .filter((item) => item.url && item.url !== heroImageSrc);
-
-  const pick = (index: number) => alternatives[index] ?? { name: serviceName, url: heroImageSrc };
-
-  const a = pick(0);
-  const b = pick(1);
-  const c = pick(2);
-  const d = pick(3);
-
-  return {
-    heroSupportImage: a.url,
-    heroSupportImageAlt: `${a.name} reference image`,
-    processGallery: [
-      {
-        url: heroImageSrc,
-        alt: serviceName,
-        label: "Service focus",
-      },
-      {
-        url: a.url,
-        alt: `${a.name} craftsmanship detail`,
-        label: "Craft reference",
-      },
-      {
-        url: b.url,
-        alt: `${b.name} finishing detail`,
-        label: "Finishing reference",
-      },
-    ],
-    expectImages: [
-      {
-        url: c.url,
-        alt: `${c.name} bench detail`,
-      },
-      {
-        url: d.url,
-        alt: `${d.name} process detail`,
-      },
-    ],
-    whyImageSrc: b.url,
-    whyImageAlt: `${b.name} in-house result`,
-  };
 }
 
 function buildFallbackFaqs(serviceName: string): FaqItem[] {
