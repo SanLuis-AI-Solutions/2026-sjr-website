@@ -36,3 +36,15 @@
 - `npm run lint` pass (0 errors; existing non-blocking Airtable warnings unchanged).
 - `npm test` pass (13/13 Playwright smoke tests).
 - `pwsh -File scripts/verify.ps1` pass.
+
+## v2 expansion: blog content clusters
+- Expanded from 3 to 9 total blog articles by adding six high-intent service-cluster guides.
+- New content themes:
+  - stone security prevention
+  - chain weak-point repair prevention
+  - pearl restringing timing
+  - custom design timeline planning
+  - professional cleaning vs home care
+  - heirloom restoration preparation.
+- Updated related-read logic to score relevance using topic overlap + related-service overlap.
+- Build verification confirmed static generation now includes all new blog routes.

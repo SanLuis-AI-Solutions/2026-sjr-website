@@ -149,6 +149,264 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     relatedServiceSlugs: ["watch-repair", "bracelet-repair", "heirloom-restoration"],
   },
+  {
+    slug: "stone-security-checklist",
+    title: "Stone Security Checklist: Preventing Loose Diamonds",
+    excerpt:
+      "How to spot warning signs early, what inspections matter, and when to secure stones before loss happens.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/stone-setting.jpg",
+    topics: ["Stone Safety", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Small movement in a stone is an early warning, not normal wear.",
+      "Prong checks should happen before and after major repairs.",
+      "Quick reinforcement costs less than replacing a lost stone.",
+    ],
+    sections: [
+      {
+        heading: "Early signs your stone may be at risk",
+        body: [
+          "If you hear a faint rattle, feel slight movement, or notice a snagging prong, your setting may already be compromised.",
+          "These signs are easiest to correct early, before a stone shifts further or falls out during daily wear.",
+        ],
+      },
+      {
+        heading: "What a quality setting check includes",
+        body: [
+          "A proper inspection reviews prong height, tension, wear at contact points, and overall seat stability.",
+          "For frequently worn pieces, periodic checks are part of prevention and should be treated like routine maintenance.",
+        ],
+      },
+      {
+        heading: "When to reinforce vs. fully rebuild",
+        body: [
+          "Minor wear can often be solved with targeted retipping or tightening. Larger wear patterns may require full prong rebuilds.",
+          "A transparent jeweler explains both options and confirms pricing/timing before work starts.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["stone-setting", "jewelry-cleaning", "heirloom-restoration"],
+  },
+  {
+    slug: "chain-repair-weak-points",
+    title: "Chain Repair 101: Necklace and Bracelet Weak Points",
+    excerpt:
+      "Where chains usually fail, which clasp issues are most common, and how to prevent repeat breakage.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/necklace-repair.png",
+    topics: ["Chain Repair", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Jump rings and clasp joints are the most common weak points.",
+      "Delicate chains need matching solder and controlled heat handling.",
+      "Reinforcing one weak section can prevent repeat repairs.",
+    ],
+    sections: [
+      {
+        heading: "Why chains break in predictable places",
+        body: [
+          "Most chain failures happen at stress points: clasp connections, jump rings, and previously repaired links.",
+          "These points absorb repeated movement and can fatigue faster than the rest of the chain.",
+        ],
+      },
+      {
+        heading: "How clasp issues become chain failures",
+        body: [
+          "Worn spring mechanisms and bent clasp tongues increase accidental opening and pulling force on the chain.",
+          "Replacing a failing clasp early can avoid downstream link damage and loss.",
+        ],
+      },
+      {
+        heading: "How to make repairs last longer",
+        body: [
+          "After repair, remove chains before sleep, workouts, and heavy lifting to reduce repeated stress on joints.",
+          "If a chain snags frequently, inspect immediately instead of continuing wear.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
+  },
+  {
+    slug: "pearl-restringing-timing-guide",
+    title: "Pearl Restringing Timing: When to Restring and Why",
+    excerpt:
+      "A practical schedule for restringing pearls and beads before strings stretch, fray, or fail.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/pearl-restringing.png",
+    topics: ["Pearl Care", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "4 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Frequent wear usually means restringing every 1–2 years.",
+      "Hand-knotting protects pearls from rubbing and abrupt loss.",
+      "Clasp condition matters as much as string condition.",
+    ],
+    sections: [
+      {
+        heading: "Signs your strand is overdue",
+        body: [
+          "Visible gaps between pearls, string discoloration, and uneven tension are common warning signs.",
+          "If a strand looks stretched, delaying service increases break risk.",
+        ],
+      },
+      {
+        heading: "Why knotting is more than visual",
+        body: [
+          "Knotting between pearls reduces friction and helps preserve nacre over time.",
+          "It also limits cascading loss if the strand breaks unexpectedly.",
+        ],
+      },
+      {
+        heading: "How to store pearls after restringing",
+        body: [
+          "Store pearls flat, away from dry heat, and avoid contact with perfume and hairspray.",
+          "Consistent care extends restringing intervals and keeps luster stable.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
+  },
+  {
+    slug: "custom-design-timeline-guide",
+    title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
+    excerpt:
+      "What to expect at each custom stage, how approvals work, and what impacts final timeline.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/custom-design.jpg",
+    topics: ["Custom Design", "Pricing & Timing"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Clear design approvals prevent timeline drift.",
+      "Stone sourcing and structural complexity are major schedule drivers.",
+      "Most custom work follows the 7-business-day baseline once approved.",
+    ],
+    sections: [
+      {
+        heading: "Step 1: concept and constraints",
+        body: [
+          "Start with your visual direction, preferred metal, stone requirements, and wear context.",
+          "Early clarity helps avoid revisions later and keeps budget planning realistic.",
+        ],
+      },
+      {
+        heading: "Step 2: approval checkpoints",
+        body: [
+          "A professional process includes explicit approval before fabrication and before scope changes.",
+          "That checkpoint keeps control in your hands and prevents unexpected costs.",
+        ],
+      },
+      {
+        heading: "Step 3: finishing and final review",
+        body: [
+          "Final finishing includes polish, fit checks, and setting review before pickup.",
+          "Ask for care guidance based on your metal and stone combination.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
+  },
+  {
+    slug: "professional-cleaning-vs-home-care",
+    title: "Professional Jewelry Cleaning vs. At-Home Cleaning",
+    excerpt:
+      "When home cleaning is enough, when to bring pieces in, and how to avoid accidental damage.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/jewelry-cleaning.png",
+    topics: ["Cleaning & Polish", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Not all stones are safe for ultrasonic methods.",
+      "Professional cleaning includes safety checks, not just shine.",
+      "Routine cleanings help catch loose settings early.",
+    ],
+    sections: [
+      {
+        heading: "What home care can handle safely",
+        body: [
+          "Mild soap, warm water, and soft brushing are usually safe for sturdy everyday pieces.",
+          "Avoid harsh chemicals and abrasive products that can damage metal or stone surfaces.",
+        ],
+      },
+      {
+        heading: "When to schedule professional cleaning",
+        body: [
+          "If jewelry looks dull despite home care, has residue buildup, or shows setting concerns, bring it in.",
+          "Professional service adds setting and structural review that home cleaning cannot provide.",
+        ],
+      },
+      {
+        heading: "How cleaning supports long-term repair prevention",
+        body: [
+          "Regular inspections during cleaning help identify early wear before it becomes a larger repair.",
+          "This is especially useful for rings and bracelets worn daily.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
+  },
+  {
+    slug: "heirloom-restoration-planning-guide",
+    title: "Heirloom Restoration Planning: What to Bring and Ask",
+    excerpt:
+      "How to prepare for heirloom restoration consultations and get clear scope, risk, and timeline decisions.",
+    image:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+    topics: ["Heirloom Care", "Trust & Buying"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Bring context: history, wear patterns, and desired outcome.",
+      "Ask about structural priorities before cosmetic refinishing.",
+      "Approval checkpoints are essential for sentimental pieces.",
+    ],
+    sections: [
+      {
+        heading: "Start with preservation priorities",
+        body: [
+          "For heirlooms, define what matters most: original character, daily wear safety, or both.",
+          "This helps guide restoration choices without over-correcting historical details.",
+        ],
+      },
+      {
+        heading: "Questions to ask during consultation",
+        body: [
+          "Ask which areas are structurally weak, what can be stabilized, and what changes are optional.",
+          "Also ask how proposed work may affect original engraving, patina, and setting style.",
+        ],
+      },
+      {
+        heading: "How to avoid scope surprises",
+        body: [
+          "Request timing and starting-at pricing before work starts and confirm the process for unexpected findings.",
+          "A clear pause-for-approval process is especially important for sentimental pieces.",
+        ],
+      },
+    ],
+    relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
@@ -158,3 +416,29 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 export const BLOG_TOPICS = Array.from(
   new Set(BLOG_POSTS.flatMap((post) => post.topics))
 );
+
+function overlapScore(a: string[], b: string[]) {
+  const set = new Set(a);
+  return b.reduce((score, item) => score + (set.has(item) ? 1 : 0), 0);
+}
+
+export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
+  const current = getBlogPostBySlug(slug);
+  if (!current) return [];
+
+  return BLOG_POSTS
+    .filter((post) => post.slug !== slug)
+    .map((post) => {
+      const topicScore = overlapScore(current.topics, post.topics) * 3;
+      const serviceScore =
+        overlapScore(current.relatedServiceSlugs, post.relatedServiceSlugs) * 2;
+      const score = topicScore + serviceScore;
+      return { post, score };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return b.post.publishedAt.localeCompare(a.post.publishedAt);
+    })
+    .slice(0, count)
+    .map((entry) => entry.post);
+}

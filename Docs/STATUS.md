@@ -156,6 +156,10 @@ Update cadence: weekly (or after major milestones).
   - `/blog` upgraded with featured guide layout and topic taxonomy chips to improve scanability and content intent matching.
   - `/blog/[slug]` upgraded with Article + Breadcrumb JSON-LD, reviewed-by authority block, reviewed date metadata, mid-article conversion module, and related-read navigation.
   - blog data model expanded (`topics`, `reviewedAt`, `authorName`, `authorRole`) to support authority and semantic continuity.
+- Blog content-cluster rollout expanded from 3 to 9 published guides:
+  - added six new high-intent service-cluster posts (stone security, chain repair weak points, pearl restringing timing, custom design timeline, pro cleaning vs home care, heirloom planning).
+  - expanded static generation coverage for blog detail routes and kept all smoke checks passing.
+  - replaced generic related-read logic with relevance scoring (topic + related-service overlap) for stronger inter-article pathways.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)

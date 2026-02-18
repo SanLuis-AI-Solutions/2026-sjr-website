@@ -5,7 +5,7 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
-import { BLOG_POSTS, getBlogPostBySlug } from "@/lib/blog";
+import { BLOG_POSTS, getBlogPostBySlug, getRelatedBlogPosts } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
 
 type PageProps = {
@@ -62,7 +62,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
   const relatedServices = SERVICES.filter((service) =>
     post.relatedServiceSlugs.includes(service.slug)
   ).slice(0, 3);
-  const relatedReads = BLOG_POSTS.filter((entry) => entry.slug !== post.slug).slice(0, 2);
+  const relatedReads = getRelatedBlogPosts(post.slug, 2);
 
   const articleSchema = {
     "@context": "https://schema.org",

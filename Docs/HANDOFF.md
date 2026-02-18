@@ -113,6 +113,17 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `/blog` now has a featured guide module and topic chips for stronger value hierarchy and easier scanning.
   - `/blog/[slug]` now includes `Article` + `BreadcrumbList` JSON-LD, reviewed-by authority metadata, mid-article conversion CTA, and related-read links.
   - blog content model expanded in `src/lib/blog.ts` with topical + authority metadata.
+- Blog cluster expansion pass (2026-02-18, same-day iteration):
+  - expanded blog inventory from 3 to 9 published articles to support service-cluster SEO and conversion pathways.
+  - added six new guides mapped to priority service themes:
+    - stone setting safety
+    - necklace/bracelet weak-point prevention
+    - pearl restringing timing
+    - custom design timeline expectations
+    - professional cleaning vs home care
+    - heirloom restoration planning.
+  - related-read module now uses relevance scoring (topic overlap + related-service overlap) instead of static ordering.
+  - blog detail static paths now include all 9 articles.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -131,4 +142,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Expand blog inventory from 3 to at least 9 high-intent service-cluster articles and wire each to matching service pages to compound SEO + conversion gains from the new intent architecture.
+- Add GA4 instrumentation for FAQ/blog behavior (`faq_filter_select`, `faq_search`, `blog_topic_click`, `article_mid_cta_click`, `related_read_click`) so we can measure and optimize this new intent architecture with real data.
