@@ -75,6 +75,10 @@ function sendGtagEvent(eventName: string, params: GtagEventParams) {
   window.gtag("event", eventName, params);
 }
 
+export function trackGaEvent(eventName: string, params: GtagEventParams = {}) {
+  sendGtagEvent(eventName, params);
+}
+
 export function GaFirstTouchCapture() {
   const pathname = usePathname();
   const searchParams = useSearchParams();

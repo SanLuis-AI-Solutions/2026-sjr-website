@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { FAQS, FAQ_CATEGORY_LABELS, type FaqCategory } from "@/lib/faq";
+import { trackGaEvent } from "@/components/analytics/ga-tracker";
 
 type FilterValue = "all" | FaqCategory;
 
@@ -24,6 +25,34 @@ export function FaqContent() {
 
   const quickAnswers = useMemo(() => FAQS.filter((item) => item.pinned).slice(0, 3), []);
 
+  const handleFilterChange = (value: FilterValue) => {
+    setActiveFilter(value);
+    trackGaEvent("faq_filter_select", {
+      faq_filter: value,
+      query_length: query.trim().length,
+      page_context: "faq",
+    });
+  };
+
+  const lastSearchEventKeyRef = useRef("");
+
+  useEffect(() => {
+    const value = query.trim().toLowerCase();
+    if (value.length < 2) return;
+    const eventKey = `${activeFilter}:${value}:${filtered.length}`;
+    if (eventKey === lastSearchEventKeyRef.current) return;
+    const timeoutId = window.setTimeout(() => {
+      trackGaEvent("faq_search", {
+        faq_filter: activeFilter,
+        query_length: value.length,
+        results_count: filtered.length,
+        page_context: "faq",
+      });
+      lastSearchEventKeyRef.current = eventKey;
+    }, 450);
+    return () => window.clearTimeout(timeoutId);
+  }, [activeFilter, filtered.length, query]);
+
   return (
     <>
       <section className="reveal-on-scroll mt-8 rounded-3xl border border-stone-200 bg-white/86 p-5 shadow-sm md:p-6">
@@ -33,7 +62,7 @@ export function FaqContent() {
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setActiveFilter("all")}
+            onClick={() => handleFilterChange("all")}
             className={`min-h-11 rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
               activeFilter === "all"
                 ? "border-brand-burgundy bg-brand-burgundy text-white"
@@ -46,7 +75,7 @@ export function FaqContent() {
             <button
               key={category.id}
               type="button"
-              onClick={() => setActiveFilter(category.id)}
+              onClick={() => handleFilterChange(category.id)}
               className={`min-h-11 rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
                 activeFilter === category.id
                   ? "border-brand-burgundy bg-brand-burgundy text-white"

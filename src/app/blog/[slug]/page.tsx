@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BLOG_POSTS, getBlogPostBySlug, getRelatedBlogPosts } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 
 type PageProps = {
   params: {
@@ -196,18 +197,22 @@ export default async function BlogDetailPage({ params }: PageProps) {
                           We can confirm starting-at pricing and timing before you visit.
                         </p>
                         <div className="mt-4 flex flex-wrap gap-3">
-                          <Link
+                          <TrackedLink
                             href="/quote"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
                             className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                           >
                             Get Fast Quote
-                          </Link>
-                          <Link
+                          </TrackedLink>
+                          <TrackedLink
                             href="/book"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "book" }}
                             className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                           >
                             Book Repair
-                          </Link>
+                          </TrackedLink>
                         </div>
                       </div>
                     ) : null}
@@ -271,9 +276,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
               </p>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
                 {relatedReads.map((entry) => (
-                  <Link
+                  <TrackedLink
                     key={entry.slug}
                     href={`/blog/${entry.slug}`}
+                    eventName="related_read_click"
+                    eventParams={{ from_blog_slug: post.slug, to_blog_slug: entry.slug }}
                     className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_16px_38px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
@@ -284,7 +291,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
                       Read article <span aria-hidden="true">→</span>
                     </span>
-                  </Link>
+                  </TrackedLink>
                 ))}
               </div>
             </section>

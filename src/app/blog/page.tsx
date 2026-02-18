@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { BLOG_POSTS, BLOG_TOPICS } from "@/lib/blog";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 
 export const metadata: Metadata = {
   title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
@@ -13,8 +14,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const [featuredPost, ...libraryPosts] = BLOG_POSTS;
+type BlogPageProps = {
+  searchParams?: {
+    topic?: string;
+  };
+};
+
+function resolveTopic(topic?: string) {
+  if (!topic) return null;
+  return BLOG_TOPICS.find((entry) => entry.toLowerCase() === topic.toLowerCase()) || null;
+}
+
+export default function BlogPage({ searchParams }: BlogPageProps) {
+  const selectedTopic = resolveTopic(searchParams?.topic);
+  const scopedPosts = selectedTopic
+    ? BLOG_POSTS.filter((post) => post.topics.includes(selectedTopic))
+    : BLOG_POSTS;
+  const visiblePosts = scopedPosts.length > 0 ? scopedPosts : BLOG_POSTS;
+  const [featuredPost, ...libraryPosts] = visiblePosts;
 
   return (
     <SiteShell>
@@ -45,16 +62,38 @@ export default function BlogPage() {
               Book Repair
             </Link>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6 flex flex-wrap gap-2" aria-label="Blog topics">
+            {selectedTopic ? (
+              <TrackedLink
+                href="/blog"
+                eventName="blog_topic_click"
+                eventParams={{ topic: "all", placement: "topic_filter" }}
+                className="rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                All topics
+              </TrackedLink>
+            ) : null}
             {BLOG_TOPICS.map((topic) => (
-              <span
+              <TrackedLink
                 key={topic}
-                className="rounded-full border border-stone-200 bg-white/85 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-700"
+                href={`/blog?topic=${encodeURIComponent(topic)}`}
+                eventName="blog_topic_click"
+                eventParams={{ topic, placement: "topic_filter" }}
+                className={`rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+                  selectedTopic === topic
+                    ? "border-brand-burgundy bg-brand-burgundy text-white"
+                    : "border-stone-200 bg-white/85 text-stone-700"
+                }`}
               >
                 {topic}
-              </span>
+              </TrackedLink>
             ))}
           </div>
+          {selectedTopic ? (
+            <p className="mt-3 text-xs uppercase tracking-[0.2em] text-stone-500">
+              Showing topic: {selectedTopic}
+            </p>
+          ) : null}
 
           {featuredPost ? (
             <Link

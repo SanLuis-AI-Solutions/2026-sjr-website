@@ -124,6 +124,15 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - heirloom restoration planning.
   - related-read module now uses relevance scoring (topic overlap + related-service overlap) instead of static ordering.
   - blog detail static paths now include all 9 articles.
+- FAQ + Blog GA4 instrumentation pass (2026-02-18, same-day iteration):
+  - added event instrumentation for intent-behavior tracking:
+    - `faq_filter_select`
+    - `faq_search`
+    - `blog_topic_click`
+    - `article_mid_cta_click`
+    - `related_read_click`
+  - introduced a reusable client `TrackedLink` component (`src/components/analytics/tracked-link.tsx`) to safely emit GA4 events from server-rendered layouts.
+  - blog topic chips now support query-param filtering (`/blog?topic=...`) to align topic-click events with visible content segmentation.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -142,4 +151,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Add GA4 instrumentation for FAQ/blog behavior (`faq_filter_select`, `faq_search`, `blog_topic_click`, `article_mid_cta_click`, `related_read_click`) so we can measure and optimize this new intent architecture with real data.
+- Build a lightweight GA4 reporting snapshot (Looker Studio or saved explorations) for the 5 new events so we can compare topic/filter engagement to downstream quote/book clicks within 7 days.

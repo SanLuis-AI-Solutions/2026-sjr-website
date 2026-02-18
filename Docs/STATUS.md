@@ -160,6 +160,11 @@ Update cadence: weekly (or after major milestones).
   - added six new high-intent service-cluster posts (stone security, chain repair weak points, pearl restringing timing, custom design timeline, pro cleaning vs home care, heirloom planning).
   - expanded static generation coverage for blog detail routes and kept all smoke checks passing.
   - replaced generic related-read logic with relevance scoring (topic + related-service overlap) for stronger inter-article pathways.
+- GA4 behavior instrumentation pass shipped for FAQ + Blog intent architecture:
+  - added reusable tracked-link analytics component for client-safe event capture from server-rendered pages.
+  - FAQ events added: `faq_filter_select`, `faq_search` (with filter/query length/results metadata).
+  - Blog events added: `blog_topic_click` (topic filter chips), `article_mid_cta_click` (mid-article quote/book module), `related_read_click` (cross-article navigation).
+  - blog topic chips now support query-param filtering (`/blog?topic=<topic>`) so event analysis maps to visible content segmentation.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
