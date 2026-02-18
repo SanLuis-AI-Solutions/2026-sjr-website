@@ -90,6 +90,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - redesigned left-side contact info on `/contact` into clearer channel cards (Phone + Email) to fix cramped/touching text.
   - added structured location/hours card for faster scanability on mobile.
   - improved form panel framing and made it sticky on desktop for better conversion ergonomics.
+- Mobile typography/spacing consistency pass (2026-02-18, same-day iteration):
+  - refined mobile text scale and spacing rhythm on `/about`, `/contact`, and `/faq`.
+  - FAQ accordion summary now uses a cleaner flex layout with improved plus-icon alignment and question readability.
+  - maintained existing h1 labels and quick-action landmarks so smoke coverage remains stable.
 
 ## Key Files
 - Design system: `DESIGN.md`

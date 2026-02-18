@@ -133,6 +133,10 @@ Update cadence: weekly (or after major milestones).
   - replaced cramped inline phone/email stack with dedicated contact-channel cards for clearer spacing and readability.
   - improved contact information hierarchy (phone, email, location, hours) and added cleaner supporting copy.
   - upgraded form container with clearer intro and desktop sticky behavior for better scan-and-submit flow.
+- Mobile typography/spacing consistency sweep shipped across high-intent info pages:
+  - `About`: tuned mobile heading/body scale and line-height for better readability rhythm while preserving premium hierarchy.
+  - `Contact`: aligned hero/body typographic scale and supporting text spacing in channel cards + form intro.
+  - `FAQ`: improved accordion question readability/spacing on mobile and refined expand affordance alignment.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)

@@ -93,10 +93,10 @@ export default function AboutPage() {
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-end">
           <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">About</p>
-            <h1 className="mt-3 max-w-3xl text-balance font-serif text-4xl text-stone-950 md:text-5xl">
+            <h1 className="mt-3 max-w-3xl text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-950 md:text-5xl">
               Family craftsmanship, refined over four decades.
             </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-700">
+            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-stone-700">
               Susie’s Jewelry Repair is built for people who expect premium work without guesswork.
               Your piece stays local, your approvals stay clear, and your finish is checked before pickup.
             </p>
@@ -117,19 +117,19 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-6 grid max-w-xl grid-cols-2 gap-3 text-center sm:grid-cols-4">
-              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3.5">
                 <p className="text-lg font-semibold text-stone-900">40+</p>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Years</p>
               </div>
-              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3.5">
                 <p className="text-lg font-semibold text-stone-900">3</p>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Generations</p>
               </div>
-              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3.5">
                 <p className="text-lg font-semibold text-stone-900">In-House</p>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Repairs</p>
               </div>
-              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3">
+              <div className="rounded-2xl border border-stone-200 bg-stone-50 p-3.5">
                 <p className="text-lg font-semibold text-stone-900">Same Day</p>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-stone-600">Service</p>
               </div>
@@ -188,11 +188,11 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Our manifesto</p>
-            <h2 id="about-manifesto" className="mt-3 text-balance font-serif text-3xl text-white">
+            <h2 id="about-manifesto" className="mt-3 text-balance font-serif text-[2rem] leading-[1.18] text-white md:text-3xl">
               Premium care should feel precise, calm, and transparent.
             </h2>
           </div>
-          <blockquote className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-white/20 bg-white/10 p-6 text-sm leading-7 text-stone-100">
+          <blockquote className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-white/20 bg-white/10 p-6 text-[15px] leading-7 text-stone-100">
             “We treat each piece as if it were our own family’s heirloom. No shortcuts, no rushed
             handoffs, and no surprises before pickup.”
           </blockquote>
@@ -212,10 +212,10 @@ export default function AboutPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="reveal-on-scroll max-w-2xl">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Legacy care</p>
-            <h2 className="mt-3 text-balance font-serif text-3xl text-white md:text-4xl">
+            <h2 className="mt-3 text-balance font-serif text-[2rem] leading-[1.2] text-white md:text-4xl">
               Some pieces carry generations of memory. We repair them accordingly.
             </h2>
-            <p className="mt-4 text-sm leading-7 text-stone-100">
+            <p className="mt-4 text-[15px] leading-7 text-stone-100">
               Our restoration work focuses on structural integrity, faithful finishing, and clear
               approvals before every major step.
             </p>
@@ -228,7 +228,7 @@ export default function AboutPage() {
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our standards</p>
           <h2
             id="about-standards"
-            className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-3xl text-stone-900"
+            className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-[2rem] leading-[1.2] text-stone-900 md:text-3xl"
           >
             What makes our process different from generic repair counters.
           </h2>
@@ -238,8 +238,8 @@ export default function AboutPage() {
                 key={item.title}
                 className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_16px_46px_rgba(58,25,16,0.10)]`}
               >
-                <h3 className="font-serif text-2xl text-stone-900">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-stone-700">{item.body}</p>
+                <h3 className="font-serif text-[1.6rem] leading-[1.2] text-stone-900 md:text-2xl">{item.title}</h3>
+                <p className="mt-3 text-[15px] leading-7 text-stone-700">{item.body}</p>
               </article>
             ))}
           </div>
@@ -251,10 +251,13 @@ export default function AboutPage() {
           <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
             <div className="reveal-on-scroll">
               <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">How we work</p>
-              <h2 id="about-process" className="mt-3 text-balance font-serif text-3xl text-stone-900">
+              <h2
+                id="about-process"
+                className="mt-3 text-balance font-serif text-[2rem] leading-[1.2] text-stone-900 md:text-3xl"
+              >
                 A clear process from first conversation to final pickup.
               </h2>
-              <p className="mt-4 text-sm leading-7 text-stone-700">
+              <p className="mt-4 text-[15px] leading-7 text-stone-700">
                 Whether you bring a watch, ring, bracelet, or heirloom, the same four-step standard
                 applies every time.
               </p>
@@ -271,8 +274,8 @@ export default function AboutPage() {
                       {item.step}
                     </span>
                     <div>
-                      <h3 className="font-serif text-2xl text-stone-900">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
+                      <h3 className="font-serif text-[1.45rem] leading-[1.2] text-stone-900 md:text-2xl">{item.title}</h3>
+                      <p className="mt-2 text-[15px] leading-7 text-stone-700">{item.detail}</p>
                     </div>
                   </div>
                 </li>
@@ -287,7 +290,7 @@ export default function AboutPage() {
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our timeline</p>
           <h2
             id="about-timeline"
-            className="reveal-on-scroll mt-3 text-balance font-serif text-3xl text-stone-900"
+            className="reveal-on-scroll mt-3 text-balance font-serif text-[2rem] leading-[1.2] text-stone-900 md:text-3xl"
           >
             Four decades of local trust, with the same family standards.
           </h2>
@@ -299,8 +302,8 @@ export default function AboutPage() {
                 className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-2xl border border-stone-200 bg-white p-5 shadow-sm`}
               >
                 <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">{item.year}</p>
-                <h3 className="mt-2 font-serif text-2xl text-stone-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
+                <h3 className="mt-2 font-serif text-[1.45rem] leading-[1.2] text-stone-900 md:text-2xl">{item.title}</h3>
+                <p className="mt-2 text-[15px] leading-7 text-stone-700">{item.detail}</p>
               </article>
             ))}
           </div>
@@ -310,14 +313,17 @@ export default function AboutPage() {
       <section className="bg-white py-14" aria-labelledby="about-visit">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
-          <h2 id="about-visit" className="reveal-on-scroll mt-3 font-serif text-3xl text-stone-900">
+          <h2
+            id="about-visit"
+            className="reveal-on-scroll mt-3 font-serif text-[2rem] leading-[1.2] text-stone-900 md:text-3xl"
+          >
             Stop by our Pasadena workshop.
           </h2>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <article className="reveal-on-scroll rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Address</h3>
-              <p className="mt-3 text-sm leading-7 text-stone-700">
+              <p className="mt-3 text-[15px] leading-7 text-stone-700">
                 {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.state} {" "}
                 {BUSINESS.address.zip}
               </p>
@@ -326,7 +332,7 @@ export default function AboutPage() {
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Phone</h3>
               <Link
                 href={`tel:${BUSINESS.phone}`}
-                className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.phone}
               </Link>
@@ -335,7 +341,7 @@ export default function AboutPage() {
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Email</h3>
               <Link
                 href={`mailto:${BUSINESS.email}`}
-                className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.email}
               </Link>

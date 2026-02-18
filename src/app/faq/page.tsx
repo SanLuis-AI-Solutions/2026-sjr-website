@@ -72,15 +72,15 @@ export default function FaqPage() {
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">FAQ</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-4xl text-stone-900 md:text-5xl">
+          <p className="reveal-on-scroll text-xs uppercase tracking-[0.3em] text-brand-burgundy">FAQ</p>
+          <h1 className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-900 md:text-5xl">
             Answers before you hand over a meaningful piece.
           </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600">
+          <p className="reveal-on-scroll mt-4 max-w-3xl text-[15px] leading-7 text-stone-600">
             Clear guidance on timing, approvals, and in-house repair so you know what to expect
             before you visit.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
+          <div className="reveal-on-scroll mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
             <Link
               href="/quote"
               className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
@@ -96,25 +96,25 @@ export default function FaqPage() {
           </div>
 
           <div className="mt-10 space-y-4" aria-label="Frequently asked questions">
-            {FAQS.map((faq) => (
+            {FAQS.map((faq, index) => (
               <details
                 key={faq.q}
-                className="group rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
+                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
               >
-                <summary className="cursor-pointer list-none pr-7 font-serif text-xl text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
-                  {faq.q}
-                  <span className="float-right mt-1 text-brand-burgundy transition-transform group-open:rotate-45">
-                    +
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 pr-1 font-serif text-[1.18rem] leading-7 text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
+                  <span>{faq.q}</span>
+                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 text-brand-burgundy transition-transform group-open:rotate-45">
+                    <span className="text-base leading-none">+</span>
                   </span>
                 </summary>
-                <p className="mt-4 text-sm leading-7 text-stone-600">{faq.a}</p>
+                <p className="mt-4 text-[15px] leading-7 text-stone-600">{faq.a}</p>
               </details>
             ))}
           </div>
 
-          <div className="mt-10 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+          <div className="reveal-on-scroll mt-10 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
             <h2 className="font-serif text-2xl text-stone-900">Still need help?</h2>
-            <p className="mt-3 text-sm text-stone-600">
+            <p className="mt-3 text-[15px] leading-7 text-stone-600">
               Call us at{" "}
               <Link
                 href={`tel:${BUSINESS.phone}`}

@@ -64,10 +64,10 @@ export default function ContactPage({
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Contact
             </p>
-            <h1 className="mt-3 font-serif text-4xl text-stone-900">
+            <h1 className="mt-3 text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-900 md:text-5xl">
               Talk to a local expert
             </h1>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
+            <p className="mt-4 max-w-xl text-[15px] leading-7 text-stone-600">
               Call, email, or send a quick note. We guide you to the best next step, confirm what
               to bring, and keep your approvals clear before service begins.
             </p>
@@ -101,7 +101,7 @@ export default function ContactPage({
                 >
                   {BUSINESS.phone}
                 </a>
-                <p className="mt-2 text-xs text-stone-600">Best for immediate repair questions.</p>
+                <p className="mt-2 text-xs leading-6 text-stone-600">Best for immediate repair questions.</p>
               </article>
 
               <article className="rounded-2xl border border-stone-200 bg-white/85 p-5 shadow-sm">
@@ -114,7 +114,7 @@ export default function ContactPage({
                 >
                   {BUSINESS.email}
                 </a>
-                <p className="mt-2 text-xs text-stone-600">Send photos or details any time.</p>
+                <p className="mt-2 text-xs leading-6 text-stone-600">Send photos or details any time.</p>
               </article>
             </div>
 
@@ -165,7 +165,7 @@ export default function ContactPage({
               <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Send us a message
               </p>
-              <p className="mt-2 text-sm text-stone-600">
+              <p className="mt-2 text-[15px] leading-7 text-stone-600">
                 Share a quick description and we’ll reply with clear next steps.
               </p>
             </div>
