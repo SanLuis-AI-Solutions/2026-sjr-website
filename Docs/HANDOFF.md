@@ -94,6 +94,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - refined mobile text scale and spacing rhythm on `/about`, `/contact`, and `/faq`.
   - FAQ accordion summary now uses a cleaner flex layout with improved plus-icon alignment and question readability.
   - maintained existing h1 labels and quick-action landmarks so smoke coverage remains stable.
+- Contact page premium redesign v2 (2026-02-18, same-day iteration):
+  - reworked `/contact` into a more premium, mobile-first composition with clearer channel hierarchy and stronger visual rhythm.
+  - replaced basic channel block with a dedicated contact-overview card and upgraded workshop/hours split layout.
+  - added numbered next-steps module and refined form panel hierarchy while preserving CTA labels and accessibility/focus behavior used by smoke tests.
+  - kept conversion contract stable (`Talk to a local expert` hero + `Quick actions` region: `Get Fast Quote` / `Book Repair`).
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -112,4 +117,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Build and upload a true per-service photo set (target: 3-4 unique real photos per service), wire those URLs into `src/lib/service-visuals.ts`, then run a full mobile+desktop visual QA sweep before performance tuning.
+- Apply the same premium v2 treatment to `/faq` and `/blog` hero + top modules so all high-intent informational pages share the upgraded visual tier before the full-site debug/performance sweep.

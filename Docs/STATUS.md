@@ -137,6 +137,11 @@ Update cadence: weekly (or after major milestones).
   - `About`: tuned mobile heading/body scale and line-height for better readability rhythm while preserving premium hierarchy.
   - `Contact`: aligned hero/body typographic scale and supporting text spacing in channel cards + form intro.
   - `FAQ`: improved accordion question readability/spacing on mobile and refined expand affordance alignment.
+- Contact page premium redesign v2 shipped (`/contact`):
+  - rebuilt page composition into stronger premium blocks (channel overview card, workshop/hours split panel, numbered next-steps strip, upgraded form panel).
+  - fixed channel readability concerns by increasing spacing and visual separation for phone + email actions.
+  - preserved conversion semantics and test contracts (`Talk to a local expert` H1 + `Quick actions` region with `Get Fast Quote` / `Book Repair` labels).
+  - improved form ergonomics with two-row input grid on wider breakpoints and persistent urgent-call fallback under submit.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
