@@ -103,6 +103,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - replaced the prior layout with a stronger two-stage art direction: high-contrast burgundy contact-desk hero + distinct light conversion section.
   - added a premium "Direct lines" hero panel and layered background treatment for a more distinctive flagship feel.
   - preserved existing smoke-test semantics and CTA naming while increasing visual impact substantially.
+- Contact page premium redesign v4 (2026-02-18, same-day iteration from user feedback):
+  - focused on the lower half to remove remaining "basic" feel after hero approval.
+  - replaced plain lower modules with a curated "visit experience" stage, timeline-style next-steps block, and card-based schedule presentation.
+  - upgraded form shell with stronger premium framing (accent rail + trust chips + deeper elevation) while preserving existing CTA labels and accessibility behavior.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -121,4 +125,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Apply this stronger premium v3 visual language to `/faq` first (hero + top intent modules), then mirror to `/blog` for consistent high-impact informational page polish.
+- Apply this same v4 lower-section treatment pattern to `/faq` and `/blog` (not just hero) so all informational pages feel equally premium end-to-end.

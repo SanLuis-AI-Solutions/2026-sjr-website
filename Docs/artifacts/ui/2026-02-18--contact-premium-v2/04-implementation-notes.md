@@ -34,3 +34,11 @@
     - stage 2: separate light conversion stage for form and process clarity
   - introduced a dedicated "Direct lines" premium panel in hero for phone/email emphasis.
   - retained conversion/a11y contracts (`h1` + quick-action labels) so smoke checks remain stable.
+
+## v4 lower-section escalation (same day)
+- Trigger: user approved hero direction but flagged the remaining sections as boring.
+- Update:
+  - reworked non-hero layout into a premium "visit experience" stage with stronger section identity.
+  - upgraded process block to timeline-style visual steps.
+  - converted workshop hours into card-grid schedule modules for clearer rhythm.
+  - elevated form shell with a branded accent rail and trust chips to better match flagship visual tier.

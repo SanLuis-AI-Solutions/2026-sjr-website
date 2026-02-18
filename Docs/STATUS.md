@@ -146,6 +146,10 @@ Update cadence: weekly (or after major milestones).
   - replaced the previous light-only composition with a high-contrast, brand-burgundy hero stage and layered atmospheric depth.
   - introduced a dedicated "direct lines" premium panel in the hero and a distinct secondary conversion stage below.
   - kept conversion contracts unchanged (`Talk to a local expert` H1 + `Quick actions` CTA labels) while materially increasing visual distinctiveness.
+- Contact page premium redesign v4 shipped from follow-up user feedback on lower sections:
+  - redesigned the non-hero portion into a stronger "visit experience" composition with premium section framing.
+  - upgraded process flow to timeline-style visual steps and converted hours into styled schedule cards.
+  - elevated form presentation with gradient accent rail, trust chips, and deeper card treatment to match flagship quality.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)

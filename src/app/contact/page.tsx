@@ -154,155 +154,199 @@ export default function ContactPage({
       </section>
 
       <section className="relative overflow-hidden bg-stone-100 py-14 md:py-18">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.18),_transparent_44%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.09),_transparent_46%)]" />
-
-        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-4 reveal-on-scroll">
-            <section className="rounded-[1.75rem] border border-stone-200 bg-white/86 p-5 shadow-[0_12px_30px_rgba(58,25,16,0.12)]">
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                Workshop hours
-              </p>
-              <div className="mt-3 space-y-1.5 text-sm text-stone-700">
-                {BUSINESS.hours.map((row) => (
-                  <div key={row.day} className="flex items-center justify-between gap-3">
-                    <span>{row.day}</span>
-                    <span className="font-medium text-stone-800">{row.hours}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-[1.75rem] border border-stone-200 bg-white/86 p-5 shadow-[0_12px_30px_rgba(58,25,16,0.12)]">
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                What happens next
-              </p>
-              <ol className="mt-3 space-y-3 text-sm text-stone-700">
-                <li className="flex gap-3">
-                  <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
-                    1
-                  </span>
-                  <span>We review your message and reply within 1 business day.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
-                    2
-                  </span>
-                  <span>If needed, we suggest a quick in-store assessment.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
-                    3
-                  </span>
-                  <span>You approve scope and timing before work begins.</span>
-                </li>
-              </ol>
-            </section>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.2),_transparent_44%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.11),_transparent_46%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="reveal-on-scroll mb-7 rounded-[1.7rem] border border-stone-200 bg-white/85 p-5 shadow-[0_16px_42px_rgba(58,25,16,0.12)]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+              Visit experience
+            </p>
+            <h2 className="mt-3 font-serif text-[1.9rem] leading-tight text-stone-900 md:text-[2.35rem]">
+              A clear path from first message to finished repair.
+            </h2>
+            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-stone-600">
+              This section is designed for clarity: when to come in, how timing works, and what
+              to expect before we begin your service.
+            </p>
           </div>
 
-          <form
-            action="/api/contact"
-            method="post"
-            className="reveal-on-scroll rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_22px_55px_rgba(58,25,16,0.16)] md:p-7"
-          >
-            <div className="mb-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                Contact form
-              </p>
-              <h2 className="mt-3 font-serif text-[1.85rem] leading-tight text-stone-900">
-                Send us a message
-              </h2>
-              <p className="mt-2 text-[15px] leading-7 text-stone-600">
-                Tell us what needs attention and how you prefer we reply.
-              </p>
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="space-y-4 reveal-on-scroll">
+              <section className="relative overflow-hidden rounded-[2rem] border border-brand-burgundy/20 bg-brand-burgundy p-6 text-white shadow-[0_20px_55px_rgba(30,20,22,0.3)]">
+                <div className="absolute right-[-5rem] top-[-3rem] h-40 w-40 rounded-full bg-brand-gold/20 blur-2xl" />
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
+                  Visit the workshop
+                </p>
+                <p className="mt-3 text-sm leading-7 text-stone-100">
+                  {BUSINESS.address.street}
+                  <br />
+                  {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-white/25 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-stone-100">
+                    In-house team
+                  </span>
+                  <span className="rounded-full border border-white/25 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-stone-100">
+                    Transparent approvals
+                  </span>
+                </div>
+              </section>
+
+              <section className="rounded-[2rem] border border-stone-200 bg-white/90 p-5 shadow-[0_12px_34px_rgba(58,25,16,0.11)]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  What happens next
+                </p>
+                <ol className="mt-4 space-y-4 text-sm text-stone-700">
+                  <li className="flex gap-3 border-l-2 border-brand-gold/45 pl-3">
+                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
+                      1
+                    </span>
+                    <span>We review your message and reply within 1 business day.</span>
+                  </li>
+                  <li className="flex gap-3 border-l-2 border-brand-gold/45 pl-3">
+                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
+                      2
+                    </span>
+                    <span>If needed, we suggest a quick in-store assessment.</span>
+                  </li>
+                  <li className="flex gap-3 border-l-2 border-brand-gold/45 pl-3">
+                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
+                      3
+                    </span>
+                    <span>You approve scope and timing before work begins.</span>
+                  </li>
+                </ol>
+              </section>
+
+              <section className="rounded-[2rem] border border-stone-200 bg-gradient-to-br from-white to-stone-100 p-5 shadow-[0_12px_34px_rgba(58,25,16,0.11)]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Workshop hours
+                </p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {BUSINESS.hours.map((row) => (
+                    <div
+                      key={row.day}
+                      className="rounded-xl border border-stone-200 bg-white/85 px-3 py-2 text-sm"
+                    >
+                      <p className="text-stone-600">{row.day}</p>
+                      <p className="mt-1 font-medium text-stone-800">{row.hours}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
 
-            <input
-              type="text"
-              name="company"
-              className="hidden"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-            />
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Name
-                <input
-                  type="text"
-                  name="name"
-                  autoComplete="name"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  placeholder="Your name"
-                  required
-                />
-              </label>
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Email
-                <input
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  placeholder="you@email.com"
-                  required
-                />
-              </label>
-            </div>
-
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Phone (optional)
-                <input
-                  type="tel"
-                  name="phone"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  placeholder="(281) 555-1234"
-                />
-              </label>
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Preferred contact method
-                <select
-                  name="preferredContact"
-                  defaultValue=""
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  <option value="">No preference</option>
-                  <option value="phone">Phone</option>
-                  <option value="email">Email</option>
-                </select>
-              </label>
-            </div>
-
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Message
-              <textarea
-                name="message"
-                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                placeholder="How can we help?"
-                required
-              />
-            </label>
-
-            <button
-              type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            <form
+              action="/api/contact"
+              method="post"
+              className="reveal-on-scroll relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7"
             >
-              Send Message
-            </button>
-            <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
-              Secure form and in-house team support.
-              <a
-                href={`tel:${BUSINESS.phone}`}
-                className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              <div className="absolute left-0 right-0 top-0 h-1.5 bg-gradient-to-r from-brand-burgundy via-brand-gold to-brand-burgundy" />
+              <div className="mb-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Contact form
+                </p>
+                <h2 className="mt-3 font-serif text-[1.9rem] leading-tight text-stone-900">
+                  Send us a message
+                </h2>
+                <p className="mt-2 text-[15px] leading-7 text-stone-600">
+                  Tell us what needs attention and how you prefer we reply.
+                </p>
+              </div>
+
+              <div className="mb-5 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-600">
+                <span className="rounded-full border border-stone-300 px-3 py-1">Secure form</span>
+                <span className="rounded-full border border-stone-300 px-3 py-1">Local team</span>
+                <span className="rounded-full border border-stone-300 px-3 py-1">Fast response</span>
+              </div>
+
+              <input
+                type="text"
+                name="company"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                  Name
+                  <input
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    placeholder="Your name"
+                    required
+                  />
+                </label>
+                <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                  Email
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    placeholder="you@email.com"
+                    required
+                  />
+                </label>
+              </div>
+
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                  Phone (optional)
+                  <input
+                    type="tel"
+                    name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    placeholder="(281) 555-1234"
+                  />
+                </label>
+                <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                  Preferred contact method
+                  <select
+                    name="preferredContact"
+                    defaultValue=""
+                    className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    <option value="">No preference</option>
+                    <option value="phone">Phone</option>
+                    <option value="email">Email</option>
+                  </select>
+                </label>
+              </div>
+
+              <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+                Message
+                <textarea
+                  name="message"
+                  className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  placeholder="How can we help?"
+                  required
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
-                Need urgent help? Call now.
-              </a>
-            </div>
-          </form>
+                Send Message
+              </button>
+              <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
+                Secure form and in-house team support.
+                <a
+                  href={`tel:${BUSINESS.phone}`}
+                  className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  Need urgent help? Call now.
+                </a>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </SiteShell>
