@@ -86,6 +86,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - updated manifesto section from dark-brown to strict brand burgundy to match brand system and CTA palette.
   - layered reveal-on-scroll animations throughout About sections/cards for stronger polish.
   - added a parallax heritage section (`parallax-hero` behavior on desktop) for a more premium visual rhythm.
+- Contact page polish pass (2026-02-18, same-day iteration):
+  - redesigned left-side contact info on `/contact` into clearer channel cards (Phone + Email) to fix cramped/touching text.
+  - added structured location/hours card for faster scanability on mobile.
+  - improved form panel framing and made it sticky on desktop for better conversion ergonomics.
 
 ## Key Files
 - Design system: `DESIGN.md`

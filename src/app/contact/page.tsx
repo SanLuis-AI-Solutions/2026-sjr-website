@@ -26,6 +26,7 @@ export default function ContactPage({
     <SiteShell>
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,_rgba(122,46,58,0.08),_transparent_48%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
           <div className="reveal-on-scroll">
             <Suspense fallback={null}>
@@ -67,8 +68,8 @@ export default function ContactPage({
               Talk to a local expert
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Call, email, or send a quick note. We will guide you to the best next step and
-              confirm what to bring.
+              Call, email, or send a quick note. We guide you to the best next step, confirm what
+              to bring, and keep your approvals clear before service begins.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-3"
@@ -89,24 +90,61 @@ export default function ContactPage({
               </Link>
             </div>
 
-            <div className="mt-8 space-y-2 text-sm text-stone-600">
-              <a
-                href={`tel:${BUSINESS.phone}`}
-                className="inline-flex min-h-11 items-center font-semibold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                {BUSINESS.phone}
-              </a>
-              <a
-                href={`mailto:${BUSINESS.email}`}
-                className="inline-flex min-h-11 items-center font-semibold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                {BUSINESS.email}
-              </a>
-              <div className="mt-3">
-                {BUSINESS.address.street}, {BUSINESS.address.city},{" "}
-                {BUSINESS.address.state} {BUSINESS.address.zip}
+            <div className="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Contact channels">
+              <article className="rounded-2xl border border-stone-200 bg-white/85 p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Phone
+                </p>
+                <a
+                  href={`tel:${BUSINESS.phone}`}
+                  className="mt-3 inline-flex min-h-11 items-center text-lg font-semibold text-stone-900 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {BUSINESS.phone}
+                </a>
+                <p className="mt-2 text-xs text-stone-600">Best for immediate repair questions.</p>
+              </article>
+
+              <article className="rounded-2xl border border-stone-200 bg-white/85 p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Email
+                </p>
+                <a
+                  href={`mailto:${BUSINESS.email}`}
+                  className="mt-3 inline-flex min-h-11 items-center break-all text-sm font-semibold text-stone-900 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {BUSINESS.email}
+                </a>
+                <p className="mt-2 text-xs text-stone-600">Send photos or details any time.</p>
+              </article>
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-stone-200 bg-white/80 p-5 text-sm text-stone-700 shadow-sm">
+              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Location
+              </div>
+              <p className="mt-3 leading-7">
+                {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
+                {BUSINESS.address.zip}
+              </p>
+              <div className="mt-4 border-t border-stone-200 pt-3">
+                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  Hours
+                </p>
+                <div className="mt-2 space-y-1">
+                  {BUSINESS.hours.slice(0, 6).map((row) => (
+                    <div key={row.day} className="flex items-center justify-between gap-3">
+                      <span>{row.day}</span>
+                      <span className="font-medium text-stone-800">{row.hours}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center justify-between gap-3">
+                    <span>{BUSINESS.hours[6]?.day}</span>
+                    <span className="font-medium text-stone-800">{BUSINESS.hours[6]?.hours}</span>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div className="mt-8 rounded-2xl border border-stone-200 bg-white/80 p-5 text-sm text-stone-600">
               <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 What happens next
@@ -121,8 +159,16 @@ export default function ContactPage({
           <form
             action="/api/contact"
             method="post"
-            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
+            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/88 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm md:sticky md:top-28"
           >
+            <div className="mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Send us a message
+              </p>
+              <p className="mt-2 text-sm text-stone-600">
+                Share a quick description and we’ll reply with clear next steps.
+              </p>
+            </div>
             <input
               type="text"
               name="company"

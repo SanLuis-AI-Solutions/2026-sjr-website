@@ -129,6 +129,10 @@ Update cadence: weekly (or after major milestones).
   - manifesto band color corrected to brand burgundy (removed dark-brown look).
   - motion layer added using reveal-on-scroll sequencing across major About sections.
   - new parallax brand section added (desktop fixed background behavior via `parallax-hero`) to increase premium depth without sacrificing mobile readability.
+- Contact page layout optimization pass shipped from user feedback:
+  - replaced cramped inline phone/email stack with dedicated contact-channel cards for clearer spacing and readability.
+  - improved contact information hierarchy (phone, email, location, hours) and added cleaner supporting copy.
+  - upgraded form container with clearer intro and desktop sticky behavior for better scan-and-submit flow.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
