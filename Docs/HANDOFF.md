@@ -99,6 +99,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - replaced basic channel block with a dedicated contact-overview card and upgraded workshop/hours split layout.
   - added numbered next-steps module and refined form panel hierarchy while preserving CTA labels and accessibility/focus behavior used by smoke tests.
   - kept conversion contract stable (`Talk to a local expert` hero + `Quick actions` region: `Get Fast Quote` / `Book Repair`).
+- Contact page premium redesign v3 (2026-02-18, same-day iteration from user feedback):
+  - replaced the prior layout with a stronger two-stage art direction: high-contrast burgundy contact-desk hero + distinct light conversion section.
+  - added a premium "Direct lines" hero panel and layered background treatment for a more distinctive flagship feel.
+  - preserved existing smoke-test semantics and CTA naming while increasing visual impact substantially.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -117,4 +121,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Apply the same premium v2 treatment to `/faq` and `/blog` hero + top modules so all high-intent informational pages share the upgraded visual tier before the full-site debug/performance sweep.
+- Apply this stronger premium v3 visual language to `/faq` first (hero + top intent modules), then mirror to `/blog` for consistent high-impact informational page polish.

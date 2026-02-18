@@ -24,12 +24,13 @@ export default function ContactPage({
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-stone-100 py-16 md:py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_12%,_rgba(122,46,58,0.12),_transparent_42%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_8%,_rgba(209,184,130,0.2),_transparent_46%)]" />
-        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(122,46,58,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(122,46,58,0.05)_1px,transparent_1px)] [background-size:32px_32px]" />
+      <section className="relative overflow-hidden bg-brand-burgundy-deep py-16 text-white md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.3)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.35)_100%)]" />
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(209,184,130,0.28)_1px,transparent_1px),linear-gradient(90deg,rgba(209,184,130,0.28)_1px,transparent_1px)] [background-size:38px_38px]" />
 
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.08fr_0.92fr] md:items-start">
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="reveal-on-scroll">
             <Suspense fallback={null}>
               <GaConversionTracker
@@ -44,18 +45,16 @@ export default function ContactPage({
               <div
                 role="status"
                 aria-live="polite"
-                className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900"
+                className="mb-6 rounded-2xl border border-emerald-200/70 bg-emerald-100/95 p-4 text-sm text-emerald-900"
               >
                 <p className="font-semibold">Message received.</p>
-                <p className="mt-1 text-emerald-800">
-                  We will reply within 1 business day.
-                </p>
+                <p className="mt-1 text-emerald-800">We will reply within 1 business day.</p>
               </div>
             ) : null}
             {error ? (
               <div
                 role="alert"
-                className="mb-6 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900"
+                className="mb-6 rounded-2xl border border-rose-200/70 bg-rose-100/95 p-4 text-sm text-rose-900"
               >
                 <p className="font-semibold">Something went wrong.</p>
                 <p className="mt-1 text-rose-800">
@@ -64,114 +63,121 @@ export default function ContactPage({
               </div>
             ) : null}
 
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Contact</p>
-            <h1 className="mt-3 text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-900 md:text-5xl">
+            <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Contact desk</p>
+            <h1 className="mt-3 max-w-2xl text-balance font-serif text-[2.35rem] leading-[1.07] text-white md:text-6xl">
               Talk to a local expert
             </h1>
-            <p className="mt-4 max-w-xl text-[15px] leading-7 text-stone-600">
-              Call, email, or send a quick note. We guide you to the best next step, confirm what
-              to bring, and keep your approvals clear before service begins.
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-100/90 md:text-base">
+              Call, email, or send a quick note. Our in-house team confirms timing, scope, and the
+              best next step before work begins.
             </p>
 
-            <div
-              className="mt-6 flex flex-wrap gap-3"
-              role="region"
-              aria-label="Quick actions"
-            >
+            <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
               <Link
                 href="/quote"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
               >
                 Get Fast Quote
               </Link>
               <Link
                 href="/book"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
               >
                 Book Repair
               </Link>
             </div>
 
-            <section className="mt-8 reveal-on-scroll">
-              <div className="rounded-[1.75rem] border border-stone-200 bg-white/86 p-5 shadow-[0_16px_40px_rgba(58,25,16,0.14)] backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Contact channels
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <article className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Response
                 </p>
-                <h2 className="mt-3 font-serif text-2xl text-stone-900 md:text-[1.8rem]">
-                  Reach us the way you prefer.
-                </h2>
-                <p className="mt-3 max-w-xl text-[15px] leading-7 text-stone-600">
-                  Fast call support, photo-friendly email, and clear visit details for in-store
-                  assessments.
+                <p className="mt-2 font-serif text-2xl">1 day</p>
+                <p className="mt-1 text-xs text-stone-100/85">Business-day reply window.</p>
+              </article>
+              <article className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Location
                 </p>
+                <p className="mt-2 font-serif text-2xl">Pasadena</p>
+                <p className="mt-1 text-xs text-stone-100/85">In-house repair workshop.</p>
+              </article>
+              <article className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Service
+                </p>
+                <p className="mt-2 font-serif text-2xl">Same Day</p>
+                <p className="mt-1 text-xs text-stone-100/85">When applicable.</p>
+              </article>
+            </div>
+          </div>
 
-                <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                  <article className="rounded-2xl border border-brand-gold/35 bg-stone-50 p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                      Call now
-                    </p>
-                    <a
-                      href={`tel:${BUSINESS.phone}`}
-                      className="mt-3 inline-flex min-h-11 items-center text-lg font-semibold text-stone-900 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      {BUSINESS.phone}
-                    </a>
-                    <p className="mt-2 text-xs leading-6 text-stone-600">
-                      Best for same-day guidance and urgent repair questions.
-                    </p>
-                  </article>
+          <aside className="reveal-on-scroll rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)] backdrop-blur-lg">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
+              Direct lines
+            </p>
+            <h2 className="mt-3 font-serif text-[1.95rem] leading-tight text-white">
+              Reach us immediately.
+            </h2>
+            <div className="mt-5 space-y-3">
+              <a
+                href={`tel:${BUSINESS.phone}`}
+                className="micro-interaction block rounded-2xl border border-white/25 bg-white/10 px-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Call now
+                </p>
+                <p className="mt-2 text-lg font-semibold text-white">{BUSINESS.phone}</p>
+              </a>
+              <a
+                href={`mailto:${BUSINESS.email}`}
+                className="micro-interaction block rounded-2xl border border-white/25 bg-white/10 px-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Email photos
+                </p>
+                <p className="mt-2 break-all text-sm font-semibold text-white">{BUSINESS.email}</p>
+              </a>
+            </div>
+            <div className="mt-5 rounded-2xl border border-white/20 bg-black/15 px-4 py-4 text-sm text-stone-100/90">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                Visit
+              </p>
+              <p className="mt-2 leading-7">
+                {BUSINESS.address.street}
+                <br />
+                {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-                  <article className="rounded-2xl border border-brand-gold/35 bg-stone-50 p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                      Email photos
-                    </p>
-                    <a
-                      href={`mailto:${BUSINESS.email}`}
-                      className="mt-3 inline-flex min-h-11 items-center break-all text-sm font-semibold text-stone-900 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      {BUSINESS.email}
-                    </a>
-                    <p className="mt-2 text-xs leading-6 text-stone-600">
-                      Share close-up images and any timing details before you visit.
-                    </p>
-                  </article>
-                </div>
-              </div>
-            </section>
+      <section className="relative overflow-hidden bg-stone-100 py-14 md:py-18">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.18),_transparent_44%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.09),_transparent_46%)]" />
 
-            <section className="mt-4 reveal-on-scroll">
-              <div className="grid gap-4 rounded-[1.75rem] border border-stone-200 bg-white/84 p-5 shadow-[0_10px_28px_rgba(58,25,16,0.12)] md:grid-cols-[0.9fr_1.1fr]">
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Visit the workshop
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-stone-700">
-                    {BUSINESS.address.street}
-                    <br />
-                    {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
-                    Hours
-                  </p>
-                  <div className="mt-2 space-y-1.5 text-sm text-stone-700">
-                    {BUSINESS.hours.map((row) => (
-                      <div key={row.day} className="flex items-center justify-between gap-3">
-                        <span>{row.day}</span>
-                        <span className="font-medium text-stone-800">{row.hours}</span>
-                      </div>
-                    ))}
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-4 reveal-on-scroll">
+            <section className="rounded-[1.75rem] border border-stone-200 bg-white/86 p-5 shadow-[0_12px_30px_rgba(58,25,16,0.12)]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Workshop hours
+              </p>
+              <div className="mt-3 space-y-1.5 text-sm text-stone-700">
+                {BUSINESS.hours.map((row) => (
+                  <div key={row.day} className="flex items-center justify-between gap-3">
+                    <span>{row.day}</span>
+                    <span className="font-medium text-stone-800">{row.hours}</span>
                   </div>
-                </div>
+                ))}
               </div>
             </section>
 
-            <section className="mt-8 reveal-on-scroll rounded-[1.75rem] border border-stone-200 bg-white/82 p-5 text-sm text-stone-600 shadow-sm">
-              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+            <section className="rounded-[1.75rem] border border-stone-200 bg-white/86 p-5 shadow-[0_12px_30px_rgba(58,25,16,0.12)]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 What happens next
-              </div>
-              <ol className="mt-3 space-y-3">
+              </p>
+              <ol className="mt-3 space-y-3 text-sm text-stone-700">
                 <li className="flex gap-3">
                   <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-[11px] font-semibold text-white">
                     1
@@ -197,13 +203,13 @@ export default function ContactPage({
           <form
             action="/api/contact"
             method="post"
-            className="reveal-on-scroll rounded-[1.9rem] border border-stone-200 bg-white/90 p-6 shadow-[0_22px_55px_rgba(58,25,16,0.15)] backdrop-blur-sm md:sticky md:top-28"
+            className="reveal-on-scroll rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_22px_55px_rgba(58,25,16,0.16)] md:p-7"
           >
             <div className="mb-4">
               <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Contact form
               </p>
-              <h2 className="mt-3 font-serif text-[1.75rem] leading-tight text-stone-900">
+              <h2 className="mt-3 font-serif text-[1.85rem] leading-tight text-stone-900">
                 Send us a message
               </h2>
               <p className="mt-2 text-[15px] leading-7 text-stone-600">
@@ -288,7 +294,7 @@ export default function ContactPage({
               Send Message
             </button>
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
-              Secure form · We reply within 1 business day.
+              Secure form and in-house team support.
               <a
                 href={`tel:${BUSINESS.phone}`}
                 className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"

@@ -25,3 +25,12 @@
 - `npm run lint` (pass; 0 errors, existing non-blocking warnings in Airtable scripts)
 - `npm test` (pass; 13/13 smoke tests)
 - `pwsh -File scripts/verify.ps1` (pass)
+
+## v3 visual escalation (same day)
+- Trigger: user reported the prior redesign still did not feel premium/stunning.
+- Update:
+  - moved to a stronger two-stage composition:
+    - stage 1: high-contrast burgundy contact-desk hero with atmospheric overlays
+    - stage 2: separate light conversion stage for form and process clarity
+  - introduced a dedicated "Direct lines" premium panel in hero for phone/email emphasis.
+  - retained conversion/a11y contracts (`h1` + quick-action labels) so smoke checks remain stable.

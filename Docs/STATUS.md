@@ -142,6 +142,10 @@ Update cadence: weekly (or after major milestones).
   - fixed channel readability concerns by increasing spacing and visual separation for phone + email actions.
   - preserved conversion semantics and test contracts (`Talk to a local expert` H1 + `Quick actions` region with `Get Fast Quote` / `Book Repair` labels).
   - improved form ergonomics with two-row input grid on wider breakpoints and persistent urgent-call fallback under submit.
+- Contact page premium redesign v3 shipped from direct user visual feedback:
+  - replaced the previous light-only composition with a high-contrast, brand-burgundy hero stage and layered atmospheric depth.
+  - introduced a dedicated "direct lines" premium panel in the hero and a distinct secondary conversion stage below.
+  - kept conversion contracts unchanged (`Talk to a local expert` H1 + `Quick actions` CTA labels) while materially increasing visual distinctiveness.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
