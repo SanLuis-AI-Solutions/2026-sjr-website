@@ -33,3 +33,16 @@
 - `npm run lint` pass (0 errors, existing non-blocking warnings unchanged).
 - `npm test` pass (13/13).
 - `pwsh -File scripts/verify.ps1` pass.
+
+## Runtime validation evidence
+- Browser interaction validation (production UI with stubbed `window.gtag`) captured all new events:
+  - `faq_filter_select`
+  - `faq_search`
+  - `blog_topic_click`
+  - `article_mid_cta_click`
+  - `related_read_click`
+- Link-transition events were validated by persisting captured payloads in `localStorage` before and after navigation.
+
+## Production blocker
+- Observed on production pages: `window.gtag` and `window.dataLayer` are absent and no GA loader script is injected.
+- Implication: events are instrumented in code but cannot reach GA until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is present in Vercel production env and the site is redeployed.

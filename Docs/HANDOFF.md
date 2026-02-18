@@ -133,6 +133,14 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `related_read_click`
   - introduced a reusable client `TrackedLink` component (`src/components/analytics/tracked-link.tsx`) to safely emit GA4 events from server-rendered layouts.
   - blog topic chips now support query-param filtering (`/blog?topic=...`) to align topic-click events with visible content segmentation.
+  - validation proof (browser-level):
+    - `faq_filter_select` + `faq_search` fired with expected metadata.
+    - `blog_topic_click` fired from topic chip routing.
+    - `article_mid_cta_click` fired before route transition to Quote.
+    - `related_read_click` fired before route transition to related article.
+  - blocker discovered:
+    - production deploy currently renders no GA loader script (`window.gtag` missing), indicating `NEXT_PUBLIC_GA_MEASUREMENT_ID` is not active in Vercel production runtime.
+    - events are wired correctly in code but will not appear in GA until production env var is set and redeployed.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -151,4 +159,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Build a lightweight GA4 reporting snapshot (Looker Studio or saved explorations) for the 5 new events so we can compare topic/filter engagement to downstream quote/book clicks within 7 days.
+- Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Vercel production env, redeploy, then run a live GA DebugView pass to confirm the 5 intent events arrive in GA before building the 7-day funnel report.
