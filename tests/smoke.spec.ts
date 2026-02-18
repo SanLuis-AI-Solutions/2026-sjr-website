@@ -364,6 +364,56 @@ test("mobile service detail: all services follow flagship section sequence", asy
   guard.assertNoErrors("service detail: all flagship section sequences");
 });
 
+test("mobile service detail: decision module and proof blocks render", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+  const slugs = [
+    "watch-repair",
+    "ring-sizing",
+    "stone-setting",
+    "jewelry-cleaning",
+    "necklace-repair",
+    "bracelet-repair",
+    "pearl-restringing",
+    "custom-design",
+    "heirloom-restoration",
+  ];
+
+  for (const slug of slugs) {
+    await page.goto(`/services/${slug}`, { waitUntil: "networkidle" });
+
+    await expect(page.getByTestId("service-decision-module")).toBeVisible();
+    await expect(page.getByTestId("service-proof-blocks")).toBeVisible();
+  }
+
+  guard.assertNoErrors("service decision/proof modules");
+});
+
+test("mobile service detail: non-watch and non-ring routes provide 7 FAQs", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const slugs = [
+    "stone-setting",
+    "jewelry-cleaning",
+    "necklace-repair",
+    "bracelet-repair",
+    "pearl-restringing",
+    "custom-design",
+    "heirloom-restoration",
+  ];
+
+  for (const slug of slugs) {
+    await page.goto(`/services/${slug}`, { waitUntil: "networkidle" });
+    const faqItems = page.locator("section:has-text('FAQs') details");
+    await expect(
+      faqItems,
+      `Expected 7 FAQs on /services/${slug} for expanded intent depth`,
+    ).toHaveCount(7);
+  }
+
+  guard.assertNoErrors("service faq depth");
+});
+
 test("mobile services pages: quick actions are clear and image assets load", async ({
   page,
 }) => {

@@ -9,7 +9,7 @@
 ## Evidence Summary
 - Service inventory: 9 slugs confirmed (`watch-repair`, `ring-sizing`, `stone-setting`, `jewelry-cleaning`, `necklace-repair`, `bracelet-repair`, `pearl-restringing`, `custom-design`, `heirloom-restoration`).
 - Image availability: `scripts/audit-images.ps1` -> `OK: 15/15`.
-- FAQ depth: watch/ring = 7 each; all other services = 5 each.
+- FAQ depth: watch/ring = 7 each; all other services expanded to 7.
 - CTA clarity: mobile quick-actions region present with 2 clear actions (`Get Fast Quote`, `Book Repair`) and tap targets ~48-50px.
 
 ## High-Impact Findings
@@ -24,6 +24,13 @@
 - Updated service template semantics in `src/app/services/[slug]/page.tsx`:
   - `How it works` is now a heading.
   - `Why customers choose us` is now a heading.
+- Added one unique service decision module per route in Pricing & Timing:
+  - `Repair vs replace`, `When to bring it in`, or `Good candidate checklist`.
+- Added per-service micro-testimonial proof blocks in the trust section.
+- Expanded non-watch/ring FAQ depth from 5 to 7 with supplemental intent-driven FAQs.
+- Added smoke tests in `tests/smoke.spec.ts` for:
+  - decision/proof block visibility on all service routes.
+  - 7 FAQ count on non-watch/ring routes.
 
 ## Recommended next pass
 - Build a per-service visual pack (3-4 unique photos per service) to reduce repetition and improve premium feel.

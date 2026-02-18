@@ -172,9 +172,14 @@ Update cadence: weekly (or after major milestones).
   - confirmed image health (`scripts/audit-images.ps1` -> `OK: 15/15`) and FAQ minimum counts (watch/ring: 7, all other services: 5).
   - identified heavy cross-page image reuse in supporting galleries (same heirloom image appears on 8 service pages), which is now the primary premium-quality gap.
   - applied semantic heading improvement in service template so section labels `How it works` and `Why customers choose us` are now real headings for stronger accessibility/SEO structure.
+- Service detail value-depth pass shipped (2026-02-18, follow-up iteration):
+  - added one unique decision module per service route (`Repair vs Replace`, `When to bring it in`, or `Good candidate checklist`) inside Pricing & Timing.
+  - added per-service customer proof blocks with micro-testimonial snippets in the trust section.
+  - expanded non-watch/ring FAQ depth from 5 to 7 with intent-driven supplemental coverage (cost, timing, process, risk, and prep intent).
+  - added smoke coverage to enforce decision/proof block rendering and 7-FAQ depth for non-watch/ring routes.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
-  - `npm test` PASS (13/13)
+  - `npm test` PASS (15/15)
   - `scripts/verify.ps1` PASS
   - `scripts/audit-images.ps1` PASS (`OK: 15/15`)
 - Learned:
@@ -187,5 +192,5 @@ Update cadence: weekly (or after major milestones).
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
-2. Run a service-detail premium polish sprint focused on reducing image reuse and adding service-specific value modules (pricing bands, trust proof, decision FAQs).
+2. Run a service-detail visual differentiation sprint focused on reducing image reuse with true per-service photo packs (3-4 unique images each).
 3. Run a post-deploy UX/a11y regression pass across Home/About/FAQ/Contact with mobile-first CTA and contrast checks.

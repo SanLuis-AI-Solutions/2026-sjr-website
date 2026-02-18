@@ -147,6 +147,17 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - confirmed no broken service images (`scripts/audit-images.ps1` -> `OK: 15/15`) and minimum FAQ counts per contract (7 for watch/ring, 5 for others).
   - identified key premium gap: heavy cross-page gallery image reuse; only 15 unique image assets currently feed all service detail compositions.
   - shipped semantic heading refinement in `src/app/services/[slug]/page.tsx` so `How it works` and `Why customers choose us` are true headings (stronger a11y/semantic structure).
+- Services detail value-depth enhancement pass (2026-02-18, same-day):
+  - implemented one unique decision module per service route in `src/app/services/[slug]/page.tsx` under Pricing & Timing.
+  - implemented per-service micro-testimonial proof blocks in the trust area (`data-testid="service-proof-blocks"`).
+  - expanded non-watch/ring FAQ depth target to 7 with new intent-driven supplemental FAQ banks per slug.
+  - added smoke tests in `tests/smoke.spec.ts` to enforce:
+    - decision/proof module visibility across all service routes.
+    - exact 7 FAQ items for non-watch/ring service routes.
+  - verification snapshot:
+    - `npm run lint` PASS (0 errors; existing non-blocking script warnings unchanged).
+    - `npm test` PASS (15/15).
+    - `scripts/verify.ps1` PASS.
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -165,4 +176,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Execute a service-page premium polish sprint: replace repeated gallery assets with a per-service visual set (3-4 unique images each) and add one service-specific value block per page (pricing bands or “when to repair vs replace” guidance).
+- Execute a service-page visual differentiation sprint: replace repeated gallery assets with true per-service photo packs (3-4 unique images per service) so each detail page feels distinct at first scroll.

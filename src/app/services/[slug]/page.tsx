@@ -40,6 +40,297 @@ type ServiceDetail = {
   faqs?: FaqItem[];
 };
 
+type DecisionModule = {
+  label: string;
+  title: string;
+  intro: string;
+  goodCandidate: string;
+  caution: string;
+  checklist: string[];
+};
+
+type ProofSnippet = {
+  quote: string;
+  context: string;
+  byline: string;
+};
+
+const DECISION_MODULES: Record<string, DecisionModule> = {
+  "watch-repair": {
+    label: "Repair vs replace",
+    title: "Service now if timing, moisture, or battery life changed.",
+    intro:
+      "Small watch issues become expensive when ignored. We confirm whether a quick service is enough or if full service is the better value.",
+    goodCandidate: "Good candidate for repair: battery drain, crystal damage, crown/stem issues, moisture signs.",
+    caution: "Usually not urgent: cosmetic case wear that does not affect function.",
+    checklist: [
+      "Running slow/fast or stopping unexpectedly",
+      "Visible condensation under crystal",
+      "Battery dying in less than a year",
+    ],
+  },
+  "ring-sizing": {
+    label: "When to bring it in",
+    title: "Adjust fit before daily wear causes damage or loss risk.",
+    intro:
+      "If a ring spins, slips, or pinches, sizing early protects both comfort and settings.",
+    goodCandidate: "Good candidate for sizing now: ring spins, leaves deep marks, or catches on knuckles daily.",
+    caution: "Usually not urgent: occasional seasonal tightness that resolves quickly.",
+    checklist: [
+      "Ring rotates and stone faces palm-side",
+      "Ring can slide off without resistance",
+      "Fit changed after recent weather or body changes",
+    ],
+  },
+  "stone-setting": {
+    label: "Repair vs replace",
+    title: "Secure the setting first, then decide on replacement.",
+    intro:
+      "A loose stone is a time-sensitive issue. We prioritize security and only recommend replacement if needed.",
+    goodCandidate: "Good candidate for repair: stone movement, worn prongs, or bent settings.",
+    caution: "Usually not urgent: minor cosmetic wear with no stone movement.",
+    checklist: [
+      "Stone clicks or shifts when lightly touched",
+      "Prongs look uneven, thin, or lifted",
+      "Recent snagging on fabric",
+    ],
+  },
+  "jewelry-cleaning": {
+    label: "Good candidate checklist",
+    title: "Book professional cleaning when shine drops or buildup appears.",
+    intro:
+      "Professional cleaning is highest value when paired with a safety inspection of prongs and settings.",
+    goodCandidate: "Good candidate for service: dull finish, heavy lotion/soap buildup, or cloudy stones.",
+    caution: "Usually not urgent: light surface smudges removable with safe home care.",
+    checklist: [
+      "Stones look hazy even after home cleaning",
+      "Metal has visible film or residue",
+      "Piece is worn daily and not inspected recently",
+    ],
+  },
+  "necklace-repair": {
+    label: "When to bring it in",
+    title: "Repair chain weak points before a complete break.",
+    intro:
+      "Early chain repair is faster and cleaner than restoring a fully separated section with missing links.",
+    goodCandidate: "Good candidate for repair: stretched links, weak clasp tension, partial chain split.",
+    caution: "Usually not urgent: cosmetic scratches that do not affect strength.",
+    checklist: [
+      "Chain kinks repeatedly in the same area",
+      "Clasp opens with low resistance",
+      "Pendant area pulls unevenly while worn",
+    ],
+  },
+  "bracelet-repair": {
+    label: "Good candidate checklist",
+    title: "Stabilize links and clasp before the bracelet is lost.",
+    intro:
+      "Most bracelet failures start as small fit or clasp issues. Early service prevents full loss events.",
+    goodCandidate: "Good candidate for repair: loose clasp tongue, separating links, weak jump rings.",
+    caution: "Usually not urgent: light surface wear without fit or clasp issues.",
+    checklist: [
+      "Bracelet opens unexpectedly",
+      "Link movement feels uneven or stiff",
+      "Safety chain is missing on high-value pieces",
+    ],
+  },
+  "pearl-restringing": {
+    label: "When to bring it in",
+    title: "Restrung pearls wear cleaner, safer, and longer.",
+    intro:
+      "Fraying string and knot spacing issues are early warning signs. Restringing early protects pearls from loss.",
+    goodCandidate: "Good candidate for restringing: stretched string, visible gaps, fraying near clasp.",
+    caution: "Usually not urgent: recently restrung strand with tight knots and clean spacing.",
+    checklist: [
+      "Knot spacing is uneven across the strand",
+      "String looks discolored or fuzzy",
+      "Clasp area feels weak or worn",
+    ],
+  },
+  "custom-design": {
+    label: "Repair vs redesign",
+    title: "Redesign if function, style, and wear goals no longer match.",
+    intro:
+      "Custom design is best when you want structural upgrades or a new look using stones you already own.",
+    goodCandidate: "Good candidate for redesign: inherited stones, outdated mounting, or daily-wear comfort issues.",
+    caution: "Usually not urgent: minor style changes that can be solved with light modifications.",
+    checklist: [
+      "You want to reuse existing stones",
+      "Current setting is insecure for daily wear",
+      "You need a date-driven timeline with approval steps",
+    ],
+  },
+  "heirloom-restoration": {
+    label: "Good candidate checklist",
+    title: "Restore only what improves safety and wearability.",
+    intro:
+      "For heirlooms, we prioritize structural integrity while preserving character and original design cues.",
+    goodCandidate: "Good candidate for restoration: worn prongs, cracked shank, unstable stones.",
+    caution: "Usually not urgent: visual patina that does not impact structure.",
+    checklist: [
+      "Stone seats look shallow or open",
+      "Band or shank has visible thinning",
+      "Piece has sentimental value but limited wearability",
+    ],
+  },
+};
+
+const PROOF_SNIPPETS: Record<string, ProofSnippet[]> = {
+  "watch-repair": [
+    {
+      quote: "Battery swap was quick and they explained pressure testing clearly before starting.",
+      context: "Battery + seal check",
+      byline: "Pasadena walk-in customer",
+    },
+    {
+      quote: "They caught a crown issue during intake and saved me from a bigger repair later.",
+      context: "Preventive assessment",
+      byline: "Local repeat customer",
+    },
+    {
+      quote: "Estimate and pickup time matched exactly what they told me up front.",
+      context: "Transparent approvals",
+      byline: "In-shop service note",
+    },
+  ],
+  "ring-sizing": [
+    {
+      quote: "Fit is perfect now, and the seam is basically invisible.",
+      context: "Sizing + finish quality",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "They checked my prongs before and after sizing, which gave me confidence.",
+      context: "Setting safety",
+      byline: "Local walk-in customer",
+    },
+    {
+      quote: "Timeline was fast and exactly what they promised at intake.",
+      context: "Same Day/Next Day service",
+      byline: "In-shop service note",
+    },
+  ],
+  "stone-setting": [
+    {
+      quote: "They found the loose prong before the stone fell out.",
+      context: "Preventive setting repair",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "Replacement stone match was much closer than I expected.",
+      context: "Stone matching",
+      byline: "Local repair customer",
+    },
+    {
+      quote: "Clear options, no pressure, and everything stayed in-house.",
+      context: "Approval process",
+      byline: "In-shop service note",
+    },
+  ],
+  "jewelry-cleaning": [
+    {
+      quote: "My ring looked new again, and they pointed out a prong issue I missed.",
+      context: "Clean + inspect",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "They explained what was safe to clean and what needed gentle handling.",
+      context: "Gemstone-safe process",
+      byline: "Local walk-in customer",
+    },
+    {
+      quote: "Fast turnaround and no upsell, just clear recommendations.",
+      context: "Service clarity",
+      byline: "In-shop service note",
+    },
+  ],
+  "necklace-repair": [
+    {
+      quote: "Broken chain was repaired cleanly and feels stronger than before.",
+      context: "Chain reinforcement",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "They upgraded my clasp and now I wear it daily without worry.",
+      context: "Security upgrade",
+      byline: "Local repeat customer",
+    },
+    {
+      quote: "Pricing and repair path were explained in plain language.",
+      context: "Transparent estimate",
+      byline: "In-shop service note",
+    },
+  ],
+  "bracelet-repair": [
+    {
+      quote: "They fixed the clasp issue that kept popping open.",
+      context: "Clasp reliability",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "Link repair blended well and the fit feels balanced again.",
+      context: "Structural repair",
+      byline: "Local walk-in customer",
+    },
+    {
+      quote: "Quick intake, clear approval, and pickup was on time.",
+      context: "Process trust",
+      byline: "In-shop service note",
+    },
+  ],
+  "pearl-restringing": [
+    {
+      quote: "The knot spacing looks even and the strand lays better now.",
+      context: "Hand-knot quality",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "They replaced the worn clasp during restringing in one visit.",
+      context: "Combined service",
+      byline: "Local repeat customer",
+    },
+    {
+      quote: "They explained exactly when to restring next time.",
+      context: "Care guidance",
+      byline: "In-shop service note",
+    },
+  ],
+  "custom-design": [
+    {
+      quote: "The approval checkpoints made the whole custom process low-stress.",
+      context: "Design workflow",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "They reused my stones and still made the piece feel brand new.",
+      context: "Stone reuse",
+      byline: "Local design customer",
+    },
+    {
+      quote: "Timeline was clear and every step was confirmed before moving forward.",
+      context: "Project clarity",
+      byline: "In-shop service note",
+    },
+  ],
+  "heirloom-restoration": [
+    {
+      quote: "They preserved the original look while fixing the weak points.",
+      context: "Preservation-first restoration",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "I appreciated how they explained what should be restored vs left as-is.",
+      context: "Scope discipline",
+      byline: "Local walk-in customer",
+    },
+    {
+      quote: "My heirloom is wearable again without losing its character.",
+      context: "Daily-wear readiness",
+      byline: "In-shop service note",
+    },
+  ],
+};
+
 function svgDataUri(title: string) {
   const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
   const svg =
@@ -171,6 +462,251 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
     ];
   }
 
+  if (slug === "stone-setting") {
+    return [
+      {
+        question: "How do I know if a stone is loose?",
+        answer:
+          "If a stone shifts, clicks, or catches on fabric, it should be inspected right away. Loose settings can lead to preventable stone loss.",
+      },
+      {
+        question: "Can you match and replace a missing accent stone?",
+        answer:
+          "Yes. We can source and match many accent stones, then secure the setting in-house after approval.",
+      },
+      {
+        question: "Do you retip or rebuild worn prongs?",
+        answer:
+          "Yes. Prong retipping and rebuilding are common ways to restore stone security and extend wear life.",
+      },
+      {
+        question: "How long does stone setting repair usually take?",
+        answer:
+          "Most stone setting requests follow Same Day/Next Day service. If sourcing or structural work is needed, we confirm timing before work begins.",
+      },
+      {
+        question: "Will setting repair change how my ring or pendant looks?",
+        answer:
+          "Our goal is to preserve the original look while improving security. We explain visible tradeoffs, if any, before you approve.",
+      },
+      {
+        question: "Should I stop wearing jewelry if a stone feels loose?",
+        answer:
+          "Yes. Continuing wear can increase risk of loss. Bring it in for a quick in-house assessment before further use.",
+      },
+    ];
+  }
+
+  if (slug === "jewelry-cleaning") {
+    return [
+      {
+        question: "What is included in professional jewelry cleaning?",
+        answer:
+          "Service typically includes safe cleaning methods, polish where appropriate, and a setting/prong safety check before pickup.",
+      },
+      {
+        question: "How often should I book professional cleaning?",
+        answer:
+          "For frequently worn pieces, every 6-12 months is common. We also recommend a check before major events or travel.",
+      },
+      {
+        question: "Can you clean delicate jewelry like pearls or fragile stones?",
+        answer:
+          "Yes, with the right method. We inspect first and use gentle cleaning paths for materials that are not ultrasonic-safe.",
+      },
+      {
+        question: "Do you check prongs and settings during cleaning?",
+        answer:
+          "Yes. Safety inspection is part of the value of in-house cleaning, especially for daily-wear rings and bracelets.",
+      },
+      {
+        question: "Can polishing remove all scratches?",
+        answer:
+          "Light surface wear can often be improved. Deep wear may need additional refinishing, which we confirm before service.",
+      },
+      {
+        question: "Is jewelry cleaning available as Same Day/Next Day service?",
+        answer:
+          "Most cleaning and polishing requests follow Same Day/Next Day service unless structural repairs are discovered during inspection.",
+      },
+    ];
+  }
+
+  if (slug === "necklace-repair") {
+    return [
+      {
+        question: "Can you repair a broken necklace chain the same day?",
+        answer:
+          "Many chain repairs follow Same Day/Next Day service. We confirm method and timing after inspecting metal type and break location.",
+      },
+      {
+        question: "Do you replace weak or broken clasps?",
+        answer:
+          "Yes. We can replace worn clasps and recommend more secure options when your necklace is worn frequently.",
+      },
+      {
+        question: "Can delicate or hollow chains be repaired safely?",
+        answer:
+          "Often, yes. We assess chain construction first and recommend the safest repair path before proceeding.",
+      },
+      {
+        question: "Will soldering affect my pendant area?",
+        answer:
+          "We protect surrounding areas during repair and explain any expected finishing impact before work begins.",
+      },
+      {
+        question: "Will the repair point be visible?",
+        answer:
+          "We aim for a clean blend and polished finish. Visibility depends on chain style, metal, and break severity.",
+      },
+      {
+        question: "How can I prevent another chain break?",
+        answer:
+          "We’ll flag weak points during intake and recommend clasp, link, or wear adjustments to improve long-term durability.",
+      },
+    ];
+  }
+
+  if (slug === "bracelet-repair") {
+    return [
+      {
+        question: "Can you rebuild broken links on bracelets?",
+        answer:
+          "Yes. We repair and reinforce links in-house, then test movement and closure before pickup.",
+      },
+      {
+        question: "Can you fix a clasp that keeps opening?",
+        answer:
+          "Yes. We can adjust or replace worn clasp components and recommend added safety options where needed.",
+      },
+      {
+        question: "Can bracelet length be adjusted without extra links?",
+        answer:
+          "Depending on style, yes. We assess your bracelet construction and confirm the cleanest fit-adjustment approach.",
+      },
+      {
+        question: "Do you repair tennis bracelets?",
+        answer:
+          "Yes. We inspect stone seats, link integrity, and clasp function before confirming service scope and pricing.",
+      },
+      {
+        question: "Can you add a safety chain during repair?",
+        answer:
+          "Yes. Adding a safety chain is a common upgrade for high-value or daily-wear bracelets.",
+      },
+      {
+        question: "Should I stop wearing a bracelet with a weak clasp?",
+        answer:
+          "Yes. Continued wear increases loss risk. Bring it in promptly for an in-house assessment and repair plan.",
+      },
+    ];
+  }
+
+  if (slug === "pearl-restringing") {
+    return [
+      {
+        question: "How do I know when pearls need restringing?",
+        answer:
+          "Signs include stretched string, visible gaps, fraying near the clasp, or uneven knot spacing.",
+      },
+      {
+        question: "Do you knot between each pearl?",
+        answer:
+          "Yes. Hand-knotting helps protect pearls from rubbing and limits loss if the strand breaks.",
+      },
+      {
+        question: "Can you shorten, lengthen, or restyle a pearl strand?",
+        answer:
+          "Often, yes. We can discuss length adjustments and clasp options during your in-house assessment.",
+      },
+      {
+        question: "Can you replace a worn clasp while restringing?",
+        answer:
+          "Yes. Clasp upgrades or replacements are commonly handled in the same service flow.",
+      },
+      {
+        question: "Should pearls be cleaned before restringing?",
+        answer:
+          "Yes. We can safely clean and inspect pearls before restringing to confirm condition and handling needs.",
+      },
+      {
+        question: "How should I store pearls after restringing?",
+        answer:
+          "Store flat, away from dry heat, and separate from harder jewelry to reduce abrasion and preserve strand life.",
+      },
+    ];
+  }
+
+  if (slug === "custom-design") {
+    return [
+      {
+        question: "How much does custom design usually cost?",
+        answer:
+          "Cost depends on materials, stone sourcing, and design complexity. We confirm pricing options before build begins.",
+      },
+      {
+        question: "How long does each custom-design step take?",
+        answer:
+          "Most projects follow a 7 business day timeline after design approval, with milestone checkpoints confirmed up front.",
+      },
+      {
+        question: "Can I reuse my own stones or existing jewelry?",
+        answer:
+          "Yes. We frequently reuse customer stones and evaluate suitability during consultation before committing to final design.",
+      },
+      {
+        question: "Do you provide CAD or model previews before production?",
+        answer:
+          "Yes, when appropriate. We review design direction before final production so you can approve confidently.",
+      },
+      {
+        question: "Can I request revisions after seeing the design direction?",
+        answer:
+          "Yes. We include approval checkpoints so updates can be discussed before final production begins.",
+      },
+      {
+        question: "Can custom design be rushed for a deadline?",
+        answer:
+          "Some timelines can be expedited depending on scope and sourcing. We confirm feasibility before accepting rush requests.",
+      },
+    ];
+  }
+
+  if (slug === "heirloom-restoration") {
+    return [
+      {
+        question: "How do you decide what to restore vs preserve on heirlooms?",
+        answer:
+          "We prioritize structural safety first, then preserve design character whenever possible. We explain tradeoffs before service.",
+      },
+      {
+        question: "Can you restore worn prongs and shanks without changing the look?",
+        answer:
+          "Often, yes. We reinforce weak points with the goal of keeping the piece visually faithful to the original style.",
+      },
+      {
+        question: "Do you keep vintage patina or polish it out?",
+        answer:
+          "That choice is yours. We review finish options so you can choose preservation or refinishing before work begins.",
+      },
+      {
+        question: "Can you reset original heirloom stones?",
+        answer:
+          "Yes. We assess stone and setting condition, then confirm the safest reset approach in-house.",
+      },
+      {
+        question: "What if my heirloom is too fragile for daily wear?",
+        answer:
+          "We can recommend stabilization, occasional-wear options, or redesign paths to protect sentimental value.",
+      },
+      {
+        question: "Do you document condition before restoration?",
+        answer:
+          "Yes. Intake notes and condition review help align expectations before restoration begins.",
+      },
+    ];
+  }
+
   return [
     {
       question: `What affects the price of ${serviceName.toLowerCase()}?`,
@@ -211,12 +747,20 @@ function canonicalFaqKey(slug: string, question: string): string {
       return "ring:appointment";
   }
 
+  if (q.includes("cost") || q.includes("price") || q.includes("how much")) return `${slug}:cost`;
+  if (q.includes("how long") || q.includes("timing") || q.includes("turnaround")) return `${slug}:time`;
+  if (q.includes("appointment") || q.includes("walk in") || q.includes("walk-in") || q.includes("walkins"))
+    return `${slug}:appointment`;
+  if (q.includes("in-house") || q.includes("outsour")) return `${slug}:in-house`;
+  if (q.includes("bring")) return `${slug}:bring`;
+  if (q.includes("same day") || q.includes("next day")) return `${slug}:service-speed`;
+
   return q.replace(/\s+/g, " ").trim();
 }
 
 function ensureMinFaqs(baseFaqs: FaqItem[], slug: string, serviceName: string): FaqItem[] {
   const basePool = Array.isArray(baseFaqs) ? baseFaqs : [];
-  const target = slug === "watch-repair" || slug === "ring-sizing" ? 7 : 5;
+  const target = SERVICES.some((item) => item.slug === slug) ? 7 : 5;
   const pool =
     slug === "watch-repair"
       ? [...buildSupplementalFaqs(slug, serviceName), ...basePool, ...buildFallbackFaqs(serviceName)]
@@ -613,6 +1157,36 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     : isRingSizing
       ? ["In-house only", "Fit precision", "Setting checks"]
       : ["In-house only", "Clear estimates", "Final checks"];
+  const decisionModule = DECISION_MODULES[slug] || {
+    label: "Decision guide",
+    title: `When to schedule ${service.name.toLowerCase()}`,
+    intro:
+      "A short in-house assessment helps you decide whether immediate service is the best value or if it can safely wait.",
+    goodCandidate: "Good candidate now: function, fit, or security issues during regular wear.",
+    caution: "Usually not urgent: cosmetic wear that does not affect safety or function.",
+    checklist: [
+      "Issue affects daily wear or comfort",
+      "You notice increased wear since last inspection",
+      "You want confirmed pricing before deciding",
+    ],
+  };
+  const proofSnippets = (PROOF_SNIPPETS[slug] || [
+    {
+      quote: "Clear intake, clear approvals, and quality finishing.",
+      context: "Process clarity",
+      byline: "Pasadena customer",
+    },
+    {
+      quote: "The team explained options in plain language before starting.",
+      context: "Transparent estimates",
+      byline: "Local walk-in customer",
+    },
+    {
+      quote: "Timeline and final result matched what was promised.",
+      context: "Pickup confidence",
+      byline: "In-shop service note",
+    },
+  ]).slice(0, 3);
   const schemaBase = SERVICES.find((item) => item.slug === service.slug) || SERVICES[0];
   const schemaService = {
     ...schemaBase,
@@ -962,6 +1536,37 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </ul>
                 </div>
               </div>
+
+              <div
+                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm"
+                data-testid="service-decision-module"
+              >
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  {decisionModule.label}
+                </div>
+                <h3 className="mt-3 font-serif text-2xl text-stone-900">{decisionModule.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-stone-700">{decisionModule.intro}</p>
+                <div className="mt-5 grid gap-4 md:grid-cols-3">
+                  {decisionModule.checklist.map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-stone-200 bg-white/90 p-4 text-sm leading-6 text-stone-700"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 space-y-2 text-sm leading-7 text-stone-700">
+                  <p>
+                    <span className="font-semibold text-stone-900">Bring it in now:</span>{" "}
+                    {decisionModule.goodCandidate}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-stone-900">Can often wait:</span>{" "}
+                    {decisionModule.caution}
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -1027,6 +1632,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
                   </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Customer proof
+                </div>
+                <div className="mt-4 grid gap-4 md:grid-cols-3" data-testid="service-proof-blocks">
+                  {proofSnippets.map((item, index) => {
+                    const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                    return (
+                      <figure
+                        key={`${item.quote}-${item.byline}`}
+                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm`}
+                      >
+                        <blockquote className="text-sm leading-7 text-stone-700">
+                          &ldquo;{item.quote}&rdquo;
+                        </blockquote>
+                        <figcaption className="mt-4 border-t border-stone-200 pt-3 text-[11px] uppercase tracking-[0.22em] text-stone-500">
+                          <span className="text-brand-burgundy">{item.context}</span> · {item.byline}
+                        </figcaption>
+                      </figure>
+                    );
+                  })}
                 </div>
               </div>
             </div>
