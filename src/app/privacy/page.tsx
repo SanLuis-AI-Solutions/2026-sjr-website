@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
 
 const UPDATED_DATE = "February 13, 2026";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Susie’s Jewelry Repair",
+  description:
+    "Read how Susie’s Jewelry Repair collects, uses, and protects customer information for quote, booking, and contact requests.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (
@@ -58,7 +68,7 @@ export default function PrivacyPage() {
                 You can request access, updates, or deletion of your contact
                 information by emailing{" "}
                 <a
-                  className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep"
+                  className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`mailto:${BUSINESS.email}`}
                 >
                   {BUSINESS.email}
@@ -73,7 +83,10 @@ export default function PrivacyPage() {
                 {BUSINESS.name} · {BUSINESS.address.street},{" "}
                 {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
                 {BUSINESS.address.zip} ·{" "}
-                <a className="hover:text-brand-burgundy" href={`tel:${BUSINESS.phone}`}>
+                <a
+                  className="hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  href={`tel:${BUSINESS.phone}`}
+                >
                   {BUSINESS.phone}
                 </a>
               </p>
@@ -84,4 +97,3 @@ export default function PrivacyPage() {
     </SiteShell>
   );
 }
-

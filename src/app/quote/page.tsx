@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Fast Quote | Susie’s Jewelry Repair",
+  description:
+    "Get a transparent starting-at quote for jewelry or watch repair from our in-house Pasadena team.",
+  alternates: {
+    canonical: "/quote",
+  },
+};
 
 export default function QuotePage({
   searchParams,
@@ -26,7 +37,11 @@ export default function QuotePage({
           </Suspense>
           <div className="reveal-on-scroll">
             {submitted ? (
-              <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900"
+              >
                 <p className="font-semibold">Request received.</p>
                 <p className="mt-1 text-emerald-800">
                   We will respond with a price range within 1 business day.
@@ -34,7 +49,10 @@ export default function QuotePage({
               </div>
             ) : null}
             {error ? (
-              <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+              <div
+                role="alert"
+                className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900"
+              >
                 <p className="font-semibold">Something went wrong.</p>
                 <p className="mt-1 text-rose-800">
                   Please try again or call us for immediate help.
@@ -47,9 +65,27 @@ export default function QuotePage({
             <h1 className="mt-3 font-serif text-4xl text-stone-900">
               Get a transparent starting‑at range
             </h1>
-            <p className="mt-4 text-sm text-stone-600">
+            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
               Share details and photos to receive a quick price range before you visit.
             </p>
+            <div
+              className="mt-6 flex flex-wrap gap-3"
+              role="region"
+              aria-label="Quick actions"
+            >
+              <Link
+                href="/book"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Book Repair
+              </Link>
+              <Link
+                href="/contact"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Contact Us
+              </Link>
+            </div>
 
             <div className="mt-8 space-y-3 text-sm text-stone-600">
               <div className="rounded-2xl border border-stone-200 bg-white/70 px-5 py-4">
@@ -64,7 +100,10 @@ export default function QuotePage({
               </div>
               <p>
                 Prefer to talk now? Call{" "}
-                <a className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep" href={`tel:${BUSINESS.phone}`}>
+                <a
+                  className="inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  href={`tel:${BUSINESS.phone}`}
+                >
                   {BUSINESS.phone}
                 </a>
                 .
@@ -93,7 +132,7 @@ export default function QuotePage({
                 type="text"
                 name="name"
                 autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="Your name"
                 required
               />
@@ -105,7 +144,7 @@ export default function QuotePage({
                 type="email"
                 name="email"
                 autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="you@email.com"
                 required
               />
@@ -118,7 +157,7 @@ export default function QuotePage({
                 name="phone"
                 autoComplete="tel"
                 inputMode="tel"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="(281) 555-1234"
               />
             </label>
@@ -127,7 +166,7 @@ export default function QuotePage({
               Repair details
               <textarea
                 name="details"
-                className="mt-2 min-h-[160px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 min-h-[160px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="What needs repair? Include metal type, stones, and anything that seems loose or broken."
                 required
               />
@@ -143,7 +182,7 @@ export default function QuotePage({
                 name="photos"
                 accept="image/*"
                 multiple
-                className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm"
+                className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               />
               <p className="text-xs text-stone-600">
                 Add up to 4 images. Close-ups of the issue help us quote accurately.

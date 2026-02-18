@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
 
 const UPDATED_DATE = "February 13, 2026";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Susie’s Jewelry Repair",
+  description:
+    "Read the website and service request terms for Susie’s Jewelry Repair, including booking and quote guidance.",
+  alternates: {
+    canonical: "/terms",
+  },
+};
 
 export default function TermsPage() {
   return (
@@ -57,13 +67,16 @@ export default function TermsPage() {
               <p className="mt-4 text-sm text-stone-600">
                 {BUSINESS.name} ·{" "}
                 <a
-                  className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep"
+                  className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`mailto:${BUSINESS.email}`}
                 >
                   {BUSINESS.email}
                 </a>{" "}
                 ·{" "}
-                <a className="hover:text-brand-burgundy" href={`tel:${BUSINESS.phone}`}>
+                <a
+                  className="hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  href={`tel:${BUSINESS.phone}`}
+                >
                   {BUSINESS.phone}
                 </a>
               </p>
@@ -74,4 +87,3 @@ export default function TermsPage() {
     </SiteShell>
   );
 }
-

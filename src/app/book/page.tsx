@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Book a Repair | Susie’s Jewelry Repair",
+  description:
+    "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch repair team.",
+  alternates: {
+    canonical: "/book",
+  },
+};
 
 export default function BookPage({
   searchParams,
@@ -30,7 +41,11 @@ export default function BookPage({
           </Suspense>
           <div className="reveal-on-scroll">
             {submitted ? (
-              <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900"
+              >
                 <p className="font-semibold">
                   {pending ? "Booking request received." : "Booking requested."}
                 </p>
@@ -40,7 +55,10 @@ export default function BookPage({
               </div>
             ) : null}
             {error ? (
-              <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">
+              <div
+                role="alert"
+                className="mb-6 rounded-lg border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900"
+              >
                 <p className="font-semibold">We could not book that time.</p>
                 <p className="mt-1 text-rose-800">
                   Please try a different time or call us for immediate help.
@@ -53,10 +71,28 @@ export default function BookPage({
             <h1 className="mt-3 font-serif text-4xl text-stone-900">
               Reserve a free 15‑minute assessment
             </h1>
-            <p className="mt-4 text-sm text-stone-600">
+            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
               Choose a preferred time and we’ll confirm your booking. We add a 15‑minute buffer
               between appointments.
             </p>
+            <div
+              className="mt-6 flex flex-wrap gap-3"
+              role="region"
+              aria-label="Quick actions"
+            >
+              <Link
+                href="/quote"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Get Fast Quote
+              </Link>
+              <Link
+                href="/contact"
+                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Contact Us
+              </Link>
+            </div>
 
             <div className="mt-8 rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600">
               <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
@@ -65,7 +101,15 @@ export default function BookPage({
               <ul className="mt-3 space-y-2">
                 <li>• Most services are Same Day/Next Day service</li>
                 <li>• We confirm bookings within 1 business day</li>
-                <li>• Need help fast? Call {BUSINESS.phone}</li>
+                <li>
+                  • Need help fast? Call{" "}
+                  <a
+                    href={`tel:${BUSINESS.phone}`}
+                    className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    {BUSINESS.phone}
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -90,7 +134,7 @@ export default function BookPage({
                 type="text"
                 name="name"
                 autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="Your name"
                 required
               />
@@ -102,7 +146,7 @@ export default function BookPage({
                 type="email"
                 name="email"
                 autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="you@email.com"
                 required
               />
@@ -115,7 +159,7 @@ export default function BookPage({
                 name="phone"
                 autoComplete="tel"
                 inputMode="tel"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="(281) 555-1234"
               />
             </label>
@@ -126,7 +170,7 @@ export default function BookPage({
                 <input
                   type="date"
                   name="date"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   required
                 />
               </label>
@@ -135,7 +179,7 @@ export default function BookPage({
                 <input
                   type="time"
                   name="time"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   required
                 />
               </label>
@@ -145,7 +189,7 @@ export default function BookPage({
               Details (optional)
               <textarea
                 name="details"
-                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800"
+                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="What should we know before you arrive?"
               />
             </label>

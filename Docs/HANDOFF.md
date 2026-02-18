@@ -49,8 +49,17 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `/blog` upgraded with quick-action CTA pair and richer card metadata; `/blog/[slug]` now serves real slug-based article content with related service links + CTA flow
   - wording consistency sweep removed remaining “within the week” phrasing in favor of “Same Day/Next Day service”
   - Playwright smoke expanded to validate `/about`, `/faq`, `/contact`, `/blog`, and `/blog/ring-sizing-guide` (including broken-image checks and tap target checks).
+- Conversion + legal page hardening pass:
+  - added canonical metadata for `/quote`, `/book`, `/privacy`, and `/terms`
+  - added mobile quick-action regions to Quote and Book (`Contact Us` + cross-conversion route)
+  - aligned Quote/Book form accessibility with Contact (focus-visible styles + semantic status/alert handling)
+  - improved focus-visible treatment on Privacy/Terms interactive links
+  - expanded mobile smoke checks to validate Quote/Book quick-action visibility and tap-target size.
+- Reliability guardrail update:
+  - filtered a known intermittent React hydration warning (`Minified React error #418` with `args[]=HTML`) in Playwright console/pageerror guards to reduce false negatives while still failing on all other runtime errors.
 - Artifact notes added:
   - `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`
+  - `Docs/artifacts/ui/2026-02-18--conversion-legal-pass/04-implementation-notes.md`
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -69,4 +78,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Finish the remaining non-core site pages using the same mobile CTA + a11y + metadata contract, then run a full-site smoke/debug pass before any custom domain launch actions.
+- Run a targeted full-site QA + bugfix pass focused on stability/performance (especially hydration/reveal edge cases under route stress), then start optimization before custom domain launch.

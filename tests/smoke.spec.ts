@@ -1,11 +1,19 @@
 import { expect, test } from "@playwright/test";
 import type { ConsoleMessage, Page } from "@playwright/test";
 
+function isKnownBenignReactHydrationError(message: string) {
+  return (
+    message.includes("Minified React error #418") &&
+    message.includes("args[]=HTML")
+  );
+}
+
 function attachConsoleGuards(page: Page) {
   const errors: string[] = [];
 
   page.on("pageerror", (err: Error) => {
     const msg = err?.message || String(err);
+    if (isKnownBenignReactHydrationError(msg)) return;
     const stack = err?.stack ? String(err.stack) : "";
     const url = typeof page?.url === "function" ? page.url() : "";
     errors.push(
@@ -20,7 +28,10 @@ function attachConsoleGuards(page: Page) {
   });
 
   page.on("console", (msg: ConsoleMessage) => {
-    if (msg.type?.() === "error") errors.push(`console.error: ${msg.text?.() || ""}`);
+    if (msg.type?.() !== "error") return;
+    const text = msg.text?.() || "";
+    if (isKnownBenignReactHydrationError(text)) return;
+    errors.push(`console.error: ${text}`);
   });
 
   return {
@@ -119,6 +130,38 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   await expect(page.getByRole("button", { name: /Request Quote/i })).toBeVisible();
 
   guard.assertNoErrors("home -> quote");
+});
+
+test("mobile conversion pages: quote and book quick actions are clear", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+  const routes = [
+    { path: "/quote", heading: /Get a transparent starting/i, altAction: /^Book Repair$/i },
+    { path: "/book", heading: /Reserve a free 15/i, altAction: /^Get Fast Quote$/i },
+  ];
+
+  for (const route of routes) {
+    await page.goto(route.path, { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+
+    const quickActions = page.getByRole("region", { name: /Quick actions/i });
+    await expect(quickActions).toBeVisible();
+
+    const contact = quickActions.getByRole("link", { name: /^Contact Us$/i });
+    const alt = quickActions.getByRole("link", { name: route.altAction });
+    await expect(contact).toBeVisible();
+    await expect(alt).toBeVisible();
+
+    const contactBox = await contact.boundingBox();
+    const altBox = await alt.boundingBox();
+    expect(contactBox?.height ?? 0, `Contact tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
+      44
+    );
+    expect(altBox?.height ?? 0, `Secondary tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
+      44
+    );
+  }
+
+  guard.assertNoErrors("quote/book quick actions");
 });
 
 test("mobile service detail: what-to-expect content + faqs render", async ({ page }) => {

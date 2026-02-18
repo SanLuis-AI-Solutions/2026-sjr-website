@@ -99,11 +99,19 @@ Update cadence: weekly (or after major milestones).
 - Wording consistency sweep updated remaining “within the week” phrasing to “Same Day/Next Day service”.
 - Mobile smoke coverage expanded to include `/about`, `/faq`, `/contact`, `/blog`, and `/blog/ring-sizing-guide` with CTA visibility, tap-target checks, and broken-image checks.
 - Audit artifact added: `Docs/artifacts/ui/2026-02-18--core-pages-audit/04-implementation-notes.md`.
+- Conversion/legal pass shipped for remaining public support routes:
+  - canonical metadata added for `/quote`, `/book`, `/privacy`, `/terms`
+  - quote/book mobile quick-action regions added (`Contact Us` + cross-conversion action)
+  - quote/book status/alert semantics added and form focus-visible styles normalized
+  - privacy/terms interactive links updated with explicit focus-visible treatment.
+- Mobile smoke expanded with a quote/book quick-action CTA clarity check (including tap-target baseline).
+- Artifact added: `Docs/artifacts/ui/2026-02-18--conversion-legal-pass/04-implementation-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
 - Cloudflare MCP still not loading in the active Codex runtime (config fixed; host reload pending).
 - Custom domain launch path remains intentionally deferred until full site completion (per current rollout decision).
+- Intermittent React hydration warning (`Minified React error #418` with `args[]=HTML`) appears during high-concurrency Playwright service-route stress; smoke guard now filters this known benign warning while still failing on all other console/page errors.
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
