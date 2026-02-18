@@ -82,6 +82,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - explicit 4-step service process
     - refined timeline cards and visit section
   - retained mobile-first CTA region semantics and existing smoke-test compatibility.
+- About page premium v3 polish (2026-02-18, same-day iteration):
+  - updated manifesto section from dark-brown to strict brand burgundy to match brand system and CTA palette.
+  - layered reveal-on-scroll animations throughout About sections/cards for stronger polish.
+  - added a parallax heritage section (`parallax-hero` behavior on desktop) for a more premium visual rhythm.
 
 ## Key Files
 - Design system: `DESIGN.md`

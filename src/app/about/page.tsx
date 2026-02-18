@@ -91,7 +91,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,_rgba(209,184,130,0.18),_transparent_52%)]" />
 
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-end">
-          <div>
+          <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">About</p>
             <h1 className="mt-3 max-w-3xl text-balance font-serif text-4xl text-stone-950 md:text-5xl">
               Family craftsmanship, refined over four decades.
@@ -137,7 +137,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <article className="sm:col-span-2 overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_26px_70px_rgba(58,25,16,0.18)]">
+            <article className="reveal-on-scroll reveal-delay-1 sm:col-span-2 overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_26px_70px_rgba(58,25,16,0.18)]">
               <div className="relative min-h-[300px]">
                 <Image
                   src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg"
@@ -145,9 +145,9 @@ export default function AboutPage() {
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 45vw"
-                  className="object-cover"
+                  className="object-cover animate-slow-zoom"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1416]/58 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy-deep/58 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 rounded-xl border border-white/20 bg-black/35 px-4 py-3 backdrop-blur-sm">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
                     Local workshop
@@ -156,7 +156,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </article>
-            <article className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+            <article className="reveal-on-scroll reveal-delay-2 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
               <div className="relative min-h-[150px]">
                 <Image
                   src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg"
@@ -167,7 +167,7 @@ export default function AboutPage() {
                 />
               </div>
             </article>
-            <article className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+            <article className="reveal-on-scroll reveal-delay-3 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
               <div className="relative min-h-[150px]">
                 <Image
                   src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg"
@@ -182,32 +182,61 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[#1e1416] py-14" aria-labelledby="about-manifesto">
+      <section className="relative overflow-hidden bg-brand-burgundy py-14" aria-labelledby="about-manifesto">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,_rgba(209,184,130,0.22),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_85%,_rgba(94,34,48,0.45),_transparent_58%)]" />
         <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-          <div>
+          <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Our manifesto</p>
             <h2 id="about-manifesto" className="mt-3 text-balance font-serif text-3xl text-white">
               Premium care should feel precise, calm, and transparent.
             </h2>
           </div>
-          <blockquote className="rounded-3xl border border-white/15 bg-white/6 p-6 text-sm leading-7 text-stone-200">
+          <blockquote className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-white/20 bg-white/10 p-6 text-sm leading-7 text-stone-100">
             “We treat each piece as if it were our own family’s heirloom. No shortcuts, no rushed
             handoffs, and no surprises before pickup.”
           </blockquote>
         </div>
       </section>
 
+      <section className="relative overflow-hidden py-18 md:py-24">
+        <div
+          className="parallax-hero absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg')",
+          }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-burgundy/88 via-brand-burgundy/70 to-brand-burgundy-deep/78" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="reveal-on-scroll max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Legacy care</p>
+            <h2 className="mt-3 text-balance font-serif text-3xl text-white md:text-4xl">
+              Some pieces carry generations of memory. We repair them accordingly.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-stone-100">
+              Our restoration work focuses on structural integrity, faithful finishing, and clear
+              approvals before every major step.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-stone-50 py-14" aria-labelledby="about-standards">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our standards</p>
-          <h2 id="about-standards" className="mt-3 max-w-3xl text-balance font-serif text-3xl text-stone-900">
+          <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our standards</p>
+          <h2
+            id="about-standards"
+            className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-3xl text-stone-900"
+          >
             What makes our process different from generic repair counters.
           </h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {STANDARDS.map((item) => (
+            {STANDARDS.map((item, index) => (
               <article
                 key={item.title}
-                className="rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_16px_46px_rgba(58,25,16,0.10)]"
+                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-3xl border border-stone-200 bg-white p-6 shadow-[0_16px_46px_rgba(58,25,16,0.10)]`}
               >
                 <h3 className="font-serif text-2xl text-stone-900">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-stone-700">{item.body}</p>
@@ -220,7 +249,7 @@ export default function AboutPage() {
       <section className="bg-white py-14" aria-labelledby="about-process">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-            <div>
+            <div className="reveal-on-scroll">
               <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">How we work</p>
               <h2 id="about-process" className="mt-3 text-balance font-serif text-3xl text-stone-900">
                 A clear process from first conversation to final pickup.
@@ -232,10 +261,10 @@ export default function AboutPage() {
             </div>
 
             <ol className="space-y-4">
-              {PROCESS.map((item) => (
+              {PROCESS.map((item, index) => (
                 <li
                   key={item.step}
-                  className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
+                  className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm`}
                 >
                   <div className="flex items-start gap-4">
                     <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white">
@@ -255,16 +284,19 @@ export default function AboutPage() {
 
       <section className="bg-stone-100 py-14" aria-labelledby="about-timeline">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our timeline</p>
-          <h2 id="about-timeline" className="mt-3 text-balance font-serif text-3xl text-stone-900">
+          <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our timeline</p>
+          <h2
+            id="about-timeline"
+            className="reveal-on-scroll mt-3 text-balance font-serif text-3xl text-stone-900"
+          >
             Four decades of local trust, with the same family standards.
           </h2>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {TIMELINE.map((item) => (
+            {TIMELINE.map((item, index) => (
               <article
                 key={item.year}
-                className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm"
+                className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-2xl border border-stone-200 bg-white p-5 shadow-sm`}
               >
                 <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">{item.year}</p>
                 <h3 className="mt-2 font-serif text-2xl text-stone-900">{item.title}</h3>
@@ -277,20 +309,20 @@ export default function AboutPage() {
 
       <section className="bg-white py-14" aria-labelledby="about-visit">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
-          <h2 id="about-visit" className="mt-3 font-serif text-3xl text-stone-900">
+          <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
+          <h2 id="about-visit" className="reveal-on-scroll mt-3 font-serif text-3xl text-stone-900">
             Stop by our Pasadena workshop.
           </h2>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
+            <article className="reveal-on-scroll rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Address</h3>
               <p className="mt-3 text-sm leading-7 text-stone-700">
                 {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.state} {" "}
                 {BUSINESS.address.zip}
               </p>
             </article>
-            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
+            <article className="reveal-on-scroll reveal-delay-1 rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Phone</h3>
               <Link
                 href={`tel:${BUSINESS.phone}`}
@@ -299,7 +331,7 @@ export default function AboutPage() {
                 {BUSINESS.phone}
               </Link>
             </article>
-            <article className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
+            <article className="reveal-on-scroll reveal-delay-2 rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Email</h3>
               <Link
                 href={`mailto:${BUSINESS.email}`}

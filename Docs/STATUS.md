@@ -125,6 +125,10 @@ Update cadence: weekly (or after major milestones).
 - About page premium v2 redesign shipped after direct comparison against legacy site:
   - replaced the still-basic stacked composition with a stronger editorial layout (asymmetric hero, trust metrics, manifesto band, process sequence, and timeline cards).
   - kept mobile-first CTA clarity and semantics while increasing visual distinctiveness from Home.
+- About page premium v3 polish shipped from user feedback:
+  - manifesto band color corrected to brand burgundy (removed dark-brown look).
+  - motion layer added using reveal-on-scroll sequencing across major About sections.
+  - new parallax brand section added (desktop fixed background behavior via `parallax-hero`) to increase premium depth without sacrificing mobile readability.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
