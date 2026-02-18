@@ -713,12 +713,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+              <h2 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 How it works
-              </p>
-              <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                What happens next.
               </h2>
+              <p className="mt-3 font-serif text-3xl text-stone-900">
+                What happens next.
+              </p>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                 {howItWorksIntro}
               </p>
@@ -970,12 +970,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                  <h2 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                     Why customers choose us
-                  </p>
-                  <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                    {whyHeading}
                   </h2>
+                  <p className="mt-3 font-serif text-3xl text-stone-900">
+                    {whyHeading}
+                  </p>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                     {whyIntroCopy}
                   </p>

@@ -167,6 +167,11 @@ Update cadence: weekly (or after major milestones).
   - blog topic chips now support query-param filtering (`/blog?topic=<topic>`) so event analysis maps to visible content segmentation.
   - runtime validation confirms all 5 events fire from live UI interactions on production alias (`blog_topic_click`, `faq_filter_select`, `faq_search`, `article_mid_cta_click`, `related_read_click`).
   - production GA loader issue resolved: `NEXT_PUBLIC_GA_MEASUREMENT_ID` now set in Vercel `production` + `preview`, value sanitized (newline removed), redeployed, and `window.gtag` now initializes correctly on live pages.
+- Services detail inventory + quality audit (2026-02-18) completed:
+  - confirmed all 9 service detail pages are implemented and live through shared dynamic route template (`/services/[slug]`).
+  - confirmed image health (`scripts/audit-images.ps1` -> `OK: 15/15`) and FAQ minimum counts (watch/ring: 7, all other services: 5).
+  - identified heavy cross-page image reuse in supporting galleries (same heirloom image appears on 8 service pages), which is now the primary premium-quality gap.
+  - applied semantic heading improvement in service template so section labels `How it works` and `Why customers choose us` are now real headings for stronger accessibility/SEO structure.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (13/13)
@@ -182,5 +187,5 @@ Update cadence: weekly (or after major milestones).
 
 ## Next Week (Top 3)
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
-2. Apply the flagship service-detail contract pattern to the next 1–2 high-intent service pages and keep FAQ intent quality high.
+2. Run a service-detail premium polish sprint focused on reducing image reuse and adding service-specific value modules (pricing bands, trust proof, decision FAQs).
 3. Run a post-deploy UX/a11y regression pass across Home/About/FAQ/Contact with mobile-first CTA and contrast checks.

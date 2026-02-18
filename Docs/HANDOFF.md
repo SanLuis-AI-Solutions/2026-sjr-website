@@ -142,6 +142,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `NEXT_PUBLIC_GA_MEASUREMENT_ID` added to Vercel `production` and `preview`.
     - first save included CRLF and caused runtime script parse errors; value was removed/re-added without newline.
     - production redeployed and alias updated; live checks now confirm GA loader script + `window.gtag` availability and event pushes to `dataLayer`.
+- Services detail completeness + optimization audit (2026-02-18):
+  - confirmed all services are already implemented as detail pages via dynamic route (`watch-repair`, `ring-sizing`, `stone-setting`, `jewelry-cleaning`, `necklace-repair`, `bracelet-repair`, `pearl-restringing`, `custom-design`, `heirloom-restoration`).
+  - confirmed no broken service images (`scripts/audit-images.ps1` -> `OK: 15/15`) and minimum FAQ counts per contract (7 for watch/ring, 5 for others).
+  - identified key premium gap: heavy cross-page gallery image reuse; only 15 unique image assets currently feed all service detail compositions.
+  - shipped semantic heading refinement in `src/app/services/[slug]/page.tsx` so `How it works` and `Why customers choose us` are true headings (stronger a11y/semantic structure).
 
 ## Key Files
 - Design system: `DESIGN.md`
@@ -160,4 +165,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Build one GA4 exploration for the new 5-event funnel (`blog_topic_click` -> `article_mid_cta_click`/`related_read_click` and `faq_filter_select` -> `faq_search`) and use it to prioritize the next 2 flagship service-detail pages.
+- Execute a service-page premium polish sprint: replace repeated gallery assets with a per-service visual set (3-4 unique images each) and add one service-specific value block per page (pricing bands or “when to repair vs replace” guidance).
