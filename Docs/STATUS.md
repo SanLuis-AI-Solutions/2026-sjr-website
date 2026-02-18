@@ -183,6 +183,11 @@ Update cadence: weekly (or after major milestones).
   - updated watch-repair gallery/support imagery to use distinct service visuals instead of repeating prior workshop trio.
   - image-link audit now passes at `OK: 20/20` after expanding the visual library.
   - mobile visual QA sweep completed with final hero-support dedupe (custom-design moved to `workshopMain`) so all service blueprint `heroSupport` assignments are now unique.
+- Service-detail pricing benchmark pass shipped (2026-02-18, follow-up iteration):
+  - added a `Houston market snapshot (provisional)` module in Pricing & Timing for all 9 service routes.
+  - each service now shows 3 scenario cards with working market starters/ranges to improve quote expectation setting on mobile.
+  - smoke coverage updated to require market snapshot visibility and exactly 3 scenario cards per service route.
+  - Houston/TX benchmark sources captured in `Docs/artifacts/ui/2026-02-18--service-detail-audit/00-audit-notes.md`.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

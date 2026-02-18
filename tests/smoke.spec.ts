@@ -383,6 +383,8 @@ test("mobile service detail: decision module and proof blocks render", async ({ 
 
     await expect(page.getByTestId("service-decision-module")).toBeVisible();
     await expect(page.getByTestId("service-proof-blocks")).toBeVisible();
+    await expect(page.getByTestId("service-market-snapshot")).toBeVisible();
+    await expect(page.getByTestId("service-market-snapshot-item")).toHaveCount(3);
   }
 
   guard.assertNoErrors("service decision/proof modules");

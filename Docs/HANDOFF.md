@@ -174,6 +174,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - mobile visual QA follow-up:
     - audited service blueprint `heroSupport` assignments and removed final duplicate (`custom-design` no longer shares support image with `jewelry-cleaning`).
     - post-fix verification rerun: `npm run lint` PASS, `npm test` PASS (15/15), `scripts/verify.ps1` PASS.
+- Service-detail market pricing benchmark pass (2026-02-18, same-day):
+  - added a `Houston market snapshot (provisional)` block inside Pricing & Timing on `src/app/services/[slug]/page.tsx`.
+  - each service route now renders three scenario cards with starter ranges for immediate quote framing.
+  - added smoke assertions in `tests/smoke.spec.ts` to enforce market snapshot visibility and 3-card rendering per service route.
+  - source/assumption notes recorded in `Docs/artifacts/ui/2026-02-18--service-detail-audit/00-audit-notes.md`.
 
 ## Key Files
 - Design system: `DESIGN.md`

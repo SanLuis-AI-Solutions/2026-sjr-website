@@ -55,6 +55,21 @@ type ProofSnippet = {
   byline: string;
 };
 
+type MarketScenario = {
+  title: string;
+  averageStart: string;
+  range: string;
+  note: string;
+};
+
+type MarketSnapshot = {
+  label: string;
+  updated: string;
+  summary: string;
+  scenarios: MarketScenario[];
+  footnote: string;
+};
+
 const DECISION_MODULES: Record<string, DecisionModule> = {
   "watch-repair": {
     label: "Repair vs replace",
@@ -331,6 +346,261 @@ const PROOF_SNIPPETS: Record<string, ProofSnippet[]> = {
   ],
 };
 
+const MARKET_SNAPSHOTS: Record<string, MarketSnapshot> = {
+  "watch-repair": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Working benchmark ranges for common watch services from Houston market listings and published TX repair examples.",
+    scenarios: [
+      {
+        title: "Battery replacement",
+        averageStart: "$15",
+        range: "$15 to $25",
+        note: "Most published Houston listings position basic battery service in this starter range.",
+      },
+      {
+        title: "Crystal replacement",
+        averageStart: "$60",
+        range: "$60 to $120",
+        note: "Material, watch model, and fitment needs drive the spread above entry pricing.",
+      },
+      {
+        title: "General repair intake",
+        averageStart: "$50",
+        range: "$50 to $180+",
+        note: "Rush or same-day requests can increase pricing above standard rates.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final in-shop estimate depends on watch condition, parts, and approvals.",
+  },
+  "ring-sizing": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Current Houston-published ring sizing ranges are broad, so we use segmented starter bands to set expectations.",
+    scenarios: [
+      {
+        title: "Basic sizing adjustment",
+        averageStart: "$25",
+        range: "$25 to $75",
+        note: "Typical for straightforward gold/silver sizing with standard finishing.",
+      },
+      {
+        title: "Complex sizing",
+        averageStart: "$75",
+        range: "$75 to $150",
+        note: "Higher range for larger size moves, stone-adjacent work, or design constraints.",
+      },
+      {
+        title: "Priority turnaround",
+        averageStart: "$100",
+        range: "1.5x to 2x standard",
+        note: "Market examples show same-day priority work commonly priced above baseline service.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on metal type, size delta, and setting safety checks.",
+  },
+  "stone-setting": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Houston setting-repair pricing is usually anchored by prong and seat work, with sourcing adding variance.",
+    scenarios: [
+      {
+        title: "Prong or seat repair",
+        averageStart: "$50",
+        range: "$50 to $150",
+        note: "Published Houston ranges for prong/setting work cluster in this band.",
+      },
+      {
+        title: "Accent stone + reset",
+        averageStart: "$60",
+        range: "$60 to $200+",
+        note: "Range expands when matching, sourcing, or additional structural work is required.",
+      },
+      {
+        title: "Urgent stabilization",
+        averageStart: "$95",
+        range: "1.5x to 2x standard",
+        note: "Rush setting stabilization can carry a premium over standard queue pricing.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on stone size/type, mounting condition, and sourcing.",
+  },
+  "jewelry-cleaning": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Published Houston cleaning offers show entry refresh pricing below repair-level work, with polish add-ons scaling cost.",
+    scenarios: [
+      {
+        title: "Quick ultrasonic clean",
+        averageStart: "$15",
+        range: "$15 to $35",
+        note: "Common starter range for straightforward cleaning-only requests.",
+      },
+      {
+        title: "Clean + polish package",
+        averageStart: "$20",
+        range: "$20 to $50",
+        note: "Used for visible luster recovery and light finish improvement.",
+      },
+      {
+        title: "Boutique deep clean",
+        averageStart: "$39",
+        range: "$39 to $80",
+        note: "Some premium Houston offerings begin around the upper end of standard cleaning.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Fragile stones, plating, and condition checks can change final pricing.",
+  },
+  "necklace-repair": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Houston repair listings plus Texas benchmark shops indicate necklace pricing generally starts above cleaning and near basic repair intake levels.",
+    scenarios: [
+      {
+        title: "Chain break repair",
+        averageStart: "$30",
+        range: "$30 to $70",
+        note: "Common baseline for simple solder/link repair without major part replacement.",
+      },
+      {
+        title: "Clasp replacement",
+        averageStart: "$30",
+        range: "$30 to $75",
+        note: "Final price depends on clasp style, metal, and any reinforcement needed.",
+      },
+      {
+        title: "Priority same-day repair",
+        averageStart: "$50",
+        range: "$50 to $100+",
+        note: "Rush handling in Houston market examples often trends to roughly double standard pricing.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on chain style, metal, and break location.",
+  },
+  "bracelet-repair": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Bracelet repair benchmarks in Houston/TX typically mirror necklace pricing, with additional variation for clasp security and link complexity.",
+    scenarios: [
+      {
+        title: "Link or solder repair",
+        averageStart: "$30",
+        range: "$30 to $70",
+        note: "Entry range for isolated link issues and standard solder repairs.",
+      },
+      {
+        title: "Clasp/security work",
+        averageStart: "$30",
+        range: "$30 to $85",
+        note: "Pricing rises when clasp replacement and safety upgrades are combined.",
+      },
+      {
+        title: "Priority turnaround",
+        averageStart: "$50",
+        range: "$50 to $110+",
+        note: "Rush same-day handling is usually priced above standard repair queue rates.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on bracelet construction, parts, and requested upgrades.",
+  },
+  "pearl-restringing": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Houston bead/pearl pricing is often itemized by strand length and knot count, making per-inch math the clearest planning baseline.",
+    scenarios: [
+      {
+        title: "Restring labor",
+        averageStart: "$36",
+        range: "$2 per inch",
+        note: "An 18-inch strand benchmarks around $36 before knotting or clasp upgrades.",
+      },
+      {
+        title: "Hand-knot add-on",
+        averageStart: "$10",
+        range: "$0.50 to $1 per knot",
+        note: "Knotting costs scale with pearl count and requested spacing style.",
+      },
+      {
+        title: "Clasp service",
+        averageStart: "$4",
+        range: "$4 to $40+",
+        note: "Simple clasp attachment can be low-cost; premium clasp replacements increase total.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on strand length, knot count, clasp type, and pearl condition.",
+  },
+  "custom-design": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Custom design pricing in Houston spans a wide range by project type, so starter bands are split by use case.",
+    scenarios: [
+      {
+        title: "Remount or redesign (existing stones)",
+        averageStart: "$600",
+        range: "$600 to $1,500+",
+        note: "Texas benchmark shops commonly place entry remount work above standard repair ranges.",
+      },
+      {
+        title: "Custom wedding band",
+        averageStart: "$400",
+        range: "$400 to $8,000+",
+        note: "Houston market examples show broad variation based on metal and stone selection.",
+      },
+      {
+        title: "Custom engagement ring",
+        averageStart: "$3,000",
+        range: "$3,000 to $25,000+",
+        note: "Project complexity, center stone, and sourcing strategy drive final range.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on design scope, materials, sourcing, and revision path.",
+  },
+  "heirloom-restoration": {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary:
+      "Heirloom restoration estimates are typically composed from structural repair + finish work rather than one flat service fee.",
+    scenarios: [
+      {
+        title: "Structural stabilization",
+        averageStart: "$50",
+        range: "$50 to $150",
+        note: "Houston setting/prong repair benchmarks are the common starting anchor.",
+      },
+      {
+        title: "Clean, polish, refinish",
+        averageStart: "$20",
+        range: "$20 to $80",
+        note: "Finish refresh pricing follows Houston cleaning/polish market ranges.",
+      },
+      {
+        title: "Complex restoration",
+        averageStart: "$150",
+        range: "$150 to $500+",
+        note: "Multi-area rebuilds and part fabrication push pricing above basic repair tiers.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate depends on preservation goals, condition risk, and fabrication needs.",
+  },
+};
+
 function svgDataUri(title: string) {
   const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
   const svg =
@@ -379,6 +649,36 @@ function buildFallbackFaqs(serviceName: string): FaqItem[] {
         "Bring the item you want serviced and any relevant parts or notes (for example: extra watch links, missing stones, or a quick description of what changed).",
     },
   ];
+}
+
+function buildDefaultMarketSnapshot(serviceName: string): MarketSnapshot {
+  return {
+    label: "Houston market snapshot (provisional)",
+    updated: "Updated Feb 2026",
+    summary: `Working benchmark ranges for ${serviceName.toLowerCase()} based on current Houston/TX market examples.`,
+    scenarios: [
+      {
+        title: "Basic service",
+        averageStart: "$50",
+        range: "$50 to $120",
+        note: "Typical entry pricing for standard in-house repair requests.",
+      },
+      {
+        title: "Mid-complexity repair",
+        averageStart: "$95",
+        range: "$95 to $220",
+        note: "Applies when parts, added labor, or multi-step finishing is needed.",
+      },
+      {
+        title: "Priority turnaround",
+        averageStart: "$100",
+        range: "1.5x to 2x standard",
+        note: "Rush handling can increase pricing above baseline service queues.",
+      },
+    ],
+    footnote:
+      "Planning benchmark only. Final estimate is confirmed in-shop after condition and scope review.",
+  };
 }
 
 function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
@@ -1187,6 +1487,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       byline: "In-shop service note",
     },
   ]).slice(0, 3);
+  const marketSnapshot =
+    MARKET_SNAPSHOTS[slug] || buildDefaultMarketSnapshot(service.name);
   const schemaBase = SERVICES.find((item) => item.slug === service.slug) || SERVICES[0];
   const schemaService = {
     ...schemaBase,
@@ -1502,6 +1804,42 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     {turnaroundDetailCopy}
                   </p>
                 </div>
+              </div>
+
+              <div
+                className="mt-6 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-6 shadow-sm"
+                data-testid="service-market-snapshot"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    {marketSnapshot.label}
+                  </div>
+                  <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-stone-600">
+                    {marketSnapshot.updated}
+                  </span>
+                </div>
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
+                  {marketSnapshot.summary}
+                </p>
+                <div className="mt-5 grid gap-3 md:grid-cols-3">
+                  {marketSnapshot.scenarios.map((scenario) => (
+                    <article
+                      key={scenario.title}
+                      className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
+                      data-testid="service-market-snapshot-item"
+                    >
+                      <h3 className="font-serif text-xl text-stone-900">{scenario.title}</h3>
+                      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
+                        Starts around {scenario.averageStart}
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-stone-900">{scenario.range}</p>
+                      <p className="mt-2 text-sm leading-6 text-stone-600">{scenario.note}</p>
+                    </article>
+                  ))}
+                </div>
+                <p className="mt-4 text-xs leading-6 text-stone-500">
+                  {marketSnapshot.footnote}
+                </p>
               </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">

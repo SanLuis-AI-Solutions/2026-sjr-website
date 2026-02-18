@@ -36,6 +36,28 @@
   - Updated `src/lib/service-visuals.ts` blueprint assignments to reduce cross-page repeated imagery.
   - Image audit baseline improved from 15 referenced assets to 20 referenced assets (`scripts/audit-images.ps1` -> `OK: 20/20`).
   - Final mobile QA tweak: removed remaining duplicated `heroSupport` assignment so service blueprints now use unique support imagery per route.
+- Added `Houston market snapshot (provisional)` in Pricing & Timing on all service-detail routes:
+  - Each route now includes 3 scenario cards with starter ranges to improve quote expectation setting on mobile.
+  - Snapshot is explicitly labeled as planning guidance (not final in-shop estimate).
+
+## Houston/TX pricing evidence used (2026-02-18)
+- Watch battery/crystal and same-day cost context:
+  - `https://crescentwatchguys.com/watch-battery-replacement-cost/`
+  - `https://www.houstonjewelry.com/faq/how-much-does-same-day-jewelry-repair-cost/`
+- Ring sizing, prong/setting, and cleaning range anchors:
+  - `https://www.houstonjewelry.com/faq/how-much-does-ring-sizing-cost/`
+  - `https://www.houstonjewelry.com/faq/how-much-does-jewelry-cleaning-cost-in-houston/`
+  - `https://www.houstonjewelry.com/jewelry-repair-in-houston/`
+- Pearl restringing formulas:
+  - `https://www.thebeadshophouston.com/store/page7.html`
+- Boutique cleaning benchmark:
+  - `https://www.taharajewelry.com/services/jewelry-repair/houston-jewelry-cleaning/`
+- Texas benchmark support for chain/clasp/custom ranges (used where Houston sources do not publish exact line-item starts):
+  - `https://www.lanewells.com/pages/jewelry-repair-price-list`
+  - `https://www.lemeljewelers.com/jewelry-repair-pricing-guide`
+
+Inference note:
+- Necklace/bracelet/custom/heirloom scenario ranges include conservative inference from Houston anchors plus TX benchmark pages when Houston-local line-item prices were not publicly posted.
 
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
