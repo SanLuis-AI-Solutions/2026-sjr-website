@@ -64,7 +64,7 @@ function buildFallbackFaqs(serviceName: string): FaqItem[] {
     {
       question: `How long does ${serviceName.toLowerCase()} usually take?`,
       answer:
-        "Most pieces follow Same Day/Next Day service timing. Final timing depends on parts and repair complexity, and we confirm that before work begins.",
+        "Most pieces follow Same Day/Next Day service. Final timing depends on parts and repair complexity, and we confirm that before work begins.",
     },
     {
       question: "Is the repair done in-house?",
@@ -100,7 +100,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "How long does a watch battery replacement take?",
         answer:
-          "Many battery replacements are completed with Same Day/Next Day service timing. We confirm fit, function, and timing before we begin service.",
+          "Many battery replacements are completed with Same Day/Next Day service. We confirm fit, function, and timing before we begin service.",
       },
       {
         question: "Can you replace a watch crystal?",
@@ -140,7 +140,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "How long does ring sizing take?",
         answer:
-          "Most ring sizing jobs follow our Same Day/Next Day service timing. If extra metalwork or stone checks are needed, we confirm timing before you approve work.",
+          "Most ring sizing jobs follow our Same Day/Next Day service. If extra metalwork or stone checks are needed, we confirm timing before you approve work.",
       },
       {
         question: "Can you size a ring up or down?",
@@ -354,9 +354,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             )}
             <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/85 p-5 shadow-sm">
-              <h2 className="text-sm font-semibold text-stone-900">
+              <p className="text-sm font-semibold text-stone-900">
                 Need {service.name} in {BUSINESS.address.city}?
-              </h2>
+              </p>
               <p className="mt-2 text-sm leading-7 text-stone-700">
                 {isWatchRepair
                   ? "Yes. We service watches in-house with clear options, transparent estimates, and a confirmed pickup timeline before work begins."
@@ -376,7 +376,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 href="/book"
                 className="micro-interaction rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
-                Book a Repair
+                Book Repair
               </Link>
             </div>
           </div>
@@ -528,7 +528,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       href="/book"
                       className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     >
-                      Book
+                      Book Repair
                     </Link>
                   </div>
                 </div>
@@ -806,7 +806,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <p className="mt-3 text-sm leading-7 text-stone-600">
                     {isWatchRepair
                       ? "Same Day/Next Day service is common for battery work. Full service varies by parts availability."
-                      : "Most sizing jobs follow Same Day/Next Day service timing. Complex structural work may require additional time."}
+                      : "Most sizing jobs follow Same Day/Next Day service. Complex structural work may require additional time."}
                   </p>
                 </div>
               </div>
@@ -1149,19 +1149,23 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
       <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm">
+        <div
+          role="region"
+          aria-label="Quick actions"
+          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
+        >
           <div className="flex items-center gap-3">
             <Link
               href="/quote"
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Get Quote
+              Get Fast Quote
             </Link>
             <Link
               href="/book"
               className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Book
+              Book Repair
             </Link>
           </div>
         </div>

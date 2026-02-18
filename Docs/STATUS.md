@@ -61,6 +61,14 @@ Update cadence: weekly (or after major milestones).
 - Canonical/SEO guardrail tightened: `getSiteUrl()` now defaults to the canonical production domain when env vars are missing, instead of falling back to transient Vercel deployment hostnames.
 - Reliability checks completed: `scripts/verify.ps1` PASS and `npm test` PASS (includes mobile smoke, services hub featured-route check, and new ring-sizing flagship section smoke test).
 - Image integrity check completed for Services + Watch Repair + Ring Sizing asset URLs; all audited image URLs returned HTTP 200.
+- Services hub and service-detail CTA copy normalized for mobile clarity (`Get Fast Quote` + `Book Repair`) including sticky action bars.
+- Services hub card action affordance strengthened by adding explicit **View details** text on each clickable service card (keeps a single clear action with no helper clutter).
+- A11y semantics pass: added `aria-labelledby` on Services category sections and labeled mobile quick-action regions (`role="region" aria-label="Quick actions"`).
+- Wording consistency pass completed: removed remaining runtime uses of “Same Day/Next Day service timing” in favor of “Same Day/Next Day service”.
+- Mobile smoke coverage extended with route-level checks for `/services`, `/services/watch-repair`, and `/services/ring-sizing` validating:
+  - quick-action CTA visibility
+  - tap target height (`>=44px`)
+  - no broken images (`naturalWidth > 0` once loaded).
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

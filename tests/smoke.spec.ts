@@ -43,6 +43,32 @@ async function assertHomeRenders(page: Page) {
   await expect(servicesHeading).toBeVisible();
 }
 
+async function assertNoBrokenImages(page: Page) {
+  await page.evaluate(async () => {
+    const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+    const total = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const step = Math.max(320, Math.floor(window.innerHeight * 0.9));
+    for (let y = 0; y <= total; y += step) {
+      window.scrollTo(0, y);
+      await pause(80);
+    }
+    window.scrollTo(0, 0);
+    await pause(80);
+  });
+
+  const broken = await page.evaluate(() => {
+    return Array.from(document.images)
+      .filter((img) => {
+        const src = img.currentSrc || img.src || "";
+        if (!src) return false;
+        return !img.complete || img.naturalWidth === 0;
+      })
+      .map((img) => img.currentSrc || img.src || "<unknown>");
+  });
+
+  expect(broken, `Broken images detected:\n${broken.join("\n")}`).toEqual([]);
+}
+
 test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -162,7 +188,36 @@ test("mobile service detail: ring sizing follows flagship section order", async 
   await expect(page.getByText(/Related services/i).first()).toBeVisible();
 
   await expect(page.getByRole("link", { name: /Get Fast Quote/i }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Book a Repair/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeVisible();
 
   guard.assertNoErrors("service detail: ring-sizing flagship sections");
+});
+
+test("mobile services pages: quick actions are clear and image assets load", async ({
+  page,
+}) => {
+  const routes = ["/services", "/services/watch-repair", "/services/ring-sizing"];
+
+  for (const route of routes) {
+    await page.goto(route, { waitUntil: "networkidle" });
+
+    const quickActions = page.getByRole("region", { name: /Quick actions/i });
+    await expect(quickActions).toBeVisible();
+
+    const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
+    const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+    await expect(quote).toBeVisible();
+    await expect(book).toBeVisible();
+
+    const quoteBox = await quote.boundingBox();
+    const bookBox = await book.boundingBox();
+    expect(quoteBox?.height ?? 0, `Quote tap target too small on ${route}`).toBeGreaterThanOrEqual(
+      44
+    );
+    expect(bookBox?.height ?? 0, `Book tap target too small on ${route}`).toBeGreaterThanOrEqual(
+      44
+    );
+
+    await assertNoBrokenImages(page);
+  }
 });

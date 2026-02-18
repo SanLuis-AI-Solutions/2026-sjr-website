@@ -121,7 +121,7 @@ export default async function ServicesPage() {
                 href="/book"
                 className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
-                Book a Repair
+                Book Repair
               </Link>
             </div>
           </div>
@@ -259,11 +259,12 @@ export default async function ServicesPage() {
                   <section
                     key={group.id}
                     id={`group-${group.id}`}
+                    aria-labelledby={`group-heading-${group.id}`}
                     className={`scroll-mt-[120px] reveal-on-scroll reveal-delay-${(groupIndex % 3) + 1}`}
                   >
                     <div className="flex flex-wrap items-end justify-between gap-4">
                       <div>
-                        <h2 className="text-3xl text-stone-900">
+                        <h2 id={`group-heading-${group.id}`} className="text-3xl text-stone-900">
                           {group.label}
                         </h2>
                         <p className="mt-3 text-sm leading-7 text-stone-700">
@@ -332,8 +333,9 @@ export default async function ServicesPage() {
                                     {service.name}
                                   </h3>
                                 </div>
-                                <span className="mt-2 inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-brand-burgundy transition group-hover:border-brand-gold/60 group-hover:bg-brand-gold/10">
-                                  →
+                                <span className="mt-2 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-burgundy transition group-hover:border-brand-gold/60 group-hover:bg-brand-gold/10">
+                                  View details
+                                  <span aria-hidden="true">→</span>
                                 </span>
                               </div>
 
@@ -376,19 +378,23 @@ export default async function ServicesPage() {
 
       {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
       <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm">
+        <div
+          role="region"
+          aria-label="Quick actions"
+          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
+        >
           <div className="flex items-center gap-3">
             <Link
               href="/quote"
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Get Quote
+              Get Fast Quote
             </Link>
             <Link
               href="/book"
               className="flex-1 rounded-full border border-brand-gold px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Book
+              Book Repair
             </Link>
           </div>
         </div>

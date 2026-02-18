@@ -28,7 +28,7 @@ export const SERVICES = [
     time_estimate: "Same Day/Next Day service",
     longDescription: [
       "From battery replacements to full mechanical service, we repair modern and vintage watches in-house with careful handling and clean finishing.",
-      "Most quick services follow Same Day/Next Day service timing. If your watch needs parts or a full movement overhaul, we confirm timing and starting-at pricing before any work begins."
+      "Most quick services follow Same Day/Next Day service. If your watch needs parts or a full movement overhaul, we confirm timing and starting-at pricing before any work begins."
     ],
     includes: [
       "Complete movement ultrasonic cleaning",

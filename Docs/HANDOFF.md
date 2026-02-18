@@ -30,6 +30,12 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `src/lib/site-url.ts` now defaults to `https://www.susiesjewelryrepair.com` when env vars are absent (prevents transient Vercel host canonicals in sitemap/metadata).
 - Artifact notes added:
   - `Docs/artifacts/ui/2026-02-14--services-watch-contract/04-implementation-notes-2026-02-17.md`
+- Follow-up hardening pass:
+  - normalized secondary CTA wording to `Book Repair` and sticky-primary wording to `Get Fast Quote` on Services hub + Service detail
+  - improved service-card click clarity by adding explicit `View details` action text
+  - added section semantics (`aria-labelledby`) and labeled mobile quick-action regions (`role="region" aria-label="Quick actions"`)
+  - removed remaining `Same Day/Next Day service timing` runtime phrasing for consistency
+  - extended Playwright mobile checks for CTA tap target size and image integrity on `/services`, `/services/watch-repair`, `/services/ring-sizing`.
 
 ## Key Files
 - Design system: `DESIGN.md`

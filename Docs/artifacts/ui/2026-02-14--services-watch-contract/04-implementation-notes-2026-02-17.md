@@ -28,3 +28,15 @@ Verification:
   - Includes existing mobile smoke tests + new ring-sizing flagship section smoke test.
 - `pwsh -File scripts/verify.ps1` (PASS)
 - Direct URL image audit on services/watch/ring assets (all HTTP 200).
+
+Addendum (same-day follow-up):
+- Services hub card action clarity improved by adding explicit **View details** micro-action text in each clickable service card.
+- CTA language normalized for consistency and mobile clarity on Services hub + Service detail:
+  - `Get Fast Quote` (primary)
+  - `Book Repair` (secondary)
+- Added `aria-labelledby` on service category sections and `role="region" aria-label="Quick actions"` on mobile sticky CTA bars.
+- Tightened heading hierarchy in service hero trust copy by converting the inline prompt from heading to paragraph text.
+- Removed remaining `Same Day/Next Day service timing` phrasing in service-detail copy and constants so wording is consistently `Same Day/Next Day service`.
+- Added Playwright smoke coverage for:
+  - quick-actions CTA visibility and tap target height (`>=44px`)
+  - image load integrity checks on `/services`, `/services/watch-repair`, and `/services/ring-sizing`.
