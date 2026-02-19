@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="grid gap-16 md:grid-cols-4">
           <div className="md:col-span-1">
             <Link href="/" className="font-serif text-2xl text-white">
-              Susie’s <span className="text-brand-gold">Repair</span>
+              Susie’s <span className="text-brand-gold">Jewelry Repair</span>
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-relaxed">
               In-house watch and jewelry repair in Pasadena. Master craftsmanship with clear communication and fast turnaround.

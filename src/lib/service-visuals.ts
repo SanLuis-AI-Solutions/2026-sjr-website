@@ -1,10 +1,8 @@
-import { SERVICES } from "@/lib/constants";
-
 type ServiceVisualBlueprint = {
-  heroSupport: string;
-  process: [string, string, string];
-  expect: [string, string];
-  why: string;
+  hero: string;
+  detailA: string;
+  detailB: string;
+  detailC: string;
 };
 
 export type ServiceVisualSet = {
@@ -16,136 +14,94 @@ export type ServiceVisualSet = {
   whyImageAlt: string;
 };
 
-const SERVICE_IMAGE_BY_SLUG = Object.fromEntries(
-  SERVICES.map((item) => [item.slug, item.image])
-) as Record<string, string>;
-
-const ASSET_LABEL_BY_URL: Record<string, string> = Object.fromEntries(
-  SERVICES.map((item) => [item.image, item.name])
-);
-
-const AUX_IMAGES = {
-  heroRing:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/hero-ring.jpg",
-  workshopMain:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg",
-  workshopSketches:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-  workshopPocketWatch:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-  beforeRing:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/before-after/before-ring.jpg",
-  afterRing:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/before-after/after-ring.png",
-  altWatchWorkbench:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/alt-watch-workbench.jpg",
-  altJewelerHands:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/alt-jeweler-hands.jpg",
-  altToolDetail:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/alt-tool-detail.jpg",
-  altRingCloseup:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/alt-ring-closeup.jpg",
-  altWorkshopBench:
-    "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/alt-workshop-bench.jpg",
-};
-
-const BLUEPRINTS: Record<string, ServiceVisualBlueprint> = {
+const SERVICE_VISUALS_V2: Record<string, ServiceVisualBlueprint> = {
+  "watch-repair": {
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-c.jpg",
+  },
   "ring-sizing": {
-    heroSupport: AUX_IMAGES.afterRing,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["ring-sizing"],
-      AUX_IMAGES.altRingCloseup,
-      SERVICE_IMAGE_BY_SLUG["stone-setting"],
-    ],
-    expect: [AUX_IMAGES.beforeRing, SERVICE_IMAGE_BY_SLUG["custom-design"]],
-    why: SERVICE_IMAGE_BY_SLUG["ring-sizing"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-c.jpg",
   },
   "stone-setting": {
-    heroSupport: AUX_IMAGES.altJewelerHands,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["stone-setting"],
-      AUX_IMAGES.altToolDetail,
-      SERVICE_IMAGE_BY_SLUG["watch-repair"],
-    ],
-    expect: [AUX_IMAGES.altRingCloseup, SERVICE_IMAGE_BY_SLUG["custom-design"]],
-    why: SERVICE_IMAGE_BY_SLUG["stone-setting"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-c.jpg",
   },
   "jewelry-cleaning": {
-    heroSupport: AUX_IMAGES.altWorkshopBench,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["jewelry-cleaning"],
-      AUX_IMAGES.altJewelerHands,
-      SERVICE_IMAGE_BY_SLUG["bracelet-repair"],
-    ],
-    expect: [
-      SERVICE_IMAGE_BY_SLUG["pearl-restringing"],
-      SERVICE_IMAGE_BY_SLUG["necklace-repair"],
-    ],
-    why: SERVICE_IMAGE_BY_SLUG["jewelry-cleaning"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-c.jpg",
   },
   "necklace-repair": {
-    heroSupport: AUX_IMAGES.heroRing,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["necklace-repair"],
-      AUX_IMAGES.altJewelerHands,
-      SERVICE_IMAGE_BY_SLUG["pearl-restringing"],
-    ],
-    expect: [
-      SERVICE_IMAGE_BY_SLUG["bracelet-repair"],
-      AUX_IMAGES.altWorkshopBench,
-    ],
-    why: SERVICE_IMAGE_BY_SLUG["necklace-repair"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-c.jpg",
   },
   "bracelet-repair": {
-    heroSupport: AUX_IMAGES.altToolDetail,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["bracelet-repair"],
-      SERVICE_IMAGE_BY_SLUG["necklace-repair"],
-      AUX_IMAGES.altWatchWorkbench,
-    ],
-    expect: [
-      SERVICE_IMAGE_BY_SLUG["jewelry-cleaning"],
-      SERVICE_IMAGE_BY_SLUG["ring-sizing"],
-    ],
-    why: SERVICE_IMAGE_BY_SLUG["bracelet-repair"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-c.jpg",
   },
   "pearl-restringing": {
-    heroSupport: AUX_IMAGES.workshopSketches,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["pearl-restringing"],
-      AUX_IMAGES.altRingCloseup,
-      SERVICE_IMAGE_BY_SLUG["necklace-repair"],
-    ],
-    expect: [
-      SERVICE_IMAGE_BY_SLUG["custom-design"],
-      SERVICE_IMAGE_BY_SLUG["jewelry-cleaning"],
-    ],
-    why: SERVICE_IMAGE_BY_SLUG["pearl-restringing"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-c.jpg",
   },
   "custom-design": {
-    heroSupport: AUX_IMAGES.workshopMain,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["custom-design"],
-      AUX_IMAGES.altJewelerHands,
-      SERVICE_IMAGE_BY_SLUG["stone-setting"],
-    ],
-    expect: [SERVICE_IMAGE_BY_SLUG["ring-sizing"], AUX_IMAGES.beforeRing],
-    why: SERVICE_IMAGE_BY_SLUG["custom-design"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-c.jpg",
   },
   "heirloom-restoration": {
-    heroSupport: AUX_IMAGES.workshopPocketWatch,
-    process: [
-      SERVICE_IMAGE_BY_SLUG["heirloom-restoration"],
-      AUX_IMAGES.altWatchWorkbench,
-      AUX_IMAGES.altToolDetail,
-    ],
-    expect: [SERVICE_IMAGE_BY_SLUG["stone-setting"], AUX_IMAGES.altRingCloseup],
-    why: SERVICE_IMAGE_BY_SLUG["heirloom-restoration"],
+    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-hero.jpg",
+    detailA:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-a.jpg",
+    detailB:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-b.jpg",
+    detailC:
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-c.jpg",
   },
 };
 
-function labelForUrl(url: string, fallbackName: string) {
-  return ASSET_LABEL_BY_URL[url] || fallbackName;
+const FALLBACK_VISUAL = SERVICE_VISUALS_V2["watch-repair"];
+
+function getVisual(slug: string) {
+  return SERVICE_VISUALS_V2[slug] || FALLBACK_VISUAL;
 }
 
 export function buildServiceVisualSet(
@@ -154,91 +110,43 @@ export function buildServiceVisualSet(
   heroImageSrc: string,
   isWatchRepair: boolean
 ): ServiceVisualSet {
+  const visual = getVisual(slug);
+
+  const primaryDetail = visual.detailA;
+  const secondaryDetail = visual.detailB;
+  const tertiaryDetail = visual.detailC;
+
   if (isWatchRepair) {
     return {
-      heroSupportImage: AUX_IMAGES.altWatchWorkbench,
-      heroSupportImageAlt: "Watch service in progress on the jeweler's bench",
+      heroSupportImage: primaryDetail,
+      heroSupportImageAlt: "Watch movement and case work detail",
       processGallery: [
-        {
-          url: AUX_IMAGES.workshopMain,
-          alt: "Workbench and precision tools",
-          label: "On the bench",
-        },
-        {
-          url: AUX_IMAGES.altJewelerHands,
-          alt: "Hands-on movement and case servicing",
-          label: "Precision first",
-        },
-        {
-          url: AUX_IMAGES.altToolDetail,
-          alt: "Detailed in-house watch repair setup",
-          label: "Careful finishing",
-        },
+        { url: primaryDetail, alt: "Watch repair setup detail", label: "Service focus" },
+        { url: secondaryDetail, alt: "Watch movement precision detail", label: "Craft reference" },
+        { url: tertiaryDetail, alt: "Watch finishing and inspection detail", label: "Finishing reference" },
       ],
       expectImages: [
-        {
-          url: SERVICE_IMAGE_BY_SLUG["watch-repair"],
-          alt: "Watch component detail under inspection",
-        },
-        {
-          url: AUX_IMAGES.altWatchWorkbench,
-          alt: "Watch repair workbench detail",
-        },
+        { url: secondaryDetail, alt: "Watch condition and parts inspection detail" },
+        { url: tertiaryDetail, alt: "Watch service completion detail" },
       ],
-      whyImageSrc: heroImageSrc,
-      whyImageAlt: serviceName,
-    };
-  }
-
-  const blueprint = BLUEPRINTS[slug];
-  if (!blueprint) {
-    return {
-      heroSupportImage: AUX_IMAGES.workshopMain,
-      heroSupportImageAlt: "In-house workshop detail",
-      processGallery: [
-        { url: heroImageSrc, alt: serviceName, label: "Service focus" },
-        {
-          url: SERVICE_IMAGE_BY_SLUG["heirloom-restoration"],
-          alt: "Heirloom Restorations craftsmanship",
-          label: "Craft reference",
-        },
-        {
-          url: SERVICE_IMAGE_BY_SLUG["custom-design"],
-          alt: "Custom Design finishing detail",
-          label: "Finishing reference",
-        },
-      ],
-      expectImages: [
-        {
-          url: SERVICE_IMAGE_BY_SLUG["stone-setting"],
-          alt: "Stone Replacement & Settings bench detail",
-        },
-        {
-          url: SERVICE_IMAGE_BY_SLUG["ring-sizing"],
-          alt: "Ring Sizing & Repair process detail",
-        },
-      ],
-      whyImageSrc: heroImageSrc,
-      whyImageAlt: serviceName,
+      whyImageSrc: primaryDetail,
+      whyImageAlt: "Completed watch repair and in-house quality control detail",
     };
   }
 
   return {
-    heroSupportImage: blueprint.heroSupport,
-    heroSupportImageAlt: `${serviceName} support image`,
-    processGallery: blueprint.process.map((url, index) => {
-      const label = index === 0 ? "Service focus" : index === 1 ? "Craft reference" : "Finishing reference";
-      return {
-        url,
-        alt: `${labelForUrl(url, serviceName)} detail`,
-        label,
-      };
-    }),
-    expectImages: blueprint.expect.map((url) => ({
-      url,
-      alt: `${labelForUrl(url, serviceName)} detail`,
-    })),
-    whyImageSrc: blueprint.why,
-    whyImageAlt: `${labelForUrl(blueprint.why, serviceName)} in-house result`,
+    heroSupportImage: primaryDetail,
+    heroSupportImageAlt: `${serviceName} support detail`,
+    processGallery: [
+      { url: primaryDetail, alt: `${serviceName} service focus detail`, label: "Service focus" },
+      { url: secondaryDetail, alt: `${serviceName} craft detail`, label: "Craft reference" },
+      { url: tertiaryDetail, alt: `${serviceName} finishing detail`, label: "Finishing reference" },
+    ],
+    expectImages: [
+      { url: secondaryDetail, alt: `${serviceName} expectation detail` },
+      { url: tertiaryDetail, alt: `${serviceName} results detail` },
+    ],
+    whyImageSrc: primaryDetail,
+    whyImageAlt: `${serviceName} in-house result detail`,
   };
 }

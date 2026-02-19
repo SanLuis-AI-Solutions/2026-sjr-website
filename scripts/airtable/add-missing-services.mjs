@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 const baseId = "app6ogTLP23Fy37bR";
 const tableId = "tblgzWv9JR6QbT42h";
 const token = process.env.AIRTABLE_PAT_TOKEN;
@@ -16,7 +13,7 @@ const services = [
     name: "Watch Repair & Battery Replacement",
     short_summary: "Precision servicing for modern and vintage watches.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/watch-repair.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-hero.jpg",
     long_description: [
       "Keep your timepieces precise with expert watch repair. From battery swaps to movement overhauls, we handle every watch with care.",
       "Our in-house watchmaker specializes in luxury brands, mechanical movements, and vintage restorations.",
@@ -39,7 +36,7 @@ const services = [
     name: "Ring Sizing & Repair",
     short_summary: "Comfortable, precise sizing with clean finishes.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/ring-sizing.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-hero.jpg",
     long_description: [
       "Ensure your rings fit perfectly with professional sizing services.",
       "We use precision techniques to keep seams invisible and integrity intact.",
@@ -62,7 +59,7 @@ const services = [
     name: "Stone Replacement & Settings",
     short_summary: "Secure mounts and stone replacements done in-house.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/stone-setting.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-hero.jpg",
     long_description: [
       "Restore brilliance and security with expert stone setting and prong repair.",
       "We match stones and secure every setting for long-term wear.",
@@ -85,7 +82,7 @@ const services = [
     name: "Jewelry Cleaning & Polishing",
     short_summary: "Bring back shine with safe, professional cleaning and polishing.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/jewelry-cleaning.png",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-hero.jpg",
     long_description: [
       "Remove buildup and restore brilliance while protecting stones and settings.",
       "Every piece is inspected during cleaning for safety.",
@@ -108,7 +105,7 @@ const services = [
     name: "Necklace Repair",
     short_summary: "Repair broken necklaces, clasps, and delicate chains.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/necklace-repair.png",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-hero.jpg",
     long_description: [
       "We repair broken necklaces and restore their strength and finish.",
       "From delicate chains to heavier pieces, every repair is reinforced and polished.",
@@ -131,7 +128,7 @@ const services = [
     name: "Bracelet Repair",
     short_summary: "Fix broken links and clasps for a secure, comfortable fit.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/bracelet-repair.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-hero.jpg",
     long_description: [
       "We restore bracelets so they wear safely and comfortably again.",
       "Every repair is finished to look seamless and last.",
@@ -154,7 +151,7 @@ const services = [
     name: "Pearl Restringing",
     short_summary: "Fresh silk stringing with secure knots for pearls and beads.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/pearl-restringing.png",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-hero.jpg",
     long_description: [
       "Pearls should be restrung to keep them safe and evenly spaced.",
       "We hand-knot between pearls for a clean, classic finish.",
@@ -177,7 +174,7 @@ const services = [
     name: "Custom Design",
     short_summary: "Design a new piece or remount stones with our jeweler.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/custom-design.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-hero.jpg",
     long_description: [
       "Create something new or redesign a piece you already own.",
       "We guide you from concept to final polish with a clear, collaborative process.",
@@ -200,7 +197,7 @@ const services = [
     name: "Heirloom Restorations",
     short_summary: "Restore treasured pieces with careful, respectful repair.",
     image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-hero.jpg",
     long_description: [
       "We preserve the look and feel of heirlooms while strengthening them for daily wear.",
       "Repairs focus on safety, longevity, and faithful restoration.",

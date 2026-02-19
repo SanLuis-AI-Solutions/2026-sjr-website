@@ -42,7 +42,7 @@ export const SERVICES = [
       "Dial restoration",
       "Band sizing and replacement"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/watch-repair.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-hero.jpg",
     faqs: [
       {
         question: "How fast can you replace a watch battery?",
@@ -79,7 +79,7 @@ export const SERVICES = [
       "Arthritic shank installations",
       "Shank thinning and tapering"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/ring-sizing.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-hero.jpg",
     faqs: [
       {
         question: "Can any ring be resized?",
@@ -108,7 +108,7 @@ export const SERVICES = [
       "Bezel tightening",
       "Prong replacement"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/stone-setting.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-hero.jpg",
     faqs: [
       {
         question: "Do you provide replacement stones?",
@@ -137,7 +137,7 @@ export const SERVICES = [
       "Stone setting check",
       "Quick refresh before events"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/jewelry-cleaning.png",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-hero.jpg",
     faqs: [
       {
         question: "Is ultrasonic cleaning safe for all jewelry?",
@@ -177,7 +177,7 @@ export const SERVICES = [
       "Charm reattachment",
       "Safety chain install"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/necklace-repair.png",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-hero.jpg",
     faqs: [
       {
         question: "Can you repair delicate or thin chains?",
@@ -217,7 +217,7 @@ export const SERVICES = [
       "Charm reattachment",
       "Safety chain install"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/bracelet-repair.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-hero.jpg",
     faqs: [
       {
         question: "Can you fix a broken link or clasp?",
@@ -257,7 +257,7 @@ export const SERVICES = [
       "Bead necklace repair",
       "Clasp upgrade"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/pearl-restringing.png",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-hero.jpg",
     faqs: [
       {
         question: "How often should pearls be restrung?",
@@ -297,7 +297,7 @@ export const SERVICES = [
       "Anniversary gifts",
       "Matching sets"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/custom-design.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-hero.jpg",
     faqs: [
       {
         question: "How long does custom design take?",
@@ -337,7 +337,7 @@ export const SERVICES = [
       "Broken shank repair",
       "General restoration"
     ],
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-hero.jpg",
     faqs: [
       {
         question: "Will you preserve the original look of my heirloom?",

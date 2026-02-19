@@ -276,6 +276,26 @@ Update cadence: weekly (or after major milestones).
     - emits weekly funnel, route conversion, and quick-action variant split snapshots to `.health/kpi-weekly-snapshot-*.{md,json}`.
   - expanded `google:baseline-7d` tracked-event inventory to include conversion quick-action events.
   - expanded production event validator (`scripts/google/validate-prod-events.mjs`) to include quick-action base + variant checks.
+- Footer branding + service image relevance pass shipped (2026-02-19, follow-up):
+  - fixed footer brand lockup typo in `src/components/site-footer.tsx`:
+    - from `Susie’s Repair`
+    - to `Susie’s Jewelry Repair`.
+  - generated a new service-specific image pack (v2): 4 variants per service, 36 assets total.
+  - uploaded new assets to Supabase storage at `site-assets/services/v2/*`.
+  - updated Supabase `services.image_url` for all 9 service slugs to new `*-hero.jpg` assets.
+  - updated Airtable service image attachments for all 9 service slugs.
+  - rewired runtime service-detail visual system to use per-service v2 image variants:
+    - `src/lib/service-visuals.ts`
+    - `src/lib/constants.ts`.
+  - synced helper scripts to new image source paths:
+    - `scripts/airtable/assign-service-images.mjs`
+    - `scripts/airtable/add-missing-services.mjs`
+    - `scripts/airtable/update-services.mjs`.
+  - added operational image-pack tooling:
+    - `scripts/supabase/generate-service-image-variants.py`
+    - `scripts/supabase/publish-service-image-pack.mjs`.
+  - artifact added:
+    - `Docs/artifacts/ui/2026-02-19--service-image-pack-v2/00-image-pack-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

@@ -11,6 +11,25 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## Latest Session (2026-02-19)
+- Footer branding + service-image relevance hardening pass completed:
+  - fixed footer wordmark typo in `src/components/site-footer.tsx` (`Susie’s Repair` -> `Susie’s Jewelry Repair`).
+  - generated and published service image pack v2 (36 assets; 4 variants x 9 services) to:
+    - `site-assets/services/v2/*`
+  - added tooling for repeatable image generation/publish:
+    - `scripts/supabase/generate-service-image-variants.py`
+    - `scripts/supabase/publish-service-image-pack.mjs`
+  - data updates executed:
+    - Supabase `services.image_url` updated for all 9 services to v2 hero images.
+    - Airtable service image attachments updated for all 9 services.
+  - code/data sync updates:
+    - `src/lib/constants.ts` service hero image URLs moved to v2 assets.
+    - `src/lib/service-visuals.ts` now uses per-service v2 variants for hero support/process/expect/why sections to keep page visuals service-relevant.
+    - Airtable helper scripts synced to v2 URLs:
+      - `scripts/airtable/assign-service-images.mjs`
+      - `scripts/airtable/add-missing-services.mjs`
+      - `scripts/airtable/update-services.mjs`
+  - artifact:
+    - `Docs/artifacts/ui/2026-02-19--service-image-pack-v2/00-image-pack-notes.md`
 - Conversion quick-action experiment + KPI automation pass completed:
   - added `src/components/analytics/conversion-quick-actions.tsx` and `src/components/analytics/cta-variant.ts`.
   - wired quick-action experiment into conversion pages:
