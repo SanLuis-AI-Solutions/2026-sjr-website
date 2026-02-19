@@ -30,6 +30,8 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
       - `scripts/airtable/update-services.mjs`
   - artifact:
     - `Docs/artifacts/ui/2026-02-19--service-image-pack-v2/00-image-pack-notes.md`
+  - regression test added:
+    - `tests/smoke.spec.ts` includes a footer brand lockup assertion to catch future `Susie’s Repair` regressions.
 - Conversion quick-action experiment + KPI automation pass completed:
   - added `src/components/analytics/conversion-quick-actions.tsx` and `src/components/analytics/cta-variant.ts`.
   - wired quick-action experiment into conversion pages:

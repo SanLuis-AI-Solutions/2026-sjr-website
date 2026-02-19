@@ -458,3 +458,18 @@ test("mobile services pages: quick actions are clear and image assets load", asy
     await assertNoBrokenImages(page);
   }
 });
+
+test("footer brand lockup includes full business name", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.locator("footer").scrollIntoViewIfNeeded();
+  await expect(
+    page
+      .locator("footer")
+      .getByRole("link", { name: /Susie.?s Jewelry Repair/i })
+      .first()
+  ).toBeVisible();
+
+  guard.assertNoErrors("footer brand lockup");
+});

@@ -296,6 +296,8 @@ Update cadence: weekly (or after major milestones).
     - `scripts/supabase/publish-service-image-pack.mjs`.
   - artifact added:
     - `Docs/artifacts/ui/2026-02-19--service-image-pack-v2/00-image-pack-notes.md`.
+  - regression guard added:
+    - `tests/smoke.spec.ts` now includes `footer brand lockup includes full business name` to prevent footer brand-copy regressions.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
