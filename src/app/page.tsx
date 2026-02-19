@@ -11,8 +11,14 @@ export default async function Home() {
 
   return (
     <>
+      <a
+        href="#main-content"
+        className="pointer-events-none fixed left-4 top-4 z-[999] -translate-y-24 rounded-full bg-brand-burgundy px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-lg transition focus:pointer-events-auto focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
       <SiteHeader />
-      <main className="overflow-hidden pt-10 md:pt-12">
+      <main id="main-content" className="overflow-hidden pt-10 md:pt-12">
         <Hero />
         <ProofBand />
         <InHouseBadge />

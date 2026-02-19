@@ -1,0 +1,87 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { trackGaEvent } from "./ga-tracker";
+
+type ServiceInteractionTrackerProps = {
+  serviceSlug: string;
+};
+
+export function ServiceInteractionTracker({ serviceSlug }: ServiceInteractionTrackerProps) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const seen = new Set<string>();
+    const pagePath = pathname || "/";
+
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-service-section]")
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.45) continue;
+          const sectionId = (entry.target as HTMLElement).dataset.serviceSection;
+          if (!sectionId) continue;
+          const key = `section:${sectionId}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          trackGaEvent("service_section_view", {
+            page_path: pagePath,
+            service_slug: serviceSlug,
+            section_id: sectionId,
+          });
+        }
+      },
+      { threshold: [0.45] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    const detailsNodes = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>(
+        "details[data-track-event],details[data-service-faq-question]"
+      )
+    );
+
+    const onToggle = (event: Event) => {
+      const details = event.currentTarget as HTMLDetailsElement | null;
+      if (!details || !details.open) return;
+
+      const trackedEventName = details.dataset.trackEvent;
+      if (trackedEventName) {
+        const detailId = details.dataset.trackId || trackedEventName;
+        const key = `detail:${detailId}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          trackGaEvent(trackedEventName, {
+            page_path: pagePath,
+            service_slug: serviceSlug,
+          });
+        }
+      }
+
+      const faqQuestion = details.dataset.serviceFaqQuestion;
+      if (faqQuestion) {
+        const key = `faq:${faqQuestion}`;
+        if (seen.has(key)) return;
+        seen.add(key);
+        trackGaEvent("service_faq_open", {
+          page_path: pagePath,
+          service_slug: serviceSlug,
+          question: faqQuestion,
+        });
+      }
+    };
+
+    detailsNodes.forEach((details) => details.addEventListener("toggle", onToggle));
+
+    return () => {
+      observer.disconnect();
+      detailsNodes.forEach((details) => details.removeEventListener("toggle", onToggle));
+    };
+  }, [pathname, serviceSlug]);
+
+  return null;
+}

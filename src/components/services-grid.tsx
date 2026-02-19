@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 
 type ServiceItem = {
   slug?: string;
@@ -52,6 +52,8 @@ export function ServicesGrid({
   hideHeader = false,
 }: ServicesGridProps) {
   if (!services || !Array.isArray(services) || services.length === 0) return null;
+  const [titleLead, ...titleRest] = title.split(" ");
+  const titleAccent = titleRest.join(" ");
 
   return (
     <section
@@ -66,10 +68,13 @@ export function ServicesGrid({
               {kicker}
             </p>
             <h2 className="mt-4 font-serif text-4xl text-neutral-900 md:text-5xl">
-              {title.split(" ").slice(0, 1).join(" ")}{" "}
-              <span className="text-brand-burgundy italic">
-                {title.split(" ").slice(1).join(" ")}
-              </span>
+              {titleLead}
+              {titleAccent ? (
+                <>
+                  {" "}
+                  <span className="text-brand-burgundy italic">{titleAccent}</span>
+                </>
+              ) : null}
             </h2>
             <div className="mx-auto mt-6 h-1 w-12 bg-brand-gold/30" />
           </header>
@@ -138,15 +143,21 @@ export function ServicesGrid({
 
             return (
               service.slug ? (
-                <Link
+                <TrackedLink
                   key={slug}
                   href={`/services/${slug}`}
+                  eventName="service_card_click"
+                  eventParams={{
+                    service_slug: slug,
+                    service_name: name,
+                    placement: id,
+                  }}
                   className={cardClass}
                   id={`service-${slug}`}
                   aria-label={`Explore details for ${name}`}
                 >
                   {cardBody}
-                </Link>
+                </TrackedLink>
               ) : (
                 <article
                   key={slug}

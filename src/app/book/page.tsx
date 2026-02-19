@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
+import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -38,6 +39,7 @@ export default function BookPage({
               leadType="booking"
               status={pending ? "pending" : "success"}
             />
+            <LeadFormTracker formId="booking-form" leadType="booking" hasError={error} />
           </Suspense>
           <div className="reveal-on-scroll">
             {submitted ? (
@@ -115,6 +117,7 @@ export default function BookPage({
           </div>
 
           <form
+            id="booking-form"
             action="/api/book"
             method="post"
             className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"

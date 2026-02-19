@@ -9,6 +9,8 @@ import { getFaqsByService, getServiceBySlug, getServices } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { buildServiceVisualSet } from "@/lib/service-visuals";
+import { TrackedLink } from "@/components/analytics/tracked-link";
+import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 
 type PageProps = {
   params: {
@@ -1495,7 +1497,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-stone-50 py-20">
+      <ServiceInteractionTracker serviceSlug={slug} />
+      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
@@ -1536,18 +1539,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
+              <TrackedLink
                 href="/quote"
+                eventName="service_cta_click"
+                eventParams={{
+                  service_slug: slug,
+                  placement: "hero",
+                  cta_target: "quote",
+                }}
                 className="micro-interaction rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Get Fast Quote
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/book"
+                eventName="service_cta_click"
+                eventParams={{
+                  service_slug: slug,
+                  placement: "hero",
+                  cta_target: "book",
+                }}
                 className="micro-interaction rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book Repair
-              </Link>
+              </TrackedLink>
             </div>
           </div>
           <div className="relative reveal-on-scroll">
@@ -1575,17 +1590,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="relative border-t border-stone-200/70 bg-white py-20">
+      <section data-service-section="how-it-works" className="relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
-              <h2 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 How it works
-              </h2>
-              <p className="mt-3 font-serif text-3xl text-stone-900">
-                What happens next.
               </p>
+              <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                What happens next.
+              </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                 {howItWorksIntro}
               </p>
@@ -1640,18 +1655,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   {howItWorksSupportCopy}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
+                  <TrackedLink
                     href="/quote"
+                    eventName="service_cta_click"
+                    eventParams={{
+                      service_slug: slug,
+                      placement: "how_it_works",
+                      cta_target: "quote",
+                    }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
-                  </Link>
-                  <Link
+                  </TrackedLink>
+                  <TrackedLink
                     href="/book"
+                    eventName="service_cta_click"
+                    eventParams={{
+                      service_slug: slug,
+                      placement: "how_it_works",
+                      cta_target: "book",
+                    }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book Repair
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
             </div>
@@ -1692,7 +1719,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section className="relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="what-to-expect" className="relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1760,7 +1787,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="pricing-timing" className="relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1828,7 +1855,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     </article>
                   ))}
                 </div>
-                <details className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                <details
+                  className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 p-4"
+                  data-track-event="service_market_expand"
+                  data-track-id="market_snapshot"
+                >
                   <summary className="cursor-pointer text-sm font-semibold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
                     Why ranges vary
                   </summary>
@@ -1857,24 +1888,36 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Quote if you want pricing first. Book if you are ready for in-shop assessment.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link
+                  <TrackedLink
                     href="/quote"
+                    eventName="service_cta_click"
+                    eventParams={{
+                      service_slug: slug,
+                      placement: "pricing_timing",
+                      cta_target: "quote",
+                    }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
-                  </Link>
-                  <Link
+                  </TrackedLink>
+                  <TrackedLink
                     href="/book"
+                    eventName="service_cta_click"
+                    eventParams={{
+                      service_slug: slug,
+                      placement: "pricing_timing",
+                      cta_target: "book",
+                    }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book Repair
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
             </div>
           </section>
 
-          <section className="relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="before-you-visit" className="relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1921,7 +1964,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     <span className="font-semibold text-stone-900">Bring it in now:</span>{" "}
                     {decisionModule.goodCandidate}
                   </p>
-                  <details className="mt-3 rounded-2xl border border-stone-200 bg-white/90 p-4">
+                  <details
+                    className="mt-3 rounded-2xl border border-stone-200 bg-white/90 p-4"
+                    data-track-event="service_decision_expand"
+                    data-track-id="decision_module"
+                  >
                     <summary className="cursor-pointer text-sm font-semibold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
                       When it can usually wait
                     </summary>
@@ -1934,17 +1981,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="why-customers-choose-us" className="relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <h2 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                     Why customers choose us
-                  </h2>
-                  <p className="mt-3 font-serif text-3xl text-stone-900">
-                    {whyHeading}
                   </p>
+                  <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                    {whyHeading}
+                  </h2>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
                     {whyIntroCopy}
                   </p>
@@ -2026,7 +2073,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </section>
         </>
       ) : (
-        <section className="bg-white py-16">
+        <section data-service-section="what-to-expect" className="bg-white py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2108,7 +2155,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       )}
 
       {!isFlagshipService ? (
-        <section className="bg-stone-100 py-16">
+        <section data-service-section="pricing-timing" className="bg-stone-100 py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2144,7 +2191,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       ) : null}
 
-      <section className="bg-white py-16">
+      <section data-service-section="faqs" className="bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             FAQs
@@ -2157,6 +2204,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <details
                 key={faq.question}
                 className="group rounded-2xl border border-stone-200 bg-stone-100/60 p-5"
+                data-service-faq-question={faq.question}
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
                   <span>{faq.question}</span>
@@ -2174,7 +2222,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="bg-stone-100 py-16">
+      <section data-service-section="related-services" className="bg-stone-100 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -2216,18 +2264,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
         >
           <div className="flex items-center gap-3">
-            <Link
+            <TrackedLink
               href="/quote"
+              eventName="service_cta_click"
+              eventParams={{
+                service_slug: slug,
+                placement: "mobile_quick_actions",
+                cta_target: "quote",
+              }}
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Get Fast Quote
-            </Link>
-            <Link
+            </TrackedLink>
+            <TrackedLink
               href="/book"
+              eventName="service_cta_click"
+              eventParams={{
+                service_slug: slug,
+                placement: "mobile_quick_actions",
+                cta_target: "book",
+              }}
               className="flex-1 rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Book Repair
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </div>

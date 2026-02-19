@@ -219,6 +219,20 @@ Update cadence: weekly (or after major milestones).
   - `npm test` PASS (15/15)
   - `scripts/verify.ps1` PASS
   - `scripts/audit-images.ps1` PASS (`OK: 20/20`)
+- Whole-site UX + QA consolidation + measurement pass shipped (2026-02-19):
+  - fixed skip-link visual flash behavior and applied stable off-canvas focus reveal pattern (`src/components/site-shell.tsx`, `src/app/page.tsx`).
+  - service-detail semantic hierarchy tightened (major section titles promoted to true heading elements).
+  - instrumentation added for service-detail interactions and conversion journey:
+    - `service_section_view`, `service_faq_open`, `service_decision_expand`, `service_market_expand`, `service_cta_click`
+    - `service_card_click`, `services_hub_cta_click`
+    - `lead_form_start`, `lead_form_step`, `lead_form_submit_attempt`, `lead_form_error`
+  - forms wired with event tracking on Quote/Book/Contact via new `LeadFormTracker`.
+  - service pages wired with interaction observers via new `ServiceInteractionTracker`.
+  - artifact bundle added:
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/00-ux-qa-audit.md`
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/02-dashboard-spec.md`
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/03-optimization-backlog.md`
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

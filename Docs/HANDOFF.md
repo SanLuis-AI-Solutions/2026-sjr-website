@@ -1,6 +1,6 @@
 # Handoff — SJR New Website
 
-Date: 2026-02-18
+Date: 2026-02-19
 Repo: `c:\Users\ninef\SanLuis Solutions projects\sjr-new-website-aiproject`
 Branch: `master`
 Production alias: `https://sjr-new-website-aiproject.vercel.app`
@@ -9,6 +9,30 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - GitHub `master` HEAD is aligned with local `master` at handoff time.
 - Vercel production alias is deployed and in sync with the latest intended `master` commit for this session.
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
+
+## Latest Session (2026-02-19)
+- Whole-site UX + QA consolidation pass completed with a bounded high-impact fix bundle:
+  - skip-link flash behavior fixed (stable off-canvas focus reveal) in `src/components/site-shell.tsx` and `src/app/page.tsx`.
+  - service-detail heading semantics tightened (`How it works` / `Why customers choose us` now use stronger heading structure).
+- Conversion/measurement optimization pass implemented:
+  - added service-detail interaction events via `src/components/analytics/service-interaction-tracker.tsx`:
+    - `service_section_view`, `service_faq_open`, `service_decision_expand`, `service_market_expand`.
+  - added CTA and card event coverage:
+    - `service_cta_click`, `service_card_click`, `services_hub_cta_click`.
+  - added form funnel instrumentation via `src/components/analytics/lead-form-tracker.tsx`:
+    - `lead_form_start`, `lead_form_step`, `lead_form_submit_attempt`, `lead_form_error`.
+  - wired trackers into:
+    - `src/app/services/[slug]/page.tsx`
+    - `src/app/services/page.tsx`
+    - `src/components/services-grid.tsx`
+    - `src/app/quote/page.tsx`
+    - `src/app/book/page.tsx`
+    - `src/app/contact/page.tsx`.
+- New artifacts:
+  - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/00-ux-qa-audit.md`
+  - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`
+  - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/02-dashboard-spec.md`
+  - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/03-optimization-backlog.md`
 
 ## What Shipped Today
 - Web Interface Guidelines + mobile accessibility audit completed for:

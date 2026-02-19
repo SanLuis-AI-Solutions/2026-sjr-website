@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { trackGaEvent } from "./ga-tracker";
@@ -11,6 +11,9 @@ type TrackedLinkProps = {
   children: ReactNode;
   eventName: string;
   eventParams?: Record<string, string | number | boolean | null | undefined>;
+  id?: string;
+  "aria-label"?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 export function TrackedLink({
@@ -19,20 +22,26 @@ export function TrackedLink({
   children,
   eventName,
   eventParams,
+  id,
+  "aria-label": ariaLabel,
+  onClick,
 }: TrackedLinkProps) {
   const pathname = usePathname();
 
   return (
     <Link
+      id={id}
       href={href}
       className={className}
-      onClick={() =>
+      aria-label={ariaLabel}
+      onClick={(event) => {
         trackGaEvent(eventName, {
           page_path: pathname || "/",
           destination: href,
           ...eventParams,
-        })
-      }
+        });
+        onClick?.(event);
+      }}
     >
       {children}
     </Link>

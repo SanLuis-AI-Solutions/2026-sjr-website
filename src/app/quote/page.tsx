@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
+import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -34,6 +35,7 @@ export default function QuotePage({
               leadType="quote"
               status="success"
             />
+            <LeadFormTracker formId="quote-form" leadType="quote" hasError={error} />
           </Suspense>
           <div className="reveal-on-scroll">
             {submitted ? (
@@ -112,6 +114,7 @@ export default function QuotePage({
           </div>
 
           <form
+            id="quote-form"
             action="/api/quote"
             method="post"
             encType="multipart/form-data"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
+import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -40,6 +41,7 @@ export default function ContactPage({
                 leadType="contact"
                 status="success"
               />
+              <LeadFormTracker formId="contact-form" leadType="contact" hasError={error} />
             </Suspense>
             {submitted ? (
               <div
@@ -237,6 +239,7 @@ export default function ContactPage({
             </div>
 
             <form
+              id="contact-form"
               action="/api/contact"
               method="post"
               className="reveal-on-scroll relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7"
