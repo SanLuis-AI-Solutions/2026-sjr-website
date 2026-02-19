@@ -294,4 +294,4 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
    - `Docs/artifacts/ui/2026-02-14--services-watch-contract/00-page-contract.md`
 
 ## Next Optimal Step
-- Run a focused mobile visual QA sweep across all 9 `/services/[slug]` routes and tighten any remaining repeated-above-the-fold imagery to maximize premium differentiation.
+- Let the quick-action experiment run for a full 7-day window, then compare `control` vs `primary_focus` outcomes using `.health/kpi-weekly-snapshot-latest.md` and promote a permanent winner in conversion-page hero CTAs.
