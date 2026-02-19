@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
+import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -75,26 +75,16 @@ export default async function ContactPage({
               timing before work begins.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
-              <Link
-                href="#contact-form"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
-              >
-                Send Message
-              </Link>
-              <Link
-                href="/quote"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
-              >
-                Get Fast Quote
-              </Link>
-              <Link
-                href="/book"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
-              >
-                Book Repair
-              </Link>
-            </div>
+            <ConversionQuickActions
+              page="contact"
+              tone="dark"
+              className="mt-7 flex flex-wrap gap-3"
+              primary={{ href: "#contact-form", label: "Send Message" }}
+              secondary={[
+                { href: "/quote", label: "Get Fast Quote" },
+                { href: "/book", label: "Book Repair", tone: "muted" },
+              ]}
+            />
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <article className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">

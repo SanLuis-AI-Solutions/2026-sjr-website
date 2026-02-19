@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
+import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -71,30 +71,14 @@ export default async function QuotePage({
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
               Share details and photos. We reply within 1 business day with a starting range.
             </p>
-            <div
-              className="mt-6 flex flex-wrap gap-3"
-              role="region"
-              aria-label="Quick actions"
-            >
-              <Link
-                href="#quote-form"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Start Quote
-              </Link>
-              <Link
-                href="/book"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Book Repair
-              </Link>
-              <Link
-                href="/contact"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Contact Us
-              </Link>
-            </div>
+            <ConversionQuickActions
+              page="quote"
+              primary={{ href: "#quote-form", label: "Start Quote" }}
+              secondary={[
+                { href: "/book", label: "Book Repair" },
+                { href: "/contact", label: "Contact Us", tone: "muted" },
+              ]}
+            />
 
             <div className="mt-8 space-y-3 text-sm text-stone-600">
               <div className="rounded-2xl border border-stone-200 bg-white/70 px-5 py-4">

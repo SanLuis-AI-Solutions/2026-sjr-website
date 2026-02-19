@@ -26,23 +26,31 @@ Date: 2026-02-19
   - Params: `service_slug`, `placement`, `cta_target`, `destination`, `page_path`.
 
 ## Form Funnel Events
+- `conversion_quick_action_click`
+  - Fires on quote/book/contact hero quick-action clicks.
+  - Params: `page_id`, `cta_target`, `page_path`, `cta_variant`.
+- `conversion_quick_action_click_control`
+  - Fires with the same params when the session is in the `control` variant.
+- `conversion_quick_action_click_primary_focus`
+  - Fires with the same params when the session is in the `primary_focus` variant.
 - `lead_form_start`
   - First interaction with quote/book/contact form.
-  - Params: `form_id`, `lead_type`, `source`, `page_path`.
+  - Params: `form_id`, `lead_type`, `source`, `page_path`, `cta_variant`.
 - `lead_form_step`
   - First focus on each field per form session.
-  - Params: `form_id`, `lead_type`, `field_name`, `page_path`.
+  - Params: `form_id`, `lead_type`, `field_name`, `page_path`, `cta_variant`.
 - `lead_form_submit_attempt`
   - Submit action attempted on form.
-  - Params: `form_id`, `lead_type`, `page_path`.
+  - Params: `form_id`, `lead_type`, `page_path`, `cta_variant`.
 - `lead_form_error`
   - Error state rendered after submit/navigation cycle.
-  - Params: `form_id`, `lead_type`, `page_path`.
+  - Params: `form_id`, `lead_type`, `page_path`, `cta_variant`.
 - Existing success events retained:
   - `quote_submit_success`
   - `booking_submit_success`
   - `booking_submit_pending`
   - `contact_submit_success`
+  - each now includes `cta_variant` when available.
 
 ## Validation Surfaces
 - Tracked links: `src/components/analytics/tracked-link.tsx`

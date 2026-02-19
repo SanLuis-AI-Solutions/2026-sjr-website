@@ -37,7 +37,17 @@ Measure route-level and service-level progression from content exploration to qu
   - `quote_submit_success` | `booking_submit_success|pending` | `contact_submit_success`
 - KPI: submit-attempt rate, success rate, and drop-off by lead type.
 
+### 4) Conversion Quick-Action Experiment
+- Dimensions:
+  - `eventName` (`conversion_quick_action_click_control` vs `conversion_quick_action_click_primary_focus`)
+  - optional parameter breakouts via `cta_variant`.
+- Metrics:
+  - quick-action click volume per variant
+  - downstream `lead_form_start` and submit-success volume.
+- KPI: quick-action to form-start lift by variant.
+
 ## Segments
 - Device category (`mobile`, `desktop`)
 - Landing source (`utm_source`, `utm_medium`)
 - Entry route group (home/services/blog/faq/contact)
+- CTA variant (`control`, `primary_focus`) where available.

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { readCurrentCtaVariant } from "./cta-variant";
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
 
@@ -85,7 +86,11 @@ function sendGtagEvent(eventName: string, params: GtagEventParams) {
 }
 
 export function trackGaEvent(eventName: string, params: GtagEventParams = {}) {
-  sendGtagEvent(eventName, params);
+  const ctaVariant = readCurrentCtaVariant();
+  sendGtagEvent(eventName, {
+    ...params,
+    ...(ctaVariant ? { cta_variant: ctaVariant } : {}),
+  });
 }
 
 export function GaFirstTouchCapture() {
@@ -134,6 +139,7 @@ export function GaConversionTracker({
       utm_term: firstTouch.utm_term,
       utm_content: firstTouch.utm_content,
       page_path: pathname || "/",
+      cta_variant: readCurrentCtaVariant(),
     };
 
     sendGtagEvent(eventName, params);

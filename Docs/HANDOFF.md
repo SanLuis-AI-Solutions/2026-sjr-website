@@ -11,6 +11,24 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## Latest Session (2026-02-19)
+- Conversion quick-action experiment + KPI automation pass completed:
+  - added `src/components/analytics/conversion-quick-actions.tsx` and `src/components/analytics/cta-variant.ts`.
+  - wired quick-action experiment into conversion pages:
+    - `src/app/quote/page.tsx`
+    - `src/app/book/page.tsx`
+    - `src/app/contact/page.tsx`
+  - event expansion shipped:
+    - `conversion_quick_action_click`
+    - `conversion_quick_action_click_control`
+    - `conversion_quick_action_click_primary_focus`
+  - conversion/form event params now include `cta_variant` when available (`src/components/analytics/ga-tracker.tsx`).
+  - weekly KPI automation added:
+    - `scripts/google/kpi-weekly-snapshot.mjs`
+    - `npm run google:kpi-weekly-snapshot`
+    - outputs: `.health/kpi-weekly-snapshot-*.{md,json}`.
+  - baseline/validator updates:
+    - `scripts/google/baseline-7d.mjs` now includes quick-action event inventory.
+    - `scripts/google/validate-prod-events.mjs` now validates quick-action base + variant events.
 - Whole-site UX + QA consolidation pass completed with a bounded high-impact fix bundle:
   - skip-link flash behavior fixed (stable off-canvas focus reveal) in `src/components/site-shell.tsx` and `src/app/page.tsx`.
   - service-detail heading semantics tightened (`How it works` / `Why customers choose us` now use stronger heading structure).

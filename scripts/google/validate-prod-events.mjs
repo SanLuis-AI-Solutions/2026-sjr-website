@@ -14,6 +14,9 @@ const REQUIRED_EVENTS = [
   "service_market_expand",
   "service_faq_open",
   "service_cta_click",
+  "conversion_quick_action_click",
+  "conversion_quick_action_click_control",
+  "conversion_quick_action_click_primary_focus",
   "lead_form_start",
   "lead_form_step",
   "quote_submit_success",
@@ -63,6 +66,21 @@ async function waitForEventDelta(page, eventName, beforeCount, timeoutMs = 8000)
   return false;
 }
 
+async function waitForAnyEventDelta(page, eventNames, beforeCounts, timeoutMs = 8000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    for (const eventName of eventNames) {
+      const current = await countEvent(page, eventName);
+      if (current > beforeCounts[eventName]) {
+        return { matchedEvent: eventName, observed: true };
+      }
+    }
+    await pause(250);
+  }
+
+  return { matchedEvent: null, observed: false };
+}
+
 async function runEventCheck(page, eventName, action, report) {
   const beforeCount = await countEvent(page, eventName);
   await action();
@@ -73,6 +91,28 @@ async function runEventCheck(page, eventName, action, report) {
     status: observed ? "PASS" : "FAIL",
     beforeCount,
     afterCount,
+  });
+}
+
+async function runAnyEventCheck(page, eventNames, action, report) {
+  const beforeCounts = {};
+  for (const eventName of eventNames) {
+    beforeCounts[eventName] = await countEvent(page, eventName);
+  }
+
+  await action();
+  const { matchedEvent, observed } = await waitForAnyEventDelta(page, eventNames, beforeCounts);
+
+  const afterCounts = {};
+  for (const eventName of eventNames) {
+    afterCounts[eventName] = await countEvent(page, eventName);
+  }
+
+  report.push({
+    eventName: `${eventNames.join(" | ")}${matchedEvent ? ` (matched: ${matchedEvent})` : ""}`,
+    status: observed ? "PASS" : "FAIL",
+    beforeCount: Object.values(beforeCounts).reduce((sum, value) => sum + value, 0),
+    afterCount: Object.values(afterCounts).reduce((sum, value) => sum + value, 0),
   });
 }
 
@@ -279,6 +319,36 @@ async function main() {
       async () => {
         await page.locator("#quote-form input[name='email']").click();
         await pause(300);
+      },
+      report
+    );
+
+    await goto(page, "/book");
+    await runEventCheck(
+      page,
+      "conversion_quick_action_click",
+      async () => {
+        const quickAction = page
+          .getByRole("region", { name: /^quick actions$/i })
+          .getByRole("link", { name: /^Contact Us$/i });
+        await quickAction.scrollIntoViewIfNeeded();
+        await quickAction.click();
+        await page.waitForLoadState("networkidle");
+      },
+      report
+    );
+
+    await goto(page, "/contact");
+    await runAnyEventCheck(
+      page,
+      ["conversion_quick_action_click_control", "conversion_quick_action_click_primary_focus"],
+      async () => {
+        const quickAction = page
+          .getByRole("region", { name: /^quick actions$/i })
+          .getByRole("link", { name: /^Get Fast Quote$/i });
+        await quickAction.scrollIntoViewIfNeeded();
+        await quickAction.click();
+        await page.waitForLoadState("networkidle");
       },
       report
     );

@@ -9,6 +9,7 @@ Scope: Conversion + service-interaction baseline capture for GA4/GSC.
 npm run google:verify-access
 npm run google:report-weekly
 npm run google:baseline-7d
+npm run google:kpi-weekly-snapshot
 ```
 
 ## Result
@@ -25,6 +26,11 @@ npm run google:baseline-7d
   - `.health/ga4-baseline-7d-2026-02-18.md`
   - `.health/ga4-baseline-7d-latest.json`
   - `.health/ga4-baseline-7d-latest.md`
+- KPI snapshot generated:
+  - `.health/kpi-weekly-snapshot-2026-02-18.json`
+  - `.health/kpi-weekly-snapshot-2026-02-18.md`
+  - `.health/kpi-weekly-snapshot-latest.json`
+  - `.health/kpi-weekly-snapshot-latest.md`
 
 ## Baseline Notes
 
@@ -36,5 +42,6 @@ npm run google:baseline-7d
 
 - Repeat daily/weekly:
   - `npm run google:baseline-7d`
+  - `npm run google:kpi-weekly-snapshot`
 - Compare snapshots:
   - latest vs prior dated baseline files under `.health/`.

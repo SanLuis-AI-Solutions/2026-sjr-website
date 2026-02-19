@@ -265,6 +265,17 @@ Update cadence: weekly (or after major milestones).
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/02-dashboard-spec.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/03-optimization-backlog.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/04-ga4-baseline-run.md`
+- Conversion quick-action experiment + KPI automation pass shipped (2026-02-19, follow-up):
+  - added reusable `ConversionQuickActions` component and wired it into `/quote`, `/book`, and `/contact` hero quick-action regions.
+  - launched controlled variant tracking for conversion quick actions:
+    - `conversion_quick_action_click`
+    - `conversion_quick_action_click_control`
+    - `conversion_quick_action_click_primary_focus`
+  - propagated `cta_variant` context into form and submit-success conversion events for downstream attribution.
+  - added `scripts/google/kpi-weekly-snapshot.mjs` and npm command `google:kpi-weekly-snapshot`:
+    - emits weekly funnel, route conversion, and quick-action variant split snapshots to `.health/kpi-weekly-snapshot-*.{md,json}`.
+  - expanded `google:baseline-7d` tracked-event inventory to include conversion quick-action events.
+  - expanded production event validator (`scripts/google/validate-prod-events.mjs`) to include quick-action base + variant checks.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

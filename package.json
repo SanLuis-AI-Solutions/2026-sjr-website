@@ -11,6 +11,7 @@
     "google:verify-access": "node scripts/google/verify-access.mjs",
     "google:report-weekly": "node scripts/google/report-weekly.mjs",
     "google:baseline-7d": "node scripts/google/baseline-7d.mjs",
+    "google:kpi-weekly-snapshot": "node scripts/google/kpi-weekly-snapshot.mjs",
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
