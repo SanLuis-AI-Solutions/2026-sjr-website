@@ -21,7 +21,7 @@ export function Hero() {
           <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/40 bg-white/80 px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-brand-burgundy">
             In-House Repairs
             <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
-            No Shipping. No Outsourcing.
+            Your Jewelry Stays On-Site.
           </div>
           <h1 className="mt-6 font-serif text-5xl text-stone-900 md:text-6xl lg:text-7xl">
             Your jewelry never leaves our hands.
