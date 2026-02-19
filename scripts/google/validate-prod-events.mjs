@@ -76,6 +76,16 @@ async function runEventCheck(page, eventName, action, report) {
   });
 }
 
+async function runPresenceCheck(page, eventName, report) {
+  const count = await countEvent(page, eventName);
+  report.push({
+    eventName,
+    status: count > 0 ? "PASS" : "FAIL",
+    beforeCount: count,
+    afterCount: count,
+  });
+}
+
 async function main() {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
@@ -99,13 +109,19 @@ async function main() {
       const persist = () =>
         window.sessionStorage.setItem(key, JSON.stringify(window.__codexGaEvents));
       const capture = (entry) => {
-        if (!Array.isArray(entry) || entry[0] !== "event" || typeof entry[1] !== "string") {
+        const normalized = Array.isArray(entry)
+          ? entry
+          : entry && typeof entry === "object" && "0" in entry
+            ? Array.from(entry)
+            : null;
+
+        if (!normalized || normalized[0] !== "event" || typeof normalized[1] !== "string") {
           return;
         }
 
         window.__codexGaEvents.push({
-          name: entry[1],
-          params: entry[2] || {},
+          name: normalized[1],
+          params: normalized[2] || {},
           path: `${window.location.pathname}${window.location.search}`,
           ts: Date.now(),
         });
@@ -268,13 +284,13 @@ async function main() {
     );
 
     await goto(page, "/quote?submitted=1&id=codex-qa");
-    await runEventCheck(page, "quote_submit_success", async () => pause(600), report);
+    await runPresenceCheck(page, "quote_submit_success", report);
 
     await goto(page, "/book?submitted=1&id=codex-qa");
-    await runEventCheck(page, "booking_submit_success", async () => pause(600), report);
+    await runPresenceCheck(page, "booking_submit_success", report);
 
     await goto(page, "/contact?submitted=1&id=codex-qa");
-    await runEventCheck(page, "contact_submit_success", async () => pause(600), report);
+    await runPresenceCheck(page, "contact_submit_success", report);
 
     const captured = await readCapturedEvents(page);
     const aggregate = Object.fromEntries(

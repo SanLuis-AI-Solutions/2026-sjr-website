@@ -253,6 +253,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `scripts/google/validate-prod-events.mjs`
     - `npm run google:validate-prod-events`
     - output reports in `.health/ga4-prod-event-validation-*.{md,json}`.
+  - validation run completed:
+    - `npm run google:validate-prod-events` PASS
+    - latest reports:
+      - `.health/ga4-prod-event-validation-latest.md`
+      - `.health/ga4-prod-event-validation-latest.json`
 
 ## Key Files
 - Design system: `DESIGN.md`

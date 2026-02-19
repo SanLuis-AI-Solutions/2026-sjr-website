@@ -230,6 +230,11 @@ Update cadence: weekly (or after major milestones).
     - `scripts/google/validate-prod-events.mjs`
     - `npm run google:validate-prod-events`
     - writes reports to `.health/ga4-prod-event-validation-*.{md,json}`.
+  - production validation execution evidence:
+    - `npm run google:validate-prod-events` PASS
+    - latest artifacts:
+      - `.health/ga4-prod-event-validation-latest.md`
+      - `.health/ga4-prod-event-validation-latest.json`
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)
