@@ -87,13 +87,9 @@ export function ServicesGrid({
             const startingAt = formatStartingAt(startingPriceRaw);
             const timeEstimate = formatTimeEstimate(timeEstimateRaw);
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
-
-            return (
-              <article
-                key={slug}
-                className={`reveal-on-scroll ${delayClass} group relative overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_24px_60px_rgba(58,25,16,0.18)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)]`}
-                id={`service-${slug}`}
-              >
+            const cardClass = `reveal-on-scroll ${delayClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_24px_60px_rgba(58,25,16,0.18)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2`;
+            const cardBody = (
+              <>
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <Image
                     src={image}
@@ -104,8 +100,6 @@ export function ServicesGrid({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />
                 </div>
-
-
 
                 <div className="p-8">
                   <h3 className="font-serif text-2xl text-neutral-900">
@@ -132,19 +126,36 @@ export function ServicesGrid({
                     )}
                   </div>
 
-                  {service.slug && (
-                    <Link
-                      href={`/services/${slug}`}
-                      className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-gold transition-colors hover:text-brand-burgundy"
-                    >
-                      Explore Details
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                      </svg>
-                    </Link>
-                  )}
+                  <div className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-gold transition-colors group-hover:text-brand-burgundy">
+                    Explore Details
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                  </div>
                 </div>
-              </article>
+              </>
+            );
+
+            return (
+              service.slug ? (
+                <Link
+                  key={slug}
+                  href={`/services/${slug}`}
+                  className={cardClass}
+                  id={`service-${slug}`}
+                  aria-label={`Explore details for ${name}`}
+                >
+                  {cardBody}
+                </Link>
+              ) : (
+                <article
+                  key={slug}
+                  className={cardClass}
+                  id={`service-${slug}`}
+                >
+                  {cardBody}
+                </article>
+              )
             );
           })}
         </div>

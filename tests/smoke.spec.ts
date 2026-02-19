@@ -308,6 +308,20 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   guard.assertNoErrors("services featured link");
 });
 
+test("home services grid: full card click navigates to service detail", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  const card = page.locator("#service-watch-repair").first();
+  await expect(card).toBeVisible();
+
+  await card.click({ position: { x: 36, y: 36 } });
+  await expect(page).toHaveURL(/\/services\/watch-repair$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Watch Repair/i })).toBeVisible();
+
+  guard.assertNoErrors("home services card click");
+});
+
 test("mobile service detail: ring sizing follows flagship section order", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

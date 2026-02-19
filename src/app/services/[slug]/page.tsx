@@ -1828,18 +1828,30 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
                       data-testid="service-market-snapshot-item"
                     >
-                      <h3 className="font-serif text-xl text-stone-900">{scenario.title}</h3>
-                      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
+                      <h3 className="font-serif text-lg text-stone-900">{scenario.title}</h3>
+                      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-burgundy">
                         Starts around {scenario.averageStart}
                       </p>
-                      <p className="mt-2 text-sm font-semibold text-stone-900">{scenario.range}</p>
-                      <p className="mt-2 text-sm leading-6 text-stone-600">{scenario.note}</p>
+                      <p className="mt-1 text-sm font-semibold text-stone-900">{scenario.range}</p>
                     </article>
                   ))}
                 </div>
-                <p className="mt-4 text-xs leading-6 text-stone-500">
-                  {marketSnapshot.footnote}
-                </p>
+                <details className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <summary className="cursor-pointer text-sm font-semibold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
+                    Why ranges vary
+                  </summary>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-stone-600">
+                    {marketSnapshot.scenarios.map((scenario) => (
+                      <li key={`${scenario.title}-note`}>
+                        <span className="font-semibold text-stone-900">{scenario.title}:</span>{" "}
+                        {scenario.note}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-xs leading-6 text-stone-500">
+                    {marketSnapshot.footnote}
+                  </p>
+                </details>
               </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -1857,52 +1869,36 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </ul>
                 </div>
 
-                <div className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <div
+                  className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm"
+                  data-testid="service-decision-module"
+                >
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Common requests
+                    {decisionModule.label}
                   </div>
-                  <ul
-                    className="mt-3 space-y-2 text-sm text-stone-600"
-                    data-testid="service-common-requests"
-                  >
-                    {(commonRequests.length > 0
-                      ? commonRequests
-                      : requestHighlights
-                    ).map((item: string) => (
-                      <li key={item}>• {item}</li>
+                  <h3 className="mt-3 font-serif text-xl text-stone-900">
+                    Quick decision guide
+                  </h3>
+                  <ul className="mt-4 space-y-3 text-sm leading-6 text-stone-700">
+                    {decisionModule.checklist.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
-                </div>
-              </div>
-
-              <div
-                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm"
-                data-testid="service-decision-module"
-              >
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  {decisionModule.label}
-                </div>
-                <h3 className="mt-3 font-serif text-2xl text-stone-900">{decisionModule.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-stone-700">{decisionModule.intro}</p>
-                <div className="mt-5 grid gap-4 md:grid-cols-3">
-                  {decisionModule.checklist.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-stone-200 bg-white/90 p-4 text-sm leading-6 text-stone-700"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 space-y-2 text-sm leading-7 text-stone-700">
-                  <p>
+                  <p className="mt-4 rounded-2xl border border-stone-200 bg-white/90 p-4 text-sm leading-6 text-stone-700">
                     <span className="font-semibold text-stone-900">Bring it in now:</span>{" "}
                     {decisionModule.goodCandidate}
                   </p>
-                  <p>
-                    <span className="font-semibold text-stone-900">Can often wait:</span>{" "}
-                    {decisionModule.caution}
-                  </p>
+                  <details className="mt-3 rounded-2xl border border-stone-200 bg-white/90 p-4">
+                    <summary className="cursor-pointer text-sm font-semibold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">
+                      When it can usually wait
+                    </summary>
+                    <p className="mt-2 text-sm leading-6 text-stone-700">
+                      {decisionModule.caution}
+                    </p>
+                  </details>
                 </div>
               </div>
             </div>

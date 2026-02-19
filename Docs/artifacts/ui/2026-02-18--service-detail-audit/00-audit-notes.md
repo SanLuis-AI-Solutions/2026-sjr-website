@@ -59,6 +59,16 @@
 Inference note:
 - Necklace/bracelet/custom/heirloom scenario ranges include conservative inference from Houston anchors plus TX benchmark pages when Houston-local line-item prices were not publicly posted.
 
+## Follow-up UX simplification (2026-02-18)
+- User feedback: service detail pages felt too busy/complex after adding additional modules.
+- Implemented de-clutter strategy:
+  - kept trust/value modules but shifted depth behind progressive disclosure.
+  - market snapshot notes moved into a closed-by-default `Why ranges vary` block.
+  - decision module rewritten to a compact checklist-first format.
+  - removed duplicated flagship `Common requests` card inside Pricing & Timing (content intent already covered in What to expect).
+- Home page services UX:
+  - entire `Expert Repair Services` card is now the click target (not only `Explore Details` text), improving tap success and discoverability.
+
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
 - Add optional per-service mini gallery captions tied to customer intent (“Before visit”, “In progress”, “Finished result”) for stronger narrative clarity.

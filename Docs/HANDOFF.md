@@ -179,6 +179,13 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - each service route now renders three scenario cards with starter ranges for immediate quote framing.
   - added smoke assertions in `tests/smoke.spec.ts` to enforce market snapshot visibility and 3-card rendering per service route.
   - source/assumption notes recorded in `Docs/artifacts/ui/2026-02-18--service-detail-audit/00-audit-notes.md`.
+- Service-detail de-clutter + card-target pass (2026-02-18, same-day from user UX feedback):
+  - simplified flagship Pricing & Timing flow in `src/app/services/[slug]/page.tsx`:
+    - market snapshot remains, but explanatory depth is now collapsed under `Why ranges vary` for cleaner first scan.
+    - decision module condensed to `Quick decision guide` with checklist-first structure and optional caution details.
+    - removed the extra flagship `Common requests` card from Pricing & Timing to reduce repetition and visual load.
+  - updated Home Services interaction in `src/components/services-grid.tsx` so each full service card is clickable (improved mobile tap behavior and desktop affordance).
+  - added Playwright smoke test `home services grid: full card click navigates to service detail` in `tests/smoke.spec.ts`.
 
 ## Key Files
 - Design system: `DESIGN.md`

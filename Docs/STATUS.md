@@ -188,6 +188,14 @@ Update cadence: weekly (or after major milestones).
   - each service now shows 3 scenario cards with working market starters/ranges to improve quote expectation setting on mobile.
   - smoke coverage updated to require market snapshot visibility and exactly 3 scenario cards per service route.
   - Houston/TX benchmark sources captured in `Docs/artifacts/ui/2026-02-18--service-detail-audit/00-audit-notes.md`.
+- Service-detail flow simplification pass shipped (2026-02-18, follow-up iteration):
+  - reduced visible cognitive load in Pricing & Timing using progressive disclosure:
+    - market scenarios now show compact at-a-glance cards first
+    - detailed range-variance notes moved into a collapsed `Why ranges vary` block
+    - decision module condensed into a `Quick decision guide` card with checklist + optional caution details.
+  - removed the extra flagship `Common requests` card in Pricing & Timing to reduce repeated content and improve scan flow.
+  - Home page `Expert Repair Services` cards are now fully clickable (entire card target), not only the `Explore Details` text.
+  - added smoke coverage proving full-card click navigation from Home to service detail.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)
