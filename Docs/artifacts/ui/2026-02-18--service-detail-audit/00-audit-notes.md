@@ -69,6 +69,17 @@ Inference note:
 - Home page services UX:
   - entire `Expert Repair Services` card is now the click target (not only `Explore Details` text), improving tap success and discoverability.
 
+## Follow-up section-separation pass (2026-02-18)
+- User feedback: service details still felt too grouped in the middle of the page.
+- Applied marketing-psychology + UX/scroll principles:
+  - lowered immediate decision complexity by separating pricing decisions from prep decisions.
+  - ensured each section has one primary job to improve processing fluency on mobile scroll.
+  - retained trust depth but shifted secondary detail behind progressive disclosure.
+- Structural result:
+  - Pricing section = price/timing + market snapshot + direct action choice.
+  - Before-you-visit section = checklist + decision module.
+  - Why-customers-choose-us remains a dedicated trust section after preparation guidance.
+
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
 - Add optional per-service mini gallery captions tied to customer intent (“Before visit”, “In progress”, “Finished result”) for stronger narrative clarity.

@@ -186,6 +186,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - removed the extra flagship `Common requests` card from Pricing & Timing to reduce repetition and visual load.
   - updated Home Services interaction in `src/components/services-grid.tsx` so each full service card is clickable (improved mobile tap behavior and desktop affordance).
   - added Playwright smoke test `home services grid: full card click navigates to service detail` in `tests/smoke.spec.ts`.
+- Service-detail section separation pass (2026-02-18, same-day from follow-up UX feedback):
+  - refactored `src/app/services/[slug]/page.tsx` to reduce grouped density in the center of the page.
+  - `Pricing & timing` now contains pricing, turnaround, compact market snapshot, and a single next-step CTA module.
+  - moved prep/decision content into its own dedicated `Before you visit` section to improve scan flow and reduce cognitive load.
+  - removed repeated explanatory messaging and preserved details via progressive disclosure (`details/summary`) where needed.
 
 ## Key Files
 - Design system: `DESIGN.md`

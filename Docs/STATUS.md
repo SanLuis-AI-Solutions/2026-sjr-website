@@ -196,6 +196,12 @@ Update cadence: weekly (or after major milestones).
   - removed the extra flagship `Common requests` card in Pricing & Timing to reduce repeated content and improve scan flow.
   - Home page `Expert Repair Services` cards are now fully clickable (entire card target), not only the `Explore Details` text.
   - added smoke coverage proving full-card click navigation from Home to service detail.
+- Service-detail section-separation pass shipped (2026-02-18, follow-up iteration):
+  - split the previously dense middle stack into clearer scroll blocks:
+    - `Pricing & timing` now focuses on at-a-glance price/turnaround + one clear next step.
+    - new `Before you visit` section now holds prep checklist and decision guidance.
+  - reduced repeated messaging by removing overlapping explanatory copy in mid-page modules and keeping deeper notes behind disclosure.
+  - improved visual rhythm with clearer background separation between `Pricing`, `Before you visit`, and `Why customers choose us`.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

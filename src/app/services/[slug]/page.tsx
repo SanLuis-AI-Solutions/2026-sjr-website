@@ -1854,7 +1854,45 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </details>
               </div>
 
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="mt-6 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Next step
+                </div>
+                <h3 className="mt-2 font-serif text-2xl text-stone-900">
+                  Choose a quick action.
+                </h3>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-700">
+                  Quote if you need exact pricing first. Book if you are ready for an in-shop assessment.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Link
+                    href="/quote"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Get Fast Quote
+                  </Link>
+                  <Link
+                    href="/book"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Book Repair
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="relative bg-stone-50 py-16">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
+            <div className="mx-auto max-w-6xl px-6">
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                Before you visit
+              </p>
+              <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                Bring the right details, decide with confidence.
+              </h2>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
                 <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     What to bring
@@ -1877,7 +1915,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     {decisionModule.label}
                   </div>
                   <h3 className="mt-3 font-serif text-xl text-stone-900">
-                    Quick decision guide
+                    {decisionModule.title}
                   </h3>
                   <ul className="mt-4 space-y-3 text-sm leading-6 text-stone-700">
                     {decisionModule.checklist.map((item) => (
@@ -1904,7 +1942,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative bg-stone-50 py-16">
+          <section className="relative bg-white py-16">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
