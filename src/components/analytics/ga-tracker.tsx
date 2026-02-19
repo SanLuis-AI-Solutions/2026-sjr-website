@@ -71,8 +71,17 @@ function markEventSent(eventName: string, submissionId?: string) {
 }
 
 function sendGtagEvent(eventName: string, params: GtagEventParams) {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", eventName, params);
+  if (typeof window === "undefined") return;
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+    return;
+  }
+
+  // Queue event arguments so events triggered before GA bootstrap are not dropped.
+  const queuedArgs: ["event", string, GtagEventParams] = ["event", eventName, params];
+  window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
+  window.dataLayer.push(queuedArgs);
 }
 
 export function trackGaEvent(eventName: string, params: GtagEventParams = {}) {

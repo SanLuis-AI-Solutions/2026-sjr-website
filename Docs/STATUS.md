@@ -218,6 +218,18 @@ Update cadence: weekly (or after major milestones).
   - refined conversion-adjacent mobile copy on `/`, `/services`, `/quote`, `/book`, and `/contact` to reduce repeated reassurance language and improve first-scroll clarity.
   - preserved all existing heading/CTA test contracts while tightening promise language and next-step framing.
   - updated trust phrasing to consistent on-site, single-team wording across hero, in-house badge, and conversion surfaces.
+- CTA hierarchy + GA resilience pass shipped (2026-02-19, follow-up iteration):
+  - added explicit primary quick-action anchors on conversion pages:
+    - `/quote` -> `Start Quote` (`#quote-form`)
+    - `/book` -> `Start Booking` (`#booking-form`)
+    - `/contact` -> `Send Message` (`#contact-form`)
+  - reduced secondary quick-action visual weight on `/contact` to preserve one clear primary action.
+  - hardened GA4 event dispatch in `src/components/analytics/ga-tracker.tsx`:
+    - events now queue into `window.dataLayer` when `window.gtag` is not yet initialized, preventing early hydration-time event loss.
+  - added production event validation automation:
+    - `scripts/google/validate-prod-events.mjs`
+    - `npm run google:validate-prod-events`
+    - writes reports to `.health/ga4-prod-event-validation-*.{md,json}`.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

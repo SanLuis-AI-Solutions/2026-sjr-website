@@ -242,6 +242,17 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - refined mobile-first conversion copy across `/`, `/services`, `/quote`, `/book`, and `/contact`.
   - reduced repeated reassurance phrasing and tightened action-oriented lines while preserving existing CTA labels and heading contracts used by smoke tests.
   - aligned trust wording to clear on-site/single-team language across hero, trust, and service context modules.
+- CTA hierarchy + GA resilience pass (2026-02-19, follow-up):
+  - added primary quick-action anchors to conversion pages to make the page-intent action unambiguous:
+    - `/quote`: `Start Quote` -> `#quote-form`
+    - `/book`: `Start Booking` -> `#booking-form`
+    - `/contact`: `Send Message` -> `#contact-form`
+  - reduced secondary CTA emphasis on `/contact` quick actions to keep one dominant primary action.
+  - added GA4 dispatch fallback in `src/components/analytics/ga-tracker.tsx` so events queue in `dataLayer` when `gtag` is not yet available.
+  - added production event validation script:
+    - `scripts/google/validate-prod-events.mjs`
+    - `npm run google:validate-prod-events`
+    - output reports in `.health/ga4-prod-event-validation-*.{md,json}`.
 
 ## Key Files
 - Design system: `DESIGN.md`
