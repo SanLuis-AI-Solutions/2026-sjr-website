@@ -1162,11 +1162,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     service.common_requests ||
     []
   ).filter(Boolean);
-  const longDescription = (
-    service.longDescription ||
-    service.long_description ||
-    []
-  ).filter(Boolean);
   const includes = (service.includes || []).filter(Boolean);
   const requestHighlights = (
     commonRequests.length > 0
@@ -1174,10 +1169,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       : ["Assessment", "In-house service", "Clear approvals"]
   ).slice(0, 3);
   const howItWorksIntro = isWatchRepair
-    ? "Three simple steps, with a clear approval point before any work begins."
+    ? "Three steps: assess, approve, complete."
     : isRingSizing
-      ? "Three simple steps for precise fit, comfort, and a clean final finish."
-      : `Three simple steps for in-house ${service.name.toLowerCase()} with clear timing and approval before work begins.`;
+      ? "Three steps for precise fit and clean finishing."
+      : `Three steps for in-house ${service.name.toLowerCase()} with clear approval before work begins.`;
   const howItWorksSteps = isWatchRepair
     ? [
         {
@@ -1188,12 +1183,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         {
           step: "2",
           title: "Free assessment",
-          detail: "We confirm the fix, price, and timing before service.",
+          detail: "We review the fix, price, and timing before work begins.",
         },
         {
           step: "3",
           title: "Approve, then service",
-          detail: "Same Day/Next Day service is common for battery work. Full service varies by parts.",
+          detail: "Battery work is often Same Day/Next Day service. Full service varies by parts.",
         },
       ]
     : isRingSizing
@@ -1206,42 +1201,42 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {
             step: "2",
             title: "Sizing assessment",
-            detail: "We measure fit, inspect stones, and confirm pricing before any work.",
+            detail: "We measure fit, inspect stones, and review pricing before work.",
           },
           {
             step: "3",
             title: "Approve, then size",
-            detail: "We complete your sizing with clean finishing and confirm pickup timing.",
+            detail: "We complete your sizing, finish cleanly, and set pickup timing.",
           },
         ]
       : [
           {
             step: "1",
             title: `Bring your ${service.name.toLowerCase()}`,
-            detail: "Walk in or book. We quickly review the issue and your priorities.",
+            detail: "Walk in or book. We review the issue and your priorities.",
           },
           {
             step: "2",
             title: "In-house assessment",
-            detail: "We confirm scope, starting-at pricing, and service timing before work.",
+            detail: "We review scope, starting-at pricing, and timing before work.",
           },
           {
             step: "3",
             title: "Approve, then service",
             detail:
               isCustomDesign
-                ? "We finalize design direction, then begin build and finishing with clear milestone updates."
-                : "We complete the repair in-house, then confirm final checks and pickup timing.",
+                ? "We finalize direction, then begin build and finishing with milestone updates."
+                : "We complete the repair in-house, then run final checks before pickup.",
           },
         ];
   const visualSet = buildServiceVisualSet(slug, service.name, heroImageSrc, isWatchRepair);
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const howItWorksSupportCopy = isWatchRepair
-    ? "We’ll confirm pricing and pickup timing before service begins."
+    ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
-      ? "We confirm your exact ring size, pricing, and pickup timing before work begins."
-      : `We confirm your ${service.name.toLowerCase()} scope, pricing, and pickup timing before work begins.`;
+      ? "Ring size, pricing, and pickup timing are set before work begins."
+      : `${service.name} scope, pricing, and pickup timing are set before work begins.`;
   const processGallery = visualSet.processGallery;
   const expectCards = isWatchRepair
     ? [
@@ -1319,19 +1314,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {
             title: "Service scope",
             eyebrow: "What we address",
-            copy:
-              longDescription[0] ||
-              `We complete ${service.name.toLowerCase()} in-house with clear recommendations and clean finishing.`,
+            copy: `In-house ${service.name.toLowerCase()} focused on function, safety, and finish.`,
             bullets: includes.slice(0, 3),
           },
           {
             title: "In-house process",
             eyebrow: "How we work",
-            copy:
-              longDescription[1] ||
-              "Every piece is inspected before and after service to confirm quality, safety, and wearability.",
+            copy: "Inspect, approve, complete, then final quality check.",
             bullets: [
-              "Clear approval before work begins",
+              "Approval before work begins",
               `Typical turnaround: ${timeEstimateDisplay}`,
               "Final checks before pickup",
             ],
@@ -1339,7 +1330,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {
             title: "Common requests",
             eyebrow: "What customers ask for most",
-            copy: `Popular ${service.name.toLowerCase()} requests are handled by our in-house team with transparent pricing.`,
+            copy: `Most-requested ${service.name.toLowerCase()} fixes we handle in-house.`,
             bullets: requestHighlights,
           },
         ];
@@ -1357,19 +1348,19 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? "some styles (eternity bands, certain metals, engraved patterns) can have sizing limits. We confirm the safest path before service."
       : isCustomDesign
         ? "custom design work includes approval checkpoints before production so you can confirm direction, materials, and final finish."
-        : "timing and final scope may vary by condition, materials, or parts availability. We confirm options before work begins.";
+        : "timing and scope may vary by condition, materials, or parts availability.";
   const pricingDetailCopy = isWatchRepair
-    ? "Final price depends on parts and condition. We confirm before service."
+    ? "Final price depends on parts and condition."
     : isRingSizing
-      ? "Final price depends on metal type, size change, and setting checks. We confirm before service."
-      : "Final price depends on materials, condition, and any required parts. We confirm before service.";
+      ? "Final price depends on metal type, size change, and setting checks."
+      : "Final price depends on materials, condition, and required parts.";
   const turnaroundDetailCopy = isWatchRepair
-    ? "Same Day/Next Day service is common for battery work. Full service varies by parts availability."
+    ? "Battery work is often Same Day/Next Day service. Full service varies by parts."
     : isRingSizing
-      ? "Most sizing jobs follow Same Day/Next Day service. Complex structural work may require additional time."
+      ? "Most sizing jobs follow Same Day/Next Day service. Structural work may add time."
       : isCustomDesign
         ? "Custom design projects typically follow a 7 business day timeline after design approval."
-        : "Most requests follow Same Day/Next Day service. Complex structural work or parts sourcing may require additional time.";
+        : "Most requests follow Same Day/Next Day service. Structural work or parts sourcing may add time.";
   const whatToBring = isWatchRepair
     ? [
         "The watch (and any extra links if you have them)",
@@ -1399,10 +1390,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? "Precise fit, clean finish, and transparent approvals."
       : `In-house ${service.name.toLowerCase()}, clear approval, careful finishing.`;
   const whyIntroCopy = isWatchRepair
-    ? "We do the work here in Pasadena. If anything changes during assessment, we pause, explain your options, and only continue with your approval."
+    ? "We do the work in Pasadena and pause for approval if scope changes."
     : isRingSizing
-      ? "Your ring stays with our in-house team in Pasadena. If we identify setting or structural concerns, we pause and review options before continuing."
-      : `Your ${service.name.toLowerCase()} stays with our in-house team in Pasadena. If scope changes during assessment, we pause and review options before continuing.`;
+      ? "Your ring stays in-house in Pasadena, with approval before any scope change."
+      : `Your ${service.name.toLowerCase()} stays in-house in Pasadena, with approval before any scope change.`;
   const whyCards = isWatchRepair
     ? [
         {
@@ -1448,10 +1439,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           },
         ];
   const trustNote = isWatchRepair
-    ? "We’ll confirm price and timing before service begins. If parts are needed, we pause and get your approval before ordering or proceeding."
+    ? "If parts are needed, we pause and ask before ordering or proceeding."
     : isRingSizing
-      ? "We confirm final ring size, method, and timing before service. If setting reinforcement is recommended, we review options and wait for approval."
-      : `We confirm ${service.name.toLowerCase()} scope, timing, and pricing before service. If additional work is recommended, we review options and wait for approval.`;
+      ? "If setting reinforcement is recommended, we review options and wait for approval."
+      : `If additional work is recommended, we review options and wait for approval.`;
   const trustBadges = isWatchRepair
     ? ["In-house only", "Clear estimates", "Final checks"]
     : isRingSizing
@@ -1778,7 +1769,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Clear estimates. Confirmed pickup.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700">
-                We confirm pricing, options, and timing before work begins. No surprises.
+                Transparent starting prices and clear pickup timing.
               </p>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -1862,7 +1853,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Choose a quick action.
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-700">
-                  Quote if you need exact pricing first. Book if you are ready for an in-shop assessment.
+                  Quote if you want pricing first. Book if you are ready for in-shop assessment.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link

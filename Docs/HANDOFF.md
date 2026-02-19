@@ -191,6 +191,13 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `Pricing & timing` now contains pricing, turnaround, compact market snapshot, and a single next-step CTA module.
   - moved prep/decision content into its own dedicated `Before you visit` section to improve scan flow and reduce cognitive load.
   - removed repeated explanatory messaging and preserved details via progressive disclosure (`details/summary`) where needed.
+- Service-detail copy compression pass (2026-02-18, same-day from follow-up UX feedback):
+  - tightened repetitive copy in `src/app/services/[slug]/page.tsx` across:
+    - `How it works` intro + step details
+    - generic `What to expect` card descriptions
+    - `Pricing & timing` support copy
+    - trust/approval explanatory notes.
+  - maintained all section contracts and smoke-test semantics while improving mobile scan speed and reducing cognitive noise.
 
 ## Key Files
 - Design system: `DESIGN.md`

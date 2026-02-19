@@ -80,6 +80,14 @@ Inference note:
   - Before-you-visit section = checklist + decision module.
   - Why-customers-choose-us remains a dedicated trust section after preparation guidance.
 
+## Follow-up copy compression pass (2026-02-18)
+- Applied strict scanability pass to reduce cognitive load:
+  - shortened intros and support copy to one concise sentence where possible.
+  - removed repeated reassurance phrasing across adjacent modules.
+  - kept detailed context in bullets/disclosure rather than long body paragraphs.
+- Result:
+  - stronger mobile “glance then act” flow without dropping trust/quality signals.
+
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
 - Add optional per-service mini gallery captions tied to customer intent (“Before visit”, “In progress”, “Finished result”) for stronger narrative clarity.

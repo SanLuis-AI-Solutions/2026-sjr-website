@@ -202,6 +202,10 @@ Update cadence: weekly (or after major milestones).
     - new `Before you visit` section now holds prep checklist and decision guidance.
   - reduced repeated messaging by removing overlapping explanatory copy in mid-page modules and keeping deeper notes behind disclosure.
   - improved visual rhythm with clearer background separation between `Pricing`, `Before you visit`, and `Why customers choose us`.
+- Service-detail copy compression pass shipped (2026-02-18, follow-up iteration):
+  - tightened section intros and step descriptions to improve first-scroll readability on mobile.
+  - reduced repeated “we confirm” language across `How it works`, `Pricing & timing`, and trust modules.
+  - standardized concise copy pattern (`headline + one support sentence + bullets/actions`) while preserving all required sections and CTAs.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)
