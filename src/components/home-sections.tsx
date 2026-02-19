@@ -50,7 +50,7 @@ export function InHouseBadge() {
           In-House Repairs
         </p>
         <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
-          100% in-house repairs. No shipping. No middlemen.
+          100% in-house repairs. Handled on-site from drop-off to pickup.
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-stone-600">
           Every repair is performed on-site by a master jeweler. You get security,
@@ -275,7 +275,7 @@ export function Testimonials() {
           {[
             {
               quote:
-                "My engagement ring looks brand new. The team explained every step and never shipped it out.",
+                "My engagement ring looks brand new. The team explained every step and kept it on-site.",
               name: "Lydia R.",
               service: "Ring Sizing & Repair",
             },

@@ -1400,7 +1400,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? [
         {
           title: "In-house watch service",
-          detail: "Your watch stays with our team. No shipping, no outsourcing.",
+          detail: "Your watch stays with our team on-site from intake to pickup.",
         },
         {
           title: "Transparent approvals",
@@ -1415,7 +1415,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? [
           {
             title: "In-house ring sizing",
-            detail: "Your ring stays in our workshop. No shipping or outsourced handling.",
+            detail: "Your ring stays in our workshop under one team from intake to pickup.",
           },
           {
             title: "Transparent approvals",
@@ -1429,7 +1429,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       : [
           {
             title: "In-house craftsmanship",
-            detail: `Your ${service.name.toLowerCase()} is completed in-house, not outsourced.`,
+            detail: `Your ${service.name.toLowerCase()} is completed in-house by one local team.`,
           },
           {
             title: "Transparent approvals",
@@ -2144,7 +2144,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Why customers choose us
                 </div>
                 <ul className="mt-3 space-y-2 text-sm text-stone-600">
-                  <li>• In-house repairs with no outsourcing</li>
+                  <li>• In-house repairs handled on-site start to finish</li>
                   <li>• Same Day/Next Day service on most pieces</li>
                   <li>• Clear approval before work starts</li>
                 </ul>

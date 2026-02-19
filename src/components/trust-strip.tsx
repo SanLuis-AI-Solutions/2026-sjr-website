@@ -10,7 +10,7 @@ export function TrustStrip() {
             Master Jeweler On‑Site
           </div>
           <p className="mt-2 text-sm text-stone-600">
-            No shipping. Your valuables stay under our care.
+            Your valuables stay on-site under our care.
           </p>
         </div>
         <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">

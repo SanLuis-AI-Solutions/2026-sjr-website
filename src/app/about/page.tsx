@@ -71,7 +71,7 @@ const PROCESS = [
 const STANDARDS = [
   {
     title: "In-house only",
-    body: "No shipping and no outsourcing. One local team handles your piece start to finish.",
+    body: "One local team handles your piece on-site from intake to pickup.",
   },
   {
     title: "Clear communication",
