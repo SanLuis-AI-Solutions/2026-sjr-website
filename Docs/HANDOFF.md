@@ -36,6 +36,14 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`
   - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/02-dashboard-spec.md`
   - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/03-optimization-backlog.md`
+  - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/04-ga4-baseline-run.md`
+- Baseline collection operationalized:
+  - added `npm run google:baseline-7d` -> `scripts/google/baseline-7d.mjs`.
+  - script captures GA4/GSC 7-day topline + tracked-event counts and writes dated + latest snapshots in `.health/`.
+  - verification run completed with current credentials:
+    - `npm run google:verify-access` PASS
+    - `npm run google:report-weekly` PASS
+    - `npm run google:baseline-7d` PASS.
 
 ## What Shipped Today
 - Web Interface Guidelines + mobile accessibility audit completed for:

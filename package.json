@@ -10,6 +10,7 @@
     "test": "npm run build && playwright test",
     "google:verify-access": "node scripts/google/verify-access.mjs",
     "google:report-weekly": "node scripts/google/report-weekly.mjs",
+    "google:baseline-7d": "node scripts/google/baseline-7d.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
     "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs"

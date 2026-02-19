@@ -232,11 +232,18 @@ Update cadence: weekly (or after major milestones).
     - success/error status messaging on redirected conversion pages
     - conversion-success GA event activation paths
     - blog `?topic=` filtering behavior.
+  - operational baseline workflow added and executed:
+    - new script `npm run google:baseline-7d` (`scripts/google/baseline-7d.mjs`) writes GA4/GSC 7-day baseline snapshots to `.health/`.
+    - access + reporting checks rerun with valid credentials:
+      - `npm run google:verify-access` PASS
+      - `npm run google:report-weekly` PASS
+      - `npm run google:baseline-7d` PASS
   - artifact bundle added:
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/00-ux-qa-audit.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/02-dashboard-spec.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/03-optimization-backlog.md`
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/04-ga4-baseline-run.md`
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
