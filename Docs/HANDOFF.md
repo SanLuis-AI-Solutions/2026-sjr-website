@@ -28,6 +28,9 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `src/app/quote/page.tsx`
     - `src/app/book/page.tsx`
     - `src/app/contact/page.tsx`.
+- Next.js query-param reliability fix applied:
+  - awaited async `searchParams` in `src/app/quote/page.tsx`, `src/app/book/page.tsx`, `src/app/contact/page.tsx`, and `src/app/blog/page.tsx`.
+  - restores conversion status banners + success-event activation on `?submitted=1` routes and topic filtering on `/blog?topic=...`.
 - New artifacts:
   - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/00-ux-qa-audit.md`
   - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`

@@ -228,6 +228,10 @@ Update cadence: weekly (or after major milestones).
     - `lead_form_start`, `lead_form_step`, `lead_form_submit_attempt`, `lead_form_error`
   - forms wired with event tracking on Quote/Book/Contact via new `LeadFormTracker`.
   - service pages wired with interaction observers via new `ServiceInteractionTracker`.
+  - fixed async query-param handling on conversion/content routes (`/quote`, `/book`, `/contact`, `/blog`) by awaiting Next.js `searchParams`, restoring:
+    - success/error status messaging on redirected conversion pages
+    - conversion-success GA event activation paths
+    - blog `?topic=` filtering behavior.
   - artifact bundle added:
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/00-ux-qa-audit.md`
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/01-event-taxonomy.md`

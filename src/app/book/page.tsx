@@ -15,14 +15,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BookPage({
+export default async function BookPage({
   searchParams,
 }: {
-  searchParams?: { submitted?: string; error?: string; pending?: string; id?: string };
+  searchParams?: Promise<{ submitted?: string; error?: string; pending?: string; id?: string }>;
 }) {
-  const submitted = searchParams?.submitted === "1";
-  const error = searchParams?.error === "1";
-  const pending = searchParams?.pending === "1";
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const submitted = resolvedSearchParams?.submitted === "1";
+  const error = resolvedSearchParams?.error === "1";
+  const pending = resolvedSearchParams?.pending === "1";
   const bookingEventName = pending
     ? "booking_submit_pending"
     : "booking_submit_success";
@@ -35,7 +36,7 @@ export default function BookPage({
             <GaConversionTracker
               active={submitted}
               eventName={bookingEventName}
-              submissionId={searchParams?.id}
+              submissionId={resolvedSearchParams?.id}
               leadType="booking"
               status={pending ? "pending" : "success"}
             />

@@ -67,7 +67,7 @@ export function ServicesGrid({
             <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">
               {kicker}
             </p>
-            <h2 className="mt-4 font-serif text-4xl text-neutral-900 md:text-5xl">
+            <h2 aria-label={title} className="mt-4 font-serif text-4xl text-neutral-900 md:text-5xl">
               {titleLead}
               {titleAccent ? (
                 <>

@@ -15,13 +15,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function QuotePage({
+export default async function QuotePage({
   searchParams,
 }: {
-  searchParams?: { submitted?: string; error?: string; id?: string };
+  searchParams?: Promise<{ submitted?: string; error?: string; id?: string }>;
 }) {
-  const submitted = searchParams?.submitted === "1";
-  const error = searchParams?.error === "1";
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const submitted = resolvedSearchParams?.submitted === "1";
+  const error = resolvedSearchParams?.error === "1";
   return (
     <SiteShell>
       <section className="relative overflow-hidden bg-stone-100 py-16">
@@ -31,7 +32,7 @@ export default function QuotePage({
             <GaConversionTracker
               active={submitted}
               eventName="quote_submit_success"
-              submissionId={searchParams?.id}
+              submissionId={resolvedSearchParams?.id}
               leadType="quote"
               status="success"
             />

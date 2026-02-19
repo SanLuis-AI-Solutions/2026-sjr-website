@@ -15,13 +15,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage({
+export default async function ContactPage({
   searchParams,
 }: {
-  searchParams?: { submitted?: string; error?: string; id?: string };
+  searchParams?: Promise<{ submitted?: string; error?: string; id?: string }>;
 }) {
-  const submitted = searchParams?.submitted === "1";
-  const error = searchParams?.error === "1";
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const submitted = resolvedSearchParams?.submitted === "1";
+  const error = resolvedSearchParams?.error === "1";
 
   return (
     <SiteShell>
@@ -37,7 +38,7 @@ export default function ContactPage({
               <GaConversionTracker
                 active={submitted}
                 eventName="contact_submit_success"
-                submissionId={searchParams?.id}
+                submissionId={resolvedSearchParams?.id}
                 leadType="contact"
                 status="success"
               />

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 type BlogPageProps = {
-  searchParams?: {
+  searchParams?: Promise<{
     topic?: string;
-  };
+  }>;
 };
 
 function resolveTopic(topic?: string) {
@@ -25,8 +25,9 @@ function resolveTopic(topic?: string) {
   return BLOG_TOPICS.find((entry) => entry.toLowerCase() === topic.toLowerCase()) || null;
 }
 
-export default function BlogPage({ searchParams }: BlogPageProps) {
-  const selectedTopic = resolveTopic(searchParams?.topic);
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const selectedTopic = resolveTopic(resolvedSearchParams?.topic);
   const scopedPosts = selectedTopic
     ? BLOG_POSTS.filter((post) => post.topics.includes(selectedTopic))
     : BLOG_POSTS;
