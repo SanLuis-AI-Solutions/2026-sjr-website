@@ -1495,10 +1495,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-stone-50 py-16">
+      <section className="relative overflow-hidden bg-stone-50 py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
           <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Service Detail
@@ -1575,10 +1575,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="relative bg-white py-16">
+      <section className="relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <h2 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 How it works
@@ -1590,7 +1590,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 {howItWorksIntro}
               </p>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
+              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {howItWorksSteps.map((item, index) => {
                   const delayClass = `reveal-delay-${(index % 3) + 1}`;
                   return (
@@ -1657,7 +1657,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {processGallery.map((img, index) => {
               const delayClass = `reveal-delay-${(index % 3) + 1}`;
               return (
@@ -1692,7 +1692,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section className="relative bg-stone-50 py-16">
+          <section className="relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1702,13 +1702,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Service options, explained clearly.
               </h2>
 
-              <div className="mt-6 grid gap-4">
+              <div className="mt-8 grid gap-5 md:grid-cols-2">
                 {expectCards.map((block, index) => {
                   const delayClass = `reveal-delay-${(index % 3) + 1}`;
+                  const spanClass = index === 2 ? "md:col-span-2" : "";
                   return (
                     <article
                       key={block.title}
-                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
+                      className={`reveal-on-scroll ${delayClass} ${spanClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
                     >
                       <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                         {block.eyebrow}
@@ -1732,7 +1733,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="mt-10 grid gap-5 md:grid-cols-2">
                 {expectImages.map((img) => (
                   <div
                     key={img.url}
@@ -1750,7 +1751,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-3xl border border-brand-gold/25 bg-white/80 p-5 text-sm text-stone-700 reveal-on-scroll shadow-sm">
+              <div className="mt-8 rounded-3xl border border-brand-gold/25 bg-white/80 p-5 text-sm text-stone-700 reveal-on-scroll shadow-sm">
                 <span className="font-semibold text-stone-900">
                   {expectNoteLabel}
                 </span>{" "}
@@ -1759,7 +1760,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative bg-white py-16">
+          <section className="relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1772,7 +1773,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Transparent starting prices and clear pickup timing.
               </p>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="mt-10 grid gap-5 md:grid-cols-2">
                 <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
                     Starting at
@@ -1798,7 +1799,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
 
               <div
-                className="mt-6 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-6 shadow-sm"
+                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-6 shadow-sm"
                 data-testid="service-market-snapshot"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
@@ -1812,7 +1813,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
                   {marketSnapshot.summary}
                 </p>
-                <div className="mt-5 grid gap-3 md:grid-cols-3">
+                <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {marketSnapshot.scenarios.map((scenario) => (
                     <article
                       key={scenario.title}
@@ -1845,7 +1846,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </details>
               </div>
 
-              <div className="mt-6 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm">
+              <div className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm">
                 <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Next step
                 </div>
@@ -1873,7 +1874,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative bg-stone-50 py-16">
+          <section className="relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1883,7 +1884,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Bring the right details, decide with confidence.
               </h2>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="mt-10 grid gap-5 md:grid-cols-2">
                 <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     What to bring
@@ -1933,7 +1934,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="relative bg-white py-16">
+          <section className="relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
@@ -1950,7 +1951,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
+              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {whyCards.map((item, index) => {
                   const delayClass = `reveal-delay-${(index % 3) + 1}`;
                   return (
@@ -1965,7 +1966,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-10 grid gap-4 md:grid-cols-[1fr_1.2fr]">
+              <div className="mt-12 grid gap-5 md:grid-cols-[1fr_1.2fr]">
                 <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     Trust note
@@ -1998,11 +1999,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-10">
                 <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Customer proof
                 </div>
-                <div className="mt-4 grid gap-4 md:grid-cols-3" data-testid="service-proof-blocks">
+                <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-testid="service-proof-blocks">
                   {proofSnippets.map((item, index) => {
                     const delayClass = `reveal-delay-${(index % 3) + 1}`;
                     return (

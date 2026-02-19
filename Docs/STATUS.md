@@ -206,6 +206,14 @@ Update cadence: weekly (or after major milestones).
   - tightened section intros and step descriptions to improve first-scroll readability on mobile.
   - reduced repeated “we confirm” language across `How it works`, `Pricing & timing`, and trust modules.
   - standardized concise copy pattern (`headline + one support sentence + bullets/actions`) while preserving all required sections and CTAs.
+- Service-detail visual density pass shipped (2026-02-18, follow-up iteration):
+  - increased vertical spacing and section rhythm (`py-20`, larger inter-block gaps) to reduce stacked-card fatigue.
+  - upgraded dense 3-column card walls to more breathable responsive layouts (`md:grid-cols-2`, `lg:grid-cols-3`) across:
+    - How-it-works support gallery
+    - What-to-expect cards
+    - Market snapshot scenarios
+    - Why-customers cards and proof grid.
+  - added subtle section separators (`border-t`) between flagship sections to make transitions clearer and improve scroll legibility.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

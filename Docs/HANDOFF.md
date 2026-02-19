@@ -198,6 +198,11 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
     - `Pricing & timing` support copy
     - trust/approval explanatory notes.
   - maintained all section contracts and smoke-test semantics while improving mobile scan speed and reducing cognitive noise.
+- Service-detail visual density pass (2026-02-18, same-day):
+  - refined `src/app/services/[slug]/page.tsx` spacing and responsive grid structure for clearer visual hierarchy.
+  - increased section breathing room and inter-module gaps to reduce grouped/stacked feel.
+  - shifted several dense 3-column compositions to responsive 2-col then 3-col at larger breakpoints for better tablet/mobile readability.
+  - added subtle top separators between flagship sections to improve section boundaries during scroll.
 
 ## Key Files
 - Design system: `DESIGN.md`

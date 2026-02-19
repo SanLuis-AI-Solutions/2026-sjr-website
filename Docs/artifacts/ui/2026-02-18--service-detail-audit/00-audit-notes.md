@@ -88,6 +88,15 @@ Inference note:
 - Result:
   - stronger mobile “glance then act” flow without dropping trust/quality signals.
 
+## Follow-up visual density pass (2026-02-18)
+- User feedback target: page still felt grouped/stacked even after copy compression.
+- Implemented layout-only refinements (no new content):
+  - increased whitespace cadence between major sections and modules.
+  - rebalanced card grids to reduce 3-up density at mid breakpoints.
+  - added clearer section boundaries for easier scroll parsing.
+- Outcome:
+  - same information architecture, but lower visual load and better section legibility on mobile/tablet.
+
 ## Recommended next pass
 - Run a mobile visual QA pass to evaluate first-screen differentiation on all 9 service routes and tune any remaining repeated hero-support selections.
 - Add optional per-service mini gallery captions tied to customer intent (“Before visit”, “In progress”, “Finished result”) for stronger narrative clarity.
