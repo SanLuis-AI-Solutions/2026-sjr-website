@@ -71,8 +71,8 @@ export default async function ContactPage({
               Talk to a local expert
             </h1>
             <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-100/90 md:text-base">
-              Call, email, or send a quick note. Our in-house team confirms timing, scope, and the
-              best next step before work begins.
+              Call, email, or send a quick note. We reply with the fastest next step and confirm
+              timing before work begins.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
@@ -168,8 +168,8 @@ export default async function ContactPage({
               A clear path from first message to finished repair.
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-stone-600">
-              This section is designed for clarity: when to come in, how timing works, and what
-              to expect before we begin your service.
+              Know when to come in, how intake works, and what gets confirmed before service
+              begins.
             </p>
           </div>
 
@@ -254,7 +254,7 @@ export default async function ContactPage({
                   Send us a message
                 </h2>
                 <p className="mt-2 text-[15px] leading-7 text-stone-600">
-                  Tell us what needs attention and how you prefer we reply.
+                  Tell us what needs attention and your preferred reply method.
                 </p>
               </div>
 
@@ -341,7 +341,7 @@ export default async function ContactPage({
                 Send Message
               </button>
               <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
-                Secure form and in-house team support.
+                Secure form · Local in-house team support.
                 <a
                   href={`tel:${BUSINESS.phone}`}
                   className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"

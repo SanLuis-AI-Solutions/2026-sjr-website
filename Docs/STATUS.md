@@ -214,6 +214,10 @@ Update cadence: weekly (or after major milestones).
     - Market snapshot scenarios
     - Why-customers cards and proof grid.
   - added subtle section separators (`border-t`) between flagship sections to make transitions clearer and improve scroll legibility.
+- Conversion-path copy clarity pass shipped (2026-02-19, follow-up iteration):
+  - refined conversion-adjacent mobile copy on `/`, `/services`, `/quote`, `/book`, and `/contact` to reduce repeated reassurance language and improve first-scroll clarity.
+  - preserved all existing heading/CTA test contracts while tightening promise language and next-step framing.
+  - updated trust phrasing to consistent on-site, single-team wording across hero, in-house badge, and conversion surfaces.
 - Verification pass after redesign:
   - `npm run lint` PASS (0 errors)
   - `npm test` PASS (15/15)

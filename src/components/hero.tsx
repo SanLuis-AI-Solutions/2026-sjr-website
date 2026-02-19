@@ -27,8 +27,8 @@ export function Hero() {
             Your jewelry never leaves our hands.
           </h1>
           <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
-            Master jeweler craftsmanship performed entirely on-site. Transparent pricing,
-            Same Day/Next Day service, and meticulous care for heirlooms and daily pieces.
+            Master jeweler craftsmanship performed on-site. Clear starting pricing and Same Day/Next
+            Day service for most repairs.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link

@@ -69,7 +69,7 @@ export default async function QuotePage({
               Get a transparent starting‑at range
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Share details and photos to receive a quick price range before you visit.
+              Share details and photos. We reply within 1 business day with a starting range.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-3"
@@ -97,8 +97,8 @@ export default async function QuotePage({
                 </div>
                 <ul className="mt-3 space-y-2">
                   <li>• We reply within 1 business day with a starting range</li>
-                  <li>• If photos are unclear, we may request 1 quick follow-up photo</li>
-                  <li>• You stay in control: we confirm final pricing after inspection</li>
+                  <li>• If photos are unclear, we request one quick follow-up photo</li>
+                  <li>• Final pricing is confirmed after in-shop inspection</li>
                 </ul>
               </div>
               <p>
@@ -200,7 +200,7 @@ export default async function QuotePage({
               Request Quote
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · We respond within 1 business day.
+              Secure form · 1 business day response.
             </p>
           </form>
         </div>

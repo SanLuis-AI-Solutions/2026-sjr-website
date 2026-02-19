@@ -106,7 +106,7 @@ export default async function ServicesPage() {
               A curated menu of in-house repairs.
             </h1>
             <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
-              Designed like a luxury workshop: clear options, consistent quality, and a fast path to a quote or booking.
+              Compare services quickly, review starting context, and move straight to quote or booking.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-600">
@@ -254,7 +254,7 @@ export default async function ServicesPage() {
                     Not sure?
                   </div>
                   <p className="mt-2 text-sm text-stone-600">
-                    Upload a photo and we will confirm pricing and timing.
+                    Send one photo and we will recommend the right next step.
                   </p>
                   <TrackedLink
                     href="/quote"

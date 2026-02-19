@@ -53,8 +53,7 @@ export function InHouseBadge() {
           100% in-house repairs. Handled on-site from drop-off to pickup.
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-stone-600">
-          Every repair is performed on-site by a master jeweler. You get security,
-          transparency, and the confidence that your jewelry stays under one roof.
+          Every repair is handled by one local team, with clear approvals before work starts.
         </p>
       </div>
     </section>

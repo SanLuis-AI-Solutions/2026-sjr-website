@@ -75,8 +75,7 @@ export default async function BookPage({
               Reserve a free 15‑minute assessment
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Choose a preferred time and we’ll confirm your booking. We add a 15‑minute buffer
-              between appointments.
+              Request a time that works for you. We confirm availability within 1 business day.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-3"
@@ -103,7 +102,7 @@ export default async function BookPage({
               </div>
               <ul className="mt-3 space-y-2">
                 <li>• Most services are Same Day/Next Day service</li>
-                <li>• We confirm bookings within 1 business day</li>
+                <li>• Your appointment confirms intake timing and next steps</li>
                 <li>
                   • Need help fast? Call{" "}
                   <a
@@ -205,7 +204,7 @@ export default async function BookPage({
               Request Booking
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · We confirm bookings within 1 business day.
+              Secure form · Booking confirmation within 1 business day.
             </p>
           </form>
         </div>

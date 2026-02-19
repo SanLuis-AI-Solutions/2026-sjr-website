@@ -238,6 +238,10 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
   - increased section breathing room and inter-module gaps to reduce grouped/stacked feel.
   - shifted several dense 3-column compositions to responsive 2-col then 3-col at larger breakpoints for better tablet/mobile readability.
   - added subtle top separators between flagship sections to improve section boundaries during scroll.
+- Conversion-path copy clarity pass (2026-02-19, follow-up):
+  - refined mobile-first conversion copy across `/`, `/services`, `/quote`, `/book`, and `/contact`.
+  - reduced repeated reassurance phrasing and tightened action-oriented lines while preserving existing CTA labels and heading contracts used by smoke tests.
+  - aligned trust wording to clear on-site/single-team language across hero, trust, and service context modules.
 
 ## Key Files
 - Design system: `DESIGN.md`
