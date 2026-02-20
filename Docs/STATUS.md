@@ -334,6 +334,18 @@ Update cadence: weekly (or after major milestones).
     - `scripts/verify.ps1` PASS.
   - artifact added:
     - `Docs/artifacts/ui/2026-02-20--service-image-pack-v3/00-image-pack-notes.md`.
+- Service image true-source refresh shipped (2026-02-20, follow-up):
+  - user feedback confirmed v3 still looked too similar because it reused original source photos.
+  - replaced generator strategy with true source refresh (`v4`) to produce visibly different image sets per service slot.
+  - new source pipeline:
+    - Openverse (CC0/PDM) primary
+    - Wikimedia fallback for query gaps/rate limits
+  - generated and published 72 new assets to `site-assets/services/v4/*`.
+  - runtime mapping and service hero constants now point to `v4`.
+  - source provenance manifest produced at:
+    - `assets/generated/services-v4/manifest.sources.json`
+  - artifact added:
+    - `Docs/artifacts/ui/2026-02-20--service-image-pack-v4/00-image-pack-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

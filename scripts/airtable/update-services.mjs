@@ -28,7 +28,7 @@ const addServices = [
     slug: "necklace-repair",
     name: "Necklace Repair",
     short_summary: "Repair broken necklaces, clasps, and delicate chains.",
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v3/necklace-repair-hero.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v4/necklace-repair-hero.jpg",
     long_description: [
       "We repair broken necklaces and restore their strength and finish.",
       "From delicate chains to heavier pieces, every repair is reinforced and polished."
@@ -50,7 +50,7 @@ const addServices = [
     slug: "bracelet-repair",
     name: "Bracelet Repair",
     short_summary: "Fix broken links and clasps for a secure, comfortable fit.",
-    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v3/bracelet-repair-hero.jpg",
+    image: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v4/bracelet-repair-hero.jpg",
     long_description: [
       "We restore bracelets so they wear safely and comfortably again.",
       "Every repair is finished to look seamless and last."
