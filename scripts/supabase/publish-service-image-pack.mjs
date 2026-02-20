@@ -164,7 +164,7 @@ async function main() {
 
   const manifestPath = path.join(
     process.cwd(),
-    "assets/generated/services-v4/manifest.local.json"
+    "assets/generated/services-v3/manifest.local.json"
   );
   if (!fs.existsSync(manifestPath)) {
     throw new Error(`Missing manifest: ${manifestPath}`);
@@ -178,7 +178,7 @@ async function main() {
     published[slug] = {};
     for (const [variantName, localFile] of Object.entries(variants)) {
       const filePath = path.join(process.cwd(), localFile);
-      const objectPath = `services/v4/${path.basename(localFile)}`;
+      const objectPath = `services/v3/${path.basename(localFile)}`;
       const publicUrl = await uploadToSupabaseStorage({
         supabaseUrl,
         supabaseKey,
@@ -214,7 +214,7 @@ async function main() {
 
   const publicManifestPath = path.join(
     process.cwd(),
-    "assets/generated/services-v4/manifest.public.json"
+    "assets/generated/services-v3/manifest.public.json"
   );
   fs.writeFileSync(publicManifestPath, JSON.stringify(published, null, 2), "utf8");
   console.log(`MANIFEST_OK ${publicManifestPath}`);

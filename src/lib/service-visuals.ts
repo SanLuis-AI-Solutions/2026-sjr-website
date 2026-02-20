@@ -20,7 +20,7 @@ export type ServiceVisualSet = {
 
 const SERVICE_ASSET_BASE =
   "https://" +
-  "lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v4";
+  "lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v3";
 
 const SERVICE_SLUGS = [
   "watch-repair",

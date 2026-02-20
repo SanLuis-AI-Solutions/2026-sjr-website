@@ -11,27 +11,6 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## Latest Session (2026-02-19)
-- Service image true-source refresh v4 completed (2026-02-20 follow-up):
-  - v3 was functionally no-repeat but still visually similar because it reused prior source photos.
-  - generated and published a full `v4` pack with refreshed sources (72 assets, 8 per service).
-  - storage path:
-    - `site-assets/services/v4/*`
-  - generator strategy updated:
-    - Openverse (CC0/PDM) first
-    - Wikimedia fallback for low-volume queries/rate limits
-  - runtime/data sync updates:
-    - `src/lib/service-visuals.ts` -> slot mapping now uses v4
-    - `src/lib/constants.ts` -> service hero URLs now v4
-    - `scripts/supabase/publish-service-image-pack.mjs` -> publishes services-v4
-    - Airtable helper scripts synced to v4 hero URLs.
-  - publish evidence:
-    - 72 uploads complete
-    - Supabase `services.image_url` updated 9/9
-    - Airtable image rows updated 9/9
-  - provenance manifest:
-    - `assets/generated/services-v4/manifest.sources.json`
-  - artifact:
-    - `Docs/artifacts/ui/2026-02-20--service-image-pack-v4/00-image-pack-notes.md`.
 - Service image no-repeat v3 pass completed (2026-02-20):
   - generated and published `v3` service pack (72 assets total; 8 variants x 9 services) to:
     - `site-assets/services/v3/*`
