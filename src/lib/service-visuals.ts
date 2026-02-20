@@ -1,8 +1,12 @@
 type ServiceVisualBlueprint = {
   hero: string;
-  detailA: string;
-  detailB: string;
-  detailC: string;
+  support: string;
+  processA: string;
+  processB: string;
+  processC: string;
+  expectA: string;
+  expectB: string;
+  why: string;
 };
 
 export type ServiceVisualSet = {
@@ -14,94 +18,46 @@ export type ServiceVisualSet = {
   whyImageAlt: string;
 };
 
-const SERVICE_VISUALS_V2: Record<string, ServiceVisualBlueprint> = {
-  "watch-repair": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/watch-repair-detail-c.jpg",
-  },
-  "ring-sizing": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/ring-sizing-detail-c.jpg",
-  },
-  "stone-setting": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/stone-setting-detail-c.jpg",
-  },
-  "jewelry-cleaning": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/jewelry-cleaning-detail-c.jpg",
-  },
-  "necklace-repair": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/necklace-repair-detail-c.jpg",
-  },
-  "bracelet-repair": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/bracelet-repair-detail-c.jpg",
-  },
-  "pearl-restringing": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/pearl-restringing-detail-c.jpg",
-  },
-  "custom-design": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/custom-design-detail-c.jpg",
-  },
-  "heirloom-restoration": {
-    hero: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-hero.jpg",
-    detailA:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-a.jpg",
-    detailB:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-b.jpg",
-    detailC:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v2/heirloom-restoration-detail-c.jpg",
-  },
-};
+const SERVICE_ASSET_BASE =
+  "https://" +
+  "lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v3";
 
-const FALLBACK_VISUAL = SERVICE_VISUALS_V2["watch-repair"];
+const SERVICE_SLUGS = [
+  "watch-repair",
+  "ring-sizing",
+  "stone-setting",
+  "jewelry-cleaning",
+  "necklace-repair",
+  "bracelet-repair",
+  "pearl-restringing",
+  "custom-design",
+  "heirloom-restoration",
+] as const;
+
+function serviceAssetUrl(slug: string, variant: string) {
+  return `${SERVICE_ASSET_BASE}/${slug}-${variant}.jpg`;
+}
+
+const SERVICE_VISUALS_V3: Record<string, ServiceVisualBlueprint> = Object.fromEntries(
+  SERVICE_SLUGS.map((slug) => [
+    slug,
+    {
+      hero: serviceAssetUrl(slug, "hero"),
+      support: serviceAssetUrl(slug, "support"),
+      processA: serviceAssetUrl(slug, "process-a"),
+      processB: serviceAssetUrl(slug, "process-b"),
+      processC: serviceAssetUrl(slug, "process-c"),
+      expectA: serviceAssetUrl(slug, "expect-a"),
+      expectB: serviceAssetUrl(slug, "expect-b"),
+      why: serviceAssetUrl(slug, "why"),
+    },
+  ])
+) as Record<string, ServiceVisualBlueprint>;
+
+const FALLBACK_VISUAL = SERVICE_VISUALS_V3["watch-repair"];
 
 function getVisual(slug: string) {
-  return SERVICE_VISUALS_V2[slug] || FALLBACK_VISUAL;
+  return SERVICE_VISUALS_V3[slug] || FALLBACK_VISUAL;
 }
 
 export function buildServiceVisualSet(
@@ -111,42 +67,45 @@ export function buildServiceVisualSet(
   isWatchRepair: boolean
 ): ServiceVisualSet {
   const visual = getVisual(slug);
-
-  const primaryDetail = visual.detailA;
-  const secondaryDetail = visual.detailB;
-  const tertiaryDetail = visual.detailC;
+  const heroSupport = visual.support || heroImageSrc || visual.hero;
+  const processA = visual.processA || heroSupport;
+  const processB = visual.processB || visual.expectA || heroSupport;
+  const processC = visual.processC || visual.expectB || heroSupport;
+  const expectA = visual.expectA || processB;
+  const expectB = visual.expectB || processC;
+  const whyImage = visual.why || heroSupport;
 
   if (isWatchRepair) {
     return {
-      heroSupportImage: primaryDetail,
+      heroSupportImage: heroSupport,
       heroSupportImageAlt: "Watch movement and case work detail",
       processGallery: [
-        { url: primaryDetail, alt: "Watch repair setup detail", label: "Service focus" },
-        { url: secondaryDetail, alt: "Watch movement precision detail", label: "Craft reference" },
-        { url: tertiaryDetail, alt: "Watch finishing and inspection detail", label: "Finishing reference" },
+        { url: processA, alt: "Watch repair setup detail", label: "Service focus" },
+        { url: processB, alt: "Watch movement precision detail", label: "Craft reference" },
+        { url: processC, alt: "Watch finishing and inspection detail", label: "Finishing reference" },
       ],
       expectImages: [
-        { url: secondaryDetail, alt: "Watch condition and parts inspection detail" },
-        { url: tertiaryDetail, alt: "Watch service completion detail" },
+        { url: expectA, alt: "Watch condition and parts inspection detail" },
+        { url: expectB, alt: "Watch service completion detail" },
       ],
-      whyImageSrc: primaryDetail,
+      whyImageSrc: whyImage,
       whyImageAlt: "Completed watch repair and in-house quality control detail",
     };
   }
 
   return {
-    heroSupportImage: primaryDetail,
+    heroSupportImage: heroSupport,
     heroSupportImageAlt: `${serviceName} support detail`,
     processGallery: [
-      { url: primaryDetail, alt: `${serviceName} service focus detail`, label: "Service focus" },
-      { url: secondaryDetail, alt: `${serviceName} craft detail`, label: "Craft reference" },
-      { url: tertiaryDetail, alt: `${serviceName} finishing detail`, label: "Finishing reference" },
+      { url: processA, alt: `${serviceName} service focus detail`, label: "Service focus" },
+      { url: processB, alt: `${serviceName} craft detail`, label: "Craft reference" },
+      { url: processC, alt: `${serviceName} finishing detail`, label: "Finishing reference" },
     ],
     expectImages: [
-      { url: secondaryDetail, alt: `${serviceName} expectation detail` },
-      { url: tertiaryDetail, alt: `${serviceName} results detail` },
+      { url: expectA, alt: `${serviceName} expectation detail` },
+      { url: expectB, alt: `${serviceName} results detail` },
     ],
-    whyImageSrc: primaryDetail,
+    whyImageSrc: whyImage,
     whyImageAlt: `${serviceName} in-house result detail`,
   };
 }

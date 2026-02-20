@@ -35,6 +35,7 @@ yarn-error.log*
 # local artifacts
 /logs
 /.health
+/assets/generated/
 
 # python cache
 __pycache__/

@@ -11,6 +11,32 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## Latest Session (2026-02-19)
+- Service image no-repeat v3 pass completed (2026-02-20):
+  - generated and published `v3` service pack (72 assets total; 8 variants x 9 services) to:
+    - `site-assets/services/v3/*`
+  - variants per service:
+    - `hero`, `support`, `process-a`, `process-b`, `process-c`, `expect-a`, `expect-b`, `why`.
+  - runtime visual mapping upgraded to slot-specific v3 assets:
+    - `src/lib/service-visuals.ts`
+  - fallback constants updated to v3 heroes:
+    - `src/lib/constants.ts`
+  - publish tooling updated to v3:
+    - `scripts/supabase/generate-service-image-variants.py`
+    - `scripts/supabase/publish-service-image-pack.mjs`
+  - Airtable helper scripts synced to v3 hero URLs:
+    - `scripts/airtable/assign-service-images.mjs`
+    - `scripts/airtable/add-missing-services.mjs`
+    - `scripts/airtable/update-services.mjs`
+    - `scripts/airtable/sync-to-supabase.mjs`
+    - `scripts/airtable/validate-schema.mjs`
+  - data writes completed:
+    - Supabase `services.image_url` updated for all 9 service rows.
+    - Airtable image attachments updated for all 9 service rows.
+  - verification:
+    - `pwsh -File scripts/audit-images.ps1` -> PASS (`OK: 21/21`)
+    - `pwsh -File scripts/verify.ps1` -> PASS
+  - artifact:
+    - `Docs/artifacts/ui/2026-02-20--service-image-pack-v3/00-image-pack-notes.md`.
 - Service-impact compare automation pass completed (2026-02-20):
   - added `scripts/google/service-impact-compare.mjs`.
   - added npm command `google:service-impact-compare`.

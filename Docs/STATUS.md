@@ -310,6 +310,30 @@ Update cadence: weekly (or after major milestones).
     - `.health/service-impact-compare-*.{md,json}`
   - run evidence artifact added:
     - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/05-service-impact-compare.md`.
+- Service image no-repeat pass shipped (2026-02-20):
+  - generated and published service image pack v3: 72 assets total (8 variants x 9 services):
+    - `hero`, `support`, `process-a`, `process-b`, `process-c`, `expect-a`, `expect-b`, `why`.
+  - updated runtime service visual mapping to dedicated per-slot assets per service (no repeated image reuse across flagship section slots):
+    - `src/lib/service-visuals.ts`
+  - updated service fallback hero URLs from v2 to v3:
+    - `src/lib/constants.ts`
+  - updated image tooling for repeatable v3 generation/publish:
+    - `scripts/supabase/generate-service-image-variants.py`
+    - `scripts/supabase/publish-service-image-pack.mjs`
+  - synced Airtable helper scripts to v3 hero paths:
+    - `scripts/airtable/assign-service-images.mjs`
+    - `scripts/airtable/add-missing-services.mjs`
+    - `scripts/airtable/update-services.mjs`
+    - `scripts/airtable/sync-to-supabase.mjs`
+    - `scripts/airtable/validate-schema.mjs`
+  - data updates executed:
+    - Supabase `services.image_url` updated for all 9 services to v3 hero URLs.
+    - Airtable service image attachments updated for all 9 services.
+  - verification:
+    - `scripts/audit-images.ps1` PASS (`OK: 21/21`)
+    - `scripts/verify.ps1` PASS.
+  - artifact added:
+    - `Docs/artifacts/ui/2026-02-20--service-image-pack-v3/00-image-pack-notes.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:

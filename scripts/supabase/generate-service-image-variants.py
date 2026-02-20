@@ -7,7 +7,7 @@ from pathlib import Path
 
 from PIL import Image, ImageEnhance, ImageFilter
 
-OUTPUT_DIR = Path("assets/generated/services-v2")
+OUTPUT_DIR = Path("assets/generated/services-v3")
 TARGET_SIZE = (1600, 1066)
 
 SOURCE_IMAGES = {
@@ -25,9 +25,13 @@ SOURCE_IMAGES = {
 VARIANTS = [
     # name, crop width ratio, center x ratio, center y ratio, contrast, color, sharpness
     ("hero", 1.00, 0.50, 0.48, 1.05, 1.02, 1.04),
-    ("detail-a", 0.82, 0.46, 0.45, 1.08, 1.03, 1.08),
-    ("detail-b", 0.74, 0.64, 0.42, 1.10, 1.04, 1.10),
-    ("detail-c", 0.70, 0.38, 0.60, 1.08, 1.02, 1.12),
+    ("support", 0.90, 0.43, 0.46, 1.08, 1.03, 1.08),
+    ("process-a", 0.82, 0.48, 0.44, 1.10, 1.04, 1.11),
+    ("process-b", 0.76, 0.62, 0.42, 1.11, 1.05, 1.12),
+    ("process-c", 0.74, 0.36, 0.58, 1.09, 1.03, 1.13),
+    ("expect-a", 0.84, 0.56, 0.50, 1.07, 1.02, 1.08),
+    ("expect-b", 0.78, 0.40, 0.40, 1.10, 1.03, 1.10),
+    ("why", 0.88, 0.52, 0.60, 1.08, 1.02, 1.09),
 ]
 
 
