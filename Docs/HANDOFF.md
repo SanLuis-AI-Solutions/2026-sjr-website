@@ -11,6 +11,15 @@ Production alias: `https://sjr-new-website-aiproject.vercel.app`
 - Core conversion flows and services UX verified on mobile via Playwright smoke tests.
 
 ## Latest Session (2026-02-19)
+- Service-impact compare automation pass completed (2026-02-20):
+  - added `scripts/google/service-impact-compare.mjs`.
+  - added npm command `google:service-impact-compare`.
+  - output files:
+    - `.health/service-impact-compare-*.md`
+    - `.health/service-impact-compare-*.json`
+  - artifact added:
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/05-service-impact-compare.md`
+  - this report is now the week-over-week decision input for validating service-image relevance and service-route conversion movement.
 - Footer branding + service-image relevance hardening pass completed:
   - fixed footer wordmark typo in `src/components/site-footer.tsx` (`Susie’s Repair` -> `Susie’s Jewelry Repair`).
   - generated and published service image pack v2 (36 assets; 4 variants x 9 services) to:

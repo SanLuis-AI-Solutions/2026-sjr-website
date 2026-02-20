@@ -298,6 +298,18 @@ Update cadence: weekly (or after major milestones).
     - `Docs/artifacts/ui/2026-02-19--service-image-pack-v2/00-image-pack-notes.md`.
   - regression guard added:
     - `tests/smoke.spec.ts` now includes `footer brand lockup includes full business name` to prevent footer brand-copy regressions.
+- Service impact measurement pass shipped (2026-02-20):
+  - added week-over-week service performance comparison script:
+    - `scripts/google/service-impact-compare.mjs`
+    - `npm run google:service-impact-compare`
+  - compares current complete 7-day window vs prior 7-day window for:
+    - all service-detail route views (`/services/<slug>`)
+    - service interaction events
+    - lead funnel outcome events
+  - writes decision artifacts to:
+    - `.health/service-impact-compare-*.{md,json}`
+  - run evidence artifact added:
+    - `Docs/artifacts/ui/2026-02-19--whole-site-ux-qa-and-measurement/05-service-impact-compare.md`.
 - Learned:
 - MCP server availability depends on the host’s MCP autostart/discovery settings and the active config source.
 - Risks:
