@@ -1,3 +1,7 @@
+import imageAltsRaw from "./image-alts.json";
+
+const imageAlts = imageAltsRaw as Record<string, string>;
+
 type ServiceVisualBlueprint = {
   hero: string;
   support: string;
@@ -18,9 +22,7 @@ export type ServiceVisualSet = {
   whyImageAlt: string;
 };
 
-const SERVICE_ASSET_BASE =
-  "https://" +
-  "lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/v3";
+const SERVICE_ASSET_BASE = "/images/services";
 
 const SERVICE_SLUGS = [
   "watch-repair",
@@ -36,6 +38,15 @@ const SERVICE_SLUGS = [
 
 function serviceAssetUrl(slug: string, variant: string) {
   return `${SERVICE_ASSET_BASE}/${slug}-${variant}.jpg`;
+}
+
+function getAlt(url: string, fallback: string) {
+  if (!url) return fallback;
+  const match = url.match(/\/images\/services\/(.*)\.jpg/);
+  if (match && imageAlts[match[1]]) {
+    return imageAlts[match[1]];
+  }
+  return fallback;
 }
 
 const SERVICE_VISUALS_V3: Record<string, ServiceVisualBlueprint> = Object.fromEntries(
@@ -78,34 +89,34 @@ export function buildServiceVisualSet(
   if (isWatchRepair) {
     return {
       heroSupportImage: heroSupport,
-      heroSupportImageAlt: "Watch movement and case work detail",
+      heroSupportImageAlt: getAlt(heroSupport, "Watch movement and case work detail"),
       processGallery: [
-        { url: processA, alt: "Watch repair setup detail", label: "Service focus" },
-        { url: processB, alt: "Watch movement precision detail", label: "Craft reference" },
-        { url: processC, alt: "Watch finishing and inspection detail", label: "Finishing reference" },
+        { url: processA, alt: getAlt(processA, "Watch repair setup detail"), label: "Service focus" },
+        { url: processB, alt: getAlt(processB, "Watch movement precision detail"), label: "Craft reference" },
+        { url: processC, alt: getAlt(processC, "Watch finishing and inspection detail"), label: "Finishing reference" },
       ],
       expectImages: [
-        { url: expectA, alt: "Watch condition and parts inspection detail" },
-        { url: expectB, alt: "Watch service completion detail" },
+        { url: expectA, alt: getAlt(expectA, "Watch condition and parts inspection detail") },
+        { url: expectB, alt: getAlt(expectB, "Watch service completion detail") },
       ],
       whyImageSrc: whyImage,
-      whyImageAlt: "Completed watch repair and in-house quality control detail",
+      whyImageAlt: getAlt(whyImage, "Completed watch repair and in-house quality control detail"),
     };
   }
 
   return {
     heroSupportImage: heroSupport,
-    heroSupportImageAlt: `${serviceName} support detail`,
+    heroSupportImageAlt: getAlt(heroSupport, `${serviceName} support detail`),
     processGallery: [
-      { url: processA, alt: `${serviceName} service focus detail`, label: "Service focus" },
-      { url: processB, alt: `${serviceName} craft detail`, label: "Craft reference" },
-      { url: processC, alt: `${serviceName} finishing detail`, label: "Finishing reference" },
+      { url: processA, alt: getAlt(processA, `${serviceName} service focus detail`), label: "Service focus" },
+      { url: processB, alt: getAlt(processB, `${serviceName} craft detail`), label: "Craft reference" },
+      { url: processC, alt: getAlt(processC, `${serviceName} finishing detail`), label: "Finishing reference" },
     ],
     expectImages: [
-      { url: expectA, alt: `${serviceName} expectation detail` },
-      { url: expectB, alt: `${serviceName} results detail` },
+      { url: expectA, alt: getAlt(expectA, `${serviceName} expectation detail`) },
+      { url: expectB, alt: getAlt(expectB, `${serviceName} results detail`) },
     ],
     whyImageSrc: whyImage,
-    whyImageAlt: `${serviceName} in-house result detail`,
+    whyImageAlt: getAlt(whyImage, `${serviceName} in-house result detail`),
   };
 }
