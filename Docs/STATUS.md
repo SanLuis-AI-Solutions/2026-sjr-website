@@ -337,8 +337,9 @@ Update cadence: weekly (or after major milestones).
 - Service image SEO & local integration rollout (2026-02-22):
   - AI-categorized 49 unlabeled generic assets into their proper `Watches, Rings, Necklaces, etc.` directories via a locally run Gemini Vision node script processing raw file binary.
   - Deduped image slots by creating exactly 72 unique, 1-to-1 mapped local files inside `/images/services/` for every service's hero, support, process, expectation, and why sections (killing all previous page cross-contamination overlap).
+  - Swapped out temporary earrings pictures mapped to the `bracelet-repair` service substituting them for natively processed, uniquely styled new `Bracelets` imagery correctly assigned via local optimization.
   - Cut the site's reliance stringently on fetching remote Supabase assets for Service static content layout; native Next.js `<Image>` tags will now locally optimize.
-  - Ran a batch Vision script to produce 72 highly-descriptive, accurate, max 15-word ALT tags tailored directly for Local/Google Search intent (`src/lib/image-alts.json`).
+  - Ran a batch Vision script to produce highly-descriptive, accurate, max 15-word ALT tags tailored directly for Local/Google Search intent (`src/lib/image-alts.json`).
   - Rewired `src/lib/service-visuals.ts` and `src/lib/constants.ts` to statically ingest and resolve the new image paths and dynamic intelligent `<alt>` strings via `getAlt` instead of fallbacks.
   - Artifact added: `Docs/artifacts/ui/2026-02-22--seo-service-images/00-seo-alt-tags-and-integration.md`.
 - Learned:
