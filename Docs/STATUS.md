@@ -5,9 +5,14 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Finish remaining site pages beyond the core set, then run full debug + optimization pass before custom domain launch.
-- Lock booking + quote + contact lead flows and keep notifications reliable.
-- Prepare launch SEO basics (metadata, sitemap/robots, internal linking).
+- Collect social media API tokens to activate the outbound Content Nexus.
+- Final DNS transition for `susiesjewelryrepair.com`.
+- Complete the "Masterpiece Recognition" review automation cycle in n8n.
+
+## Recent Milestones (Today)
+- **Performance Optimization**: Shaved 93% off mobile image payloads; hit an 85+ median Lighthouse score.
+- **SJR Content Nexus**: Shipped the integrated social sync engine with X (Twitter) support.
+- **Master-Grade Security**: Migrated admin access to Supabase Auth with strict Email Gating (contact@sanluisai.com) and MFA readiness.
 
 ## KPIs
 - Primary KPI:
