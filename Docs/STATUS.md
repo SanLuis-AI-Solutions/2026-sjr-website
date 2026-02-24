@@ -38,6 +38,24 @@ Update cadence: weekly (or after major milestones).
 - `2026-02-24 16:47:14 -06:00` Mobile smoke gate repaired:
   - fixed `tests/smoke.spec.ts` service image-variety matcher to support current local image paths (`/images/services/*`) while retaining legacy compatibility (`/site-assets/services/*`).
   - verification: targeted failing test PASS and full `npm test` PASS (`17/17`).
+- `2026-02-24 17:23:24 -06:00` Production performance lock iteration executed (Option 1):
+  - shipped + deployed multiple LCP hardening patches:
+    - ring-sizing hero preload + sync decode (`src/app/services/[slug]/page.tsx`)
+    - home/blog hero preload + sync decode (`src/components/hero.tsx`, `src/app/blog/[slug]/page.tsx`)
+    - reduced server-blocking work:
+      - home services data fetch moved behind `Suspense` in `src/app/page.tsx`
+      - removed blocking `getServices()` fetch from service detail route (`src/app/services/[slug]/page.tsx`)
+      - added `cv-auto` containment for heavy blog body blocks (`src/app/blog/[slug]/page.tsx`)
+  - production deploys completed and aliased to `https://susiesjewelryrepair.com`:
+    - `https://sjr-new-website-aiproject-5rqhyljh3.vercel.app`
+    - `https://sjr-new-website-aiproject-ovp33sv5u.vercel.app`
+    - `https://sjr-new-website-aiproject-kkgwdd8ka.vercel.app`
+  - latest 3-run production gate remains narrowly above strict LCP threshold (`<=2500ms`) while SEO remains `100`:
+    - source: `.health/perf-gate-2026-02-24T23-19-01-742Z/summary.json`
+    - `/`: `perf=91`, `seo=100`, `lcp=2558ms`
+    - `/services/ring-sizing`: `perf=89`, `seo=100`, `lcp=2786ms`
+    - `/blog/ring-sizing-guide`: `perf=94`, `seo=100`, `lcp=2732ms`
+  - regression safety: `npm test` PASS (`17/17`) after all performance patches.
 
 ## KPIs
 - Primary KPI:

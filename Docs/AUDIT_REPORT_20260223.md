@@ -14,6 +14,7 @@
 - **Booking schedule centralization (2026-02-24 16:38 -06:00):** Extracted unified booking schedule logic into `src/lib/booking-schedule.ts` and connected both booking UI and `/api/book` to remove rule drift risk.
 - **Holiday closure configuration (2026-02-24 16:38 -06:00):** Added optional `NEXT_PUBLIC_BOOKING_BLACKOUT_DATES` environment control (documented in `.env.example`) for no-booking dates.
 - **Smoke gate recovery (2026-02-24 16:47 -06:00):** Fixed service-image variety smoke matcher for current local image URLs (`/images/services/*`) and restored full suite pass (`npm test`: `17/17`).
+- **Performance lock execution (2026-02-24 17:23 -06:00):** Multiple production LCP hardening deploys completed; latest strict gate remains just above `<=2500ms` on launch routes with SEO holding at `100` (source: `.health/perf-gate-2026-02-24T23-19-01-742Z/summary.json`).
 
 ---
 
