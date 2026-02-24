@@ -20,7 +20,8 @@ function parseArgs(argv) {
       process.env.SITE_URL ||
       process.env.NEXT_PUBLIC_SITE_URL ||
       "https://www.susiesjewelryrepair.com",
-    runs: 3,
+    runs: 7,
+    percentile: 75,
     lcpThresholdMs: 2500,
     seoThreshold: 100,
     outputDir: ".health",
@@ -33,6 +34,7 @@ function parseArgs(argv) {
     const token = argv[i];
     if (token === "--base-url") defaults.baseUrl = argv[++i];
     else if (token === "--runs") defaults.runs = parseNumber(argv[++i], "--runs");
+    else if (token === "--percentile") defaults.percentile = parseNumber(argv[++i], "--percentile");
     else if (token === "--lcp-threshold-ms") {
       defaults.lcpThresholdMs = parseNumber(argv[++i], "--lcp-threshold-ms");
     } else if (token === "--seo-threshold") {
@@ -49,6 +51,9 @@ function parseArgs(argv) {
   }
   if (!defaults.baseUrl) throw new Error("Missing base URL.");
   if (defaults.runs < 1) throw new Error("--runs must be >= 1");
+  if (defaults.percentile <= 0 || defaults.percentile > 100) {
+    throw new Error("--percentile must be > 0 and <= 100");
+  }
 
   return defaults;
 }
@@ -56,6 +61,14 @@ function parseArgs(argv) {
 function median(values) {
   const sorted = [...values].sort((a, b) => a - b);
   return sorted[Math.floor(sorted.length / 2)];
+}
+
+function percentile(values, p) {
+  const sorted = [...values].sort((a, b) => a - b);
+  if (sorted.length === 0) return 0;
+  const rank = Math.ceil((p / 100) * sorted.length);
+  const index = Math.min(sorted.length - 1, Math.max(0, rank - 1));
+  return sorted[index];
 }
 
 function safeSlug(routePath) {
@@ -155,13 +168,21 @@ async function run() {
         tbt: median(runs.map((r) => r.tbt)),
         cls: median(runs.map((r) => r.cls)),
       },
+      baseline: {
+        perf: percentile(runs.map((r) => r.perf), opts.percentile),
+        seo: percentile(runs.map((r) => r.seo), opts.percentile),
+        lcp: percentile(runs.map((r) => r.lcp), opts.percentile),
+        fcp: percentile(runs.map((r) => r.fcp), opts.percentile),
+        tbt: percentile(runs.map((r) => r.tbt), opts.percentile),
+        cls: percentile(runs.map((r) => r.cls), opts.percentile),
+      },
     };
     results.push(routeResult);
   }
 
   const failedRoutes = results.filter(
     (result) =>
-      result.median.lcp > opts.lcpThresholdMs || result.median.seo < opts.seoThreshold
+      result.baseline.lcp > opts.lcpThresholdMs || result.baseline.seo < opts.seoThreshold
   );
 
   const summary = {
@@ -169,6 +190,7 @@ async function run() {
     config: {
       baseUrl: opts.baseUrl,
       runs: opts.runs,
+      percentile: opts.percentile,
       lcpThresholdMs: opts.lcpThresholdMs,
       seoThreshold: opts.seoThreshold,
       paths: opts.paths,
@@ -183,14 +205,14 @@ async function run() {
   await fs.writeFile(path.join(opts.outputDir, "perf-gate-latest.json"), JSON.stringify(summary, null, 2));
 
   console.log("");
-  console.log("Median Results");
+  console.log(`P${opts.percentile} Baseline Results`);
   for (const result of results) {
     console.log(
-      `${result.path.padEnd(28)} perf=${String(result.median.perf).padStart(3)} seo=${String(
-        result.median.seo
-      ).padStart(3)} lcp=${String(result.median.lcp).padStart(4)}ms tbt=${String(
-        result.median.tbt
-      ).padStart(4)}ms cls=${result.median.cls}`
+      `${result.path.padEnd(28)} perf=${String(result.baseline.perf).padStart(3)} seo=${String(
+        result.baseline.seo
+      ).padStart(3)} lcp=${String(result.baseline.lcp).padStart(4)}ms tbt=${String(
+        result.baseline.tbt
+      ).padStart(4)}ms cls=${result.baseline.cls}`
     );
   }
   console.log(`Summary written: ${summaryPath}`);
@@ -198,11 +220,11 @@ async function run() {
   if (failedRoutes.length > 0) {
     console.error("");
     console.error(
-      `Performance gate failed. LCP must be <= ${opts.lcpThresholdMs}ms and SEO must be >= ${opts.seoThreshold}.`
+      `Performance gate failed (P${opts.percentile} baseline). LCP must be <= ${opts.lcpThresholdMs}ms and SEO must be >= ${opts.seoThreshold}.`
     );
     for (const route of failedRoutes) {
       console.error(
-        `- ${route.path}: lcp=${route.median.lcp}ms seo=${route.median.seo}`
+        `- ${route.path}: lcp=${route.baseline.lcp}ms seo=${route.baseline.seo}`
       );
     }
     process.exit(1);
