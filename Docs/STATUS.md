@@ -30,6 +30,11 @@ Update cadence: weekly (or after major milestones).
   - server-side guardrails in `/api/book` aligned to same schedule.
   - production deploy: `https://sjr-new-website-aiproject-g0um1jk04.vercel.app` (aliased to `https://susiesjewelryrepair.com`).
   - API validation evidence (all expected rejects): Sunday, weekday before open, weekday after close, Saturday after close -> `400 outside_business_hours`.
+- `2026-02-24 16:38:13 -06:00` Booking rules centralized for drift prevention:
+  - added shared schedule module `src/lib/booking-schedule.ts` used by both booking UI and `/api/book`.
+  - introduced optional holiday blackout config: `NEXT_PUBLIC_BOOKING_BLACKOUT_DATES` (comma-separated `YYYY-MM-DD`) and documented in `.env.example`.
+  - UI closed-state messaging now differentiates Sunday vs configured holiday closures.
+  - verification: `npm run build` PASS; `npm test` ran with 1 pre-existing failure in image-variety smoke on `/services/ring-sizing` (booking changes unaffected).
 
 ## KPIs
 - Primary KPI:

@@ -4,6 +4,12 @@ import { supabaseInsert, supabaseUpdateById } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
 import { sendLeadEmail } from "@/lib/lead-email";
 import { normalizeTimeZone } from "@/lib/timezone";
+import {
+  isValidDateString,
+  isValidTimeString,
+  isWithinBookingHours,
+  minutesFromTime,
+} from "@/lib/booking-schedule";
 
 export async function POST(request: Request) {
   try {
@@ -30,7 +36,7 @@ export async function POST(request: Request) {
     }
 
     const tz = normalizeTimeZone(process.env.GOOGLE_CALENDAR_TIMEZONE);
-    if (!isWithinBusinessHours(date, time)) {
+    if (!isWithinBookingHours(date, time)) {
       return redirectOrJson(request, { ok: false, error: "outside_business_hours" }, 400);
     }
 
@@ -189,38 +195,6 @@ function redirectOrJson(
 
   const target = new URL("/book?error=1", url);
   return NextResponse.redirect(target, 303);
-}
-
-function isValidDateString(value: string) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value);
-}
-
-function isValidTimeString(value: string) {
-  return /^\d{2}:\d{2}$/.test(value);
-}
-
-function dayOfWeekFromDate(date: string) {
-  const [y, m, d] = date.split("-").map((n) => parseInt(n, 10));
-  // Use UTC to avoid server-timezone drift.
-  return new Date(Date.UTC(y, m - 1, d)).getUTCDay(); // 0=Sun .. 6=Sat
-}
-
-function minutesFromTime(time: string) {
-  const [hh, mm] = time.split(":").map((n) => parseInt(n, 10));
-  return hh * 60 + mm;
-}
-
-function isWithinBusinessHours(date: string, time: string) {
-  const dow = dayOfWeekFromDate(date);
-  if (dow === 0) return false; // Sun closed
-
-  const start = minutesFromTime(time);
-  if (!Number.isFinite(start)) return false;
-  if (start % 15 !== 0) return false;
-
-  const open = 10 * 60; // 10:00 AM
-  const latestStart = dow === 6 ? 15 * 60 : 17 * 60; // Sat 3:00 PM, weekdays 5:00 PM
-  return start >= open && start <= latestStart;
 }
 
 function getTodayYmd(timeZone: string) {
