@@ -10,9 +10,10 @@ Update cadence: weekly (or after major milestones).
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
 ## Recent Milestones (Today)
+- **Virtual Boutique Showroom**: Launched a white-label Stuller Showcase integration with a luxury "Unlock Gate" roadmap and performance-optimized iframe management.
 - **Performance Optimization**: Shaved 93% off mobile image payloads; hit an 85+ median Lighthouse score.
 - **SJR Content Nexus**: Shipped the integrated social sync engine with X (Twitter) support.
-- **Master-Grade Security**: Migrated admin access to Supabase Auth with strict Email Gating (contact@sanluisai.com) and MFA readiness.
+- **Master-Grade Security**: Migrated admin access to Supabase Auth with strict Email Gating (contact@sanluisai.com).
 
 ## KPIs
 - Primary KPI:
