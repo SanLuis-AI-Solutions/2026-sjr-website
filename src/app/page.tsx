@@ -2,7 +2,7 @@ import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesGrid } from "@/components/services-grid";
-import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, Testimonials } from "@/components/home-sections";
+import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowroomBand, Testimonials } from "@/components/home-sections";
 import { localBusinessSchema, servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 
@@ -25,6 +25,7 @@ export default async function Home() {
         <ProcessSteps />
         <ServicesGrid services={services} />
         <CraftStory />
+        <ShowroomBand />
         <Testimonials />
         <HomeFaq />
         <HomeCta />

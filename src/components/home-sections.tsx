@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function ProofBand() {
   return (
@@ -171,14 +172,17 @@ export function CraftStory() {
           </div>
         </div>
         <div className="grid gap-4 reveal-on-scroll">
-          <div
-            className="h-60 rounded-3xl border border-stone-200 bg-cover bg-center shadow-md"
-            style={{
-              backgroundImage:
-                "url('https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg')",
-            }}
-            aria-hidden="true"
-          />
+          <div className="relative h-60 overflow-hidden rounded-3xl border border-stone-200 shadow-md">
+            <Image
+              src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg"
+              alt=""
+              aria-hidden
+              fill
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             {[
               "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
@@ -186,12 +190,48 @@ export function CraftStory() {
             ].map((url) => (
               <div
                 key={url}
-                className="h-32 rounded-2xl border border-stone-200 bg-cover bg-center shadow-sm"
-                style={{ backgroundImage: `url('${url}')` }}
-                aria-hidden="true"
-              />
+                className="relative h-32 overflow-hidden rounded-2xl border border-stone-200 shadow-sm"
+              >
+                <Image
+                  src={url}
+                  alt=""
+                  aria-hidden
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className="object-cover"
+                />
+              </div>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ShowroomBand() {
+  return (
+    <section className="relative overflow-hidden bg-stone-900 py-24 text-[#faf7f2]">
+      <div className="pointer-events-none absolute -left-32 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.15),_transparent_70%)]" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.2),_transparent_70%)]" />
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
+        <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">
+          The Curated Collection
+        </p>
+        <h2 className="font-serif text-3xl md:text-5xl text-[#faf7f2]">
+          Not just repairing the past, but crafting your future.
+        </h2>
+        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-stone-300 md:text-base">
+          Browse our curated digital showroom of mountings, settings, and bespoke pieces. Hand-selected by our Master Jewelers to inspire your next custom design.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <Link
+            href="/showroom"
+            className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 transition-colors"
+          >
+            Enter Virtual Showroom
+          </Link>
         </div>
       </div>
     </section>
