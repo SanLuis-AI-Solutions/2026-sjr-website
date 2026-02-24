@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { preload } from "react-dom";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
@@ -1238,6 +1239,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc =
     slug === "ring-sizing" ? "/images/services/ring-sizing-hero-mobile.avif" : null;
+  const lcpHeroImageSrc = mobileHeroImageSrc || heroImageSrc;
+  preload(lcpHeroImageSrc, {
+    as: "image",
+    fetchPriority: "high",
+    ...(mobileHeroImageSrc ? { type: "image/avif" } : {}),
+  });
   const howItWorksSupportCopy = isWatchRepair
     ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
@@ -1579,11 +1586,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <source media="(max-width: 767px)" srcSet={mobileHeroImageSrc} type="image/avif" />
                 ) : null}
                 <img
-                  src={heroImageSrc}
+                  src={lcpHeroImageSrc}
                   alt={service.name}
                   loading="eager"
                   fetchPriority="high"
-                  decoding="async"
+                  decoding="sync"
                   className="h-full w-full object-cover"
                 />
               </picture>
