@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     const tz = normalizeTimeZone(process.env.GOOGLE_CALENDAR_TIMEZONE);
-    if (!isWithinBusinessHours(date, time, 30)) {
+    if (!isWithinBusinessHours(date, time)) {
       return redirectOrJson(request, { ok: false, error: "outside_business_hours" }, 400);
     }
 
@@ -210,7 +210,7 @@ function minutesFromTime(time: string) {
   return hh * 60 + mm;
 }
 
-function isWithinBusinessHours(date: string, time: string, durationMinutes: number) {
+function isWithinBusinessHours(date: string, time: string) {
   const dow = dayOfWeekFromDate(date);
   if (dow === 0) return false; // Sun closed
 
@@ -218,9 +218,9 @@ function isWithinBusinessHours(date: string, time: string, durationMinutes: numb
   if (!Number.isFinite(start)) return false;
   if (start % 15 !== 0) return false;
 
-  const open = 10 * 60;
-  const close = dow === 6 ? 16 * 60 : 18 * 60; // Sat 10-4, weekdays 10-6
-  return start >= open && start + durationMinutes <= close;
+  const open = 10 * 60; // 10:00 AM
+  const latestStart = dow === 6 ? 15 * 60 : 17 * 60; // Sat 3:00 PM, weekdays 5:00 PM
+  return start >= open && start <= latestStart;
 }
 
 function getTodayYmd(timeZone: string) {

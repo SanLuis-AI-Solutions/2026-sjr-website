@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
+import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -157,26 +158,7 @@ export default async function BookPage({
               />
             </label>
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Date
-                <input
-                  type="date"
-                  name="date"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  required
-                />
-              </label>
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-                Time
-                <input
-                  type="time"
-                  name="time"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  required
-                />
-              </label>
-            </div>
+            <BookingDateTimeFields />
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
               Details (optional)

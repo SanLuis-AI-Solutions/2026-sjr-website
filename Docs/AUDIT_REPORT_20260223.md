@@ -10,6 +10,7 @@
 - **Canonical:** Apex redirects to `www` in production via `next.config.ts`.
 - **Measured Production Gate:** Repeated 3-run mobile Lighthouse passes now executed on the live custom domain with automated reporting (`npm run perf:gate`).
 - **Gate status:** Production mobile performance gate now passes with `SEO=100` and `LCP<=2500ms` medians on `/`, `/services/ring-sizing`, and `/blog/ring-sizing-guide` (source: `.health/perf-gate-2026-02-24T22-03-49-377Z/summary.json`).
+- **Booking schedule controls (2026-02-24 16:26 -06:00):** Booking page now restricts appointment selections to business windows in both UI and API (Mon-Fri 10-5, Sat 10-3, Sun closed).
 
 ---
 

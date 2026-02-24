@@ -23,6 +23,14 @@ Update cadence: weekly (or after major milestones).
 - `/services/ring-sizing`: `perf=96`, `seo=100`, `lcp=2454ms`
 - `/blog/ring-sizing-guide`: `perf=97`, `seo=100`, `lcp=2481ms`
 
+## Execution Log (Local Time -06:00)
+- `2026-02-24 16:26:33 -06:00` Booking availability hardening shipped:
+  - UI upgraded from free-form time input to constrained 15-minute slot dropdown based on selected date/day.
+  - enforced schedule in booking UI: Mon-Fri `10:00-17:00`, Sat `10:00-15:00`, Sun closed.
+  - server-side guardrails in `/api/book` aligned to same schedule.
+  - production deploy: `https://sjr-new-website-aiproject-g0um1jk04.vercel.app` (aliased to `https://susiesjewelryrepair.com`).
+  - API validation evidence (all expected rejects): Sunday, weekday before open, weekday after close, Saturday after close -> `400 outside_business_hours`.
+
 ## KPIs
 - Primary KPI:
 - Secondary KPIs:
