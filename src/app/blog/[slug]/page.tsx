@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
+import { preload } from "react-dom";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BLOG_POSTS, getBlogPostBySlug, getRelatedBlogPosts } from "@/lib/blog";
@@ -65,6 +66,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
   const mobileHeroImageSrc =
     post.slug === "ring-sizing-guide" ? "/images/blog/ring-sizing-guide-cover-mobile.avif" : null;
+  const lcpHeroImageSrc = mobileHeroImageSrc || post.image;
+  preload(lcpHeroImageSrc, {
+    as: "image",
+    fetchPriority: "high",
+    ...(mobileHeroImageSrc ? { type: "image/avif" } : {}),
+  });
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -134,11 +141,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 <source media="(max-width: 767px)" srcSet={mobileHeroImageSrc} type="image/avif" />
               ) : null}
               <img
-                src={post.image}
+                src={lcpHeroImageSrc}
                 alt={post.title}
                 loading="eager"
                 fetchPriority="high"
-                decoding="async"
+                decoding="sync"
                 className="h-full w-full object-cover"
               />
             </picture>

@@ -20,15 +20,17 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-10 md:pt-12">
         <Hero />
-        <ProofBand />
-        <InHouseBadge />
-        <ProcessSteps />
-        <ServicesGrid services={services} />
-        <CraftStory />
-        <ShowroomBand />
-        <Testimonials />
-        <HomeFaq />
-        <HomeCta />
+        <div className="cv-auto">
+          <ProofBand />
+          <InHouseBadge />
+          <ProcessSteps />
+          <ServicesGrid services={services} />
+          <CraftStory />
+          <ShowroomBand />
+          <Testimonials />
+          <HomeFaq />
+          <HomeCta />
+        </div>
       </main>
       <SiteFooter />
 

@@ -1,21 +1,29 @@
 import Link from "next/link";
+import { preload } from "react-dom";
 
 export function Hero() {
+  const mobileHeroImageSrc = "/images/home/home-hero-ring-mobile.avif";
+  preload(mobileHeroImageSrc, {
+    as: "image",
+    fetchPriority: "high",
+    type: "image/avif",
+  });
+
   return (
     <section className="relative overflow-hidden bg-stone-100">
       <div className="absolute inset-0">
         <picture className="absolute inset-0 block h-full w-full">
           <source
             media="(max-width: 767px)"
-            srcSet="/images/home/home-hero-ring-mobile.avif"
+            srcSet={mobileHeroImageSrc}
             type="image/avif"
           />
           <img
-            src="/images/home/home-hero-ring.jpg"
+            src={mobileHeroImageSrc}
             alt="Jewelry repair hero background"
             loading="eager"
             fetchPriority="high"
-            decoding="async"
+            decoding="sync"
             className="parallax-hero h-full w-full object-cover object-center md:object-[center_right]"
           />
         </picture>
