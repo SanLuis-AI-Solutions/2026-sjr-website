@@ -6,6 +6,7 @@ import "./globals.css";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
 import { GaFirstTouchCapture } from "@/components/analytics/ga-tracker";
 import { getSiteUrl } from "@/lib/site-url";
+import { LocalBusinessSchema } from "@/components/local-business-schema";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -42,9 +43,9 @@ export default function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="ga4-init" strategy="afterInteractive">
+            <Script id="ga4-init" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -56,6 +57,7 @@ export default function RootLayout({
           </>
         ) : null}
         {children}
+        <LocalBusinessSchema />
         <Suspense fallback={null}>
           <GaFirstTouchCapture />
         </Suspense>

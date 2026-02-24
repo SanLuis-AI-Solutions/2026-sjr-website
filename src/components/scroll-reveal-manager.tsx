@@ -9,69 +9,82 @@ export function ScrollRevealManager() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const root = document.documentElement;
-    root.classList.add("reveal-ready");
+    const init = () => {
+      const root = document.documentElement;
+      root.classList.add("reveal-ready");
 
-    const prefersReduced =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const prefersReduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const getElements = () =>
-      Array.from(document.querySelectorAll<HTMLElement>(".reveal-on-scroll"));
+      const getElements = () =>
+        Array.from(document.querySelectorAll<HTMLElement>(".reveal-on-scroll"));
 
-    const elements = getElements();
-    if (elements.length === 0) return;
+      const elements = getElements();
+      if (elements.length === 0) return;
 
-    if (prefersReduced) {
-      elements.forEach((el) => el.classList.add("reveal-visible"));
-      return;
-    }
+      if (prefersReduced) {
+        elements.forEach((el) => el.classList.add("reveal-visible"));
+        return;
+      }
 
-    if (typeof IntersectionObserver === "undefined") {
-      elements.forEach((el) => el.classList.add("reveal-visible"));
-      return;
-    }
+      if (typeof IntersectionObserver === "undefined") {
+        elements.forEach((el) => el.classList.add("reveal-visible"));
+        return;
+      }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
-          }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      );
+
+      let scheduled = false;
+      const observePending = () => {
+        scheduled = false;
+        getElements().forEach((el) => {
+          if (!el.classList.contains("reveal-visible")) observer.observe(el);
         });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
-    );
+      };
 
-    // Streamed Server Components can insert `.reveal-on-scroll` nodes *after* this effect runs.
-    // If we don't observe those late nodes, they remain `opacity: 0` indefinitely.
-    let scheduled = false;
-    const observePending = () => {
-      scheduled = false;
-      getElements().forEach((el) => {
-        if (!el.classList.contains("reveal-visible")) observer.observe(el);
+      const scheduleObserve = () => {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(observePending);
+      };
+
+      observePending();
+
+      const mutationObserver = new MutationObserver(() => {
+        scheduleObserve();
       });
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+      return () => {
+        mutationObserver.disconnect();
+        observer.disconnect();
+      };
     };
 
-    const scheduleObserve = () => {
-      if (scheduled) return;
-      scheduled = true;
-      // Next paint (DOM is more likely to include streamed content).
-      requestAnimationFrame(observePending);
-    };
-
-    // Initial scan.
-    observePending();
-
-    const mutationObserver = new MutationObserver(() => {
-      scheduleObserve();
+    // Defer execution until the main thread is idle
+    let cleanup: (() => void) | undefined;
+    const idleId = (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 100)))(() => {
+      cleanup = init();
     });
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      mutationObserver.disconnect();
-      observer.disconnect();
+      if (window.cancelIdleCallback) {
+        window.cancelIdleCallback(idleId as number);
+      } else {
+        clearTimeout(idleId as any);
+      }
+      if (cleanup) cleanup();
     };
   }, [pathname]);
 
