@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -6,9 +7,12 @@ import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, Sh
 import { localBusinessSchema, servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 
-export default async function Home() {
+async function ServicesGridSection() {
   const services = await getServicesWithImages();
+  return <ServicesGrid services={services} />;
+}
 
+export default async function Home() {
   return (
     <>
       <a
@@ -24,7 +28,9 @@ export default async function Home() {
           <ProofBand />
           <InHouseBadge />
           <ProcessSteps />
-          <ServicesGrid services={services} />
+          <Suspense fallback={null}>
+            <ServicesGridSection />
+          </Suspense>
           <CraftStory />
           <ShowroomBand />
           <Testimonials />

@@ -6,7 +6,7 @@ import { preload } from "react-dom";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
-import { getFaqsByService, getServiceBySlug, getServices } from "@/lib/content";
+import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { buildServiceVisualSet } from "@/lib/service-visuals";
@@ -1123,10 +1123,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const [serviceData, faqs, services] = await Promise.all([
+  const [serviceData, faqs] = await Promise.all([
     getServiceBySlug(slug),
     getFaqsByService(slug),
-    getServices(),
   ]);
   const service = serviceData as ServiceDetail | undefined;
 
@@ -1141,7 +1140,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? embeddedFaqs
       : buildFallbackFaqs(service.name);
   const resolvedFaqs = ensureMinFaqs(resolvedFaqsRaw, slug, service.name);
-  const relatedServices = services
+  const relatedServices = SERVICES
     .filter((item) => item.slug !== service.slug)
     .slice(0, 4);
   const startingAt =
