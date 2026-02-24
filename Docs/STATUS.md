@@ -5,15 +5,22 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Collect social media API tokens to activate the outbound Content Nexus.
-- Final DNS transition for `susiesjewelryrepair.com`.
+- Finalize the last mobile LCP push to reach `<= 2500ms` median on `/`, `/services/ring-sizing`, and `/blog/ring-sizing-guide`.
+- Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
 ## Recent Milestones (Today)
-- **Virtual Boutique Showroom**: Launched a white-label Stuller Showcase integration with a luxury "Unlock Gate" roadmap and performance-optimized iframe management.
-- **Performance Optimization**: Shaved 93% off mobile image payloads; hit an 85+ median Lighthouse score.
-- **SJR Content Nexus**: Shipped the integrated social sync engine with X (Twitter) support.
-- **Master-Grade Security**: Migrated admin access to Supabase Auth with strict Email Gating (contact@sanluisai.com).
+- **Domain + SSL Live**: Cloudflare DNS now points to Vercel (`A @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`) and SSL is active for `susiesjewelryrepair.com` + `www`.
+- **Canonical Guardrail Live**: Apex-to-www permanent redirect shipped in `next.config.ts`.
+- **Lighthouse Gate Automation**: Added production 3-run mobile gate at `scripts/perf/launch-performance-gate.mjs` with `npm run perf:gate`.
+- **LCP Route Hardening**: Implemented route-scoped reveal disablement, hero image-first mobile ordering, and multiple mobile hero render optimizations on home/service/blog detail routes.
+- **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
+
+## Latest Verified Metrics (2026-02-24)
+- Source: `.health/perf-gate-2026-02-24T21-21-05-807Z/summary.json`
+- `/`: `perf=96`, `seo=100`, `lcp=2504ms`
+- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2559ms`
+- `/blog/ring-sizing-guide`: `perf=95`, `seo=100`, `lcp=2556ms`
 
 ## KPIs
 - Primary KPI:

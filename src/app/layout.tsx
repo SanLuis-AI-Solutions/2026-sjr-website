@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
 import { GaFirstTouchCapture } from "@/components/analytics/ga-tracker";
 import { getSiteUrl } from "@/lib/site-url";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
+import { DeferredGaLoader } from "@/components/analytics/deferred-ga-loader";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
-  display: 'swap',
+  display: "optional",
 });
 
 const inter = Inter({
@@ -39,23 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
-        {gaMeasurementId ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-              strategy="lazyOnload"
-            />
-            <Script id="ga4-init" strategy="lazyOnload">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = gtag;
-                gtag('js', new Date());
-                gtag('config', '${gaMeasurementId}');
-              `}
-            </Script>
-          </>
-        ) : null}
+        {gaMeasurementId ? <DeferredGaLoader measurementId={gaMeasurementId} /> : null}
         {children}
         <LocalBusinessSchema />
         <Suspense fallback={null}>

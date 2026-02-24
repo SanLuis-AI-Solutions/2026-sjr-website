@@ -137,3 +137,41 @@ create table if not exists contact_requests (
 
 create index if not exists contact_requests_created_at_idx on contact_requests(created_at desc);
 create index if not exists contact_requests_status_idx on contact_requests(status);
+
+-- Content Nexus dedupe and review-loop safety tables
+
+create table if not exists shared_slugs (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null,
+  platform text not null check (platform in ('gbp', 'meta', 'pinterest', 'linkedin')),
+  status text not null default 'shared' check (status in ('shared', 'failed', 'skipped')),
+  shared_at timestamptz not null default now(),
+  external_post_id text,
+  external_post_url text,
+  error text,
+  payload jsonb
+);
+
+create unique index if not exists shared_slugs_slug_platform_unique on shared_slugs(slug, platform);
+create index if not exists shared_slugs_shared_at_idx on shared_slugs(shared_at desc);
+
+create table if not exists review_request_status (
+  id uuid primary key default gen_random_uuid(),
+  customer_key text not null,
+  job_reference text,
+  channel text not null default 'sms' check (channel in ('sms', 'email')),
+  status text not null default 'queued' check (status in ('queued', 'sent', 'delivered', 'reviewed', 'reminder_sent', 'suppressed', 'failed')),
+  first_sent_at timestamptz,
+  last_sent_at timestamptz,
+  reminder_sent_at timestamptz,
+  review_received_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  notes text,
+  payload jsonb
+);
+
+create unique index if not exists review_request_status_customer_job_unique
+  on review_request_status(customer_key, coalesce(job_reference, ''));
+create index if not exists review_request_status_last_sent_at_idx on review_request_status(last_sent_at desc);
+create index if not exists review_request_status_status_idx on review_request_status(status);

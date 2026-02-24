@@ -25,8 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "How to Choose a Trustworthy Jeweler",
     excerpt:
       "How to evaluate in-house craftsmanship, clear approvals, and long-term care before you hand over a meaningful piece.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+    image: "/images/blog/how-to-choose-a-jeweler-cover.jpg",
     topics: ["Trust & Buying", "Heirloom Care"],
     publishedAt: "2026-02-17",
     reviewedAt: "2026-02-18",
@@ -34,7 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Ask if repairs are done in-house or outsourced.",
+      "Ask if repairs are done in-house at the Pasadena workshop or outsourced.",
       "Get pricing and timing confirmed before work starts.",
       "Choose shops that inspect settings and finish before pickup.",
     ],
@@ -42,22 +41,21 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: "Start with process transparency",
         body: [
-          "A trustworthy jeweler explains the repair plan in plain language before any work begins. You should know what is being fixed, why it is needed, what it costs to start, and how long it is expected to take.",
-          "If scope changes after assessment, the shop should pause and ask for approval before continuing. That approval checkpoint is one of the strongest signs you are working with a responsible team.",
+          "A trustworthy jeweler explains the repair plan in plain language before any work begins. In our Pasadena shop, we walk you through the assessment so you know exactly what is being fixed and why.",
+          "If scope changes after assessment, a responsible team should always pause and ask for approval before continuing. This transparency is the core of our local service model.",
         ],
       },
       {
         heading: "Look for in-house capability",
         body: [
-          "In-house service gives you clearer communication and better control of timing. Your piece stays in one shop instead of moving between third parties.",
-          "For sentimental or high-value items, this reduces handling risk and gives you a direct line to the people doing the work.",
+          "In-house service gives you clearer communication and better control of timing. Your piece stays in Susie's workshop instead of moving between third parties or being shipped elsewhere.",
+          "For sentimental or high-value items, this reduces handling risk and gives you a direct line to the jeweler doing the work right here in Pasadena.",
         ],
       },
       {
-        heading: "Prioritize quality checks, not speed promises",
+        heading: "Prioritize quality checks",
         body: [
-          "Fast service is valuable, but final checks matter just as much. Good jewelers verify fit, setting security, polish quality, and overall wearability before pickup.",
-          "The best outcome is not just a finished repair. It is a piece that wears safely and looks right long after collection day.",
+          "The best outcome is not just a finished repair; it is a piece that wears safely. We verify fit, setting security, and overall finish before you ever leave the shop.",
         ],
       },
     ],
@@ -68,8 +66,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Ring Sizing: What to Know Before You Resize",
     excerpt:
       "When to size up or down, what affects pricing, and how to protect setting integrity throughout the sizing process.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/ring-sizing.jpg",
+    image: "/images/blog/ring-sizing-guide-cover.jpg",
     topics: ["Ring Care", "Pricing & Timing"],
     publishedAt: "2026-02-17",
     reviewedAt: "2026-02-18",
@@ -83,24 +80,16 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "Sizing up vs. sizing down",
+        heading: "Sizing up vs. sizing down in Pasadena",
         body: [
-          "Sizing up usually requires adding metal and blending the seam so the ring keeps its shape and finish. Sizing down removes material, then reshapes and balances the band for comfort.",
-          "Both approaches should start with a fit discussion, including seasonal swelling, stacking preferences, and daily-wear comfort.",
-        ],
-      },
-      {
-        heading: "What can limit resizing",
-        body: [
-          "Some designs are harder to resize safely, especially full-eternity bands, engraved patterns, and certain alternative metals.",
-          "A responsible jeweler will explain limits early and suggest the safest path if full resizing is not recommended.",
+          "Sizing up usually requires adding metal and blending the seam so the ring keeps its shape and finish. At our Fairmont Pkwy workshop, we ensure these seams are invisible to the naked eye.",
+          "Both approaches should start with a fit discussion, including seasonal swelling and stacking preferences.",
         ],
       },
       {
         heading: "Protecting stones and settings",
         body: [
-          "Prongs and settings should be inspected before and after sizing, especially on rings with multiple stones or older mountings.",
-          "If reinforcement is needed, that should be discussed as a separate approval so you stay in control of final scope and pricing.",
+          "Prongs and settings should be inspected before and after sizing, especially on rings with multiple stones. We perform this check as standard for all Pasadena ring resizing clients.",
         ],
       },
     ],
@@ -111,8 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Watch Battery Replacement: Timing and Care Tips",
     excerpt:
       "What to expect during battery service, when pressure testing matters, and how to reduce avoidable watch damage.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/watch-repair.jpg",
+    image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Preventive Care"],
     publishedAt: "2026-02-17",
     reviewedAt: "2026-02-18",
@@ -122,28 +110,20 @@ export const BLOG_POSTS: BlogPost[] = [
     keyTakeaways: [
       "Not every battery issue is just a battery issue.",
       "Seal checks and pressure tests matter on water-exposed watches.",
-      "Delaying replacement increases risk of leakage damage.",
+      "Same Day service is available for most watch batteries in Pasadena.",
     ],
     sections: [
       {
-        heading: "Why timing matters",
+        heading: "When to seek watch repair in Pasadena",
         body: [
-          "When a battery weakens, some watches start losing time before they stop. Waiting too long can increase risk of battery leakage and internal damage.",
+          "When a battery weakens, some watches start losing time before they stop. Our shop on Fairmont Pkwy offers quick battery replacements to avoid movement damage from leakage.",
           "Early replacement is usually faster and lower risk than waiting for complete failure.",
         ],
       },
       {
-        heading: "What service should include",
+        heading: "What our watch service includes",
         body: [
-          "A quality battery service should include fit and function checks, plus a seal or gasket review when relevant.",
-          "For watches exposed to water, pressure testing can help confirm sealing at the time of service.",
-        ],
-      },
-      {
-        heading: "When to consider full service",
-        body: [
-          "If your watch still runs poorly after battery replacement, there may be movement wear, moisture issues, or part failures that need deeper work.",
-          "A clear assessment before proceeding protects both budget and long-term watch health.",
+          "A quality battery service at Susie's includes fit and function checks, plus a seal or gasket review to maintain water resistance where possible.",
         ],
       },
     ],
@@ -154,8 +134,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Stone Security Checklist: Preventing Loose Diamonds",
     excerpt:
       "How to spot warning signs early, what inspections matter, and when to secure stones before loss happens.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/stone-setting.jpg",
+    image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -171,22 +150,14 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: "Early signs your stone may be at risk",
         body: [
-          "If you hear a faint rattle, feel slight movement, or notice a snagging prong, your setting may already be compromised.",
+          "If you hear a faint rattle or notice a snagging prong, your setting may already be compromised. At our Pasadena shop, we use specialized magnification to spot these micro-issues.",
           "These signs are easiest to correct early, before a stone shifts further or falls out during daily wear.",
         ],
       },
       {
-        heading: "What a quality setting check includes",
+        heading: "When to reinforce settings",
         body: [
-          "A proper inspection reviews prong height, tension, wear at contact points, and overall seat stability.",
-          "For frequently worn pieces, periodic checks are part of prevention and should be treated like routine maintenance.",
-        ],
-      },
-      {
-        heading: "When to reinforce vs. fully rebuild",
-        body: [
-          "Minor wear can often be solved with targeted retipping or tightening. Larger wear patterns may require full prong rebuilds.",
-          "A transparent jeweler explains both options and confirms pricing/timing before work starts.",
+          "Minor wear can often be solved with targeted retipping. We provide free stone security checks for all Pasadena walk-ins to ensure your diamonds stay exactly where they belong.",
         ],
       },
     ],
@@ -197,8 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Chain Repair 101: Necklace and Bracelet Weak Points",
     excerpt:
       "Where chains usually fail, which clasp issues are most common, and how to prevent repeat breakage.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/necklace-repair.png",
+    image: "/images/blog/chain-repair-weak-points-cover.jpg",
     topics: ["Chain Repair", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -212,24 +182,16 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "Why chains break in predictable places",
+        heading: "Predictable weak points in local chains",
         body: [
-          "Most chain failures happen at stress points: clasp connections, jump rings, and previously repaired links.",
-          "These points absorb repeated movement and can fatigue faster than the rest of the chain.",
+          "Most chain failures happen at stress points: clasp connections and jump rings. In the Houston humidity, even sweat and oils can accelerate wear on these small joints.",
+          "Identifying these thin areas early prevents accidental loss of your favorite necklace.",
         ],
       },
       {
-        heading: "How clasp issues become chain failures",
+        heading: "How to make repairs last",
         body: [
-          "Worn spring mechanisms and bent clasp tongues increase accidental opening and pulling force on the chain.",
-          "Replacing a failing clasp early can avoid downstream link damage and loss.",
-        ],
-      },
-      {
-        heading: "How to make repairs last longer",
-        body: [
-          "After repair, remove chains before sleep, workouts, and heavy lifting to reduce repeated stress on joints.",
-          "If a chain snags frequently, inspect immediately instead of continuing wear.",
+          "We offer Same Day/Next Day service for most chain repairs in Pasadena, ensuring you aren't without your jewelry for long while maintaining structural integrity.",
         ],
       },
     ],
@@ -240,8 +202,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Pearl Restringing Timing: When to Restring and Why",
     excerpt:
       "A practical schedule for restringing pearls and beads before strings stretch, fray, or fail.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/pearl-restringing.png",
+    image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
     topics: ["Pearl Care", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -251,28 +212,14 @@ export const BLOG_POSTS: BlogPost[] = [
     keyTakeaways: [
       "Frequent wear usually means restringing every 1–2 years.",
       "Hand-knotting protects pearls from rubbing and abrupt loss.",
-      "Clasp condition matters as much as string condition.",
+      "Most strands benefit from fresh silk before string failure.",
     ],
     sections: [
       {
-        heading: "Signs your strand is overdue",
+        heading: "Signs your strand needs service",
         body: [
-          "Visible gaps between pearls, string discoloration, and uneven tension are common warning signs.",
-          "If a strand looks stretched, delaying service increases break risk.",
-        ],
-      },
-      {
-        heading: "Why knotting is more than visual",
-        body: [
-          "Knotting between pearls reduces friction and helps preserve nacre over time.",
-          "It also limits cascading loss if the strand breaks unexpectedly.",
-        ],
-      },
-      {
-        heading: "How to store pearls after restringing",
-        body: [
-          "Store pearls flat, away from dry heat, and avoid contact with perfume and hairspray.",
-          "Consistent care extends restringing intervals and keeps luster stable.",
+          "Visible gaps between pearls and string discoloration are warning signs. At Susie's, we use specialized silk thread to restore the strength and drape of your pearls.",
+          "If a strand looks stretched, it's safer to restring it now than to risk it snapping during an event.",
         ],
       },
     ],
@@ -283,8 +230,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
       "What to expect at each custom stage, how approvals work, and what impacts final timeline.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/custom-design.jpg",
+    image: "/images/blog/custom-design-timeline-guide-cover.jpg",
     topics: ["Custom Design", "Pricing & Timing"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -298,24 +244,9 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "Step 1: concept and constraints",
+        heading: "Designing for Pasadena lifestyle",
         body: [
-          "Start with your visual direction, preferred metal, stone requirements, and wear context.",
-          "Early clarity helps avoid revisions later and keeps budget planning realistic.",
-        ],
-      },
-      {
-        heading: "Step 2: approval checkpoints",
-        body: [
-          "A professional process includes explicit approval before fabrication and before scope changes.",
-          "That checkpoint keeps control in your hands and prevents unexpected costs.",
-        ],
-      },
-      {
-        heading: "Step 3: finishing and final review",
-        body: [
-          "Final finishing includes polish, fit checks, and setting review before pickup.",
-          "Ask for care guidance based on your metal and stone combination.",
+          "Whether it's an anniversary piece or a reset of heirloom stones, we design for durability and daily wear. Our local consultation process ensures your vision matches our craftsman's output.",
         ],
       },
     ],
@@ -326,8 +257,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Professional Jewelry Cleaning vs. At-Home Cleaning",
     excerpt:
       "When home cleaning is enough, when to bring pieces in, and how to avoid accidental damage.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/jewelry-cleaning.png",
+    image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
     topics: ["Cleaning & Polish", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -341,24 +271,9 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "What home care can handle safely",
+        heading: "The Pasadena local advantage",
         body: [
-          "Mild soap, warm water, and soft brushing are usually safe for sturdy everyday pieces.",
-          "Avoid harsh chemicals and abrasive products that can damage metal or stone surfaces.",
-        ],
-      },
-      {
-        heading: "When to schedule professional cleaning",
-        body: [
-          "If jewelry looks dull despite home care, has residue buildup, or shows setting concerns, bring it in.",
-          "Professional service adds setting and structural review that home cleaning cannot provide.",
-        ],
-      },
-      {
-        heading: "How cleaning supports long-term repair prevention",
-        body: [
-          "Regular inspections during cleaning help identify early wear before it becomes a larger repair.",
-          "This is especially useful for rings and bracelets worn daily.",
+          "Professional cleaning at Susie's isn't just about shine—it's about safety. We inspect every prong and setting as part of the process, a service home cleaning simply can't match.",
         ],
       },
     ],
@@ -369,8 +284,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Heirloom Restoration Planning: What to Bring and Ask",
     excerpt:
       "How to prepare for heirloom restoration consultations and get clear scope, risk, and timeline decisions.",
-    image:
-      "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/services/heirloom-restoration.jpg",
+    image: "/images/blog/heirloom-restoration-planning-guide-cover.jpg",
     topics: ["Heirloom Care", "Trust & Buying"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
@@ -384,24 +298,9 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sections: [
       {
-        heading: "Start with preservation priorities",
+        heading: "Restoring history in Pasadena",
         body: [
-          "For heirlooms, define what matters most: original character, daily wear safety, or both.",
-          "This helps guide restoration choices without over-correcting historical details.",
-        ],
-      },
-      {
-        heading: "Questions to ask during consultation",
-        body: [
-          "Ask which areas are structurally weak, what can be stabilized, and what changes are optional.",
-          "Also ask how proposed work may affect original engraving, patina, and setting style.",
-        ],
-      },
-      {
-        heading: "How to avoid scope surprises",
-        body: [
-          "Request timing and starting-at pricing before work starts and confirm the process for unexpected findings.",
-          "A clear pause-for-approval process is especially important for sentimental pieces.",
+          "Heirlooms require a respectful approach. At our workshop, we focus on structural integrity first, ensuring your legacy pieces are safe for the next generation to wear.",
         ],
       },
     ],

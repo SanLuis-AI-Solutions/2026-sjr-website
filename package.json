@@ -16,9 +16,12 @@
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
-    "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs"
+    "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs",
+    "perf:gate": "node scripts/perf/launch-performance-gate.mjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.97.0",
     "googleapis": "^171.0.0",
     "next": "16.1.6",
     "nodemailer": "^8.0.1",
@@ -34,6 +37,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

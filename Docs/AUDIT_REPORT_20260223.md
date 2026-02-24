@@ -5,6 +5,14 @@
 
 ---
 
+## 🔄 Addendum (2026-02-24)
+- **Domain + SSL:** Production domain now connected and serving from Vercel with active SSL.
+- **Canonical:** Apex redirects to `www` in production via `next.config.ts`.
+- **Measured Production Gate:** Repeated 3-run mobile Lighthouse passes now executed on the live custom domain with automated reporting (`npm run perf:gate`).
+- **Current gap:** SEO holds at 100 on audited routes; LCP is near-target and requires a final mobile hero-asset pass to consistently hit `<=2500ms` medians.
+
+---
+
 ## 📊 Executive Scorecard
 
 | Category | Score | Status |

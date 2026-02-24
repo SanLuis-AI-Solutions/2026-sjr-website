@@ -44,6 +44,13 @@ h1, h2, h3, h4, .font-serif {
   letter-spacing: -0.02em;
 }
 
+/* Stabilize above-the-fold text LCP by avoiding delayed webfont swaps. */
+.lcp-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 /* Luxury UI Utilities */
 .glass-card {
   background: var(--glass-bg);
@@ -108,12 +115,24 @@ h1, h2, h3, h4, .font-serif {
 }
 
 @supports (animation-timeline: view()) {
-  html:not(.reveal-ready) .reveal-on-scroll {
+  html:not(.reveal-ready):not(.reveal-disabled) .reveal-on-scroll {
     opacity: 0;
     animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-timeline: view();
     animation-range: entry 0% cover 35%;
   }
+}
+
+html.reveal-disabled .reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  animation: none;
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
 }
 
 .reveal-delay-1 { animation-delay: 0.05s; }

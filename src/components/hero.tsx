@@ -6,18 +6,20 @@ export function Hero() {
     <section className="relative overflow-hidden bg-stone-100">
       <div className="absolute inset-0">
         <Image
-          src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/hero-ring.jpg"
+          src="/images/home/home-hero-ring.jpg"
           alt="Jewelry repair hero background"
           fill
           priority
+          fetchPriority="high"
+          quality={58}
           sizes="100vw"
-          className="parallax-hero object-cover object-[center_right] animate-slow-zoom"
+          className="parallax-hero object-cover object-center md:object-[center_right]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/85 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.1),_transparent_60%)]" />
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/85 to-transparent md:block" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.1),_transparent_60%)] md:block" />
       </div>
-      <div className="relative mx-auto flex min-h-[74vh] max-w-6xl items-center px-6 py-10 md:py-14">
-        <div className="max-w-2xl animate-fade-up">
+      <div className="relative mx-auto flex min-h-[62vh] max-w-6xl items-center px-6 py-10 md:min-h-[74vh] md:py-14">
+        <div className="max-w-2xl">
           <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/40 bg-white/80 px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-brand-burgundy">
             In-House Repairs
             <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />

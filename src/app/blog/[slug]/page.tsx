@@ -127,8 +127,26 @@ export default async function BlogDetailPage({ params }: PageProps) {
           >
             ← Back to Blog
           </Link>
-          <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Blog Post</p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">{post.title}</h1>
+          <div className="relative mt-6 h-60 overflow-hidden rounded-xl md:h-96 md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_20px_55px_rgba(58,25,16,0.14)]">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              priority
+              fetchPriority="high"
+              quality={60}
+              sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(100vw - 3rem), 960px"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent md:block" />
+          </div>
+          <p className="mt-6 text-xs uppercase tracking-[0.3em] text-brand-burgundy">Blog Post</p>
+          <h1
+            className="lcp-heading md:text-5xl"
+            style={{ marginTop: "0.75rem", fontSize: "2.25rem", lineHeight: "2.5rem", color: "#1c1917" }}
+          >
+            {post.title}
+          </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600">{post.excerpt}</p>
 
           <div className="mt-6 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-stone-700">
@@ -165,19 +183,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <div className="relative h-72 overflow-hidden rounded-3xl border border-stone-200 shadow-[0_20px_55px_rgba(58,25,16,0.14)] md:h-96">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 65vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent" />
-              </div>
-
-              <div className="mt-10 space-y-8">
+              <div className="mt-2 space-y-8">
                 {post.sections.map((section, index) => (
                   <section key={section.heading}>
                     <h2 className="font-serif text-2xl text-stone-900">{section.heading}</h2>

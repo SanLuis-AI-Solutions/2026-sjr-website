@@ -8,9 +8,21 @@ export function ScrollRevealManager() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    const root = document.documentElement;
+
+    // Keep key SEO/performance routes static to reduce above-the-fold main-thread work.
+    const disableRevealForRoute =
+      pathname === "/" || pathname.startsWith("/services") || pathname.startsWith("/blog");
+
+    if (disableRevealForRoute) {
+      root.classList.remove("reveal-ready");
+      root.classList.add("reveal-disabled");
+      return;
+    }
+
+    root.classList.remove("reveal-disabled");
 
     const init = () => {
-      const root = document.documentElement;
       root.classList.add("reveal-ready");
 
       const prefersReduced =

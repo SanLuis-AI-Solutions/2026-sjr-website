@@ -1157,8 +1157,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isRingSizing = slug === "ring-sizing";
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
+  const localServiceConfig = SERVICES.find((item) => item.slug === slug);
+  const localHeroImageSrc = localServiceConfig?.image;
   const heroImageSrc =
-    service.image_url || service.image || svgDataUri(service.name);
+    localHeroImageSrc || service.image || service.image_url || svgDataUri(service.name);
   const commonRequests = (
     service.commonRequests ||
     service.common_requests ||
@@ -1491,23 +1493,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     longDescription: service.longDescription || service.long_description || schemaBase.longDescription,
     includes: service.includes || schemaBase.includes,
     commonRequests: commonRequests.length > 0 ? commonRequests : schemaBase.commonRequests,
-    image: service.image || service.image_url || schemaBase.image,
+    image: heroImageSrc || schemaBase.image,
     faqs: resolvedFaqs,
   };
 
   return (
     <SiteShell>
       <ServiceInteractionTracker serviceSlug={slug} />
-      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)]" />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
-          <div className="reveal-on-scroll">
+      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-14 md:py-20">
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)] md:block" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-2 md:items-center md:gap-12">
+          <div className="order-2 md:order-1">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Service Detail
             </p>
-            <h1 className="mt-3 font-serif text-4xl text-stone-950">
-              {service.name} in {BUSINESS.address.city}, {BUSINESS.address.state}
+            <h1
+              className="lcp-heading"
+              style={{ marginTop: "0.75rem", fontSize: "2.25rem", lineHeight: "2.5rem", color: "#1c1917" }}
+            >
+              {service.name}
             </h1>
             <p className="mt-4 max-w-2xl text-sm text-stone-700">
               {service.summary || service.short_summary}
@@ -1565,20 +1570,22 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </TrackedLink>
             </div>
           </div>
-          <div className="relative reveal-on-scroll">
-            <div className="relative h-[320px] overflow-hidden rounded-3xl border border-stone-200 shadow-[0_28px_70px_rgba(58,25,16,0.18)] md:h-[380px]">
+          <div className="relative order-1 md:order-2">
+            <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
               <Image
                 src={heroImageSrc}
                 alt={service.name}
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
+                fetchPriority="high"
+                quality={60}
+                sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1024px) 50vw, 560px"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)]" />
+              <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
+              <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
             </div>
-            <div className="absolute -bottom-8 left-6 right-6 rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
+            <div className="mt-3 rounded-xl border border-stone-200 bg-white p-4 md:absolute md:-bottom-8 md:left-6 md:right-6 md:mt-0 md:shadow-sm">
               <div className="text-xs uppercase tracking-[0.25em] text-brand-burgundy">
                 In-house assessment
               </div>
@@ -1590,7 +1597,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="how-it-works" className="relative border-t border-stone-200/70 bg-white py-20">
+      <section data-service-section="how-it-works" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -1719,7 +1726,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section data-service-section="what-to-expect" className="relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="what-to-expect" className="cv-auto relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1787,7 +1794,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="pricing-timing" className="relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="pricing-timing" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1917,7 +1924,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="before-you-visit" className="relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="before-you-visit" className="cv-auto relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1981,7 +1988,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="why-customers-choose-us" className="relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="why-customers-choose-us" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
@@ -2073,7 +2080,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </section>
         </>
       ) : (
-        <section data-service-section="what-to-expect" className="bg-white py-16">
+        <section data-service-section="what-to-expect" className="cv-auto bg-white py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2155,7 +2162,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       )}
 
       {!isFlagshipService ? (
-        <section data-service-section="pricing-timing" className="bg-stone-100 py-16">
+        <section data-service-section="pricing-timing" className="cv-auto bg-stone-100 py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2191,7 +2198,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       ) : null}
 
-      <section data-service-section="faqs" className="bg-white py-16">
+      <section data-service-section="faqs" className="cv-auto bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             FAQs
@@ -2222,7 +2229,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="related-services" className="bg-stone-100 py-16">
+      <section data-service-section="related-services" className="cv-auto bg-stone-100 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>

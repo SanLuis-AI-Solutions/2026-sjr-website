@@ -28,6 +28,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "susiesjewelryrepair.com",
+          },
+        ],
+        destination: "https://www.susiesjewelryrepair.com/:path*",
+        permanent: true,
+      },
+      {
         source: "/services/ring-resizing",
         destination: "/services/ring-sizing",
         permanent: true,
