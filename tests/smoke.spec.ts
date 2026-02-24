@@ -273,7 +273,9 @@ test("mobile service detail: non-watch routes use a varied image set", async ({ 
             return raw;
           }
         })
-        .filter((src) => src.includes("/site-assets/services/"));
+        .filter(
+          (src) => src.includes("/images/services/") || src.includes("/site-assets/services/")
+        );
       return new Set(urls).size;
     });
 

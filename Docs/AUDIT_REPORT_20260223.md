@@ -13,6 +13,7 @@
 - **Booking schedule controls (2026-02-24 16:26 -06:00):** Booking page now restricts appointment selections to business windows in both UI and API (Mon-Fri 10-5, Sat 10-3, Sun closed).
 - **Booking schedule centralization (2026-02-24 16:38 -06:00):** Extracted unified booking schedule logic into `src/lib/booking-schedule.ts` and connected both booking UI and `/api/book` to remove rule drift risk.
 - **Holiday closure configuration (2026-02-24 16:38 -06:00):** Added optional `NEXT_PUBLIC_BOOKING_BLACKOUT_DATES` environment control (documented in `.env.example`) for no-booking dates.
+- **Smoke gate recovery (2026-02-24 16:47 -06:00):** Fixed service-image variety smoke matcher for current local image URLs (`/images/services/*`) and restored full suite pass (`npm test`: `17/17`).
 
 ---
 

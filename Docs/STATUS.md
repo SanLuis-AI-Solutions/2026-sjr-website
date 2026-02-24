@@ -35,6 +35,9 @@ Update cadence: weekly (or after major milestones).
   - introduced optional holiday blackout config: `NEXT_PUBLIC_BOOKING_BLACKOUT_DATES` (comma-separated `YYYY-MM-DD`) and documented in `.env.example`.
   - UI closed-state messaging now differentiates Sunday vs configured holiday closures.
   - verification: `npm run build` PASS; `npm test` ran with 1 pre-existing failure in image-variety smoke on `/services/ring-sizing` (booking changes unaffected).
+- `2026-02-24 16:47:14 -06:00` Mobile smoke gate repaired:
+  - fixed `tests/smoke.spec.ts` service image-variety matcher to support current local image paths (`/images/services/*`) while retaining legacy compatibility (`/site-assets/services/*`).
+  - verification: targeted failing test PASS and full `npm test` PASS (`17/17`).
 
 ## KPIs
 - Primary KPI:
