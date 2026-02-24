@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
@@ -64,6 +63,8 @@ export default async function BlogDetailPage({ params }: PageProps) {
     post.relatedServiceSlugs.includes(service.slug)
   ).slice(0, 3);
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
+  const mobileHeroImageSrc =
+    post.slug === "ring-sizing-guide" ? "/images/blog/ring-sizing-guide-cover-mobile.avif" : null;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -128,16 +129,19 @@ export default async function BlogDetailPage({ params }: PageProps) {
             ← Back to Blog
           </Link>
           <div className="relative mt-6 h-60 overflow-hidden rounded-xl md:h-96 md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_20px_55px_rgba(58,25,16,0.14)]">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              priority
-              fetchPriority="high"
-              quality={60}
-              sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(100vw - 3rem), 960px"
-              className="object-cover"
-            />
+            <picture className="absolute inset-0 block h-full w-full">
+              {mobileHeroImageSrc ? (
+                <source media="(max-width: 767px)" srcSet={mobileHeroImageSrc} type="image/avif" />
+              ) : null}
+              <img
+                src={post.image}
+                alt={post.title}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </picture>
             <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent md:block" />
           </div>
           <p className="mt-6 text-xs uppercase tracking-[0.3em] text-brand-burgundy">Blog Post</p>

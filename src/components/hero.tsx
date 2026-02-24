@@ -1,20 +1,24 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-stone-100">
       <div className="absolute inset-0">
-        <Image
-          src="/images/home/home-hero-ring.jpg"
-          alt="Jewelry repair hero background"
-          fill
-          priority
-          fetchPriority="high"
-          quality={58}
-          sizes="100vw"
-          className="parallax-hero object-cover object-center md:object-[center_right]"
-        />
+        <picture className="absolute inset-0 block h-full w-full">
+          <source
+            media="(max-width: 767px)"
+            srcSet="/images/home/home-hero-ring-mobile.avif"
+            type="image/avif"
+          />
+          <img
+            src="/images/home/home-hero-ring.jpg"
+            alt="Jewelry repair hero background"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            className="parallax-hero h-full w-full object-cover object-center md:object-[center_right]"
+          />
+        </picture>
         <div className="absolute inset-0 hidden bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/85 to-transparent md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.1),_transparent_60%)] md:block" />
       </div>

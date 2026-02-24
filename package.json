@@ -17,7 +17,8 @@
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
     "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs",
-    "perf:gate": "node scripts/perf/launch-performance-gate.mjs"
+    "perf:gate": "node scripts/perf/launch-performance-gate.mjs",
+    "perf:gen-mobile-heroes": "node scripts/perf/generate-mobile-hero-avif.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

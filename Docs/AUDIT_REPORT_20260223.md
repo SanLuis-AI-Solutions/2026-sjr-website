@@ -9,7 +9,7 @@
 - **Domain + SSL:** Production domain now connected and serving from Vercel with active SSL.
 - **Canonical:** Apex redirects to `www` in production via `next.config.ts`.
 - **Measured Production Gate:** Repeated 3-run mobile Lighthouse passes now executed on the live custom domain with automated reporting (`npm run perf:gate`).
-- **Current gap:** SEO holds at 100 on audited routes; LCP is near-target and requires a final mobile hero-asset pass to consistently hit `<=2500ms` medians.
+- **Gate status:** Production mobile performance gate now passes with `SEO=100` and `LCP<=2500ms` medians on `/`, `/services/ring-sizing`, and `/blog/ring-sizing-guide` (source: `.health/perf-gate-2026-02-24T22-03-49-377Z/summary.json`).
 
 ---
 

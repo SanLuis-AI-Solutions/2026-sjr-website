@@ -5,7 +5,7 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Finalize the last mobile LCP push to reach `<= 2500ms` median on `/`, `/services/ring-sizing`, and `/blog/ring-sizing-guide`.
+- Lock and monitor the now-passing mobile Lighthouse baseline on production.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -13,14 +13,15 @@ Update cadence: weekly (or after major milestones).
 - **Domain + SSL Live**: Cloudflare DNS now points to Vercel (`A @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`) and SSL is active for `susiesjewelryrepair.com` + `www`.
 - **Canonical Guardrail Live**: Apex-to-www permanent redirect shipped in `next.config.ts`.
 - **Lighthouse Gate Automation**: Added production 3-run mobile gate at `scripts/perf/launch-performance-gate.mjs` with `npm run perf:gate`.
-- **LCP Route Hardening**: Implemented route-scoped reveal disablement, hero image-first mobile ordering, and multiple mobile hero render optimizations on home/service/blog detail routes.
+- **LCP Route Hardening**: Implemented route-scoped reveal disablement, hero image-first mobile ordering, mobile AVIF hero assets, and service analytics idle initialization to cut first-paint contention on key routes.
+- **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Verified Metrics (2026-02-24)
-- Source: `.health/perf-gate-2026-02-24T21-21-05-807Z/summary.json`
-- `/`: `perf=96`, `seo=100`, `lcp=2504ms`
-- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2559ms`
-- `/blog/ring-sizing-guide`: `perf=95`, `seo=100`, `lcp=2556ms`
+- Source: `.health/perf-gate-2026-02-24T22-03-49-377Z/summary.json` (`Performance gate passed`)
+- `/`: `perf=95`, `seo=100`, `lcp=2480ms`
+- `/services/ring-sizing`: `perf=96`, `seo=100`, `lcp=2454ms`
+- `/blog/ring-sizing-guide`: `perf=97`, `seo=100`, `lcp=2481ms`
 
 ## KPIs
 - Primary KPI:
