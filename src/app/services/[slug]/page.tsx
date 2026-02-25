@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { preload } from "react-dom";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
@@ -1179,71 +1178,66 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       : `Three steps for in-house ${service.name.toLowerCase()} with clear approval before work begins.`;
   const howItWorksSteps = isWatchRepair
     ? [
+      {
+        step: "1",
+        title: "Bring your watch",
+        detail: "Walk in or book. Extra links help with sizing.",
+      },
+      {
+        step: "2",
+        title: "Free assessment",
+        detail: "We review the fix, price, and timing before work begins.",
+      },
+      {
+        step: "3",
+        title: "Approve, then service",
+        detail: "Battery work is often Same Day/Next Day service. Full service varies by parts.",
+      },
+    ]
+    : isRingSizing
+      ? [
         {
           step: "1",
-          title: "Bring your watch",
-          detail: "Walk in or book. Extra links help with sizing.",
+          title: "Bring your ring",
+          detail: "Walk in or book. Tell us if the fit is tight, loose, or seasonal.",
         },
         {
           step: "2",
-          title: "Free assessment",
-          detail: "We review the fix, price, and timing before work begins.",
+          title: "Sizing assessment",
+          detail: "We measure fit, inspect stones, and review pricing before work.",
+        },
+        {
+          step: "3",
+          title: "Approve, then size",
+          detail: "We complete your sizing, finish cleanly, and set pickup timing.",
+        },
+      ]
+      : [
+        {
+          step: "1",
+          title: `Bring your ${service.name.toLowerCase()}`,
+          detail: "Walk in or book. We review the issue and your priorities.",
+        },
+        {
+          step: "2",
+          title: "In-house assessment",
+          detail: "We review scope, starting-at pricing, and timing before work.",
         },
         {
           step: "3",
           title: "Approve, then service",
-          detail: "Battery work is often Same Day/Next Day service. Full service varies by parts.",
+          detail:
+            isCustomDesign
+              ? "We finalize direction, then begin build and finishing with milestone updates."
+              : "We complete the repair in-house, then run final checks before pickup.",
         },
-      ]
-    : isRingSizing
-      ? [
-          {
-            step: "1",
-            title: "Bring your ring",
-            detail: "Walk in or book. Tell us if the fit is tight, loose, or seasonal.",
-          },
-          {
-            step: "2",
-            title: "Sizing assessment",
-            detail: "We measure fit, inspect stones, and review pricing before work.",
-          },
-          {
-            step: "3",
-            title: "Approve, then size",
-            detail: "We complete your sizing, finish cleanly, and set pickup timing.",
-          },
-        ]
-      : [
-          {
-            step: "1",
-            title: `Bring your ${service.name.toLowerCase()}`,
-            detail: "Walk in or book. We review the issue and your priorities.",
-          },
-          {
-            step: "2",
-            title: "In-house assessment",
-            detail: "We review scope, starting-at pricing, and timing before work.",
-          },
-          {
-            step: "3",
-            title: "Approve, then service",
-            detail:
-              isCustomDesign
-                ? "We finalize direction, then begin build and finishing with milestone updates."
-                : "We complete the repair in-house, then run final checks before pickup.",
-          },
-        ];
+      ];
   const visualSet = buildServiceVisualSet(slug, service.name, heroImageSrc, isWatchRepair);
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc =
     slug === "ring-sizing" ? "/images/services/ring-sizing-hero-mobile.avif" : null;
   const lcpHeroImageSrc = mobileHeroImageSrc || heroImageSrc;
-  preload(lcpHeroImageSrc, {
-    as: "image",
-    fetchPriority: "high",
-    ...(mobileHeroImageSrc ? { type: "image/avif" } : {}),
-  });
   const howItWorksSupportCopy = isWatchRepair
     ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
@@ -1252,100 +1246,100 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const processGallery = visualSet.processGallery;
   const expectCards = isWatchRepair
     ? [
+      {
+        title: "Battery replacement",
+        eyebrow: "Quick service",
+        copy:
+          "Often completed while you wait. We confirm fit and function, and can inspect seals when applicable.",
+        bullets: [
+          "Fresh battery + function check",
+          "Basic gasket inspection",
+          "Optional pressure test (when applicable)",
+        ],
+      },
+      {
+        title: "Full service",
+        eyebrow: "Preventive maintenance",
+        copy:
+          "For slow running, moisture, or overdue maintenance. We confirm timing and parts before work begins.",
+        bullets: [
+          "Movement cleaning + lubrication",
+          "Worn parts evaluation (if needed)",
+          "Regulation + final testing",
+        ],
+      },
+      {
+        title: "Repairs & parts",
+        eyebrow: "When something breaks",
+        copy:
+          "Crystal, crown/stem, gaskets, and other components. We’ll recommend the safest option and confirm pricing first.",
+        bullets: [
+          "Crystal replacement",
+          "Stem and crown repair",
+          "Seal and gasket replacement",
+        ],
+      },
+    ]
+    : isRingSizing
+      ? [
         {
-          title: "Battery replacement",
-          eyebrow: "Quick service",
+          title: "Sizing up",
+          eyebrow: "When your ring is tight",
           copy:
-            "Often completed while you wait. We confirm fit and function, and can inspect seals when applicable.",
+            "We add metal as needed and finish the seam cleanly so fit and appearance stay premium.",
           bullets: [
-            "Fresh battery + function check",
-            "Basic gasket inspection",
-            "Optional pressure test (when applicable)",
+            "Fit assessment before sizing",
+            "Metal matched to your ring",
+            "Polish and final comfort check",
           ],
         },
         {
-          title: "Full service",
-          eyebrow: "Preventive maintenance",
+          title: "Sizing down",
+          eyebrow: "When your ring is loose",
           copy:
-            "For slow running, moisture, or overdue maintenance. We confirm timing and parts before work begins.",
+            "We remove a precise amount, then reshape and finish for secure daily wear.",
           bullets: [
-            "Movement cleaning + lubrication",
-            "Worn parts evaluation (if needed)",
-            "Regulation + final testing",
+            "Measured size reduction",
+            "Roundness and balance check",
+            "Clean finishing at pickup",
           ],
         },
         {
-          title: "Repairs & parts",
-          eyebrow: "When something breaks",
+          title: "Setting safety",
+          eyebrow: "Protecting your stones",
           copy:
-            "Crystal, crown/stem, gaskets, and other components. We’ll recommend the safest option and confirm pricing first.",
+            "We inspect prongs and stone security before and after sizing, and explain any recommended reinforcement.",
           bullets: [
-            "Crystal replacement",
-            "Stem and crown repair",
-            "Seal and gasket replacement",
+            "Pre-size setting inspection",
+            "Post-size stability check",
+            "Optional refinishing for white gold",
           ],
         },
       ]
-    : isRingSizing
-      ? [
-          {
-            title: "Sizing up",
-            eyebrow: "When your ring is tight",
-            copy:
-              "We add metal as needed and finish the seam cleanly so fit and appearance stay premium.",
-            bullets: [
-              "Fit assessment before sizing",
-              "Metal matched to your ring",
-              "Polish and final comfort check",
-            ],
-          },
-          {
-            title: "Sizing down",
-            eyebrow: "When your ring is loose",
-            copy:
-              "We remove a precise amount, then reshape and finish for secure daily wear.",
-            bullets: [
-              "Measured size reduction",
-              "Roundness and balance check",
-              "Clean finishing at pickup",
-            ],
-          },
-          {
-            title: "Setting safety",
-            eyebrow: "Protecting your stones",
-            copy:
-              "We inspect prongs and stone security before and after sizing, and explain any recommended reinforcement.",
-            bullets: [
-              "Pre-size setting inspection",
-              "Post-size stability check",
-              "Optional refinishing for white gold",
-            ],
-          },
-        ]
       : [
-          {
-            title: "Service scope",
-            eyebrow: "What we address",
-            copy: `In-house ${service.name.toLowerCase()} focused on function, safety, and finish.`,
-            bullets: includes.slice(0, 3),
-          },
-          {
-            title: "In-house process",
-            eyebrow: "How we work",
-            copy: "Inspect, approve, complete, then final quality check.",
-            bullets: [
-              "Approval before work begins",
-              `Typical turnaround: ${timeEstimateDisplay}`,
-              "Final checks before pickup",
-            ],
-          },
-          {
-            title: "Common requests",
-            eyebrow: "What customers ask for most",
-            copy: `Most-requested ${service.name.toLowerCase()} fixes we handle in-house.`,
-            bullets: requestHighlights,
-          },
-        ];
+        {
+          title: "Service scope",
+          eyebrow: "What we address",
+          copy: `In-house ${service.name.toLowerCase()} focused on function, safety, and finish.`,
+          bullets: includes.slice(0, 3),
+        },
+        {
+          title: "In-house process",
+          eyebrow: "How we work",
+          copy: "Inspect, approve, complete, then final quality check.",
+          bullets: [
+            "Approval before work begins",
+            `Typical turnaround: ${timeEstimateDisplay}`,
+            "Final checks before pickup",
+          ],
+        },
+        {
+          title: "Common requests",
+          eyebrow: "What customers ask for most",
+          copy: `Most-requested ${service.name.toLowerCase()} fixes we handle in-house.`,
+          bullets: requestHighlights,
+        },
+      ];
   const expectImages = visualSet.expectImages;
   const whyImageSrc = visualSet.whyImageSrc;
   const whyImageAlt = visualSet.whyImageAlt;
@@ -1375,27 +1369,27 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         : "Most requests follow Same Day/Next Day service. Structural work or parts sourcing may add time.";
   const whatToBring = isWatchRepair
     ? [
-        "The watch (and any extra links if you have them)",
-        "A quick note on the issue: slow/fast, stopping, moisture, crown/stem, crystal",
-        "Any recent service history (optional, but helpful)",
-      ]
+      "The watch (and any extra links if you have them)",
+      "A quick note on the issue: slow/fast, stopping, moisture, crown/stem, crystal",
+      "Any recent service history (optional, but helpful)",
+    ]
     : isRingSizing
       ? [
-          "The ring and your preferred fit (snug, comfort, or stack fit)",
-          "Any sizing history or recent fit changes (optional)",
-          "If white gold: let us know if you want rhodium refinishing",
-        ]
+        "The ring and your preferred fit (snug, comfort, or stack fit)",
+        "Any sizing history or recent fit changes (optional)",
+        "If white gold: let us know if you want rhodium refinishing",
+      ]
       : isCustomDesign
         ? [
-            "Reference photos or style ideas",
-            "Any stones or jewelry you want to reuse",
-            "Target budget and occasion timeline",
-          ]
+          "Reference photos or style ideas",
+          "Any stones or jewelry you want to reuse",
+          "Target budget and occasion timeline",
+        ]
         : [
-            `The ${service.name.toLowerCase()} item you want serviced`,
-            "Any missing parts, notes, or prior service info (if available)",
-            "Your preferred timing and any wear concerns to address",
-          ];
+          `The ${service.name.toLowerCase()} item you want serviced`,
+          "Any missing parts, notes, or prior service info (if available)",
+          "Your preferred timing and any wear concerns to address",
+        ];
   const whyHeading = isWatchRepair
     ? "In-house service, clear approval, careful finishing."
     : isRingSizing
@@ -1408,48 +1402,48 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       : `Your ${service.name.toLowerCase()} stays in-house in Pasadena, with approval before any scope change.`;
   const whyCards = isWatchRepair
     ? [
+      {
+        title: "In-house watch service",
+        detail: "Your watch stays with our team on-site from intake to pickup.",
+      },
+      {
+        title: "Transparent approvals",
+        detail: "You see the price and timing before work begins. No surprises.",
+      },
+      {
+        title: "Quality checks",
+        detail: "Function checks and final testing are part of our process before pickup.",
+      },
+    ]
+    : isRingSizing
+      ? [
         {
-          title: "In-house watch service",
-          detail: "Your watch stays with our team on-site from intake to pickup.",
+          title: "In-house ring sizing",
+          detail: "Your ring stays in our workshop under one team from intake to pickup.",
         },
         {
           title: "Transparent approvals",
-          detail: "You see the price and timing before work begins. No surprises.",
+          detail: "You approve price, timing, and method before we begin service.",
         },
         {
-          title: "Quality checks",
-          detail: "Function checks and final testing are part of our process before pickup.",
+          title: "Finish quality checks",
+          detail: "We check fit, shape, and polish before pickup so the ring wears comfortably.",
         },
       ]
-    : isRingSizing
-      ? [
-          {
-            title: "In-house ring sizing",
-            detail: "Your ring stays in our workshop under one team from intake to pickup.",
-          },
-          {
-            title: "Transparent approvals",
-            detail: "You approve price, timing, and method before we begin service.",
-          },
-          {
-            title: "Finish quality checks",
-            detail: "We check fit, shape, and polish before pickup so the ring wears comfortably.",
-          },
-        ]
       : [
-          {
-            title: "In-house craftsmanship",
-            detail: `Your ${service.name.toLowerCase()} is completed in-house by one local team.`,
-          },
-          {
-            title: "Transparent approvals",
-            detail: "You approve pricing and timing before work begins. No surprises.",
-          },
-          {
-            title: "Final quality checks",
-            detail: "We confirm finish, function, and wearability before pickup.",
-          },
-        ];
+        {
+          title: "In-house craftsmanship",
+          detail: `Your ${service.name.toLowerCase()} is completed in-house by one local team.`,
+        },
+        {
+          title: "Transparent approvals",
+          detail: "You approve pricing and timing before work begins. No surprises.",
+        },
+        {
+          title: "Final quality checks",
+          detail: "We confirm finish, function, and wearability before pickup.",
+        },
+      ];
   const trustNote = isWatchRepair
     ? "If parts are needed, we pause and ask before ordering or proceeding."
     : isRingSizing
@@ -1507,7 +1501,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      <ServiceInteractionTracker serviceSlug={slug} />
       <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-14 md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
@@ -1552,47 +1545,40 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
             <div className="mt-8 flex flex-wrap gap-4">
-              <TrackedLink
+              <Link
                 href="/quote"
-                eventName="service_cta_click"
-                eventParams={{
-                  service_slug: slug,
-                  placement: "hero",
-                  cta_target: "quote",
-                }}
+                data-track-event="service_cta_click"
+                data-track-slug={slug}
+                data-track-placement="hero"
+                data-track-target="quote"
                 className="micro-interaction rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Get Fast Quote
-              </TrackedLink>
-              <TrackedLink
+              </Link>
+              <Link
                 href="/book"
-                eventName="service_cta_click"
-                eventParams={{
-                  service_slug: slug,
-                  placement: "hero",
-                  cta_target: "book",
-                }}
+                data-track-event="service_cta_click"
+                data-track-slug={slug}
+                data-track-placement="hero"
+                data-track-target="book"
                 className="micro-interaction rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book Repair
-              </TrackedLink>
+              </Link>
             </div>
           </div>
           <div className="relative order-1 md:order-2">
             <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
-              <picture className="absolute inset-0 block h-full w-full">
-                {mobileHeroImageSrc ? (
-                  <source media="(max-width: 767px)" srcSet={mobileHeroImageSrc} type="image/avif" />
-                ) : null}
-                <img
-                  src={lcpHeroImageSrc}
-                  alt={service.name}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
-              </picture>
+              <Image
+                src={lcpHeroImageSrc}
+                alt={service.name}
+                priority
+                fetchPriority="high"
+                width={800}
+                height={540}
+                unoptimized={lcpHeroImageSrc.startsWith("/images/")}
+                className="h-full w-full object-cover"
+              />
               <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
               <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
             </div>
@@ -1608,7 +1594,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="how-it-works" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
+      <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -1673,30 +1659,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   {howItWorksSupportCopy}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <TrackedLink
+                  <Link
                     href="/quote"
-                    eventName="service_cta_click"
-                    eventParams={{
-                      service_slug: slug,
-                      placement: "how_it_works",
-                      cta_target: "quote",
-                    }}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="how_it_works"
+                    data-track-target="quote"
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
-                  </TrackedLink>
-                  <TrackedLink
+                  </Link>
+                  <Link
                     href="/book"
-                    eventName="service_cta_click"
-                    eventParams={{
-                      service_slug: slug,
-                      placement: "how_it_works",
-                      cta_target: "book",
-                    }}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="how_it_works"
+                    data-track-target="book"
                     className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book Repair
-                  </TrackedLink>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -1737,7 +1719,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section data-service-section="what-to-expect" className="cv-auto relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="what-to-expect" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1805,7 +1787,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="pricing-timing" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="pricing-timing" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1906,36 +1888,32 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Quote if you want pricing first. Book if you are ready for in-shop assessment.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <TrackedLink
+                  <Link
                     href="/quote"
-                    eventName="service_cta_click"
-                    eventParams={{
-                      service_slug: slug,
-                      placement: "pricing_timing",
-                      cta_target: "quote",
-                    }}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="pricing_timing"
+                    data-track-target="quote"
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
-                  </TrackedLink>
-                  <TrackedLink
+                  </Link>
+                  <Link
                     href="/book"
-                    eventName="service_cta_click"
-                    eventParams={{
-                      service_slug: slug,
-                      placement: "pricing_timing",
-                      cta_target: "book",
-                    }}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="pricing_timing"
+                    data-track-target="book"
                     className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book Repair
-                  </TrackedLink>
+                  </Link>
                 </div>
               </div>
             </div>
           </section>
 
-          <section data-service-section="before-you-visit" className="cv-auto relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="before-you-visit" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1999,7 +1977,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="why-customers-choose-us" className="cv-auto relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="why-customers-choose-us" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
@@ -2091,7 +2069,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </section>
         </>
       ) : (
-        <section data-service-section="what-to-expect" className="cv-auto bg-white py-16">
+        <section data-service-section="what-to-expect" className="cv-section bg-white py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2173,7 +2151,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       )}
 
       {!isFlagshipService ? (
-        <section data-service-section="pricing-timing" className="cv-auto bg-stone-100 py-16">
+        <section data-service-section="pricing-timing" className="cv-section bg-stone-100 py-16">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2209,7 +2187,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       ) : null}
 
-      <section data-service-section="faqs" className="cv-auto bg-white py-16">
+      <section data-service-section="faqs" className="cv-section bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             FAQs
@@ -2240,7 +2218,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="related-services" className="cv-auto bg-stone-100 py-16">
+      <section data-service-section="related-services" className="cv-section bg-stone-100 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -2282,34 +2260,31 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
         >
           <div className="flex items-center gap-3">
-            <TrackedLink
+            <Link
               href="/quote"
-              eventName="service_cta_click"
-              eventParams={{
-                service_slug: slug,
-                placement: "mobile_quick_actions",
-                cta_target: "quote",
-              }}
+              data-track-event="service_cta_click"
+              data-track-slug={slug}
+              data-track-placement="mobile_quick_actions"
+              data-track-target="quote"
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Get Fast Quote
-            </TrackedLink>
-            <TrackedLink
+            </Link>
+            <Link
               href="/book"
-              eventName="service_cta_click"
-              eventParams={{
-                service_slug: slug,
-                placement: "mobile_quick_actions",
-                cta_target: "book",
-              }}
+              data-track-event="service_cta_click"
+              data-track-slug={slug}
+              data-track-placement="mobile_quick_actions"
+              data-track-target="book"
               className="flex-1 rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Book Repair
-            </TrackedLink>
+            </Link>
           </div>
         </div>
       </div>
       <div className="h-24 md:hidden" aria-hidden="true" />
+      <ServiceInteractionTracker serviceSlug={slug} />
 
       <script
         type="application/ld+json"
@@ -2323,6 +2298,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           __html: JSON.stringify(serviceFaqSchema(schemaService)),
         }}
       />
+
     </SiteShell>
   );
 }
+

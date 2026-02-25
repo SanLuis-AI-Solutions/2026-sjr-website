@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { preload } from "react-dom";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BLOG_POSTS, getBlogPostBySlug, getRelatedBlogPosts } from "@/lib/blog";
@@ -67,11 +66,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
   const mobileHeroImageSrc =
     post.slug === "ring-sizing-guide" ? "/images/blog/ring-sizing-guide-cover-mobile.avif" : null;
   const lcpHeroImageSrc = mobileHeroImageSrc || post.image;
-  preload(lcpHeroImageSrc, {
-    as: "image",
-    fetchPriority: "high",
-    ...(mobileHeroImageSrc ? { type: "image/avif" } : {}),
-  });
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -116,6 +110,8 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
+      {/* Preload the LCP blog hero image — restores the early hint lost when switching from next/image priority. */}
+      <link rel="preload" as="image" href={lcpHeroImageSrc} fetchPriority="high" />
       <Script
         id="blog-article-schema"
         type="application/ld+json"
@@ -136,19 +132,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
             ← Back to Blog
           </Link>
           <div className="relative mt-6 h-60 overflow-hidden rounded-xl md:h-96 md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_20px_55px_rgba(58,25,16,0.14)]">
-            <picture className="absolute inset-0 block h-full w-full">
-              {mobileHeroImageSrc ? (
-                <source media="(max-width: 767px)" srcSet={mobileHeroImageSrc} type="image/avif" />
-              ) : null}
-              <img
-                src={lcpHeroImageSrc}
-                alt={post.title}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-            </picture>
+            <img
+              src={lcpHeroImageSrc}
+              alt={post.title}
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
             <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent md:block" />
           </div>
           <p className="mt-6 text-xs uppercase tracking-[0.3em] text-brand-burgundy">Blog Post</p>
@@ -192,129 +183,127 @@ export default async function BlogDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="cv-auto">
-            <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-              <div>
-                <div className="mt-2 space-y-8">
-                  {post.sections.map((section, index) => (
-                    <section key={section.heading}>
-                      <h2 className="font-serif text-2xl text-stone-900">{section.heading}</h2>
-                      <div className="mt-3 space-y-4">
-                        {section.body.map((paragraph) => (
-                          <p key={paragraph} className="text-sm leading-7 text-stone-700">
-                            {paragraph}
-                          </p>
-                        ))}
-                      </div>
-                      {index === 0 ? (
-                        <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 p-5">
-                          <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-brand-burgundy">
-                            Need a repair estimate?
-                          </p>
-                          <p className="mt-2 text-sm leading-7 text-stone-700">
-                            We can confirm starting-at pricing and timing before you visit.
-                          </p>
-                          <div className="mt-4 flex flex-wrap gap-3">
-                            <TrackedLink
-                              href="/quote"
-                              eventName="article_mid_cta_click"
-                              eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
-                              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                            >
-                              Get Fast Quote
-                            </TrackedLink>
-                            <TrackedLink
-                              href="/book"
-                              eventName="article_mid_cta_click"
-                              eventParams={{ blog_slug: post.slug, cta_target: "book" }}
-                              className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                            >
-                              Book Repair
-                            </TrackedLink>
-                          </div>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <div className="mt-2 space-y-8">
+                {post.sections.map((section, index) => (
+                  <section key={section.heading}>
+                    <h2 className="font-serif text-2xl text-stone-900">{section.heading}</h2>
+                    <div className="mt-3 space-y-4">
+                      {section.body.map((paragraph) => (
+                        <p key={paragraph} className="text-sm leading-7 text-stone-700">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                    {index === 0 ? (
+                      <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 p-5">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-brand-burgundy">
+                          Need a repair estimate?
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-stone-700">
+                          We can confirm starting-at pricing and timing before you visit.
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-3">
+                          <TrackedLink
+                            href="/quote"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Get Fast Quote
+                          </TrackedLink>
+                          <TrackedLink
+                            href="/book"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "book" }}
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Book Repair
+                          </TrackedLink>
                         </div>
-                      ) : null}
-                    </section>
-                  ))}
-                </div>
+                      </div>
+                    ) : null}
+                  </section>
+                ))}
               </div>
-
-              <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-                <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Key takeaways
-                  </p>
-                  <ul className="mt-4 space-y-3 text-sm text-stone-700">
-                    {post.keyTakeaways.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Related services
-                  </p>
-                  <div className="mt-4 space-y-2">
-                    {relatedServices.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={`/services/${service.slug}`}
-                        className="block rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    <Link
-                      href="/quote"
-                      className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      Get Fast Quote
-                    </Link>
-                    <Link
-                      href="/services"
-                      className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      View Services
-                    </Link>
-                  </div>
-                </div>
-              </aside>
             </div>
 
-            {relatedReads.length > 0 ? (
-              <section className="mt-12">
+            <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Related reads
+                  Key takeaways
                 </p>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  {relatedReads.map((entry) => (
-                    <TrackedLink
-                      key={entry.slug}
-                      href={`/blog/${entry.slug}`}
-                      eventName="related_read_click"
-                      eventParams={{ from_blog_slug: post.slug, to_blog_slug: entry.slug }}
-                      className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_16px_38px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                <ul className="mt-4 space-y-3 text-sm text-stone-700">
+                  {post.keyTakeaways.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Related services
+                </p>
+                <div className="mt-4 space-y-2">
+                  {relatedServices.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="block rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     >
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
-                        {entry.readTime}
-                      </p>
-                      <h2 className="mt-3 font-serif text-2xl text-stone-900">{entry.title}</h2>
-                      <p className="mt-2 text-sm leading-7 text-stone-600">{entry.excerpt}</p>
-                      <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
-                        Read article <span aria-hidden="true">→</span>
-                      </span>
-                    </TrackedLink>
+                      {service.name}
+                    </Link>
                   ))}
                 </div>
-              </section>
-            ) : null}
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href="/quote"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Get Fast Quote
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    View Services
+                  </Link>
+                </div>
+              </div>
+            </aside>
           </div>
+
+          {relatedReads.length > 0 ? (
+            <section className="mt-12">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                Related reads
+              </p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {relatedReads.map((entry) => (
+                  <TrackedLink
+                    key={entry.slug}
+                    href={`/blog/${entry.slug}`}
+                    eventName="related_read_click"
+                    eventParams={{ from_blog_slug: post.slug, to_blog_slug: entry.slug }}
+                    className="group rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_16px_38px_rgba(58,25,16,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                      {entry.readTime}
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">{entry.title}</h2>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">{entry.excerpt}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
+                      Read article <span aria-hidden="true">→</span>
+                    </span>
+                  </TrackedLink>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </article>
 

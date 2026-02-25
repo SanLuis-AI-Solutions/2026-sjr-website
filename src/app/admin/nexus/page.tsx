@@ -68,7 +68,7 @@ export default async function NexusPage() {
                                 Content <span className="text-brand-gold">Nexus</span>
                             </h1>
                             <p className="mt-4 max-w-xl text-sm leading-relaxed text-stone-600">
-                                Orchestrating SJR's digital presence across social platforms and automated review cycles.
+                                Orchestrating SJR&apos;s digital presence across social platforms and automated review cycles.
                             </p>
                         </div>
                         <div className="flex items-center gap-3 rounded-2xl border border-brand-gold/20 bg-white/50 p-4 backdrop-blur-md">

@@ -86,16 +86,19 @@ export function ScrollRevealManager() {
 
     // Defer execution until the main thread is idle
     let cleanup: (() => void) | undefined;
-    const idleId = (window.requestIdleCallback || ((cb: any) => setTimeout(cb, 100)))(() => {
+    const requestIdle = window.requestIdleCallback
+      ? (cb: IdleRequestCallback) => window.requestIdleCallback(cb)
+      : (cb: IdleRequestCallback) =>
+          window.setTimeout(() => cb({ didTimeout: false, timeRemaining: () => 0 }), 100);
+    const cancelIdle = window.cancelIdleCallback
+      ? (id: number) => window.cancelIdleCallback(id)
+      : (id: number) => window.clearTimeout(id);
+    const idleId = requestIdle(() => {
       cleanup = init();
     });
 
     return () => {
-      if (window.cancelIdleCallback) {
-        window.cancelIdleCallback(idleId as number);
-      } else {
-        clearTimeout(idleId as any);
-      }
+      cancelIdle(idleId);
       if (cleanup) cleanup();
     };
   }, [pathname]);

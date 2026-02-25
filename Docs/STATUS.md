@@ -5,7 +5,9 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Lock and monitor the now-passing mobile Lighthouse baseline on production.
+- Diagnosing and fixing mobile LCP regression on `/services/ring-sizing` and `/blog/ring-sizing-guide` (`>4000ms` local, threshold `≤2500ms`).
+- Root causes identified and patched — final local gate verification in progress.
+- After stabilization: lock ERD ≤400ms and img_ttfb ≤20ms as perf regression signals.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -56,11 +58,21 @@ Update cadence: weekly (or after major milestones).
     - `/services/ring-sizing`: `perf=89`, `seo=100`, `lcp=2786ms`
     - `/blog/ring-sizing-guide`: `perf=94`, `seo=100`, `lcp=2732ms`
   - regression safety: `npm test` PASS (`17/17`) after all performance patches.
+- `2026-02-25 15:00-16:00 -06:00` **LCP root-cause analysis + multi-fix session**:
+  - Discovered and patched **3 root causes** for the mobile LCP regression; full doc at `Docs/PERF-LCP-FIX.md`.
+  - **Root Cause 1 (Critical):** `src/app/head.tsx` was preloading the home hero image (`home-hero-ring-mobile.avif`) on **every page** with `fetchPriority=high`, competing with the service/blog page's own LCP image. **Fix:** deleted `head.tsx`, moved preload into `src/components/hero.tsx` scoped to homepage only.
+  - **Root Cause 2 (High):** All `TrackedLink` client components were creating React hydration boundaries in the above-fold service page render path, causing `elementRenderDelay` of **1454ms**. **Fix:** replaced all 8 `TrackedLink` instances with plain `<Link>` elements + `data-track-*` attributes. Extended `ServiceInteractionTracker` to capture clicks via event delegation (`document.addEventListener('click')`). `elementRenderDelay` reduced to **~350ms** (75% improvement). Moved `ServiceInteractionTracker` to bottom of page JSX tree.
+  - **Root Cause 3 (High):** Replacing hero image with raw `<img>` (from previous session) removed the automatic `<link rel=preload>` that `next/image priority` generates in `<head>` at byte 183 of the HTML response. **Fix:** restored `<Image priority>` with explicit `width={800} height={540}` (not `fill`) on service hero.
+  - **Root Cause 4 (Medium):** Consecutive Lighthouse runs sharing Chrome process CPU pressure on Windows caused intermittent ERD spikes of 1200-1400ms. **Fix:** added 12s inter-run cooldown to `scripts/perf/launch-performance-gate.mjs`.
+  - **Performance after fixes (local `next start`):**
+    - `/services/ring-sizing`: `lcp≈3350ms` (runs 2+3; run 1 cold-start spike to 3665ms), `erd≈250-450ms`, `img_ttfb≈100-200ms`
+    - `/blog/ring-sizing-guide`: `lcp≈2700ms` (2/3 runs <2750ms, 1 spike to 3118ms), `erd≈180-220ms`, `img_ttfb≈7-18ms` ✅
+    - `/`: `lcp≈2950ms`, `erd≈215ms`, `img_ttfb≈10ms` ✅
+  - **Expected in production:** TTFB drops from ~136ms local SSR to ~30-50ms (Vercel edge cache). LCP drops ~300-500ms across all routes → service page expected to land ≤3000ms.
+  - Applied `content-visibility: auto` (`.cv-section`) to all 7 below-fold service page sections.
+  - **Documentation:** `Docs/PERF-LCP-FIX.md` — full root-cause guide, prevention checklist, and quick-command reference.
 
 ## KPIs
-- Primary KPI:
-- Secondary KPIs:
-
 ## This Week
 - Shipped:
 - Home + Services hub + Service detail template (9 services).

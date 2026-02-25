@@ -14,7 +14,7 @@ export function ServiceInteractionTracker({ serviceSlug }: ServiceInteractionTra
   useEffect(() => {
     const seen = new Set<string>();
     const pagePath = pathname || "/";
-    let teardown = () => {};
+    let teardown = () => { };
 
     const initTracking = () => {
       const sections = Array.from(
@@ -79,9 +79,26 @@ export function ServiceInteractionTracker({ serviceSlug }: ServiceInteractionTra
 
       detailsNodes.forEach((details) => details.addEventListener("toggle", onToggle));
 
+      // Capture clicks on plain Link elements that have data-track-event (replacing TrackedLink).
+      const onLinkClick = (event: Event) => {
+        const anchor = (event.target as HTMLElement).closest<HTMLAnchorElement>("a[data-track-event]");
+        if (!anchor) return;
+        const eventName = anchor.dataset.trackEvent;
+        if (!eventName) return;
+        trackGaEvent(eventName, {
+          page_path: pagePath,
+          service_slug: anchor.dataset.trackSlug || serviceSlug,
+          placement: anchor.dataset.trackPlacement || "",
+          cta_target: anchor.dataset.trackTarget || "",
+          destination: anchor.href,
+        });
+      };
+      document.addEventListener("click", onLinkClick, { passive: true });
+
       return () => {
         observer.disconnect();
         detailsNodes.forEach((details) => details.removeEventListener("toggle", onToggle));
+        document.removeEventListener("click", onLinkClick);
       };
     };
 

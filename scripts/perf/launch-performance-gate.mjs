@@ -4,6 +4,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const INTER_RUN_COOLDOWN_MS = 12000;
+
 const DEFAULT_PATHS = ["/", "/services/ring-sizing", "/blog/ring-sizing-guide"];
 
 function parseNumber(value, name) {
@@ -20,7 +23,7 @@ function parseArgs(argv) {
       process.env.SITE_URL ||
       process.env.NEXT_PUBLIC_SITE_URL ||
       "https://www.susiesjewelryrepair.com",
-    runs: 7,
+    runs: 10,
     percentile: 75,
     lcpThresholdMs: 2500,
     seoThreshold: 100,
@@ -105,29 +108,47 @@ async function run() {
       ];
 
       console.log(`Running ${routePath} (${runIndex}/${opts.runs})`);
+      // Cool down between runs to reduce Chrome process residual CPU pressure.
+      if (runIndex > 1) {
+        await sleep(INTER_RUN_COOLDOWN_MS);
+      }
       const isWindows = process.platform === "win32";
-      const proc = spawnSync("npx", args, {
-        encoding: "utf8",
-        shell: isWindows,
-      });
+      let proc = null;
+      let reportExists = false;
 
-      if (proc.error) {
-        throw proc.error;
+      for (let attempt = 1; attempt <= 2; attempt += 1) {
+        if (attempt > 1) {
+          console.warn(
+            `Retrying ${routePath} run ${runIndex} (attempt ${attempt}/2) due to missing report.`
+          );
+        }
+
+        proc = spawnSync("npx", args, {
+          encoding: "utf8",
+          shell: isWindows,
+        });
+
+        if (proc.error) {
+          throw proc.error;
+        }
+
+        reportExists = await fs
+          .access(reportPath)
+          .then(() => true)
+          .catch(() => false);
+
+        if (reportExists) break;
       }
 
-      const reportExists = await fs
-        .access(reportPath)
-        .then(() => true)
-        .catch(() => false);
-
       if (!reportExists) {
-        const stderr = String(proc.stderr || "").trim();
-        const stdout = String(proc.stdout || "").trim();
+        const stderr = String(proc?.stderr || "").trim();
+        const stdout = String(proc?.stdout || "").trim();
         if (stderr) console.error(stderr);
         if (stdout) console.error(stdout);
         throw new Error(`Lighthouse report missing: ${reportPath}`);
       }
-      if (proc.status !== 0) {
+
+      if (proc && proc.status !== 0) {
         const stderr = String(proc.stderr || "");
         const isKnownWindowsCleanupError = stderr.includes("EPERM, Permission denied");
         if (isKnownWindowsCleanupError) {

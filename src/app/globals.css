@@ -135,6 +135,11 @@ html.reveal-disabled .reveal-on-scroll {
   contain-intrinsic-size: 1000px;
 }
 
+.cv-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 .reveal-delay-1 { animation-delay: 0.05s; }
 .reveal-delay-2 { animation-delay: 0.12s; }
 .reveal-delay-3 { animation-delay: 0.18s; }
