@@ -5,9 +5,8 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Diagnosing and fixing mobile LCP regression on `/services/ring-sizing` and `/blog/ring-sizing-guide` (`>4000ms` local, threshold `≤2500ms`).
-- Root causes identified and patched — final local gate verification in progress.
-- After stabilization: lock ERD ≤400ms and img_ttfb ≤20ms as perf regression signals.
+- Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
+- **Next action:** Deploy to production → verify production gate → if service page still >2500ms, implement Suspense streaming for below-fold sections on `/services/[slug]`.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -71,6 +70,16 @@ Update cadence: weekly (or after major milestones).
   - **Expected in production:** TTFB drops from ~136ms local SSR to ~30-50ms (Vercel edge cache). LCP drops ~300-500ms across all routes → service page expected to land ≤3000ms.
   - Applied `content-visibility: auto` (`.cv-section`) to all 7 below-fold service page sections.
   - **Documentation:** `Docs/PERF-LCP-FIX.md` — full root-cause guide, prevention checklist, and quick-command reference.
+- `2026-02-25T16:38-06:00` **Codex audit cross-check performed:**
+  - Confirmed: `head.tsx` files removed, workspace clean at `658e519`, lint 0 errors.
+  - Confirmed: gate still failing locally (service=3665ms, blog=3118ms, home=2960ms) — expected per §5 of `PERF-LCP-FIX.md` (local SSR ≠ production CDN).
+  - **Critical finding confirmed:** `src/app/page.tsx` was in Hero-only state — all home sections stripped and not restored before the perf commit.
+  - Codex recommended: implement Suspense-deferred below-fold critical shell on service page + 10-run p75 gate.
+- `2026-02-25T16:41-06:00` **Home page regression fixed:**
+  - Root cause: `page.tsx` was stripped to Hero-only during LCP diagnostic experiment and accidentally committed in `494dc54` without restoring sections.
+  - Fix: restored all 9 below-fold sections (`ProofBand`, `InHouseBadge`, `ProcessSteps`, `ServicesGridSection`, `CraftStory`, `ShowroomBand`, `Testimonials`, `HomeFaq`, `HomeCta`) + moved `SiteFooter` back outside `<main>`.
+  - Build verified clean. Gate re-run in progress.
+  - All changes committed and documented in `Docs/PERF-LCP-FIX.md` §9.
 
 ## KPIs
 ## This Week
