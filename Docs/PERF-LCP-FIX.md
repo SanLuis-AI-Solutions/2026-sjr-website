@@ -45,6 +45,8 @@ for(let i=1;i<=3;i++){
 **Fix:**
 1. Deleted `src/app/head.tsx`
 2. Moved the preload into `src/components/hero.tsx` (Server Component) as a `<link rel="preload">` — only renders on the homepage
+3. Deleted deprecated `src/app/services/[slug]/head.tsx` and `src/app/blog/[slug]/head.tsx` (from a prior session — these were route-scoped but only hardcoded for one slug each and are deprecated API in Next.js 16)
+4. `next/image` with `priority=true` correctly generates the `<link rel="preload">` at byte 183 of the HTML `<head>` — confirmed via `Invoke-WebRequest`
 
 **Prevention Rule:** NEVER add a `<link rel="preload">` for a page-specific resource in the global `app/head.tsx` or `app/layout.tsx`. Route-specific preloads must live in the route's own page/layout or be injected by `next/image priority`.
 
