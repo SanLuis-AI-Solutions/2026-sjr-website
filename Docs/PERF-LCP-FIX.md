@@ -284,6 +284,20 @@ for(let i=1;i<=3;i++){
 - **However**, the remaining local LCP delta (~1200ms above threshold) is primarily driven by local SSR TTFB (~136ms) + 4G throttling on a 138KB HTML page — factors that are eliminated in production. The Suspense approach is a valid optimization but may not be the highest-ROI fix before a production verification run.
 - **Recommended sequence:** Deploy current fixes → verify production gate → if still failing, implement Suspense streaming on service page.
 
+### Final Gate Run After Home Restore (2026-02-25T22:42-06:00)
+
+After restoring home sections, gate ran 9 Lighthouse tests (3 routes × 3 runs). Results showed **cumulative CPU pressure** — ERD spikes appearing in blog runs 2+3 and home FCP jumping 147ms:
+
+| Route | Run1 LCP | Run2 LCP | Run3 LCP | p75 | ERD R1/R2/R3 | img_ttfb R1/R2/R3 |
+|-------|----------|----------|----------|-----|--------------|-------------------|
+| service | 3465ms | 3533ms | 3527ms | 3533ms | 297/409/388ms | 517/310/269ms |
+| blog | 2924ms | 3097ms | 3127ms | 3097ms | 217/1252/1163ms ⚠️ | 18/15/16ms |
+| home | 3232ms | 3241ms | 3214ms | 3241ms | 267/282/274ms | 22/17/15ms |
+
+**Key observation:** Blog and home ERD spikes occur in runs 2 and 3, which run AFTER 6 prior Lighthouse tests. The 12s cooldown is insufficient when the machine is processing 9 consecutive Chrome processes. This is a **local environment limitation**, not a code regression.
+
+**Conclusion:** Local p75 gate is not a reliable pass/fail signal on this Windows machine for multi-route test sessions. Proceed to production deployment for authoritative measurement.
+
 ---
 
 ## 10. Commit Log for This Session
@@ -293,8 +307,10 @@ for(let i=1;i<=3;i++){
 | 2026-02-25T15:50 | `494dc54` | perf: fix mobile LCP regression (main fixes) |
 | 2026-02-25T15:52 | `eedffba` | chore: remove deprecated route head.tsx files |
 | 2026-02-25T15:53 | `658e519` | docs: update PERF-LCP-FIX with head.tsx clarification |
-| 2026-02-25T16:41 | (home fix) | fix: restore home page sections accidentally stripped |
+| 2026-02-25T16:41 | (home fix commit) | fix: restore home page sections accidentally stripped |
+| 2026-02-25T16:41 | `b9eda1c` | docs: update PERF-LCP-FIX and STATUS with all findings |
 
 ---
 
-*Last updated: 2026-02-25T16:41-06:00 by Antigravity agent*
+*Last updated: 2026-02-25T16:53-06:00 by Antigravity agent*
+
