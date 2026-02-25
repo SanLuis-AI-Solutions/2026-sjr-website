@@ -1,7 +1,15 @@
 # Master Project Handoff — February 24, 2026
 
 ## 🚀 OVERVIEW
-The SJR website is live and canonical at `susiesjewelryrepair.com`. We are in the final **Performance & Conversion Hardening** phase.
+The SJR website is live and canonical at **`https://www.susiesjewelryrepair.com/`**. We are in the final **Performance & Conversion Hardening** phase.
+
+**MANDATORY OPERATING RULE:** You ABSOLUTELY MUST invoke `@using-superpowers` at the start of this session and before any significant architectural or performance decision. This is non-negotiable.
+
+## 🧰 RESOURCE TOOLKIT
+Use these specific resources to ensure a high-fidelity execution:
+- **Core Skills**: `web-performance-optimization`, `performance-profiling`, `nextjs-best-practices`, `verification-before-completion`.
+- **Specialized Agents**: `performance-optimizer`, `frontend-specialist`, `test-engineer`.
+- **Command Workflows**: `/status` (Check baseline), `/qa-gate` (Final verification), `/test` (Smoke testing).
 
 ## 🎯 CURRENT OBJECTIVE
 Stabilize the **Performance Gate** on mobile. We are hitting 2400ms – 3100ms LCP (Largest Contentful Paint) jitter. We need a consistent "Green" pass (< 2500ms) on a 10-run p75 baseline.
