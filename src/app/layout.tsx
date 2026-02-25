@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import { Suspense } from "react";
 import "./globals.css";
-import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
-import { GaFirstTouchCapture } from "@/components/analytics/ga-tracker";
 import { getSiteUrl } from "@/lib/site-url";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { DeferredGaLoader } from "@/components/analytics/deferred-ga-loader";
@@ -42,10 +39,6 @@ export default function RootLayout({
         {gaMeasurementId ? <DeferredGaLoader measurementId={gaMeasurementId} /> : null}
         {children}
         <LocalBusinessSchema />
-        <Suspense fallback={null}>
-          <GaFirstTouchCapture />
-        </Suspense>
-        <ScrollRevealManager />
       </body>
     </html>
   );

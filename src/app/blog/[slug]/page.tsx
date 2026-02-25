@@ -145,7 +145,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 alt={post.title}
                 loading="eager"
                 fetchPriority="high"
-                decoding="sync"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </picture>

@@ -1589,7 +1589,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   alt={service.name}
                   loading="eager"
                   fetchPriority="high"
-                  decoding="sync"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </picture>

@@ -23,7 +23,7 @@ export function Hero() {
             alt="Jewelry repair hero background"
             loading="eager"
             fetchPriority="high"
-            decoding="sync"
+            decoding="async"
             className="parallax-hero h-full w-full object-cover object-center md:object-[center_right]"
           />
         </picture>
