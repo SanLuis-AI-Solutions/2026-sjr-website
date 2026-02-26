@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
@@ -110,8 +111,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      {/* Preload the LCP blog hero image — restores the early hint lost when switching from next/image priority. */}
-      <link rel="preload" as="image" href={lcpHeroImageSrc} fetchPriority="high" />
       <Script
         id="blog-article-schema"
         type="application/ld+json"
@@ -132,12 +131,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
             ← Back to Blog
           </Link>
           <div className="relative mt-6 h-60 overflow-hidden rounded-xl md:h-96 md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_20px_55px_rgba(58,25,16,0.14)]">
-            <img
+            <Image
               src={lcpHeroImageSrc}
               alt={post.title}
-              loading="eager"
+              priority
               fetchPriority="high"
-              decoding="sync"
+              width={800}
+              height={540}
+              unoptimized={lcpHeroImageSrc.startsWith("/images/")}
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/45 via-transparent to-transparent md:block" />

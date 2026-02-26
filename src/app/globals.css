@@ -2,14 +2,21 @@
 
 :root {
   /* Brand Palette - Strict Adherence */
-  --background: #faf7f2; /* Cream/Off-White */
-  --foreground: #181112; /* Soft Black */
-  --brand-burgundy: #7a2e3a; /* Brand Burgundy */
-  --brand-burgundy-deep: #5e2230; /* Secondary/Footer */
-  --brand-gold: #d1b882; /* Luxury Accents */
-  --stone-200: #e2d5d7; /* Neutrals - Dividers */
-  --stone-600: #4a3a3c; /* Neutrals - Subtext */
-  
+  --background: #faf7f2;
+  /* Cream/Off-White */
+  --foreground: #181112;
+  /* Soft Black */
+  --brand-burgundy: #7a2e3a;
+  /* Brand Burgundy */
+  --brand-burgundy-deep: #5e2230;
+  /* Secondary/Footer */
+  --brand-gold: #d1b882;
+  /* Luxury Accents */
+  --stone-200: #e2d5d7;
+  /* Neutrals - Dividers */
+  --stone-600: #4a3a3c;
+  /* Neutrals - Subtext */
+
   /* Glass-morphism Defaults */
   --glass-bg: rgba(250, 247, 242, 0.7);
   --glass-border: rgba(209, 184, 130, 0.2);
@@ -23,7 +30,7 @@
   --color-brand-gold: var(--brand-gold);
   --color-stone-200: var(--stone-200);
   --color-stone-600: var(--stone-600);
-  
+
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
 }
@@ -38,7 +45,11 @@ body {
 }
 
 /* Typography Enhancements */
-h1, h2, h3, h4, .font-serif {
+h1,
+h2,
+h3,
+h4,
+.font-serif {
   font-family: var(--font-playfair), serif;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -83,6 +94,7 @@ h1, h2, h3, h4, .font-serif {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -90,8 +102,13 @@ h1, h2, h3, h4, .font-serif {
 }
 
 @keyframes slow-zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.05); }
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.05);
+  }
 }
 
 .animate-fade-up {
@@ -140,10 +157,21 @@ html.reveal-disabled .reveal-on-scroll {
   contain-intrinsic-size: auto 600px;
 }
 
-.reveal-delay-1 { animation-delay: 0.05s; }
-.reveal-delay-2 { animation-delay: 0.12s; }
-.reveal-delay-3 { animation-delay: 0.18s; }
-.reveal-delay-4 { animation-delay: 0.24s; }
+.reveal-delay-1 {
+  animation-delay: 0.05s;
+}
+
+.reveal-delay-2 {
+  animation-delay: 0.12s;
+}
+
+.reveal-delay-3 {
+  animation-delay: 0.18s;
+}
+
+.reveal-delay-4 {
+  animation-delay: 0.24s;
+}
 
 @media (min-width: 768px) {
   .parallax-hero {
@@ -152,7 +180,10 @@ html.reveal-disabled .reveal-on-scroll {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up, .animate-slow-zoom, .micro-interaction {
+
+  .animate-fade-up,
+  .animate-slow-zoom,
+  .micro-interaction {
     animation: none;
     transition: none;
     transform: none;

@@ -3,7 +3,7 @@ import { BUSINESS, SERVICES } from "@/lib/constants";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-burgundy-deep text-stone-100/80 selection:bg-brand-gold selection:text-white">
+    <footer className="cv-section bg-brand-burgundy-deep text-stone-100/80 selection:bg-brand-gold selection:text-white">
       <div className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid gap-16 md:grid-cols-4">
           <div className="md:col-span-1">

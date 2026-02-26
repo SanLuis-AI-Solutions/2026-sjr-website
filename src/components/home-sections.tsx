@@ -240,7 +240,7 @@ export function ShowroomBand() {
 
 export function HomeFaq() {
   return (
-    <section className="bg-[#f0d3c0] py-16">
+    <section className="cv-section bg-[#f0d3c0] py-16">
       <div className="mx-auto max-w-4xl px-6">
         <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy reveal-on-scroll">
           FAQs
@@ -294,7 +294,7 @@ export function HomeFaq() {
 
 export function Testimonials() {
   return (
-    <section className="bg-[#e7c4ae] py-16">
+    <section className="cv-section bg-[#e7c4ae] py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-end justify-between reveal-on-scroll">
           <div>
@@ -355,7 +355,7 @@ export function Testimonials() {
 
 export function HomeCta() {
   return (
-    <section className="bg-brand-burgundy py-16">
+    <section className="cv-section bg-brand-burgundy py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
         <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
           Start Today

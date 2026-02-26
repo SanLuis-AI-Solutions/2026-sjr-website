@@ -1,25 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const mobileHeroImageSrc = "/images/home/home-hero-ring-mobile.avif";
 
 export function Hero() {
   return (
     <section className="relative min-h-[560px] overflow-hidden bg-stone-100 md:min-h-[74vh]">
-      {/* Preload hint: scoped to homepage only (unlike the deleted global head.tsx) */}
-      <link
-        rel="preload"
-        as="image"
-        href={mobileHeroImageSrc}
-        fetchPriority="high"
-      />
       <div className="absolute inset-0">
-        <img
+        <Image
           src={mobileHeroImageSrc}
           alt="Jewelry repair hero background"
-          loading="eager"
+          priority
           fetchPriority="high"
-          decoding="sync"
-          className="parallax-hero absolute inset-0 h-full w-full object-cover object-center md:object-[center_right]"
+          width={800}
+          height={540}
+          unoptimized={true}
+          className="absolute inset-0 h-full w-full object-cover object-center md:object-[center_right]"
         />
         <div className="absolute inset-0 hidden bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/85 to-transparent md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.1),_transparent_60%)] md:block" />

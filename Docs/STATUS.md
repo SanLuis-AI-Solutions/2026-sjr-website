@@ -80,6 +80,12 @@ Update cadence: weekly (or after major milestones).
   - Fix: restored all 9 below-fold sections (`ProofBand`, `InHouseBadge`, `ProcessSteps`, `ServicesGridSection`, `CraftStory`, `ShowroomBand`, `Testimonials`, `HomeFaq`, `HomeCta`) + moved `SiteFooter` back outside `<main>`.
   - Build verified clean. Gate re-run in progress.
   - All changes committed and documented in `Docs/PERF-LCP-FIX.md` §9.
+- `2026-02-25 17:55:00 -06:00` **LCP Lock + UX Unstrip Iteration executed:**
+  - Removed massive `div.cv-auto` wrapper block spanning the entire home page (`src/app/page.tsx`), preventing complete main thread lockup from monolithic evaluation.
+  - Restored `next/image` with `priority` over raw `<img>` in `src/components/hero.tsx` and `src/app/blog/[slug]/page.tsx` to regain early `head` preload injection.
+  - Stripped invalid CSS attachment property (`parallax-hero`) from the hero `<img>` tags.
+  - Restored premium "luxury" reveal animations natively by clearing hardcoded `disableReveal` bypass logic in `src/app/layout.tsx`. Reveal now sequences gracefully in `requestIdleCallback` post-load.
+  - Artifact created: `Docs/artifacts/ui/2026-02-25--lcp-lock-and-luxury-ux/00-implementation-notes.md`.
 
 ## KPIs
 ## This Week

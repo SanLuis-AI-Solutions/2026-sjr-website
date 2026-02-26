@@ -27,83 +27,72 @@ export const metadata: Metadata = {
 };
 
 const CRITICAL_REVEAL_GUARD_SCRIPT = `(() => {
-  const pathname = location.pathname.length > 1 && location.pathname.endsWith("/")
-    ? location.pathname.slice(0, -1)
-    : location.pathname;
-  const disableReveal = pathname === "/" || pathname.startsWith("/services") || pathname.startsWith("/blog");
-  if (!disableReveal) return;
-  const root = document.documentElement;
-  root.classList.remove("reveal-ready");
-  root.classList.add("reveal-disabled");
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) {
+    document.documentElement.classList.add("reveal-disabled");
+  }
 })();`;
 
 function getRuntimeEnhancementsScript(measurementId?: string) {
   return `(() => {
     const measurementId = ${JSON.stringify(measurementId ?? "")};
-    const pathname = location.pathname.length > 1 && location.pathname.endsWith("/")
-      ? location.pathname.slice(0, -1)
-      : location.pathname;
-    const disableReveal = pathname === "/" || pathname.startsWith("/services") || pathname.startsWith("/blog");
     const root = document.documentElement;
+    const initReveal = () => {
+      root.classList.remove("reveal-disabled");
+      root.classList.add("reveal-ready");
 
-    if (!disableReveal) {
-      const initReveal = () => {
-        root.classList.remove("reveal-disabled");
-        root.classList.add("reveal-ready");
+      const prefersReduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        const prefersReduced =
-          window.matchMedia &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const getElements = () =>
+        Array.from(document.querySelectorAll(".reveal-on-scroll"));
 
-        const getElements = () =>
-          Array.from(document.querySelectorAll(".reveal-on-scroll"));
+      const elements = getElements();
+      if (elements.length === 0) return;
 
-        const elements = getElements();
-        if (elements.length === 0) return;
+      if (prefersReduced || typeof IntersectionObserver === "undefined") {
+        elements.forEach((el) => el.classList.add("reveal-visible"));
+        return;
+      }
 
-        if (prefersReduced || typeof IntersectionObserver === "undefined") {
-          elements.forEach((el) => el.classList.add("reveal-visible"));
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              entry.target.classList.add("reveal-visible");
-              observer.unobserve(entry.target);
-            });
-          },
-          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
-        );
-
-        let scheduled = false;
-        const observePending = () => {
-          scheduled = false;
-          getElements().forEach((el) => {
-            if (!el.classList.contains("reveal-visible")) observer.observe(el);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
           });
-        };
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      );
 
-        const scheduleObserve = () => {
-          if (scheduled) return;
-          scheduled = true;
-          requestAnimationFrame(observePending);
-        };
-
-        observePending();
-
-        const mutationObserver = new MutationObserver(() => {
-          scheduleObserve();
+      let scheduled = false;
+      const observePending = () => {
+        scheduled = false;
+        getElements().forEach((el) => {
+          if (!el.classList.contains("reveal-visible")) observer.observe(el);
         });
-        mutationObserver.observe(document.body, { childList: true, subtree: true });
       };
 
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(initReveal);
-      } else {
-        window.setTimeout(initReveal, 100);
-      }
+      const scheduleObserve = () => {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(observePending);
+      };
+
+      observePending();
+
+      const mutationObserver = new MutationObserver(() => {
+        scheduleObserve();
+      });
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
+    };
+
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(initReveal);
+    } else {
+      window.setTimeout(initReveal, 100);
     }
 
     if (!measurementId || window.__sjrGaLoaded) return;

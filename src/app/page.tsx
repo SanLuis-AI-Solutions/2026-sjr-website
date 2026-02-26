@@ -24,19 +24,17 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-10 md:pt-12">
         <Hero />
-        <div className="cv-auto">
-          <ProofBand />
-          <InHouseBadge />
-          <ProcessSteps />
-          <Suspense fallback={null}>
-            <ServicesGridSection />
-          </Suspense>
-          <CraftStory />
-          <ShowroomBand />
-          <Testimonials />
-          <HomeFaq />
-          <HomeCta />
-        </div>
+        <ProofBand />
+        <InHouseBadge />
+        <ProcessSteps />
+        <Suspense fallback={null}>
+          <ServicesGridSection />
+        </Suspense>
+        <CraftStory />
+        <ShowroomBand />
+        <Testimonials />
+        <HomeFaq />
+        <HomeCta />
       </main>
       <SiteFooter />
 
