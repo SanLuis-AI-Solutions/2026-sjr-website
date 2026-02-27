@@ -33,6 +33,11 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Smoke tests (mobile navigation)
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://mock.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key"
+          SUPABASE_URL: "https://mock.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "mock-service-key"
         run: npm test
 
       - name: Audit image URLs (Supabase public assets)
