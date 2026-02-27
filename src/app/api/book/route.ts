@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createBookingEvent } from "@/lib/google-calendar";
 import { supabaseInsert, supabaseUpdateById } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
-import { sendLeadEmail } from "@/lib/lead-email";
+import { sendCustomerConfirmationEmail, sendLeadEmail } from "@/lib/lead-email";
 import { normalizeTimeZone } from "@/lib/timezone";
 import {
   isValidDateString,
@@ -10,6 +10,13 @@ import {
   isWithinBookingHours,
   minutesFromTime,
 } from "@/lib/booking-schedule";
+
+/*
+ * Date: 2026-02-26
+ * Time: 18:14:40 -06:00 (CST)
+ * Context/Notes: Added customer confirmation email dispatch for booked and pending booking states.
+ * Agent Name: Codex
+ */
 
 export async function POST(request: Request) {
   try {
@@ -114,6 +121,20 @@ export async function POST(request: Request) {
         console.error(emailResult.error);
       }
 
+      const customerEmailResult = await sendCustomerConfirmationEmail({
+        name,
+        email,
+        date,
+        time,
+        details: details || undefined,
+        pending: false,
+        bookingId: String(created?.id || bookingId),
+        calendarLink: event?.htmlLink || undefined,
+      }).catch(() => null);
+      if (customerEmailResult && !customerEmailResult.ok) {
+        console.error(customerEmailResult.error);
+      }
+
       return redirectOrJson(request, { ok: true, id: created?.id || bookingId });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "calendar_error";
@@ -155,6 +176,20 @@ export async function POST(request: Request) {
       if (emailResult && !emailResult.ok) {
         console.error(emailResult.error);
       }
+
+      const customerEmailResult = await sendCustomerConfirmationEmail({
+        name,
+        email,
+        date,
+        time,
+        details: details || undefined,
+        pending: true,
+        bookingId: String(created?.id || bookingId),
+      }).catch(() => null);
+      if (customerEmailResult && !customerEmailResult.ok) {
+        console.error(customerEmailResult.error);
+      }
+
       // Still treat as received so we don't drop the lead if Calendar is misconfigured.
       return redirectOrJson(
         request,

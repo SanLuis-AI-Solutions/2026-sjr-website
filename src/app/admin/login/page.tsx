@@ -4,6 +4,13 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SiteShell } from "@/components/site-shell";
 
+/*
+ * Date: 2026-02-26
+ * Time: 18:14:40 -06:00 (CST)
+ * Context/Notes: Updated admin email placeholder to neutral craftsman address aligned with env-driven allowlist gating.
+ * Agent Name: Codex
+ */
+
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -59,7 +66,7 @@ export default function LoginPage() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="appearance-none relative block w-full px-4 py-3 border border-stone-200 placeholder-stone-400 text-stone-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                                    placeholder="contact@sanluisai.com"
+                                    placeholder="craftsman@susiesjewelryrepair.com"
                                 />
                             </div>
                             <div>
