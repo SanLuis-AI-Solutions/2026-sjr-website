@@ -33,16 +33,16 @@ export function Hero() {
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.1),_transparent_60%)] md:block" />
       </div>
       <div className="relative mx-auto flex min-h-[560px] max-w-6xl items-center px-6 py-10 md:min-h-[74vh] md:py-14">
-        <div className="w-full max-w-2xl rounded-[2.5rem] border border-white/40 bg-white/45 p-7 shadow-[0_22px_55px_rgba(40,23,14,0.18)] backdrop-blur-[10px] md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-0">
-          <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/40 bg-white/90 px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-brand-burgundy md:bg-white/80">
+        <div className="w-full max-w-2xl rounded-[2.5rem] border border-stone-200/60 bg-white/95 p-8 shadow-2xl backdrop-blur-xl md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-0">
+          <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/40 bg-white px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-brand-burgundy font-semibold md:bg-white/80">
             In-House Repairs
             <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
             Your Jewelry Stays On-Site.
           </div>
-          <h1 className="lcp-heading mt-6 text-5xl text-stone-900 md:text-6xl lg:text-7xl">
+          <h1 className="lcp-heading mt-6 font-serif text-5xl text-stone-900 md:text-6xl lg:text-7xl">
             Your jewelry never leaves our hands.
           </h1>
-          <p className="mt-6 max-w-xl text-base font-medium text-stone-950 [text-shadow:0_1px_2px_rgba(255,255,255,0.6)] md:text-lg md:font-normal md:text-stone-600 md:[text-shadow:none]">
+          <p className="mt-6 max-w-xl text-base font-medium leading-relaxed text-stone-800 md:text-lg md:font-normal md:text-stone-600">
             Master jeweler craftsmanship performed on-site. Clear starting pricing and Same Day/Next
             Day service for most repairs.
           </p>
@@ -55,7 +55,7 @@ export function Hero() {
             </Link>
             <Link
               href="/book"
-              className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold/80 bg-white/95 px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy shadow-lg backdrop-blur-sm hover:bg-brand-gold/25 md:border-brand-gold md:bg-transparent md:shadow-none md:backdrop-blur-0 md:hover:bg-brand-gold/10"
+              className="micro-interaction inline-flex items-center justify-center rounded-full border-2 border-brand-burgundy bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-burgundy hover:text-white md:border md:border-brand-gold/80 md:bg-transparent md:shadow-none md:backdrop-blur-0 md:text-brand-burgundy md:hover:bg-brand-gold/10"
             >
               Book a Repair
             </Link>
