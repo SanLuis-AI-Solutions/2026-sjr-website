@@ -2,6 +2,12 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 20:59:28 -06:00 (CST)
+- **Context/Notes**: Reworked mobile Home Hero into a luxury layered composition (cinematic vignette + glow overlays, editorial heading rhythm, premium CTA stack) while preserving eager LCP image loading and desktop behavior. Verification: `eslint` + `next build` pass; test gate passed with 1 unrelated flaky image retry in service detail suite.
+- **Agent Name**: Codex
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 20:37:33 -06:00 (CST)
 - **Context/Notes**: Hardened mobile tap targets on About/FAQ/Blog (`min-h-12`) to clear flaky 44px assertions, retained hero readability/motion updates, and re-ran full production gate successfully (`npm test`: 17/17 Playwright + build pass).
 - **Agent Name**: Codex
