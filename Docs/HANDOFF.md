@@ -2,6 +2,12 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 21:12:31 -06:00 (CST)
+- **Context/Notes**: Applied Option 2 Hero visual direction (brighter champagne luxury) on mobile with luminous overlays, translucent editorial panel, and refined CTA styling. Verification: `eslint` + `next build` pass; test gate passed with 1 known unrelated flaky retry in service image coverage.
+- **Agent Name**: Codex
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 20:59:28 -06:00 (CST)
 - **Context/Notes**: Reworked mobile Home Hero into a luxury layered composition (cinematic vignette + glow overlays, editorial heading rhythm, premium CTA stack) while preserving eager LCP image loading and desktop behavior. Verification: `eslint` + `next build` pass; test gate passed with 1 unrelated flaky image retry in service detail suite.
 - **Agent Name**: Codex
