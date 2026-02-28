@@ -2,6 +2,12 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 21:54:05 -06:00 (CST)
+- **Context/Notes**: Implemented cinematic product-first Hero direction: ring-dominant mobile framing, narrowed text footprint, left-side editorial veil, and stronger luxury lighting/CTA hierarchy to improve first-glance visual impact.
+- **Agent Name**: Codex
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 21:40:55 -06:00 (CST)
 - **Context/Notes**: Rolled back Home Hero to Option 1 per stakeholder direction (reverted from Option 1.5/Option 2 styling). Validation: `eslint` + `next build` pass; test gate passed with one unrelated flaky retry in services image checks.
 - **Agent Name**: Codex
