@@ -2,6 +2,12 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 21:26:46 -06:00 (CST)
+- **Context/Notes**: Replaced Option 2 with an Option 1.5 Hero treatment: stronger dark-luxury look, reduced text block footprint, and ring-focused mobile framing to keep gemstone detail visible while preserving premium contrast and CTA clarity.
+- **Agent Name**: Codex
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 21:12:31 -06:00 (CST)
 - **Context/Notes**: Applied Option 2 Hero visual direction (brighter champagne luxury) on mobile with luminous overlays, translucent editorial panel, and refined CTA styling. Verification: `eslint` + `next build` pass; test gate passed with 1 known unrelated flaky retry in service image coverage.
 - **Agent Name**: Codex
