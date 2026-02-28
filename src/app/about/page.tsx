@@ -104,13 +104,13 @@ export default function AboutPage() {
             <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
               <Link
                 href="/quote"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Get Fast Quote
               </Link>
               <Link
                 href="/book"
-                className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book Repair
               </Link>
@@ -332,7 +332,7 @@ export default function AboutPage() {
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Phone</h3>
               <Link
                 href={`tel:${BUSINESS.phone}`}
-                className="mt-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-3 inline-flex min-h-12 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.phone}
               </Link>
@@ -341,7 +341,7 @@ export default function AboutPage() {
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Email</h3>
               <Link
                 href={`mailto:${BUSINESS.email}`}
-                className="mt-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-3 inline-flex min-h-12 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.email}
               </Link>

@@ -2,6 +2,12 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 20:37:33 -06:00 (CST)
+- **Context/Notes**: Hardened mobile tap targets on About/FAQ/Blog (`min-h-12`) to clear flaky 44px assertions, retained hero readability/motion updates, and re-ran full production gate successfully (`npm test`: 17/17 Playwright + build pass).
+- **Agent Name**: Codex
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 17:20:37 -06:00 (CST)
 - **Context/Notes**: Hardening plan execution for auth allowlist, customer email loop, hero readability, and booking date-picker; verification + perf delta recorded.
 - **Agent Name**: Codex
