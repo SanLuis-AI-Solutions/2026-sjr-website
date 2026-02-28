@@ -45,6 +45,7 @@ export function SiteHeader() {
 
           <details className="relative md:hidden">
             <summary
+              role="button"
               className="cursor-pointer list-none rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-stone-900"
               aria-label="Toggle Menu"
             >
