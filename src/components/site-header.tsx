@@ -46,12 +46,14 @@ export function SiteHeader() {
           <details className="relative md:hidden">
             <summary
               className="cursor-pointer list-none rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-stone-900"
-              aria-label="Open mobile navigation menu"
+              aria-label="Toggle Menu"
             >
               Menu
             </summary>
             <div
               id="mobile-nav"
+              role="dialog"
+              aria-label="Mobile navigation"
               className="absolute right-0 mt-3 w-[19rem] rounded-3xl border border-stone-200 bg-[#faf7f2] p-5 shadow-2xl"
             >
               <nav className="grid gap-2">
