@@ -34,10 +34,10 @@ Codex, here are the explicit next steps to fully close out this execution loop:
    - Validate that the `/about` page renders the "Behind the Bench" section appropriately, specifically checking the responsive layout on mobile breakpoints and ensuring the new storefront image is visible.
    - Validate that the `/blog` index route surfaces the 5 new articles properly.
 3. **Update Tracking (if applicable):**
-   - Ensure any modified layout or CTA buttons maintain the `ServiceInteractionTracker` and `TrackedLink` structures added in the previous week's UX sprints.
+   - Ensure any modified layout or CTA buttons maintain the delegated analytics pattern (`ServiceInteractionTracker` + `data-track-*` attributes) added in the previous week's UX sprints.
 4. **Push to Production:**
    - Commit the storefront image and the remaining code modifications.
-   - Push to `main` to trigger the Vercel production deployment.
+   - Push to `master` to trigger the Vercel production deployment.
 5. **Verify Live Deployment:**
    - Smoke-test the live deployment URLs (`https://www.susiesjewelryrepair.com/about` and `/blog`).
    - Report back to the user once the deployment goes fully green.

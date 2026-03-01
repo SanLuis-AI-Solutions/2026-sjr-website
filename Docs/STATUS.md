@@ -39,7 +39,7 @@ Update cadence: weekly (or after major milestones).
   - **Codex Handoff:**
     1. Verify file `public/images/about/storefront.jpg` exists (from user upload).
     2. Review the new blog content and updated `About` page locally.
-    3. Push changes to `main` to trigger the Vercel production deployment.
+    3. Push changes to `master` to trigger the Vercel production deployment.
 - `2026-02-27 22:23:59 -06:00` Production gate verification refresh:
   - command: `node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 10 --percentile 75 --lcp-threshold-ms 2500 --seo-threshold 100`
   - artifact: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`
