@@ -279,9 +279,9 @@ export function HomeFaq() {
                 key={item.question}
                 className={`reveal-on-scroll ${delayClass} rounded-xl border border-brand-gold/30 bg-white p-5 shadow-[0_18px_40px_rgba(90,55,35,0.14)]`}
               >
-                <div className="font-semibold text-stone-900">
+                <h3 className="font-semibold text-stone-900">
                   {item.question}
-                </div>
+                </h3>
                 <p className="mt-2 text-sm text-stone-600">{item.answer}</p>
               </div>
             );

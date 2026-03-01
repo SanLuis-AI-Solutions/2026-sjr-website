@@ -138,15 +138,28 @@ export default async function ContactPage({
                 <p className="mt-2 break-all text-sm font-semibold text-white">{BUSINESS.email}</p>
               </a>
             </div>
-            <div className="mt-5 rounded-2xl border border-white/20 bg-black/15 px-4 py-4 text-sm text-stone-100/90">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
-                Visit
-              </p>
-              <p className="mt-2 leading-7">
-                {BUSINESS.address.street}
-                <br />
-                {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
-              </p>
+            <div className="mt-5 overflow-hidden rounded-2xl border border-white/20 bg-black/15">
+              <div className="p-4 text-sm text-stone-100/90">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                  Visit
+                </p>
+                <p className="mt-2 leading-7">
+                  {BUSINESS.address.street}
+                  <br />
+                  {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
+                </p>
+              </div>
+              <iframe
+                title="Google Maps Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.864319665551!2d-95.1458909!3d29.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409de6c3e98b0b%3A0x7d2cb6bb1af1f1a5!2sSusie&#39;s%20Jewelry%20Repair!5e0!3m2!1sen!2sus!4v1714151700147!5m2!1sen!2sus"
+                width="100%"
+                height="220"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale-[30%] contrast-[1.1] opacity-90 transition-all hover:grayscale-0 hover:opacity-100"
+              />
             </div>
           </aside>
         </div>

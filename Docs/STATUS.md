@@ -6,11 +6,12 @@ Update cadence: weekly (or after major milestones).
 
 ## Current Focus
 - Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
-- **Next action:** Deploy to production → verify production gate → if service page still >2500ms, implement Suspense streaming for below-fold sections on `/services/[slug]`.
+- **Next action:** Execute Critical Shell refactor on `/` and `/services/[slug]` (keep Hero + `SiteHeader` in initial HTML flush, move all below-fold blocks into one streamed `<Suspense>` boundary), then re-run the production 10-run p75 gate.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
 ## Recent Milestones (Today)
+- **Production Perf Gate Evidence Refresh**: Re-ran the canonical 10-run p75 production gate with strict thresholds (`LCP<=2500ms`, `SEO=100`). Result: **Fail** on `/` and `/services/ring-sizing`; `/blog/ring-sizing-guide` passes LCP.
 - **Domain + SSL Live**: Cloudflare DNS now points to Vercel (`A @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`) and SSL is active for `susiesjewelryrepair.com` + `www`.
 - **Canonical Guardrail Live**: Apex-to-www permanent redirect shipped in `next.config.ts`.
 - **Lighthouse Gate Automation**: Added production 3-run mobile gate at `scripts/perf/launch-performance-gate.mjs` with `npm run perf:gate`.
@@ -18,13 +19,35 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Verified Metrics (2026-02-24)
-- Source: `.health/perf-gate-2026-02-24T22-03-49-377Z/summary.json` (`Performance gate passed`)
-- `/`: `perf=95`, `seo=100`, `lcp=2480ms`
-- `/services/ring-sizing`: `perf=96`, `seo=100`, `lcp=2454ms`
-- `/blog/ring-sizing-guide`: `perf=97`, `seo=100`, `lcp=2481ms`
+## Latest Gate Metrics (2026-02-27 CST / 2026-02-28 UTC)
+- Source: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json` (`Performance gate failed`)
+- Config: 10 runs, p75 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
+- `/`: `perf=96`, `seo=100`, `lcp=2738ms`, `tbt=294ms`
+- `/services/ring-sizing`: `perf=95`, `seo=100`, `lcp=2836ms`, `tbt=270ms`
+- `/blog/ring-sizing-guide`: `perf=98`, `seo=100`, `lcp=2331ms`, `tbt=90ms`
+- Failed paths: `/`, `/services/ring-sizing`
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-01 16:30:00 -06:00` **Website SEO & AEO Audit + Execution Pass**:
+  - Conducted a full SEO/AEO audit focusing on Answer Engine Optimization, Local SEO, E-E-A-T, and Content gaps. Full report generated in agent artifacts.
+  - **AEO & Technical SEO:** Converted all FAQ `<div>` wrappers to semantic `<h3>` elements for better AI scraper direct-answer extraction.
+  - **Schema:** Injected `Review` and `AggregateRating` schema into `src/lib/schema.ts` and `src/components/local-business-schema.tsx`.
+  - **Local Prominence:** Embedded a true Google Maps iframe into `src/app/contact/page.tsx` aside.
+  - **E-E-A-T & Trust:** Rebuilt the `/about` page team section into an authentic "Behind the Bench" workshop craftsmanship module to protect founder privacy. Configured path `public/images/about/storefront.jpg` for user's authentic storefront picture.
+  - **Content Expansion:** Authored and injected 5 new hyper-local voice-search optimized articles into `src/lib/blog.ts`.
+  - **Verification:** `npm run build` executed and passed cleanly.
+  - **Codex Handoff:**
+    1. Verify file `public/images/about/storefront.jpg` exists (from user upload).
+    2. Review the new blog content and updated `About` page locally.
+    3. Push changes to `main` to trigger the Vercel production deployment.
+- `2026-02-27 22:23:59 -06:00` Production gate verification refresh:
+  - command: `node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 10 --percentile 75 --lcp-threshold-ms 2500 --seo-threshold 100`
+  - artifact: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`
+  - result: gate `pass=false`; failed paths: `/`, `/services/ring-sizing`.
+  - p75 baseline deltas vs prior run (`.health/perf-gate-2026-02-27T00-23-39-026Z/summary.json`):
+    - `/`: `2738ms` vs `2691ms` (`+47ms`)
+    - `/services/ring-sizing`: `2836ms` vs `2847ms` (`-11ms`)
+    - `/blog/ring-sizing-guide`: `2331ms` vs `2369ms` (`-38ms`)
 - `2026-02-24 16:26:33 -06:00` Booking availability hardening shipped:
   - UI upgraded from free-form time input to constrained 15-minute slot dropdown based on selected date/day.
   - enforced schedule in booking UI: Mon-Fri `10:00-17:00`, Sat `10:00-15:00`, Sun closed.

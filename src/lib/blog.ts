@@ -306,6 +306,173 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
   },
+  {
+    slug: "cost-to-resize-gold-ring-pasadena",
+    title: "How much does it cost to resize a gold ring in Pasadena?",
+    excerpt: "A local guide to gold ring resizing costs, timing, and what factors influence the price of a safe, invisible resize.",
+    image: "/images/blog/ring-sizing-guide-cover.jpg",
+    topics: ["Ring Care", "Pricing & Timing"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "4 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Starting cost for a basic 14k gold sizing down usually ranges around $45-$65.",
+      "Sizing up requires adding matching gold, increasing the price based on width and ring size.",
+      "Settings and side stones add complexity, requiring a professional assessment before pricing."
+    ],
+    sections: [
+      {
+        heading: "What factors affect ring resizing costs?",
+        body: [
+          "The cost to resize a gold ring in Pasadena depends on three main factors: whether you are sizing up or down, the thickness of the band, and how many stones the ring has. Sizing down is typically more affordable because we remove metal and reseal the band. Sizing up requires us to carefully cut the shank, add a matching piece of gold, and weld it seamlessly.",
+          "Because gold prices fluctuated, the amount of new metal required will directly impact the total cost. Most simple sizing jobs start around $45-$65, but can increase if the ring is extremely wide or requires complex blending."
+        ]
+      },
+      {
+        heading: "Are all gold rings safe to resize?",
+        body: [
+          "Most standard 10k, 14k, and 18k yellow or white gold rings can be safely resized. However, rings with full eternity bands (diamonds going all the way around) or extremely intricate vintage patterns might warp or lose their stones if stretched or compressed.",
+          "At Susie's Jewelry Repair on Fairmont Pkwy, we inspect every ring under magnification before giving a quote to ensure the structural integrity of your piece won't be compromised."
+        ]
+      }
+    ],
+    relatedServiceSlugs: ["ring-sizing", "stone-setting"]
+  },
+  {
+    slug: "can-a-severely-bent-ring-prong-be-fixed",
+    title: "Can a severely bent ring prong be fixed, or do I need a new setting?",
+    excerpt: "Discover when a bent prong can be safely repaired and when replacing the entire setting is the only way to save your diamond.",
+    image: "/images/blog/stone-security-checklist-cover.jpg",
+    topics: ["Stone Safety", "Ring Care"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "A slightly bent prong can often be carefully pushed back into place by a master jeweler.",
+      "If the metal is torn, fatigued, or cracked, pushing it back will cause it to snap.",
+      "Re-tipping or rebuilding the prong is a safe, cost-effective alternative to replacing the whole head."
+    ],
+    sections: [
+      {
+        heading: "Can a severely bent ring prong be fixed?",
+        body: [
+          "If your prong is severely bent, do not try to bend it back yourself. Often, a severely bent prong can be repaired in our shop using a technique called re-tipping, where we melt new gold or platinum onto the worn or bent area to rebuild its strength.",
+          "However, if the metal has suffered severe stress or micro-cracks from the impact, simply pushing it back will cause it to snap later. A master jeweler must assess the metal's fatigue."
+        ]
+      },
+      {
+        heading: "When do I need a completely new setting?",
+        body: [
+          "If multiple prongs are missing, or the base of the setting (the 'head') is crushed or structurally compromised, rebuilding individual prongs may cost more than starting fresh. In these cases, we recommend replacing the entire head to ensure your center diamond is 100% secure.",
+          "Stop by our Pasadena location for a free microscope inspection if you suspect your prong is compromised."
+        ]
+      }
+    ],
+    relatedServiceSlugs: ["stone-setting", "custom-design"]
+  },
+  {
+    slug: "where-to-get-watch-battery-replaced-pasadena",
+    title: "Where to get a watch battery replaced today near Deer Park / Pasadena?",
+    excerpt: "Looking for same-day watch battery replacement in Pasadena? Here is what you need to know about our fast, in-house service.",
+    image: "/images/blog/watch-battery-replacement-cover.jpg",
+    topics: ["Watch Service", "Pricing & Timing"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "3 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Susie's Jewelry Repair offers same-day and while-you-wait watch battery replacements.",
+      "We stock batteries for 99% of quartz watches, from everyday brands to luxury timepieces.",
+      "Our service always includes a seal check to protect against moisture damage."
+    ],
+    sections: [
+      {
+        heading: "Where can I get a watch battery replaced today in Pasadena?",
+        body: [
+          "If your quartz watch has stopped ticking, you can get a same-day battery replacement at Susie's Jewelry Repair, conveniently located near the Deer Park and Pasadena border on Fairmont Pkwy. We handle everything from basic fashion watches to high-end Swiss quartz models.",
+          "Unlike mall kiosks, our master craftsmen carefully open the case back to prevent scratching, swap in a fresh, high-quality battery, and ensure the internal gaskets are properly seated before closing."
+        ]
+      },
+      {
+        heading: "Do you pressure test water-resistant watches?",
+        body: [
+          "For standard everyday wear, our visual seal check ensures basic splash resistance. If your watch is a professional dive watch and you plan on submerging it, we recommend discussing a full pressure test and reseal with our team to guarantee its original depth rating."
+        ]
+      }
+    ],
+    relatedServiceSlugs: ["watch-repair"]
+  },
+  {
+    slug: "safe-to-clean-vintage-diamond-ring-at-home",
+    title: "Is it safe to clean my vintage diamond ring with household products?",
+    excerpt: "Vintage rings are delicate. Learn which household cleaners are safe, which will destroy your metals, and how to safely restore the sparkle.",
+    image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
+    topics: ["Cleaning & Polish", "Heirloom Care"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "4 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Mild dish soap and warm water are the only consistently safe household cleaners for vintage jewelry.",
+      "Harsh chemicals like bleach and ammonia can cause gold alloys to stress-crack and break.",
+      "Vintage settings often have hidden wear, making aggressive scrubbing risky."
+    ],
+    sections: [
+      {
+        heading: "Is it safe to clean my vintage diamond ring with household products?",
+        body: [
+          "It is generally safe to clean a vintage diamond ring with a few drops of mild dish soap and warm water, using a very soft baby toothbrush. However, you should never use bleach, chlorine, acetone, or harsh household degreasers. These chemicals can cause the alloys in gold to break down, resulting in stress cracks that can literally shatter your prongs.",
+          "Vintage rings are exceptionally vulnerable because the metal has experienced decades of wear, making the prongs thinner and more brittle than modern rings."
+        ]
+      },
+      {
+        heading: "When should I bring it to a professional?",
+        body: [
+          "If your vintage ring features intricate filigree, foil-backed stones, or soft gemstones like pearls and opals, skip the home cleaning entirely. Bring it into our Pasadena workshop. We use specialized, non-destructive cleaning techniques that remove decades of grime without putting weak structural points at risk."
+        ]
+      }
+    ],
+    relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"]
+  },
+  {
+    slug: "heirloom-jewelry-restoration-repair-or-redesign",
+    title: "Heirloom Jewelry Restoration: Should I Repair It or Redesign It?",
+    excerpt: "Deciding what to do with inherited jewelry? We break down the structural and sentimental factors of repairing versus redesigning.",
+    image: "/images/blog/heirloom-restoration-planning-guide-cover.jpg",
+    topics: ["Heirloom Care", "Custom Design"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "5 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Repairing is ideal when the piece's history is the most important factor and the structure is salvageable.",
+      "Redesigning is best if the piece is severely damaged, out of style, or not wearable for your lifestyle.",
+      "You can often reuse the original stones and gold to keep the sentimental value intact during a redesign."
+    ],
+    sections: [
+      {
+        heading: "Should I repair or redesign my inherited jewelry?",
+        body: [
+          "The decision to repair or redesign comes down to structural integrity and personal taste. If the ring is in relatively good condition and you love the vintage aesthetic, a thorough restoration (re-tipping prongs, reinforcing the shank, and deep cleaning) will preserve its history perfectly.",
+          "However, if the metal is paper-thin, severely cracked, or the style sits in a jewelry box because it isn’t to your taste, a redesign is the smarter choice. At Susie's, we can melt down the original gold and use the inherited family diamonds to craft a brand-new, modern piece that you will actually wear."
+        ]
+      },
+      {
+        heading: "How does the custom redesign process work?",
+        body: [
+          "We start with a free consultation at our Pasadena shop. We'll inspect your heirloom stones, sketch out a design that fits your lifestyle, and walk you through 3D models before casting. This ensures you get a durable, stunning piece while keeping the family legacy alive."
+        ]
+      }
+    ],
+    relatedServiceSlugs: ["heirloom-restoration", "custom-design"]
+  }
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

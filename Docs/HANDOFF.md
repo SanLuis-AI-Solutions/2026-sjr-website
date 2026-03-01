@@ -2,6 +2,13 @@
 
 ## Session Update — February 27, 2026
 - **Date**: 2026-02-27
+- **Time**: 22:23:59 -06:00 (CST)
+- **Context/Notes**: Ran production 10-run p75 Lighthouse gate (`scripts/perf/launch-performance-gate.mjs`) against canonical domain. Gate remains red on Home + Ring Sizing due to LCP jitter above 2500ms while SEO holds at 100. Baseline snapshot: `/` LCP `2738ms`, `/services/ring-sizing` LCP `2836ms`, `/blog/ring-sizing-guide` LCP `2331ms`. Next required optimization is the Critical Shell refactor (hero/header in first flush, all below-fold sections in a single Suspense stream boundary) on `/` and `/services/[slug]`.
+- **Agent Name**: Codex
+- Latest perf gate artifact: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`
+
+## Session Update — February 27, 2026
+- **Date**: 2026-02-27
 - **Time**: 21:54:05 -06:00 (CST)
 - **Context/Notes**: Implemented cinematic product-first Hero direction: ring-dominant mobile framing, narrowed text footprint, left-side editorial veil, and stronger luxury lighting/CTA hierarchy to improve first-glance visual impact.
 - **Agent Name**: Codex

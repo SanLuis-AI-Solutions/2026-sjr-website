@@ -310,7 +310,46 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14" aria-labelledby="about-visit">
+      <section className="bg-white py-14" aria-labelledby="about-workshop">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Inside the workshop</p>
+          <h2
+            id="about-workshop"
+            className="reveal-on-scroll mt-3 text-balance font-serif text-[2rem] leading-[1.2] text-stone-900 md:text-3xl"
+          >
+            Authentic, in-house craftsmanship.
+          </h2>
+          <p className="reveal-on-scroll mt-4 text-[15px] leading-7 text-stone-700 max-w-2xl">
+            We are a family of jewelers spanning three generations. When you drop off a piece, it never leaves our sight. We prefer to let our work speak for itself—no outsourced labor, just authentic local dedication at our Pasadena workshop.
+          </p>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { title: "Master Craftsmanship", desc: "Hands at work on a detailed repair", image: "/images/about/master-craftsmanship.png" },
+              { title: "The Jeweler's Bench", desc: "Precision tools and equipment", image: "/images/about/jewelers-bench.png" },
+              { title: "Our Local Storefront", desc: "Serving Pasadena & Deer Park", image: "/images/about/storefront.jpg" }
+            ].map((item, index) => (
+              <article key={item.title} className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} group relative overflow-hidden rounded-2xl border border-stone-200 bg-stone-50`}>
+                <div className="aspect-[3/4] w-full bg-stone-200 relative overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </div>
+                <div className="relative z-10 -mt-1 p-5 border-t border-stone-100 bg-white shadow-sm">
+                  <h3 className="font-serif text-xl text-stone-900">{item.title}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-brand-gold">{item.desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-stone-50 py-14" aria-labelledby="about-visit">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
           <h2
