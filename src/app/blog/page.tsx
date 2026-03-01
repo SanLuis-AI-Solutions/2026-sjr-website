@@ -107,6 +107,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   alt={featuredPost.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 58vw"
+                  priority
+                  loading="eager"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
