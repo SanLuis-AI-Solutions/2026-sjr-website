@@ -22,9 +22,17 @@ export function ScrollRevealManager() {
 
     root.classList.remove("reveal-disabled");
 
-    const init = () => {
-      root.classList.add("reveal-ready");
+    const markInitiallyVisible = (elements: HTMLElement[]) => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= viewportHeight * 0.95 && rect.bottom >= 0) {
+          el.classList.add("reveal-visible");
+        }
+      });
+    };
 
+    const init = () => {
       const prefersReduced =
         window.matchMedia &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -36,14 +44,20 @@ export function ScrollRevealManager() {
       if (elements.length === 0) return;
 
       if (prefersReduced) {
+        root.classList.add("reveal-ready");
         elements.forEach((el) => el.classList.add("reveal-visible"));
         return;
       }
 
       if (typeof IntersectionObserver === "undefined") {
+        root.classList.add("reveal-ready");
         elements.forEach((el) => el.classList.add("reveal-visible"));
         return;
       }
+
+      // Prevent post-hydration flash by pre-marking above-fold reveal targets.
+      markInitiallyVisible(elements);
+      root.classList.add("reveal-ready");
 
       const observer = new IntersectionObserver(
         (entries) => {
