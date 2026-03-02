@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Suspense, type ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
-import { BUSINESS, SERVICES } from "@/lib/constants";
+import { BUSINESS, SERVICES, SERVICE_MOBILE_HERO_IMAGE_BY_SLUG } from "@/lib/constants";
 import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
@@ -1240,9 +1240,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const visualSet = buildServiceVisualSet(slug, service.name, heroImageSrc, isWatchRepair);
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
-  const mobileHeroImageSrc =
-    slug === "ring-sizing" ? "/images/services/ring-sizing-hero-mobile.avif" : null;
-  const lcpHeroImageSrc = mobileHeroImageSrc || heroImageSrc;
+  const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
   const howItWorksSupportCopy = isWatchRepair
     ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
@@ -1574,16 +1572,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
           <div className="relative order-1 md:order-2">
             <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
-              <Image
-                src={lcpHeroImageSrc}
-                alt={service.name}
-                priority
-                fetchPriority="high"
-                width={800}
-                height={540}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="h-full w-full object-cover"
-              />
+              <picture>
+                {mobileHeroImageSrc ? (
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={mobileHeroImageSrc}
+                    type="image/avif"
+                  />
+                ) : null}
+                <Image
+                  src={heroImageSrc}
+                  alt={service.name}
+                  priority={!mobileHeroImageSrc}
+                  loading={mobileHeroImageSrc ? "eager" : undefined}
+                  fetchPriority="high"
+                  width={800}
+                  height={540}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="h-full w-full object-cover"
+                />
+              </picture>
               <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
               <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
             </div>

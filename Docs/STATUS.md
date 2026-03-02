@@ -5,8 +5,8 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
-- **Next action:** Fix the `/contact` LCP outlier and remove recurring global accessibility failures (`color-contrast`, footer heading-order), then rerun full-site audit snapshot.
+- SEO Step 6 service-mobile-hero pilot is live on production (`2026-03-02`) with verified mobile-vs-desktop hero source routing.
+- **Next action:** run targeted LCP root-cause remediation for `/services/ring-sizing`, `/services/watch-repair`, and `/contact` (current production guardrail outlier), then rerun 5-run p50 gate.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -19,17 +19,72 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Gate Metrics (2026-03-01 CST / 2026-03-02 UTC)
-- Source: `.health/perf-gate-2026-03-02T01-50-34-669Z/summary.json` (`Performance gate failed`)
-- Config: 10 runs, p75 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/`: `perf=94`, `seo=100`, `lcp=2692ms`, `tbt=178ms`
-- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2740ms`, `tbt=173ms`
-- Failed paths: `/`, `/services/ring-sizing`
-- p75 delta vs prior 10-run baseline (`.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`):
-  - `/`: `2692ms` vs `2738ms` (`-46ms`)
-  - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
+## Latest Gate Metrics (2026-03-02 CST)
+- Source: `.health/perf-gate-2026-03-02T22-39-15-498Z/summary.json` (`Performance gate failed`)
+- Config: 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
+- `/services/ring-sizing`: `perf=90`, `seo=100`, `lcp=3123ms`, `tbt=103ms`
+- `/services/watch-repair`: `perf=88`, `seo=100`, `lcp=3199ms`, `tbt=197ms`
+- `/services/custom-design`: `perf=95`, `seo=100`, `lcp=2826ms`, `tbt=67ms`
+- Failed paths: all 3 checked pilot service routes
+- p50 delta vs Step 5 baseline (`.health/perf-gate-2026-03-02T21-51-16-231Z/summary.json`):
+  - `/services/ring-sizing`: `3123ms` vs `2980ms` (`+143ms`)
+  - `/services/watch-repair`: `3199ms` vs `3050ms` (`+149ms`)
+  - `/services/custom-design`: `2826ms` vs `2902ms` (`-76ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 16:54:57 -06:00` **SEO Step 6 deployed to Production + verified (service mobile-hero pilot, balanced quality)**:
+  - Implemented pilot mobile hero optimization workflow for 3 service routes (`ring-sizing`, `watch-repair`, `custom-design`) with no layout/style redesign:
+    - `scripts/perf/generate-mobile-hero-avif.mjs` now supports `--slugs` and balanced defaults (`720px`, `35-55KB`) with manifest output.
+    - generated pilot assets:
+      - `public/images/services/ring-sizing-hero-mobile.avif`
+      - `public/images/services/watch-repair-hero-mobile.avif`
+      - `public/images/services/custom-design-hero-mobile.avif`
+      - manifest: `.health/service-mobile-hero-manifest-step6-pilot.json`
+    - added explicit pilot routing map in `src/lib/constants.ts`:
+      - `SERVICE_MOBILE_HERO_IMAGE_BY_SLUG`
+    - updated `src/app/services/[slug]/page.tsx` hero source selection:
+      - mobile uses AVIF pilot source
+      - desktop/tablet keeps existing desktop hero source
+      - preserved current hero composition/CTA styling and responsive sizing behavior.
+  - Build verification:
+    - `npm run build` PASS.
+  - Local QA verification:
+    - pilot smoke artifact: `.health/service-hero-local-smoke-step6.json`
+    - required visual screenshots captured:
+      - `.health/screenshots/step6-service-pilot/*`
+    - local About-page layout confirmation:
+      - `.health/about-local-layout-check-step6.json`
+      - screenshots: `.health/screenshots/about-local/about-390x844.png`, `.health/screenshots/about-local/about-1440x900.png`
+  - Production deploy:
+    - URL: `https://sjr-new-website-aiproject-lwar1vjil.vercel.app`
+    - Inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/8KhnAvHj1ZEpgU46brhHq4rRvSAn`
+    - Alias: `https://susiesjewelryrepair.com`
+    - production smoke: `.health/service-hero-prod-smoke-step6.json` (mobile-vs-desktop hero routing verified, no network/image errors)
+  - Production perf gate (5-run p50) vs Step 5 baseline:
+    - baseline source:
+      - `.health/perf-gate-2026-03-02T21-51-16-231Z/summary.json`
+    - post-deploy runs:
+      - `.health/perf-gate-2026-03-02T22-31-49-882Z/summary.json`
+      - `.health/perf-gate-2026-03-02T22-39-15-498Z/summary.json` (latest)
+    - latest p50 LCP deltas:
+      - `/services/ring-sizing`: `2980ms -> 3123ms` (`+143ms`)
+      - `/services/watch-repair`: `3050ms -> 3199ms` (`+149ms`)
+      - `/services/custom-design`: `2902ms -> 2826ms` (`-76ms`)
+    - SEO remained `100` on all pilot routes.
+  - Guardrail checks:
+    - step-6 single-run artifacts:
+      - `.health/prod-lh-step6-guard-about.json`
+      - `.health/prod-lh-step6-guard-contact.json`
+      - `.health/prod-lh-step6-guard-contact-rerun2.json`
+    - 3-run p50 guard artifact:
+      - `.health/perf-gate-2026-03-02T22-49-39-525Z/summary.json`
+    - `/about` remained near baseline; `/contact` showed significant current lab LCP regression and needs dedicated remediation.
+  - Acceptance status:
+    - quality guardrails: PASS
+    - performance target (`>=250ms` improvement on at least 2/3): FAIL
+    - guardrail target (`/about` + `/contact` stable): FAIL (contact outlier)
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-6-service-mobile-hero-pilot.md`.
 - `2026-03-02 15:59:00 -06:00` **SEO Step 5 deployed to Production + verified (shared service-template LCP pass)**:
   - Implemented shared service-route optimization in two fast iterations:
     - content fetch policy hardening for public pages:

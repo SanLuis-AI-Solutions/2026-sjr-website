@@ -20,6 +20,12 @@ export const BUSINESS = {
   serviceAreas: ["Pasadena", "Deer Park", "La Porte", "Houston Area"],
 };
 
+export const SERVICE_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
+  "ring-sizing": "/images/services/ring-sizing-hero-mobile.avif",
+  "watch-repair": "/images/services/watch-repair-hero-mobile.avif",
+  "custom-design": "/images/services/custom-design-hero-mobile.avif",
+};
+
 export const SERVICES = [
   {
     slug: "watch-repair",
