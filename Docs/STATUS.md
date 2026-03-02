@@ -30,6 +30,28 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 14:39:18 -06:00` **SEO Easy Wins Step 2 deployed to Production + verified**:
+  - Deploy command: `npx vercel --prod --yes`
+  - Deployment:
+    - URL: `https://sjr-new-website-aiproject-99ke7uyga.vercel.app`
+    - Inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/36Y1cPjMZRvNN9FgoNkMnSNt9Qu4`
+    - Alias: `https://susiesjewelryrepair.com` (canonical redirect to `https://www.susiesjewelryrepair.com`).
+  - Production verification:
+    - home canonical now present: `https://www.susiesjewelryrepair.com`.
+    - About storefront image path present on `/about`, and `https://susiesjewelryrepair.com/images/about/storefront.jpg` returns `200`.
+    - sitemap continuity preserved: `LOC_TOTAL=33`, blog detail entries `=14`.
+    - production Lighthouse accessibility spot-checks all clean:
+      - `/`, `/contact`, `/services/ring-sizing`, `/blog` each returned:
+        - `a11y=100`
+        - `heading-order=1`
+        - `color-contrast=1`
+      - artifacts:
+        - `.health/prod-lh-easywins-home.json`
+        - `.health/prod-lh-easywins-contact.json`
+        - `.health/prod-lh-easywins-ring-sizing.json`
+        - `.health/prod-lh-easywins-blog.json`
+  - Artifact updated:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-2-easy-wins.md`.
 - `2026-03-02 14:34:41 -06:00` **SEO Easy Wins Step 2 Completed (Metadata + Accessibility Contrast/Heading Order)**:
   - Implemented metadata/canonical quick wins:
     - added explicit home canonical in `src/app/page.tsx`.

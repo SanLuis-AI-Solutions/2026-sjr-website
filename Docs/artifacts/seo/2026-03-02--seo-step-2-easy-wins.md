@@ -75,5 +75,38 @@ Note: Lighthouse emitted known Windows temp cleanup `EPERM` messages post-run, b
 - Easy-win accessibility backlog items (`heading-order` and key recurring `color-contrast` regressions) are resolved in local production-build validation.
 - Metadata/canonical quick wins are implemented and build-verified.
 
+## Production Deploy + Verification
+- Deploy command:
+  - `npx vercel --prod --yes`
+- Deployment URL:
+  - `https://sjr-new-website-aiproject-99ke7uyga.vercel.app`
+- Alias:
+  - `https://susiesjewelryrepair.com` (redirects to canonical `https://www.susiesjewelryrepair.com`)
+
+### Production checks
+- Home canonical:
+  - `https://www.susiesjewelryrepair.com`
+- About storefront:
+  - `/about` contains `/images/about/storefront.jpg`
+  - `https://susiesjewelryrepair.com/images/about/storefront.jpg` returns `200`
+- Sitemap continuity:
+  - total `<loc>` entries: `33`
+  - blog detail entries: `14`
+
+### Production Lighthouse accessibility spot-check
+Artifacts:
+- `.health/prod-lh-easywins-home.json`
+- `.health/prod-lh-easywins-contact.json`
+- `.health/prod-lh-easywins-ring-sizing.json`
+- `.health/prod-lh-easywins-blog.json`
+
+Results:
+- `/`: `a11y=100`, `heading-order=1`, `color-contrast=1`
+- `/contact`: `a11y=100`, `heading-order=1`, `color-contrast=1`
+- `/services/ring-sizing`: `a11y=100`, `heading-order=1`, `color-contrast=1`
+- `/blog`: `a11y=100`, `heading-order=1`, `color-contrast=1`
+
+Note: Lighthouse emitted known Windows temp cleanup `EPERM` messages post-run, but JSON artifacts were generated and parsed successfully.
+
 ## Next Priority (Longer Work)
 - Remediate `/contact` LCP outlier (largest remaining issue from full-site audit).
