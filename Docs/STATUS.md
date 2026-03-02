@@ -30,6 +30,27 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 14:53:46 -06:00` **SEO Step 3 Completed (Contact LCP Outlier Remediation - local verified)**:
+  - Implemented quick, low-risk `/contact` performance fixes:
+    - moved Google Maps iframe out of the above-fold hero panel and into a below-fold map block.
+    - kept immediate map utility via above-fold `Open in Google Maps` outbound link.
+    - disabled scroll-reveal animations on `/contact` (`src/components/scroll-reveal-manager.tsx`).
+    - extracted below-fold contact content into async deferred section rendered under `<Suspense fallback={null}>`.
+    - added `cv-section` containment to deferred section.
+    - applied hero heading `lcp-heading` class and removed non-critical hero visual effects (pattern overlay + chip blur).
+  - Verification:
+    - `npm run build` PASS.
+    - local `/contact` smoke markers PASS (`H1`, form, map section, map link, iframe present).
+    - local Lighthouse before/after (`/contact`):
+      - Performance: `74 -> 95` (`+21`)
+      - LCP: `5282ms -> 2763ms` (`-2519ms`)
+      - FCP: `2980ms -> 1442ms` (`-1538ms`)
+      - TBT: `119ms -> 102ms` (`-17ms`)
+      - artifacts:
+        - `.health/lh-contact-baseline-local-full.json`
+        - `.health/lh-contact-after2-local-full.json`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-3-contact-lcp.md`.
 - `2026-03-02 14:39:18 -06:00` **SEO Easy Wins Step 2 deployed to Production + verified**:
   - Deploy command: `npx vercel --prod --yes`
   - Deployment:

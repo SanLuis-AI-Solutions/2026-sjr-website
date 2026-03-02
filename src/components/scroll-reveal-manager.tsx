@@ -12,7 +12,10 @@ export function ScrollRevealManager() {
 
     // Keep key SEO/performance routes static to reduce above-the-fold main-thread work.
     const disableRevealForRoute =
-      pathname === "/" || pathname.startsWith("/services") || pathname.startsWith("/blog");
+      pathname === "/" ||
+      pathname === "/contact" ||
+      pathname.startsWith("/services") ||
+      pathname.startsWith("/blog");
 
     if (disableRevealForRoute) {
       root.classList.remove("reveal-ready");
