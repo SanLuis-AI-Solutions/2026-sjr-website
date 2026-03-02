@@ -118,7 +118,11 @@ function mergeServiceRecord(fallback: ServiceRecord, record: ServiceRecord | nul
 
 export const getServices = cache(async function getServices() {
   try {
-    const data = await supabaseGet("services", "?select=*&active=eq.true&order=priority.asc");
+    const data = await supabaseGet(
+      "services",
+      "?select=*&active=eq.true&order=priority.asc",
+      { revalidate: 3600, tags: ["content:services"] }
+    );
     if (!Array.isArray(data) || data.length === 0) return SERVICES;
 
     const bySlug = new Map(data.map((item) => [item.slug, item]));
@@ -136,7 +140,8 @@ export const getServiceBySlug = cache(async function getServiceBySlug(slug: stri
   try {
     const data = await supabaseGet(
       "services",
-      `?select=*&slug=eq.${encodeURIComponent(slug)}&limit=1`
+      `?select=*&slug=eq.${encodeURIComponent(slug)}&limit=1`,
+      { revalidate: 3600, tags: [`content:service:${slug}`] }
     );
     if (Array.isArray(data) && data[0]) {
       const fallback = SERVICES.find((service) => service.slug === slug);
@@ -153,7 +158,8 @@ export const getFaqsByService = cache(async function getFaqsByService(slug: stri
   try {
     const data = await supabaseGet(
       "faqs",
-      `?select=*&service_slug=eq.${encodeURIComponent(slug)}&active=eq.true&order=priority.asc`
+      `?select=*&service_slug=eq.${encodeURIComponent(slug)}&active=eq.true&order=priority.asc`,
+      { revalidate: 3600, tags: [`content:faqs:${slug}`] }
     );
     if (Array.isArray(data)) return data;
   } catch {
