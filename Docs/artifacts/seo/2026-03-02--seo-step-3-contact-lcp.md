@@ -54,3 +54,37 @@ Note: Lighthouse emitted known Windows temp cleanup `EPERM` warnings post-run, b
 
 ## Expected Production Impact
 - Significant reduction of the `/contact` LCP outlier by prioritizing text-first paint and deferring non-critical/interactive blocks.
+
+## Production Deploy + Verification
+- Deploy command:
+  - `npx vercel --prod --yes`
+- Deployment URL:
+  - `https://sjr-new-website-aiproject-o7i4d7qz1.vercel.app`
+- Alias:
+  - `https://susiesjewelryrepair.com` (canonical `https://www.susiesjewelryrepair.com`)
+
+### Production Lighthouse spot-check
+Artifacts:
+- `.health/prod-lh-contact-after-step3.json`
+- `.health/prod-lh-home-after-step3.json`
+
+Results:
+- `/contact`:
+  - Performance: `97`
+  - Accessibility: `100`
+  - SEO: `100`
+  - LCP: `2402ms`
+  - FCP: `1420ms`
+  - TBT: `113ms`
+- `/`:
+  - Performance: `93`
+  - Accessibility: `100`
+  - SEO: `100`
+  - LCP: `2486ms`
+
+Comparison to prior full-site audit contact baseline:
+- Prior `/contact` LCP (audit): `5411ms`
+- Current `/contact` LCP: `2402ms`
+- Delta: `-3009ms`
+
+Note: Lighthouse emitted known Windows temp cleanup `EPERM` warnings post-run, but reports were generated and parsed successfully.
