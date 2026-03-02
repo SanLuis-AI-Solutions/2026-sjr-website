@@ -39,6 +39,13 @@ Update cadence: weekly (or after major milestones).
     - `npm run build` PASS.
     - Local `/sitemap.xml` check: `LOC_TOTAL=33`, `BLOG_DETAIL_LOC_COUNT=14`.
     - Local blog HTML check (`/blog/ring-sizing-guide`): `HAS_ARTICLE_SCHEMA=True`, `HAS_BREADCRUMB_SCHEMA=True`.
+  - Production deploy + verification:
+    - Deploy command: `npx vercel --prod --yes`
+    - Deployment URL: `https://sjr-new-website-aiproject-beg6nni55.vercel.app`
+    - Alias: `https://susiesjewelryrepair.com`
+    - Production `/sitemap.xml` check: `PROD_LOC_TOTAL=33`, `PROD_BLOG_DETAIL_LOC_COUNT=14`.
+    - Production blog schema check (`/blog/ring-sizing-guide`): `PROD_HAS_ARTICLE_SCHEMA=True`, `PROD_HAS_BREADCRUMB_SCHEMA=True`.
+    - All blog detail pages schema check: `total=14`, `missingArticle=0`, `missingBreadcrumb=0`.
   - Artifact:
     - `Docs/artifacts/seo/2026-03-02--seo-step-1-discoverability.md`.
 - `2026-03-02 13:49:00 -06:00` **Full Production Site Audit Refresh (Copilot/Gemini comparison pass)**:
