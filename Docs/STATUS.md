@@ -30,6 +30,41 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 15:59:00 -06:00` **SEO Step 5 deployed to Production + verified (shared service-template LCP pass)**:
+  - Implemented shared service-route optimization in two fast iterations:
+    - content fetch policy hardening for public pages:
+      - `src/lib/supabase/server.ts` now supports optional cached/revalidated reads.
+      - `src/lib/content.ts` service/faq reads now use `revalidate: 3600` + cache tags.
+    - shared hero image delivery optimization:
+      - `src/app/services/[slug]/page.tsx` removed local-image `unoptimized` override and added responsive `sizes`.
+  - Build verification:
+    - `npm run build` PASS.
+    - service route output now static/ISR-backed:
+      - `/services` -> `○` (`1h` revalidate)
+      - `/services/[slug]` -> `●` (`1h` revalidate)
+  - Production deploys:
+    - pass A: `https://sjr-new-website-aiproject-odyykqby7.vercel.app`
+      - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/n6yHi3zCsGwA3URfGFZGFEajrvKC`
+    - pass B: `https://sjr-new-website-aiproject-arfx0bgya.vercel.app`
+      - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/13DQXq9jfzq4RdRViGiBvz2QFiKr`
+    - alias: `https://susiesjewelryrepair.com`
+  - Production perf gate comparison (5-run p50):
+    - pre-hero pass artifact:
+      - `.health/perf-gate-2026-03-02T21-39-23-251Z/summary.json`
+    - post-hero pass artifact:
+      - `.health/perf-gate-2026-03-02T21-51-16-231Z/summary.json`
+    - p50 LCP deltas:
+      - `/services/ring-sizing`: `2982ms -> 2980ms` (`-2ms`)
+      - `/services/watch-repair`: `3423ms -> 3050ms` (`-373ms`)
+      - `/services/custom-design`: `2984ms -> 2902ms` (`-82ms`)
+    - gate remains failed against strict `<=2500ms` target on all 3 checked service routes; SEO remained `100`.
+  - Guardrail spot-check (post-step single-run):
+    - `/contact`: `perf=98`, `a11y=100`, `seo=100`, `lcp=2289ms`
+      - `.health/prod-lh-step5-guard-contact.json`
+    - `/about`: `perf=98`, `a11y=100`, `seo=100`, `lcp=2230ms`
+      - `.health/prod-lh-step5-guard-about.json`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-5-services-template-lcp.md`.
 - `2026-03-02 15:22:49 -06:00` **SEO Step 4 deployed to Production + verified (`/about` LCP optimization)**:
   - Implemented low-risk `/about` performance changes:
     - disabled reveal manager on `/about` (`src/components/scroll-reveal-manager.tsx`).
