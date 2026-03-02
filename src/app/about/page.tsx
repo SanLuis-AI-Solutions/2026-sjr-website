@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-end">
           <div className="reveal-on-scroll">
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">About</p>
-            <h1 className="mt-3 max-w-3xl text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-950 md:text-5xl">
+            <h1 className="lcp-heading mt-3 max-w-3xl text-balance text-[2.15rem] leading-[1.12] text-stone-950 md:text-5xl">
               Family craftsmanship, refined over four decades.
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-stone-700">
@@ -145,11 +145,11 @@ export default function AboutPage() {
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 45vw"
-                  className="object-cover animate-slow-zoom"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy-deep/58 via-transparent to-transparent" />
-                <div className="absolute bottom-5 left-5 rounded-xl border border-white/20 bg-black/35 px-4 py-3 backdrop-blur-sm">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                <div className="absolute bottom-5 left-5 rounded-xl border border-white/20 bg-black/35 px-4 py-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-stone-100">
                     Local workshop
                   </p>
                   <p className="mt-1 text-sm text-white">Pasadena, Texas</p>
@@ -182,12 +182,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-burgundy py-14" aria-labelledby="about-manifesto">
+      <section className="cv-section relative overflow-hidden bg-brand-burgundy py-14" aria-labelledby="about-manifesto">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,_rgba(209,184,130,0.22),_transparent_55%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_85%,_rgba(94,34,48,0.45),_transparent_58%)]" />
         <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div className="reveal-on-scroll">
-            <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Our manifesto</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-stone-100">Our manifesto</p>
             <h2 id="about-manifesto" className="mt-3 text-balance font-serif text-[2rem] leading-[1.18] text-white md:text-3xl">
               Premium care should feel precise, calm, and transparent.
             </h2>
@@ -199,7 +199,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-18 md:py-24">
+      <section className="cv-section relative overflow-hidden py-18 md:py-24">
         <div
           className="parallax-hero absolute inset-0 bg-cover bg-center"
           style={{
@@ -211,7 +211,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-burgundy/88 via-brand-burgundy/70 to-brand-burgundy-deep/78" />
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="reveal-on-scroll max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Legacy care</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-stone-100">Legacy care</p>
             <h2 className="mt-3 text-balance font-serif text-[2rem] leading-[1.2] text-white md:text-4xl">
               Some pieces carry generations of memory. We repair them accordingly.
             </h2>
@@ -223,7 +223,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-stone-50 py-14" aria-labelledby="about-standards">
+      <section className="cv-section bg-stone-50 py-14" aria-labelledby="about-standards">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our standards</p>
           <h2
@@ -246,7 +246,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14" aria-labelledby="about-process">
+      <section className="cv-section bg-white py-14" aria-labelledby="about-process">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
             <div className="reveal-on-scroll">
@@ -285,7 +285,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-stone-100 py-14" aria-labelledby="about-timeline">
+      <section className="cv-section bg-stone-100 py-14" aria-labelledby="about-timeline">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Our timeline</p>
           <h2
@@ -301,7 +301,7 @@ export default function AboutPage() {
                 key={item.year}
                 className={`reveal-on-scroll reveal-delay-${(index % 3) + 1} rounded-2xl border border-stone-200 bg-white p-5 shadow-sm`}
               >
-                <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">{item.year}</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">{item.year}</p>
                 <h3 className="mt-2 font-serif text-[1.45rem] leading-[1.2] text-stone-900 md:text-2xl">{item.title}</h3>
                 <p className="mt-2 text-[15px] leading-7 text-stone-700">{item.detail}</p>
               </article>
@@ -310,7 +310,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14" aria-labelledby="about-workshop">
+      <section className="cv-section bg-white py-14" aria-labelledby="about-workshop">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Inside the workshop</p>
           <h2
@@ -336,15 +336,14 @@ export default function AboutPage() {
                     alt={item.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    loading="lazy"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="relative z-10 -mt-1 p-5 border-t border-stone-100 bg-white shadow-sm">
                   <h3 className="font-serif text-xl text-stone-900">{item.title}</h3>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-brand-gold">{item.desc}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-brand-burgundy">{item.desc}</p>
                 </div>
               </article>
             ))}
@@ -352,7 +351,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-stone-50 py-14" aria-labelledby="about-visit">
+      <section className="cv-section bg-stone-50 py-14" aria-labelledby="about-visit">
         <div className="mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.35em] text-brand-burgundy">Visit us</p>
           <h2

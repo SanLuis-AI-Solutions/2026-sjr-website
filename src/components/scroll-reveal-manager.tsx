@@ -14,6 +14,7 @@ export function ScrollRevealManager() {
     const disableRevealForRoute =
       pathname === "/" ||
       pathname === "/contact" ||
+      pathname === "/about" ||
       pathname.startsWith("/services") ||
       pathname.startsWith("/blog");
 
