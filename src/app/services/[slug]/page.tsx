@@ -1581,7 +1581,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 fetchPriority="high"
                 width={800}
                 height={540}
-                unoptimized={lcpHeroImageSrc.startsWith("/images/")}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
