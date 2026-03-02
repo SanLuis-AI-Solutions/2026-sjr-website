@@ -203,7 +203,7 @@ export default async function ServicesPage() {
               </div>
 
               <div className="rounded-3xl border border-stone-200 bg-white/70 p-6 backdrop-blur-sm">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                   Typical turnaround
                 </div>
                 <div className="mt-2 font-serif text-2xl text-stone-900">
@@ -211,7 +211,7 @@ export default async function ServicesPage() {
                     "Same Day/Next Day service"}
                 </div>
                 <div className="mt-6 h-px bg-stone-200" />
-                <div className="mt-6 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                <div className="mt-6 text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                   Best for
                 </div>
                 <p className="mt-2 text-sm text-stone-600">

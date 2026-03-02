@@ -1112,10 +1112,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const location = `${BUSINESS.address.city}, ${BUSINESS.address.state}`;
-  const title = `${service.name} in ${location} | ${BUSINESS.name}`;
+  const title = `${service.name} | Jewelry Repair Pasadena, TX`;
   const summary = service.summary || service.short_summary || "";
-  const description = `${summary} Local, in-house service with transparent pricing and fast turnaround.`;
+  const description = `${summary} Local in-house repair in Pasadena with clear approvals, transparent pricing, and Same Day/Next Day service when applicable.`;
 
   return {
     title,
@@ -1629,7 +1628,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow">
                           {item.step}
                         </span>
-                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                        <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                           Step {item.step}
                         </div>
                       </div>
@@ -1657,7 +1656,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
               </div>
               <div className="px-6 py-6">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                   Typical turnaround
                 </div>
                 <div className="mt-2 font-serif text-2xl text-stone-900">
@@ -1810,7 +1809,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
               <div className="mt-10 grid gap-5 md:grid-cols-2">
                 <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                     Starting at
                   </div>
                   <div className="mt-2 font-serif text-2xl text-stone-900">
@@ -1821,7 +1820,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </p>
                 </div>
                 <div className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-500">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-stone-700">
                     Typical turnaround
                   </div>
                   <div className="mt-2 font-serif text-2xl text-stone-900">

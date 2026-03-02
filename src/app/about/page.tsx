@@ -6,7 +6,7 @@ import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "About Susie’s Jewelry Repair | Family-Owned In-House Craftsmanship",
+  title: "About Susie’s Jewelry Repair | In-House Family Craftsmanship",
   description:
     "Meet the family behind Susie’s Jewelry Repair in Pasadena, TX. Three generations, in-house service, and clear approvals on every repair.",
   alternates: {

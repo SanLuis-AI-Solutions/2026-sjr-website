@@ -9,7 +9,7 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
   description:
-    "Talk to our Pasadena in-house repair team. Call, email, or send a quick message for jewelry and watch service guidance.",
+    "Talk to our Pasadena in-house repair team by phone, email, or message for jewelry and watch service guidance, next steps, and appointment support.",
   alternates: {
     canonical: "/contact",
   },

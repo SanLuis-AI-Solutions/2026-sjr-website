@@ -30,6 +30,37 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 14:34:41 -06:00` **SEO Easy Wins Step 2 Completed (Metadata + Accessibility Contrast/Heading Order)**:
+  - Implemented metadata/canonical quick wins:
+    - added explicit home canonical in `src/app/page.tsx`.
+    - tuned title/description lengths on `/about`, `/faq`, `/quote`, `/book`, `/contact`, and `/terms`.
+    - tightened service detail dynamic metadata pattern in `src/app/services/[slug]/page.tsx`.
+  - Implemented accessibility quick wins with broad route impact:
+    - footer heading-order fix in `src/components/site-footer.tsx` (`h4` section labels replaced with non-heading labels).
+    - footer contrast/readability updates in `src/components/site-footer.tsx` and removed `cv-section` on footer.
+    - low-contrast micro-label token updates on light surfaces:
+      - `src/components/home-sections.tsx`
+      - `src/components/services-grid.tsx`
+      - `src/app/services/page.tsx`
+      - `src/app/services/[slug]/page.tsx`
+  - Verification:
+    - `npm run build` PASS.
+    - local Lighthouse accessibility spot checks (`next start`):
+      - `/`, `/quote`, `/services/ring-sizing`, `/blog`, `/about`, `/contact` all returned:
+        - `a11y=100`
+        - `heading-order=1`
+        - `color-contrast=1`
+      - artifacts:
+        - `.health/lh-easywins-home.json`
+        - `.health/lh-easywins-quote.json`
+        - `.health/lh-easywins-ring-sizing.json`
+        - `.health/lh-easywins-blog.json`
+        - `.health/lh-easywins-about.json`
+        - `.health/lh-easywins-contact.json`
+    - storefront image integrity check:
+      - `public/images/about/storefront.jpg` exists, size `4,692,042` bytes.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-2-easy-wins.md`.
 - `2026-03-02 14:13:31 -06:00` **SEO Discoverability Step 1 Completed (Blog Sitemap + Blog JSON-LD SSR)**:
   - Implemented sitemap expansion for blog content:
     - `src/app/sitemap.ts` now includes all blog detail URLs from `BLOG_POSTS`.

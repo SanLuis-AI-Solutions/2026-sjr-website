@@ -7,7 +7,7 @@ const UPDATED_DATE = "February 13, 2026";
 export const metadata: Metadata = {
   title: "Terms of Service | Susie’s Jewelry Repair",
   description:
-    "Read the website and service request terms for Susie’s Jewelry Repair, including booking and quote guidance.",
+    "Review the website and service request terms for Susie’s Jewelry Repair, including booking requests, quote ranges, repair timing, and communication expectations.",
   alternates: {
     canonical: "/terms",
   },

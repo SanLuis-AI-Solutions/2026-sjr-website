@@ -9,7 +9,7 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Fast Quote | Susie’s Jewelry Repair",
   description:
-    "Get a transparent starting-at quote for jewelry or watch repair from our in-house Pasadena team.",
+    "Get a transparent starting-at quote for jewelry or watch repair from our in-house Pasadena team, with photo-based guidance and a response within 1 business day.",
   alternates: {
     canonical: "/quote",
   },

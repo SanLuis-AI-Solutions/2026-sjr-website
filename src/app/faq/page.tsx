@@ -7,9 +7,9 @@ import { FAQS } from "@/lib/faq";
 import { FaqContent } from "./faq-content";
 
 export const metadata: Metadata = {
-  title: "FAQ | Susie’s Jewelry Repair",
+  title: "Jewelry Repair FAQ | Susie’s Jewelry Repair",
   description:
-    "Common questions about in-house jewelry and watch repair, timing, pricing, and appointments in Pasadena.",
+    "Read frequently asked questions about in-house jewelry and watch repair in Pasadena, including timing, pricing, approvals, and appointment guidance.",
   alternates: {
     canonical: "/faq",
   },

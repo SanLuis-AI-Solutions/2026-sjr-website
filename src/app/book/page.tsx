@@ -10,7 +10,7 @@ import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Book a Repair | Susie’s Jewelry Repair",
   description:
-    "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch repair team.",
+    "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch team, and get booking confirmation by email within 1 business day.",
   alternates: {
     canonical: "/book",
   },

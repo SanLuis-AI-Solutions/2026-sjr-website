@@ -64,7 +64,7 @@ export function ServicesGrid({
       <div className="mx-auto max-w-7xl px-6">
         {!hideHeader && (
           <header className="mb-16 text-center reveal-on-scroll">
-            <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">
+            <p className="text-xs uppercase tracking-[0.4em] text-brand-burgundy">
               {kicker}
             </p>
             <h2 aria-label={title} className="mt-4 font-serif text-4xl text-neutral-900 md:text-5xl">
@@ -116,14 +116,14 @@ export function ServicesGrid({
 
                   <div className="mt-6 flex flex-wrap gap-4 border-t border-stone-200 pt-6">
                     <div className="flex flex-col">
-                      <span className="text-[10px] uppercase tracking-widest text-stone-400">Starts At</span>
+                      <span className="text-[10px] uppercase tracking-widest text-stone-600">Starts At</span>
                       <span className="font-sans text-sm font-semibold text-brand-burgundy">
                         {startingAt ?? "Request quote"}
                       </span>
                     </div>
                     {timeEstimate && (
                       <div className="flex flex-col">
-                        <span className="text-[10px] uppercase tracking-widest text-stone-400">Turnaround</span>
+                        <span className="text-[10px] uppercase tracking-widest text-stone-600">Turnaround</span>
                         <span className="font-sans text-sm font-semibold text-neutral-900">
                           {timeEstimate}
                         </span>
@@ -131,7 +131,7 @@ export function ServicesGrid({
                     )}
                   </div>
 
-                  <div className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-gold transition-colors group-hover:text-brand-burgundy">
+                  <div className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep">
                     Explore Details
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
