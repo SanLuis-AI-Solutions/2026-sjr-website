@@ -6,7 +6,7 @@ Update cadence: weekly (or after major milestones).
 
 ## Current Focus
 - Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
-- **Next action:** Re-run the production 10-run p75 gate after the Critical Shell refactor deploy (`/` and `/services/ring-sizing`) and decide whether to add image compression for `public/images/about/storefront.jpg` (~4.7 MB source file).
+- **Next action:** Reduce above-fold image payload on `/` and `/services/ring-sizing` (hero asset bytes + responsive `sizes`) to close the remaining ~192-240ms LCP gap to the strict `<=2500ms` gate threshold.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -19,15 +19,28 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Gate Metrics (2026-02-27 CST / 2026-02-28 UTC)
-- Source: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json` (`Performance gate failed`)
+## Latest Gate Metrics (2026-03-01 CST / 2026-03-02 UTC)
+- Source: `.health/perf-gate-2026-03-02T01-50-34-669Z/summary.json` (`Performance gate failed`)
 - Config: 10 runs, p75 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/`: `perf=96`, `seo=100`, `lcp=2738ms`, `tbt=294ms`
-- `/services/ring-sizing`: `perf=95`, `seo=100`, `lcp=2836ms`, `tbt=270ms`
-- `/blog/ring-sizing-guide`: `perf=98`, `seo=100`, `lcp=2331ms`, `tbt=90ms`
+- `/`: `perf=94`, `seo=100`, `lcp=2692ms`, `tbt=178ms`
+- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2740ms`, `tbt=173ms`
 - Failed paths: `/`, `/services/ring-sizing`
+- p75 delta vs prior 10-run baseline (`.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`):
+  - `/`: `2692ms` vs `2738ms` (`-46ms`)
+  - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-01 20:00:22 -06:00` **Production Deploy + 10-Run p75 Gate After Critical Shell Refactor**:
+  - Production deploy command executed: `npx vercel --prod --yes`.
+  - Deployment:
+    - URL: `https://sjr-new-website-aiproject-6dnlhzw7j.vercel.app`
+    - Inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/ASr4CaBR5ojBodJVqdi7MLF4c978`
+    - Alias: `https://susiesjewelryrepair.com`
+  - Live smoke verification: HTTP `200` confirmed on `/`, `/services/ring-sizing`, `/about` with expected content markers present.
+  - Production gate run command:
+    - `node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 10 --percentile 75 --lcp-threshold-ms 2500 --seo-threshold 100 --path / --path /services/ring-sizing`
+  - Gate result: `pass=false` (`SEO=100` on both paths; LCP still above threshold).
+  - Artifact: `.health/perf-gate-2026-03-02T01-50-34-669Z/summary.json`.
 - `2026-03-01 19:46:41 -06:00` **Critical Shell Refactor (Home + Service Detail) + Local Verification**:
   - Implemented a deferred below-fold render boundary on Home:
     - `src/app/page.tsx`: added `HomeDeferredContent()` and moved all below-hero blocks into one streamed `<Suspense>` boundary (`ProofBand`, `InHouseBadge`, `ProcessSteps`, `ServicesGridSection`, `CraftStory`, `ShowroomBand`, `Testimonials`, `HomeFaq`, `HomeCta`).
