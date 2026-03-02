@@ -12,6 +12,24 @@ async function ServicesGridSection() {
   return <ServicesGrid services={services} />;
 }
 
+async function HomeDeferredContent() {
+  await Promise.resolve();
+
+  return (
+    <>
+      <ProofBand />
+      <InHouseBadge />
+      <ProcessSteps />
+      <ServicesGridSection />
+      <CraftStory />
+      <ShowroomBand />
+      <Testimonials />
+      <HomeFaq />
+      <HomeCta />
+    </>
+  );
+}
+
 export default async function Home() {
   return (
     <>
@@ -24,17 +42,9 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-10 md:pt-12">
         <Hero />
-        <ProofBand />
-        <InHouseBadge />
-        <ProcessSteps />
         <Suspense fallback={null}>
-          <ServicesGridSection />
+          <HomeDeferredContent />
         </Suspense>
-        <CraftStory />
-        <ShowroomBand />
-        <Testimonials />
-        <HomeFaq />
-        <HomeCta />
       </main>
       <SiteFooter />
 

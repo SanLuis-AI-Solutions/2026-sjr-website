@@ -6,7 +6,7 @@ Update cadence: weekly (or after major milestones).
 
 ## Current Focus
 - Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
-- **Next action:** Execute Critical Shell refactor on `/` and `/services/[slug]` (keep Hero + `SiteHeader` in initial HTML flush, move all below-fold blocks into one streamed `<Suspense>` boundary), then re-run the production 10-run p75 gate.
+- **Next action:** Re-run the production 10-run p75 gate after the Critical Shell refactor deploy (`/` and `/services/ring-sizing`) and decide whether to add image compression for `public/images/about/storefront.jpg` (~4.7 MB source file).
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -28,6 +28,19 @@ Update cadence: weekly (or after major milestones).
 - Failed paths: `/`, `/services/ring-sizing`
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-01 19:46:41 -06:00` **Critical Shell Refactor (Home + Service Detail) + Local Verification**:
+  - Implemented a deferred below-fold render boundary on Home:
+    - `src/app/page.tsx`: added `HomeDeferredContent()` and moved all below-hero blocks into one streamed `<Suspense>` boundary (`ProofBand`, `InHouseBadge`, `ProcessSteps`, `ServicesGridSection`, `CraftStory`, `ShowroomBand`, `Testimonials`, `HomeFaq`, `HomeCta`).
+  - Implemented the same deferred shell pattern on Service Detail:
+    - `src/app/services/[slug]/page.tsx`: added `DeferredServiceSections()` and wrapped all sections below hero (`how-it-works` onward through mobile quick-actions spacer) in a single streamed `<Suspense>` boundary.
+  - Storefront asset verification completed:
+    - `public/images/about/storefront.jpg` exists and renders on `/about`.
+    - Local metadata check: JPEG `4000x3000`, `4,692,042` bytes.
+  - Local verification:
+    - `npm run build` PASS after refactor.
+    - Browser smoke (local dev): `/`, `/services/ring-sizing`, `/about` render and layout integrity verified.
+  - Documentation artifact:
+    - `Docs/artifacts/ui/2026-03-01--critical-shell-refactor/00-implementation-notes.md`.
 - `2026-03-01 16:30:00 -06:00` **Website SEO & AEO Audit + Execution Pass**:
   - Conducted a full SEO/AEO audit focusing on Answer Engine Optimization, Local SEO, E-E-A-T, and Content gaps. Full report generated in agent artifacts.
   - **AEO & Technical SEO:** Converted all FAQ `<div>` wrappers to semantic `<h3>` elements for better AI scraper direct-answer extraction.

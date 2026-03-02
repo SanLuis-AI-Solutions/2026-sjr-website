@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Suspense, type ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
 import { BUSINESS, SERVICES } from "@/lib/constants";
@@ -71,6 +72,11 @@ type MarketSnapshot = {
   scenarios: MarketScenario[];
   footnote: string;
 };
+
+async function DeferredServiceSections({ children }: { children: ReactNode }) {
+  await Promise.resolve();
+  return <>{children}</>;
+}
 
 const DECISION_MODULES: Record<string, DecisionModule> = {
   "watch-repair": {
@@ -1594,7 +1600,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
+      <Suspense fallback={null}>
+        <DeferredServiceSections>
+          <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -2284,6 +2292,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </div>
       <div className="h-24 md:hidden" aria-hidden="true" />
+        </DeferredServiceSections>
+      </Suspense>
       <ServiceInteractionTracker serviceSlug={slug} />
 
       <script
