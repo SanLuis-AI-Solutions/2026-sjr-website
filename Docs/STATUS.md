@@ -30,6 +30,38 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 15:22:49 -06:00` **SEO Step 4 deployed to Production + verified (`/about` LCP optimization)**:
+  - Implemented low-risk `/about` performance changes:
+    - disabled reveal manager on `/about` (`src/components/scroll-reveal-manager.tsx`).
+    - reduced hero paint overhead and stabilized hero heading render (`src/app/about/page.tsx`).
+    - added `cv-section` containment to below-fold About sections.
+    - removed below-fold eager/priority image behavior in workshop gallery.
+    - corrected affected label contrast tokens to keep accessibility clean.
+  - Build verification:
+    - `npm run build` PASS.
+  - Local Lighthouse before/after (`/about`):
+    - `perf: 92 -> 94`
+    - `lcp: 3317ms -> 2996ms` (`-321ms`)
+    - `a11y: 100 -> 100`
+    - artifacts:
+      - `.health/lh-about-baseline-local-step4.json`
+      - `.health/lh-about-after2-local-step4.json`
+  - Production deploy:
+    - URL: `https://sjr-new-website-aiproject-d3dsm21gz.vercel.app`
+    - Inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/FQdAWxauWy761ZTWhjwonh4KivjU`
+    - Alias: `https://susiesjewelryrepair.com`
+  - Production Lighthouse verification (`/about`, 3-run median):
+    - baseline: `lcp=3050ms` (`.health/prod-lh-about-baseline-step4.json`)
+    - runs:
+      - `.health/prod-lh-step4-about-run1.json` (`lcp=2449ms`, `perf=97`)
+      - `.health/prod-lh-step4-about-run2.json` (`lcp=2440ms`, `perf=97`)
+      - `.health/prod-lh-step4-about-run3.json` (`lcp=3044ms`, `perf=94`)
+    - median result:
+      - `lcp=2449ms` (`-601ms` vs baseline)
+      - `perf=97`
+      - `a11y=100`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-4-about-lcp.md`.
 - `2026-03-02 14:57:38 -06:00` **SEO Step 3 deployed to Production + verified (`/contact` LCP fix)**:
   - Deploy command: `npx vercel --prod --yes`
   - Deployment:
