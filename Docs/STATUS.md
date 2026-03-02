@@ -6,7 +6,7 @@ Update cadence: weekly (or after major milestones).
 
 ## Current Focus
 - Mobile LCP root-cause fixes shipped (`2026-02-25`). Home page regression fixed per Codex audit.
-- **Next action:** Reduce above-fold image payload on `/` and `/services/ring-sizing` (hero asset bytes + responsive `sizes`) to close the remaining ~192-240ms LCP gap to the strict `<=2500ms` gate threshold.
+- **Next action:** Fix the `/contact` LCP outlier and remove recurring global accessibility failures (`color-contrast`, footer heading-order), then rerun full-site audit snapshot.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -30,6 +30,30 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `2740ms` vs `2836ms` (`-96ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-02 14:13:31 -06:00` **SEO Discoverability Step 1 Completed (Blog Sitemap + Blog JSON-LD SSR)**:
+  - Implemented sitemap expansion for blog content:
+    - `src/app/sitemap.ts` now includes all blog detail URLs from `BLOG_POSTS`.
+  - Implemented server-rendered blog structured data:
+    - `src/app/blog/[slug]/page.tsx` now renders `Article` and `BreadcrumbList` JSON-LD using direct `<script type="application/ld+json">` tags in initial HTML.
+  - Verification:
+    - `npm run build` PASS.
+    - Local `/sitemap.xml` check: `LOC_TOTAL=33`, `BLOG_DETAIL_LOC_COUNT=14`.
+    - Local blog HTML check (`/blog/ring-sizing-guide`): `HAS_ARTICLE_SCHEMA=True`, `HAS_BREADCRUMB_SCHEMA=True`.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-02--seo-step-1-discoverability.md`.
+- `2026-03-02 13:49:00 -06:00` **Full Production Site Audit Refresh (Copilot/Gemini comparison pass)**:
+  - Completed full-domain production audit with evidence artifacts:
+    - sitemap crawl + metadata/schema checks (`.health/site-audit-latest.json`)
+    - full Lighthouse pass over all sitemap URLs (`.health/site-audit-lh-latest.json`)
+    - recurring accessibility/performance issue extraction (`.health/site-audit-lh-issues-latest.json`)
+    - internal link integrity pass over sitemap + all blog detail pages (`.health/site-audit-links-latest.json`)
+    - blog detail schema presence audit (`.health/site-audit-blog-schemas-latest.json`)
+  - Published report artifact:
+    - `Docs/artifacts/seo/2026-03-02--full-site-audit-refresh.md`
+  - Key findings:
+    - overall score `88/100`; improved from Copilot baseline and roughly holding Gemini score level.
+    - strengths: crawl stability, `SEO=100` Lighthouse average, strong service-page architecture and trust signals.
+    - critical opportunities: blog detail pages excluded from sitemap, blog `Article`/`BreadcrumbList` schema not present in crawled initial HTML, contact route LCP outlier, recurring contrast/heading-order accessibility failures.
 - `2026-03-01 20:00:22 -06:00` **Production Deploy + 10-Run p75 Gate After Critical Shell Refactor**:
   - Production deploy command executed: `npx vercel --prod --yes`.
   - Deployment:

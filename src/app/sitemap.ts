@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { BLOG_POSTS } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -22,6 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/services/${s.slug}`,
   }));
 
-  return [...staticRoutes, ...serviceRoutes];
-}
+  const blogRoutes: MetadataRoute.Sitemap = (BLOG_POSTS || []).map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+  }));
 
+  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+}

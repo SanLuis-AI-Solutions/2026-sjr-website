@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
@@ -111,13 +110,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
-      <Script
-        id="blog-article-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <Script
-        id="blog-breadcrumb-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
