@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { Suspense, type ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
@@ -1241,6 +1241,23 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
+  const heroImageSizes = "(max-width: 768px) calc(100vw - 3rem), 50vw";
+  const desktopHeroImageProps = getImageProps({
+    src: heroImageSrc,
+    alt: service.name,
+    width: 800,
+    height: 540,
+    sizes: heroImageSizes,
+  }).props;
+  const mobileHeroImageProps = mobileHeroImageSrc
+    ? getImageProps({
+        src: mobileHeroImageSrc,
+        alt: service.name,
+        width: 800,
+        height: 540,
+        sizes: heroImageSizes,
+      }).props
+    : null;
   const howItWorksSupportCopy = isWatchRepair
     ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
@@ -1550,6 +1567,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/quote"
+                prefetch={false}
                 data-track-event="service_cta_click"
                 data-track-slug={slug}
                 data-track-placement="hero"
@@ -1560,6 +1578,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </Link>
               <Link
                 href="/book"
+                prefetch={false}
                 data-track-event="service_cta_click"
                 data-track-slug={slug}
                 data-track-placement="hero"
@@ -1573,22 +1592,18 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className="relative order-1 md:order-2">
             <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
               <picture>
-                {mobileHeroImageSrc ? (
+                {mobileHeroImageProps?.srcSet ? (
                   <source
                     media="(max-width: 767px)"
-                    srcSet={mobileHeroImageSrc}
-                    type="image/avif"
+                    srcSet={mobileHeroImageProps.srcSet}
+                    sizes={heroImageSizes}
                   />
                 ) : null}
-                <Image
-                  src={heroImageSrc}
-                  alt={service.name}
-                  priority={!mobileHeroImageSrc}
-                  loading={mobileHeroImageSrc ? "eager" : undefined}
+                <img
+                  {...desktopHeroImageProps}
                   fetchPriority="high"
-                  width={800}
-                  height={540}
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="eager"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </picture>
@@ -1676,6 +1691,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/quote"
+                    prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
                     data-track-placement="how_it_works"
@@ -1686,6 +1702,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </Link>
                   <Link
                     href="/book"
+                    prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
                     data-track-placement="how_it_works"
@@ -1905,6 +1922,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     href="/quote"
+                    prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
                     data-track-placement="pricing_timing"
@@ -1915,6 +1933,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </Link>
                   <Link
                     href="/book"
+                    prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
                     data-track-placement="pricing_timing"
@@ -2246,6 +2265,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
             <Link
               href="/services"
+              prefetch={false}
               className="text-sm font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               View all services →
@@ -2256,6 +2276,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <Link
                 key={item.slug}
                 href={`/services/${item.slug}`}
+                prefetch={false}
                 className="rounded-xl border border-stone-200 bg-white p-4 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {item.name}
@@ -2277,6 +2298,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className="flex items-center gap-3">
             <Link
               href="/quote"
+              prefetch={false}
               data-track-event="service_cta_click"
               data-track-slug={slug}
               data-track-placement="mobile_quick_actions"
@@ -2287,6 +2309,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </Link>
             <Link
               href="/book"
+              prefetch={false}
               data-track-event="service_cta_click"
               data-track-slug={slug}
               data-track-placement="mobile_quick_actions"

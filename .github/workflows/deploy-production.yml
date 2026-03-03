@@ -53,3 +53,30 @@ jobs:
           VERCEL_PROJECT_ID: prj_a7IPNCaE1nzmcO8ojPqyDLP0wIti
         run: |
           npx -y vercel@50.15.1 deploy --prod --yes --token="$VERCEL_TOKEN"
+
+      - name: Wait for production alias propagation
+        run: sleep 20
+
+      - name: Post-deploy conversion performance guardrail (isolated p50)
+        run: |
+          node scripts/perf/launch-performance-gate.mjs \
+            --base-url https://www.susiesjewelryrepair.com \
+            --runs 5 \
+            --percentile 50 \
+            --lcp-threshold-ms 2600 \
+            --seo-threshold 100 \
+            --isolate \
+            --diagnostics \
+            --path /contact \
+            --path /quote \
+            --path /book
+
+      - name: Upload performance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-gate-${{ github.run_id }}
+          path: |
+            .health/perf-gate-*
+            .health/lcp-diagnostics-*.json
+          if-no-files-found: warn

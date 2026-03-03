@@ -5,8 +5,11 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- SEO Step 6 service-mobile-hero pilot is live on production (`2026-03-02`) with verified mobile-vs-desktop hero source routing.
-- **Next action:** run targeted LCP root-cause remediation for `/services/ring-sizing`, `/services/watch-repair`, and `/contact` (current production guardrail outlier), then rerun 5-run p50 gate.
+- SEO Step 6.2 process-of-elimination pass is now deployed on production (`2026-03-03`) and the pilot service p50 gate is passing in the latest isolated evidence run.
+- `/contact` guardrail recovery stream succeeded with deferred live-map loading; latest isolated p50 is now below target.
+- Conversion baseline lock pass completed for `/contact`, `/quote`, and `/book`; all three are below `<=2600ms` in current production evidence.
+- Automated conversion-route guardrail gate has been added to production CI workflow (`deploy-production.yml`).
+- **Next action:** run the updated production deploy workflow once to validate CI gate execution and artifact upload end-to-end.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -19,19 +22,267 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Gate Metrics (2026-03-02 CST)
-- Source: `.health/perf-gate-2026-03-02T22-39-15-498Z/summary.json` (`Performance gate failed`)
-- Config: 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/services/ring-sizing`: `perf=90`, `seo=100`, `lcp=3123ms`, `tbt=103ms`
-- `/services/watch-repair`: `perf=88`, `seo=100`, `lcp=3199ms`, `tbt=197ms`
-- `/services/custom-design`: `perf=95`, `seo=100`, `lcp=2826ms`, `tbt=67ms`
-- Failed paths: all 3 checked pilot service routes
-- p50 delta vs Step 5 baseline (`.health/perf-gate-2026-03-02T21-51-16-231Z/summary.json`):
-  - `/services/ring-sizing`: `3123ms` vs `2980ms` (`+143ms`)
-  - `/services/watch-repair`: `3199ms` vs `3050ms` (`+149ms`)
-  - `/services/custom-design`: `2826ms` vs `2902ms` (`-76ms`)
+## Latest Gate Metrics (2026-03-03 CST)
+- Conversion baseline lock source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json` (`Performance gate passed`)
+  - `/contact`: `perf=99`, `seo=100`, `lcp=2159ms`, `tbt=35ms`
+  - `/quote`: `perf=98`, `seo=100`, `lcp=2235ms`, `tbt=30ms`
+  - `/book`: `perf=98`, `seo=100`, `lcp=2237ms`, `tbt=38ms`
+- Contact/About source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T21-32-54-339Z/summary.json` (`Performance gate passed`)
+  - `/contact`: `perf=98`, `seo=100`, `lcp=2165ms`, `tbt=24ms`
+  - `/about`: `perf=99`, `seo=100`, `lcp=2196ms`, `tbt=14ms`
+- Contact/About delta vs prior guardrail run (`.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`):
+  - `/contact`: `5248ms -> 2165ms` (`-3083ms`)
+  - `/about`: `2473ms -> 2196ms` (`-277ms`)
+- Service source (latest non-regression check on current production deploy): `.health/perf-gate-2026-03-03T21-37-07-906Z/summary.json` (`Performance gate passed`)
+- Service config: 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
+- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2449ms`, `tbt=22ms`
+- `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2299ms`, `tbt=24ms`
+- `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2375ms`, `tbt=30ms`
+- Failed paths: none (pilot service gate pass)
+- Service p50 delta vs prior iteration-3 baseline (`.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`):
+  - `/services/ring-sizing`: `3040ms -> 2449ms` (`-591ms`)
+  - `/services/watch-repair`: `3113ms -> 2299ms` (`-814ms`)
+  - `/services/custom-design`: `2755ms -> 2375ms` (`-380ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 23:20:00 -06:00` **Step 6.2 Iteration 7 executed (CI conversion guardrail automation), implemented and documented**:
+  - updated `.github/workflows/deploy-production.yml`:
+    - added post-deploy isolated 5-run p50 gate for `/contact`, `/quote`, `/book`
+    - thresholds: `LCP <= 2600ms`, `SEO = 100`
+    - added artifact upload step (`if: always`) for `.health/perf-gate-*` and `.health/lcp-diagnostics-*.json`.
+  - purpose:
+    - fail production pipeline on conversion-route regression before release is considered healthy.
+  - runtime note:
+    - first full validation of this CI guardrail occurs on next workflow run.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-7-ci-conversion-guardrail.md`
+- `2026-03-03 23:10:00 -06:00` **Step 6.2 Iteration 6 executed (conversion baseline lock, no-code), verified, and documented**:
+  - Ran isolated 5-run p50 diagnostics gate for `/contact`, `/quote`, `/book` on production alias.
+  - Verification artifacts:
+    - `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-03T23-02-55-169Z.json`
+  - Results:
+    - `/contact`: `2159ms`
+    - `/quote`: `2235ms`
+    - `/book`: `2237ms`
+    - SEO `100` on all three routes.
+  - Diagnostic note:
+    - residual `?_rsc` prefetch count remained consistent at `6` per run on each route, but no current threshold risk.
+  - Decision:
+    - no additional code change in this iteration to avoid unnecessary risk while passing.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-6-conversion-baseline-lock.md`
+- `2026-03-03 21:45:00 -06:00` **Step 6.2 Iteration 5 executed (contact map deferral), deployed, and accepted**:
+  - Single change:
+    - replaced direct Google Maps iframe render in `src/app/contact/page.tsx` with deferred map mount using `src/components/deferred-google-map-embed.tsx`.
+  - Production deploy:
+    - `https://sjr-new-website-aiproject-dnag4ly7s.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/Cae3v7boxhmEDjZ6LtvVwzAzouK8`
+    - alias: `https://susiesjewelryrepair.com`
+  - Guardrail verification (isolated 5-run p50):
+    - `.health/perf-gate-2026-03-03T21-32-54-339Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-03T21-32-54-339Z.json`
+    - result:
+      - `/contact`: `2165ms`
+      - `/about`: `2196ms`
+  - Non-regression verification (isolated 5-run p50 services):
+    - `.health/perf-gate-2026-03-03T21-37-07-906Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-03T21-37-07-906Z.json`
+    - service p50 remained passing (`2449ms`, `2299ms`, `2375ms`).
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-5-contact-map-deferral.md`
+- `2026-03-03 18:10:00 -06:00` **Guardrail extension hypothesis tested and rejected (rolled back)**:
+  - Tested change:
+    - temporarily set `prefetch={false}` for `ConversionQuickActions` links in `src/components/analytics/conversion-quick-actions.tsx`.
+  - Test deploy:
+    - `https://sjr-new-website-aiproject-q5y1wjjpj.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/7cAtq3p1EeUDB9LxJagz2CxpjP3a`
+  - Measurement showed major `/contact` regression:
+    - `.health/perf-gate-2026-03-03T17-51-53-615Z/summary.json`
+    - `.health/perf-gate-2026-03-03T17-56-22-458Z/summary.json`
+    - `/contact` p50 remained around `~5.2s`.
+  - Action taken:
+    - reverted `ConversionQuickActions` prefetch change.
+    - rollback deploy:
+      - `https://sjr-new-website-aiproject-7x9lx0ew9.vercel.app`
+      - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/AyHUFWgJYHE2XTkrm2k6MJYamy2T`
+  - Post-rollback guardrail check:
+    - `.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`
+    - `/about` improved (`2473ms`), `/contact` remained high (`5248ms`), indicating a separate contact-specific issue not fixed by prefetch toggles.
+- `2026-03-03 17:50:00 -06:00` **Step 6.2 Iteration 4 executed (prefetch elimination), deployed, and validated with full process-of-elimination evidence**:
+  - Diagnostic finding before change:
+    - representative service runs showed early `?_rsc` prefetch fetches during LCP window (`/quote`, `/book`, `/`), indicating avoidable prefetch contention.
+  - Iteration 4A change:
+    - `src/app/services/[slug]/page.tsx`: set `prefetch={false}` on all service-route `Link` instances.
+    - deploy: `https://sjr-new-website-aiproject-jqfdfvhnw.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/FJAnBdzZY4x3F4sVwS6S2nr9TUr2`
+  - Iteration 4B change:
+    - `src/components/site-header.tsx`: set `prefetch={false}` on home brand link.
+    - deploy: `https://sjr-new-website-aiproject-flubtwefz.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/C9uG4SPdRf7cGiecFjsbruWtraXW`
+    - alias: `https://susiesjewelryrepair.com`
+  - Verification:
+    - local `npm run build` PASS after each code change.
+    - full isolated service gate (5-run p50) PASS:
+      - `.health/perf-gate-2026-03-03T17-35-38-805Z/summary.json`
+      - `.health/lcp-diagnostics-2026-03-03T17-35-38-805Z.json`
+    - representative prefetch check after elimination:
+      - `ring_run3_rsc_prefetch_count = 0`
+      - `watch_run3_rsc_prefetch_count = 0`
+  - Result:
+    - pilot services now pass strict p50 target (`<=2500ms`) with SEO `100`.
+  - Guardrail follow-up measurement:
+    - `.health/perf-gate-2026-03-03T17-42-14-398Z/summary.json`
+    - `/about` and `/contact` still above `<=2600ms` target.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-4-prefetch-elimination.md`
+- `2026-03-03 17:02:00 -06:00` **Step 6.2 Iteration 3 executed (post-load tracker deferral), deployed, and retained**:
+  - Iteration 3 micro-change:
+    - `src/components/analytics/service-interaction-tracker.tsx`
+    - deferred tracker observer wiring to post-`window.load` + idle scheduling (kept analytics event semantics unchanged).
+  - Local verification:
+    - `npm run build` PASS.
+  - Production deploy:
+    - `https://sjr-new-website-aiproject-q7qgmxuom.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/4dSRkPUzDXcWn6iGSsUKC9MNprix`
+    - alias: `https://susiesjewelryrepair.com`
+  - Isolated 5-run p50 measurement:
+    - `.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-03T16-54-36-560Z.json`
+    - p50:
+      - `/services/ring-sizing`: `3040ms`
+      - `/services/watch-repair`: `3113ms`
+      - `/services/custom-design`: `2755ms`
+    - vs recent rollback baseline (`.health/perf-gate-2026-03-03T16-32-13-218Z/summary.json`):
+      - ring-sizing `-77ms`
+      - watch-repair `-14ms`
+      - custom-design `-57ms`
+  - Decision:
+    - retained iteration 3 code change (no regression observed), but threshold still missed on all 3 pilot routes.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-3.md`
+- `2026-03-03 16:40:00 -06:00` **Step 6.2 Iteration 2 executed (decode-sync test), failed, and rolled back**:
+  - Resource stack check completed in local `.agent` catalogs before proceeding:
+    - agents: `performance-optimizer`, `debugger`, `sre-specialist`
+    - workflows: `/debug`, `/qa-gate`, `/deploy`
+    - skills: `web-performance-optimization`, `systematic-debugging`, `performance-profiling`, `verification-before-completion`, `deployment-procedures`.
+  - Iteration 2 change tested:
+    - `src/app/services/[slug]/page.tsx` hero LCP image decode hint changed from `decoding="async"` to `decoding="sync"`.
+  - Local verification:
+    - `npm run build` PASS.
+  - Production test deploy:
+    - `https://sjr-new-website-aiproject-fonn9va56.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/96YR4fycHuSi6Mvg6p236RRkpZG3`
+  - Isolated 5-run p50 measurement (test build):
+    - `.health/perf-gate-2026-03-03T16-21-58-133Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-03T16-21-58-133Z.json`
+    - p50:
+      - `/services/ring-sizing`: `3186ms`
+      - `/services/watch-repair`: `3040ms`
+      - `/services/custom-design`: `2831ms`
+    - vs recent restore baseline (`.health/perf-gate-2026-03-03T01-08-14-035Z/summary.json`):
+      - ring-sizing `+484ms`
+      - watch-repair `-5ms`
+      - custom-design `+88ms`
+  - Action taken:
+    - reverted decode hint back to `decoding="async"` in `src/app/services/[slug]/page.tsx`.
+    - rollback deploy:
+      - `https://sjr-new-website-aiproject-o7v0ixo0x.vercel.app`
+      - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/4jz2t7GN5zKZdebuUAV2aJSpHdW5`
+    - rollback verification:
+      - `.health/perf-gate-2026-03-03T16-32-13-218Z/summary.json`
+      - `.health/lcp-diagnostics-2026-03-03T16-32-13-218Z.json`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-2.md`
+- `2026-03-03 01:15:00 -06:00` **SEO Step 6.2 Iteration 1 executed, failed, and rolled back (production restored)**:
+  - Iteration change attempted (mobile-only above-fold simplification):
+    - temporarily hid two non-essential hero support cards on mobile in `src/app/services/[slug]/page.tsx`:
+      - "Need <service> in <city>?" card
+      - "In-house assessment" card below hero image
+    - desktop presentation remained unchanged.
+  - Local verification before deploy:
+    - `npm run build` PASS.
+    - local smoke/screenshots PASS:
+      - `.health/step6-2-iter1-local-smoke-report.json`
+      - `.health/screenshots/step6-2-iter1-local/*`
+  - Production deploy of iteration:
+    - URL: `https://sjr-new-website-aiproject-jnbz4jpfq.vercel.app`
+    - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/CSgdWRDRemYvhkQDc5tzAh5uEpAC`
+  - Isolated 5-run p50 results showed regression/instability:
+    - `.health/perf-gate-2026-03-03T00-51-40-731Z/summary.json`
+    - `.health/perf-gate-2026-03-03T00-58-34-496Z/summary.json`
+    - key symptom: elevated service hero `elementRenderDelay` volatility, especially on `ring-sizing` and `watch-repair`.
+  - Action taken:
+    - reverted the iteration change in `src/app/services/[slug]/page.tsx`.
+    - redeployed rollback build:
+      - URL: `https://sjr-new-website-aiproject-2r1ftjt22.vercel.app`
+      - inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/FceAuYa2hmMZDseEdgDchfZtNAy9`
+      - alias: `https://susiesjewelryrepair.com`
+  - Production restore verification (isolated 5-run p50):
+    - `.health/perf-gate-2026-03-03T01-08-14-035Z/summary.json`
+    - restored metrics:
+      - `/services/ring-sizing`: `2702ms`
+      - `/services/watch-repair`: `3045ms`
+      - `/services/custom-design`: `2743ms`
+    - diagnostics:
+      - `.health/lcp-diagnostics-2026-03-03T01-08-14-035Z.json`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-1.md`
+- `2026-03-03 00:26:00 -06:00` **SEO Step 6.1 executed end-to-end (evidence-driven LCP recovery, diagnostics-first)**:
+  - Tooling updates delivered:
+    - `scripts/perf/launch-performance-gate.mjs` now supports:
+      - `--cooldown-ms` (default `12000`)
+      - `--diagnostics` (route-level median LCP phase extraction + representative LCP element/image)
+      - `--isolate` (isolated route process groups for lower cross-route noise)
+    - added parser script:
+      - `scripts/perf/extract-lcp-diagnostics.mjs`
+      - emits `.health/lcp-diagnostics-<label>.json` with run-level and route-level diagnostics.
+    - package script added:
+      - `npm run perf:extract-lcp-diagnostics`.
+  - Service hero implementation (Phase 1):
+    - `src/app/services/[slug]/page.tsx` now routes pilot mobile hero through Next optimized responsive sources via `getImageProps` (desktop source unchanged).
+    - configured sizes:
+      - `"(max-width: 768px) calc(100vw - 3rem), 50vw"`.
+  - Local verification:
+    - `npm run build` PASS.
+    - local smoke + screenshots PASS:
+      - report: `.health/step6-1-local-smoke-report.json`
+      - screenshots: `.health/screenshots/step6-1-service-pilot-local/*`
+      - mobile and desktop source-selection checks passed with no image 4xx/5xx.
+  - Production deployments during Step 6.1:
+    - Phase 1 deploy:
+      - `https://sjr-new-website-aiproject-n91zdh373.vercel.app`
+    - Phase 2 step-1 deploy:
+      - `https://sjr-new-website-aiproject-r4mh4wcbd.vercel.app`
+    - Phase 2 step-2 deploy (latest):
+      - `https://sjr-new-website-aiproject-8fsktv4fp.vercel.app`
+    - alias remained:
+      - `https://susiesjewelryrepair.com`
+  - Isolated baseline and diagnostics artifacts locked:
+    - services baseline:
+      - `.health/perf-gate-2026-03-02T23-31-37-066Z/summary.json`
+      - `.health/lcp-diagnostics-2026-03-02T23-31-37-066Z.json`
+    - contact baseline:
+      - `.health/perf-gate-2026-03-02T23-39-57-858Z/summary.json`
+      - `.health/lcp-diagnostics-2026-03-02T23-39-57-858Z.json`
+    - about baseline:
+      - `.health/perf-gate-2026-03-02T23-43-33-269Z/summary.json`
+      - `.health/lcp-diagnostics-2026-03-02T23-43-33-269Z.json`
+  - Phase 2 contact stabilization sequence (strict order):
+    - Step 1 (remove above-fold `reveal-on-scroll` wrappers in hero text column + direct-lines card):
+      - measurement: `.health/perf-gate-2026-03-03T00-09-55-388Z/summary.json`
+      - result: `/contact` regressed to `lcp=5547ms`.
+    - Step 2 (move `<GaConversionTracker />` + `<LeadFormTracker />` to end-of-page outside hero subtree):
+      - measurement: `.health/perf-gate-2026-03-03T00-16-04-239Z/summary.json`
+      - result: `/contact` improved to `lcp=2959ms` vs step-1, but still above `<=2600ms`.
+  - Step 6.1 acceptance status:
+    - SEO on pilot service routes: PASS (`100` each).
+    - performance target (`>=250ms` gain on at least 2/3 pilot routes vs isolated baseline): FAIL (only `/services/ring-sizing` met this).
+    - no pilot route regressed by more than `150ms`: PASS.
+    - `/contact` stop condition (`<=2600ms`) after Phase 2: FAIL.
+  - Artifacts:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-1-lcp-recovery.md`
+    - `Docs/PERF-LCP-FIX.md` (Step 6.1 update appended).
 - `2026-03-02 16:54:57 -06:00` **SEO Step 6 deployed to Production + verified (service mobile-hero pilot, balanced quality)**:
   - Implemented pilot mobile hero optimization workflow for 3 service routes (`ring-sizing`, `watch-repair`, `custom-design`) with no layout/style redesign:
     - `scripts/perf/generate-mobile-hero-avif.mjs` now supports `--slugs` and balanced defaults (`720px`, `35-55KB`) with manifest output.

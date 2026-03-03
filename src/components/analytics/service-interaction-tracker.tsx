@@ -112,18 +112,35 @@ export function ServiceInteractionTracker({ serviceSlug }: ServiceInteractionTra
 
     let idleHandle: number | undefined;
     let timeoutHandle: number | undefined;
+    let removeLoadListener: (() => void) | undefined;
 
-    if (idleWindow.requestIdleCallback) {
-      idleHandle = idleWindow.requestIdleCallback(() => {
-        teardown = initTracking();
-      }, { timeout: 1200 });
-    } else {
+    const queueInitAfterLoad = () => {
+      if (idleWindow.requestIdleCallback) {
+        idleHandle = idleWindow.requestIdleCallback(() => {
+          teardown = initTracking();
+        }, { timeout: 3000 });
+        return;
+      }
       timeoutHandle = window.setTimeout(() => {
         teardown = initTracking();
-      }, 250);
+      }, 1200);
+    };
+
+    if (document.readyState === "complete") {
+      queueInitAfterLoad();
+    } else {
+      const onLoad = () => {
+        window.removeEventListener("load", onLoad);
+        queueInitAfterLoad();
+      };
+      window.addEventListener("load", onLoad);
+      removeLoadListener = () => window.removeEventListener("load", onLoad);
     }
 
     return () => {
+      if (removeLoadListener) {
+        removeLoadListener();
+      }
       if (idleHandle !== undefined && idleWindow.cancelIdleCallback) {
         idleWindow.cancelIdleCallback(idleHandle);
       }

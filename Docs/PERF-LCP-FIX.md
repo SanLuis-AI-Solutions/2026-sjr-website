@@ -1,9 +1,222 @@
 # Mobile LCP Performance Fix — Root Cause Analysis & Prevention Guide
 
-**Date:** 2026-02-25  
+**Date:** 2026-02-25 (updated with Step 6.2 elimination pass on 2026-03-03)  
 **Pages affected:** `/services/[slug]` and `/blog/[slug]`  
 **Symptom:** Mobile LCP p75 >4000ms (threshold: ≤2500ms). SEO: 100 ✅  
-**Status:** Root causes patched. Home page regression fixed. Awaiting production deployment to verify final LCP numbers (see §5 for why local ≠ production).  
+**Status:** Step 6.2 process-of-elimination pass applied on production. Pilot service routes now pass p50 `<=2500ms` in the latest isolated evidence run; guardrail pages (`/about`, `/contact`) remain a separate follow-up stream.  
+
+---
+
+## 0. Step 6.1 Production Evidence Update (2026-03-03)
+
+### 0.1 What was implemented
+- Performance gate script upgraded (`scripts/perf/launch-performance-gate.mjs`) with:
+  - `--cooldown-ms` (default `12000`)
+  - `--diagnostics` (LCP phase medians + representative LCP element/image)
+  - `--isolate` (per-route isolated process groups)
+- New diagnostics extractor added:
+  - `scripts/perf/extract-lcp-diagnostics.mjs`
+  - Output: `.health/lcp-diagnostics-<label>.json`
+- Service hero template updated (`src/app/services/[slug]/page.tsx`):
+  - Mobile pilot source and desktop source now both run through Next responsive optimization (`getImageProps`).
+  - Hero `sizes` set to `"(max-width: 768px) calc(100vw - 3rem), 50vw"`.
+- Contact conditional fixes applied in strict order (`src/app/contact/page.tsx`):
+  1. removed above-fold `reveal-on-scroll` from hero text column + direct-lines card.
+  2. moved `<GaConversionTracker />` and `<LeadFormTracker />` out of hero subtree to end-of-page.
+
+### 0.2 Baseline artifacts (locked for comparison)
+- Services:
+  - `.health/perf-gate-2026-03-02T23-31-37-066Z/summary.json`
+  - `.health/lcp-diagnostics-2026-03-02T23-31-37-066Z.json`
+- Contact:
+  - `.health/perf-gate-2026-03-02T23-39-57-858Z/summary.json`
+  - `.health/lcp-diagnostics-2026-03-02T23-39-57-858Z.json`
+- About:
+  - `.health/perf-gate-2026-03-02T23-43-33-269Z/summary.json`
+  - `.health/lcp-diagnostics-2026-03-02T23-43-33-269Z.json`
+
+### 0.3 Final production results after Step 6.1
+- Service final run:
+  - `.health/perf-gate-2026-03-03T00-18-54-618Z/summary.json`
+  - `.health/lcp-diagnostics-2026-03-03T00-18-54-618Z.json`
+- Guardrails:
+  - Contact: `.health/perf-gate-2026-03-03T00-16-04-239Z/summary.json`
+  - About: `.health/perf-gate-2026-03-03T00-18-54-942Z/summary.json`
+
+Service p50 LCP deltas vs isolated baseline:
+- `/services/ring-sizing`: `3124ms -> 2645ms` (`-479ms`)
+- `/services/watch-repair`: `3118ms -> 2969ms` (`-149ms`)
+- `/services/custom-design`: `2964ms -> 2826ms` (`-138ms`)
+- SEO: `100` on all pilot routes.
+
+Guardrails:
+- `/contact`: `4377ms -> 2959ms` overall improvement from baseline, but still above `<=2600ms` target.
+- `/about`: `3287ms -> 2697ms` in latest Step 6.1 final run.
+
+### 0.4 Step 6.1 acceptance decision
+- `>=250ms` improvement on at least 2/3 pilot routes: **FAIL** (1/3 met).
+- No pilot route regressed by more than `150ms`: **PASS**.
+- SEO `100` on pilot routes: **PASS**.
+- `/contact <=2600ms` after Phase 2: **FAIL**.
+
+### 0.5 Notes that remove guesswork for next iteration
+- In the final service run, median `elementRenderDelay` did **not** exceed `1500ms` on any pilot route (`656ms`, `1388ms`, `1368ms`), so format-switch fallback (`AVIF->WebP`) was not triggered by the plan rule.
+- Remaining misses are now concentrated in above-fold render-path behavior rather than obvious network wait, so Step 6.2 should target mobile above-fold DOM simplification with isolated diagnostics.
+
+### 0.6 Step 6.2 Production Evidence Update (Process of Elimination)
+
+Step 6.2 was executed as a strict eliminate-and-measure sequence to avoid looping on blind tweaks:
+
+1. Iteration 3 retained:
+- `src/components/analytics/service-interaction-tracker.tsx`
+- deferred tracker setup to post-`window.load` + idle.
+- result: small improvements, still above target.
+
+2. Iteration 4A:
+- `src/app/services/[slug]/page.tsx`
+- set `prefetch={false}` on all service-route `Link` elements.
+- result: reduced early prefetch noise and improved service p50 values.
+
+3. Iteration 4B:
+- `src/components/site-header.tsx`
+- set `prefetch={false}` on home brand link.
+- result: eliminated residual `/?_rsc` fetch bursts during service-page LCP window in representative runs.
+
+Final stable service evidence (isolated 5-run p50):
+- `.health/perf-gate-2026-03-03T17-35-38-805Z/summary.json`
+- `.health/lcp-diagnostics-2026-03-03T17-35-38-805Z.json`
+
+Service p50 results:
+- `/services/ring-sizing`: `2447ms`
+- `/services/watch-repair`: `2379ms`
+- `/services/custom-design`: `2397ms`
+- SEO: `100` on all three.
+
+Delta vs iteration-3 baseline (`.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`):
+- `/services/ring-sizing`: `3040ms -> 2447ms` (`-593ms`)
+- `/services/watch-repair`: `3113ms -> 2379ms` (`-734ms`)
+- `/services/custom-design`: `2755ms -> 2397ms` (`-358ms`)
+
+Guardrail check (latest):
+- `.health/perf-gate-2026-03-03T17-42-14-398Z/summary.json`
+- `/about`: `3045ms`
+- `/contact`: `2866ms`
+
+Decision:
+- Service pilot path now passes strict p50 gate (`<=2500ms`) in latest stable run.
+- Keep prefetch-elimination changes.
+- Treat `/about` and `/contact` as the next isolated optimization stream.
+
+### 0.7 Guardrail Extension Attempt (Rejected)
+
+Attempted extension:
+- temporary `prefetch={false}` in `src/components/analytics/conversion-quick-actions.tsx` to reduce `/contact` prefetch noise.
+
+Result:
+- repeated `/contact` isolated runs regressed to ~`5.2s` p50 LCP in this test window.
+- change was rolled back and redeployed.
+
+Evidence:
+- test run: `.health/perf-gate-2026-03-03T17-51-53-615Z/summary.json`
+- rerun confirmation: `.health/perf-gate-2026-03-03T17-56-22-458Z/summary.json`
+- post-rollback check: `.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`
+
+Decision:
+- keep service prefetch-elimination changes (`services page links` + `header home link`).
+- do not apply conversion-quick-actions prefetch change.
+- run `/contact` as a dedicated recovery stream with stricter cold-start methodology.
+
+### 0.8 Contact Recovery Breakthrough (Accepted)
+
+Date: 2026-03-03
+
+Single-variable change:
+- replaced direct Google Maps iframe render in `src/app/contact/page.tsx` with deferred mount using `src/components/deferred-google-map-embed.tsx`.
+- behavior:
+  - load map iframe when section nears viewport (IntersectionObserver), or
+  - immediately when user clicks `Load Live Map`.
+- premium layout/style preserved (section framing and visual hierarchy unchanged).
+
+Production deploy:
+- `https://sjr-new-website-aiproject-dnag4ly7s.vercel.app`
+- inspector: `https://vercel.com/sanluis-ai-solutions-projects/sjr-new-website-aiproject/Cae3v7boxhmEDjZ6LtvVwzAzouK8`
+- alias: `https://susiesjewelryrepair.com`
+
+Guardrail evidence:
+- before: `.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`
+- after: `.health/perf-gate-2026-03-03T21-32-54-339Z/summary.json`
+- diagnostics: `.health/lcp-diagnostics-2026-03-03T21-32-54-339Z.json`
+
+p50 deltas:
+- `/contact`: `5248ms -> 2165ms` (`-3083ms`)
+- `/about`: `2473ms -> 2196ms` (`-277ms`)
+- SEO remained `100`.
+
+Non-regression confirmation (same deploy):
+- `.health/perf-gate-2026-03-03T21-37-07-906Z/summary.json`
+- `.health/lcp-diagnostics-2026-03-03T21-37-07-906Z.json`
+- service p50 remained passing:
+  - `/services/ring-sizing`: `2449ms`
+  - `/services/watch-repair`: `2299ms`
+  - `/services/custom-design`: `2375ms`
+
+Diagnostic confirmation:
+- representative contact run network log now shows `mapsRequests = 0` in initial audit window.
+
+Decision:
+- keep deferred-map implementation as the accepted `/contact` recovery fix.
+- continue with narrower follow-up optimizations only after this baseline is locked.
+
+### 0.9 Conversion Baseline Lock (No-Code Verification)
+
+Date: 2026-03-03
+
+Execution:
+- isolated 5-run p50 diagnostics-only pass on:
+  - `/contact`
+  - `/quote`
+  - `/book`
+- command:
+  - `node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 5 --percentile 50 --lcp-threshold-ms 10000 --seo-threshold 100 --isolate --diagnostics --path /contact --path /quote --path /book`
+
+Evidence:
+- `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json`
+- `.health/lcp-diagnostics-2026-03-03T23-02-55-169Z.json`
+
+Results (p50):
+- `/contact`: `2159ms` (`perf=99`, `seo=100`)
+- `/quote`: `2235ms` (`perf=98`, `seo=100`)
+- `/book`: `2237ms` (`perf=98`, `seo=100`)
+
+Observation:
+- residual `?_rsc` prefetch requests remained consistent (`6` per run on each conversion route),
+  but no threshold risk was observed in the current production state.
+
+Decision:
+- no additional code change in this pass.
+- lock conversion routes as the new baseline and prioritize regression-prevention automation over new tuning.
+
+### 0.10 Conversion Guardrail Automation in CI (Shipped)
+
+Date: 2026-03-03
+
+Implementation:
+- updated `.github/workflows/deploy-production.yml` to add post-deploy conversion-route guardrails.
+- new automated post-deploy step runs:
+  - `/contact`, `/quote`, `/book`
+  - isolated 5-run p50 gate
+  - thresholds: `LCP <= 2600ms`, `SEO = 100`.
+- workflow now fails if any conversion route breaches thresholds.
+- added artifact upload step (`if: always()`) for:
+  - `.health/perf-gate-*`
+  - `.health/lcp-diagnostics-*.json`
+
+Purpose:
+- turn the validated conversion baseline into an enforced release gate.
+- prevent regression drift and reduce manual re-check loops.
+
+Validation status:
+- workflow logic shipped; first end-to-end validation occurs on the next production workflow run.
 
 ---
 

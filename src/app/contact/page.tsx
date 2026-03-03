@@ -3,11 +3,14 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
+import { DeferredGoogleMapEmbed } from "@/components/deferred-google-map-embed";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
 const GOOGLE_MAPS_PLACE_URL =
   "https://www.google.com/maps/place/Susie's+Jewelry+Repair/@29.6631,-95.1458909,17z";
+const GOOGLE_MAPS_EMBED_URL =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.864319665551!2d-95.1458909!3d29.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409de6c3e98b0b%3A0x7d2cb6bb1af1f1a5!2sSusie%27s%20Jewelry%20Repair!5e0!3m2!1sen!2sus!4v1714151700147!5m2!1sen!2sus";
 
 export const metadata: Metadata = {
   title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
@@ -233,16 +236,9 @@ async function DeferredContactSection() {
               Open Full Map
             </a>
           </div>
-          <iframe
+          <DeferredGoogleMapEmbed
             title="Google Maps Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.864319665551!2d-95.1458909!3d29.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409de6c3e98b0b%3A0x7d2cb6bb1af1f1a5!2sSusie&#39;s%20Jewelry%20Repair!5e0!3m2!1sen!2sus!4v1714151700147!5m2!1sen!2sus"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full overflow-hidden rounded-2xl border border-stone-200 grayscale-[20%] contrast-[1.05]"
+            embedUrl={GOOGLE_MAPS_EMBED_URL}
           />
         </section>
       </div>
@@ -267,17 +263,7 @@ export default async function ContactPage({
         <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.3)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.35)_100%)]" />
 
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-          <div className="reveal-on-scroll">
-            <Suspense fallback={null}>
-              <GaConversionTracker
-                active={submitted}
-                eventName="contact_submit_success"
-                submissionId={resolvedSearchParams?.id}
-                leadType="contact"
-                status="success"
-              />
-              <LeadFormTracker formId="contact-form" leadType="contact" hasError={error} />
-            </Suspense>
+          <div>
             {submitted ? (
               <div
                 role="status"
@@ -345,7 +331,7 @@ export default async function ContactPage({
             </div>
           </div>
 
-          <aside className="reveal-on-scroll rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)]">
+          <aside className="rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
               Direct lines
             </p>
@@ -398,6 +384,16 @@ export default async function ContactPage({
 
       <Suspense fallback={null}>
         <DeferredContactSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <GaConversionTracker
+          active={submitted}
+          eventName="contact_submit_success"
+          submissionId={resolvedSearchParams?.id}
+          leadType="contact"
+          status="success"
+        />
+        <LeadFormTracker formId="contact-form" leadType="contact" hasError={error} />
       </Suspense>
     </SiteShell>
   );

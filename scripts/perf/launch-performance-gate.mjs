@@ -5,7 +5,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const INTER_RUN_COOLDOWN_MS = 12000;
+const DEFAULT_INTER_RUN_COOLDOWN_MS = 12000;
 
 const DEFAULT_PATHS = ["/", "/services/ring-sizing", "/blog/ring-sizing-guide"];
 
@@ -29,6 +29,10 @@ function parseArgs(argv) {
     seoThreshold: 100,
     outputDir: ".health",
     paths: [...DEFAULT_PATHS],
+    cooldownMs: DEFAULT_INTER_RUN_COOLDOWN_MS,
+    diagnostics: false,
+    isolate: false,
+    isolateWorker: false,
   };
 
   const pathOverrides = [];
@@ -43,6 +47,15 @@ function parseArgs(argv) {
     } else if (token === "--seo-threshold") {
       defaults.seoThreshold = parseNumber(argv[++i], "--seo-threshold");
     } else if (token === "--output-dir") defaults.outputDir = argv[++i];
+    else if (token === "--cooldown-ms") {
+      defaults.cooldownMs = parseNumber(argv[++i], "--cooldown-ms");
+    } else if (token === "--diagnostics") {
+      defaults.diagnostics = true;
+    } else if (token === "--isolate") {
+      defaults.isolate = true;
+    } else if (token === "--isolate-worker") {
+      defaults.isolateWorker = true;
+    }
     else if (token === "--path") pathOverrides.push(argv[++i]);
     else {
       throw new Error(`Unknown argument: ${token}`);
@@ -56,6 +69,9 @@ function parseArgs(argv) {
   if (defaults.runs < 1) throw new Error("--runs must be >= 1");
   if (defaults.percentile <= 0 || defaults.percentile > 100) {
     throw new Error("--percentile must be > 0 and <= 100");
+  }
+  if (defaults.cooldownMs < 0) {
+    throw new Error("--cooldown-ms must be >= 0");
   }
 
   return defaults;
@@ -83,11 +99,206 @@ function joinUrl(baseUrl, routePath) {
   return new URL(routePath, baseUrl).toString();
 }
 
+function decodeHtmlEntities(value) {
+  if (!value) return value;
+  return value
+    .replaceAll("&amp;", "&")
+    .replaceAll("&quot;", "\"")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">");
+}
+
+function extractLcpDiagnostics(report) {
+  const breakdownItems = report.audits["lcp-breakdown-insight"]?.details?.items?.[0]?.items || [];
+  const phases = {
+    ttfb: 0,
+    resourceLoadDelay: 0,
+    resourceLoadDuration: 0,
+    elementRenderDelay: 0,
+  };
+
+  for (const item of breakdownItems) {
+    if (item?.subpart === "timeToFirstByte") phases.ttfb = Math.round(item.duration || 0);
+    else if (item?.subpart === "resourceLoadDelay") phases.resourceLoadDelay = Math.round(item.duration || 0);
+    else if (item?.subpart === "resourceLoadDuration") phases.resourceLoadDuration = Math.round(item.duration || 0);
+    else if (item?.subpart === "elementRenderDelay") phases.elementRenderDelay = Math.round(item.duration || 0);
+  }
+
+  const discoveryItems = report.audits["lcp-discovery-insight"]?.details?.items || [];
+  const node = discoveryItems.find((item) => item?.type === "node") || null;
+  const snippet = decodeHtmlEntities(node?.snippet || "");
+  const srcMatch = snippet.match(/\ssrc="([^"]+)"/i);
+
+  return {
+    phases,
+    lcpElementSelector: node?.selector || null,
+    lcpElementSnippet: snippet || null,
+    lcpImageUrl: srcMatch ? srcMatch[1] : null,
+  };
+}
+
+function summarizeRouteDiagnostics(routePath, runs) {
+  const medianPhases = {
+    ttfb: median(runs.map((run) => run.diagnostics?.phases?.ttfb || 0)),
+    resourceLoadDelay: median(runs.map((run) => run.diagnostics?.phases?.resourceLoadDelay || 0)),
+    resourceLoadDuration: median(runs.map((run) => run.diagnostics?.phases?.resourceLoadDuration || 0)),
+    elementRenderDelay: median(runs.map((run) => run.diagnostics?.phases?.elementRenderDelay || 0)),
+  };
+
+  const lcpValues = runs.map((run) => run.lcp).sort((a, b) => a - b);
+  const medianLcp = lcpValues[Math.floor(lcpValues.length / 2)];
+  const representativeRun =
+    runs.find((run) => run.lcp === medianLcp && run.diagnostics?.lcpElementSelector) ||
+    runs.find((run) => run.lcp === medianLcp) ||
+    runs[0];
+
+  return {
+    route: routePath,
+    medianPhases,
+    lcpElementSelector: representativeRun?.diagnostics?.lcpElementSelector || null,
+    lcpImageUrl: representativeRun?.diagnostics?.lcpImageUrl || null,
+  };
+}
+
+async function readJson(filePath) {
+  return JSON.parse(await fs.readFile(filePath, "utf8"));
+}
+
+function buildChildArgs(opts, routePath, outputDir) {
+  const args = [
+    process.argv[1],
+    "--base-url",
+    opts.baseUrl,
+    "--runs",
+    String(opts.runs),
+    "--percentile",
+    String(opts.percentile),
+    "--lcp-threshold-ms",
+    String(opts.lcpThresholdMs),
+    "--seo-threshold",
+    String(opts.seoThreshold),
+    "--output-dir",
+    outputDir,
+    "--path",
+    routePath,
+    "--cooldown-ms",
+    String(opts.cooldownMs),
+    "--isolate-worker",
+  ];
+  if (opts.diagnostics) args.push("--diagnostics");
+  return args;
+}
+
+function printSummary(opts, summary, summaryPath) {
+  console.log("");
+  console.log(`P${opts.percentile} Baseline Results`);
+  for (const result of summary.results) {
+    console.log(
+      `${result.path.padEnd(28)} perf=${String(result.baseline.perf).padStart(3)} seo=${String(
+        result.baseline.seo
+      ).padStart(3)} lcp=${String(result.baseline.lcp).padStart(4)}ms tbt=${String(
+        result.baseline.tbt
+      ).padStart(4)}ms cls=${result.baseline.cls}`
+    );
+    if (opts.diagnostics && result.diagnostics?.medianPhases) {
+      const phase = result.diagnostics.medianPhases;
+      console.log(
+        `  diagnostics: ttfb=${phase.ttfb}ms loadDelay=${phase.resourceLoadDelay}ms loadTime=${phase.resourceLoadDuration}ms renderDelay=${phase.elementRenderDelay}ms`
+      );
+      if (result.diagnostics.lcpElementSelector) {
+        console.log(`  lcp-element: ${result.diagnostics.lcpElementSelector}`);
+      }
+      if (result.diagnostics.lcpImageUrl) {
+        console.log(`  lcp-image: ${result.diagnostics.lcpImageUrl}`);
+      }
+    }
+  }
+  console.log(`Summary written: ${summaryPath}`);
+}
+
+async function runIsolatedRoutes(opts, runDir) {
+  const childRoot = path.join(runDir, "_isolated");
+  await fs.mkdir(childRoot, { recursive: true });
+
+  const routeResults = [];
+  for (const routePath of opts.paths) {
+    const routeSlug = safeSlug(routePath);
+    const routeOutputDir = path.join(childRoot, routeSlug);
+    await fs.mkdir(routeOutputDir, { recursive: true });
+
+    const childArgs = buildChildArgs(opts, routePath, routeOutputDir);
+    const child = spawnSync(process.execPath, childArgs, {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      shell: false,
+    });
+
+    if (child.stdout?.trim()) process.stdout.write(child.stdout);
+    if (child.stderr?.trim()) process.stderr.write(child.stderr);
+    if (child.error) throw child.error;
+
+    const childLatestPath = path.join(routeOutputDir, "perf-gate-latest.json");
+    const childSummary = await readJson(childLatestPath);
+    if (!Array.isArray(childSummary.results) || childSummary.results.length !== 1) {
+      throw new Error(`Isolated run produced unexpected summary shape for ${routePath}`);
+    }
+    routeResults.push(childSummary.results[0]);
+  }
+
+  const failedRoutes = routeResults.filter(
+    (result) =>
+      result.baseline.lcp > opts.lcpThresholdMs || result.baseline.seo < opts.seoThreshold
+  );
+
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    config: {
+      baseUrl: opts.baseUrl,
+      runs: opts.runs,
+      percentile: opts.percentile,
+      lcpThresholdMs: opts.lcpThresholdMs,
+      seoThreshold: opts.seoThreshold,
+      paths: opts.paths,
+      cooldownMs: opts.cooldownMs,
+      diagnostics: opts.diagnostics,
+      isolate: true,
+    },
+    results: routeResults,
+    pass: failedRoutes.length === 0,
+    failedPaths: failedRoutes.map((route) => route.path),
+  };
+
+  const summaryPath = path.join(runDir, "summary.json");
+  await fs.writeFile(summaryPath, JSON.stringify(summary, null, 2));
+  await fs.writeFile(path.join(opts.outputDir, "perf-gate-latest.json"), JSON.stringify(summary, null, 2));
+  printSummary(opts, summary, summaryPath);
+
+  if (failedRoutes.length > 0) {
+    console.error("");
+    console.error(
+      `Performance gate failed (P${opts.percentile} baseline). LCP must be <= ${opts.lcpThresholdMs}ms and SEO must be >= ${opts.seoThreshold}.`
+    );
+    for (const route of failedRoutes) {
+      console.error(`- ${route.path}: lcp=${route.baseline.lcp}ms seo=${route.baseline.seo}`);
+    }
+    process.exit(1);
+  }
+
+  console.log("");
+  console.log("Performance gate passed.");
+}
+
 async function run() {
   const opts = parseArgs(process.argv);
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   const runDir = path.join(opts.outputDir, `perf-gate-${stamp}`);
   await fs.mkdir(runDir, { recursive: true });
+
+  if (opts.isolate && !opts.isolateWorker && opts.paths.length > 1) {
+    await runIsolatedRoutes(opts, runDir);
+    return;
+  }
 
   const results = [];
 
@@ -110,7 +321,7 @@ async function run() {
       console.log(`Running ${routePath} (${runIndex}/${opts.runs})`);
       // Cool down between runs to reduce Chrome process residual CPU pressure.
       if (runIndex > 1) {
-        await sleep(INTER_RUN_COOLDOWN_MS);
+        await sleep(opts.cooldownMs);
       }
       const isWindows = process.platform === "win32";
       let proc = null;
@@ -166,7 +377,7 @@ async function run() {
       }
 
       const report = JSON.parse(await fs.readFile(reportPath, "utf8"));
-      runs.push({
+      const runResult = {
         run: runIndex,
         perf: Math.round((report.categories.performance.score || 0) * 100),
         seo: Math.round((report.categories.seo.score || 0) * 100),
@@ -174,7 +385,11 @@ async function run() {
         fcp: Math.round(report.audits["first-contentful-paint"]?.numericValue || 0),
         tbt: Math.round(report.audits["total-blocking-time"]?.numericValue || 0),
         cls: Number((report.audits["cumulative-layout-shift"]?.numericValue || 0).toFixed(3)),
-      });
+      };
+      if (opts.diagnostics) {
+        runResult.diagnostics = extractLcpDiagnostics(report);
+      }
+      runs.push(runResult);
     }
 
     const routeResult = {
@@ -198,6 +413,9 @@ async function run() {
         cls: percentile(runs.map((r) => r.cls), opts.percentile),
       },
     };
+    if (opts.diagnostics) {
+      routeResult.diagnostics = summarizeRouteDiagnostics(routePath, runs);
+    }
     results.push(routeResult);
   }
 
@@ -215,6 +433,9 @@ async function run() {
       lcpThresholdMs: opts.lcpThresholdMs,
       seoThreshold: opts.seoThreshold,
       paths: opts.paths,
+      cooldownMs: opts.cooldownMs,
+      diagnostics: opts.diagnostics,
+      isolate: Boolean(opts.isolate),
     },
     results,
     pass: failedRoutes.length === 0,
@@ -225,18 +446,7 @@ async function run() {
   await fs.writeFile(summaryPath, JSON.stringify(summary, null, 2));
   await fs.writeFile(path.join(opts.outputDir, "perf-gate-latest.json"), JSON.stringify(summary, null, 2));
 
-  console.log("");
-  console.log(`P${opts.percentile} Baseline Results`);
-  for (const result of results) {
-    console.log(
-      `${result.path.padEnd(28)} perf=${String(result.baseline.perf).padStart(3)} seo=${String(
-        result.baseline.seo
-      ).padStart(3)} lcp=${String(result.baseline.lcp).padStart(4)}ms tbt=${String(
-        result.baseline.tbt
-      ).padStart(4)}ms cls=${result.baseline.cls}`
-    );
-  }
-  console.log(`Summary written: ${summaryPath}`);
+  printSummary(opts, summary, summaryPath);
 
   if (failedRoutes.length > 0) {
     console.error("");
