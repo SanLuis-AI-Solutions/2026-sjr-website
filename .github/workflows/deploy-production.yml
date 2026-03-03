@@ -71,12 +71,25 @@ jobs:
             --path /quote \
             --path /book
 
+      - name: Extract LCP diagnostics from latest gate run
+        if: always()
+        run: |
+          latest_dir=$(ls -1dt .health/perf-gate-*/ 2>/dev/null | head -n 1 | sed 's:/*$::')
+          if [ -z "$latest_dir" ]; then
+            echo "No perf-gate directory found under .health."
+            exit 1
+          fi
+          echo "Extracting diagnostics from $latest_dir"
+          node scripts/perf/extract-lcp-diagnostics.mjs --dir "$latest_dir"
+
       - name: Upload performance artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: perf-gate-${{ github.run_id }}
           path: |
-            .health/perf-gate-*
+            .health/perf-gate-*/**
+            .health/perf-gate-latest.json
             .health/lcp-diagnostics-*.json
+          include-hidden-files: true
           if-no-files-found: warn
