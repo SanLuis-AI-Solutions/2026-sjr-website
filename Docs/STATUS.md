@@ -9,7 +9,8 @@ Update cadence: weekly (or after major milestones).
 - `/contact` guardrail recovery stream succeeded with deferred live-map loading; latest isolated p50 is now below target.
 - Conversion baseline lock pass completed for `/contact`, `/quote`, and `/book`; all three are below `<=2600ms` in current production evidence.
 - Automated conversion-route guardrail gate has been added to production CI workflow (`deploy-production.yml`).
-- **Next action:** run the updated production deploy workflow once to validate CI gate execution and artifact upload end-to-end.
+- CI validation run confirms guardrail + diagnostics + artifact upload now work end-to-end on GitHub Actions.
+- **Next action:** extend CI with a second isolated service-pilot guardrail gate (`/services/ring-sizing`, `/services/watch-repair`, `/services/custom-design`) to protect both conversion and service LCP paths.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -23,6 +24,10 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-03 CST)
+- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-03T23-46-07-371Z/summary.json` (`Performance gate passed`, run `22647929726`)
+  - `/contact`: `perf=97`, `seo=100`, `lcp=2296ms`, `tbt=110ms`
+  - `/quote`: `perf=97`, `seo=100`, `lcp=2319ms`, `tbt=89ms`
+  - `/book`: `perf=98`, `seo=100`, `lcp=2320ms`, `tbt=94ms`
 - Conversion baseline lock source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json` (`Performance gate passed`)
   - `/contact`: `perf=99`, `seo=100`, `lcp=2159ms`, `tbt=35ms`
   - `/quote`: `perf=98`, `seo=100`, `lcp=2235ms`, `tbt=30ms`
@@ -45,6 +50,27 @@ Update cadence: weekly (or after major milestones).
   - `/services/custom-design`: `2755ms -> 2375ms` (`-380ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 23:55:00 -06:00` **Step 6.2 Iteration 8 executed (CI artifact capture fix), validated live, and accepted**:
+  - workflow patch:
+    - added `Extract LCP diagnostics from latest gate run` step in `.github/workflows/deploy-production.yml`.
+    - updated artifact upload patterns to include full `.health` perf outputs.
+    - enabled `include-hidden-files: true` for hidden `.health` directory upload.
+  - validation run:
+    - workflow: `Deploy Production (Vercel)`
+    - run id: `22647929726`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22647929726`
+    - status: success.
+  - conversion guardrail results (same run):
+    - `/contact`: `2296ms`
+    - `/quote`: `2319ms`
+    - `/book`: `2320ms`
+    - SEO `100` on all three routes.
+  - artifact upload verification:
+    - artifact name: `perf-gate-22647929726`
+    - artifact id: `5750988899`
+    - size: `1,975,645 bytes`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-8-ci-artifact-capture-fix.md`
 - `2026-03-03 23:20:00 -06:00` **Step 6.2 Iteration 7 executed (CI conversion guardrail automation), implemented and documented**:
   - updated `.github/workflows/deploy-production.yml`:
     - added post-deploy isolated 5-run p50 gate for `/contact`, `/quote`, `/book`

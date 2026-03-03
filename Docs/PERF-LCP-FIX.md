@@ -216,7 +216,16 @@ Purpose:
 - prevent regression drift and reduce manual re-check loops.
 
 Validation status:
-- workflow logic shipped; first end-to-end validation occurs on the next production workflow run.
+- workflow run `22647929726` completed with end-to-end validation:
+  - post-deploy conversion guardrail: PASS
+  - diagnostics extraction: PASS
+  - artifact upload: PASS
+- artifact attached in GitHub Actions:
+  - `perf-gate-22647929726` (id `5750988899`)
+- guardrail p50 values in that CI run:
+  - `/contact`: `2296ms`
+  - `/quote`: `2319ms`
+  - `/book`: `2320ms`
 
 ---
 

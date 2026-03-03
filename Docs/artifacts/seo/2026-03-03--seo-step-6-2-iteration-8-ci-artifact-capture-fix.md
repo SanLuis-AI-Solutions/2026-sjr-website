@@ -38,3 +38,29 @@ Updated `.github/workflows/deploy-production.yml`:
   - latest perf summary pointer
   - generated LCP diagnostics JSON
 - Evidence remains attached to CI even when gate fails (`if: always()` retained).
+
+## Validation (Completed)
+
+Production workflow run:
+- `22647929726`
+- URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22647929726`
+- head: `9795243`
+
+Step outcomes:
+- `Post-deploy conversion performance guardrail (isolated p50)`: PASS
+- `Extract LCP diagnostics from latest gate run`: PASS
+- `Upload performance artifacts`: PASS
+
+Guardrail p50 metrics from run log:
+- `/contact`: `2296ms` (`seo=100`)
+- `/quote`: `2319ms` (`seo=100`)
+- `/book`: `2320ms` (`seo=100`)
+
+Artifact upload confirmation:
+- artifact count: `1`
+- artifact name: `perf-gate-22647929726`
+- artifact id: `5750988899`
+- size: `1,975,645 bytes`
+
+Result:
+- CI evidence capture issue is resolved and verified end-to-end.
