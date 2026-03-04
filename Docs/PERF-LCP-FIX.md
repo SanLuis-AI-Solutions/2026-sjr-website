@@ -656,6 +656,44 @@ Decision:
 - keep AVIF live for home mobile hero.
 - no rollback.
 
+### 0.22 Stabilization Check (Iteration 22: AVIF Repeat + Breadth Refresh)
+
+Date: 2026-03-04
+
+Goal:
+- verify iteration 21 AVIF gain is repeatable and refresh full-site breadth score before selecting the next micro-change.
+
+Repeat verification (home, AVIF still live):
+- isolated 10-run p50:
+  - `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json`
+  - `/`: `2530ms`
+  - median diagnostics: `ttfb=137ms`, `loadDelay=28ms`, `loadTime=74ms`, `renderDelay=1270ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.avif`
+
+Delta checks:
+- vs first AVIF run (`.health/perf-gate-2026-03-04T20-29-00-373Z/summary.json`): `2523ms -> 2530ms` (`+7ms`, stable noise band).
+- vs locked WebP baseline (`.health/perf-gate-2026-03-04T20-05-33-804Z/summary.json`): `2590ms -> 2530ms` (`-60ms`).
+
+Full-site breadth refresh:
+- source: `.health/perf-gate-2026-03-04T21-06-28-437Z/summary.json`
+- diagnostics: `.health/lcp-diagnostics-2026-03-04T21-06-28-437Z.json`
+- profile: 30 routes, isolated, mobile, 1 run per route.
+
+Breadth outcomes:
+- average LCP: `2261ms`
+- core-route average (`/`, `/about`, `/contact`, `/quote`, `/book`, `/services`, `/blog`): `2262ms`
+- SEO `100`: `30/30`
+- routes `<=2500ms`: `28/30`
+- outliers:
+  - `/`: `2591ms`
+  - `/services`: `2560ms`
+- score model (same framework): `95/100` (held).
+
+Decision:
+- keep AVIF as home mobile hero source.
+- no new code change in this iteration; stabilization confirmed.
+- next optimization should target `/services` hub first, then return to `/` if needed.
+
 ---
 
 ## 1. Diagnostic Method

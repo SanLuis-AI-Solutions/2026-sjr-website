@@ -18,7 +18,8 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 19 (mobile overlay merge) is now complete and rejected (`-16ms`, not material); rollback applied to keep baseline stable.
 - Home-only iteration 20 (mobile blur reduction) is now complete and rejected (`+9ms` on 10-run p50); rollback applied.
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
-- **Next action:** run one repeat isolated `/` 10-run p50 and a full-site breadth audit refresh to lock a stable post-iteration score and decide whether one final micro-pass is still needed.
+- Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
+- **Next action:** run a `/services` hub-only 5-run isolated diagnostic baseline, then apply one micro-change to reduce first paint/render delay (mobile-only, premium layout preserved).
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -32,6 +33,21 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- Home AVIF repeat verification (stabilization):
+  - isolated 10-run p50: `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json`
+  - `/`: `2530ms`
+  - median diagnostics: `ttfb=137ms`, `loadDelay=28ms`, `loadTime=74ms`, `renderDelay=1270ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.avif`
+  - delta vs prior AVIF run (`2523ms`): `+7ms` (noise band)
+  - delta vs locked WebP baseline (`2590ms`): `-60ms`
+- Full-site breadth refresh (30 routes, 1-run isolated):
+  - source: `.health/perf-gate-2026-03-04T21-06-28-437Z/summary.json`
+  - diagnostics: `.health/lcp-diagnostics-2026-03-04T21-06-28-437Z.json`
+  - average LCP: `2261ms`
+  - core-route average LCP (`/`, `/about`, `/contact`, `/quote`, `/book`, `/services`, `/blog`): `2262ms`
+  - routes `<=2500ms`: `28/30`
+  - outliers: `/` (`2591ms`), `/services` (`2560ms`)
+  - score model (same framework): `95/100` (held)
 - CI deploy source (iteration 21 AVIF test): workflow run `22687190400` (`success`)
   - deploy + conversion/service guardrails + baseline-delta checks: PASS.
 - Home format A/B baseline (WebP):
@@ -151,6 +167,20 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 15:10:00 -06:00` **Step 6.2 Iteration 22 executed (stabilization repeat + breadth refresh), measured, and documented**:
+  - home repeat verification:
+    - `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json` -> `/` `2530ms`, `renderDelay=1270ms`.
+    - vs prior AVIF run (`2523ms`): `+7ms` (stable/noise band).
+    - vs locked WebP baseline (`2590ms`): `-60ms`.
+  - full-site breadth refresh:
+    - `.health/perf-gate-2026-03-04T21-06-28-437Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-04T21-06-28-437Z.json`
+    - 30 routes, `28/30` at `<=2500ms`, outliers: `/` and `/services`.
+    - average LCP `2261ms`, score model `95/100` (held).
+  - decision:
+    - keep AVIF live; target next micro-pass on `/services` hub before returning to `/`.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-22-stabilization-and-breadth-refresh.md`
 - `2026-03-04 14:35:00 -06:00` **Step 6.2 Iteration 21 executed (home format A/B: WebP vs AVIF), accepted, and kept live**:
   - baseline lock (WebP):
     - `.health/perf-gate-2026-03-04T20-05-33-804Z/summary.json` -> `/` `2590ms`, `renderDelay=1286ms`.
