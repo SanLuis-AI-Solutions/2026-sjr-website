@@ -615,6 +615,47 @@ Decision:
   - deploy + conversion/service guardrails and baseline-delta checks all PASS.
 - next best step is to test hero image format/decode path (AVIF vs WebP) on home with unchanged layout.
 
+### 0.21 Home Hero Format A/B (Iteration 21: WebP vs AVIF)
+
+Date: 2026-03-04
+
+Goal:
+- run a controlled format test for the home mobile hero to reduce LCP without changing composition/layout.
+
+Baseline (WebP):
+- isolated 10-run p50:
+  - `.health/perf-gate-2026-03-04T20-05-33-804Z/summary.json`
+  - `/`: `2590ms`
+  - median diagnostics: `ttfb=128ms`, `loadDelay=24ms`, `loadTime=75ms`, `renderDelay=1286ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.webp`
+
+Implementation:
+- `src/components/hero.tsx` (commit `fd14869`)
+  - switched home mobile hero source:
+    - `/images/home/home-hero-ring-mobile.webp` -> `/images/home/home-hero-ring-mobile.avif`
+- `npm run build` passed.
+
+Production deploy evidence:
+- workflow run: `22687190400` (`success`)
+- deploy + conversion/service guardrails + baseline-delta checks: PASS.
+
+Measured results (AVIF):
+- isolated 10-run p50:
+  - `.health/perf-gate-2026-03-04T20-29-00-373Z/summary.json`
+  - `/`: `2523ms`
+  - median diagnostics: `ttfb=129ms`, `loadDelay=33ms`, `loadTime=49ms`, `renderDelay=1247ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.avif`
+
+Delta (WebP -> AVIF):
+- LCP p50: `2590ms -> 2523ms` (`-67ms`)
+- `renderDelay`: `1286ms -> 1247ms` (`-39ms`)
+- `resourceLoadDuration`: `75ms -> 49ms` (`-26ms`)
+
+Decision:
+- iteration 21 is accepted.
+- keep AVIF live for home mobile hero.
+- no rollback.
+
 ---
 
 ## 1. Diagnostic Method

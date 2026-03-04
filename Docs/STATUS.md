@@ -17,7 +17,8 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 18 (mobile text animation gating) is now complete and logged as non-deterministic (bimodal, no sustained median shift).
 - Home-only iteration 19 (mobile overlay merge) is now complete and rejected (`-16ms`, not material); rollback applied to keep baseline stable.
 - Home-only iteration 20 (mobile blur reduction) is now complete and rejected (`+9ms` on 10-run p50); rollback applied.
-- **Next action:** run a controlled home-hero image format test (AVIF vs WebP) with unchanged composition and compare isolated `/` 10-run median `elementRenderDelay`.
+- Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
+- **Next action:** run one repeat isolated `/` 10-run p50 and a full-site breadth audit refresh to lock a stable post-iteration score and decide whether one final micro-pass is still needed.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -31,6 +32,19 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- CI deploy source (iteration 21 AVIF test): workflow run `22687190400` (`success`)
+  - deploy + conversion/service guardrails + baseline-delta checks: PASS.
+- Home format A/B baseline (WebP):
+  - isolated 10-run p50: `.health/perf-gate-2026-03-04T20-05-33-804Z/summary.json`
+  - `/`: `2590ms`
+  - median diagnostics: `ttfb=128ms`, `loadDelay=24ms`, `loadTime=75ms`, `renderDelay=1286ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.webp`
+- Home format A/B result (AVIF):
+  - isolated 10-run p50: `.health/perf-gate-2026-03-04T20-29-00-373Z/summary.json`
+  - `/`: `2523ms`
+  - median diagnostics: `ttfb=129ms`, `loadDelay=33ms`, `loadTime=49ms`, `renderDelay=1247ms`
+  - LCP image: `/images/home/home-hero-ring-mobile.avif`
+  - delta vs WebP baseline: `-67ms` LCP, `-39ms` renderDelay
 - CI test deploy source (iteration 20): workflow run `22683881746` (`failure`)
   - failure point: service baseline-delta check
     - `/services/watch-repair`: baseline `2113ms`, current `2324ms`, delta `+211ms` vs budget `+200ms`
@@ -137,6 +151,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 14:35:00 -06:00` **Step 6.2 Iteration 21 executed (home format A/B: WebP vs AVIF), accepted, and kept live**:
+  - baseline lock (WebP):
+    - `.health/perf-gate-2026-03-04T20-05-33-804Z/summary.json` -> `/` `2590ms`, `renderDelay=1286ms`.
+  - test change:
+    - `src/components/hero.tsx`: mobile hero source `webp -> avif` (commit `fd14869`).
+  - production deploy validation:
+    - workflow run id: `22687190400`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22687190400`
+    - status: success (deploy + conversion/service guardrails + baseline-delta checks PASS).
+  - post-deploy verification (AVIF):
+    - `.health/perf-gate-2026-03-04T20-29-00-373Z/summary.json` -> `/` `2523ms`, `renderDelay=1247ms`.
+    - delta vs WebP baseline: `-67ms` LCP, `-39ms` renderDelay.
+  - decision:
+    - accept iteration 21 and keep AVIF live (no rollback).
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-21-home-format-ab-avif-vs-webp.md`
 - `2026-03-04 13:10:00 -06:00` **Step 6.2 Iteration 20 executed (home mobile blur reduction), measured, and rolled back**:
   - test change:
     - `src/components/hero.tsx`: disabled `backdrop-blur` on mobile for home hero badge + secondary CTA; desktop blur retained.
