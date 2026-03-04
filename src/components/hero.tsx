@@ -18,7 +18,7 @@ export function Hero() {
           src={mobileHeroImageSrc}
           alt="Jewelry repair hero background"
           fetchPriority="high"
-          decoding="sync"
+          decoding="async"
           loading="eager"
           width={800}
           height={540}
