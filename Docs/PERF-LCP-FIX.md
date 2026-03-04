@@ -446,6 +446,48 @@ Decision:
 - CI deployment and route guardrails are now stable and passing on latest production workflow.
 - remaining optimization target is concentrated on home hero render delay (`/`), with `/services` near-threshold variability in breadth-only scans.
 
+### 0.17 Home Decode Async Elimination (Iteration 17)
+
+Date: 2026-03-04
+
+Goal:
+- run one low-risk, single-variable home-LCP test and measure with isolated 5-run p50 diagnostics.
+
+Implementation:
+- `src/components/hero.tsx`
+  - changed home hero `<img>` from `decoding="sync"` to `decoding="async"`.
+  - no visual/layout/copy changes.
+
+Production deploy evidence:
+- commit: `c8dc480`
+- workflow run: `22679162288` (`success`)
+- guardrails in same run: PASS
+  - conversion p50:
+    - `/contact`: `2169ms`
+    - `/quote`: `2130ms`
+    - `/book`: `2208ms`
+  - service p50:
+    - `/services/ring-sizing`: `2424ms`
+    - `/services/watch-repair`: `2264ms`
+    - `/services/custom-design`: `2267ms`
+
+Home before/after (isolated 5-run p50):
+- before: `.health/perf-gate-2026-03-04T05-40-12-512Z/summary.json`
+  - `/`: `2617ms`
+  - median `elementRenderDelay`: `1208ms`
+- after: `.health/perf-gate-2026-03-04T16-56-49-516Z/summary.json`
+  - `/`: `2593ms`
+  - median `elementRenderDelay`: `1234ms`
+
+Delta:
+- `/` LCP p50: `-24ms` (not material)
+- render-delay phase: `+26ms` (within run noise, no meaningful recovery signal)
+
+Decision:
+- mark this path as **insufficient** for home-route recovery.
+- keep the change (no regressions), but do not repeat this tactic.
+- next route-specific intervention should target above-fold animation/composition work on mobile hero text stack.
+
 ---
 
 ## 1. Diagnostic Method

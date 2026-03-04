@@ -13,7 +13,8 @@ Update cadence: weekly (or after major milestones).
 - Conversion/service delta guardrail budgets are calibrated to observed CI run noise (`/contact +175`, `/book +225`, `/services/watch-repair +200`) to avoid false-fail loops while preserving route-level regression detection.
 - Easy-win content-template outlier pass is now deployed (responsive blog hero optimization), and all six prior outlier routes pass isolated 5-run p50 verification.
 - Latest full-site audit refresh keeps a `95/100` evidence score with only two single-run outliers (`/` and `/services`).
-- **Next action:** execute a dedicated home-hero render-delay reduction pass (`/` route only) and validate with isolated 5-run p50 before any broader tuning.
+- Home-only iteration 17 (decode mode test) is now complete and logged as an eliminated path (`-24ms`, not material).
+- **Next action:** run a mobile-only hero text animation reduction pass on `/` (desktop visuals preserved), then re-measure isolated 5-run p50 diagnostics.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -27,6 +28,20 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- CI post-deploy conversion/service source (latest): workflow run `22679162288` (`success`)
+  - conversion p50:
+    - `/contact`: `perf=98`, `seo=100`, `lcp=2169ms`, `tbt=90ms`
+    - `/quote`: `perf=98`, `seo=100`, `lcp=2130ms`, `tbt=93ms`
+    - `/book`: `perf=98`, `seo=100`, `lcp=2208ms`, `tbt=91ms`
+  - service p50:
+    - `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2424ms`, `tbt=107ms`
+    - `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2264ms`, `tbt=92ms`
+    - `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2267ms`, `tbt=94ms`
+  - baseline-delta checks: PASS for conversion + service in the same run.
+- Home isolated verification source (post-iteration 17): `.health/perf-gate-2026-03-04T16-56-49-516Z/summary.json`
+  - `/`: `perf=97`, `seo=100`, `lcp=2593ms`, `tbt=27ms`
+  - median diagnostics: `ttfb=130ms`, `loadDelay=24ms`, `loadTime=79ms`, `renderDelay=1234ms`
+  - before comparison source: `.health/perf-gate-2026-03-04T05-40-12-512Z/summary.json` (`/` `2617ms` -> `2593ms`, `-24ms`)
 - CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T05-57-34-066Z/summary.json` (`Performance gate passed`, run `22657021063`)
   - `/contact`: `perf=98`, `seo=100`, `lcp=1972ms`, `tbt=83ms`
   - `/quote`: `perf=98`, `seo=100`, `lcp=2121ms`, `tbt=86ms`
@@ -62,6 +77,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 11:05:00 -06:00` **Step 6.2 Iteration 17 executed (home decode async elimination), deployed, verified, and documented**:
+  - single-variable change:
+    - `src/components/hero.tsx`: `decoding="sync" -> decoding="async"` on home hero image.
+  - production deploy validation:
+    - workflow run id: `22679162288`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22679162288`
+    - status: success (conversion/service guardrails + delta checks PASS).
+  - isolated home verification:
+    - after: `.health/perf-gate-2026-03-04T16-56-49-516Z/summary.json`
+    - before: `.health/perf-gate-2026-03-04T05-40-12-512Z/summary.json`
+    - `/` p50 LCP: `2617ms -> 2593ms` (`-24ms`, not material).
+    - median render delay: `1208ms -> 1234ms`.
+  - decision:
+    - keep change (no regressions), but mark path as insufficient for home recovery.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-17-home-decode-async.md`
 - `2026-03-04 00:10:00 -06:00` **Step 6.2 Iterations 12-16 executed (stability pass + CI guardrail-noise calibration + breadth refresh), deployed and verified**:
   - code-path stabilization:
     - `src/app/services/page.tsx`:
