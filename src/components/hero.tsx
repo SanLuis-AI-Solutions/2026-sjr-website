@@ -7,7 +7,7 @@ import Link from "next/link";
  * Agent Name: Codex
  */
 
-const mobileHeroImageSrc = "/images/home/home-hero-ring-mobile.webp";
+const mobileHeroImageSrc = "/images/home/home-hero-ring-mobile.avif";
 
 export function Hero() {
   return (
