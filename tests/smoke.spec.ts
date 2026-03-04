@@ -72,7 +72,8 @@ async function assertNoBrokenImages(page: Page) {
       .filter((img) => {
         const src = img.currentSrc || img.src || "";
         if (!src) return false;
-        return !img.complete || img.naturalWidth === 0;
+        // Only fail on true decode/load failures; in-flight lazy images are not broken.
+        return img.complete && img.naturalWidth === 0;
       })
       .map((img) => img.currentSrc || img.src || "<unknown>");
   });
