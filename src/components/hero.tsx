@@ -22,7 +22,7 @@ export function Hero() {
           loading="eager"
           width={800}
           height={540}
-          className="absolute inset-0 h-full w-full object-cover object-[83%_34%] animate-slow-zoom md:object-[center_right]"
+          className="absolute inset-0 h-full w-full object-cover object-[83%_34%] md:animate-slow-zoom md:object-[center_right]"
         />
         {/* Mobile-only Product-First Overlays */}
         <div className="absolute inset-0 bg-[linear-gradient(102deg,_rgba(10,6,10,0.94)_0%,_rgba(25,10,18,0.82)_36%,_rgba(25,10,18,0.34)_64%,_rgba(25,10,18,0.08)_100%)] md:hidden" />

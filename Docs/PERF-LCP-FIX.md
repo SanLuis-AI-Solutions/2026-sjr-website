@@ -338,6 +338,58 @@ Artifacts:
 - uploaded artifact `perf-gate-22649912753` (id `5751846561`)
 - includes gate summaries, diagnostics, and delta reports.
 
+### 0.15 Blog Outlier Hero Optimization (Iteration 11)
+
+Date: 2026-03-04
+
+Goal:
+- remove the remaining easy-win outlier cluster on content routes without changing premium layout/brand presentation.
+
+Implementation:
+- `src/app/blog/[slug]/page.tsx`
+  - replaced unoptimized hero image flow with Next-optimized responsive art-direction:
+    - `getImageProps` for desktop/mobile sources
+    - `<picture>` with mobile source selection
+    - preserved existing visual composition.
+- `src/lib/blog.ts`
+  - added `BLOG_MOBILE_HERO_IMAGE_BY_SLUG` map for targeted mobile hero routing.
+- generated mobile assets:
+  - `public/images/blog/stone-security-checklist-cover-mobile.avif`
+  - `public/images/blog/custom-design-timeline-guide-cover-mobile.avif`
+  - `public/images/blog/watch-battery-replacement-cover-mobile.avif`
+
+Deploy validation:
+- workflow run `22651204423`
+- URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22651204423`
+- result: success (conversion/service guardrails and baseline-delta checks all PASS).
+
+Targeted outlier verification (isolated 5-run p50):
+- source: `.health/perf-gate-2026-03-04T01-58-49-945Z/summary.json`
+- diagnostics: `.health/lcp-diagnostics-2026-03-04T01-58-49-945Z.json`
+- deltas vs prior breadth baseline (`.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json`):
+  - `/services`: `2615ms -> 2468ms` (`-147ms`)
+  - `/blog/cost-to-resize-gold-ring-pasadena`: `2916ms -> 2245ms` (`-671ms`)
+  - `/blog/can-a-severely-bent-ring-prong-be-fixed`: `2614ms -> 2101ms` (`-513ms`)
+  - `/blog/custom-design-timeline-guide`: `2613ms -> 2315ms` (`-298ms`)
+  - `/blog/stone-security-checklist`: `2612ms -> 2313ms` (`-299ms`)
+  - `/blog/watch-battery-replacement`: `2537ms -> 2245ms` (`-292ms`)
+
+Full-site breadth refresh:
+- source: `.health/perf-gate-2026-03-04T02-10-38-904Z/summary.json`
+- diagnostics: `.health/lcp-diagnostics-2026-03-04T02-10-38-904Z.json`
+- outcomes:
+  - `avg lcp=2299ms`, `avg perf=98`, `seo=100`
+  - `28/30` routes at or below `2500ms`
+  - single-run outliers: `/blog` and `/services`
+
+Noise verification:
+- source: `.health/perf-gate-2026-03-04T02-17-34-958Z/summary.json`
+- diagnostics: `.health/lcp-diagnostics-2026-03-04T02-17-34-958Z.json`
+- results:
+  - `/blog`: `2228ms`
+  - `/services`: `2409ms`
+- decision: single-run breadth outliers were volatility/noise, not persistent misses.
+
 ---
 
 ## 1. Diagnostic Method

@@ -11,8 +11,9 @@ Update cadence: weekly (or after major milestones).
 - Automated conversion-route and service-route guardrail gates are now added to production CI workflow (`deploy-production.yml`).
 - Automated baseline-delta checks (current run vs locked baseline, route-level LCP budget) are now integrated into CI workflow for conversion + service gates.
 - Service delta guardrail budget is calibrated to real run-to-run noise on `/services/watch-repair` (`+175ms` route budget) after observing a 3ms over-budget false fail in live CI.
-- Latest full-site audit run completed across 30 routes with isolated diagnostics and refreshed Great/Good/Bad scorecard evidence.
-- **Next action:** execute easy-win content-template performance pass on the six remaining `>2500ms` outlier routes (services hub + 5 blog detail pages), starting with responsive blog hero image optimization.
+- Easy-win content-template outlier pass is now deployed (responsive blog hero optimization), and all six prior outlier routes pass isolated 5-run p50 verification.
+- Latest full-site audit refresh improved the evidence score from `91/100` to `95/100` with only two single-run noise outliers.
+- **Next action:** add a lightweight content-stability guardrail for `/blog` + `/services` (isolated p50) in CI or a scheduled nightly workflow to detect drift without slowing deploy runtime too much.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -26,10 +27,10 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
-- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T00-57-34-461Z/summary.json` (`Performance gate passed`, run `22649912753`)
-  - `/contact`: `perf=97`, `seo=100`, `lcp=2189ms`, `tbt=97ms`
-  - `/quote`: `perf=98`, `seo=100`, `lcp=2256ms`, `tbt=85ms`
-  - `/book`: `perf=98`, `seo=100`, `lcp=2124ms`, `tbt=90ms`
+- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T01-46-30-097Z/summary.json` (`Performance gate passed`, run `22651204423`)
+  - `/contact`: `perf=97`, `seo=100`, `lcp=2279ms`, `tbt=106ms`
+  - `/quote`: `perf=98`, `seo=100`, `lcp=2188ms`, `tbt=62ms`
+  - `/book`: `perf=98`, `seo=100`, `lcp=2265ms`, `tbt=60ms`
 - Conversion baseline lock source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json` (`Performance gate passed`)
   - `/contact`: `perf=99`, `seo=100`, `lcp=2159ms`, `tbt=35ms`
   - `/quote`: `perf=98`, `seo=100`, `lcp=2235ms`, `tbt=30ms`
@@ -40,22 +41,56 @@ Update cadence: weekly (or after major milestones).
 - Contact/About delta vs prior guardrail run (`.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`):
   - `/contact`: `5248ms -> 2165ms` (`-3083ms`)
   - `/about`: `2473ms -> 2196ms` (`-277ms`)
-- CI post-deploy service source (latest): `.health/perf-gate-2026-03-04T01-03-41-260Z/summary.json` (`Performance gate passed`, run `22649912753`)
+- CI post-deploy service source (latest): `.health/perf-gate-2026-03-04T01-52-37-826Z/summary.json` (`Performance gate passed`, run `22651204423`)
 - Service config: isolated 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/services/ring-sizing`: `perf=98`, `seo=100`, `lcp=2411ms`, `tbt=52ms`
-- `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2266ms`, `tbt=65ms`
-- `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2264ms`, `tbt=79ms`
+- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2428ms`, `tbt=91ms`
+- `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2268ms`, `tbt=39ms`
+- `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2273ms`, `tbt=71ms`
 - Failed paths: none (pilot service gate pass)
 - Service p50 delta vs prior iteration-3 baseline (`.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`):
-  - `/services/ring-sizing`: `3040ms -> 2411ms` (`-629ms`)
-  - `/services/watch-repair`: `3113ms -> 2266ms` (`-847ms`)
-  - `/services/custom-design`: `2755ms -> 2264ms` (`-491ms`)
-- Full-site audit source (latest isolated breadth run): `.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json` (`Performance gate passed`, 30 routes, 1-run p50 scan)
-  - overall average: `lcp=2377ms`, `perf=98`, `seo=100`, `tbt=29ms`
-  - routes `<=2500ms`: `24/30`
-  - outliers (`>2500ms`): `/services` and 5 blog detail pages (max `2916ms`)
+  - `/services/ring-sizing`: `3040ms -> 2428ms` (`-612ms`)
+  - `/services/watch-repair`: `3113ms -> 2268ms` (`-845ms`)
+  - `/services/custom-design`: `2755ms -> 2273ms` (`-482ms`)
+- Full-site audit source (latest isolated breadth run): `.health/perf-gate-2026-03-04T02-10-38-904Z/summary.json` (`Performance gate passed`, 30 routes, 1-run p50 scan)
+  - overall average: `lcp=2299ms`, `perf=98`, `seo=100`, `tbt=27ms`
+  - routes `<=2500ms`: `28/30`
+  - single-run outliers (`>2500ms`): `/blog` (`2667ms`), `/services` (`2606ms`)
+  - audit score model (same framework as prior artifact): `95/100` (up from `91/100`)
+- Outlier-noise verification source (isolated 5-run p50): `.health/perf-gate-2026-03-04T02-17-34-958Z/summary.json` (`Performance gate passed`)
+  - `/blog`: `2228ms`
+  - `/services`: `2409ms`
+  - interpretation: prior single-run outliers are volatility/noise, not persistent threshold misses.
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 20:20:00 -06:00` **Step 6.2 Iteration 11 executed (blog outlier hero optimization), deployed, verified, and documented**:
+  - code + asset changes:
+    - `src/app/blog/[slug]/page.tsx`
+      - replaced unoptimized hero image path with Next-optimized responsive art-direction (`getImageProps` + `<picture>`).
+    - `src/lib/blog.ts`
+      - added `BLOG_MOBILE_HERO_IMAGE_BY_SLUG` map for mobile hero routing on target slugs.
+    - generated mobile assets:
+      - `public/images/blog/stone-security-checklist-cover-mobile.avif`
+      - `public/images/blog/custom-design-timeline-guide-cover-mobile.avif`
+      - `public/images/blog/watch-battery-replacement-cover-mobile.avif`
+  - production deployment validation:
+    - workflow run id: `22651204423`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22651204423`
+    - status: success (all conversion/service guardrails + delta checks PASS).
+  - targeted outlier verification (isolated 5-run p50):
+    - source: `.health/perf-gate-2026-03-04T01-58-49-945Z/summary.json`
+    - diagnostics: `.health/lcp-diagnostics-2026-03-04T01-58-49-945Z.json`
+    - `/services`: `2615ms -> 2468ms` (`-147ms`)
+    - `/blog/cost-to-resize-gold-ring-pasadena`: `2916ms -> 2245ms` (`-671ms`)
+    - `/blog/can-a-severely-bent-ring-prong-be-fixed`: `2614ms -> 2101ms` (`-513ms`)
+    - `/blog/custom-design-timeline-guide`: `2613ms -> 2315ms` (`-298ms`)
+    - `/blog/stone-security-checklist`: `2612ms -> 2313ms` (`-299ms`)
+    - `/blog/watch-battery-replacement`: `2537ms -> 2245ms` (`-292ms`)
+  - breadth audit refresh:
+    - source: `.health/perf-gate-2026-03-04T02-10-38-904Z/summary.json`
+    - diagnostics: `.health/lcp-diagnostics-2026-03-04T02-10-38-904Z.json`
+    - 30 routes audited; score model improved to `95/100`.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-11-blog-hero-outlier-pass.md`
 - `2026-03-03 19:10:00 -06:00` **Step 6.2 Iteration 10C executed (post-calibration CI validation), passed end-to-end**:
   - validation workflow:
     - run id: `22649912753`

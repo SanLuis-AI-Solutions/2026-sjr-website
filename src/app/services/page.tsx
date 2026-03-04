@@ -97,7 +97,7 @@ export default async function ServicesPage() {
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
-          <div className="reveal-on-scroll">
+          <div>
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
               Services Directory
             </p>
@@ -140,7 +140,7 @@ export default async function ServicesPage() {
             </div>
           </div>
 
-          <div className="relative reveal-on-scroll">
+          <div className="relative">
             <div className="relative h-[420px] overflow-hidden rounded-3xl border border-stone-200 shadow-[0_28px_70px_rgba(58,25,16,0.18)] md:h-[520px]">
               <Image
                 src={featuredImage}
