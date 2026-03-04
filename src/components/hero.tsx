@@ -35,19 +35,19 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-end px-5 pb-10 pt-24 md:min-h-[74vh] md:items-center md:px-6 md:py-14">
         <div className="relative w-full max-w-[19.25rem] md:max-w-2xl">
           <div className="relative">
-            <div className="animate-fade-up reveal-delay-1 inline-flex items-center gap-3 rounded-full border border-brand-gold/50 bg-black/32 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold shadow-[0_8px_20px_rgba(0,0,0,0.24)] backdrop-blur-sm md:bg-white/80 md:text-brand-burgundy">
+            <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3 rounded-full border border-brand-gold/50 bg-black/32 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold shadow-[0_8px_20px_rgba(0,0,0,0.24)] backdrop-blur-sm md:bg-white/80 md:text-brand-burgundy">
               In-House Repairs
               <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
               Your Jewelry Stays On-Site.
             </div>
-            <h1 className="lcp-heading animate-fade-up reveal-delay-2 mt-6 max-w-[8.8ch] text-[clamp(2.9rem,13.6vw,4.2rem)] leading-[0.9] text-white [text-wrap:balance] md:max-w-none md:text-6xl md:leading-[0.95] md:text-stone-900 lg:text-7xl">
+            <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[8.8ch] text-[clamp(2.9rem,13.6vw,4.2rem)] leading-[0.9] text-white [text-wrap:balance] md:max-w-none md:text-6xl md:leading-[0.95] md:text-stone-900 lg:text-7xl">
               Your jewelry never leaves our hands.
             </h1>
-            <p className="animate-fade-up reveal-delay-3 mt-5 max-w-[24ch] text-[1.08rem] leading-relaxed text-stone-100/92 md:mt-6 md:max-w-[32ch] md:text-lg md:font-normal md:text-stone-600">
+            <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-5 max-w-[24ch] text-[1.08rem] leading-relaxed text-stone-100/92 md:mt-6 md:max-w-[32ch] md:text-lg md:font-normal md:text-stone-600">
               On-site master craftsmanship with clear pricing and Same Day/Next Day service.
             </p>
-            <div className="animate-fade-up reveal-delay-4 mt-7 h-px w-24 bg-gradient-to-r from-brand-gold/95 to-transparent md:hidden" />
-            <div className="animate-fade-up reveal-delay-4 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 h-px w-24 bg-gradient-to-r from-brand-gold/95 to-transparent md:hidden" />
+            <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/quote"
                 className="micro-interaction group relative inline-flex min-h-12 w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-brand-burgundy to-[#9c3f5e] px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-[0_24px_52px_rgba(24,7,13,0.52)] ring-1 ring-inset ring-brand-gold/25 transition-all hover:from-brand-burgundy-deep hover:to-brand-burgundy hover:shadow-[0_30px_58px_rgba(24,7,13,0.62)] sm:w-auto"
