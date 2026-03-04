@@ -71,6 +71,15 @@ jobs:
             --path /quote \
             --path /book
 
+      - name: Compare conversion gate vs locked baseline (delta budget)
+        run: |
+          conversion_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
+          node scripts/perf/compare-perf-gate-baseline.mjs \
+            --label conversion \
+            --summary "$conversion_summary" \
+            --baseline scripts/perf/baselines/conversion-ci-lcp-baseline.json \
+            --write .health/perf-delta-conversion-latest.json
+
       - name: Post-deploy service performance guardrail (isolated p50)
         run: |
           node scripts/perf/launch-performance-gate.mjs \
@@ -84,6 +93,15 @@ jobs:
             --path /services/ring-sizing \
             --path /services/watch-repair \
             --path /services/custom-design
+
+      - name: Compare service gate vs locked baseline (delta budget)
+        run: |
+          service_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
+          node scripts/perf/compare-perf-gate-baseline.mjs \
+            --label service \
+            --summary "$service_summary" \
+            --baseline scripts/perf/baselines/service-ci-lcp-baseline.json \
+            --write .health/perf-delta-service-latest.json
 
       - name: Extract LCP diagnostics from gate runs
         if: always()
@@ -110,5 +128,6 @@ jobs:
             .health/perf-gate-*/**
             .health/perf-gate-latest.json
             .health/lcp-diagnostics-*.json
+            .health/perf-delta-*.json
           include-hidden-files: true
           if-no-files-found: warn

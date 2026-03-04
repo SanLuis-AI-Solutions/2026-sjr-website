@@ -19,7 +19,8 @@
     "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs",
     "perf:gate": "node scripts/perf/launch-performance-gate.mjs",
     "perf:gen-mobile-heroes": "node scripts/perf/generate-mobile-hero-avif.mjs",
-    "perf:extract-lcp-diagnostics": "node scripts/perf/extract-lcp-diagnostics.mjs"
+    "perf:extract-lcp-diagnostics": "node scripts/perf/extract-lcp-diagnostics.mjs",
+    "perf:compare-baseline": "node scripts/perf/compare-perf-gate-baseline.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

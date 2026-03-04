@@ -259,6 +259,38 @@ Validation status:
   - `/quote`: `2156ms`
   - `/book`: `2119ms`
 
+### 0.12 CI Baseline-Delta Enforcement + Full-Site Audit Refresh
+
+Date: 2026-03-04
+
+Implementation:
+- added `scripts/perf/compare-perf-gate-baseline.mjs`.
+- added locked baseline files:
+  - `scripts/perf/baselines/conversion-ci-lcp-baseline.json`
+  - `scripts/perf/baselines/service-ci-lcp-baseline.json`
+- updated `.github/workflows/deploy-production.yml`:
+  - compare conversion gate vs locked baseline
+  - compare service gate vs locked baseline
+  - fail workflow when route delta exceeds regression budget (`+150ms` default).
+- upload now includes `.health/perf-delta-*.json` artifacts.
+
+Validation:
+- local conversion check PASS against locked baseline.
+- local service check intentionally FAILed on historical summary where `/services/watch-repair` was `+186ms` over baseline (`+150ms` budget), confirming fail behavior works.
+- YAML validation PASS for workflow structure.
+
+Full-site breadth audit refresh:
+- source: `.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json` (30 routes, isolated, mobile)
+- diagnostics: `.health/lcp-diagnostics-2026-03-04T00-23-13-383Z.json`
+- outcomes:
+  - SEO `100` on all 30 routes.
+  - `24/30` routes at or below `2500ms`.
+  - outliers (`>2500ms`) concentrated on `/services` + 5 blog detail pages.
+
+Decision:
+- regression detection is now deterministic in CI for the protected conversion/service route sets.
+- next optimization wave should target easy-win outlier pages first (blog detail + services hub) with the same eliminate-and-measure method.
+
 ---
 
 ## 1. Diagnostic Method

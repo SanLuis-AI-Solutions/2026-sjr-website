@@ -1,0 +1,30 @@
+{
+  "name": "conversion-ci-lcp-baseline",
+  "source": {
+    "workflowRunId": 22648411605,
+    "collectedAt": "2026-03-03T18:10:15-06:00",
+    "summary": ".health/perf-gate-2026-03-04T00-06-29-647Z/summary.json",
+    "percentile": 50,
+    "runs": 5
+  },
+  "metric": "results[].baseline.lcp",
+  "defaultMaxRegressionMs": 150,
+  "routes": [
+    {
+      "path": "/contact",
+      "lcpMs": 2130,
+      "maxRegressionMs": 150
+    },
+    {
+      "path": "/quote",
+      "lcpMs": 2156,
+      "maxRegressionMs": 150
+    },
+    {
+      "path": "/book",
+      "lcpMs": 2119,
+      "maxRegressionMs": 150
+    }
+  ]
+}
+

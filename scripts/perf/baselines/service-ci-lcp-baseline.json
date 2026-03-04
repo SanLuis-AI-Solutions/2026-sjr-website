@@ -1,0 +1,30 @@
+{
+  "name": "service-ci-lcp-baseline",
+  "source": {
+    "workflowRunId": 22648411605,
+    "collectedAt": "2026-03-03T18:10:15-06:00",
+    "summary": ".health/perf-gate-2026-03-04T00-10-15-343Z/summary.json",
+    "percentile": 50,
+    "runs": 5
+  },
+  "metric": "results[].baseline.lcp",
+  "defaultMaxRegressionMs": 150,
+  "routes": [
+    {
+      "path": "/services/ring-sizing",
+      "lcpMs": 2419,
+      "maxRegressionMs": 150
+    },
+    {
+      "path": "/services/watch-repair",
+      "lcpMs": 2113,
+      "maxRegressionMs": 150
+    },
+    {
+      "path": "/services/custom-design",
+      "lcpMs": 2271,
+      "maxRegressionMs": 150
+    }
+  ]
+}
+

@@ -9,8 +9,9 @@ Update cadence: weekly (or after major milestones).
 - `/contact` guardrail recovery stream succeeded with deferred live-map loading; latest isolated p50 is now below target.
 - Conversion baseline lock pass completed for `/contact`, `/quote`, and `/book`; all three are below `<=2600ms` in current production evidence.
 - Automated conversion-route and service-route guardrail gates are now added to production CI workflow (`deploy-production.yml`).
-- Latest CI validation run confirms both guardrails + diagnostics extraction + artifact upload now work end-to-end on GitHub Actions.
-- **Next action:** add automated baseline-delta reporting in CI (current run vs locked baseline) so regressions are triaged with immediate before/after context.
+- Automated baseline-delta checks (current run vs locked baseline, route-level LCP budget) are now integrated into CI workflow for conversion + service gates.
+- Latest full-site audit run completed across 30 routes with isolated diagnostics and refreshed Great/Good/Bad scorecard evidence.
+- **Next action:** execute easy-win content-template performance pass on the six remaining `>2500ms` outlier routes (services hub + 5 blog detail pages), starting with responsive blog hero image optimization.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -48,8 +49,35 @@ Update cadence: weekly (or after major milestones).
   - `/services/ring-sizing`: `3040ms -> 2419ms` (`-621ms`)
   - `/services/watch-repair`: `3113ms -> 2113ms` (`-1000ms`)
   - `/services/custom-design`: `2755ms -> 2271ms` (`-484ms`)
+- Full-site audit source (latest isolated breadth run): `.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json` (`Performance gate passed`, 30 routes, 1-run p50 scan)
+  - overall average: `lcp=2377ms`, `perf=98`, `seo=100`, `tbt=29ms`
+  - routes `<=2500ms`: `24/30`
+  - outliers (`>2500ms`): `/services` and 5 blog detail pages (max `2916ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 18:35:00 -06:00` **Step 6.2 Iteration 10 executed (CI baseline-delta guardrail + full-site audit refresh), validated and documented**:
+  - workflow hardening:
+    - added `scripts/perf/compare-perf-gate-baseline.mjs` for deterministic route-level LCP delta checks.
+    - added locked baseline files:
+      - `scripts/perf/baselines/conversion-ci-lcp-baseline.json`
+      - `scripts/perf/baselines/service-ci-lcp-baseline.json`
+    - updated `.github/workflows/deploy-production.yml` with two new post-gate checks:
+      - `Compare conversion gate vs locked baseline (delta budget)`
+      - `Compare service gate vs locked baseline (delta budget)`
+    - artifact upload expanded to include `.health/perf-delta-*.json`.
+  - local comparator verification:
+    - conversion check PASS on local evidence (`.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json`).
+    - service check correctly FAILed when regression budget exceeded on `/services/watch-repair` (+186ms vs +150ms budget), confirming fail behavior.
+  - full-site audit refresh:
+    - ran isolated diagnostics breadth scan for 30 routes:
+      - source: `.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json`
+      - diagnostics: `.health/lcp-diagnostics-2026-03-04T00-23-13-383Z.json`
+    - key outcomes:
+      - SEO `100` on all 30 routes.
+      - 24/30 routes at or under `2500ms` LCP.
+      - remaining outliers are concentrated in `/services` and 5 blog detail pages.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--full-site-audit-refresh.md`
 - `2026-03-03 18:15:00 -06:00` **Step 6.2 Iteration 9 executed (service CI guardrail automation), validated live, and accepted**:
   - workflow patch:
     - added `Post-deploy service performance guardrail (isolated p50)` step in `.github/workflows/deploy-production.yml`.
