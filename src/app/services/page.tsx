@@ -268,7 +268,7 @@ export default async function ServicesPage() {
             </aside>
 
             <div className="space-y-16">
-              {groups.map((group, groupIndex) => {
+              {groups.map((group) => {
                 const items = group.slugs
                   .map((slug) => servicesBySlug.get(slug))
                   .filter((item): item is ServiceListItem => Boolean(item));
@@ -278,7 +278,7 @@ export default async function ServicesPage() {
                     key={group.id}
                     id={`group-${group.id}`}
                     aria-labelledby={`group-heading-${group.id}`}
-                    className={`scroll-mt-[120px] reveal-on-scroll reveal-delay-${(groupIndex % 3) + 1}`}
+                    className="scroll-mt-[120px]"
                   >
                     <div className="flex flex-wrap items-end justify-between gap-4">
                       <div>

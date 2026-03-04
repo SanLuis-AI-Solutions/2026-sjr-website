@@ -99,7 +99,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           {featuredPost ? (
             <Link
               href={`/blog/${featuredPost.slug}`}
-              className="reveal-on-scroll group mt-10 grid overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_22px_64px_rgba(58,25,16,0.15)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_75px_rgba(58,25,16,0.17)] md:grid-cols-[1.1fr_0.9fr] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="group mt-10 grid overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_22px_64px_rgba(58,25,16,0.15)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_75px_rgba(58,25,16,0.17)] md:grid-cols-[1.1fr_0.9fr] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               <div className="relative min-h-[16rem] md:min-h-[22rem]">
                 <Image
