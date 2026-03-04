@@ -528,6 +528,46 @@ Decision:
 - keep the mobile animation gating change (no regressions), but do not treat it as the main home-LCP fix.
 - next elimination target should be mobile hero overlay/compositor complexity, not copy animation.
 
+### 0.19 Home Overlay Merge Elimination (Iteration 19)
+
+Date: 2026-03-04
+
+Goal:
+- test whether merging mobile hero overlay layers reduces persistent home `elementRenderDelay`.
+
+Implementation:
+- `src/components/hero.tsx`
+  - temporarily merged two mobile overlay elements into a single combined gradient layer.
+
+Production deploy evidence:
+- test commit: `80aba97`
+- workflow run: `22682033617` (`failure`)
+- failure reason:
+  - service guardrail step failed on `/services/ring-sizing` at `2525ms` (`+25ms` over absolute `2500ms` gate).
+  - in the same run:
+    - `/services/watch-repair`: `2275ms`
+    - `/services/custom-design`: `2277ms`
+
+Home verification:
+- post-change isolated 10-run p50:
+  - `.health/perf-gate-2026-03-04T18-10-32-112Z/summary.json`
+  - `/`: `2586ms`
+  - median `elementRenderDelay`: `1228ms`
+- comparison baseline:
+  - `.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json`
+  - `/`: `2602ms`
+- delta: `-16ms` (not material).
+
+Service sanity recheck (to separate CI noise from true regression):
+- `.health/perf-gate-2026-03-04T18-14-48-917Z/summary.json`
+- `/services/ring-sizing`: `2445ms` (pass).
+
+Decision:
+- iteration 19 is **rejected** as a primary home recovery path.
+- revert applied to keep baseline stable:
+  - revert commit: `c5314af`.
+- next elimination target should focus on mobile hero chrome effects (e.g., above-fold `backdrop-blur`) rather than overlay layer count.
+
 ---
 
 ## 1. Diagnostic Method

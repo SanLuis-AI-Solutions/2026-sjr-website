@@ -15,7 +15,8 @@ Update cadence: weekly (or after major milestones).
 - Latest full-site audit refresh keeps a `95/100` evidence score with only two single-run outliers (`/` and `/services`).
 - Home-only iteration 17 (decode mode test) is now complete and logged as an eliminated path (`-24ms`, not material).
 - Home-only iteration 18 (mobile text animation gating) is now complete and logged as non-deterministic (bimodal, no sustained median shift).
-- **Next action:** run a mobile hero overlay-composition simplification pass on `/` (luxury look preserved), then validate with isolated 10-run p50 diagnostics.
+- Home-only iteration 19 (mobile overlay merge) is now complete and rejected (`-16ms`, not material); rollback applied to keep baseline stable.
+- **Next action:** run a mobile-only pass to reduce above-fold `backdrop-blur` usage on home hero UI chrome, then validate with isolated 10-run p50 diagnostics.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -29,6 +30,21 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- CI post-deploy conversion/service source (iteration 19 test): workflow run `22682033617` (`failure`)
+  - failure point: service guardrail step
+    - `/services/ring-sizing`: `2525ms` (threshold `<=2500ms`)
+  - same run values:
+    - `/services/watch-repair`: `2275ms`
+    - `/services/custom-design`: `2277ms`
+  - interpretation: near-threshold CI miss during iteration 19 test deploy.
+- Home isolated verification (iteration 19 test deploy):
+  - 10-run p50: `.health/perf-gate-2026-03-04T18-10-32-112Z/summary.json`
+    - `/`: `2586ms`
+    - median diagnostics: `ttfb=130ms`, `loadDelay=22ms`, `loadTime=82ms`, `renderDelay=1228ms`
+  - vs prior stabilized home baseline (`.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json`): `2602ms -> 2586ms` (`-16ms`, not material).
+- Service sanity recheck after iteration 19 CI miss:
+  - `.health/perf-gate-2026-03-04T18-14-48-917Z/summary.json`
+  - `/services/ring-sizing`: `2445ms` (pass), indicating CI miss was likely transient.
 - CI post-deploy conversion/service source (latest): workflow run `22680479756` (`success`)
   - conversion p50:
     - `/contact`: `perf=98`, `seo=100`, `lcp=2254ms`, `tbt=91ms`
@@ -93,6 +109,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 12:20:00 -06:00` **Step 6.2 Iteration 19 executed (home mobile overlay merge), measured, and rolled back**:
+  - test change:
+    - `src/components/hero.tsx`: merged two mobile overlay layers into one combined layer to reduce compositor work.
+  - production deploy validation:
+    - workflow run id: `22682033617`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22682033617`
+    - status: failure (service guardrail failed on `/services/ring-sizing` at `2525ms`).
+  - home verification:
+    - `.health/perf-gate-2026-03-04T18-10-32-112Z/summary.json` -> `/` `2586ms`, `renderDelay=1228ms`.
+    - delta vs prior stabilized baseline (`2602ms`): `-16ms` (not material).
+  - service sanity check:
+    - `.health/perf-gate-2026-03-04T18-14-48-917Z/summary.json` -> `/services/ring-sizing` `2445ms` (pass).
+  - decision:
+    - reject iteration 19 as primary recovery path; rollback applied in commit `c5314af`.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-19-home-overlay-merge-elimination.md`
 - `2026-03-04 11:40:00 -06:00` **Step 6.2 Iteration 18 executed (home mobile animation gating), deployed, verified, and documented**:
   - single-variable change set:
     - `src/components/hero.tsx`: added `home-hero-mobile-static` on home hero text/CTA stack.
