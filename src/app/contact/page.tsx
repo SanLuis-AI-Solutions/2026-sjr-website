@@ -7,8 +7,6 @@ import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
 const GOOGLE_MAPS_PRIMARY_URL = "https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8";
-const GOOGLE_MAPS_EMBED_URL =
-  "https://www.google.com/maps?q=Susie's+Jewelry+and+Watch+Repair,+3910+Fairmont+Pkwy+C,+Pasadena,+TX+77504&output=embed";
 
 export const metadata: Metadata = {
   title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
@@ -236,15 +234,15 @@ async function DeferredContactSection() {
             aria-label="Open Susie's Jewelry and Watch Repair on Google Maps"
             className="group relative block overflow-hidden rounded-2xl border border-stone-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
           >
-            <iframe
-              title="Susie's Jewelry and Watch Repair map location"
-              src={GOOGLE_MAPS_EMBED_URL}
-              width="100%"
-              height="320"
-              style={{ border: 0 }}
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static map preview avoids iframe performance cost while preserving clear location context. */}
+            <img
+              src="/images/contact/susies-map-preview.webp"
+              alt="Map preview centered on Susie's Jewelry and Watch Repair in Pasadena, Texas"
+              width={1365}
+              height={768}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="pointer-events-none h-[320px] w-full grayscale-[14%] contrast-[1.03] transition-transform duration-300 group-hover:scale-[1.01]"
+              decoding="async"
+              className="pointer-events-none h-[320px] w-full object-cover object-center grayscale-[14%] contrast-[1.03] transition-transform duration-300 group-hover:scale-[1.01]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
             <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-xl border border-white/35 bg-black/55 px-4 py-3 text-white shadow-[0_12px_30px_rgba(10,6,6,0.3)] backdrop-blur-sm">

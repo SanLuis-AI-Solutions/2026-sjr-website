@@ -34,10 +34,9 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
-- Contact map fix guardrail verification:
-  - source: `.health/perf-gate-2026-03-04T21-38-21-693Z/summary.json`
-  - `/contact`: `perf=98`, `seo=100`, `lcp=2167ms`, `tbt=26ms`
-  - outcome: pass, no regression from map UX update.
+- Contact map fix verification:
+  - local build passed after map UX update.
+  - deployment guardrail verification is tracked in the production workflow run for the static-map variant.
 - Home AVIF repeat verification (stabilization):
   - isolated 10-run p50: `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json`
   - `/`: `2530ms`
@@ -175,12 +174,13 @@ Update cadence: weekly (or after major milestones).
 - `2026-03-04 15:45:00 -06:00` **Contact map UX fix implemented and verified**:
   - code change:
     - `src/app/contact/page.tsx`
-    - replaced deferred placeholder map interaction with a full clickable map card.
+    - replaced deferred/live iframe map interaction with a full clickable static map preview card.
     - all map-card clicks now open `https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8`.
     - added explicit overlay business label/address to ensure destination is immediately visible.
+    - added `public/images/contact/susies-map-preview.webp` as the map preview image.
   - verification:
     - build: `npm run build` passed.
-    - guardrail: `.health/perf-gate-2026-03-04T21-38-21-693Z/summary.json` -> `/contact` `2167ms` (pass).
+    - production guardrail validation recorded in deploy workflow for this fix.
   - Artifact:
     - `Docs/artifacts/seo/2026-03-04--contact-map-direct-clickthrough-fix.md`
 - `2026-03-04 15:10:00 -06:00` **Step 6.2 Iteration 22 executed (stabilization repeat + breadth refresh), measured, and documented**:
