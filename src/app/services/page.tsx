@@ -228,7 +228,7 @@ export default async function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
-            <aside className="reveal-on-scroll lg:sticky lg:top-28 lg:self-start">
+            <aside className="lg:sticky lg:top-28 lg:self-start">
               {/* Desktop: keep a persistent sticky directory for quick navigation. */}
               <div className="hidden rounded-3xl border border-stone-200 bg-stone-100/60 p-6 lg:block">
                 <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
