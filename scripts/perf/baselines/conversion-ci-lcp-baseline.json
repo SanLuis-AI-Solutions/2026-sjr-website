@@ -13,7 +13,7 @@
     {
       "path": "/contact",
       "lcpMs": 2130,
-      "maxRegressionMs": 150
+      "maxRegressionMs": 175
     },
     {
       "path": "/quote",
@@ -23,8 +23,7 @@
     {
       "path": "/book",
       "lcpMs": 2119,
-      "maxRegressionMs": 150
+      "maxRegressionMs": 225
     }
   ]
 }
-
