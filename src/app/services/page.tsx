@@ -165,7 +165,7 @@ export default async function ServicesPage() {
       </section>
 
       {/* Featured section (standalone, clean, Apple-like). */}
-      <section className="bg-white py-14">
+      <section className="cv-section bg-white py-14">
         <div className="mx-auto max-w-6xl px-6">
           <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-[0_22px_60px_rgba(58,25,16,0.14)]">
             <div className="absolute inset-0">
@@ -223,7 +223,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative bg-stone-50 py-16">
+      <section className="cv-section relative bg-stone-50 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,_rgba(122,46,58,0.08),_transparent_52%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
