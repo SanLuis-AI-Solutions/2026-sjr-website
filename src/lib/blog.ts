@@ -475,6 +475,16 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 ];
 
+export const BLOG_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
+  "ring-sizing-guide": "/images/blog/ring-sizing-guide-cover-mobile.avif",
+  "cost-to-resize-gold-ring-pasadena": "/images/blog/ring-sizing-guide-cover-mobile.avif",
+  "stone-security-checklist": "/images/blog/stone-security-checklist-cover-mobile.avif",
+  "can-a-severely-bent-ring-prong-be-fixed": "/images/blog/stone-security-checklist-cover-mobile.avif",
+  "custom-design-timeline-guide": "/images/blog/custom-design-timeline-guide-cover-mobile.avif",
+  "watch-battery-replacement": "/images/blog/watch-battery-replacement-cover-mobile.avif",
+  "where-to-get-watch-battery-replaced-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
+};
+
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((post) => post.slug === slug);
 }
