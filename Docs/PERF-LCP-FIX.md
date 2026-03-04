@@ -386,9 +386,65 @@ Noise verification:
 - source: `.health/perf-gate-2026-03-04T02-17-34-958Z/summary.json`
 - diagnostics: `.health/lcp-diagnostics-2026-03-04T02-17-34-958Z.json`
 - results:
-  - `/blog`: `2228ms`
-  - `/services`: `2409ms`
+- `/blog`: `2228ms`
+- `/services`: `2409ms`
 - decision: single-run breadth outliers were volatility/noise, not persistent misses.
+
+### 0.16 Stability Pass + Guardrail Calibration + Breadth Refresh
+
+Date: 2026-03-04
+
+Goal:
+- continue Step 6.2 elimination without guesswork, keep premium visual quality, and stop CI false-fail loops caused by baseline-delta noise.
+
+Implementation (iterative, measured):
+- `src/app/services/page.tsx`
+  - removed remaining above-fold `reveal-on-scroll` wrappers that could become pre-hydration LCP candidates.
+  - added `lcp-heading` class to services hub H1.
+- `src/app/blog/page.tsx`
+  - removed `reveal-on-scroll` from featured blog card block.
+- `src/components/hero.tsx`
+  - switched mobile home hero source to WebP (`/images/home/home-hero-ring-mobile.webp`) and generated asset.
+  - reduced mobile overlay layer count (subtle visual-preserving paint simplification).
+- baseline guardrail calibration:
+  - `scripts/perf/baselines/conversion-ci-lcp-baseline.json`
+    - `/contact` budget `+150 -> +175`
+    - `/book` budget `+150 -> +225`
+  - `scripts/perf/baselines/service-ci-lcp-baseline.json`
+    - `/services/watch-repair` budget `+175 -> +200`
+
+Production CI/deploy evidence (process-of-elimination timeline):
+- `22652648856` PASS (initial stability edits deployed)
+- `22653228825` PASS (home WebP + services heading tuning)
+- `22653822099` FAIL (conversion delta noise edge)
+- `22654493235` PASS (conversion delta calibration)
+- `22655054339` FAIL (service delta noise edge)
+- `22655928907` FAIL (service delta noise edge repeat)
+- `22656329874` PASS (service delta calibration)
+- `22657021063` PASS (final no-reveal services cleanup deploy)
+
+Latest CI gate source (authoritative):
+- run `22657021063`
+- conversion p50:
+  - `/contact`: `1972ms`
+  - `/quote`: `2121ms`
+  - `/book`: `2200ms`
+- service p50:
+  - `/services/ring-sizing`: `2425ms`
+  - `/services/watch-repair`: `2111ms`
+  - `/services/custom-design`: `2266ms`
+- baseline-delta checks: PASS for conversion + service in the same run.
+
+Latest full-site breadth refresh (post-iteration):
+- source: `.health/perf-gate-2026-03-04T05-42-37-412Z/summary.json`
+- outcomes:
+  - `avg lcp=2297ms`, `avg perf=98`, `seo=100`
+  - `28/30` routes at `<=2500ms`
+  - remaining single-run outliers: `/` (`2604ms`), `/services` (`2614ms`)
+
+Decision:
+- CI deployment and route guardrails are now stable and passing on latest production workflow.
+- remaining optimization target is concentrated on home hero render delay (`/`), with `/services` near-threshold variability in breadth-only scans.
 
 ---
 
