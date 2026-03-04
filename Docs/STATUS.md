@@ -30,6 +30,16 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- CI rollback validation source (latest): workflow run `22683032561` (`success`)
+  - conversion p50:
+    - `/contact`: `perf=97`, `seo=100`, `lcp=2288ms`, `tbt=93ms`
+    - `/quote`: `perf=98`, `seo=100`, `lcp=2277ms`, `tbt=93ms`
+    - `/book`: `perf=98`, `seo=100`, `lcp=2268ms`, `tbt=86ms`
+  - service p50:
+    - `/services/ring-sizing`: `perf=96`, `seo=100`, `lcp=2479ms`, `tbt=138ms`
+    - `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2270ms`, `tbt=77ms`
+    - `/services/custom-design`: `perf=97`, `seo=100`, `lcp=2343ms`, `tbt=84ms`
+  - baseline-delta checks: PASS for conversion + service in the same run.
 - CI post-deploy conversion/service source (iteration 19 test): workflow run `22682033617` (`failure`)
   - failure point: service guardrail step
     - `/services/ring-sizing`: `2525ms` (threshold `<=2500ms`)
@@ -123,6 +133,9 @@ Update cadence: weekly (or after major milestones).
     - `.health/perf-gate-2026-03-04T18-14-48-917Z/summary.json` -> `/services/ring-sizing` `2445ms` (pass).
   - decision:
     - reject iteration 19 as primary recovery path; rollback applied in commit `c5314af`.
+  - rollback deploy validation:
+    - workflow run id: `22683032561`
+    - status: success (conversion/service guardrails + delta checks PASS).
   - Artifact:
     - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-19-home-overlay-merge-elimination.md`
 - `2026-03-04 11:40:00 -06:00` **Step 6.2 Iteration 18 executed (home mobile animation gating), deployed, verified, and documented**:

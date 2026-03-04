@@ -48,8 +48,19 @@ Interpretation:
 - Reverted the overlay-merge change to keep baseline stable:
   - revert commit: `c5314af`
 
+## Rollback Validation
+- Rollback deploy workflow: `22683032561` (`success`)
+- Service guardrail p50 after rollback:
+  - `/services/ring-sizing`: `2479ms`
+  - `/services/watch-repair`: `2270ms`
+  - `/services/custom-design`: `2343ms`
+- Conversion guardrail p50 after rollback:
+  - `/contact`: `2288ms`
+  - `/quote`: `2277ms`
+  - `/book`: `2268ms`
+- Result: baseline stability restored with all CI guardrails passing.
+
 ## Next Optimal Step
 Target a likely remaining compositor hotspot on mobile hero chrome:
 - reduce mobile-only `backdrop-blur` usage on above-fold hero UI chips/buttons while preserving desktop premium styling,
 - then run isolated `/` 10-run p50 diagnostics.
-

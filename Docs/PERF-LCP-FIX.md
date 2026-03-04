@@ -566,6 +566,9 @@ Decision:
 - iteration 19 is **rejected** as a primary home recovery path.
 - revert applied to keep baseline stable:
   - revert commit: `c5314af`.
+- rollback deploy validation:
+  - workflow run `22683032561` completed `success`
+  - conversion + service guardrails and baseline-delta checks all PASS.
 - next elimination target should focus on mobile hero chrome effects (e.g., above-fold `backdrop-blur`) rather than overlay layer count.
 
 ---
