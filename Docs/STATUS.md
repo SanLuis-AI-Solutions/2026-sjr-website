@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run a `/services` hub-only 5-run isolated diagnostic baseline, then apply one micro-change to reduce first paint/render delay (mobile-only, premium layout preserved).
+- **Next action:** run one `/services` hero text paint experiment (mobile-only, no layout redesign), then re-measure isolated 5-run p50 and keep/rollback based on measured delta only.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -34,6 +34,14 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- Services hub iteration 23 (micro-pass + post-deploy verification):
+  - pre-change isolated baseline: `.health/perf-gate-2026-03-04T22-23-03-693Z/summary.json`
+  - pre-change `/services`: `2693ms` (`renderDelay=1355ms`)
+  - deployment run (success): `22692703231`
+  - post-change isolated verification: `.health/perf-gate-2026-03-04T22-54-31-275Z/summary.json`
+  - diagnostics: `.health/lcp-diagnostics-2026-03-04T22-54-31-275Z.json`
+  - post-change `/services`: `2667ms` (`renderDelay=1299ms`)
+  - delta: `-26ms` LCP (`not material`); LCP node remains `h1.lcp-heading`.
 - Contact map fix verification:
   - local build passed after map UX update.
   - deployment guardrail verification is tracked in the production workflow run for the static-map variant.
@@ -171,6 +179,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 16:55:00 -06:00` **Step 6.2 Iteration 23 executed (`/services` hub micro-pass), deployed, measured, and documented**:
+  - baseline lock:
+    - `.health/perf-gate-2026-03-04T22-23-03-693Z/summary.json` -> `/services` `2693ms`, `renderDelay=1355ms`.
+    - LCP node evidence points to hero heading (`h1.lcp-heading`), not an image resource path.
+  - code changes:
+    - `src/app/services/page.tsx` (commit `78ef2f4`): added `cv-section` to below-fold `/services` sections.
+    - `tests/smoke.spec.ts` (commit `1a2a98f`): tightened broken-image assertion to actual decode failures only (`img.complete && naturalWidth===0`), eliminating false CI failures from in-flight lazy loads.
+  - verification:
+    - local: `npm run build` pass; `npx playwright test tests/smoke.spec.ts --project=mobile-chromium` pass (`17/17`).
+    - production deploy run: `22692703231` (success) with conversion/service gate and baseline-delta checks pass.
+    - post-deploy isolated check: `.health/perf-gate-2026-03-04T22-54-31-275Z/summary.json` -> `/services` `2667ms`, `renderDelay=1299ms`.
+    - delta vs baseline: `-26ms` (kept live, but not material for target recovery).
+  - decision:
+    - mark this branch as an elimination step; next iteration must target hero text paint path directly on mobile.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-23-services-hub-micro-pass-and-ci-gate-stabilization.md`
 - `2026-03-04 15:45:00 -06:00` **Contact map UX fix implemented and verified**:
   - code change:
     - `src/app/contact/page.tsx`
