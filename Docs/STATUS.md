@@ -8,9 +8,9 @@ Update cadence: weekly (or after major milestones).
 - SEO Step 6.2 process-of-elimination pass is now deployed on production (`2026-03-03`) and the pilot service p50 gate is passing in the latest isolated evidence run.
 - `/contact` guardrail recovery stream succeeded with deferred live-map loading; latest isolated p50 is now below target.
 - Conversion baseline lock pass completed for `/contact`, `/quote`, and `/book`; all three are below `<=2600ms` in current production evidence.
-- Automated conversion-route guardrail gate has been added to production CI workflow (`deploy-production.yml`).
-- CI validation run confirms guardrail + diagnostics + artifact upload now work end-to-end on GitHub Actions.
-- **Next action:** extend CI with a second isolated service-pilot guardrail gate (`/services/ring-sizing`, `/services/watch-repair`, `/services/custom-design`) to protect both conversion and service LCP paths.
+- Automated conversion-route and service-route guardrail gates are now added to production CI workflow (`deploy-production.yml`).
+- Latest CI validation run confirms both guardrails + diagnostics extraction + artifact upload now work end-to-end on GitHub Actions.
+- **Next action:** add automated baseline-delta reporting in CI (current run vs locked baseline) so regressions are triaged with immediate before/after context.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -24,10 +24,10 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-03 CST)
-- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-03T23-46-07-371Z/summary.json` (`Performance gate passed`, run `22647929726`)
-  - `/contact`: `perf=97`, `seo=100`, `lcp=2296ms`, `tbt=110ms`
-  - `/quote`: `perf=97`, `seo=100`, `lcp=2319ms`, `tbt=89ms`
-  - `/book`: `perf=98`, `seo=100`, `lcp=2320ms`, `tbt=94ms`
+- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T00-06-29-647Z/summary.json` (`Performance gate passed`, run `22648411605`)
+  - `/contact`: `perf=99`, `seo=100`, `lcp=2130ms`, `tbt=16ms`
+  - `/quote`: `perf=99`, `seo=100`, `lcp=2156ms`, `tbt=17ms`
+  - `/book`: `perf=99`, `seo=100`, `lcp=2119ms`, `tbt=20ms`
 - Conversion baseline lock source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json` (`Performance gate passed`)
   - `/contact`: `perf=99`, `seo=100`, `lcp=2159ms`, `tbt=35ms`
   - `/quote`: `perf=98`, `seo=100`, `lcp=2235ms`, `tbt=30ms`
@@ -38,18 +38,45 @@ Update cadence: weekly (or after major milestones).
 - Contact/About delta vs prior guardrail run (`.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`):
   - `/contact`: `5248ms -> 2165ms` (`-3083ms`)
   - `/about`: `2473ms -> 2196ms` (`-277ms`)
-- Service source (latest non-regression check on current production deploy): `.health/perf-gate-2026-03-03T21-37-07-906Z/summary.json` (`Performance gate passed`)
-- Service config: 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2449ms`, `tbt=22ms`
-- `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2299ms`, `tbt=24ms`
-- `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2375ms`, `tbt=30ms`
+- CI post-deploy service source (latest): `.health/perf-gate-2026-03-04T00-10-15-343Z/summary.json` (`Performance gate passed`, run `22648411605`)
+- Service config: isolated 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
+- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2419ms`, `tbt=16ms`
+- `/services/watch-repair`: `perf=99`, `seo=100`, `lcp=2113ms`, `tbt=15ms`
+- `/services/custom-design`: `perf=99`, `seo=100`, `lcp=2271ms`, `tbt=14ms`
 - Failed paths: none (pilot service gate pass)
 - Service p50 delta vs prior iteration-3 baseline (`.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`):
-  - `/services/ring-sizing`: `3040ms -> 2449ms` (`-591ms`)
-  - `/services/watch-repair`: `3113ms -> 2299ms` (`-814ms`)
-  - `/services/custom-design`: `2755ms -> 2375ms` (`-380ms`)
+  - `/services/ring-sizing`: `3040ms -> 2419ms` (`-621ms`)
+  - `/services/watch-repair`: `3113ms -> 2113ms` (`-1000ms`)
+  - `/services/custom-design`: `2755ms -> 2271ms` (`-484ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 18:15:00 -06:00` **Step 6.2 Iteration 9 executed (service CI guardrail automation), validated live, and accepted**:
+  - workflow patch:
+    - added `Post-deploy service performance guardrail (isolated p50)` step in `.github/workflows/deploy-production.yml`.
+    - routes gated: `/services/ring-sizing`, `/services/watch-repair`, `/services/custom-design`.
+    - thresholds: `LCP <= 2500ms`, `SEO = 100`.
+    - updated diagnostics extraction to process all generated `.health/perf-gate-*` directories in each run.
+  - validation run:
+    - workflow: `Deploy Production (Vercel)`
+    - run id: `22648411605`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22648411605`
+    - status: success.
+  - conversion guardrail results (same run):
+    - `/contact`: `2130ms`
+    - `/quote`: `2156ms`
+    - `/book`: `2119ms`
+    - SEO `100` on all three routes.
+  - service guardrail results (same run):
+    - `/services/ring-sizing`: `2419ms`
+    - `/services/watch-repair`: `2113ms`
+    - `/services/custom-design`: `2271ms`
+    - SEO `100` on all three routes.
+  - artifact upload verification:
+    - artifact name: `perf-gate-22648411605`
+    - artifact id: `5751238154`
+    - size: `6,143,002 bytes`
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-03--seo-step-6-2-iteration-9-service-ci-guardrail.md`
 - `2026-03-03 23:55:00 -06:00` **Step 6.2 Iteration 8 executed (CI artifact capture fix), validated live, and accepted**:
   - workflow patch:
     - added `Extract LCP diagnostics from latest gate run` step in `.github/workflows/deploy-production.yml`.

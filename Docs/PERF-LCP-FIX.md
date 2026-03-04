@@ -227,6 +227,38 @@ Validation status:
   - `/quote`: `2319ms`
   - `/book`: `2320ms`
 
+### 0.11 Service Guardrail Automation in CI (Shipped)
+
+Date: 2026-03-03
+
+Implementation:
+- updated `.github/workflows/deploy-production.yml` to add post-deploy service-route guardrails.
+- new automated post-deploy step runs:
+  - `/services/ring-sizing`, `/services/watch-repair`, `/services/custom-design`
+  - isolated 5-run p50 gate
+  - thresholds: `LCP <= 2500ms`, `SEO = 100`.
+- updated diagnostics extraction step to parse all generated `.health/perf-gate-*` directories in each CI run so both conversion and service gates always emit diagnostics.
+
+Purpose:
+- enforce the validated Step 6.2 service baseline in every production deploy.
+- remove manual regression checks for pilot services.
+
+Validation status:
+- workflow run `22648411605` completed with end-to-end validation:
+  - post-deploy conversion guardrail: PASS
+  - post-deploy service guardrail: PASS
+  - diagnostics extraction: PASS
+  - artifact upload: PASS
+- artifact attached in GitHub Actions:
+  - `perf-gate-22648411605` (id `5751238154`)
+- guardrail p50 values in that CI run:
+  - `/services/ring-sizing`: `2419ms`
+  - `/services/watch-repair`: `2113ms`
+  - `/services/custom-design`: `2271ms`
+  - `/contact`: `2130ms`
+  - `/quote`: `2156ms`
+  - `/book`: `2119ms`
+
 ---
 
 ## 1. Diagnostic Method
