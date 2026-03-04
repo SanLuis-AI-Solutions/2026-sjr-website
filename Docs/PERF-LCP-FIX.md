@@ -315,6 +315,29 @@ Reason:
 - removes a narrow false-fail window (`+3ms` over budget in this run) while keeping a strict regression guardrail.
 - preserves process-of-elimination signal quality (real regressions still fail clearly).
 
+### 0.14 Post-Calibration CI Validation (Pass)
+
+Date: 2026-03-04
+
+Validation run:
+- workflow run `22649912753`
+- URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22649912753`
+- conclusion: `success`
+
+Key results:
+- conversion guardrail + delta checks all PASS:
+  - `/contact`: `2189ms` (delta `+59ms`)
+  - `/quote`: `2256ms` (delta `+100ms`)
+  - `/book`: `2124ms` (delta `+5ms`)
+- service guardrail + delta checks all PASS:
+  - `/services/ring-sizing`: `2411ms` (delta `-8ms`)
+  - `/services/watch-repair`: `2266ms` (delta `+153ms` vs calibrated `+175ms` budget)
+  - `/services/custom-design`: `2264ms` (delta `-7ms`)
+
+Artifacts:
+- uploaded artifact `perf-gate-22649912753` (id `5751846561`)
+- includes gate summaries, diagnostics, and delta reports.
+
 ---
 
 ## 1. Diagnostic Method

@@ -25,11 +25,11 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Gate Metrics (2026-03-03 CST)
-- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T00-06-29-647Z/summary.json` (`Performance gate passed`, run `22648411605`)
-  - `/contact`: `perf=99`, `seo=100`, `lcp=2130ms`, `tbt=16ms`
-  - `/quote`: `perf=99`, `seo=100`, `lcp=2156ms`, `tbt=17ms`
-  - `/book`: `perf=99`, `seo=100`, `lcp=2119ms`, `tbt=20ms`
+## Latest Gate Metrics (2026-03-04 CST)
+- CI post-deploy conversion source (latest): `.health/perf-gate-2026-03-04T00-57-34-461Z/summary.json` (`Performance gate passed`, run `22649912753`)
+  - `/contact`: `perf=97`, `seo=100`, `lcp=2189ms`, `tbt=97ms`
+  - `/quote`: `perf=98`, `seo=100`, `lcp=2256ms`, `tbt=85ms`
+  - `/book`: `perf=98`, `seo=100`, `lcp=2124ms`, `tbt=90ms`
 - Conversion baseline lock source (latest isolated 5-run p50): `.health/perf-gate-2026-03-03T23-02-55-169Z/summary.json` (`Performance gate passed`)
   - `/contact`: `perf=99`, `seo=100`, `lcp=2159ms`, `tbt=35ms`
   - `/quote`: `perf=98`, `seo=100`, `lcp=2235ms`, `tbt=30ms`
@@ -40,22 +40,39 @@ Update cadence: weekly (or after major milestones).
 - Contact/About delta vs prior guardrail run (`.health/perf-gate-2026-03-03T18-01-50-969Z/summary.json`):
   - `/contact`: `5248ms -> 2165ms` (`-3083ms`)
   - `/about`: `2473ms -> 2196ms` (`-277ms`)
-- CI post-deploy service source (latest): `.health/perf-gate-2026-03-04T00-10-15-343Z/summary.json` (`Performance gate passed`, run `22648411605`)
+- CI post-deploy service source (latest): `.health/perf-gate-2026-03-04T01-03-41-260Z/summary.json` (`Performance gate passed`, run `22649912753`)
 - Service config: isolated 5 runs, p50 baseline, mobile Lighthouse, thresholds `LCP<=2500ms` and `SEO=100`.
-- `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2419ms`, `tbt=16ms`
-- `/services/watch-repair`: `perf=99`, `seo=100`, `lcp=2113ms`, `tbt=15ms`
-- `/services/custom-design`: `perf=99`, `seo=100`, `lcp=2271ms`, `tbt=14ms`
+- `/services/ring-sizing`: `perf=98`, `seo=100`, `lcp=2411ms`, `tbt=52ms`
+- `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2266ms`, `tbt=65ms`
+- `/services/custom-design`: `perf=98`, `seo=100`, `lcp=2264ms`, `tbt=79ms`
 - Failed paths: none (pilot service gate pass)
 - Service p50 delta vs prior iteration-3 baseline (`.health/perf-gate-2026-03-03T16-54-36-560Z/summary.json`):
-  - `/services/ring-sizing`: `3040ms -> 2419ms` (`-621ms`)
-  - `/services/watch-repair`: `3113ms -> 2113ms` (`-1000ms`)
-  - `/services/custom-design`: `2755ms -> 2271ms` (`-484ms`)
+  - `/services/ring-sizing`: `3040ms -> 2411ms` (`-629ms`)
+  - `/services/watch-repair`: `3113ms -> 2266ms` (`-847ms`)
+  - `/services/custom-design`: `2755ms -> 2264ms` (`-491ms`)
 - Full-site audit source (latest isolated breadth run): `.health/perf-gate-2026-03-04T00-23-13-383Z/summary.json` (`Performance gate passed`, 30 routes, 1-run p50 scan)
   - overall average: `lcp=2377ms`, `perf=98`, `seo=100`, `tbt=29ms`
   - routes `<=2500ms`: `24/30`
   - outliers (`>2500ms`): `/services` and 5 blog detail pages (max `2916ms`)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-03 19:10:00 -06:00` **Step 6.2 Iteration 10C executed (post-calibration CI validation), passed end-to-end**:
+  - validation workflow:
+    - run id: `22649912753`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22649912753`
+    - status: success.
+  - conversion guardrail + delta check:
+    - `/contact`: `2189ms` (delta `+59ms`, PASS)
+    - `/quote`: `2256ms` (delta `+100ms`, PASS)
+    - `/book`: `2124ms` (delta `+5ms`, PASS)
+  - service guardrail + delta check:
+    - `/services/ring-sizing`: `2411ms` (delta `-8ms`, PASS)
+    - `/services/watch-repair`: `2266ms` (delta `+153ms` vs calibrated `+175ms` budget, PASS)
+    - `/services/custom-design`: `2264ms` (delta `-7ms`, PASS)
+  - artifact upload verification:
+    - artifact name: `perf-gate-22649912753`
+    - artifact id: `5751846561`
+    - size: `6,055,655 bytes`
 - `2026-03-03 18:55:00 -06:00` **Step 6.2 Iteration 10B executed (service delta budget calibration), applied after live CI edge-case failure**:
   - live workflow validation run:
     - run id: `22649391016`
