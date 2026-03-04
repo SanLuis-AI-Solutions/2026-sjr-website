@@ -488,6 +488,46 @@ Decision:
 - keep the change (no regressions), but do not repeat this tactic.
 - next route-specific intervention should target above-fold animation/composition work on mobile hero text stack.
 
+### 0.18 Home Mobile Animation Gating (Iteration 18)
+
+Date: 2026-03-04
+
+Goal:
+- reduce mobile above-fold animation work on home hero copy/CTA while preserving desktop premium motion.
+
+Implementation:
+- `src/components/hero.tsx`
+  - added `home-hero-mobile-static` class to hero badge/H1/body/divider/CTA wrapper.
+- `src/app/globals.css`
+  - added mobile-only override (`max-width: 767px`) for `home-hero-mobile-static`:
+    - `animation: none`
+    - `opacity: 1`
+    - `transform: none`
+
+Production deploy evidence:
+- commit: `8ff958f`
+- workflow run: `22680479756` (`success`)
+- conversion + service guardrails and baseline-delta checks: PASS.
+
+Home measurement evidence:
+- before (iteration 17 baseline):
+  - `.health/perf-gate-2026-03-04T16-56-49-516Z/summary.json`
+  - `/` p50 `2593ms`, median `elementRenderDelay=1234ms`
+- post-change run A (isolated 5-run):
+  - `.health/perf-gate-2026-03-04T17-30-16-187Z/summary.json`
+  - `/` p50 `2317ms`, median `elementRenderDelay=295ms`
+- post-change run B (isolated 5-run confirmation):
+  - `.health/perf-gate-2026-03-04T17-32-24-146Z/summary.json`
+  - `/` p50 `2603ms`, median `elementRenderDelay=1288ms`
+- post-change stabilization (isolated 10-run):
+  - `.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json`
+  - `/` p50 `2602ms`, median `elementRenderDelay=1277ms`
+
+Decision:
+- iteration is **bimodal and non-deterministic** for median recovery.
+- keep the mobile animation gating change (no regressions), but do not treat it as the main home-LCP fix.
+- next elimination target should be mobile hero overlay/compositor complexity, not copy animation.
+
 ---
 
 ## 1. Diagnostic Method

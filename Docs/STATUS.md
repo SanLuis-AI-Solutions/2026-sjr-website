@@ -14,7 +14,8 @@ Update cadence: weekly (or after major milestones).
 - Easy-win content-template outlier pass is now deployed (responsive blog hero optimization), and all six prior outlier routes pass isolated 5-run p50 verification.
 - Latest full-site audit refresh keeps a `95/100` evidence score with only two single-run outliers (`/` and `/services`).
 - Home-only iteration 17 (decode mode test) is now complete and logged as an eliminated path (`-24ms`, not material).
-- **Next action:** run a mobile-only hero text animation reduction pass on `/` (desktop visuals preserved), then re-measure isolated 5-run p50 diagnostics.
+- Home-only iteration 18 (mobile text animation gating) is now complete and logged as non-deterministic (bimodal, no sustained median shift).
+- **Next action:** run a mobile hero overlay-composition simplification pass on `/` (luxury look preserved), then validate with isolated 10-run p50 diagnostics.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -28,6 +29,21 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- CI post-deploy conversion/service source (latest): workflow run `22680479756` (`success`)
+  - conversion p50:
+    - `/contact`: `perf=98`, `seo=100`, `lcp=2254ms`, `tbt=91ms`
+    - `/quote`: `perf=98`, `seo=100`, `lcp=2138ms`, `tbt=93ms`
+    - `/book`: `perf=97`, `seo=100`, `lcp=2181ms`, `tbt=103ms`
+  - service p50:
+    - `/services/ring-sizing`: `perf=97`, `seo=100`, `lcp=2428ms`, `tbt=83ms`
+    - `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2267ms`, `tbt=78ms`
+    - `/services/custom-design`: `perf=97`, `seo=100`, `lcp=2420ms`, `tbt=98ms`
+  - baseline-delta checks: PASS for conversion + service in the same run.
+- Home isolated verification set (iteration 18):
+  - run A: `.health/perf-gate-2026-03-04T17-30-16-187Z/summary.json` -> `/` `2317ms`, `renderDelay=295ms`
+  - run B: `.health/perf-gate-2026-03-04T17-32-24-146Z/summary.json` -> `/` `2603ms`, `renderDelay=1288ms`
+  - stabilization (10-run): `.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json` -> `/` `2602ms`, `renderDelay=1277ms`
+  - interpretation: bimodal; no sustained median improvement vs prior baseline (`2593ms`).
 - CI post-deploy conversion/service source (latest): workflow run `22679162288` (`success`)
   - conversion p50:
     - `/contact`: `perf=98`, `seo=100`, `lcp=2169ms`, `tbt=90ms`
@@ -77,6 +93,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 11:40:00 -06:00` **Step 6.2 Iteration 18 executed (home mobile animation gating), deployed, verified, and documented**:
+  - single-variable change set:
+    - `src/components/hero.tsx`: added `home-hero-mobile-static` on home hero text/CTA stack.
+    - `src/app/globals.css`: added mobile-only override (`max-width: 767px`) to disable animation and force stable paint values for that class.
+  - production deploy validation:
+    - workflow run id: `22680479756`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22680479756`
+    - status: success (conversion/service guardrails + delta checks PASS).
+  - home verification evidence:
+    - run A (5-run p50): `.health/perf-gate-2026-03-04T17-30-16-187Z/summary.json` -> `/` `2317ms`, `renderDelay=295ms`
+    - run B (5-run p50): `.health/perf-gate-2026-03-04T17-32-24-146Z/summary.json` -> `/` `2603ms`, `renderDelay=1288ms`
+    - stabilization (10-run p50): `.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json` -> `/` `2602ms`, `renderDelay=1277ms`
+  - decision:
+    - bimodal/non-deterministic outcome; keep change (no regressions) but do not treat as primary home-LCP fix.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-18-home-mobile-animation-gating.md`
 - `2026-03-04 11:05:00 -06:00` **Step 6.2 Iteration 17 executed (home decode async elimination), deployed, verified, and documented**:
   - single-variable change:
     - `src/components/hero.tsx`: `decoding="sync" -> decoding="async"` on home hero image.
