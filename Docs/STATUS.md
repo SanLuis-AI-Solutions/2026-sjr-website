@@ -16,7 +16,8 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 17 (decode mode test) is now complete and logged as an eliminated path (`-24ms`, not material).
 - Home-only iteration 18 (mobile text animation gating) is now complete and logged as non-deterministic (bimodal, no sustained median shift).
 - Home-only iteration 19 (mobile overlay merge) is now complete and rejected (`-16ms`, not material); rollback applied to keep baseline stable.
-- **Next action:** run a mobile-only pass to reduce above-fold `backdrop-blur` usage on home hero UI chrome, then validate with isolated 10-run p50 diagnostics.
+- Home-only iteration 20 (mobile blur reduction) is now complete and rejected (`+9ms` on 10-run p50); rollback applied.
+- **Next action:** run a controlled home-hero image format test (AVIF vs WebP) with unchanged composition and compare isolated `/` 10-run median `elementRenderDelay`.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -30,16 +31,33 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
-- CI rollback validation source (latest): workflow run `22683032561` (`success`)
-  - conversion p50:
+- CI test deploy source (iteration 20): workflow run `22683881746` (`failure`)
+  - failure point: service baseline-delta check
+    - `/services/watch-repair`: baseline `2113ms`, current `2324ms`, delta `+211ms` vs budget `+200ms`
+  - service absolute p50 in same run:
+    - `/services/ring-sizing`: `2431ms`
+    - `/services/watch-repair`: `2324ms`
+    - `/services/custom-design`: `2331ms`
+- Home isolated verification (iteration 20 test):
+  - 10-run p50: `.health/perf-gate-2026-03-04T19-00-30-010Z/summary.json`
+    - `/`: `2611ms`
+    - median diagnostics: `ttfb=138ms`, `loadDelay=25ms`, `loadTime=84ms`, `renderDelay=2240ms`
+  - vs prior stabilized home reference (`.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json`): `2602ms -> 2611ms` (`+9ms`).
+- Service sanity checks after iteration 20 deploy:
+  - `.health/perf-gate-2026-03-04T19-04-59-526Z/summary.json` -> `/services/ring-sizing` `2447ms` (pass)
+  - `.health/perf-gate-2026-03-04T19-04-59-720Z/summary.json` -> `/services/watch-repair` `2291ms` (pass)
+- CI rollback validation source (latest): workflow run `22684848403` (`success`)
+  - deploy + conversion/service guardrails + baseline-delta checks: PASS.
+  - last full metric snapshot from rollback-success run `22683032561`:
+    - conversion p50:
     - `/contact`: `perf=97`, `seo=100`, `lcp=2288ms`, `tbt=93ms`
     - `/quote`: `perf=98`, `seo=100`, `lcp=2277ms`, `tbt=93ms`
     - `/book`: `perf=98`, `seo=100`, `lcp=2268ms`, `tbt=86ms`
-  - service p50:
+    - service p50:
     - `/services/ring-sizing`: `perf=96`, `seo=100`, `lcp=2479ms`, `tbt=138ms`
     - `/services/watch-repair`: `perf=98`, `seo=100`, `lcp=2270ms`, `tbt=77ms`
     - `/services/custom-design`: `perf=97`, `seo=100`, `lcp=2343ms`, `tbt=84ms`
-  - baseline-delta checks: PASS for conversion + service in the same run.
+    - baseline-delta checks: PASS for conversion + service in that run.
 - CI post-deploy conversion/service source (iteration 19 test): workflow run `22682033617` (`failure`)
   - failure point: service guardrail step
     - `/services/ring-sizing`: `2525ms` (threshold `<=2500ms`)
@@ -119,6 +137,27 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 13:10:00 -06:00` **Step 6.2 Iteration 20 executed (home mobile blur reduction), measured, and rolled back**:
+  - test change:
+    - `src/components/hero.tsx`: disabled `backdrop-blur` on mobile for home hero badge + secondary CTA; desktop blur retained.
+  - production deploy validation:
+    - workflow run id: `22683881746`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22683881746`
+    - status: failure on service baseline-delta check only (`/services/watch-repair` `+211ms` vs `+200ms` budget).
+  - home verification:
+    - `.health/perf-gate-2026-03-04T19-00-30-010Z/summary.json` -> `/` `2611ms`, `renderDelay=2240ms`.
+    - delta vs prior stabilized home reference (`2602ms`): `+9ms` (worse).
+  - service sanity:
+    - `.health/perf-gate-2026-03-04T19-04-59-526Z/summary.json` -> `/services/ring-sizing` `2447ms` (pass).
+    - `.health/perf-gate-2026-03-04T19-04-59-720Z/summary.json` -> `/services/watch-repair` `2291ms` (pass).
+  - decision:
+    - reject iteration 20 as home recovery path; rollback applied in commit `ee9c610`.
+  - rollback deploy validation:
+    - workflow run id: `22684848403`
+    - URL: `https://github.com/SanLuis-AI-Solutions/2026-sjr-website/actions/runs/22684848403`
+    - status: success (deploy + conversion/service guardrails + baseline-delta checks PASS).
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-20-home-mobile-blur-elimination.md`
 - `2026-03-04 12:20:00 -06:00` **Step 6.2 Iteration 19 executed (home mobile overlay merge), measured, and rolled back**:
   - test change:
     - `src/components/hero.tsx`: merged two mobile overlay layers into one combined layer to reduce compositor work.
@@ -1264,3 +1303,4 @@ Update cadence: weekly (or after major milestones).
 1. Complete domain-readiness launch pass (Vercel custom domain + `NEXT_PUBLIC_SITE_URL` + Search Console sitemap submission).
 2. Run a service-detail visual QA pass on mobile to verify each route’s first-scroll identity is distinct and premium after the new `alt-*` pack rollout.
 3. Run a post-deploy UX/a11y regression pass across Home/About/FAQ/Contact with mobile-first CTA and contrast checks.
+

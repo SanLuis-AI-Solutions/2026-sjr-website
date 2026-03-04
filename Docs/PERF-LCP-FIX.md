@@ -571,6 +571,50 @@ Decision:
   - conversion + service guardrails and baseline-delta checks all PASS.
 - next elimination target should focus on mobile hero chrome effects (e.g., above-fold `backdrop-blur`) rather than overlay layer count.
 
+### 0.20 Home Mobile Blur Elimination (Iteration 20)
+
+Date: 2026-03-04
+
+Goal:
+- test whether removing mobile `backdrop-blur` in home hero chrome reduces persistent home `elementRenderDelay`.
+
+Implementation:
+- `src/components/hero.tsx` (test commit `5f29cc1`)
+  - changed hero badge and secondary CTA blur classes to mobile-off, desktop-on:
+    - `backdrop-blur-sm` -> `backdrop-blur-0 md:backdrop-blur-sm`
+
+Production deploy evidence:
+- workflow run: `22683881746` (`failure`)
+- failure type:
+  - service baseline-delta check only
+  - `/services/watch-repair`: `+211ms` vs `+200ms` budget.
+- service absolute gate remained passing in that run.
+
+Measured results:
+- home isolated 10-run p50:
+  - `.health/perf-gate-2026-03-04T19-00-30-010Z/summary.json`
+  - `/`: `2611ms`
+  - median `elementRenderDelay`: `2240ms`
+- prior stabilized reference:
+  - `.health/perf-gate-2026-03-04T17-34-31-833Z/summary.json`
+  - `/`: `2602ms`
+- delta: `+9ms` (worse).
+
+Service sanity checks:
+- `.health/perf-gate-2026-03-04T19-04-59-526Z/summary.json`
+  - `/services/ring-sizing`: `2447ms` (pass)
+- `.health/perf-gate-2026-03-04T19-04-59-720Z/summary.json`
+  - `/services/watch-repair`: `2291ms` (pass)
+
+Decision:
+- iteration 20 is rejected as a home recovery path.
+- rollback applied to restore stable baseline:
+  - revert commit: `ee9c610`.
+- rollback deploy validation:
+  - workflow run `22684848403` completed `success`
+  - deploy + conversion/service guardrails and baseline-delta checks all PASS.
+- next best step is to test hero image format/decode path (AVIF vs WebP) on home with unchanged layout.
+
 ---
 
 ## 1. Diagnostic Method
