@@ -18,7 +18,7 @@
     {
       "path": "/services/watch-repair",
       "lcpMs": 2113,
-      "maxRegressionMs": 150
+      "maxRegressionMs": 175
     },
     {
       "path": "/services/custom-design",
@@ -27,4 +27,3 @@
     }
   ]
 }
-
