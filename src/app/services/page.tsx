@@ -167,7 +167,7 @@ export default async function ServicesPage() {
       {/* Featured section (standalone, clean, Apple-like). */}
       <section className="bg-white py-14">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-[0_22px_60px_rgba(58,25,16,0.14)]">
+          <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-[0_22px_60px_rgba(58,25,16,0.14)]">
             <div className="absolute inset-0">
               <Image
                 src={featuredImage}
