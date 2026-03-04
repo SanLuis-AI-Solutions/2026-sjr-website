@@ -35,7 +35,7 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[620px] max-w-6xl items-end px-5 pb-10 pt-24 md:min-h-[74vh] md:items-center md:px-6 md:py-14">
         <div className="relative w-full max-w-[19.25rem] md:max-w-2xl">
           <div className="relative">
-            <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3 rounded-full border border-brand-gold/50 bg-black/32 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold shadow-[0_8px_20px_rgba(0,0,0,0.24)] backdrop-blur-0 md:backdrop-blur-sm md:bg-white/80 md:text-brand-burgundy">
+            <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3 rounded-full border border-brand-gold/50 bg-black/32 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold shadow-[0_8px_20px_rgba(0,0,0,0.24)] backdrop-blur-sm md:bg-white/80 md:text-brand-burgundy">
               In-House Repairs
               <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
               Your Jewelry Stays On-Site.
@@ -57,7 +57,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/book"
-                className="micro-interaction inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold/70 bg-white/6 px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-0 transition-colors hover:bg-white/14 md:border md:border-brand-gold/80 md:bg-transparent md:backdrop-blur-sm md:text-brand-burgundy md:hover:bg-brand-gold/10 sm:w-auto"
+                className="micro-interaction inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold/70 bg-white/6 px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-sm transition-colors hover:bg-white/14 md:border md:border-brand-gold/80 md:bg-transparent md:text-brand-burgundy md:hover:bg-brand-gold/10 sm:w-auto"
               >
                 Book a Repair
               </Link>
