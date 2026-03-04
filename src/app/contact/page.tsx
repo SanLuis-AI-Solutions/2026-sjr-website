@@ -3,14 +3,12 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
-import { DeferredGoogleMapEmbed } from "@/components/deferred-google-map-embed";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 
-const GOOGLE_MAPS_PLACE_URL =
-  "https://www.google.com/maps/place/Susie's+Jewelry+Repair/@29.6631,-95.1458909,17z";
+const GOOGLE_MAPS_PRIMARY_URL = "https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8";
 const GOOGLE_MAPS_EMBED_URL =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.864319665551!2d-95.1458909!3d29.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409de6c3e98b0b%3A0x7d2cb6bb1af1f1a5!2sSusie%27s%20Jewelry%20Repair!5e0!3m2!1sen!2sus!4v1714151700147!5m2!1sen!2sus";
+  "https://www.google.com/maps?q=Susie's+Jewelry+and+Watch+Repair,+3910+Fairmont+Pkwy+C,+Pasadena,+TX+77504&output=embed";
 
 export const metadata: Metadata = {
   title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
@@ -227,19 +225,40 @@ async function DeferredContactSection() {
               </p>
               <h2 className="mt-2 font-serif text-xl text-stone-900">Find our storefront</h2>
             </div>
-            <a
-              href={GOOGLE_MAPS_PLACE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-burgundy px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy hover:bg-brand-burgundy/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Open Full Map
-            </a>
+            <span className="rounded-full border border-brand-burgundy/30 bg-brand-burgundy/5 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-burgundy">
+              Tap Anywhere For Directions
+            </span>
           </div>
-          <DeferredGoogleMapEmbed
-            title="Google Maps Location"
-            embedUrl={GOOGLE_MAPS_EMBED_URL}
-          />
+          <a
+            href={GOOGLE_MAPS_PRIMARY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Susie's Jewelry and Watch Repair on Google Maps"
+            className="group relative block overflow-hidden rounded-2xl border border-stone-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+          >
+            <iframe
+              title="Susie's Jewelry and Watch Repair map location"
+              src={GOOGLE_MAPS_EMBED_URL}
+              width="100%"
+              height="320"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="pointer-events-none h-[320px] w-full grayscale-[14%] contrast-[1.03] transition-transform duration-300 group-hover:scale-[1.01]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+            <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-xl border border-white/35 bg-black/55 px-4 py-3 text-white shadow-[0_12px_30px_rgba(10,6,6,0.3)] backdrop-blur-sm">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-gold">
+                Susie's Jewelry and Watch Repair
+              </p>
+              <p className="mt-1 text-sm leading-6 text-stone-100">
+                3910 Fairmont Pkwy #C, Pasadena, TX 77504
+              </p>
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/95">
+                Open In Google Maps
+              </p>
+            </div>
+          </a>
         </section>
       </div>
     </section>
@@ -369,7 +388,7 @@ export default async function ContactPage({
                   {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
                 </p>
                 <a
-                  href={GOOGLE_MAPS_PLACE_URL}
+                  href={GOOGLE_MAPS_PRIMARY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="micro-interaction mt-4 inline-flex items-center justify-center rounded-full border border-brand-gold px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"

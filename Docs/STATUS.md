@@ -19,6 +19,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 20 (mobile blur reduction) is now complete and rejected (`+9ms` on 10-run p50); rollback applied.
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
+- Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
 - **Next action:** run a `/services` hub-only 5-run isolated diagnostic baseline, then apply one micro-change to reduce first paint/render delay (mobile-only, premium layout preserved).
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
@@ -33,6 +34,10 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- Contact map fix guardrail verification:
+  - source: `.health/perf-gate-2026-03-04T21-38-21-693Z/summary.json`
+  - `/contact`: `perf=98`, `seo=100`, `lcp=2167ms`, `tbt=26ms`
+  - outcome: pass, no regression from map UX update.
 - Home AVIF repeat verification (stabilization):
   - isolated 10-run p50: `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json`
   - `/`: `2530ms`
@@ -167,6 +172,17 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 15:45:00 -06:00` **Contact map UX fix implemented and verified**:
+  - code change:
+    - `src/app/contact/page.tsx`
+    - replaced deferred placeholder map interaction with a full clickable map card.
+    - all map-card clicks now open `https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8`.
+    - added explicit overlay business label/address to ensure destination is immediately visible.
+  - verification:
+    - build: `npm run build` passed.
+    - guardrail: `.health/perf-gate-2026-03-04T21-38-21-693Z/summary.json` -> `/contact` `2167ms` (pass).
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--contact-map-direct-clickthrough-fix.md`
 - `2026-03-04 15:10:00 -06:00` **Step 6.2 Iteration 22 executed (stabilization repeat + breadth refresh), measured, and documented**:
   - home repeat verification:
     - `.health/perf-gate-2026-03-04T21-01-54-100Z/summary.json` -> `/` `2530ms`, `renderDelay=1270ms`.
