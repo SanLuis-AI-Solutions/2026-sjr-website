@@ -20,9 +20,10 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run isolated 5-run p50 diagnostics on `/` and `/services` together (same timestamped run) to lock noise-free baselines before any further code changes.
+- **Next action:** run a home-only H2 micro-pass (mobile above-fold reveal-on-scroll contention reduction), then verify with isolated 10-run p50 diagnostics on `/` only.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
+- Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -36,6 +37,24 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Home iteration 28 (`decoding="sync"` AVIF decode mode test) outcome:
+  - pre-change baseline lock:
+    - `.health/perf-gate-2026-03-05T16-39-58-127Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-39-58-127Z.json`
+    - `/`: `2539ms` (diagnostics median)
+    - `renderDelay`: `1240ms`
+  - code change:
+    - `src/components/hero.tsx` (commit `d85e414`): `decoding="async"` -> `decoding="sync"` on the home hero image.
+  - deploy run (success): `22728668937`
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T17-55-13-776Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T17-55-13-776Z.json`
+    - `/`: `2537ms` (diagnostics median)
+    - `renderDelay`: `1235ms`
+  - delta vs baseline lock:
+    - `/`: `-2ms` (non-material)
+    - `renderDelay`: `-5ms` (non-material)
+  - decision: reject as neutral; decode-mode-only change eliminated as meaningful home LCP lever.
 - Services hub iteration 27 (mobile hero badge blur removal) outcome:
   - pre-change baseline lock:
     - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
@@ -246,6 +265,26 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 12:00:00 -06:00` **Home iteration 28 executed (`decoding="sync"` on AVIF hero), deployed, measured, and rejected**:
+  - code change:
+    - `src/components/hero.tsx` (commit `d85e414`): `decoding="async"` -> `decoding="sync"` on the home hero image.
+  - local verification:
+    - `npm run build` pass.
+    - targeted smoke:
+      - `mobile smoke: repeated nav to Home is stable` pass.
+      - `mobile nav: menu opens and can reach Services` pass.
+  - production deploy:
+    - run `22728668937` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+  - post-deploy isolated 10-run verification (`/` only):
+    - `.health/perf-gate-2026-03-05T17-55-13-776Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T17-55-13-776Z.json`
+    - diagnostics median: `lcp=2537ms`, `ttfb=127ms`, `loadDelay=35ms`, `loadTime=77ms`, `renderDelay=1235ms`.
+  - baseline comparison source:
+    - `.health/perf-gate-2026-03-05T16-39-58-127Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-39-58-127Z.json`
+    - diagnostics median: `lcp=2539ms`, `renderDelay=1240ms`.
+  - decision:
+    - delta `lcp=-2ms`, `renderDelay=-5ms` (non-material), reject as neutral and eliminate decode-mode-only as primary lever.
 - `2026-03-05 10:12:00 -06:00` **Step 6.2 Iteration 27 executed (`/services` hero badge blur removal), deployed, measured, and kept**:
   - code change:
     - `src/app/services/page.tsx` (commit `5653622`): removed mobile backdrop blur on the hero turnaround badge (`md:backdrop-blur-sm` desktop-only).
