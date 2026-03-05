@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run a full-site breadth refresh (30 routes, isolated 1-run) and update the audit scorecard to confirm remaining outliers for the 2-day optimization closeout.
+- **Next action:** run isolated 5-run p50 diagnostics on `/` and `/services` together (same timestamped run) to lock noise-free baselines before any further code changes.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -34,6 +34,14 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Full-site breadth refresh (30 routes, 1-run isolated):
+  - source: `.health/perf-gate-2026-03-05T14-12-49-741Z/summary.json`
+  - diagnostics: `.health/lcp-diagnostics-2026-03-05T14-12-49-741Z.json`
+  - average LCP: `2301ms` (`+40ms` vs prior breadth snapshot)
+  - core-route average LCP (`/`, `/about`, `/contact`, `/quote`, `/book`, `/services`, `/blog`): `2331ms` (`+69ms`)
+  - routes `<=2500ms`: `28/30` (unchanged)
+  - outliers: `/services` (`2797ms`), `/` (`2603ms`) (same outlier set as prior breadth run)
+  - score model (same framework): `95/100` (held)
 - Services hub iteration 26 (hero image `sizes` request-path tuning) outcome:
   - pre-change baseline:
     - `.health/perf-gate-2026-03-05T05-48-37-467Z/summary.json`
@@ -214,6 +222,25 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 08:20:00 -06:00` **Full-site breadth refresh rerun executed, scorecard updated, and outlier set reconfirmed**:
+  - run profile:
+    - 30 routes, isolated 1-run p50, diagnostics enabled, permissive thresholds for data capture.
+  - evidence:
+    - `.health/perf-gate-2026-03-05T14-12-49-741Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T14-12-49-741Z.json`
+  - outcomes:
+    - SEO `100`: `30/30`
+    - routes `<=2500ms`: `28/30`
+    - outliers: `/services` `2797ms`, `/` `2603ms`
+    - score model: `95/100` (unchanged)
+  - comparison vs prior breadth snapshot (`.health/perf-gate-2026-03-04T21-06-28-437Z/summary.json`):
+    - outlier set unchanged (`/`, `/services`)
+    - average LCP: `2261ms -> 2301ms` (`+40ms`)
+    - core-route average LCP: `2262ms -> 2331ms` (`+69ms`)
+  - decision:
+    - no code change from this step; next step is isolated 5-run p50 de-noise on `/` + `/services` before selecting the next micro-optimization.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-05--full-site-audit-refresh.md`
 - `2026-03-05 00:12:00 -06:00` **Step 6.2 Iteration 26 executed (`/services` hero image sizes tuning), deployed, measured, and kept**:
   - baseline lock:
     - `.health/perf-gate-2026-03-05T05-48-37-467Z/summary.json` -> `/services` `2653ms`, `renderDelay=307ms`.
