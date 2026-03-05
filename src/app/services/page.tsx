@@ -95,7 +95,7 @@ export default async function ServicesPage() {
     <SiteShell>
       <div id="top" className="sr-only" />
       <section className="relative overflow-hidden bg-stone-100 py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)] md:block" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
           <div>
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
