@@ -229,6 +229,15 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 09:25:00 -06:00` **Deploy smoke test sync fix after headline update**:
+  - issue:
+    - production workflow `22724191425` failed in smoke tests because assertions still matched the old home headline string.
+  - fix:
+    - `tests/smoke.spec.ts`: updated two heading assertions to `/Trusted Pasadena Jewelry Repair/i`.
+  - verification:
+    - `npx playwright test tests/smoke.spec.ts --project=mobile-chromium --grep "repeated nav to Home is stable|menu opens and can reach Services"`: pass (`2/2`).
+  - next:
+    - push test fix to re-run production deploy workflow.
 - `2026-03-05 09:15:00 -06:00` **Isolated 5-run p50 de-noise baseline locked for `/` and `/services` + home trust-copy refresh**:
   - perf evidence:
     - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`

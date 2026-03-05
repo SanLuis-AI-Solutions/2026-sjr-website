@@ -45,7 +45,7 @@ function attachConsoleGuards(page: Page) {
 
 async function assertHomeRenders(page: Page) {
   await expect(
-    page.getByRole("heading", { name: /Your jewelry never leaves our hands/i })
+    page.getByRole("heading", { name: /Trusted Pasadena Jewelry Repair/i })
   ).toBeVisible();
 
   // Ensure reveal-on-scroll content becomes visible after scrolling.
@@ -105,7 +105,7 @@ test("mobile nav: menu opens and can reach Services", async ({ page }) => {
 
   await page.goto("/", { waitUntil: "networkidle" });
   await expect(
-    page.getByRole("heading", { name: /Your jewelry never leaves our hands/i })
+    page.getByRole("heading", { name: /Trusted Pasadena Jewelry Repair/i })
   ).toBeVisible();
 
   await page.getByRole("button", { name: /Toggle Menu/i }).click();

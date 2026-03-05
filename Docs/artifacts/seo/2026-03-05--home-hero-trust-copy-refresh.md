@@ -36,6 +36,9 @@ Replace a negatively perceived hero phrase with positive, trust-forward wording 
 ## Verification
 
 - `npm run build` passed.
+- CI smoke follow-up:
+  - `tests/smoke.spec.ts` heading assertions updated to `/Trusted Pasadena Jewelry Repair/i`.
+  - targeted mobile smoke rerun passed (`2/2`).
 
 ## Related Evidence (same work session)
 
