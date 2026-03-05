@@ -12,7 +12,7 @@ Update cadence: weekly (or after major milestones).
 - Automated baseline-delta checks (current run vs locked baseline, route-level LCP budget) are now integrated into CI workflow for conversion + service gates.
 - Conversion/service delta guardrail budgets are calibrated to observed CI run noise (`/contact +175`, `/book +225`, `/services/watch-repair +200`) to avoid false-fail loops while preserving route-level regression detection.
 - Easy-win content-template outlier pass is now deployed (responsive blog hero optimization), and all six prior outlier routes pass isolated 5-run p50 verification.
-- Latest full-site audit refresh keeps a `95/100` evidence score with only two single-run outliers (`/` and `/services`).
+- Latest full-site audit refresh keeps a `95/100` evidence score with two single-run outliers now at (`/services` and `/blog`), while `/` moved back in-band.
 - Home-only iteration 17 (decode mode test) is now complete and logged as an eliminated path (`-24ms`, not material).
 - Home-only iteration 18 (mobile text animation gating) is now complete and logged as non-deterministic (bimodal, no sustained median shift).
 - Home-only iteration 19 (mobile overlay merge) is now complete and rejected (`-16ms`, not material); rollback applied to keep baseline stable.
@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run a full-site isolated breadth audit (30 routes, 1-run p50) and compare against the prior `95/100` snapshot to confirm home iteration gains did not cause cross-route regressions.
+- **Next action:** run an isolated 5-run p50 confirmation on `/services` + `/blog`, then select one single-variable fix only if both remain out-of-band in multi-run evidence.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -41,6 +41,15 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Full-site breadth refresh (30 routes, 1-run isolated) after home iteration 31:
+  - source: `.health/perf-gate-2026-03-05T21-32-00-678Z/summary.json`
+  - diagnostics: `.health/lcp-diagnostics-2026-03-05T21-32-00-678Z.json`
+  - comparison source: `.health/perf-gate-2026-03-05T14-12-49-741Z/summary.json`
+  - overall average LCP: `2304ms` (`+3ms`)
+  - core-route average LCP (`/`, `/about`, `/contact`, `/quote`, `/book`, `/services`, `/blog`): `2330ms` (`-1ms`)
+  - routes `<=2500ms`: `28/30` (unchanged)
+  - outliers: `/services` (`2846ms`), `/blog` (`2668ms`)
+  - score model: `95/100` (held)
 - Home iteration 31 (trust-dot `animate-pulse` removal) outcome:
   - pre-change baseline lock:
     - `.health/perf-gate-2026-03-05T20-55-53-977Z/summary.json`
@@ -343,6 +352,17 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 15:32:00 -06:00` **Full-site breadth refresh executed after home iteration 31**:
+  - command profile:
+    - isolated, mobile, 1 run per route, 30 routes, diagnostics enabled.
+  - source artifacts:
+    - `.health/perf-gate-2026-03-05T21-32-00-678Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T21-32-00-678Z.json`
+  - outcome:
+    - score held at `95/100`.
+    - routes `<=2500ms`: `28/30` (unchanged).
+    - outlier set rotated from (`/`, `/services`) to (`/blog`, `/services`).
+    - `/` moved back in-band (`2313ms`) in this breadth snapshot.
 - `2026-03-05 15:24:00 -06:00` **Home iteration 31 repeat-confirmed and accepted**:
   - change commit:
     - `3ccf790` in `src/components/hero.tsx`: removed `animate-pulse` from trust-dot span.
