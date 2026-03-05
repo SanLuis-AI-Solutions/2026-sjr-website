@@ -152,7 +152,7 @@ export default async function ServicesPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/30 bg-white/15 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
+                <div className="inline-flex items-center gap-3 rounded-full border border-brand-gold/30 bg-white/15 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.35em] text-white md:backdrop-blur-sm">
                   Typical turnaround
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
                   {formatTimeEstimate(featured?.time_estimate ?? featured?.timeEstimate ?? null) ?? "Same Day/Next Day service"}
