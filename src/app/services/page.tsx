@@ -147,7 +147,7 @@ export default async function ServicesPage() {
                 alt={featured?.name || "Featured service"}
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) calc(100vw - 3rem), 50vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
