@@ -26,7 +26,6 @@ export function Hero() {
         />
         {/* Mobile-only Product-First Overlays */}
         <div className="absolute inset-0 bg-[linear-gradient(102deg,_rgba(10,6,10,0.94)_0%,_rgba(25,10,18,0.82)_36%,_rgba(25,10,18,0.34)_64%,_rgba(25,10,18,0.08)_100%)] md:hidden" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,_rgba(209,184,130,0.22)_0%,_rgba(209,184,130,0.05)_34%,_transparent_62%)] md:hidden" />
 
         {/* Desktop-only Overlays */}
         <div className="absolute inset-0 hidden bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/85 to-transparent md:block" />
