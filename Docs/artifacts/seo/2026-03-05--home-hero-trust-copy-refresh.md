@@ -39,6 +39,9 @@ Replace a negatively perceived hero phrase with positive, trust-forward wording 
 - CI smoke follow-up:
   - `tests/smoke.spec.ts` heading assertions updated to `/Trusted Pasadena Jewelry Repair/i`.
   - targeted mobile smoke rerun passed (`2/2`).
+- production deploy:
+  - first run `22724191425` failed (stale smoke assertion against old copy).
+  - follow-up run `22724417208` passed end-to-end (deploy + conversion/service guardrails + baseline-delta checks).
 
 ## Related Evidence (same work session)
 

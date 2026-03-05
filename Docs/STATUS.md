@@ -229,6 +229,15 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 09:31:00 -06:00` **Hero headline update deployed successfully after smoke-sync fix**:
+  - failed deploy run (pre-fix): `22724191425` (smoke assertion still expected old headline copy).
+  - follow-up deploy run (post-fix): `22724417208` (success).
+  - validation in successful run:
+    - smoke tests pass
+    - production deploy pass
+    - conversion guardrail pass
+    - service guardrail pass
+    - baseline-delta checks pass
 - `2026-03-05 09:25:00 -06:00` **Deploy smoke test sync fix after headline update**:
   - issue:
     - production workflow `22724191425` failed in smoke tests because assertions still matched the old home headline string.
