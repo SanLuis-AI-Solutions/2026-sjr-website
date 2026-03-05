@@ -58,7 +58,7 @@ Update cadence: weekly (or after major milestones).
   - decision: reject as neutral; decode-mode-only change eliminated as meaningful home LCP lever.
   - rollback deployment:
     - commit `7a94fc2` restored `decoding="async"` in `src/components/hero.tsx`.
-    - deploy run `22729881379` success.
+    - deploy run `22730730614` success.
 - Services hub iteration 27 (mobile hero badge blur removal) outcome:
   - pre-change baseline lock:
     - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
@@ -278,7 +278,7 @@ Update cadence: weekly (or after major milestones).
       - `mobile smoke: repeated nav to Home is stable`
       - `mobile nav: menu opens and can reach Services`
   - production deploy:
-    - run `22729881379` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+    - run `22730730614` success (deploy + conversion/service guardrails + baseline-delta checks pass).
   - outcome:
     - production now matches iteration-28 decision log (sync-decode test recorded, then reverted as non-material).
 - `2026-03-05 12:00:00 -06:00` **Home iteration 28 executed (`decoding="sync"` on AVIF hero), deployed, measured, and rejected**:

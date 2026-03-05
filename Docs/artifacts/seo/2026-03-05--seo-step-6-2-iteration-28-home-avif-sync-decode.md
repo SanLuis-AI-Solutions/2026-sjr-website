@@ -76,7 +76,7 @@ node scripts/perf/launch-performance-gate.mjs \
 - Process outcome: mark H1 (decode mode alone) as eliminated for AVIF on current home hero implementation.
 - Rollback:
   - commit `7a94fc2` restored `decoding="async"` in `src/components/hero.tsx`.
-  - deploy run `22729881379` completed successfully to return production to the prior decode mode.
+  - deploy run `22730730614` completed successfully to return production to the prior decode mode.
 
 ## Next Optimal Step
 
