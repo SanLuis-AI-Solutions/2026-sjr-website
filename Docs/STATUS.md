@@ -20,11 +20,12 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run a home-only H2 micro-pass (mobile above-fold reveal-on-scroll contention reduction), then verify with isolated 10-run p50 diagnostics on `/` only.
+- **Next action:** run a diagnostics-only home forensics pass that extracts per-run long-task/style-layout categories from Lighthouse report JSON, then execute one single-variable code change based on that ranked evidence.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
 - Iteration 28 rollback is deployed: home hero decode mode restored to `decoding="async"` after neutral test outcome.
+- Home iteration 29 (mobile trust-badge blur removal test) is complete and rejected as non-material (`-1ms` LCP; `-13ms` renderDelay); rollback is deployed to preserve baseline look.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -38,6 +39,27 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Home iteration 29 (mobile trust-badge blur removal) outcome:
+  - pre-change baseline lock:
+    - `.health/perf-gate-2026-03-05T16-39-58-127Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-39-58-127Z.json`
+    - `/`: `2539ms` (diagnostics median)
+    - `renderDelay`: `1240ms`
+  - code change:
+    - `src/components/hero.tsx` (commit `6705ea3`): badge blur changed from `backdrop-blur-sm` to `md:backdrop-blur-sm`.
+  - deploy run (success): `22731973024`
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T19-15-40-163Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T19-15-40-163Z.json`
+    - `/`: `2538ms` (diagnostics median)
+    - `renderDelay`: `1227ms`
+  - delta vs baseline lock:
+    - `/`: `-1ms` (non-material)
+    - `renderDelay`: `-13ms` (non-material)
+  - decision: reject as neutral; rollback applied to preserve premium baseline visual.
+  - rollback deployment:
+    - commit `e652ee8` restored `backdrop-blur-sm` on mobile trust badge.
+    - deploy run `22732836047` success.
 - Home iteration 28 (`decoding="sync"` AVIF decode mode test) outcome:
   - pre-change baseline lock:
     - `.health/perf-gate-2026-03-05T16-39-58-127Z/summary.json`
@@ -269,6 +291,35 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 19:20:00 -06:00` **Iteration 29 rollback deployed (mobile trust-badge blur restored)**:
+  - rollback commit:
+    - `e652ee8` in `src/components/hero.tsx`: restored `backdrop-blur-sm` on mobile trust badge.
+  - local verification:
+    - `npm run build` pass.
+  - production deploy:
+    - run `22732836047` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+  - outcome:
+    - production returned to pre-test visual baseline after neutral result.
+- `2026-03-05 19:00:00 -06:00` **Home iteration 29 executed (mobile trust-badge blur removal), deployed, measured, and rejected**:
+  - code change:
+    - `src/components/hero.tsx` (commit `6705ea3`): `backdrop-blur-sm` -> `md:backdrop-blur-sm` on trust badge.
+  - local verification:
+    - `npm run build` pass.
+    - targeted smoke:
+      - `mobile smoke: repeated nav to Home is stable` pass.
+      - `mobile nav: menu opens and can reach Services` pass.
+  - production deploy:
+    - run `22731973024` success.
+  - post-deploy isolated 10-run verification (`/` only):
+    - `.health/perf-gate-2026-03-05T19-15-40-163Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T19-15-40-163Z.json`
+    - diagnostics median: `lcp=2538ms`, `ttfb=127ms`, `loadDelay=29ms`, `loadTime=78ms`, `renderDelay=1227ms`.
+  - baseline comparison source:
+    - `.health/perf-gate-2026-03-05T16-39-58-127Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-39-58-127Z.json`
+    - diagnostics median: `lcp=2539ms`, `renderDelay=1240ms`.
+  - decision:
+    - delta `lcp=-1ms`, `renderDelay=-13ms` (non-material), reject and rollback.
 - `2026-03-05 12:24:00 -06:00` **Iteration 28 rollback deployed to keep production aligned with elimination decision**:
   - rollback commit:
     - `7a94fc2` in `src/components/hero.tsx`: restored `decoding="async"` on home hero image.
