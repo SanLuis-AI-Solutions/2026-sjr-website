@@ -11,7 +11,7 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-stone-200/70 bg-[#faf7f2]/95 py-4 md:backdrop-blur">
+    <header className="fixed top-0 z-50 w-full border-b border-stone-200/70 bg-[#faf7f2]/95 py-4 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         <Link href="/" prefetch={false} className="group flex flex-col">
           <span className="font-serif text-xl leading-none tracking-tight text-neutral-900 md:text-2xl">
