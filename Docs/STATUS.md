@@ -21,6 +21,7 @@ Update cadence: weekly (or after major milestones).
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
 - **Next action:** run isolated 5-run p50 diagnostics on `/` and `/services` together (same timestamped run) to lock noise-free baselines before any further code changes.
+- Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -34,6 +35,12 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Isolated de-noise lock for remaining outlier routes (`/` + `/services`, 5-run p50):
+  - source: `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
+  - diagnostics: `.health/lcp-diagnostics-2026-03-05T15-02-48-628Z.json`
+  - `/`: `2520ms` (`ttfb=128ms`, `loadDelay=22ms`, `loadTime=76ms`, `renderDelay=1200ms`)
+  - `/services`: `2732ms` (`ttfb=126ms`, `loadDelay=0ms`, `loadTime=0ms`, `renderDelay=1271ms`)
+  - decision: `/services` remains the primary Step 6.2 bottleneck route; continue services-hub micro-pass next.
 - Full-site breadth refresh (30 routes, 1-run isolated):
   - source: `.health/perf-gate-2026-03-05T14-12-49-741Z/summary.json`
   - diagnostics: `.health/lcp-diagnostics-2026-03-05T14-12-49-741Z.json`
@@ -222,6 +229,19 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 09:15:00 -06:00` **Isolated 5-run p50 de-noise baseline locked for `/` and `/services` + home trust-copy refresh**:
+  - perf evidence:
+    - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T15-02-48-628Z.json`
+    - `/`: `2520ms`; `/services`: `2732ms`
+  - content update:
+    - `src/components/hero.tsx`: changed headline from negative phrasing to positive local-intent phrasing:
+      - from: `Your jewelry never leaves our hands.`
+      - to: `Trusted Pasadena Jewelry Repair, Done In-House.`
+  - verification:
+    - `npm run build` pass.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-05--home-hero-trust-copy-refresh.md`
 - `2026-03-05 08:20:00 -06:00` **Full-site breadth refresh rerun executed, scorecard updated, and outlier set reconfirmed**:
   - run profile:
     - 30 routes, isolated 1-run p50, diagnostics enabled, permissive thresholds for data capture.

@@ -41,7 +41,7 @@ export function Hero() {
               Your Jewelry Stays On-Site.
             </div>
             <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[8.8ch] text-[clamp(2.9rem,13.6vw,4.2rem)] leading-[0.9] text-white [text-wrap:balance] md:max-w-none md:text-6xl md:leading-[0.95] md:text-stone-900 lg:text-7xl">
-              Your jewelry never leaves our hands.
+              Trusted Pasadena Jewelry Repair, Done In-House.
             </h1>
             <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-5 max-w-[24ch] text-[1.08rem] leading-relaxed text-stone-100/92 md:mt-6 md:max-w-[32ch] md:text-lg md:font-normal md:text-stone-600">
               On-site master craftsmanship with clear pricing and Same Day/Next Day service.
