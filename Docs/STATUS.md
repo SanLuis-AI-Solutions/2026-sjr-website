@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run one `/services` hero text paint experiment (mobile-only, no layout redesign), then re-measure isolated 5-run p50 and keep/rollback based on measured delta only.
+- **Next action:** run one `/services` hero paint-layer simplification experiment (mobile-only, no copy/layout/CTA changes), then re-measure isolated 5-run p50 and keep/rollback based on measured delta only.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -34,6 +34,17 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-04 CST)
+- Services hub iteration 24 (mobile heading paint experiment) outcome:
+  - experiment deploy run: `22701429100` (failed at service baseline-delta compare by `3ms` on `/services/custom-design`, after deploy completed).
+  - target-route verification after experiment:
+    - `.health/perf-gate-2026-03-05T04-10-00-034Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T04-10-00-034Z.json`
+    - `/services`: `2677ms` (vs locked baseline `2667ms`, delta `+10ms`, rejected).
+    - sampled LCP element in run: hero image (`img.object-cover`), not heading.
+  - rollback deploy run: `22701947161` (success; all guardrails pass).
+  - post-rollback isolated confirmation:
+    - `.health/perf-gate-2026-03-05T04-30-43-567Z/summary.json`
+    - `/services`: `2692ms`, `ttfb=128ms`, `loadDelay=0ms`, `loadTime=0ms`, `renderDelay=1303ms`.
 - Services hub iteration 23 (micro-pass + post-deploy verification):
   - pre-change isolated baseline: `.health/perf-gate-2026-03-04T22-23-03-693Z/summary.json`
   - pre-change `/services`: `2693ms` (`renderDelay=1355ms`)
@@ -179,6 +190,22 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 22:30:00 -06:00` **Step 6.2 Iteration 24 executed (`/services` mobile heading paint test), rejected, and rolled back**:
+  - experiment change:
+    - `src/app/services/page.tsx` (commit `ebd3178`): mobile-only hero heading size/line-height clamp tuning.
+  - verification:
+    - local: `npm run build` pass; focused services smoke tests pass.
+    - deploy run `22701429100`: deploy completed, but baseline-delta check failed on `/services/custom-design` by `+3ms` (`+153ms` vs `+150ms` budget).
+    - target route measurement:
+      - `.health/perf-gate-2026-03-05T04-10-00-034Z/summary.json` -> `/services` `2677ms` (vs `2667ms`, `+10ms`).
+      - diagnostics showed sampled LCP switched to hero image; no material improvement.
+  - decision:
+    - reject iteration 24 change (fails keep criteria).
+  - rollback:
+    - commit `514f730` deployed in run `22701947161` (success).
+    - post-rollback confirmation: `.health/perf-gate-2026-03-05T04-30-43-567Z/summary.json` -> `/services` `2692ms`.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-04--seo-step-6-2-iteration-24-services-heading-experiment-rejected.md`
 - `2026-03-04 16:55:00 -06:00` **Step 6.2 Iteration 23 executed (`/services` hub micro-pass), deployed, measured, and documented**:
   - baseline lock:
     - `.health/perf-gate-2026-03-04T22-23-03-693Z/summary.json` -> `/services` `2693ms`, `renderDelay=1355ms`.
