@@ -22,6 +22,7 @@ Update cadence: weekly (or after major milestones).
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
 - **Next action:** run isolated 5-run p50 diagnostics on `/` and `/services` together (same timestamped run) to lock noise-free baselines before any further code changes.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
+- Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -35,6 +36,22 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Services hub iteration 27 (mobile hero badge blur removal) outcome:
+  - pre-change baseline lock:
+    - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T15-02-48-628Z.json`
+    - `/services`: `2732ms`
+    - `/`: `2520ms`
+  - deploy run (success): `22725969011`
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T16-07-48-547Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-07-48-547Z.json`
+    - `/services`: `2390ms`
+    - `/`: `2524ms`
+  - delta vs baseline lock:
+    - `/services`: `-342ms` (accepted)
+    - `/`: `+4ms` (noise band)
+  - decision: keep change live; shift next optimization focus to `/` only.
 - Isolated de-noise lock for remaining outlier routes (`/` + `/services`, 5-run p50):
   - source: `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
   - diagnostics: `.health/lcp-diagnostics-2026-03-05T15-02-48-628Z.json`
@@ -229,6 +246,25 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 10:12:00 -06:00` **Step 6.2 Iteration 27 executed (`/services` hero badge blur removal), deployed, measured, and kept**:
+  - code change:
+    - `src/app/services/page.tsx` (commit `5653622`): removed mobile backdrop blur on the hero turnaround badge (`md:backdrop-blur-sm` desktop-only).
+  - local verification:
+    - `npm run build` pass.
+    - targeted mobile smoke:
+      - `services hub: featured detail link routes to service detail` pass.
+      - `mobile services pages: quick actions are clear and image assets load` pass.
+  - production deploy:
+    - run `22725969011` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+  - post-deploy isolated 5-run p50 verification:
+    - `.health/perf-gate-2026-03-05T16-07-48-547Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T16-07-48-547Z.json`
+    - `/services`: `2390ms` (`2732ms -> 2390ms`, `-342ms`)
+    - `/`: `2524ms` (`2520ms -> 2524ms`, `+4ms`)
+  - decision:
+    - keep iteration 27 live and move next elimination step to home-only recovery.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-27-services-hero-badge-blur-removal.md`
 - `2026-03-05 09:31:00 -06:00` **Hero headline update deployed successfully after smoke-sync fix**:
   - failed deploy run (pre-fix): `22724191425` (smoke assertion still expected old headline copy).
   - follow-up deploy run (post-fix): `22724417208` (success).
