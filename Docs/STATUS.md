@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run one `/services` hero paint-layer simplification experiment (mobile-only, no copy/layout/CTA changes), then re-measure isolated 5-run p50 and keep/rollback based on measured delta only.
+- **Next action:** run one `/services` hero image-request-path experiment (single change, no layout/copy/CTA changes), then re-measure isolated 5-run p50 and keep/rollback by measured delta only.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -33,7 +33,19 @@ Update cadence: weekly (or after major milestones).
 - **Performance Gate Pass (Production)**: Achieved passing 3-run mobile median on launch routes (`/`, `/services/ring-sizing`, `/blog/ring-sizing-guide`).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
-## Latest Gate Metrics (2026-03-04 CST)
+## Latest Gate Metrics (2026-03-05 CST)
+- Services hub iteration 25 (mobile hero overlay simplification) outcome:
+  - pre-change baseline:
+    - `.health/perf-gate-2026-03-05T05-21-04-782Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T05-21-04-782Z.json`
+    - `/services`: `2657ms` (`renderDelay=1294ms`)
+  - deploy run (success): `22703704711`
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T05-42-15-933Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T05-42-15-933Z.json`
+    - `/services`: `2533ms` (`renderDelay=299ms`)
+  - delta: `-124ms` LCP (`keep`)
+  - sampled LCP node remains hero heading (`h1.lcp-heading`) in representative run.
 - Services hub iteration 24 (mobile heading paint experiment) outcome:
   - experiment deploy run: `22701429100` (failed at service baseline-delta compare by `3ms` on `/services/custom-design`, after deploy completed).
   - target-route verification after experiment:
@@ -190,6 +202,23 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-04 23:45:00 -06:00` **Step 6.2 Iteration 25 executed (`/services` mobile hero overlay simplification), deployed, measured, and kept**:
+  - baseline lock:
+    - `.health/perf-gate-2026-03-05T05-21-04-782Z/summary.json` -> `/services` `2657ms`, `renderDelay=1294ms`.
+    - diagnostics: `.health/lcp-diagnostics-2026-03-05T05-21-04-782Z.json`.
+  - code change:
+    - `src/app/services/page.tsx` (commit `ed1e878`): top hero radial background overlay changed to desktop-only (`hidden md:block`) so mobile above-fold paint stack is reduced.
+  - verification:
+    - local: `npm run build` pass; focused services smoke checks pass.
+    - production deploy run: `22703704711` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+    - post-deploy isolated check:
+      - `.health/perf-gate-2026-03-05T05-42-15-933Z/summary.json` -> `/services` `2533ms`, `renderDelay=299ms`.
+      - diagnostics: `.health/lcp-diagnostics-2026-03-05T05-42-15-933Z.json`.
+    - delta vs baseline: `-124ms` LCP (`keep`).
+  - decision:
+    - keep change live; continue with one more isolated `/services` micro-pass targeting image request path.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-25-services-hero-overlay-mobile.md`
 - `2026-03-04 22:30:00 -06:00` **Step 6.2 Iteration 24 executed (`/services` mobile heading paint test), rejected, and rolled back**:
   - experiment change:
     - `src/app/services/page.tsx` (commit `ebd3178`): mobile-only hero heading size/line-height clamp tuning.
