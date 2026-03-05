@@ -37,7 +37,7 @@ export function Hero() {
           <div className="relative">
             <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3 rounded-full border border-brand-gold/50 bg-black/32 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold shadow-[0_8px_20px_rgba(0,0,0,0.24)] backdrop-blur-sm md:bg-white/80 md:text-brand-burgundy">
               In-House Repairs
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
               Your Jewelry Stays On-Site.
             </div>
             <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[8.8ch] text-[clamp(2.9rem,13.6vw,4.2rem)] leading-[0.9] text-white [text-wrap:balance] md:max-w-none md:text-6xl md:leading-[0.95] md:text-stone-900 lg:text-7xl">
