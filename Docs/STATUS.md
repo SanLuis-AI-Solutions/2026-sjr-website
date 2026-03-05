@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run one `/services` hero image-request-path experiment (single change, no layout/copy/CTA changes), then re-measure isolated 5-run p50 and keep/rollback by measured delta only.
+- **Next action:** run a full-site breadth refresh (30 routes, isolated 1-run) and update the audit scorecard to confirm remaining outliers for the 2-day optimization closeout.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -34,6 +34,18 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Services hub iteration 26 (hero image `sizes` request-path tuning) outcome:
+  - pre-change baseline:
+    - `.health/perf-gate-2026-03-05T05-48-37-467Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T05-48-37-467Z.json`
+    - `/services`: `2653ms` (`renderDelay=307ms`)
+  - deploy run (success): `22704419397`
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T06-09-51-807Z/summary.json`
+    - `.health/lcp-diagnostics-2026-03-05T06-09-51-807Z.json`
+    - `/services`: `2426ms` (`renderDelay=293ms`)
+  - delta: `-227ms` LCP (`keep`)
+  - sampled LCP node remains hero heading (`h1.lcp-heading`) in representative run.
 - Services hub iteration 25 (mobile hero overlay simplification) outcome:
   - pre-change baseline:
     - `.health/perf-gate-2026-03-05T05-21-04-782Z/summary.json`
@@ -202,6 +214,23 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 00:12:00 -06:00` **Step 6.2 Iteration 26 executed (`/services` hero image sizes tuning), deployed, measured, and kept**:
+  - baseline lock:
+    - `.health/perf-gate-2026-03-05T05-48-37-467Z/summary.json` -> `/services` `2653ms`, `renderDelay=307ms`.
+    - diagnostics: `.health/lcp-diagnostics-2026-03-05T05-48-37-467Z.json`.
+  - code change:
+    - `src/app/services/page.tsx` (commit `41e5a9b`): top hero image `sizes` changed from `100vw` to `calc(100vw - 3rem)` for mobile request-path accuracy.
+  - verification:
+    - local: `npm run build` pass; focused services smoke checks pass.
+    - production deploy run: `22704419397` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+    - post-deploy isolated check:
+      - `.health/perf-gate-2026-03-05T06-09-51-807Z/summary.json` -> `/services` `2426ms`, `renderDelay=293ms`.
+      - diagnostics: `.health/lcp-diagnostics-2026-03-05T06-09-51-807Z.json`.
+    - delta vs baseline: `-227ms` LCP (`keep`).
+  - decision:
+    - keep change live; proceed to full-site breadth refresh to identify final remaining outlier routes.
+  - Artifact:
+    - `Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-26-services-hero-image-sizes.md`
 - `2026-03-04 23:45:00 -06:00` **Step 6.2 Iteration 25 executed (`/services` mobile hero overlay simplification), deployed, measured, and kept**:
   - baseline lock:
     - `.health/perf-gate-2026-03-05T05-21-04-782Z/summary.json` -> `/services` `2657ms`, `renderDelay=1294ms`.
