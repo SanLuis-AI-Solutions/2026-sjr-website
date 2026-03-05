@@ -24,6 +24,7 @@ Update cadence: weekly (or after major milestones).
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
+- Iteration 28 rollback is deployed: home hero decode mode restored to `decoding="async"` after neutral test outcome.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -55,6 +56,9 @@ Update cadence: weekly (or after major milestones).
     - `/`: `-2ms` (non-material)
     - `renderDelay`: `-5ms` (non-material)
   - decision: reject as neutral; decode-mode-only change eliminated as meaningful home LCP lever.
+  - rollback deployment:
+    - commit `7a94fc2` restored `decoding="async"` in `src/components/hero.tsx`.
+    - deploy run `22729881379` success.
 - Services hub iteration 27 (mobile hero badge blur removal) outcome:
   - pre-change baseline lock:
     - `.health/perf-gate-2026-03-05T15-02-48-628Z/summary.json`
@@ -265,6 +269,18 @@ Update cadence: weekly (or after major milestones).
   - `/`: `2613ms` (persistent near-threshold miss; next dedicated target)
 
 ## Execution Log (Local Time -06:00)
+- `2026-03-05 12:24:00 -06:00` **Iteration 28 rollback deployed to keep production aligned with elimination decision**:
+  - rollback commit:
+    - `7a94fc2` in `src/components/hero.tsx`: restored `decoding="async"` on home hero image.
+  - local verification:
+    - `npm run build` pass.
+    - smoke checks pass:
+      - `mobile smoke: repeated nav to Home is stable`
+      - `mobile nav: menu opens and can reach Services`
+  - production deploy:
+    - run `22729881379` success (deploy + conversion/service guardrails + baseline-delta checks pass).
+  - outcome:
+    - production now matches iteration-28 decision log (sync-decode test recorded, then reverted as non-material).
 - `2026-03-05 12:00:00 -06:00` **Home iteration 28 executed (`decoding="sync"` on AVIF hero), deployed, measured, and rejected**:
   - code change:
     - `src/components/hero.tsx` (commit `d85e414`): `decoding="async"` -> `decoding="sync"` on the home hero image.

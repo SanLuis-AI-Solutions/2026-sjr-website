@@ -74,8 +74,10 @@ node scripts/perf/launch-performance-gate.mjs \
 - Result: **Rejected as non-material**.
 - Reason: the change did not produce a meaningful shift in either LCP or render delay on isolated 10-run production evidence; it is within run noise.
 - Process outcome: mark H1 (decode mode alone) as eliminated for AVIF on current home hero implementation.
+- Rollback:
+  - commit `7a94fc2` restored `decoding="async"` in `src/components/hero.tsx`.
+  - deploy run `22729881379` completed successfully to return production to the prior decode mode.
 
 ## Next Optimal Step
 
 Run a single-variable H2 test on home by reducing above-fold main-thread contention (mobile-only reveal-on-scroll deferral/removal for the first visible home sections), then re-run the same isolated 10-run diagnostics command.
-
