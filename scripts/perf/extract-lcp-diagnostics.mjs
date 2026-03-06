@@ -75,8 +75,17 @@ function extractBreakdown(report) {
 }
 
 function extractLcpNode(report) {
-  const items = report.audits["lcp-discovery-insight"]?.details?.items || [];
-  const node = items.find((item) => item?.type === "node") || null;
+  // Primary: lcp-discovery-insight (populated for image-based LCP elements).
+  const discoveryItems = report.audits["lcp-discovery-insight"]?.details?.items || [];
+  let node = discoveryItems.find((item) => item?.type === "node") || null;
+
+  // Fallback: lcp-breakdown-insight outer list (populated for all LCP element types,
+  // including text-based LCP on /services and /blog where discovery-insight is empty).
+  if (!node) {
+    const breakdownOuterItems = report.audits["lcp-breakdown-insight"]?.details?.items || [];
+    node = breakdownOuterItems.find((item) => item?.type === "node") || null;
+  }
+
   const snippet = decodeHtmlEntities(node?.snippet || "");
   const srcMatch = snippet.match(/\ssrc="([^"]+)"/i);
   return {
