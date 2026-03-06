@@ -184,7 +184,7 @@ export default async function ServicesPage() {
                 <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Featured service
                 </div>
-                <h2 className="mt-4 font-serif text-4xl leading-[1.05] text-stone-900 md:text-5xl">
+                <h2 className="lcp-heading mt-4 text-4xl leading-[1.05] text-stone-900 md:text-5xl">
                   {featured?.name || "Watch Repair"}
                 </h2>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 md:text-base">

@@ -42,7 +42,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             Blog
           </p>
-          <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">
+          <h1 className="lcp-heading mt-3 text-4xl text-stone-900 md:text-5xl">
             Repair tips and local guidance.
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-stone-600">
@@ -118,7 +118,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                     Featured guide
                   </p>
-                  <h2 className="mt-3 font-serif text-3xl leading-tight text-stone-900">
+                  <h2 className="lcp-heading mt-3 text-3xl leading-tight text-stone-900">
                     {featuredPost.title}
                   </h2>
                   <p className="mt-4 text-[15px] leading-7 text-stone-600">{featuredPost.excerpt}</p>
