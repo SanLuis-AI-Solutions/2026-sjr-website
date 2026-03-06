@@ -1,86 +1,92 @@
-# Master Project Handoff — February 24, 2026
+# Handoff Snapshot — 2026-03-05/06 (CST)
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 22:23:59 -06:00 (CST)
-- **Context/Notes**: Ran production 10-run p75 Lighthouse gate (`scripts/perf/launch-performance-gate.mjs`) against canonical domain. Gate remains red on Home + Ring Sizing due to LCP jitter above 2500ms while SEO holds at 100. Baseline snapshot: `/` LCP `2738ms`, `/services/ring-sizing` LCP `2836ms`, `/blog/ring-sizing-guide` LCP `2331ms`. Next required optimization is the Critical Shell refactor (hero/header in first flush, all below-fold sections in a single Suspense stream boundary) on `/` and `/services/[slug]`.
-- **Agent Name**: Codex
-- Latest perf gate artifact: `.health/perf-gate-2026-02-28T04-08-01-463Z/summary.json`
+## Current State
+- Branch: `master`
+- Workspace: clean
+- Canonical domain: `https://www.susiesjewelryrepair.com`
+- Latest synced status log: `Docs/STATUS.md`
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 21:54:05 -06:00 (CST)
-- **Context/Notes**: Implemented cinematic product-first Hero direction: ring-dominant mobile framing, narrowed text footprint, left-side editorial veil, and stronger luxury lighting/CTA hierarchy to improve first-glance visual impact.
-- **Agent Name**: Codex
+## What Was Completed In This Session
+1. Processed Claude recommendation context and avoided repeating already-rejected header blur hypothesis.
+2. Ran a full single-variable experiment on `/services`:
+   - commit `f7e4921` (`perf: reduce services hub hydration boundaries`)
+   - production deploy run `22741610030` = success
+3. Measured post-change with isolated production gate (`5-run p50`):
+   - source: `.health/perf-gate-2026-03-05T23-54-07-095Z/summary.json`
+   - `/services`: `2725ms`, renderDelay `1303ms`
+4. Compared to locked baseline:
+   - baseline: `.health/perf-gate-2026-03-05T23-21-54-278Z/summary.json`
+   - `/services`: `2735ms`, renderDelay `1294ms`
+   - delta: `-10ms` LCP (non-material), rejected.
+5. Rolled back immediately:
+   - rollback commit `82e6f36`
+   - rollback deploy run `22742317989` = success
+6. Post-rollback confirmation:
+   - source: `.health/perf-gate-2026-03-06T00-18-19-987Z/summary.json`
+   - `/services`: `2728ms`
+   - `/blog`: `2659ms`
+   - `/`: `2522ms`
+7. Documentation synced:
+   - iteration artifact: `Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-32-services-hub-trackedlink-elimination.md`
+   - status updated: `Docs/STATUS.md`
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 21:40:55 -06:00 (CST)
-- **Context/Notes**: Rolled back Home Hero to Option 1 per stakeholder direction (reverted from Option 1.5/Option 2 styling). Validation: `eslint` + `next build` pass; test gate passed with one unrelated flaky retry in services image checks.
-- **Agent Name**: Codex
+## Latest Deploy Workflow Evidence
+- `22742317989` (rollback deploy): success
+- `22743060468` (docs sync push): success
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 21:26:46 -06:00 (CST)
-- **Context/Notes**: Replaced Option 2 with an Option 1.5 Hero treatment: stronger dark-luxury look, reduced text block footprint, and ring-focused mobile framing to keep gemstone detail visible while preserving premium contrast and CTA clarity.
-- **Agent Name**: Codex
+## Current Bottleneck Reality (Evidence-Based)
+- `/services` and `/blog` are still dominated by `elementRenderDelay` with zero resource-load phases in current failing runs.
+- This indicates render-path/text-paint/hydration timing pressure, not network/image transfer, as the active bottleneck.
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 21:12:31 -06:00 (CST)
-- **Context/Notes**: Applied Option 2 Hero visual direction (brighter champagne luxury) on mobile with luminous overlays, translucent editorial panel, and refined CTA styling. Verification: `eslint` + `next build` pass; test gate passed with 1 known unrelated flaky retry in service image coverage.
-- **Agent Name**: Codex
+## Eliminated Paths (Do Not Repeat)
+- Home header mobile blur toggle hypothesis (tested, rejected, rolled back).
+- `/services` TrackedLink boundary elimination experiment (iteration 32; rejected and rolled back).
+- Prior home iterations 28-30 (sync decode, badge blur, radial overlay) were non-material and already closed.
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 20:59:28 -06:00 (CST)
-- **Context/Notes**: Reworked mobile Home Hero into a luxury layered composition (cinematic vignette + glow overlays, editorial heading rhythm, premium CTA stack) while preserving eager LCP image loading and desktop behavior. Verification: `eslint` + `next build` pass; test gate passed with 1 unrelated flaky image retry in service detail suite.
-- **Agent Name**: Codex
+## Next Optimal Step (Ready To Execute)
+Run one text-LCP fallback experiment:
+1. Add `lcp-heading` class to above-fold text LCP candidates on `/blog` and `/services` hero stack.
+2. Deploy.
+3. Re-run isolated production 5-run p50 gate on `/services`, `/blog`, `/`.
+4. Accept only if at least one target route improves by `>=150ms` with no `/` regression worse than `+150ms`; otherwise rollback.
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 20:37:33 -06:00 (CST)
-- **Context/Notes**: Hardened mobile tap targets on About/FAQ/Blog (`min-h-12`) to clear flaky 44px assertions, retained hero readability/motion updates, and re-ran full production gate successfully (`npm test`: 17/17 Playwright + build pass).
-- **Agent Name**: Codex
+## New Chat Kickoff Prompt (Copy/Paste)
+Use this exact prompt to resume quickly:
 
-## Session Update — February 27, 2026
-- **Date**: 2026-02-27
-- **Time**: 17:20:37 -06:00 (CST)
-- **Context/Notes**: Hardening plan execution for auth allowlist, customer email loop, hero readability, and booking date-picker; verification + perf delta recorded.
-- **Agent Name**: Codex
-- Canonical implementation log: `Docs/2026-02-27--Hardening-Execution-Log.md`
-- Latest perf gate artifact: `.health/perf-gate-2026-02-27T00-23-39-026Z/summary.json`
+```text
+Continue from the current master state of the SJR website repo.
 
-## 🚀 OVERVIEW
-The SJR website is live and canonical at **`https://www.susiesjewelryrepair.com/`**. We are in the final **Performance & Conversion Hardening** phase.
+Read first:
+1) Docs/HANDOFF.md
+2) Docs/STATUS.md
+3) Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-32-services-hub-trackedlink-elimination.md
+4) Docs/PERF-LCP-FIX.md
 
-**MANDATORY OPERATING RULE:** You ABSOLUTELY MUST invoke `@using-superpowers` at the start of this session and before any significant architectural or performance decision. This is non-negotiable.
+Context:
+- Latest session completed iteration 32 and rolled it back due non-material gain.
+- Current evidence after rollback:
+  - .health/perf-gate-2026-03-06T00-18-19-987Z/summary.json
+  - /services=2728ms, /blog=2659ms, /=2522ms
+- We are using strict process-of-elimination. Do not repeat previously rejected hypotheses.
 
-## 🧰 RESOURCE TOOLKIT
-Use these specific resources to ensure a high-fidelity execution:
-- **Core Skills**: `web-performance-optimization`, `performance-profiling`, `nextjs-best-practices`, `verification-before-completion`.
-- **Specialized Agents**: `performance-optimizer`, `frontend-specialist`, `test-engineer`.
-- **Command Workflows**: `/status` (Check baseline), `/qa-gate` (Final verification), `/test` (Smoke testing).
+Task:
+1) Implement one single-variable text-LCP fallback experiment:
+   - apply lcp-heading fallback class to above-fold text LCP candidates on /blog and /services.
+2) Run verification:
+   - npm run build
+   - npm run test -- --grep "mobile smoke: repeated nav to Home is stable"
+   - npm run test -- --grep "mobile nav: menu opens and can reach Services"
+3) Deploy production.
+4) Run isolated diagnostics gate:
+   - node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 5 --percentile 50 --lcp-threshold-ms 10000 --seo-threshold 100 --isolate --diagnostics --path /services --path /blog --path /
+5) Document:
+   - new artifact under Docs/artifacts/seo/ (next iteration number)
+   - update Docs/STATUS.md with baseline, after, deltas, decision
+6) If non-material, rollback immediately and document rollback evidence.
 
-## 🎯 CURRENT OBJECTIVE
-Stabilize the **Performance Gate** on mobile. We are hitting 2400ms – 3100ms LCP (Largest Contentful Paint) jitter. We need a consistent "Green" pass (< 2500ms) on a 10-run p75 baseline.
-
-## 💎 KEY UPDATES (TODAY)
-1. **Virtual Showroom Locked**: Shipped `/showroom` with a performance-optimized, white-labeled Stuller Showcase integration.
-2. **Server-Side Header**: Converted `SiteHeader` to a Server Component (native details menu) to stop client-side hydration contention.
-3. **Environment Sync**: Stuller URL and site constants are locked in `.env.local` and `Vercel`.
-4. **Project Status**: Updated `Docs/STATUS.md` with the latest Lighthouse evidence (LCP ~2500ms).
-
-## 🛠️ REQUIRED NEXT ACTIONS (NEW SESSION)
-1. **Image Priority Fix**: Revert LCP hero images from `decoding="async"` to **`decoding="sync"`** in `src/components/hero.tsx` and related routes to force immediate painting during initial render.
-2. **Containment Polish**: Remove global `cv-auto` from the home page. Apply it **surgically** only to the bottom-most sections (Testimonials, FAQs, Footer) to clear the main thread for the Hero area.
-3. **Stability Gate**: Increase performance gate to **10-runs with p75 reporting**.
-
-## 📁 CRITICAL FILES
-- **Performance Gate**: `scripts/perf/launch-performance-gate.mjs`
-- **Hero Logic**: `src/components/hero.tsx`
-- **Status Source**: `Docs/STATUS.md`
-- **Historical Context**: See `Docs/archive/` and `Docs/artifacts/`
-
----
-**Status: Locked & Synced (Master). Prepared for New Chat.**
+Output required:
+- commit IDs
+- deploy workflow run IDs
+- baseline/after metric table
+- accept/reject decision and next optimal step
+```
