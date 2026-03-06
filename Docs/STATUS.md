@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** lock a same-window control baseline with two back-to-back isolated 5-run p50 runs on current live `master`, then execute one new `/services` single-variable render-delay experiment (excluding previously rejected paths).
+- **Next action:** keep strict same-window baseline locking, then test one new `/services` fixed quick-actions shell simplification lever that does not repeat TrackedLink elimination, hero `font-serif` removal, or quick-actions blur removal.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -32,6 +32,7 @@ Update cadence: weekly (or after major milestones).
 - Iteration 33 (text LCP fallback class on `/blog` + `/services` above-fold headings) is complete and accepted (`/services -298ms`; `/blog -48ms`; `/ -210ms`).
 - Iteration 35 (`/blog` topic-filter TrackedLink boundary elimination) is complete and accepted (`/blog -413ms`; `/services -4ms`; `/ +14ms`).
 - Iteration 36 (`/services` hero `font-serif` removal) is complete and rejected (`/services +41ms`; `/blog +371ms`; `/ +56ms`), with immediate rollback deployed and verified.
+- Iteration 37 (`/services` mobile quick-actions blur removal) is complete and rejected (`/services +181ms` vs locked control midpoint; `/blog +377ms`; `/ +99ms`), with immediate rollback deployed and verified.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -45,6 +46,40 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-06 CST)
+- Iteration 37 (`/services` mobile quick-actions blur removal) outcome:
+  - locked control run #1:
+    - `.health/perf-gate-2026-03-06T19-42-30-823Z/summary.json`
+    - `/services`: `2453ms`
+    - `/blog`: `2204ms`
+    - `/`: `2519ms`
+  - locked control run #2:
+    - `.health/perf-gate-2026-03-06T19-48-46-123Z/summary.json`
+    - `/services`: `2798ms`
+    - `/blog`: `2263ms`
+    - `/`: `2311ms`
+  - locked control midpoint (rounded mean of both runs):
+    - `/services`: `2626ms`
+    - `/blog`: `2234ms`
+    - `/`: `2415ms`
+  - experiment commit: `b6675d0`
+  - experiment deploy run: `22779801382` (`cancelled after rollback push; Vercel deploy + alias propagation completed before cancellation`)
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-06T20-06-23-964Z/summary.json`
+    - `/services`: `2807ms`
+    - `/blog`: `2611ms`
+    - `/`: `2514ms`
+  - delta vs locked control midpoint:
+    - `/services`: `+181ms`
+    - `/blog`: `+377ms`
+    - `/`: `+99ms`
+  - decision: reject and rollback.
+  - rollback commit: `c466c4f`
+  - rollback deploy run: `22780218192` (`success`)
+  - rollback evidence:
+    - `.health/perf-gate-2026-03-06T20-30-37-523Z/summary.json`
+    - `/services`: `2736ms`
+    - `/blog`: `2719ms`
+    - `/`: `2539ms`
 - Iteration 36 (`/services` hero `font-serif` removal) outcome:
   - pre-change lock:
     - `.health/perf-gate-2026-03-06T03-37-35-184Z/summary.json`
