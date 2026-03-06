@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
-import Link from "next/link";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
-import { ServicesHubInteractionTracker } from "@/components/analytics/services-hub-interaction-tracker";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 
 type ServiceListItem = {
   slug: string;
@@ -122,24 +121,22 @@ export default async function ServicesPage() {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link
+              <TrackedLink
                 href="/quote"
-                data-track-event="services_hub_cta_click"
-                data-track-placement="hero"
-                data-track-target="quote"
+                eventName="services_hub_cta_click"
+                eventParams={{ placement: "hero", cta_target: "quote" }}
                 className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Get Fast Quote
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/book"
-                data-track-event="services_hub_cta_click"
-                data-track-placement="hero"
-                data-track-target="book"
+                eventName="services_hub_cta_click"
+                eventParams={{ placement: "hero", cta_target: "book" }}
                 className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book Repair
-              </Link>
+              </TrackedLink>
             </div>
           </div>
 
@@ -194,15 +191,14 @@ export default async function ServicesPage() {
                   {featured?.summary || "Precision servicing for modern and vintage watches."}
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
-                  <Link
+                  <TrackedLink
                     href="/services/watch-repair"
-                    data-track-event="service_card_click"
-                    data-track-placement="services_hub_featured"
-                    data-track-slug="watch-repair"
+                    eventName="service_card_click"
+                    eventParams={{ placement: "services_hub_featured", service_slug: "watch-repair" }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-7 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     View details
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
 
@@ -259,15 +255,14 @@ export default async function ServicesPage() {
                   <p className="mt-2 text-sm text-stone-600">
                     Send one photo and we will recommend the right next step.
                   </p>
-                  <Link
+                  <TrackedLink
                     href="/quote"
-                    data-track-event="services_hub_cta_click"
-                    data-track-placement="directory_aside"
-                    data-track-target="quote"
+                    eventName="services_hub_cta_click"
+                    eventParams={{ placement: "directory_aside", cta_target: "quote" }}
                     className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
-                  </Link>
+                  </TrackedLink>
                 </div>
               </div>
             </aside>
@@ -319,15 +314,17 @@ export default async function ServicesPage() {
                         const isSingle = items.length === 1;
 
                         return (
-                          <Link
+                          <TrackedLink
                             key={service.slug}
                             id={`service-${service.slug}`}
                             className={`group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50 ${isSingle ? "md:col-span-2" : ""}`}
                             href={`/services/${service.slug}`}
-                            data-track-event="service_card_click"
-                            data-track-placement={`services_hub_${group.id}`}
-                            data-track-slug={service.slug}
-                            data-track-service-name={service.name}
+                            eventName="service_card_click"
+                            eventParams={{
+                              placement: `services_hub_${group.id}`,
+                              service_slug: service.slug,
+                              service_name: service.name,
+                            }}
                             aria-label={`View details: ${service.name}`}
                           >
                             <div className="relative h-48">
@@ -391,7 +388,7 @@ export default async function ServicesPage() {
                                 </span>
                               </div>
                             </div>
-                          </Link>
+                          </TrackedLink>
                         );
                       })}
                     </div>
@@ -411,29 +408,26 @@ export default async function ServicesPage() {
           className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
         >
           <div className="flex items-center gap-3">
-            <Link
+            <TrackedLink
               href="/quote"
-              data-track-event="services_hub_cta_click"
-              data-track-placement="mobile_quick_actions"
-              data-track-target="quote"
+              eventName="services_hub_cta_click"
+              eventParams={{ placement: "mobile_quick_actions", cta_target: "quote" }}
               className="flex-1 rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Get Fast Quote
-            </Link>
-            <Link
+            </TrackedLink>
+            <TrackedLink
               href="/book"
-              data-track-event="services_hub_cta_click"
-              data-track-placement="mobile_quick_actions"
-              data-track-target="book"
+              eventName="services_hub_cta_click"
+              eventParams={{ placement: "mobile_quick_actions", cta_target: "book" }}
               className="flex-1 rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Book Repair
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </div>
       <div className="h-24 md:hidden" aria-hidden="true" />
-      <ServicesHubInteractionTracker />
     </SiteShell>
   );
 }
