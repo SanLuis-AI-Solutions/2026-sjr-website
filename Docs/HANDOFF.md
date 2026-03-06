@@ -1,92 +1,94 @@
-# Handoff Snapshot — 2026-03-05/06 (CST)
+# Handoff Snapshot — 2026-03-06 (CST)
 
 ## Current State
 - Branch: `master`
 - Workspace: clean
 - Canonical domain: `https://www.susiesjewelryrepair.com`
-- Latest synced status log: `Docs/STATUS.md`
+- Primary status ledger: `Docs/STATUS.md`
 
-## What Was Completed In This Session
-1. Processed Claude recommendation context and avoided repeating already-rejected header blur hypothesis.
-2. Ran a full single-variable experiment on `/services`:
-   - commit `f7e4921` (`perf: reduce services hub hydration boundaries`)
-   - production deploy run `22741610030` = success
-3. Measured post-change with isolated production gate (`5-run p50`):
-   - source: `.health/perf-gate-2026-03-05T23-54-07-095Z/summary.json`
-   - `/services`: `2725ms`, renderDelay `1303ms`
-4. Compared to locked baseline:
-   - baseline: `.health/perf-gate-2026-03-05T23-21-54-278Z/summary.json`
-   - `/services`: `2735ms`, renderDelay `1294ms`
-   - delta: `-10ms` LCP (non-material), rejected.
-5. Rolled back immediately:
-   - rollback commit `82e6f36`
-   - rollback deploy run `22742317989` = success
-6. Post-rollback confirmation:
-   - source: `.health/perf-gate-2026-03-06T00-18-19-987Z/summary.json`
-   - `/services`: `2728ms`
-   - `/blog`: `2659ms`
-   - `/`: `2522ms`
-7. Documentation synced:
-   - iteration artifact: `Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-32-services-hub-trackedlink-elimination.md`
-   - status updated: `Docs/STATUS.md`
+## Session Summary (Most Recent)
+1. Accepted iteration 35 (`/blog` topic-filter TrackedLink boundary elimination).
+   - commit: `53bc042`
+   - deploy run: `22747534882` (`success`)
+   - doc sync commit: `9bbe175`
+   - doc deploy run: `22748101732` (`success`)
+2. Reviewed external-agent input:
+   - Gemini: correctly identified `/services` hydration bimodality, but suggested repeating services TrackedLink elimination (already rejected in iteration 32).
+   - Claude: produced one-line isolated test commit to remove `font-serif` from `/services` hero `h1`.
+3. Executed Claude single-variable test as iteration 36.
+   - experiment commit on `master`: `bb7befc`
+   - deploy run: `22777008222` (`success`)
+   - post-change evidence: `.health/perf-gate-2026-03-06T18-57-48-001Z/summary.json`
+   - result: rejected (no material `/services` gain; negative drift in run set).
+4. Rolled back iteration 36 immediately.
+   - rollback commit: `09c9d68`
+   - rollback deploy run: `22777865461` (`success`)
+   - rollback evidence: `.health/perf-gate-2026-03-06T19-22-02-949Z/summary.json`
+5. Documentation synced:
+   - `Docs/artifacts/seo/2026-03-06--seo-step-6-2-iteration-35-blog-topic-filter-trackedlink-elimination.md`
+   - `Docs/artifacts/seo/2026-03-06--seo-step-6-2-iteration-36-services-font-serif-removal.md`
+   - `Docs/STATUS.md`
 
-## Latest Deploy Workflow Evidence
-- `22742317989` (rollback deploy): success
-- `22743060468` (docs sync push): success
+## Locked Context (Do Not Regress)
+- Iteration 32 (`/services` TrackedLink elimination) was tested, rejected, and rolled back.
+- Iteration 35 (`/blog` topic-filter TrackedLink elimination) is accepted and should remain live.
+- Iteration 36 (`/services` hero `font-serif` removal) is rejected and rolled back.
+- `/services` remains the primary unstable bottleneck with text-LCP render-delay volatility.
 
-## Current Bottleneck Reality (Evidence-Based)
-- `/services` and `/blog` are still dominated by `elementRenderDelay` with zero resource-load phases in current failing runs.
-- This indicates render-path/text-paint/hydration timing pressure, not network/image transfer, as the active bottleneck.
+## Evidence Pointers
+- Iteration 35 pre-change lock: `.health/perf-gate-2026-03-06T00-18-19-987Z/summary.json`
+- Iteration 35 accepted run: `.health/perf-gate-2026-03-06T03-37-35-184Z/summary.json`
+- Iteration 36 pre-change lock: `.health/perf-gate-2026-03-06T03-37-35-184Z/summary.json`
+- Iteration 36 experiment run: `.health/perf-gate-2026-03-06T18-57-48-001Z/summary.json`
+- Iteration 36 rollback run: `.health/perf-gate-2026-03-06T19-22-02-949Z/summary.json`
 
-## Eliminated Paths (Do Not Repeat)
-- Home header mobile blur toggle hypothesis (tested, rejected, rolled back).
-- `/services` TrackedLink boundary elimination experiment (iteration 32; rejected and rolled back).
-- Prior home iterations 28-30 (sync decode, badge blur, radial overlay) were non-material and already closed.
+## Next Optimal Step
+Run a measurement-stabilization gate before any new code change:
+1. Execute two back-to-back isolated 5-run p50 diagnostics on current live `master` (`/services`, `/blog`, `/`).
+2. Use that same-window control as the only baseline for iteration 37.
+3. Select one new non-repeated `/services` render-delay lever (not services TrackedLink elimination, not font-serif removal), then run the standard verify/deploy/measure loop.
 
-## Next Optimal Step (Ready To Execute)
-Run one text-LCP fallback experiment:
-1. Add `lcp-heading` class to above-fold text LCP candidates on `/blog` and `/services` hero stack.
-2. Deploy.
-3. Re-run isolated production 5-run p50 gate on `/services`, `/blog`, `/`.
-4. Accept only if at least one target route improves by `>=150ms` with no `/` regression worse than `+150ms`; otherwise rollback.
+## External-Agent Output Rule (Mandatory)
+When delegating to Gemini or Claude, require persistent artifacts:
+1. They must save findings to a file under `Docs/artifacts/` (or a specified artifact path).
+2. Response must include: branch, commit, artifact path, run IDs, exact commands, and pass/fail decision.
+3. No “done” claim is valid without a file path plus at least one metric/run evidence reference.
 
-## New Chat Kickoff Prompt (Copy/Paste)
-Use this exact prompt to resume quickly:
-
+## GPT-5.4 New Chat Kickoff Prompt
 ```text
-Continue from the current master state of the SJR website repo.
+Continue from current master state of:
+C:\Users\ninef\SanLuis Solutions projects\sjr-new-website-aiproject
 
-Read first:
+Read first (in order):
 1) Docs/HANDOFF.md
 2) Docs/STATUS.md
-3) Docs/artifacts/seo/2026-03-05--seo-step-6-2-iteration-32-services-hub-trackedlink-elimination.md
-4) Docs/PERF-LCP-FIX.md
+3) Docs/artifacts/seo/2026-03-06--seo-step-6-2-iteration-35-blog-topic-filter-trackedlink-elimination.md
+4) Docs/artifacts/seo/2026-03-06--seo-step-6-2-iteration-36-services-font-serif-removal.md
+5) Docs/PERF-LCP-FIX.md
 
-Context:
-- Latest session completed iteration 32 and rolled it back due non-material gain.
-- Current evidence after rollback:
-  - .health/perf-gate-2026-03-06T00-18-19-987Z/summary.json
-  - /services=2728ms, /blog=2659ms, /=2522ms
-- We are using strict process-of-elimination. Do not repeat previously rejected hypotheses.
+Context to respect:
+- Iteration 32 (/services TrackedLink elimination) is rejected and rolled back.
+- Iteration 35 (/blog topic-filter TrackedLink elimination) is accepted and live.
+- Iteration 36 (/services hero font-serif removal) is rejected and rolled back.
+- Use strict process-of-elimination; do not repeat rejected hypotheses.
 
 Task:
-1) Implement one single-variable text-LCP fallback experiment:
-   - apply lcp-heading fallback class to above-fold text LCP candidates on /blog and /services.
-2) Run verification:
+1) Lock same-window baseline:
+   - run isolated diagnostics twice back-to-back:
+     node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 5 --percentile 50 --lcp-threshold-ms 10000 --seo-threshold 100 --isolate --diagnostics --path /services --path /blog --path /
+2) Choose one non-repeated single-variable /services render-delay experiment.
+3) Verify locally:
    - npm run build
    - npm run test -- --grep "mobile smoke: repeated nav to Home is stable"
    - npm run test -- --grep "mobile nav: menu opens and can reach Services"
-3) Deploy production.
-4) Run isolated diagnostics gate:
-   - node scripts/perf/launch-performance-gate.mjs --base-url https://www.susiesjewelryrepair.com --runs 5 --percentile 50 --lcp-threshold-ms 10000 --seo-threshold 100 --isolate --diagnostics --path /services --path /blog --path /
-5) Document:
-   - new artifact under Docs/artifacts/seo/ (next iteration number)
-   - update Docs/STATUS.md with baseline, after, deltas, decision
+4) Deploy production and rerun isolated diagnostics.
+5) Document under Docs/artifacts/seo/ (next iteration number) and update Docs/STATUS.md.
 6) If non-material, rollback immediately and document rollback evidence.
 
-Output required:
-- commit IDs
+Required output:
+- commits
 - deploy workflow run IDs
-- baseline/after metric table
-- accept/reject decision and next optimal step
+- baseline vs after metric table
+- accept/reject decision
+- next optimal step
 ```

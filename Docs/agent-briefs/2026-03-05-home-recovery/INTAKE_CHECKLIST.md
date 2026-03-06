@@ -39,6 +39,11 @@ Acceptance Check:
 - attempted command(s)
 - safest next step
 
+4. Artifact persistence is mandatory:
+- Create/update a real file under `Docs/artifacts/` (or explicitly assigned artifact path).
+- Include the exact artifact path in the response.
+- If no artifact file is produced, the task is incomplete.
+
 ## Scope Guardrails
 
 1. Do not edit unrelated files.

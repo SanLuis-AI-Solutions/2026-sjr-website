@@ -18,4 +18,5 @@ Purpose: standardize parallel work from Gemini and Claude so Codex can verify ou
 1. Send `GEMINI_TASK.md` to Gemini.
 2. Send `CLAUDE_TASK.md` to Claude.
 3. Require both to follow `INTAKE_CHECKLIST.md` exactly.
-4. Return branch, commit, artifact path, and run IDs to Codex for independent verification.
+4. Require each agent to save results to an artifact file path (not just chat text).
+5. Return branch, commit, artifact path, and run IDs to Codex for independent verification.
