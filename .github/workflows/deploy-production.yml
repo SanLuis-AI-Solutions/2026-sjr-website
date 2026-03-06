@@ -20,11 +20,39 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Detect perf-relevant changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          list-files: shell
+          filters: |
+            perf_relevant:
+              - 'src/**'
+              - 'tests/**'
+              - 'public/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'next.config.*'
+              - 'playwright.config.*'
+              - 'scripts/perf/**'
+              - '.github/workflows/deploy-production.yml'
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: "npm"
+
+      - name: Performance gating mode
+        run: |
+          echo "Perf-relevant changes: ${{ steps.changes.outputs.perf_relevant }}"
+          if [ "${{ steps.changes.outputs.perf_relevant }}" = "true" ]; then
+            echo "Running post-deploy performance guardrails because runtime or perf-relevant files changed."
+            echo "Matched files:"
+            printf '%s\n' "${{ steps.changes.outputs.perf_relevant_files }}"
+          else
+            echo "Skipping post-deploy performance guardrails because only docs or non-runtime metadata changed."
+          fi
 
       - name: Install
         run: npm ci
@@ -58,6 +86,7 @@ jobs:
         run: sleep 20
 
       - name: Post-deploy conversion performance guardrail (isolated p50)
+        if: steps.changes.outputs.perf_relevant == 'true'
         run: |
           node scripts/perf/launch-performance-gate.mjs \
             --base-url https://www.susiesjewelryrepair.com \
@@ -72,6 +101,7 @@ jobs:
             --path /book
 
       - name: Compare conversion gate vs locked baseline (delta budget)
+        if: steps.changes.outputs.perf_relevant == 'true'
         run: |
           conversion_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
           node scripts/perf/compare-perf-gate-baseline.mjs \
@@ -81,6 +111,7 @@ jobs:
             --write .health/perf-delta-conversion-latest.json
 
       - name: Post-deploy service performance guardrail (isolated p50)
+        if: steps.changes.outputs.perf_relevant == 'true'
         run: |
           node scripts/perf/launch-performance-gate.mjs \
             --base-url https://www.susiesjewelryrepair.com \
@@ -95,6 +126,7 @@ jobs:
             --path /services/custom-design
 
       - name: Compare service gate vs locked baseline (delta budget)
+        if: steps.changes.outputs.perf_relevant == 'true'
         run: |
           service_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
           node scripts/perf/compare-perf-gate-baseline.mjs \
@@ -104,7 +136,7 @@ jobs:
             --write .health/perf-delta-service-latest.json
 
       - name: Extract LCP diagnostics from gate runs
-        if: always()
+        if: always() && steps.changes.outputs.perf_relevant == 'true'
         run: |
           gate_dirs=$(ls -1dt .health/perf-gate-*/ 2>/dev/null | sed 's:/*$::')
           if [ -z "$gate_dirs" ]; then
@@ -120,7 +152,7 @@ jobs:
           EOF
 
       - name: Upload performance artifacts
-        if: always()
+        if: always() && steps.changes.outputs.perf_relevant == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: perf-gate-${{ github.run_id }}
