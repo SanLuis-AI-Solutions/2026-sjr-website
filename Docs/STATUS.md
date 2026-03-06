@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** run an isolated 5-run p50 confirmation on `/services` + `/blog`, then select one single-variable fix only if both remain out-of-band in multi-run evidence.
+- **Next action:** run one evidence pass to identify exact LCP element candidates on `/services` and `/blog` (trace-level), then test one above-fold paint-simplification variable only.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -28,6 +28,7 @@ Update cadence: weekly (or after major milestones).
 - Home iteration 29 (mobile trust-badge blur removal test) is complete and rejected as non-material (`-1ms` LCP; `-13ms` renderDelay); rollback is deployed to preserve baseline look.
 - Home iteration 30 (mobile radial overlay removal test) is complete and rejected as non-material (`0ms` LCP; `-14ms` renderDelay); rollback is deployed to preserve premium hero lighting.
 - Home iteration 31 (trust-dot `animate-pulse` removal) is complete and accepted (`-207ms` LCP; `-991ms` renderDelay in repeat-confirmed diagnostics median).
+- Services hub iteration 32 (TrackedLink boundary elimination) is complete and rejected (`-10ms` LCP, non-material); rollback is deployed.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
@@ -41,6 +42,22 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-05 CST)
+- Services hub iteration 32 (`TrackedLink` boundary elimination) outcome:
+  - pre-change baseline lock:
+    - `.health/perf-gate-2026-03-05T23-21-54-278Z/summary.json`
+    - `/services`: `2735ms` (`renderDelay=1294ms`)
+  - experiment deploy run: `22741610030` (`success`)
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-05T23-54-07-095Z/summary.json`
+    - `/services`: `2725ms` (`renderDelay=1303ms`)
+    - delta vs baseline: `-10ms` LCP (`non-material`)
+  - decision: reject and rollback.
+  - rollback deploy run: `22742317989` (`success`)
+  - post-rollback confirmation:
+    - `.health/perf-gate-2026-03-06T00-18-19-987Z/summary.json`
+    - `/services`: `2728ms`
+    - `/blog`: `2659ms`
+    - `/`: `2522ms`
 - Full-site breadth refresh (30 routes, 1-run isolated) after home iteration 31:
   - source: `.health/perf-gate-2026-03-05T21-32-00-678Z/summary.json`
   - diagnostics: `.health/lcp-diagnostics-2026-03-05T21-32-00-678Z.json`
