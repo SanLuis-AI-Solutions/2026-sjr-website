@@ -142,12 +142,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           ) : null}
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {libraryPosts.map((post) => {
+            {libraryPosts.map((post, index) => {
+              const delayClass = `reveal-delay-${(index % 3) + 1}`;
               return (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  className={`reveal-on-scroll ${delayClass} group overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2`}
                 >
                   <div className="relative h-44">
                     <Image
