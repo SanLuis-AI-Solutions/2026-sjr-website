@@ -405,7 +405,7 @@ export default async function ServicesPage() {
         <div
           role="region"
           aria-label="Quick actions"
-          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
+          className="rounded-2xl border border-stone-200 bg-white/95 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)]"
         >
           <div className="flex items-center gap-3">
             <TrackedLink
