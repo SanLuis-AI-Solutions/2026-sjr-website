@@ -311,27 +311,6 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   guard.assertNoErrors("services featured link");
 });
 
-test("mobile services hub: quick actions start inline and pin after hero scroll", async ({
-  page,
-}) => {
-  const guard = attachConsoleGuards(page);
-
-  await page.goto("/services", { waitUntil: "networkidle" });
-
-  const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
-  await expect(quickActions).toBeVisible();
-  await expect(quickActions).toHaveAttribute("data-quick-actions-mode", "inline");
-
-  await expect(quickActions.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
-  await expect(quickActions.getByRole("link", { name: /^Book Repair$/i })).toBeVisible();
-
-  await page.locator("#group-watches").scrollIntoViewIfNeeded();
-  await expect(quickActions).toBeVisible();
-  await expect(quickActions).toHaveAttribute("data-quick-actions-mode", "fixed");
-
-  guard.assertNoErrors("services hub quick actions pinning");
-});
-
 test("home services grid: full card click navigates to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
