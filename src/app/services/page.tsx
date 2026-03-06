@@ -4,6 +4,7 @@ import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
+import { ServicesHubMobileQuickActions } from "@/components/services-hub-mobile-quick-actions";
 
 type ServiceListItem = {
   slug: string;
@@ -120,7 +121,7 @@ export default async function ServicesPage() {
               </span>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 hidden flex-wrap gap-4 md:flex">
               <TrackedLink
                 href="/quote"
                 eventName="services_hub_cta_click"
@@ -138,6 +139,8 @@ export default async function ServicesPage() {
                 Book Repair
               </TrackedLink>
             </div>
+
+            <ServicesHubMobileQuickActions />
           </div>
 
           <div className="relative">
@@ -159,7 +162,6 @@ export default async function ServicesPage() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -399,35 +401,6 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
-
-      {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
-      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div
-          role="region"
-          aria-label="Quick actions"
-          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
-        >
-          <div className="flex items-center gap-3">
-            <TrackedLink
-              href="/quote"
-              eventName="services_hub_cta_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "quote" }}
-              className="flex-1 rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </TrackedLink>
-            <TrackedLink
-              href="/book"
-              eventName="services_hub_cta_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "book" }}
-              className="flex-1 rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Book Repair
-            </TrackedLink>
-          </div>
-        </div>
-      </div>
-      <div className="h-24 md:hidden" aria-hidden="true" />
     </SiteShell>
   );
 }
