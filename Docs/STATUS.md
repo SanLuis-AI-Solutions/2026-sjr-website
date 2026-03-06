@@ -20,7 +20,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** keep strict same-window baseline locking, then test one new `/services` fixed quick-actions shell simplification lever that does not repeat TrackedLink elimination, hero `font-serif` removal, or quick-actions blur removal.
+- **Next action:** keep strict same-window baseline locking, then test one new `/services` fixed quick-actions shell simplification lever that removes the outer mobile quick-actions shell container while avoiding repeats of TrackedLink elimination, hero `font-serif` removal, blur-only removal, and shell deferral.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -46,6 +46,40 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-06 CST)
+- Iteration 38 (`/services` mobile quick-actions shell deferral) outcome:
+  - locked control run #1:
+    - `.health/perf-gate-2026-03-06T20-57-37-196Z/summary.json`
+    - `/services`: `2764ms`
+    - `/blog`: `2583ms`
+    - `/`: `2528ms`
+  - locked control run #2:
+    - `.health/perf-gate-2026-03-06T21-04-20-268Z/summary.json`
+    - `/services`: `2738ms`
+    - `/blog`: `2634ms`
+    - `/`: `2516ms`
+  - locked control midpoint (rounded mean of both runs):
+    - `/services`: `2751ms`
+    - `/blog`: `2609ms`
+    - `/`: `2522ms`
+  - experiment commit: `fecc9fa`
+  - experiment deploy run: `22782377938` (`success`)
+  - post-change isolated verification:
+    - `.health/perf-gate-2026-03-06T21-35-38-602Z/summary.json`
+    - `/services`: `2800ms`
+    - `/blog`: `2615ms`
+    - `/`: `2527ms`
+  - delta vs locked control midpoint:
+    - `/services`: `+49ms`
+    - `/blog`: `+6ms`
+    - `/`: `+5ms`
+  - decision: reject and rollback.
+  - rollback commit: `fdf9710`
+  - rollback deploy run: `22783142526` (`success`)
+  - rollback evidence:
+    - `.health/perf-gate-2026-03-06T21-59-25-510Z/summary.json`
+    - `/services`: `2812ms`
+    - `/blog`: `2607ms`
+    - `/`: `2512ms`
 - Iteration 37 (`/services` mobile quick-actions blur removal) outcome:
   - locked control run #1:
     - `.health/perf-gate-2026-03-06T19-42-30-823Z/summary.json`
