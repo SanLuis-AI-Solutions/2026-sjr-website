@@ -5,6 +5,16 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Release closeout mode is now active: Step 6.2 `/services` micro-iterations are paused, and `/services` performance is now tracked as deferred post-launch work rather than a release blocker.
+- Path-aware deploy gating is now shipped in `deploy-production.yml` via commit `0401274`; workflow run `22785078312` succeeded and keeps runtime pushes protected while allowing docs-only or non-perf-relevant pushes to skip post-deploy delta compares.
+- Final closeout verification is green:
+  - local: `npm run build`, `npm test`, `powershell -ExecutionPolicy Bypass -File scripts/verify.ps1`
+  - production: `.health/release-closeout-verification-2026-03-06-final.json` (`12/12` routes passed)
+- Canonical closeout documents are now live:
+  - `Docs/RELEASE-DECISION.md`
+  - `Docs/POST-LAUNCH-BACKLOG.md`
+  - `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
+  - `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
 - SEO Step 6.2 process-of-elimination pass is now deployed on production (`2026-03-03`) and the pilot service p50 gate is passing in the latest isolated evidence run.
 - `/contact` guardrail recovery stream succeeded with deferred live-map loading; latest isolated p50 is now below target.
 - Conversion baseline lock pass completed for `/contact`, `/quote`, and `/book`; all three are below `<=2600ms` in current production evidence.
@@ -20,7 +30,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** keep strict same-window baseline locking, then test one new `/services` fixed quick-actions shell simplification lever that removes the outer mobile quick-actions shell container while avoiding repeats of TrackedLink elimination, hero `font-serif` removal, blur-only removal, and shell deferral.
+- **Next action:** proceed with ship-now closeout and post-launch monitoring. Do not reopen `/services` micro-iterations unless a new structural hypothesis is explicitly approved for a separate post-launch sprint.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -46,6 +56,17 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-06 CST)
+- Release closeout state:
+  - release decision: `Ship now`
+  - canonical release doc: `Docs/RELEASE-DECISION.md`
+  - post-launch backlog: `Docs/POST-LAUNCH-BACKLOG.md`
+  - workflow fix commit: `0401274`
+  - workflow fix run: `22785078312` (`success`)
+  - final production verification:
+    - `.health/release-closeout-verification-2026-03-06-final.json`
+    - `.health/release-closeout-verification-2026-03-06-final.md`
+    - result: `12/12` routes passed with no unexpected console errors or broken images detected
+  - closeout decision: pause Step 6.2 `/services` experimentation and treat `/services` performance as deferred post-launch debt.
 - Iteration 38 (`/services` mobile quick-actions shell deferral) outcome:
   - locked control run #1:
     - `.health/perf-gate-2026-03-06T20-57-37-196Z/summary.json`
