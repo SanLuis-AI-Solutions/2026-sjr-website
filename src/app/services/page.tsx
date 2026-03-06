@@ -101,7 +101,7 @@ export default async function ServicesPage() {
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
               Services Directory
             </p>
-            <h1 className="lcp-heading mt-4 font-serif text-5xl leading-[1.05] text-stone-900 md:text-6xl">
+            <h1 className="lcp-heading mt-4 text-5xl leading-[1.05] text-stone-900 md:text-6xl">
               A curated menu of in-house repairs.
             </h1>
             <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
