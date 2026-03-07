@@ -26,9 +26,11 @@
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 - Expand the highest-intent existing blog articles with richer local detail, stronger service links, and in-body FAQ blocks.
 - Build the first geo-expansion service-area pages for Deer Park and La Porte once the content pattern is locked.
+- Add contextual internal links from the best-matching blog posts into the new Deer Park and La Porte geo pages.
 - If the first geo pages perform well, extend the adjacent-city ring with:
   - Webster
   - Friendswood
+- Clear Lake if area-intent searches are strong enough to justify a dedicated page
 - Treat Houston as a broader, later-stage city page that needs stronger differentiation than the suburban pages.
 
 ## Monitoring Improvements

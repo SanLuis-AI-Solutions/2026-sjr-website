@@ -48,6 +48,8 @@ Working rollout order:
   - new static La Porte geo page
 - `src/app/services/page.tsx`
   - added an internal-link section for nearby service areas
+- `src/app/sitemap.ts`
+  - added Deer Park and La Porte to the generated sitemap
 - `tests/smoke.spec.ts`
   - added smoke coverage for both geo pages
 
@@ -55,6 +57,9 @@ Working rollout order:
 
 - `npm run build`
 - `npm test`
+- verified sitemap generation now includes:
+  - `/services/deer-park`
+  - `/services/la-porte`
 
 ## Decision
 
@@ -70,6 +75,6 @@ Reasoning:
 
 Choose one of the following, in order:
 
-1. build Webster and Friendswood using the same pattern if you want the next suburban ring
-2. add supporting internal links from relevant blog posts into the new geo pages
+1. add supporting internal links from relevant blog posts into the new geo pages
+2. build Webster, Friendswood, and possibly Clear Lake only after this first pair is indexed and the pattern is confirmed
 3. defer Houston until there is a stronger, truly differentiated angle for a broader city page

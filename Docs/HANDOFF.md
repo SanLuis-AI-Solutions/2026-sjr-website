@@ -50,6 +50,7 @@
    - added `/services/deer-park`
    - added `/services/la-porte`
    - linked both pages from the main services hub
+   - added both pages to the generated sitemap
    - artifact:
      - `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-1.md`
 10. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
@@ -111,10 +112,12 @@
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Deploy the verified schema/entity fixes.
-2. Extend the geo-page pattern to the next adjacent cities only after this first pair is live and verified.
+2. Feed the new geo pages with contextual internal links from matching blog posts before opening the next city ring.
+3. Extend the geo-page pattern to the next adjacent cities only after this first pair is live and indexed.
    - Webster
    - Friendswood
-3. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+   - Clear Lake if the search phrasing justifies an area page rather than a city page
+4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
 4. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 5. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
 

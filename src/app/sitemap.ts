@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
+import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { getSiteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -23,9 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/services/${s.slug}`,
   }));
 
+  const serviceAreaRoutes: MetadataRoute.Sitemap = (SERVICE_AREA_PAGES || []).map((page) => ({
+    url: `${baseUrl}/services/${page.slug}`,
+  }));
+
   const blogRoutes: MetadataRoute.Sitemap = (BLOG_POSTS || []).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...serviceAreaRoutes, ...blogRoutes];
 }
