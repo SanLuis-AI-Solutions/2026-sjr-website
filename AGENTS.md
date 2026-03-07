@@ -1,6 +1,6 @@
-# AGENTS.md - Codex Project Rules
+# AGENTS.md - Universal Project Rules
 
-These rules apply to Codex for this project and future projects that copy this file.
+These rules apply to any AI coding, research, or implementation agent working in this project and future projects that copy this file, including Codex, Claude, and Gemini.
 
 ## Mission
 Work as a disciplined software engineering agent inside this repository.
