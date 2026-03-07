@@ -53,12 +53,16 @@
    - added both pages to the generated sitemap
    - artifact:
      - `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-1.md`
-10. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
-11. Shipped a path-aware deploy workflow fix:
+10. Strengthened the first geo pages with contextual article links.
+   - linked five high-intent blog posts into Deer Park and La Porte using the existing article next-step block
+   - artifact:
+     - `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass.md`
+11. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
+12. Shipped a path-aware deploy workflow fix:
    - commit: `0401274`
    - workflow run: `22785078312` (`success`)
    - effect: docs-only and non-perf-relevant pushes now skip post-deploy performance delta comparisons, while runtime pushes still execute them.
-12. Re-ran closeout verification and locked the final evidence:
+13. Re-ran closeout verification and locked the final evidence:
    - local verification passed:
      - `npm run build`
      - `npm test`
@@ -67,7 +71,7 @@
      - `.health/release-closeout-verification-2026-03-06-final.json`
      - `.health/release-closeout-verification-2026-03-06-final.md`
      - result: `12/12` routes passed, with no unexpected console errors or broken images detected
-13. Added closeout artifacts and canonical docs:
+14. Added closeout artifacts and canonical docs:
    - `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
    - `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
    - `Docs/RELEASE-DECISION.md`
@@ -99,6 +103,8 @@
   - `Docs/artifacts/audit/2026-03-06--blog-commercial-intent-expansion-pass-2.md`
 - Geo service-area pages pass 1:
   - `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-1.md`
+- Geo-page internal link pass:
+  - `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass.md`
 - Workflow fix run: `22785078312`
 - Final production verification:
   - `.health/release-closeout-verification-2026-03-06-final.json`
@@ -112,12 +118,11 @@
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Deploy the verified schema/entity fixes.
-2. Feed the new geo pages with contextual internal links from matching blog posts before opening the next city ring.
-3. Extend the geo-page pattern to the next adjacent cities only after this first pair is live and indexed.
+2. Extend the geo-page pattern to the next adjacent cities now that the first pair has hub links, sitemap coverage, and supporting article links.
    - Webster
    - Friendswood
    - Clear Lake if the search phrasing justifies an area page rather than a city page
-4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+3. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
 4. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 5. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
 

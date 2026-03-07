@@ -394,6 +394,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you want a confirmed Pasadena quote instead of a rough estimate, start with the ring sizing service page or send the ring details for review.",
     nextSteps: [
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "Get Deer Park Repair Guidance", href: "/services/deer-park" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
@@ -471,6 +472,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Start with a stone-setting inspection if the ring has a loose or damaged prong. If the setting is beyond repair, the custom design path is the right follow-up conversation.",
     nextSteps: [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
@@ -546,6 +548,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If it is likely a battery issue, start with watch repair service details or request a quick quote before you drive over.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
@@ -622,6 +625,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you are not fully confident in the ring's condition, start with professional cleaning or an heirloom-focused inspection before trying a stronger home-cleaning routine.",
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
@@ -698,6 +702,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you want to preserve the original piece, start with heirloom restoration. If you already know the current style is not right for you, the custom design path is the better starting point.",
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book Repair", href: "/book" },
     ],

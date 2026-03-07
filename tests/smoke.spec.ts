@@ -317,6 +317,7 @@ test("mobile blog detail: commercial-intent article renders in-body faq and next
     page.getByRole("heading", { level: 2, name: /Best next step if your ring feels too loose or too tight/i })
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /See Ring Sizing Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Get Deer Park Repair Guidance/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /^Get Fast Quote$/i }).first()).toBeVisible();
 
   guard.assertNoErrors("blog detail faq/next-steps");
@@ -352,9 +353,31 @@ test("mobile blog detail: heirloom article renders in-body faq and next steps", 
     })
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore Heirloom Restoration/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /See La Porte Repair Guidance/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore Custom Design/i })).toBeVisible();
 
   guard.assertNoErrors("blog detail heirloom faq/next-steps");
+});
+
+test("mobile blog detail: watch battery article links into deer park geo guidance", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/where-to-get-watch-battery-replaced-pasadena", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /Where to get a watch battery replaced today near Deer Park \/ Pasadena/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Get Deer Park Watch Repair Help/i })
+  ).toBeVisible();
+
+  guard.assertNoErrors("blog detail watch battery geo link");
 });
 
 test("mobile service-area pages: deer park and la porte render local guidance and quick actions", async ({

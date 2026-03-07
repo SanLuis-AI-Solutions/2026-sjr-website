@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Geo-page internal link pass is now in progress:
+  - connected the highest-intent commercial blog posts into Deer Park and La Porte
+  - reused the existing article next-step block instead of adding a new content module
+  - artifact: `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass.md`
 - Geo service-area pages pass 1 is now in progress:
   - launched Deer Park and La Porte as the first adjacent-city geo pages
   - added a reusable local landing-page renderer and linked the pages from the services hub
@@ -57,7 +61,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** feed the new geo pages with stronger internal links from matching blog posts, then extend the pattern to the next adjacent cities before attempting a broader Houston page.
+- **Next action:** build the next adjacent-city geo pages after this internal-link pass lands.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -174,6 +178,20 @@ Update cadence: weekly (or after major milestones).
     - added internal discovery from the services hub
     - added both geo pages to the generated sitemap
     - added `BreadcrumbList`, `FAQPage`, and `Service` schema to both pages
+  - verification:
+    - `npm run build`
+    - `npm test`
+  - decision:
+    - accept and keep live
+- Geo-page internal link pass:
+  - source:
+    - `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass.md`
+  - code changes:
+    - `src/lib/blog.ts`
+    - `tests/smoke.spec.ts`
+  - result:
+    - linked five high-intent articles into `/services/deer-park` and `/services/la-porte`
+    - increased internal discovery into the first geo pages using existing article next-step modules
   - verification:
     - `npm run build`
     - `npm test`
