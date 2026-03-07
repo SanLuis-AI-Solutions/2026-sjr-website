@@ -3,7 +3,7 @@ import path from "node:path";
 import { chromium } from "@playwright/test";
 
 const BASE_URL =
-  process.env.SJR_PROD_URL || "https://sjr-new-website-aiproject.vercel.app";
+  process.env.SJR_PROD_URL || "https://www.susiesjewelryrepair.com";
 const STORAGE_KEY = "__codex_ga_events__";
 
 const REQUIRED_EVENTS = [
@@ -18,6 +18,8 @@ const REQUIRED_EVENTS = [
   "conversion_quick_action_click_control",
   "conversion_quick_action_click_primary_focus",
   "lead_form_start",
+  "quote_form_start",
+  "booking_form_start",
   "lead_form_step",
   "quote_submit_success",
   "booking_submit_success",
@@ -313,6 +315,8 @@ async function main() {
       report
     );
 
+    await runPresenceCheck(page, "quote_form_start", report);
+
     await runEventCheck(
       page,
       "lead_form_step",
@@ -324,6 +328,16 @@ async function main() {
     );
 
     await goto(page, "/book");
+    await runEventCheck(
+      page,
+      "booking_form_start",
+      async () => {
+        await page.locator("#booking-form input[name='name']").click();
+        await pause(300);
+      },
+      report
+    );
+
     await runEventCheck(
       page,
       "conversion_quick_action_click",

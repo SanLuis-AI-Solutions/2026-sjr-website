@@ -68,6 +68,46 @@ const nextConfig: NextConfig = {
         destination: "/services",
         permanent: true,
       },
+      {
+        source: "/ring-sizing-repair",
+        destination: "/services/ring-sizing",
+        permanent: true,
+      },
+      {
+        source: "/book-online",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/book-online/:path*",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/watch-repair-battery",
+        destination: "/services/watch-repair",
+        permanent: true,
+      },
+      {
+        source: "/necklace-bracelet-repair",
+        destination: "/services/necklace-repair",
+        permanent: true,
+      },
+      {
+        source: "/custom-work-restorations",
+        destination: "/services/heirloom-restoration",
+        permanent: true,
+      },
+      {
+        source: "/accessibility",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/blank-2",
+        destination: "/services",
+        permanent: true,
+      },
     ];
   },
 };

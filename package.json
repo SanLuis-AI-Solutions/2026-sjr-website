@@ -12,6 +12,8 @@
     "google:report-weekly": "node scripts/google/report-weekly.mjs",
     "google:baseline-7d": "node scripts/google/baseline-7d.mjs",
     "google:kpi-weekly-snapshot": "node scripts/google/kpi-weekly-snapshot.mjs",
+    "google:reconcile-90d": "node scripts/google/reconcile-90d.mjs",
+    "google:weekly-seo-health": "node scripts/google/weekly-seo-health.mjs",
     "google:service-impact-compare": "node scripts/google/service-impact-compare.mjs",
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",

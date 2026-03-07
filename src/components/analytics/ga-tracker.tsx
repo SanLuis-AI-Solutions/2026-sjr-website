@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { readCurrentCtaVariant } from "./cta-variant";
+import { isProductionAnalyticsHost } from "@/lib/analytics-host";
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
 
@@ -19,6 +20,7 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __sjrGaHostAllowed?: boolean;
   }
 }
 
@@ -71,8 +73,17 @@ function markEventSent(eventName: string, submissionId?: string) {
   window.sessionStorage.setItem(eventKey(eventName, submissionId), "1");
 }
 
+function isGaTrackingAllowed() {
+  if (typeof window === "undefined") return false;
+  if (typeof window.__sjrGaHostAllowed === "boolean") {
+    return window.__sjrGaHostAllowed;
+  }
+  return isProductionAnalyticsHost(window.location.hostname);
+}
+
 function sendGtagEvent(eventName: string, params: GtagEventParams) {
   if (typeof window === "undefined") return;
+  if (!isGaTrackingAllowed()) return;
 
   if (typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
@@ -83,6 +94,18 @@ function sendGtagEvent(eventName: string, params: GtagEventParams) {
   const queuedArgs: ["event", string, GtagEventParams] = ["event", eventName, params];
   window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
   window.dataLayer.push(queuedArgs);
+}
+
+function sendPageView(pathname: string, search: string) {
+  if (typeof window === "undefined") return;
+  if (!isGaTrackingAllowed()) return;
+
+  const pagePath = search ? `${pathname}?${search}` : pathname;
+  sendGtagEvent("page_view", {
+    page_path: pagePath,
+    page_location: `${window.location.origin}${pagePath}`,
+    page_title: document.title,
+  });
 }
 
 export function trackGaEvent(eventName: string, params: GtagEventParams = {}) {
@@ -100,6 +123,23 @@ export function GaFirstTouchCapture() {
 
   useEffect(() => {
     getOrCreateFirstTouch(pathname || "/", searchParams);
+  }, [pathname, searchKey, searchParams]);
+
+  return null;
+}
+
+export function GaPageViewTracker() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const searchKey = searchParams.toString();
+  const lastPagePathRef = useRef<string>("");
+
+  useEffect(() => {
+    const resolvedPathname = pathname || "/";
+    const pagePath = searchKey ? `${resolvedPathname}?${searchKey}` : resolvedPathname;
+    if (lastPagePathRef.current === pagePath) return;
+    lastPagePathRef.current = pagePath;
+    sendPageView(resolvedPathname, searchKey);
   }, [pathname, searchKey, searchParams]);
 
   return null;

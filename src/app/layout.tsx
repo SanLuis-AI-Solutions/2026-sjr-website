@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
+import { GaFirstTouchCapture, GaPageViewTracker } from "@/components/analytics/ga-tracker";
+import { PRODUCTION_GA_HOSTNAME } from "@/lib/analytics-host";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -27,9 +30,14 @@ export const metadata: Metadata = {
     "Expert in-house jewelry, watch, and eyeglass repairs in Pasadena. Experience modern luxury meets master craftsmanship with transparent pricing and fast turnaround.",
 };
 
-function getGaBootstrapScript(measurementId: string) {
+function getGaBootstrapScript(measurementId: string, allowedHostname: string) {
   return `(() => {
     const measurementId = ${JSON.stringify(measurementId)};
+    const allowedHostname = ${JSON.stringify(allowedHostname)};
+    const currentHostname = (window.location.hostname || "").toLowerCase();
+    const isAllowedHost = currentHostname === allowedHostname;
+    window.__sjrGaHostAllowed = isAllowedHost;
+    if (!isAllowedHost) return;
     if (window.__sjrGaLoaded) return;
 
     window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
@@ -43,7 +51,7 @@ function getGaBootstrapScript(measurementId: string) {
       if (window.__sjrGaLoaded) return;
       window.__sjrGaLoaded = true;
       window.gtag("js", new Date());
-      window.gtag("config", measurementId);
+      window.gtag("config", measurementId, { send_page_view: false });
 
       const script = document.createElement("script");
       script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
@@ -90,9 +98,15 @@ export default function RootLayout({
         <ScrollRevealManager />
         <LocalBusinessSchema />
         {gaMeasurementId ? (
+          <Suspense fallback={null}>
+            <GaFirstTouchCapture />
+            <GaPageViewTracker />
+          </Suspense>
+        ) : null}
+        {gaMeasurementId ? (
           <script
             dangerouslySetInnerHTML={{
-              __html: getGaBootstrapScript(gaMeasurementId),
+              __html: getGaBootstrapScript(gaMeasurementId, PRODUCTION_GA_HOSTNAME),
             }}
           />
         ) : null}

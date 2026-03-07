@@ -240,6 +240,82 @@ test("home schema: local business hours and external entity links are valid", as
   guard.assertNoErrors("home schema");
 });
 
+test("analytics guard: localhost does not load the production GA script", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+  const gaRequests: string[] = [];
+
+  page.on("request", (request) => {
+    if (request.url().includes("googletagmanager.com/gtag/js")) {
+      gaRequests.push(request.url());
+    }
+  });
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.mouse.click(24, 24);
+  await page.keyboard.press("Tab");
+  await page.waitForTimeout(300);
+
+  const hostAllowed = await page.evaluate(() => window.__sjrGaHostAllowed);
+  expect(hostAllowed).toBe(false);
+  expect(gaRequests).toEqual([]);
+
+  guard.assertNoErrors("localhost analytics guard");
+});
+
+test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+  const routes = [
+    {
+      path: "/ring-sizing-repair",
+      url: /\/services\/ring-sizing$/,
+      heading: /Ring Sizing/i,
+    },
+    {
+      path: "/book-online?utm_source=google&utm_medium=book_button",
+      url: /\/book\?utm_source=google&utm_medium=book_button$/,
+      heading: /Reserve a free 15/i,
+    },
+    {
+      path: "/watch-repair-battery",
+      url: /\/services\/watch-repair$/,
+      heading: /Watch Repair/i,
+    },
+    {
+      path: "/custom-work-restorations",
+      url: /\/services\/heirloom-restoration$/,
+      heading: /Heirloom Restoration/i,
+    },
+    {
+      path: "/accessibility",
+      url: /\/contact$/,
+      heading: /Talk to a local expert/i,
+    },
+    {
+      path: "/blank-2",
+      url: /\/services$/,
+      heading: /A curated menu of in-house repairs/i,
+    },
+  ];
+
+  for (const route of routes) {
+    await page.goto(route.path, { waitUntil: "networkidle" });
+    await expect(page).toHaveURL(route.url);
+    await expect(page.getByRole("heading", { name: route.heading }).first()).toBeVisible();
+  }
+
+  guard.assertNoErrors("legacy Wix redirects");
+});
+
+test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
+  await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
+  const bodyText = (await page.textContent("body")) || "";
+
+  expect(bodyText).toContain("https://www.susiesjewelryrepair.com/services/deer-park");
+  expect(bodyText).toContain("https://www.susiesjewelryrepair.com/services/clear-lake");
+  expect(bodyText).not.toContain("/book-online");
+  expect(bodyText).not.toContain("/ring-sizing-repair");
+});
+
 test("mobile core pages: about, faq, contact, and blog quick actions are clear", async ({
   page,
 }) => {

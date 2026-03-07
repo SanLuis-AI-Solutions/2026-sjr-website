@@ -39,12 +39,14 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
     const markStarted = (source: string) => {
       if (started) return;
       started = true;
-      trackGaEvent("lead_form_start", {
+      const sharedParams = {
         page_path: pathname || "/",
         form_id: formId,
         lead_type: leadType,
         source,
-      });
+      };
+      trackGaEvent("lead_form_start", sharedParams);
+      trackGaEvent(`${leadType}_form_start`, sharedParams);
     };
 
     const onFocusIn = (event: Event) => {

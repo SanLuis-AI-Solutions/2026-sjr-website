@@ -5,6 +5,13 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- SEO and analytics integrity recovery is now in progress:
+  - production GA4 is now host-restricted to `www.susiesjewelryrepair.com`
+  - explicit App Router pageview tracking is added
+  - lead starts are normalized for quote vs booking
+  - legacy Wix URLs with observed demand now have best-fit `301` targets
+  - weekly reporting foundation is now documented in `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
+  - artifact: `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
 - Geo-page internal link pass 2 is now in progress:
   - connected the strongest matching commercial-intent articles into Webster, Friendswood, and Clear Lake
   - reused the existing article next-step block for the second geo ring
@@ -69,8 +76,11 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** move into Google Search Console and Google Analytics setup/validation so the new geo assets and content work can actually be measured.
-  - Grok review does not change this order.
+- **Next action:** complete the Google-admin side cleanup for the new measurement foundation.
+  - link Search Console to GA4
+  - verify key events in GA4 admin
+  - resubmit the sitemap in GSC
+  - review redirected Wix URLs over the next 2 weeks
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -96,6 +106,43 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-06 CST)
+- SEO + analytics integrity recovery:
+  - source:
+    - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+    - `.health/ga4-gsc-reconciliation-90d-latest.md`
+    - `.health/weekly-seo-health-latest.md`
+  - code changes:
+    - `src/app/layout.tsx`
+    - `src/lib/analytics-host.ts`
+    - `src/components/analytics/ga-tracker.tsx`
+    - `src/components/analytics/lead-form-tracker.tsx`
+    - `next.config.ts`
+    - `scripts/google/reconcile-90d.mjs`
+    - `scripts/google/weekly-seo-health.mjs`
+    - `scripts/google/validate-prod-events.mjs`
+    - `tests/smoke.spec.ts`
+    - `DASHBOARD.md`
+    - `Docs/WEEKLY-SEO-HEALTH.md`
+  - verified baseline:
+    - 90-day GA4 users: `2,366`
+    - production-host GA4 users: `278`
+    - localhost / `127.0.0.1` users: `2,073`
+    - preview-host users: `15`
+    - 90-day Search Console clicks: `102`
+  - current 7-day weekly baseline:
+    - Google clicks: `8`
+    - Google impressions: `506`
+    - production-host organic sessions: `0`
+    - quote + booking starts: `0`
+    - quote + booking outcomes: `0`
+  - verification:
+    - `npm run build`
+    - `npm test`
+    - `npm run google:reconcile-90d`
+    - `npm run google:weekly-seo-health`
+  - decision:
+    - accept and keep live
+    - treat the GA4 vs GSC gap as a measurement-integrity issue already explained by localhost pollution, not as evidence of SEO collapse
 - Audit adjudication + quick-fix pass:
   - source audits:
     - `Docs/artifacts/audit/2026-03-06--claude-full-site-seo-geo-aeo-audit.md`

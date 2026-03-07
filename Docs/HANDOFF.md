@@ -7,6 +7,32 @@
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
 
 ## Session Summary (Most Recent)
+1. Implemented the SEO + analytics integrity recovery pass.
+   - production GA4 is now gated to `www.susiesjewelryrepair.com`
+   - added explicit App Router pageview tracking
+   - added additive `quote_form_start`, `booking_form_start`, and `contact_form_start` events
+   - restored best-fit `301` coverage for legacy Wix URLs with known search demand
+   - added the 90-day reconciliation script and weekly SEO health script
+   - added `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
+   - artifact:
+     - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+2. Verified the discrepancy with fresh saved evidence.
+   - `.health/ga4-gsc-reconciliation-90d-latest.md`
+   - `.health/weekly-seo-health-latest.md`
+   - key finding:
+     - GA4 `2,366` active users over 90 days vs Search Console `102` clicks is primarily explained by `2,073` localhost / `127.0.0.1` users polluting GA4
+3. Verified the code changes locally.
+   - `npm run build`
+   - `npm test`
+   - `npm run google:reconcile-90d`
+   - `npm run google:weekly-seo-health`
+4. Existing growth work remains live and unchanged:
+   - audit adjudication
+   - blog commercial-intent expansions
+   - geo service-area pages and internal links
+
+## Prior Session History
+
 1. Adjudicated the conflicting Claude and Gemini audit outputs.
    - accepted the verified source findings from Claude
    - rejected Gemini's `TrackedLink`-first remediation path as inconsistent with the current release state
@@ -98,6 +124,18 @@
 - Working growth baseline after audit adjudication is `75/100`, not the inflated Gemini `87/100`.
 
 ## Evidence Pointers
+- Analytics integrity artifact:
+  - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+- 90-day reconciliation:
+  - `.health/ga4-gsc-reconciliation-90d-latest.json`
+  - `.health/ga4-gsc-reconciliation-90d-latest.md`
+- Weekly SEO health snapshot:
+  - `.health/weekly-seo-health-latest.json`
+  - `.health/weekly-seo-health-latest.md`
+- Weekly dashboard:
+  - `DASHBOARD.md`
+- Weekly checklist:
+  - `Docs/WEEKLY-SEO-HEALTH.md`
 - Release decision: `Docs/RELEASE-DECISION.md`
 - Post-launch backlog: `Docs/POST-LAUNCH-BACKLOG.md`
 - Claude synthesis artifact: `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
@@ -132,11 +170,17 @@
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Deploy the verified schema/entity fixes.
-2. Move into Google Search Console and Google Analytics / GA4 setup-validation so the current SEO and GEO work can be measured cleanly.
-3. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
-4. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
-5. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
+1. Complete the Google-admin side cleanup:
+   - link Search Console to GA4
+   - verify the production GA4 stream and key-event settings
+   - resubmit the sitemap in GSC
+2. Monitor the redirected Wix URLs in GSC for 2 weeks to confirm the `404` cluster starts shrinking.
+3. Keep the weekly review loop lightweight:
+   - run `npm run google:weekly-seo-health`
+   - update `DASHBOARD.md`
+   - review `Docs/WEEKLY-SEO-HEALTH.md`
+4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+5. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 
 ## External-Agent Output Rule (Mandatory)
 
