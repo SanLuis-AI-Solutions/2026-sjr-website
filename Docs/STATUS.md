@@ -5,6 +5,11 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Blog commercial-intent expansion pass is now in progress:
+  - expanded the 3 highest-intent local posts first
+  - added in-body FAQ blocks and `FAQPage` schema support for enriched answer extraction
+  - added stronger in-article next-step links into services, quote, and booking flows
+  - artifact: `Docs/artifacts/audit/2026-03-06--blog-commercial-intent-expansion-pass.md`
 - Grok audit verification is complete:
   - accepted as high-level directional input only
   - rejected as a technical source of truth for metadata/schema state
@@ -43,7 +48,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** move into the highest-leverage growth work: blog depth expansion, in-body FAQ blocks, stronger service-page internal linking, and the first geo-expansion service-area pages.
+- **Next action:** finish the first blog depth pass on the next commercial-intent articles, then move into the first geo-expansion service-area pages.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -102,6 +107,27 @@ Update cadence: weekly (or after major milestones).
   - verification:
     - `npm run build`
     - `npx playwright test --grep "home schema: local business hours and external entity links are valid"`
+  - decision:
+    - accept and keep live
+- Blog commercial-intent expansion pass:
+  - source:
+    - `Docs/artifacts/audit/2026-03-06--blog-commercial-intent-expansion-pass.md`
+  - code changes:
+    - `src/lib/blog.ts`
+    - `src/app/blog/[slug]/page.tsx`
+    - `tests/smoke.spec.ts`
+  - targets:
+    - `/blog/cost-to-resize-gold-ring-pasadena`
+    - `/blog/where-to-get-watch-battery-replaced-pasadena`
+    - `/blog/can-a-severely-bent-ring-prong-be-fixed`
+  - result:
+    - richer local/commercial copy depth
+    - in-body FAQ blocks on the target posts
+    - `FAQPage` schema added for FAQ-enabled articles
+    - stronger next-step internal links into services, quote, and booking flows
+  - verification:
+    - `npm run build`
+    - `npm test`
   - decision:
     - accept and keep live
 - Release closeout state:

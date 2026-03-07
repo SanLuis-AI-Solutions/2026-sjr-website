@@ -32,12 +32,20 @@
    - Yelp and Facebook URLs verified via public search evidence
    - artifact:
      - `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
-7. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
-8. Shipped a path-aware deploy workflow fix:
+7. Started the first commercial-intent blog growth pass.
+   - expanded `/blog/cost-to-resize-gold-ring-pasadena`
+   - expanded `/blog/where-to-get-watch-battery-replaced-pasadena`
+   - expanded `/blog/can-a-severely-bent-ring-prong-be-fixed`
+   - added in-body FAQ blocks + `FAQPage` schema support for FAQ-enabled blog posts
+   - added stronger in-article next-step links into service, quote, and booking paths
+   - artifact:
+     - `Docs/artifacts/audit/2026-03-06--blog-commercial-intent-expansion-pass.md`
+8. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
+9. Shipped a path-aware deploy workflow fix:
    - commit: `0401274`
    - workflow run: `22785078312` (`success`)
    - effect: docs-only and non-perf-relevant pushes now skip post-deploy performance delta comparisons, while runtime pushes still execute them.
-9. Re-ran closeout verification and locked the final evidence:
+10. Re-ran closeout verification and locked the final evidence:
    - local verification passed:
      - `npm run build`
      - `npm test`
@@ -46,7 +54,7 @@
      - `.health/release-closeout-verification-2026-03-06-final.json`
      - `.health/release-closeout-verification-2026-03-06-final.md`
      - result: `12/12` routes passed, with no unexpected console errors or broken images detected
-10. Added closeout artifacts and canonical docs:
+11. Added closeout artifacts and canonical docs:
    - `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
    - `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
    - `Docs/RELEASE-DECISION.md`
@@ -72,6 +80,8 @@
   - `Docs/artifacts/audit/2026-03-06--grok-audit-verification.md`
 - Official entity-link verification:
   - `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
+- Blog commercial-intent expansion pass:
+  - `Docs/artifacts/audit/2026-03-06--blog-commercial-intent-expansion-pass.md`
 - Workflow fix run: `22785078312`
 - Final production verification:
   - `.health/release-closeout-verification-2026-03-06-final.json`
@@ -85,11 +95,10 @@
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Deploy the verified schema/entity fixes.
-2. Start the next high-leverage growth work:
-   - expand the best commercial blog articles
-   - add in-body FAQ blocks
-   - build the first geo-expansion service-area pages
-3. Add stronger internal links from commercial blog content into service pages, quote, and booking flows during that content pass.
+2. Finish the next tier of commercial-intent blog expansion:
+   - `safe-to-clean-vintage-diamond-ring-at-home`
+   - `heirloom-jewelry-restoration-repair-or-redesign`
+3. Build the first geo-expansion service-area pages once the content pattern is locked.
 4. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 5. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
 

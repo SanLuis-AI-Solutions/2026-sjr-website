@@ -128,6 +128,22 @@ export default async function BlogDetailPage({ params }: PageProps) {
     ],
   };
 
+  const faqSchema =
+    post.faqs && post.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <SiteShell>
       <script
@@ -138,6 +154,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      ) : null}
       <article className="relative overflow-hidden bg-white pb-16 pt-14">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-5xl px-6">
@@ -250,6 +272,55 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     ) : null}
                   </section>
                 ))}
+
+                {post.faqs && post.faqs.length > 0 ? (
+                  <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                      In-body FAQ
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">
+                      {post.faqHeading || "Common questions"}
+                    </h2>
+                    <div className="mt-5 space-y-4">
+                      {post.faqs.map((faq) => (
+                        <div
+                          key={faq.question}
+                          className="rounded-2xl border border-stone-200 bg-white p-5"
+                        >
+                          <h3 className="text-base font-semibold text-stone-900">{faq.question}</h3>
+                          <p className="mt-2 text-sm leading-7 text-stone-700">{faq.answer}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
+
+                {post.nextSteps && post.nextSteps.length > 0 ? (
+                  <section className="rounded-3xl border border-brand-gold/40 bg-white p-6 shadow-[0_18px_48px_rgba(58,25,16,0.08)]">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                      Next step
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">
+                      {post.nextStepsHeading || "Get the right repair path"}
+                    </h2>
+                    {post.nextStepsIntro ? (
+                      <p className="mt-3 text-sm leading-7 text-stone-700">{post.nextStepsIntro}</p>
+                    ) : null}
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      {post.nextSteps.map((item) => (
+                        <TrackedLink
+                          key={item.href}
+                          href={item.href}
+                          eventName="article_mid_cta_click"
+                          eventParams={{ blog_slug: post.slug, cta_target: item.href }}
+                          className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-200 bg-stone-50 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-900 hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                        >
+                          {item.label}
+                        </TrackedLink>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
               </div>
             </div>
 

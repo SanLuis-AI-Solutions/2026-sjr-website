@@ -298,6 +298,30 @@ test("mobile blog detail: article content, related services, and CTAs render", a
   guard.assertNoErrors("blog detail");
 });
 
+test("mobile blog detail: commercial-intent article renders in-body faq and next steps", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/cost-to-resize-gold-ring-pasadena", { waitUntil: "networkidle" });
+  await expect(
+    page.getByRole("heading", { level: 1, name: /How much does it cost to resize a gold ring in Pasadena/i })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: /Quick answers for Pasadena ring resizing/i })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/How much does it cost to size a simple gold ring down in Pasadena/i)
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: /Best next step if your ring feels too loose or too tight/i })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Ring Sizing Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Get Fast Quote$/i }).first()).toBeVisible();
+
+  guard.assertNoErrors("blog detail faq/next-steps");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];

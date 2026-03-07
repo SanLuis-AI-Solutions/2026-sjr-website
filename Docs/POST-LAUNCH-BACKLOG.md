@@ -26,6 +26,9 @@
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 - Expand the highest-intent existing blog articles with richer local detail, stronger service links, and in-body FAQ blocks.
 - Build the first geo-expansion service-area pages for Deer Park and La Porte once the content pattern is locked.
+- Continue the second-tier commercial article refresh after the first 3-post pass:
+  - `safe-to-clean-vintage-diamond-ring-at-home`
+  - `heirloom-jewelry-restoration-repair-or-redesign`
 
 ## Monitoring Improvements
 

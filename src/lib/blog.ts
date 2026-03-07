@@ -3,6 +3,16 @@ export type BlogSection = {
   body: string[];
 };
 
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
+
+export type BlogNextStep = {
+  label: string;
+  href: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -16,6 +26,11 @@ export type BlogPost = {
   authorRole: string;
   keyTakeaways: string[];
   sections: BlogSection[];
+  faqs?: BlogFaq[];
+  faqHeading?: string;
+  nextStepsHeading?: string;
+  nextStepsIntro?: string;
+  nextSteps?: BlogNextStep[];
   relatedServiceSlugs: string[];
 };
 
@@ -314,7 +329,7 @@ export const BLOG_POSTS: BlogPost[] = [
     topics: ["Ring Care", "Pricing & Timing"],
     publishedAt: "2026-03-01",
     reviewedAt: "2026-03-01",
-    readTime: "4 min read",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -327,16 +342,60 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "What factors affect ring resizing costs?",
         body: [
           "The cost to resize a gold ring in Pasadena depends on three main factors: whether you are sizing up or down, the thickness of the band, and how many stones the ring has. Sizing down is typically more affordable because we remove metal and reseal the band. Sizing up requires us to carefully cut the shank, add a matching piece of gold, and weld it seamlessly.",
-          "Because gold prices fluctuated, the amount of new metal required will directly impact the total cost. Most simple sizing jobs start around $45-$65, but can increase if the ring is extremely wide or requires complex blending."
+          "Because gold prices fluctuate, the amount of new metal required will directly impact the total cost. Most simple sizing jobs start around $45-$65, but can increase if the ring is extremely wide or requires complex blending.",
+          "For Pasadena, Deer Park, and La Porte customers, the practical question is not just price. It is whether the resize will look invisible, feel comfortable, and keep the ring strong enough for everyday wear. That is why a real quote should always include fit, metal type, and setting condition, not just a flat number."
         ]
       },
       {
         heading: "Are all gold rings safe to resize?",
         body: [
           "Most standard 10k, 14k, and 18k yellow or white gold rings can be safely resized. However, rings with full eternity bands (diamonds going all the way around) or extremely intricate vintage patterns might warp or lose their stones if stretched or compressed.",
-          "At Susie's Jewelry Repair on Fairmont Pkwy, we inspect every ring under magnification before giving a quote to ensure the structural integrity of your piece won't be compromised."
+          "At Susie's Jewelry Repair on Fairmont Pkwy, we inspect every ring under magnification before giving a quote to ensure the structural integrity of your piece won't be compromised.",
+          "White gold rings often need more than the size change itself. After the metal work is complete, many customers also choose polishing and fresh rhodium so the ring does not leave with a dull seam or mismatched finish."
+        ]
+      },
+      {
+        heading: "What makes one resizing quote higher than another?",
+        body: [
+          "A narrow plain band is usually the fastest and most affordable job because it needs less metal movement and less finishing. A wide shank, engraved pattern, multiple side stones, or previous repair work increases bench time and inspection time.",
+          "If your ring has channel-set diamonds, hidden halos, or delicate antique prongs, the jeweler may need to retighten stones after sizing. That extra labor is not upselling; it is part of returning the ring in wearable condition.",
+          "When you compare Pasadena ring sizing quotes, ask whether stone checks, finishing, and cleanup are already included. A low quote that skips those steps can cost more later if stones loosen or the ring comes back uneven."
+        ]
+      },
+      {
+        heading: "How long does ring sizing take locally?",
+        body: [
+          "Most standard gold ring sizings follow our Same Day/Next Day pattern, depending on the ring style and shop workload. The most straightforward jobs can move quickly, but complex sizing should not be rushed if the ring needs structural reinforcement or stone tightening.",
+          "If you need the ring for a proposal, anniversary dinner, trip, or weekend event, tell the team that up front. Timeline planning is part of the service, and it is easier to protect both quality and deadline when expectations are clear before work starts.",
+          "For customers coming from Deer Park, La Porte, or southeast Houston, the easiest path is to request a fast quote online first, then bring the ring in for a confirmed assessment."
         ]
       }
+    ],
+    faqHeading: "Quick answers for Pasadena ring resizing",
+    faqs: [
+      {
+        question: "How much does it cost to size a simple gold ring down in Pasadena?",
+        answer:
+          "Most simple gold ring sizings down start around $45-$65, but the final price depends on band width, stone layout, and finish work after the seam is closed.",
+      },
+      {
+        question: "Does sizing up cost more than sizing down?",
+        answer:
+          "Yes. Sizing up usually costs more because matching gold has to be added, shaped, soldered or laser-welded, and then refinished so the ring looks even.",
+      },
+      {
+        question: "Can you resize a ring with diamonds on the band?",
+        answer:
+          "Often yes, but it depends on how far the stones run around the ring. Rings with side stones or eternity-style layouts need a closer inspection before a safe quote can be confirmed.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your ring feels too loose or too tight",
+    nextStepsIntro:
+      "If you want a confirmed Pasadena quote instead of a rough estimate, start with the ring sizing service page or send the ring details for review.",
+    nextSteps: [
+      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting"]
   },
@@ -348,7 +407,7 @@ export const BLOG_POSTS: BlogPost[] = [
     topics: ["Stone Safety", "Ring Care"],
     publishedAt: "2026-03-01",
     reviewedAt: "2026-03-01",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -361,7 +420,8 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Can a severely bent ring prong be fixed?",
         body: [
           "If your prong is severely bent, do not try to bend it back yourself. Often, a severely bent prong can be repaired in our shop using a technique called re-tipping, where we melt new gold or platinum onto the worn or bent area to rebuild its strength.",
-          "However, if the metal has suffered severe stress or micro-cracks from the impact, simply pushing it back will cause it to snap later. A master jeweler must assess the metal's fatigue."
+          "However, if the metal has suffered severe stress or micro-cracks from the impact, simply pushing it back will cause it to snap later. A master jeweler must assess the metal's fatigue.",
+          "In Pasadena, this usually happens after rings catch on shopping carts, gym equipment, door handles, or hard countertop edges. The stone may still appear secure, but the real risk is hidden inside the stressed metal."
         ]
       },
       {
@@ -370,7 +430,49 @@ export const BLOG_POSTS: BlogPost[] = [
           "If multiple prongs are missing, or the base of the setting (the 'head') is crushed or structurally compromised, rebuilding individual prongs may cost more than starting fresh. In these cases, we recommend replacing the entire head to ensure your center diamond is 100% secure.",
           "Stop by our Pasadena location for a free microscope inspection if you suspect your prong is compromised."
         ]
+      },
+      {
+        heading: "What are the warning signs that a bent prong is now urgent?",
+        body: [
+          "If the diamond moves, rattles, tilts, or suddenly catches on fabric, stop wearing the ring immediately. Those are not cosmetic issues. They are signs the stone may already be one impact away from coming loose.",
+          "Another warning sign is a prong that looks darker, flatter, or shorter than the others after a hit. That can mean the tip folded or wore down enough that it is no longer holding the crown of the stone correctly.",
+          "The safest move is to place the ring in a small pouch or box and bring it in before wearing it again. Continuing to wear it to work, errands, or the gym is how a repair turns into a lost-diamond problem."
+        ]
+      },
+      {
+        heading: "Repair, rebuild, or redesign: how to choose",
+        body: [
+          "If the rest of the ring is healthy, rebuilding one or two prongs is usually the most efficient repair. If the head is twisted, several prongs are worn, or the shank is already thin, a new setting or head replacement may provide better long-term security.",
+          "For older engagement rings and family pieces, we also look at wear pattern and lifestyle. A customer who wears the ring daily may be better served by a stronger modern head while preserving the original diamond and overall look.",
+          "If the mounting has repeated problems, redesign can be the more economical decision over time. It can eliminate chronic weak points instead of repairing the same fragile structure again and again."
+        ]
       }
+    ],
+    faqHeading: "Quick answers about bent prongs and loose stones",
+    faqs: [
+      {
+        question: "Can you fix one badly bent prong without replacing the whole ring?",
+        answer:
+          "Often yes. If the surrounding head is still sound, we can usually rebuild or retip the damaged prong rather than replace the entire setting.",
+      },
+      {
+        question: "Is it safe to wear my ring if one prong is bent?",
+        answer:
+          "No. If a prong is visibly bent, stop wearing the ring until it is inspected. Even if the stone looks stable, the metal may already be fatigued.",
+      },
+      {
+        question: "When is a new setting the better choice?",
+        answer:
+          "A new setting becomes the safer choice when multiple prongs are worn, the head is crushed, or the overall mounting has too much structural wear to trust after a spot repair.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your diamond feels exposed",
+    nextStepsIntro:
+      "Start with a stone-setting inspection if the ring has a loose or damaged prong. If the setting is beyond repair, the custom design path is the right follow-up conversation.",
+    nextSteps: [
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "Explore Custom Design", href: "/services/custom-design" },
+      { label: "Get Fast Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["stone-setting", "custom-design"]
   },
@@ -382,7 +484,7 @@ export const BLOG_POSTS: BlogPost[] = [
     topics: ["Watch Service", "Pricing & Timing"],
     publishedAt: "2026-03-01",
     reviewedAt: "2026-03-01",
-    readTime: "3 min read",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -395,7 +497,8 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Where can I get a watch battery replaced today in Pasadena?",
         body: [
           "If your quartz watch has stopped ticking, you can get a same-day battery replacement at Susie's Jewelry Repair, conveniently located near the Deer Park and Pasadena border on Fairmont Pkwy. We handle everything from basic fashion watches to high-end Swiss quartz models.",
-          "Unlike mall kiosks, our master craftsmen carefully open the case back to prevent scratching, swap in a fresh, high-quality battery, and ensure the internal gaskets are properly seated before closing."
+          "Unlike mall kiosks, our master craftsmen carefully open the case back to prevent scratching, swap in a fresh, high-quality battery, and ensure the internal gaskets are properly seated before closing.",
+          "That matters for local customers who need the watch back today for work, school, travel, or everyday wear. The goal is not just to make the hands move again. It is to return the watch clean, protected, and ready to wear."
         ]
       },
       {
@@ -403,7 +506,48 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "For standard everyday wear, our visual seal check ensures basic splash resistance. If your watch is a professional dive watch and you plan on submerging it, we recommend discussing a full pressure test and reseal with our team to guarantee its original depth rating."
         ]
+      },
+      {
+        heading: "How long does a watch battery replacement take?",
+        body: [
+          "Most battery replacements are same-day and many are completed while you wait, depending on the watch style and how busy the bench is. Straightforward quartz watches are usually fast. Specialty backs, luxury cases, and watches with stripped screws can take longer because they need more careful handling.",
+          "If you are coming from Deer Park, La Porte, or southeast Houston, call or start a quick quote first if you have a brand-specific concern. That helps us tell you whether your model needs a standard battery swap, gasket replacement, or a deeper diagnostic."
+        ]
+      },
+      {
+        heading: "When a dead watch may be more than a battery",
+        body: [
+          "Not every stopped watch only needs a fresh cell. Battery leakage, coil issues, damaged stems, and moisture intrusion can all mimic a simple dead-battery symptom.",
+          "If a watch recently lost time, fogged under the crystal, or stopped after sitting with an old battery for too long, inspection matters. Replacing the battery without checking the movement can hide the real cause and shorten the life of the watch.",
+          "This is especially important for sentimental or higher-end watches. A quick diagnosis now is cheaper than a full movement repair later."
+        ]
       }
+    ],
+    faqHeading: "Quick answers about same-day watch battery service",
+    faqs: [
+      {
+        question: "Do you offer same-day watch battery replacement in Pasadena?",
+        answer:
+          "Yes. Most quartz watch battery replacements are same-day, and many can be completed while you wait depending on the watch style and bench load.",
+      },
+      {
+        question: "Do you replace batteries in luxury or Swiss watches?",
+        answer:
+          "Yes. We handle everyday watches and many higher-end models, but some luxury cases require slower opening, seal work, or additional diagnostics.",
+      },
+      {
+        question: "Do you check the seal after replacing the battery?",
+        answer:
+          "Yes. We visually inspect seals and gasket condition during service. If the watch needs a deeper reseal or pressure test, we will tell you before the work is finalized.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your watch stopped today",
+    nextStepsIntro:
+      "If it is likely a battery issue, start with watch repair service details or request a quick quote before you drive over.",
+    nextSteps: [
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair"]
   },
