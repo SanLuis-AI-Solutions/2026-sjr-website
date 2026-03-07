@@ -357,6 +357,37 @@ test("mobile blog detail: heirloom article renders in-body faq and next steps", 
   guard.assertNoErrors("blog detail heirloom faq/next-steps");
 });
 
+test("mobile service-area pages: deer park and la porte render local guidance and quick actions", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const routes = [
+    {
+      path: "/services/deer-park",
+      heading: /Jewelry repair near Deer Park, handled in-house/i,
+      serviceLink: /Jewelry repair near Deer Park/i,
+      quickLink: /Get Fast Quote/i,
+    },
+    {
+      path: "/services/la-porte",
+      heading: /Jewelry repair near La Porte, handled in-house/i,
+      serviceLink: /Jewelry repair near La Porte/i,
+      quickLink: /Book Repair/i,
+    },
+  ];
+
+  for (const route of routes) {
+    await page.goto(route.path, { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+    await expect(page.getByRole("region", { name: /^Quick actions$/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: route.quickLink }).first()).toBeVisible();
+    await expect(page.getByText(route.serviceLink).first()).toBeVisible();
+    await assertNoBrokenImages(page);
+  }
+
+  guard.assertNoErrors("service-area pages");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];

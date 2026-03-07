@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Geo service-area pages pass 1 is now in progress:
+  - launched Deer Park and La Porte as the first adjacent-city geo pages
+  - added a reusable local landing-page renderer and linked the pages from the services hub
+  - artifact: `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-1.md`
 - Blog commercial-intent expansion pass 2 is now in progress:
   - expanded the vintage-cleaning and heirloom-redesign commercial posts
   - reused the in-body FAQ + next-step pattern established in the first pass
@@ -52,7 +56,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** move into the first geo-expansion service-area pages for Deer Park and La Porte.
+- **Next action:** measure and extend the geo-page pattern to the next adjacent cities before attempting a broader Houston page.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -147,6 +151,26 @@ Update cadence: weekly (or after major milestones).
     - richer answer depth on vintage cleaning and heirloom redesign intent
     - stronger in-body FAQ and next-step coverage on both articles
     - tighter internal routing into cleaning, heirloom restoration, custom design, quote, and booking flows
+  - verification:
+    - `npm run build`
+    - `npm test`
+  - decision:
+    - accept and keep live
+- Geo service-area pages pass 1:
+  - source:
+    - `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-1.md`
+  - code changes:
+    - `src/lib/service-areas.ts`
+    - `src/components/service-area-page.tsx`
+    - `src/app/services/deer-park/page.tsx`
+    - `src/app/services/la-porte/page.tsx`
+    - `src/app/services/page.tsx`
+    - `tests/smoke.spec.ts`
+  - result:
+    - launched `/services/deer-park`
+    - launched `/services/la-porte`
+    - added internal discovery from the services hub
+    - added `BreadcrumbList`, `FAQPage`, and `Service` schema to both pages
   - verification:
     - `npm run build`
     - `npm test`

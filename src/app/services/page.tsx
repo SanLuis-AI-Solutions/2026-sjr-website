@@ -164,6 +164,60 @@ export default async function ServicesPage() {
         </div>
       </section>
 
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+              Nearby service areas
+            </p>
+            <h2 className="mt-3 font-serif text-3xl text-stone-900">
+              Repair guidance for nearby cities, not just Pasadena.
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
+              If you are coming from a nearby area, start with a city-specific page to see how
+              local customers typically use our Pasadena workshop, which repairs are most common,
+              and the fastest quote-first path before you drive over.
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <TrackedLink
+                href="/services/deer-park"
+                eventName="service_area_card_click"
+                eventParams={{ area_slug: "deer-park", placement: "services_hub_area_section" }}
+                className="group rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                  Deer Park
+                </p>
+                <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                  Jewelry repair near Deer Park
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-stone-700">
+                  Start with local guidance for ring sizing, watch batteries, prong repair, and
+                  quote-first service from our Pasadena workshop.
+                </p>
+              </TrackedLink>
+              <TrackedLink
+                href="/services/la-porte"
+                eventName="service_area_card_click"
+                eventParams={{ area_slug: "la-porte", placement: "services_hub_area_section" }}
+                className="group rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                  La Porte
+                </p>
+                <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                  Jewelry repair near La Porte
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-stone-700">
+                  Get the fastest path for watch service, heirloom restoration, and quote-first
+                  repair planning before making the trip.
+                </p>
+              </TrackedLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured section (standalone, clean, Apple-like). */}
       <section className="cv-section bg-white py-14">
         <div className="mx-auto max-w-6xl px-6">
