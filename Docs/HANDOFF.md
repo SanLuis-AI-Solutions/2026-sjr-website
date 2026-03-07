@@ -26,7 +26,20 @@
    - `npm test`
    - `npm run google:reconcile-90d`
    - `npm run google:weekly-seo-health`
-4. Existing growth work remains live and unchanged:
+4. Validated the weekly GitHub reminder automation end to end.
+   - workflow:
+     - `.github/workflows/weekly-health.yml`
+   - validation runs:
+     - `22791746557`
+       - workflow `success`
+       - SEO snapshots skipped before GitHub secrets were configured
+     - `22792076143`
+       - workflow `success`
+       - weekly SEO snapshots passed after GitHub secrets and repo variables were added
+5. Added a one-time Google-admin cleanup runbook.
+   - artifact:
+     - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
+6. Existing growth work remains live and unchanged:
    - audit adjudication
    - blog commercial-intent expansions
    - geo service-area pages and internal links
@@ -126,6 +139,8 @@
 ## Evidence Pointers
 - Analytics integrity artifact:
   - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+- Google-admin cleanup runbook:
+  - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
 - 90-day reconciliation:
   - `.health/ga4-gsc-reconciliation-90d-latest.json`
   - `.health/ga4-gsc-reconciliation-90d-latest.md`
@@ -171,9 +186,11 @@
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Complete the Google-admin side cleanup:
+   - use `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
    - link Search Console to GA4
    - verify the production GA4 stream and key-event settings
    - resubmit the sitemap in GSC
+   - inspect key live URLs and one redirected Wix URL in GSC
 2. Monitor the redirected Wix URLs in GSC for 2 weeks to confirm the `404` cluster starts shrinking.
 3. Keep the weekly review loop lightweight:
    - run `npm run google:weekly-seo-health`

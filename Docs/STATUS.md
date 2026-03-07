@@ -12,6 +12,12 @@ Update cadence: weekly (or after major milestones).
   - legacy Wix URLs with observed demand now have best-fit `301` targets
   - weekly reporting foundation is now documented in `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
   - artifact: `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+  - weekly GitHub reminder automation is now validated:
+    - workflow: `.github/workflows/weekly-health.yml`
+    - pre-secret validation run: `22791746557` (`success`, snapshots skipped)
+    - post-secret validation run: `22792076143` (`success`, snapshots passed)
+  - admin runbook:
+    - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
 - Geo-page internal link pass 2 is now in progress:
   - connected the strongest matching commercial-intent articles into Webster, Friendswood, and Clear Lake
   - reused the existing article next-step block for the second geo ring
@@ -80,6 +86,7 @@ Update cadence: weekly (or after major milestones).
   - link Search Console to GA4
   - verify key events in GA4 admin
   - resubmit the sitemap in GSC
+  - inspect key live URLs and one redirected Wix URL in GSC
   - review redirected Wix URLs over the next 2 weeks
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -109,6 +116,7 @@ Update cadence: weekly (or after major milestones).
 - SEO + analytics integrity recovery:
   - source:
     - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
+    - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
     - `.health/ga4-gsc-reconciliation-90d-latest.md`
     - `.health/weekly-seo-health-latest.md`
   - code changes:
@@ -140,6 +148,9 @@ Update cadence: weekly (or after major milestones).
     - `npm test`
     - `npm run google:reconcile-90d`
     - `npm run google:weekly-seo-health`
+    - weekly workflow validation:
+      - `22791746557` (`success`, snapshots skipped before GitHub secrets were set)
+      - `22792076143` (`success`, snapshots passed after GitHub secrets/variables were added)
   - decision:
     - accept and keep live
     - treat the GA4 vs GSC gap as a measurement-integrity issue already explained by localhost pollution, not as evidence of SEO collapse
