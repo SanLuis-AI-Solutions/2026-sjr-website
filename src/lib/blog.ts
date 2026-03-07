@@ -559,7 +559,7 @@ export const BLOG_POSTS: BlogPost[] = [
     topics: ["Cleaning & Polish", "Heirloom Care"],
     publishedAt: "2026-03-01",
     reviewedAt: "2026-03-01",
-    readTime: "4 min read",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -572,7 +572,8 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Is it safe to clean my vintage diamond ring with household products?",
         body: [
           "It is generally safe to clean a vintage diamond ring with a few drops of mild dish soap and warm water, using a very soft baby toothbrush. However, you should never use bleach, chlorine, acetone, or harsh household degreasers. These chemicals can cause the alloys in gold to break down, resulting in stress cracks that can literally shatter your prongs.",
-          "Vintage rings are exceptionally vulnerable because the metal has experienced decades of wear, making the prongs thinner and more brittle than modern rings."
+          "Vintage rings are exceptionally vulnerable because the metal has experienced decades of wear, making the prongs thinner and more brittle than modern rings.",
+          "For Pasadena customers with inherited or antique rings, the real risk is not only the cleaner itself. It is what happens when harsh chemicals combine with already-thin prongs, old solder joints, or fragile gallery work that has not been inspected recently."
         ]
       },
       {
@@ -580,7 +581,49 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "If your vintage ring features intricate filigree, foil-backed stones, or soft gemstones like pearls and opals, skip the home cleaning entirely. Bring it into our Pasadena workshop. We use specialized, non-destructive cleaning techniques that remove decades of grime without putting weak structural points at risk."
         ]
-      }
+      },
+      {
+        heading: "Which at-home methods are safest for older rings?",
+        body: [
+          "The safest at-home approach is simple: lukewarm water, mild dish soap, a short soak, and a very soft brush used gently around the setting. Rinse carefully and pat dry with a lint-free cloth instead of rubbing aggressively.",
+          "Avoid ultrasonic devices unless a jeweler has already told you the ring is structurally sound and the stones are appropriate for that method. Older rings often hide worn prongs or delicate under-gallery details that can fail under vibration.",
+          "Steam, toothpaste, abrasive powders, and silver dips also belong on the avoid list for vintage rings. They may seem harmless, but they can remove finish, stress old solder seams, or damage softer gems set alongside diamonds."
+        ]
+      },
+      {
+        heading: "What makes vintage diamond rings different from modern settings?",
+        body: [
+          "Many vintage rings were built with finer prongs, hand-cut details, and design techniques that were never intended for modern household cleaners or constant scrubbing. They may also have decades of invisible wear that only shows up under magnification.",
+          "A ring can look beautiful on top while hiding thin shanks, weakened galleries, or loose accent stones underneath. That is why older rings should be evaluated for structure, not just shine.",
+          "If the ring has sentimental value, the safer strategy is usually to clean it less aggressively at home and use professional cleaning as part of a regular inspection routine."
+        ]
+      },
+    ],
+    faqHeading: "Quick answers about cleaning vintage rings safely",
+    faqs: [
+      {
+        question: "Is dish soap safe for a vintage diamond ring?",
+        answer:
+          "Usually yes, as long as it is mild dish soap used with lukewarm water and a soft brush. The bigger concern is the ring's structural condition, not the soap itself.",
+      },
+      {
+        question: "Can I use bleach, ammonia, or jewelry cleaner from a store?",
+        answer:
+          "No. Harsh chemicals can weaken old gold alloys, damage fragile finishes, and increase the risk of cracked prongs or damaged accent stones.",
+      },
+      {
+        question: "When should I skip home cleaning and bring the ring in?",
+        answer:
+          "Skip home cleaning if the ring is antique, has filigree, foil-backed stones, pearls, opals, loose prongs, or any sign of wear. Those rings are safer with a professional inspection and non-destructive cleaning.",
+      },
+    ],
+    nextStepsHeading: "Best next step for a fragile or sentimental ring",
+    nextStepsIntro:
+      "If you are not fully confident in the ring's condition, start with professional cleaning or an heirloom-focused inspection before trying a stronger home-cleaning routine.",
+    nextSteps: [
+      { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Get Fast Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"]
   },
@@ -592,7 +635,7 @@ export const BLOG_POSTS: BlogPost[] = [
     topics: ["Heirloom Care", "Custom Design"],
     publishedAt: "2026-03-01",
     reviewedAt: "2026-03-01",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -605,7 +648,8 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Should I repair or redesign my inherited jewelry?",
         body: [
           "The decision to repair or redesign comes down to structural integrity and personal taste. If the ring is in relatively good condition and you love the vintage aesthetic, a thorough restoration (re-tipping prongs, reinforcing the shank, and deep cleaning) will preserve its history perfectly.",
-          "However, if the metal is paper-thin, severely cracked, or the style sits in a jewelry box because it isn’t to your taste, a redesign is the smarter choice. At Susie's, we can melt down the original gold and use the inherited family diamonds to craft a brand-new, modern piece that you will actually wear."
+          "However, if the metal is paper-thin, severely cracked, or the style sits in a jewelry box because it isn’t to your taste, a redesign is the smarter choice. At Susie's, we can melt down the original gold and use the inherited family diamonds to craft a brand-new, modern piece that you will actually wear.",
+          "For Pasadena families, this choice is often emotional before it is technical. Some customers want to preserve the exact look because the piece belonged to a parent or grandparent. Others want to keep the stones and story, but create something stronger for daily wear."
         ]
       },
       {
@@ -613,7 +657,49 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "We start with a free consultation at our Pasadena shop. We'll inspect your heirloom stones, sketch out a design that fits your lifestyle, and walk you through 3D models before casting. This ensures you get a durable, stunning piece while keeping the family legacy alive."
         ]
-      }
+      },
+      {
+        heading: "When restoration is usually the better choice",
+        body: [
+          "Restoration is usually the right path when the original craftsmanship matters more than changing the style. If the shank can be reinforced, the prongs can be rebuilt, and the overall design still suits how you want to wear it, preserving the original piece often delivers the best emotional value.",
+          "This is especially true for anniversary rings, family solitaires, and heirloom pieces with engraving or old-world details that would be difficult to replicate. A careful restoration keeps the visual identity intact while making the piece safer to wear.",
+          "In practical terms, restoration also makes sense when the existing setting is still structurally recoverable and the cost to rebuild key components is lower than fabricating an entirely new mounting."
+        ]
+      },
+      {
+        heading: "When redesign creates the stronger long-term result",
+        body: [
+          "Redesign becomes the stronger option when the original piece is too fragile, too damaged, or simply not wearable for your lifestyle. A ring that constantly snags, sits too high, or remains in a box is not serving you well even if it has sentimental value.",
+          "A redesign can preserve the heirloom's core identity by reusing its diamonds, colored stones, or even some of the original gold while giving you a lower-profile, sturdier, more modern piece. The emotional continuity stays, but the day-to-day wearability improves.",
+          "Customers often choose redesign when several major repairs would stack up anyway: worn prongs, thin shanks, damaged heads, and outdated proportions. In that case, rebuilding from the ground up can be more durable and more cost-effective over time."
+        ]
+      },
+    ],
+    faqHeading: "Quick answers about heirloom repair vs redesign",
+    faqs: [
+      {
+        question: "How do I know if an heirloom should be restored instead of redesigned?",
+        answer:
+          "If the structure is still recoverable and the original look matters deeply to you, restoration is usually the better choice. It preserves the character of the piece while strengthening it for safer wear.",
+      },
+      {
+        question: "Can you reuse the original diamonds or gold in a redesign?",
+        answer:
+          "Yes. In many cases we can reuse heirloom stones and, depending on the project, some of the original gold so the new piece still carries the family connection.",
+      },
+      {
+        question: "Is redesign only for badly damaged jewelry?",
+        answer:
+          "No. Redesign is also a smart choice when the original piece is not your style or no longer fits how you want to wear it, even if the jewelry is still structurally salvageable.",
+      },
+    ],
+    nextStepsHeading: "Best next step for inherited jewelry you want to wear again",
+    nextStepsIntro:
+      "If you want to preserve the original piece, start with heirloom restoration. If you already know the current style is not right for you, the custom design path is the better starting point.",
+    nextSteps: [
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Explore Custom Design", href: "/services/custom-design" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design"]
   }

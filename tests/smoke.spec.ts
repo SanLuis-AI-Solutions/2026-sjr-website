@@ -322,6 +322,41 @@ test("mobile blog detail: commercial-intent article renders in-body faq and next
   guard.assertNoErrors("blog detail faq/next-steps");
 });
 
+test("mobile blog detail: heirloom article renders in-body faq and next steps", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/heirloom-jewelry-restoration-repair-or-redesign", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /Heirloom Jewelry Restoration: Should I Repair It or Redesign It/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Quick answers about heirloom repair vs redesign/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Can you reuse the original diamonds or gold in a redesign/i)
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Best next step for inherited jewelry you want to wear again/i,
+    })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore Heirloom Restoration/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore Custom Design/i })).toBeVisible();
+
+  guard.assertNoErrors("blog detail heirloom faq/next-steps");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];
