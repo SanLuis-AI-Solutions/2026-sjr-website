@@ -2,6 +2,10 @@ export const BUSINESS = {
   name: "Susie’s Jewelry Repair",
   phone: "(281) 991-6500",
   email: "contact@susiesjewelryrepair.com",
+  sameAs: [
+    "https://www.loc8nearme.com/texas/pasadena/susies-jewelry-repair/5318092/",
+    "https://www.mapquest.com/us/texas/susies-jewelry-repair-277840794",
+  ],
   address: {
     street: "3910 Fairmont Pkwy #C",
     city: "Pasadena",

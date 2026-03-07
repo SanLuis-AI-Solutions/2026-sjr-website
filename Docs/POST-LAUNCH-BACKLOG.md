@@ -22,6 +22,7 @@
 
 ## Growth And Content Tasks
 
+- Replace temporary third-party directory `sameAs` references with verified official GBP, Yelp, and Facebook URLs once those profiles are confirmed.
 - Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 - Continue blog and content-cluster expansion only after launch monitoring stabilizes.

@@ -1,6 +1,21 @@
 import { BUSINESS } from "@/lib/constants";
 
 export function LocalBusinessSchema() {
+    const openingHoursSpecification = BUSINESS.hours.flatMap((h) => {
+        if (h.hours === "Closed") return [];
+
+        const [day] = h.day.split(" ");
+        const match = h.hours.match(/(.*) – (.*)/);
+        if (!match) return [];
+
+        return [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": day,
+            "opens": match[1],
+            "closes": match[2]
+        }];
+    });
+
     const schema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -48,19 +63,8 @@ export function LocalBusinessSchema() {
                 "reviewBody": "They restored my grandmother’s necklace flawlessly. The craftsmanship is unreal."
             }
         ],
-        "openingHoursSpecification": BUSINESS.hours.map((h) => {
-            const [day] = h.day.split(" ");
-            const match = h.hours.match(/(.*) – (.*)/);
-            return {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": day,
-                "opens": match ? match[1] : "10:00",
-                "closes": match ? match[2] : "18:00"
-            };
-        }),
-        "sameAs": [
-            // Add social links here if available
-        ]
+        "openingHoursSpecification": openingHoursSpecification,
+        "sameAs": BUSINESS.sameAs
     };
 
     return (

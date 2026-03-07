@@ -198,6 +198,41 @@ test("legal pages: privacy + terms exist", async ({ page }) => {
   guard.assertNoErrors("privacy/terms");
 });
 
+test("home schema: local business hours and external entity links are valid", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const localBusinessSchema = await page.evaluate(() => {
+    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+    for (const script of scripts) {
+      try {
+        const parsed = JSON.parse(script.textContent || "");
+        if (parsed?.["@type"] === "LocalBusiness") {
+          return parsed;
+        }
+      } catch {
+        // Ignore non-JSON payloads in unrelated scripts.
+      }
+    }
+    return null;
+  });
+
+  expect(localBusinessSchema).not.toBeNull();
+  expect(Array.isArray(localBusinessSchema.sameAs)).toBe(true);
+  expect(localBusinessSchema.sameAs.length).toBeGreaterThanOrEqual(2);
+
+  const sundayHours = Array.isArray(localBusinessSchema.openingHoursSpecification)
+    ? localBusinessSchema.openingHoursSpecification.find(
+        (entry: { dayOfWeek?: string }) => entry.dayOfWeek === "Sunday"
+      )
+    : undefined;
+
+  expect(sundayHours).toBeUndefined();
+
+  guard.assertNoErrors("home schema");
+});
+
 test("mobile core pages: about, faq, contact, and blog quick actions are clear", async ({
   page,
 }) => {

@@ -302,7 +302,7 @@ export function BookingDateTimeFields() {
         </select>
       </label>
       <p id="booking-hours-note" className="sm:col-span-2 text-xs text-stone-600">
-        Booking hours: Monday-Friday 10:00 AM-5:00 PM, Saturday 10:00 AM-3:00 PM, Sunday closed.
+        Last booking start: Monday-Friday 10:00 AM-5:00 PM, Saturday 10:00 AM-3:00 PM, Sunday closed.
         Holidays can be blocked when configured.
       </p>
       <p id="booking-date-format-note" className="sr-only">

@@ -5,6 +5,11 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Audit adjudication and easy-win remediation are now in progress:
+  - verified fixes applied for `LocalBusiness` closed-day schema handling
+  - `sameAs` is no longer empty
+  - Saturday booking note now explicitly states `Last booking start`
+  - schema smoke coverage added
 - Release closeout mode is now active: Step 6.2 `/services` micro-iterations are paused, and `/services` performance is now tracked as deferred post-launch work rather than a release blocker.
 - Path-aware deploy gating is now shipped in `deploy-production.yml` via commit `0401274`; workflow run `22785078312` succeeded and keeps runtime pushes protected while allowing docs-only or non-perf-relevant pushes to skip post-deploy delta compares.
 - Final closeout verification is green:
@@ -30,7 +35,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** proceed with ship-now closeout and post-launch monitoring. Do not reopen `/services` micro-iterations unless a new structural hypothesis is explicitly approved for a separate post-launch sprint.
+- **Next action:** ship the audited schema/entity fixes, then move to the highest-leverage growth work: verified official social/entity links, blog depth expansion, and the first geo-expansion service-area pages.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
@@ -56,6 +61,25 @@ Update cadence: weekly (or after major milestones).
 - **SEO Stability**: SEO remains `100` on all audited launch routes through the full performance iteration cycle.
 
 ## Latest Gate Metrics (2026-03-06 CST)
+- Audit adjudication + quick-fix pass:
+  - source audits:
+    - `Docs/artifacts/audit/2026-03-06--claude-full-site-seo-geo-aeo-audit.md`
+    - `Docs/artifacts/audit/2026-03-06--gemini-full-site-seo-geo-aeo-audit.md`
+  - adjudicated baseline:
+    - `Docs/artifacts/audit/2026-03-06--master-audit-adjudication-and-quick-fix-pass.md`
+    - working score: `75/100`
+  - code changes:
+    - `src/components/local-business-schema.tsx`
+    - `src/lib/constants.ts`
+    - `src/components/booking-date-time-fields.tsx`
+    - `tests/smoke.spec.ts`
+  - verification:
+    - `npm run build`
+    - `npm test`
+  - decision:
+    - accept Claude's verified source findings
+    - reject Gemini's `TrackedLink`-first remediation path as conflicting with the closed performance loop
+    - shift next work to traffic + authority growth rather than another `/services` render-delay cycle
 - Release closeout state:
   - release decision: `Ship now`
   - canonical release doc: `Docs/RELEASE-DECISION.md`

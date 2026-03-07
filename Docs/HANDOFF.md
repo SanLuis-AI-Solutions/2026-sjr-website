@@ -7,12 +7,27 @@
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
 
 ## Session Summary (Most Recent)
-1. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
-2. Shipped a path-aware deploy workflow fix:
+1. Adjudicated the conflicting Claude and Gemini audit outputs.
+   - accepted the verified source findings from Claude
+   - rejected Gemini's `TrackedLink`-first remediation path as inconsistent with the current release state
+   - working baseline artifact:
+     - `Docs/artifacts/audit/2026-03-06--master-audit-adjudication-and-quick-fix-pass.md`
+     - working score: `75/100`
+2. Implemented the easy-win fixes from the adjudicated audit:
+   - `src/components/local-business-schema.tsx`: stop emitting Sunday opening hours for closed days
+   - `src/lib/constants.ts`: populate `sameAs` with resolvable external entity references
+   - `src/components/booking-date-time-fields.tsx`: clarify Saturday note as `Last booking start`
+   - `tests/smoke.spec.ts`: add schema/entity smoke coverage
+3. Verified the fix set locally:
+   - `npm run build` pass
+   - `npm test` pass
+4. Quote-page phone visibility was re-checked and is already live in `src/app/quote/page.tsx`, so that Claude finding was not accepted as open work.
+5. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
+6. Shipped a path-aware deploy workflow fix:
    - commit: `0401274`
    - workflow run: `22785078312` (`success`)
    - effect: docs-only and non-perf-relevant pushes now skip post-deploy performance delta comparisons, while runtime pushes still execute them.
-3. Re-ran closeout verification and locked the final evidence:
+7. Re-ran closeout verification and locked the final evidence:
    - local verification passed:
      - `npm run build`
      - `npm test`
@@ -21,7 +36,7 @@
      - `.health/release-closeout-verification-2026-03-06-final.json`
      - `.health/release-closeout-verification-2026-03-06-final.md`
      - result: `12/12` routes passed, with no unexpected console errors or broken images detected
-4. Added closeout artifacts and canonical docs:
+8. Added closeout artifacts and canonical docs:
    - `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
    - `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
    - `Docs/RELEASE-DECISION.md`
@@ -34,12 +49,15 @@
 - Step 6.2 `/services` experimentation is paused.
 - `/services` performance is now treated as deferred post-launch debt, not a release blocker.
 - Release posture is now `Ship now`.
+- Working growth baseline after audit adjudication is `75/100`, not the inflated Gemini `87/100`.
 
 ## Evidence Pointers
 - Release decision: `Docs/RELEASE-DECISION.md`
 - Post-launch backlog: `Docs/POST-LAUNCH-BACKLOG.md`
 - Claude synthesis artifact: `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
 - Gemini audit artifact: `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
+- Master audit adjudication:
+  - `Docs/artifacts/audit/2026-03-06--master-audit-adjudication-and-quick-fix-pass.md`
 - Workflow fix run: `22785078312`
 - Final production verification:
   - `.health/release-closeout-verification-2026-03-06-final.json`
@@ -52,9 +70,13 @@
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Finish the docs-only validation push for the new release documents.
-2. Monitor production after launch using the existing KPI and GA validation scripts.
-3. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
+1. Deploy the verified schema/entity fixes.
+2. Replace temporary directory `sameAs` references with official GBP / Yelp / Facebook URLs once confirmed.
+3. Start the next high-leverage growth work:
+   - expand the best commercial blog articles
+   - add in-body FAQ blocks
+   - build the first geo-expansion service-area pages
+4. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
 
 ## External-Agent Output Rule (Mandatory)
 
