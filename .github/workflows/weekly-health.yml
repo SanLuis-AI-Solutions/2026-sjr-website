@@ -41,9 +41,24 @@ jobs:
           pwsh -File scripts/verify.ps1 -Ci -ReportPath .health/report.md
           "exit_code=$LASTEXITCODE" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
+      - name: Check Google Snapshot Credentials
+        id: google_config
+        shell: pwsh
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY }}
+        run: |
+          $hasEmail = -not [string]::IsNullOrWhiteSpace($env:GOOGLE_SERVICE_ACCOUNT_EMAIL)
+          $hasKey = -not [string]::IsNullOrWhiteSpace($env:GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY)
+          if ($hasEmail -and $hasKey) {
+            "available=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          } else {
+            "available=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          }
+
       - name: Run Weekly SEO Snapshots
         id: seo_snapshots
-        if: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL != '' && secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY != '' }}
+        if: ${{ steps.google_config.outputs.available == 'true' }}
         shell: pwsh
         continue-on-error: true
         env:
@@ -80,7 +95,7 @@ jobs:
             const title = 'Weekly SEO Health Report';
             const reportPath = '.health/report.md';
             const exitCode = Number('${{ steps.verify.outputs.exit_code }}' || '0');
-            const seoStepRan = '${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL != '' && secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY != '' }}' === 'true';
+            const seoStepRan = '${{ steps.google_config.outputs.available }}' === 'true';
             const seoExitCode = Number('${{ steps.seo_snapshots.outputs.exit_code }}' || '0');
             const weeklySeoPath = '.health/weekly-seo-health-latest.md';
             const reconcilePath = '.health/ga4-gsc-reconciliation-90d-latest.md';
