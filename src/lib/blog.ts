@@ -395,6 +395,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Get Deer Park Repair Guidance", href: "/services/deer-park" },
+      { label: "See Friendswood Ring Repair Guidance", href: "/services/friendswood" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
@@ -473,6 +474,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
+      { label: "See Webster Ring Repair Guidance", href: "/services/webster" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
@@ -549,6 +551,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
       { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
+      { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
@@ -626,6 +629,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
       { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
+      { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
@@ -703,6 +707,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
+      { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book Repair", href: "/book" },
     ],

@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Geo-page internal link pass 2 is now in progress:
+  - connected the strongest matching commercial-intent articles into Webster, Friendswood, and Clear Lake
+  - reused the existing article next-step block for the second geo ring
+  - artifact: `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass-2.md`
 - Geo service-area pages pass 2 is now in progress:
   - launched Webster, Friendswood, and Clear Lake using the same service-area system
   - converted the services hub area cards to render from shared geo-page data
@@ -65,7 +69,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** feed Webster, Friendswood, and Clear Lake with contextual internal links before deciding whether to open a broader Houston asset.
+- **Next action:** move into Google Search Console and Google Analytics setup/validation so the new geo assets and content work can actually be measured.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -217,6 +221,20 @@ Update cadence: weekly (or after major milestones).
     - launched `/services/friendswood`
     - launched `/services/clear-lake`
     - expanded the services-hub nearby-area section to all five geo pages
+  - verification:
+    - `npm run build`
+    - `npm test`
+  - decision:
+    - accept and keep live
+- Geo-page internal link pass 2:
+  - source:
+    - `Docs/artifacts/audit/2026-03-06--geo-page-internal-link-pass-2.md`
+  - code changes:
+    - `src/lib/blog.ts`
+    - `tests/smoke.spec.ts`
+  - result:
+    - linked Webster, Friendswood, and Clear Lake into the strongest matching commercial-intent articles
+    - increased internal discovery into the full five-page geo ring
   - verification:
     - `npm run build`
     - `npm test`
