@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Grok audit verification is complete:
+  - accepted as high-level directional input only
+  - rejected as a technical source of truth for metadata/schema state
+  - verification artifact: `Docs/artifacts/audit/2026-03-06--grok-audit-verification.md`
 - Audit adjudication and easy-win remediation are now in progress:
   - verified fixes applied for `LocalBusiness` closed-day schema handling
   - `sameAs` is no longer empty
@@ -36,6 +40,7 @@ Update cadence: weekly (or after major milestones).
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
 - **Next action:** ship the audited schema/entity fixes, then move to the highest-leverage growth work: verified official social/entity links, blog depth expansion, and the first geo-expansion service-area pages.
+  - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).
