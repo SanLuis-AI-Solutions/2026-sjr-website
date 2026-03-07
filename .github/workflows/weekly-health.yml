@@ -2,7 +2,7 @@ name: Weekly Health Report
 
 on:
   schedule:
-    # Mondays 14:00 UTC (adjust as desired)
+    # Mondays 14:00 UTC / 8:00 AM CST / 9:00 AM CDT
     - cron: "0 14 * * 1"
   workflow_dispatch: {}
 
@@ -41,31 +41,103 @@ jobs:
           pwsh -File scripts/verify.ps1 -Ci -ReportPath .health/report.md
           "exit_code=$LASTEXITCODE" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
+      - name: Run Weekly SEO Snapshots
+        id: seo_snapshots
+        if: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL != '' && secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY != '' }}
+        shell: pwsh
+        continue-on-error: true
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY }}
+          SEARCH_CONSOLE_PROPERTY: ${{ vars.SEARCH_CONSOLE_PROPERTY }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+        run: |
+          $failed = 0
+          npm run google:weekly-seo-health
+          if ($LASTEXITCODE -ne 0) { $failed = 1 }
+          npm run google:reconcile-90d
+          if ($LASTEXITCODE -ne 0) { $failed = 1 }
+          "exit_code=$failed" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Upload Weekly Health Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-health-${{ github.run_id }}
+          path: |
+            .health/report.md
+            .health/weekly-seo-health-latest.md
+            .health/weekly-seo-health-latest.json
+            .health/ga4-gsc-reconciliation-90d-latest.md
+            .health/ga4-gsc-reconciliation-90d-latest.json
+          if-no-files-found: warn
+
       - name: Upsert Weekly Health Issue
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const title = 'Weekly Health Report';
+            const title = 'Weekly SEO Health Report';
             const reportPath = '.health/report.md';
             const exitCode = Number('${{ steps.verify.outputs.exit_code }}' || '0');
+            const seoStepRan = '${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL != '' && secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY != '' }}' === 'true';
+            const seoExitCode = Number('${{ steps.seo_snapshots.outputs.exit_code }}' || '0');
+            const weeklySeoPath = '.health/weekly-seo-health-latest.md';
+            const reconcilePath = '.health/ga4-gsc-reconciliation-90d-latest.md';
 
-            let body = '';
-            try {
-              body = fs.readFileSync(reportPath, 'utf8');
-            } catch (e) {
-              body = `Health report file missing: ${reportPath}\n\nVerify exit code: ${exitCode}`;
+            function readIfExists(filePath, fallback) {
+              try {
+                return fs.readFileSync(filePath, 'utf8');
+              } catch (e) {
+                return fallback;
+              }
             }
 
-            // Add a short header for quick triage.
-            const header = [
-              `Last run: ${new Date().toISOString()}`,
-              `Status: ${exitCode === 0 ? 'PASS' : 'FAIL'}`,
-              '',
-            ].join('\n');
-            body = header + body;
+            const verifyBody = readIfExists(
+              reportPath,
+              `Health report file missing: ${reportPath}\n\nVerify exit code: ${exitCode}`
+            );
+            const weeklySeoBody = seoStepRan
+              ? readIfExists(
+                  weeklySeoPath,
+                  `Weekly SEO snapshot missing: ${weeklySeoPath}\n\nSEO snapshot exit code: ${seoExitCode}`
+                )
+              : 'Weekly SEO snapshots were skipped because Google service-account secrets are not configured in GitHub Actions.';
+            const reconcileBody = seoStepRan
+              ? readIfExists(
+                  reconcilePath,
+                  `Reconciliation snapshot missing: ${reconcilePath}\n\nSEO snapshot exit code: ${seoExitCode}`
+                )
+              : 'GA4 vs Search Console reconciliation was skipped because Google service-account secrets are not configured in GitHub Actions.';
 
-            // Find existing open issue with the same title (prefer the most recent).
+            const seoStatus = !seoStepRan ? 'SKIPPED' : seoExitCode === 0 ? 'PASS' : 'FAIL';
+            const workflowRunUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+
+            const body = [
+              `Last run: ${new Date().toISOString()}`,
+              `Verify status: ${exitCode === 0 ? 'PASS' : 'FAIL'}`,
+              `SEO snapshot status: ${seoStatus}`,
+              `Workflow run: ${workflowRunUrl}`,
+              '',
+              '## Verify Report',
+              '',
+              verifyBody,
+              '',
+              '## Weekly SEO Snapshot',
+              '',
+              weeklySeoBody,
+              '',
+              '## 90-Day Reconciliation',
+              '',
+              reconcileBody,
+              '',
+              '## Setup Notes',
+              '',
+              '- Schedule: every Monday at 14:00 UTC / 8:00 AM CST / 9:00 AM CDT',
+              '- Required GitHub secrets: `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`',
+              '- Optional GitHub repository variables: `SEARCH_CONSOLE_PROPERTY`, `GA4_PROPERTY_ID`',
+            ].join('\n');
+
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -83,6 +155,18 @@ jobs:
                 body,
                 labels,
               });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: [
+                  `Weekly run complete for ${new Date().toISOString().slice(0, 10)}.`,
+                  `- Verify: ${exitCode === 0 ? 'PASS' : 'FAIL'}`,
+                  `- SEO snapshots: ${seoStatus}`,
+                  `- Run: ${workflowRunUrl}`,
+                ].join('\n'),
+              });
             } else {
               await github.rest.issues.create({
                 owner: context.repo.owner,
@@ -99,3 +183,8 @@ jobs:
         run: |
           Write-Error "Verify failed with exit code ${{ steps.verify.outputs.exit_code }}"
 
+      - name: Fail Job If SEO Snapshots Failed
+        if: ${{ steps.seo_snapshots.conclusion == 'failure' || steps.seo_snapshots.outputs.exit_code == '1' }}
+        shell: pwsh
+        run: |
+          Write-Error "Weekly SEO snapshots failed"

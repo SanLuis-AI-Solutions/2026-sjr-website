@@ -7,6 +7,18 @@ npm run google:reconcile-90d
 npm run google:weekly-seo-health
 ```
 
+Automated option:
+
+- GitHub Actions workflow: `.github/workflows/weekly-health.yml`
+- Schedule: every Monday at `14:00 UTC`
+- Reminder surface: GitHub issue `Weekly SEO Health Report`
+- Required GitHub secrets:
+  - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+  - `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+- Optional GitHub repository variables:
+  - `SEARCH_CONSOLE_PROPERTY`
+  - `GA4_PROPERTY_ID`
+
 ## Technical Integrity
 
 - `https://www.susiesjewelryrepair.com/sitemap.xml` loads successfully

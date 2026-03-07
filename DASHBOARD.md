@@ -20,6 +20,24 @@ Generated outputs:
 - `.health/ga4-gsc-reconciliation-90d-latest.md`
 - `.health/weekly-seo-health-latest.md`
 
+## Automation
+
+The repo now includes a scheduled GitHub Actions workflow at [.github/workflows/weekly-health.yml](/c:/Users/ninef/SanLuis%20Solutions%20projects/sjr-new-website-aiproject/.github/workflows/weekly-health.yml).
+
+- Schedule: every Monday at `14:00 UTC`
+- Reminder surface: GitHub issue `Weekly SEO Health Report` plus a fresh weekly comment on that issue
+- Artifacts: each run uploads the latest `.health` snapshots to the workflow run
+
+Required GitHub secrets:
+
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+
+Optional GitHub repository variables:
+
+- `SEARCH_CONSOLE_PROPERTY`
+- `GA4_PROPERTY_ID`
+
 ## Core Weekly KPIs
 
 Track these 5 metrics every week:
