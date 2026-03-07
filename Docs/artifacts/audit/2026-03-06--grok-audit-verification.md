@@ -137,7 +137,7 @@ No material change to the current roadmap.
 
 The existing next-step priorities remain correct:
 
-1. replace temporary directory-based `sameAs` references with verified official GBP / Yelp / Facebook URLs
+1. keep the now-verified official Google Maps, Yelp, and Facebook entity links live in `sameAs`
 2. expand the highest-intent existing blog content
 3. add in-body FAQ blocks where they support AEO
 4. create the first geo-expansion service-area pages
@@ -152,6 +152,5 @@ What does **not** change:
 
 Use live external verification, not model summaries, for the next authority task:
 
-- confirm official GBP, Yelp, and Facebook URLs
-- replace the temporary `sameAs` links
+- keep live entity references current as official profile URLs evolve
 - then begin the content-depth pass on the strongest commercial blog articles

@@ -2,9 +2,12 @@ export const BUSINESS = {
   name: "Susie’s Jewelry Repair",
   phone: "(281) 991-6500",
   email: "contact@susiesjewelryrepair.com",
+  googleMapsUrl:
+    "https://www.google.com/maps/place/Susie's+Jewelry+and+Watch+Repair/@29.6504877,-95.1863662,17z/data=!3m1!4b1!4m6!3m5!1s0x86409857c894980f:0xf79f8dc5a8328ab9!8m2!3d29.6504877!4d-95.1863662!16s%2Fg%2F1ttph87w",
   sameAs: [
-    "https://www.loc8nearme.com/texas/pasadena/susies-jewelry-repair/5318092/",
-    "https://www.mapquest.com/us/texas/susies-jewelry-repair-277840794",
+    "https://www.google.com/maps/place/Susie's+Jewelry+and+Watch+Repair/@29.6504877,-95.1863662,17z/data=!3m1!4b1!4m6!3m5!1s0x86409857c894980f:0xf79f8dc5a8328ab9!8m2!3d29.6504877!4d-95.1863662!16s%2Fg%2F1ttph87w",
+    "https://www.yelp.com/biz/susies-jewelry-repair-pasadena-2",
+    "https://www.facebook.com/p/Susies-Jewelry-Repair-61574507807667/",
   ],
   address: {
     street: "3910 Fairmont Pkwy #C",

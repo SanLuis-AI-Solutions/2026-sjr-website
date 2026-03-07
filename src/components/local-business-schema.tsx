@@ -38,6 +38,7 @@ export function LocalBusinessSchema() {
             "latitude": 29.6631,
             "longitude": -95.1436
         },
+        "hasMap": BUSINESS.googleMapsUrl,
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.5",

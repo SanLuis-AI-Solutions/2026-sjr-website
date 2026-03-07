@@ -15,7 +15,7 @@
      - working score: `75/100`
 2. Implemented the easy-win fixes from the adjudicated audit:
    - `src/components/local-business-schema.tsx`: stop emitting Sunday opening hours for closed days
-   - `src/lib/constants.ts`: populate `sameAs` with resolvable external entity references
+   - `src/lib/constants.ts`: populate `sameAs` with official Google Maps, Yelp, and Facebook entity references
    - `src/components/booking-date-time-fields.tsx`: clarify Saturday note as `Last booking start`
    - `tests/smoke.spec.ts`: add schema/entity smoke coverage
 3. Verified the fix set locally:
@@ -27,12 +27,17 @@
    - rejected its claims that meta descriptions, canonicals, schema, and GA confirmation were absent
    - artifact:
      - `Docs/artifacts/audit/2026-03-06--grok-audit-verification.md`
-6. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
-7. Shipped a path-aware deploy workflow fix:
+6. Verified and replaced the temporary entity references in structured data.
+   - Google Maps place verified live against business name, address, phone, and website
+   - Yelp and Facebook URLs verified via public search evidence
+   - artifact:
+     - `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
+7. Shifted the project from open-ended `/services` performance iteration into release closeout mode.
+8. Shipped a path-aware deploy workflow fix:
    - commit: `0401274`
    - workflow run: `22785078312` (`success`)
    - effect: docs-only and non-perf-relevant pushes now skip post-deploy performance delta comparisons, while runtime pushes still execute them.
-8. Re-ran closeout verification and locked the final evidence:
+9. Re-ran closeout verification and locked the final evidence:
    - local verification passed:
      - `npm run build`
      - `npm test`
@@ -41,7 +46,7 @@
      - `.health/release-closeout-verification-2026-03-06-final.json`
      - `.health/release-closeout-verification-2026-03-06-final.md`
      - result: `12/12` routes passed, with no unexpected console errors or broken images detected
-9. Added closeout artifacts and canonical docs:
+10. Added closeout artifacts and canonical docs:
    - `Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md`
    - `Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md`
    - `Docs/RELEASE-DECISION.md`
@@ -65,6 +70,8 @@
   - `Docs/artifacts/audit/2026-03-06--master-audit-adjudication-and-quick-fix-pass.md`
 - Grok audit verification:
   - `Docs/artifacts/audit/2026-03-06--grok-audit-verification.md`
+- Official entity-link verification:
+  - `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
 - Workflow fix run: `22785078312`
 - Final production verification:
   - `.health/release-closeout-verification-2026-03-06-final.json`
@@ -78,11 +85,11 @@
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Deploy the verified schema/entity fixes.
-2. Replace temporary directory `sameAs` references with official GBP / Yelp / Facebook URLs once confirmed.
-3. Start the next high-leverage growth work:
+2. Start the next high-leverage growth work:
    - expand the best commercial blog articles
    - add in-body FAQ blocks
    - build the first geo-expansion service-area pages
+3. Add stronger internal links from commercial blog content into service pages, quote, and booking flows during that content pass.
 4. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 5. If `/services` performance is reopened later, start from `Docs/POST-LAUNCH-BACKLOG.md` and require a new structural hypothesis plus explicit approval.
 

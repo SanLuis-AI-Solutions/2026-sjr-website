@@ -9,6 +9,10 @@ Update cadence: weekly (or after major milestones).
   - accepted as high-level directional input only
   - rejected as a technical source of truth for metadata/schema state
   - verification artifact: `Docs/artifacts/audit/2026-03-06--grok-audit-verification.md`
+- Official entity-link verification is complete:
+  - temporary directory-style `sameAs` references are replaced with verified Google Maps, Yelp, and Facebook URLs
+  - `LocalBusiness` schema now also carries `hasMap`
+  - verification artifact: `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
 - Audit adjudication and easy-win remediation are now in progress:
   - verified fixes applied for `LocalBusiness` closed-day schema handling
   - `sameAs` is no longer empty
@@ -39,7 +43,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** ship the audited schema/entity fixes, then move to the highest-leverage growth work: verified official social/entity links, blog depth expansion, and the first geo-expansion service-area pages.
+- **Next action:** move into the highest-leverage growth work: blog depth expansion, in-body FAQ blocks, stronger service-page internal linking, and the first geo-expansion service-area pages.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -85,6 +89,21 @@ Update cadence: weekly (or after major milestones).
     - accept Claude's verified source findings
     - reject Gemini's `TrackedLink`-first remediation path as conflicting with the closed performance loop
     - shift next work to traffic + authority growth rather than another `/services` render-delay cycle
+- Official entity-link cleanup:
+  - source verification:
+    - `Docs/artifacts/audit/2026-03-06--official-entity-links-verification.md`
+  - code changes:
+    - `src/lib/constants.ts`
+    - `src/components/local-business-schema.tsx`
+    - `tests/smoke.spec.ts`
+  - result:
+    - `sameAs` now points to verified Google Maps, Yelp, and Facebook URLs
+    - `hasMap` is now included in `LocalBusiness` schema
+  - verification:
+    - `npm run build`
+    - `npx playwright test --grep "home schema: local business hours and external entity links are valid"`
+  - decision:
+    - accept and keep live
 - Release closeout state:
   - release decision: `Ship now`
   - canonical release doc: `Docs/RELEASE-DECISION.md`

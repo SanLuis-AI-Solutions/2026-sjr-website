@@ -58,10 +58,8 @@ Reasoning:
 - file: `src/lib/constants.ts`
 - wired into: `src/components/local-business-schema.tsx`
 - change:
-  - populated `sameAs` with externally resolvable business reference URLs instead of an empty array
-- note:
-  - official GBP / Yelp / Facebook URLs are still preferable when verified
-  - current directory references are an improvement over `sameAs: []`
+  - populated `sameAs` with verified Google Maps, Yelp, and Facebook URLs
+  - added `hasMap` for the verified Google Maps place URL
 
 ### 3. Saturday booking-hours note clarified
 
@@ -92,12 +90,11 @@ Reasoning:
 
 Move from easy fixes into the next highest-leverage growth work:
 
-1. Replace temporary directory `sameAs` references with verified official GBP / Yelp / Facebook URLs when available.
-2. Start the content expansion pass on the existing blog inventory:
+1. Start the content expansion pass on the existing blog inventory:
    - expand the best commercial-intent articles first
    - add in-body FAQ blocks
    - add stronger service-page internal links
-3. Build the first geo-expansion pages for Deer Park and La Porte once the content format is locked.
+2. Build the first geo-expansion pages for Deer Park and La Porte once the content format is locked.
 
 ## Done
 
@@ -107,10 +104,8 @@ Move from easy fixes into the next highest-leverage growth work:
 
 ## Not Done
 
-- Official GBP / Yelp / Facebook profile URLs are not yet verified in-repo.
 - Content-depth and geo-page roadmap work has not started.
 
 ## Risks
 
-- Directory-style `sameAs` links are a temporary improvement, not the final ideal entity set.
-- If official business profiles exist and are not added later, GEO / AEO confidence will still underperform its ceiling.
+- If the business later adopts cleaner vanity URLs or adds more official profiles, `sameAs` should be refreshed to match the strongest canonical identities.

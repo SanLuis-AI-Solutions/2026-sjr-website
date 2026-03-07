@@ -220,7 +220,14 @@ test("home schema: local business hours and external entity links are valid", as
 
   expect(localBusinessSchema).not.toBeNull();
   expect(Array.isArray(localBusinessSchema.sameAs)).toBe(true);
-  expect(localBusinessSchema.sameAs.length).toBeGreaterThanOrEqual(2);
+  expect(localBusinessSchema.sameAs).toEqual(
+    expect.arrayContaining([
+      expect.stringContaining("google.com/maps/place/"),
+      expect.stringContaining("yelp.com/biz/"),
+      expect.stringContaining("facebook.com/"),
+    ])
+  );
+  expect(localBusinessSchema.hasMap).toContain("google.com/maps/place/");
 
   const sundayHours = Array.isArray(localBusinessSchema.openingHoursSpecification)
     ? localBusinessSchema.openingHoursSpecification.find(
