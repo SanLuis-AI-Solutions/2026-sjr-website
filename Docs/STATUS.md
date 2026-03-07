@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Geo service-area pages pass 2 is now in progress:
+  - launched Webster, Friendswood, and Clear Lake using the same service-area system
+  - converted the services hub area cards to render from shared geo-page data
+  - artifact: `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-2.md`
 - Geo-page internal link pass is now in progress:
   - connected the highest-intent commercial blog posts into Deer Park and La Porte
   - reused the existing article next-step block instead of adding a new content module
@@ -61,7 +65,7 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** build the next adjacent-city geo pages after this internal-link pass lands.
+- **Next action:** feed Webster, Friendswood, and Clear Lake with contextual internal links before deciding whether to open a broader Houston asset.
   - Grok review does not change this order.
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
@@ -192,6 +196,27 @@ Update cadence: weekly (or after major milestones).
   - result:
     - linked five high-intent articles into `/services/deer-park` and `/services/la-porte`
     - increased internal discovery into the first geo pages using existing article next-step modules
+  - verification:
+    - `npm run build`
+    - `npm test`
+  - decision:
+    - accept and keep live
+- Geo service-area pages pass 2:
+  - source:
+    - `Docs/artifacts/audit/2026-03-06--geo-service-area-pages-pass-2.md`
+  - code changes:
+    - `src/lib/service-areas.ts`
+    - `src/components/service-area-page.tsx`
+    - `src/app/services/webster/page.tsx`
+    - `src/app/services/friendswood/page.tsx`
+    - `src/app/services/clear-lake/page.tsx`
+    - `src/app/services/page.tsx`
+    - `tests/smoke.spec.ts`
+  - result:
+    - launched `/services/webster`
+    - launched `/services/friendswood`
+    - launched `/services/clear-lake`
+    - expanded the services-hub nearby-area section to all five geo pages
   - verification:
     - `npm run build`
     - `npm test`

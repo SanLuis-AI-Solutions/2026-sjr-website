@@ -4,6 +4,7 @@ import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
+import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 
 type ServiceListItem = {
   slug: string;
@@ -178,41 +179,24 @@ export default async function ServicesPage() {
               local customers typically use our Pasadena workshop, which repairs are most common,
               and the fastest quote-first path before you drive over.
             </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <TrackedLink
-                href="/services/deer-park"
-                eventName="service_area_card_click"
-                eventParams={{ area_slug: "deer-park", placement: "services_hub_area_section" }}
-                className="group rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
-                  Deer Park
-                </p>
-                <h3 className="mt-3 font-serif text-2xl text-stone-900">
-                  Jewelry repair near Deer Park
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-stone-700">
-                  Start with local guidance for ring sizing, watch batteries, prong repair, and
-                  quote-first service from our Pasadena workshop.
-                </p>
-              </TrackedLink>
-              <TrackedLink
-                href="/services/la-porte"
-                eventName="service_area_card_click"
-                eventParams={{ area_slug: "la-porte", placement: "services_hub_area_section" }}
-                className="group rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
-                  La Porte
-                </p>
-                <h3 className="mt-3 font-serif text-2xl text-stone-900">
-                  Jewelry repair near La Porte
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-stone-700">
-                  Get the fastest path for watch service, heirloom restoration, and quote-first
-                  repair planning before making the trip.
-                </p>
-              </TrackedLink>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {SERVICE_AREA_PAGES.map((area) => (
+                <TrackedLink
+                  key={area.slug}
+                  href={`/services/${area.slug}`}
+                  eventName="service_area_card_click"
+                  eventParams={{ area_slug: area.slug, placement: "services_hub_area_section" }}
+                  className="group rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                    {area.city}
+                  </p>
+                  <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                    Jewelry repair near {area.city}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-stone-700">{area.cardDescription}</p>
+                </TrackedLink>
+              ))}
             </div>
           </div>
         </div>

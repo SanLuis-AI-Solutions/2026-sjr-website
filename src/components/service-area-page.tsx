@@ -52,7 +52,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
     name: `Jewelry Repair Near ${page.city}, TX`,
     serviceType: "Jewelry repair and watch repair",
     areaServed: {
-      "@type": "City",
+      "@type": page.areaSchemaType ?? "City",
       name: page.city,
     },
     provider: {

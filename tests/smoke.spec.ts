@@ -380,7 +380,7 @@ test("mobile blog detail: watch battery article links into deer park geo guidanc
   guard.assertNoErrors("blog detail watch battery geo link");
 });
 
-test("mobile service-area pages: deer park and la porte render local guidance and quick actions", async ({
+test("mobile service-area pages: nearby city pages render local guidance and quick actions", async ({
   page,
 }) => {
   const guard = attachConsoleGuards(page);
@@ -396,6 +396,24 @@ test("mobile service-area pages: deer park and la porte render local guidance an
       heading: /Jewelry repair near La Porte, handled in-house/i,
       serviceLink: /Jewelry repair near La Porte/i,
       quickLink: /Book Repair/i,
+    },
+    {
+      path: "/services/webster",
+      heading: /Jewelry repair near Webster, handled in-house/i,
+      serviceLink: /Jewelry repair near Webster/i,
+      quickLink: /Get Fast Quote/i,
+    },
+    {
+      path: "/services/friendswood",
+      heading: /Jewelry repair near Friendswood, handled in-house/i,
+      serviceLink: /Jewelry repair near Friendswood/i,
+      quickLink: /Book Repair/i,
+    },
+    {
+      path: "/services/clear-lake",
+      heading: /Jewelry repair near Clear Lake, handled in-house/i,
+      serviceLink: /Jewelry repair near Clear Lake/i,
+      quickLink: /Get Fast Quote/i,
     },
   ];
 

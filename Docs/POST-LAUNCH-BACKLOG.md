@@ -30,6 +30,7 @@
   - Webster
   - Friendswood
 - Clear Lake if area-intent searches are strong enough to justify a dedicated page
+- Add contextual internal links from matching articles into Webster, Friendswood, and Clear Lake once those pages are live.
 - Treat Houston as a broader, later-stage city page that needs stronger differentiation than the suburban pages.
 
 ## Monitoring Improvements
