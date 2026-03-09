@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseInsert, supabaseUploadObject } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
 import { sendLeadEmail } from "@/lib/lead-email";
+import { evaluateLeadSpam } from "@/lib/lead-spam";
 
 export async function POST(request: Request) {
   try {
@@ -22,6 +23,14 @@ export async function POST(request: Request) {
       return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400);
     }
 
+    const spamCheck = evaluateLeadSpam({
+      leadType: "quote",
+      name,
+      email,
+      phone,
+      details,
+    });
+
     const bucket = process.env.SUPABASE_QUOTES_BUCKET || "quote-uploads";
     const maxFiles = parseInt(process.env.SUPABASE_QUOTES_MAX_FILES || "4", 10);
     const maxBytes = parseInt(process.env.SUPABASE_QUOTES_MAX_FILE_BYTES || "8000000", 10);
@@ -32,41 +41,43 @@ export async function POST(request: Request) {
     const limited = files.slice(0, Math.max(0, maxFiles));
 
     const requestId = crypto.randomUUID();
-    const now = new Date();
-    const prefix = `quotes/${now.getUTCFullYear()}/${String(now.getUTCMonth() + 1).padStart(
-      2,
-      "0"
-    )}/${requestId}`;
-
     const attachments = [];
-    for (const file of limited) {
-      if (!file.type.startsWith("image/")) continue;
-      if (file.size > maxBytes) continue;
+    if (!spamCheck.isSpam) {
+      const now = new Date();
+      const prefix = `quotes/${now.getUTCFullYear()}/${String(now.getUTCMonth() + 1).padStart(
+        2,
+        "0"
+      )}/${requestId}`;
 
-      const safeName = (file.name || "photo")
-        .replaceAll("\\", "-")
-        .replaceAll("/", "-")
-        .replaceAll("..", ".");
-      const objectPath = `${prefix}/${safeName}`;
-      const bytes = new Uint8Array(await file.arrayBuffer());
+      for (const file of limited) {
+        if (!file.type.startsWith("image/")) continue;
+        if (file.size > maxBytes) continue;
 
-      const uploaded = await supabaseUploadObject({
-        bucket,
-        objectPath,
-        bytes,
-        contentType: file.type || "application/octet-stream",
-        upsert: false,
-      });
+        const safeName = (file.name || "photo")
+          .replaceAll("\\", "-")
+          .replaceAll("/", "-")
+          .replaceAll("..", ".");
+        const objectPath = `${prefix}/${safeName}`;
+        const bytes = new Uint8Array(await file.arrayBuffer());
 
-      attachments.push({
-        bucket,
-        path: objectPath,
-        original_name: file.name || null,
-        mime: file.type || null,
-        size: file.size,
-        object_url: uploaded.objectUrl,
-        public_url: uploaded.publicUrl,
-      });
+        const uploaded = await supabaseUploadObject({
+          bucket,
+          objectPath,
+          bytes,
+          contentType: file.type || "application/octet-stream",
+          upsert: false,
+        });
+
+        attachments.push({
+          bucket,
+          path: objectPath,
+          original_name: file.name || null,
+          mime: file.type || null,
+          size: file.size,
+          object_url: uploaded.objectUrl,
+          public_url: uploaded.publicUrl,
+        });
+      }
     }
 
     const inserted = await supabaseInsert("quote_requests", {
@@ -76,12 +87,16 @@ export async function POST(request: Request) {
       phone: phone || null,
       details,
       attachments,
-      status: "new",
-      source: "website",
+      status: spamCheck.isSpam ? "spam" : "new",
+      source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,
-      ip: request.headers.get("x-forwarded-for") || null,
+      ip: (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || null,
     });
+
+    if (spamCheck.isSpam) {
+      return redirectOrJson(request, { ok: true, id: inserted?.id || requestId });
+    }
 
     // Best-effort notification; never block lead capture on messaging failures.
     await notifyGoogleChat(

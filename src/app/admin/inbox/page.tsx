@@ -50,7 +50,7 @@ type ContactRequestRow = {
 };
 
 const QUOTE_STATUSES = ["new", "contacted", "closed", "spam"] as const;
-const BOOKING_STATUSES = ["new", "booked", "pending", "contacted", "closed", "canceled"] as const;
+const BOOKING_STATUSES = ["new", "booked", "pending", "contacted", "closed", "canceled", "spam"] as const;
 const CONTACT_STATUSES = ["new", "contacted", "closed", "spam"] as const;
 
 function clampText(value: string, max = 180) {

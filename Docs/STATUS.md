@@ -5,6 +5,11 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Lead-notification spam guardrails are now in progress:
+  - suspicious quote, booking, and contact submissions are now classified before Chat/email notification dispatch
+  - suspicious bookings are prevented from creating calendar events
+  - suspicious submissions remain visible in `/admin/inbox` with `spam` status for manual review
+  - artifact: `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
 - SEO and analytics integrity recovery is now in progress:
   - production GA4 is now host-restricted to `www.susiesjewelryrepair.com`
   - explicit App Router pageview tracking is added
@@ -82,12 +87,11 @@ Update cadence: weekly (or after major milestones).
 - Home-only iteration 21 (format A/B: WebP -> AVIF) is now complete and accepted (`-67ms` on isolated 10-run p50); AVIF is now live.
 - Iteration 22 stabilization pass is complete: AVIF home gain repeated (`2530ms`, +7ms vs prior AVIF run; still `-60ms` vs WebP baseline), full-site breadth score remains `95/100`.
 - Contact map UX fix is implemented to remove search friction: full map card now click-through to Google Maps business destination with visible business label/address.
-- **Next action:** complete the Google-admin side cleanup for the new measurement foundation.
-  - link Search Console to GA4
-  - verify key events in GA4 admin
-  - resubmit the sitemap in GSC
-  - inspect key live URLs and one redirected Wix URL in GSC
-  - review redirected Wix URLs over the next 2 weeks
+- **Next action:** verify the new spam guardrails in local and live behavior, then monitor whether Google Chat noise drops before adding heavier bot controls.
+  - `npm run build`
+  - validate quote / booking / contact happy paths
+  - watch `/admin/inbox` for new `spam` rows
+  - if needed, add lightweight rate limiting or Turnstile on the highest-abuse path
 - Home hero trust headline was updated to a positive, local-intent phrase to improve first impression while reinforcing SEO/GEO/AEO relevance.
 - Services hub iteration 27 is complete and accepted: mobile hero badge blur removed, bringing `/services` back under target in isolated 5-run p50 validation.
 - Home iteration 28 (`decoding="sync"` on AVIF hero) is complete and rejected as non-material (`-2ms` LCP; `-5ms` renderDelay in isolated 10-run diagnostics median).

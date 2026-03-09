@@ -10,6 +10,7 @@ import {
   isWithinBookingHours,
   minutesFromTime,
 } from "@/lib/booking-schedule";
+import { evaluateLeadSpam } from "@/lib/lead-spam";
 
 /*
  * Date: 2026-02-26
@@ -51,6 +52,14 @@ export async function POST(request: Request) {
       return redirectOrJson(request, { ok: false, error: "in_past" }, 400);
     }
 
+    const spamCheck = evaluateLeadSpam({
+      leadType: "booking",
+      name,
+      email,
+      phone,
+      details,
+    });
+
     const bookingId = crypto.randomUUID();
     const created = await supabaseInsert("booking_requests", {
       id: bookingId,
@@ -60,12 +69,16 @@ export async function POST(request: Request) {
       date,
       time,
       details: details || null,
-      status: "new",
-      source: "website",
+      status: spamCheck.isSpam ? "spam" : "new",
+      source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,
       ip: (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || null,
     });
+
+    if (spamCheck.isSpam) {
+      return redirectOrJson(request, { ok: true, id: created?.id || bookingId });
+    }
 
     try {
       const event = await createBookingEvent({

@@ -7,7 +7,20 @@
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
 
 ## Session Summary (Most Recent)
-1. Implemented the SEO + analytics integrity recovery pass.
+1. Added lead-notification spam guardrails across quote, booking, and contact.
+   - new shared spam evaluator:
+     - `src/lib/lead-spam.ts`
+   - suspicious submissions now:
+     - save as `spam`
+     - skip Google Chat notifications
+     - skip lead email notifications
+     - skip booking calendar creation
+   - suspicious submissions remain visible in `/admin/inbox`
+   - artifact:
+     - `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
+2. Verified Google Workspace MCP access is live in read-only mode for `9xfold@gmail.com`.
+   - confirmed via `list_calendars`
+3. Implemented the SEO + analytics integrity recovery pass.
    - production GA4 is now gated to `www.susiesjewelryrepair.com`
    - added explicit App Router pageview tracking
    - added additive `quote_form_start`, `booking_form_start`, and `contact_form_start` events
@@ -16,17 +29,17 @@
    - added `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
-2. Verified the discrepancy with fresh saved evidence.
+4. Verified the discrepancy with fresh saved evidence.
    - `.health/ga4-gsc-reconciliation-90d-latest.md`
    - `.health/weekly-seo-health-latest.md`
    - key finding:
      - GA4 `2,366` active users over 90 days vs Search Console `102` clicks is primarily explained by `2,073` localhost / `127.0.0.1` users polluting GA4
-3. Verified the code changes locally.
+5. Verified the code changes locally.
    - `npm run build`
    - `npm test`
    - `npm run google:reconcile-90d`
    - `npm run google:weekly-seo-health`
-4. Validated the weekly GitHub reminder automation end to end.
+6. Validated the weekly GitHub reminder automation end to end.
    - workflow:
      - `.github/workflows/weekly-health.yml`
    - validation runs:
@@ -36,7 +49,7 @@
      - `22792076143`
        - workflow `success`
        - weekly SEO snapshots passed after GitHub secrets and repo variables were added
-5. Added a one-time Google-admin cleanup runbook.
+7. Added a one-time Google-admin cleanup runbook.
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
 6. Existing growth work remains live and unchanged:

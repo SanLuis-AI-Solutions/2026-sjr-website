@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseInsert } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
 import { sendLeadEmail } from "@/lib/lead-email";
+import { evaluateLeadSpam } from "@/lib/lead-spam";
 
 export async function POST(request: Request) {
   try {
@@ -23,6 +24,14 @@ export async function POST(request: Request) {
       return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400);
     }
 
+    const spamCheck = evaluateLeadSpam({
+      leadType: "contact",
+      name,
+      email,
+      phone,
+      message,
+    });
+
     const contactId = crypto.randomUUID();
     const created = await supabaseInsert("contact_requests", {
       id: contactId,
@@ -31,12 +40,16 @@ export async function POST(request: Request) {
       phone: phone || null,
       preferred_contact: preferredContact || null,
       message,
-      status: "new",
-      source: "website",
+      status: spamCheck.isSpam ? "spam" : "new",
+      source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,
       ip: (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || null,
     });
+
+    if (spamCheck.isSpam) {
+      return redirectOrJson(request, { ok: true, id: created?.id || contactId });
+    }
 
     // Best-effort notification; never block lead capture on messaging failures.
     await notifyGoogleChat(
