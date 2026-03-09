@@ -10,6 +10,7 @@ Update cadence: weekly (or after major milestones).
   - suspicious bookings are prevented from creating calendar events
   - suspicious submissions remain visible in `/admin/inbox` with `spam` status for manual review
   - artifact: `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
+  - latest deploy run: `22870062917`
 - SEO and analytics integrity recovery is now in progress:
   - production GA4 is now host-restricted to `www.susiesjewelryrepair.com`
   - explicit App Router pageview tracking is added

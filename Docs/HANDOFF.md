@@ -1,10 +1,25 @@
-# Handoff Snapshot — 2026-03-06 (CST)
+# Handoff Snapshot — 2026-03-09 (CST)
 
 ## Current State
 - Branch: `master`
 - Canonical domain: `https://www.susiesjewelryrepair.com`
 - Primary status ledger: `Docs/STATUS.md`
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
+- Latest code commit:
+  - `653a7dd` `fix: suppress spam lead notifications`
+- Latest deploy workflow:
+  - `22870062917` (`in_progress` at handoff time)
+
+## Tooling State
+- NotebookLM MCP:
+  - installed, authenticated, and working
+  - notebook listing verified in-session
+- Google Workspace MCP:
+  - installed, authenticated, and working in read-only mode
+  - verified via `list_calendars` for `9xfold@gmail.com`
+- Weekly SEO automation:
+  - live via `.github/workflows/weekly-health.yml`
+  - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
 1. Added lead-notification spam guardrails across quote, booking, and contact.
@@ -52,7 +67,7 @@
 7. Added a one-time Google-admin cleanup runbook.
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
-6. Existing growth work remains live and unchanged:
+8. Existing growth work remains live and unchanged:
    - audit adjudication
    - blog commercial-intent expansions
    - geo service-area pages and internal links
@@ -148,8 +163,13 @@
 - `/services` performance is now treated as deferred post-launch debt, not a release blocker.
 - Release posture is now `Ship now`.
 - Working growth baseline after audit adjudication is `75/100`, not the inflated Gemini `87/100`.
+- Anti-spam rule is now:
+  - suspicious quote / booking / contact submissions should be stored as `spam`
+  - suspicious submissions should not trigger Google Chat, lead email, or booking calendar side effects
 
 ## Evidence Pointers
+- Latest anti-spam artifact:
+  - `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
 - Analytics integrity artifact:
   - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
 - Google-admin cleanup runbook:
@@ -193,24 +213,34 @@
 - Latest accepted performance evidence:
   - iteration 33 accepted run: `.health/perf-gate-2026-03-06T01-19-48-431Z/summary.json`
   - iteration 35 accepted run: `.health/perf-gate-2026-03-06T03-37-35-184Z/summary.json`
+- Current deploy run for anti-spam rollout:
+  - `22870062917`
+
+## Workspace Notes
+- There is no confirmed Apps Script usage in the repo for lead notifications.
+- Current Google Chat alerts are direct webhook posts from:
+  - `src/lib/notify.ts`
+- Spam/noise issue was upstream of Chat automation, so filtering was added in the API routes rather than in Workspace tooling.
+- Google Drive API may still need enabling later if future sessions want to enumerate Apps Script projects through the Google Workspace MCP.
 
 ## Next Optimal Step
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Complete the Google-admin side cleanup:
-   - use `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
-   - link Search Console to GA4
-   - verify the production GA4 stream and key-event settings
-   - resubmit the sitemap in GSC
-   - inspect key live URLs and one redirected Wix URL in GSC
-2. Monitor the redirected Wix URLs in GSC for 2 weeks to confirm the `404` cluster starts shrinking.
+1. Confirm deploy run `22870062917` completes successfully.
+2. Monitor live lead traffic for the new spam guardrails:
+   - verify Google Chat noise drops
+   - verify suspicious leads land in `/admin/inbox` as `spam`
+   - verify real leads still notify correctly
 3. Keep the weekly review loop lightweight:
    - run `npm run google:weekly-seo-health`
    - update `DASHBOARD.md`
    - review `Docs/WEEKLY-SEO-HEALTH.md`
-4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
-5. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
+4. Continue Google-admin monitoring:
+   - review indexing state of `/watch-repair`, `/book`, and `/quote`
+   - review redirected Wix URLs over the next 2 weeks
+5. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+6. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 
 ## External-Agent Output Rule (Mandatory)
 
@@ -229,9 +259,10 @@ Read first (in order):
 1) Docs/HANDOFF.md
 2) Docs/RELEASE-DECISION.md
 3) Docs/STATUS.md
-4) Docs/artifacts/release/2026-03-06--claude-services-perf-synthesis.md
-5) Docs/artifacts/release/2026-03-06--gemini-launch-readiness-audit.md
-6) Docs/POST-LAUNCH-BACKLOG.md
+4) Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md
+5) Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md
+6) Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md
+7) Docs/POST-LAUNCH-BACKLOG.md
 
 Context to respect:
 - Release posture is Ship Now.
@@ -240,11 +271,16 @@ Context to respect:
 - Iteration 33 and iteration 35 remain live.
 - Iterations 32, 36, 37, and 38 remain rejected.
 - Do not reopen the /services experiment loop unless the user explicitly approves a post-launch performance sprint with a new structural hypothesis.
+- Latest shipped code change is `653a7dd` (`fix: suppress spam lead notifications`).
+- Deploy workflow `22870062917` may need status confirmation.
+- NotebookLM MCP is available.
+- Google Workspace MCP is available in read-only mode and authenticated for `9xfold@gmail.com`.
 
 Task:
 1) Confirm whether the request is a true release blocker, post-launch backlog item, or optional polish.
 2) Prefer smaller-scope fixes, verification, and documentation over new exploratory work.
 3) Keep Docs/RELEASE-DECISION.md, Docs/STATUS.md, and Docs/HANDOFF.md aligned if anything material changes.
+4) Ignore unrelated untracked local files unless the user explicitly asks about them (`.claude/`, `Docs/cookies.txt`).
 
 Required output:
 - commits
