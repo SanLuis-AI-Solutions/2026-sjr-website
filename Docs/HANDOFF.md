@@ -8,7 +8,8 @@
 - Latest code commit:
   - `653a7dd` `fix: suppress spam lead notifications`
 - Latest deploy workflow:
-  - `22870062917` (`in_progress` at handoff time)
+  - `22870252426` (`success`)
+  - note: initial spam-guardrail deploy run `22870062917` was cancelled during the Vercel production step and then superseded by the successful descendant deploy above
 
 ## Tooling State
 - NotebookLM MCP:
@@ -214,7 +215,8 @@
   - iteration 33 accepted run: `.health/perf-gate-2026-03-06T01-19-48-431Z/summary.json`
   - iteration 35 accepted run: `.health/perf-gate-2026-03-06T03-37-35-184Z/summary.json`
 - Current deploy run for anti-spam rollout:
-  - `22870062917`
+  - initial run: `22870062917` (`cancelled`)
+  - superseding successful run: `22870252426` (`success`)
 
 ## Workspace Notes
 - There is no confirmed Apps Script usage in the repo for lead notifications.
@@ -227,20 +229,19 @@
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Confirm deploy run `22870062917` completes successfully.
-2. Monitor live lead traffic for the new spam guardrails:
+1. Monitor live lead traffic for the new spam guardrails:
    - verify Google Chat noise drops
    - verify suspicious leads land in `/admin/inbox` as `spam`
    - verify real leads still notify correctly
-3. Keep the weekly review loop lightweight:
+2. Keep the weekly review loop lightweight:
    - run `npm run google:weekly-seo-health`
    - update `DASHBOARD.md`
    - review `Docs/WEEKLY-SEO-HEALTH.md`
-4. Continue Google-admin monitoring:
+3. Continue Google-admin monitoring:
    - review indexing state of `/watch-repair`, `/book`, and `/quote`
    - review redirected Wix URLs over the next 2 weeks
-5. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
-6. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
+4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+5. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 
 ## External-Agent Output Rule (Mandatory)
 
@@ -272,7 +273,7 @@ Context to respect:
 - Iterations 32, 36, 37, and 38 remain rejected.
 - Do not reopen the /services experiment loop unless the user explicitly approves a post-launch performance sprint with a new structural hypothesis.
 - Latest shipped code change is `653a7dd` (`fix: suppress spam lead notifications`).
-- Deploy workflow `22870062917` may need status confirmation.
+- Initial spam-guardrail deploy run `22870062917` was cancelled and superseded by successful deploy run `22870252426`.
 - NotebookLM MCP is available.
 - Google Workspace MCP is available in read-only mode and authenticated for `9xfold@gmail.com`.
 
