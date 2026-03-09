@@ -98,6 +98,34 @@ export async function supabaseUpdateById(
   return Array.isArray(json) ? json[0] : json;
 }
 
+export async function supabaseUpsert<Row extends Record<string, unknown>>(
+  table: string,
+  row: Row,
+  onConflict: string
+) {
+  const { url, key } = getSupabaseEnv();
+  const target = `${url}/rest/v1/${table}?on_conflict=${encodeURIComponent(onConflict)}`;
+  const res = await fetch(target, {
+    method: "POST",
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      Prefer: "resolution=merge-duplicates,return=representation",
+    },
+    body: JSON.stringify(row),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Supabase UPSERT failed: ${res.status} ${body}`);
+  }
+
+  const json = await res.json();
+  return Array.isArray(json) ? json[0] : json;
+}
+
 export async function supabaseCreateSignedObjectUrl(opts: {
   bucket: string;
   objectPath: string;

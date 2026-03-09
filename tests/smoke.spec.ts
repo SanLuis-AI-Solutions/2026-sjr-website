@@ -198,6 +198,22 @@ test("legal pages: privacy + terms exist", async ({ page }) => {
   guard.assertNoErrors("privacy/terms");
 });
 
+test("admin routes: protected nexus and inbox redirect unauthenticated users to login", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/admin/nexus", { waitUntil: "networkidle" });
+  await expect(page).toHaveURL(/\/admin\/login$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Secure login/i })).toBeVisible();
+
+  await page.goto("/admin/inbox?tab=quotes&status=spam", { waitUntil: "networkidle" });
+  await expect(page).toHaveURL(/\/admin\/login$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Secure login/i })).toBeVisible();
+
+  guard.assertNoErrors("admin auth redirect");
+});
+
 test("home schema: local business hours and external entity links are valid", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

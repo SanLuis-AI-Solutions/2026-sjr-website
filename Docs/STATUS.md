@@ -5,6 +5,43 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Local admin redesign pass is browser-verified and still local-only pending commit:
+  - `/admin/login` is now a minimal login-only entry screen
+  - `/admin/nexus` now uses left-rail section tabs (`Overview`, `Leads`, `Publishing`, `Reviews`, `Connections`) instead of one long stacked page
+  - `Overview` is now the only Mission Control section that shows the global KPI strip
+  - `Leads`, `Publishing`, `Reviews`, and `Connections` now stay section-specific without repeated global stats
+  - auxiliary explainer side-panels were removed from all Mission Control sections so each tab now renders a single focused working surface
+  - `/admin/inbox` is now queue-scoped:
+    - `Quotes` shows only quote requests
+    - `Bookings` shows only booking requests
+    - `Contacts` shows only contact messages
+  - the redundant queue selector was removed
+  - desktop shell is now viewport-contained:
+    - document height matches viewport during local desktop verification
+    - long lists scroll inside the active workspace panel instead of being cut off at the bottom
+  - Connections now include provider action buttons inside the workspace
+  - connection truth is now explicit:
+    - Google Business Profile now has a real in-app OAuth connect path plus persisted `nexus_config` storage
+    - Meta / Pinterest / LinkedIn / X remain deferred provider work
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+    - local dry-run sync:
+      - `POST /api/v1/nexus/sync`
+      - `slug=how-to-choose-a-jeweler`
+      - `platforms=["gbp"]`
+      - `dryRun=true`
+      - result: `skipped / dry_run`
+    - local Playwright browser verification:
+      - `/admin/nexus?preview=1`
+      - `/admin/nexus?view=leads`
+      - `/admin/nexus?view=publishing`
+      - `/admin/nexus?view=reviews`
+      - `/admin/nexus?view=connections`
+      - `/admin/inbox?tab=quotes`
+      - `/admin/inbox?tab=bookings`
+      - `/admin/inbox?tab=contacts`
+      - `/api/auth/social/gbp?preview=1` -> `307` redirect to Google OAuth
 - Lead-notification spam guardrails are now deployed:
   - suspicious quote, booking, and contact submissions are now classified before Chat/email notification dispatch
   - suspicious bookings are prevented from creating calendar events
@@ -106,7 +143,7 @@ Update cadence: weekly (or after major milestones).
 - Iteration 35 (`/blog` topic-filter TrackedLink boundary elimination) is complete and accepted (`/blog -413ms`; `/services -4ms`; `/ +14ms`).
 - Iteration 36 (`/services` hero `font-serif` removal) is complete and rejected (`/services +41ms`; `/blog +371ms`; `/ +56ms`), with immediate rollback deployed and verified.
 - Iteration 37 (`/services` mobile quick-actions blur removal) is complete and rejected (`/services +181ms` vs locked control midpoint; `/blog +377ms`; `/ +99ms`), with immediate rollback deployed and verified.
-- Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
+- Complete the remaining provider OAuth/posting adapters for Meta, Pinterest, LinkedIn, and X after the GBP-first path is accepted.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 
 ## Recent Milestones (Today)

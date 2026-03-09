@@ -23,7 +23,60 @@
   - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
-1. Added lead-notification spam guardrails across quote, booking, and contact.
+1. Built and browser-verified a local-only admin shell redesign pass for pre-commit review.
+   - `/admin/login` is now a minimal login-only screen
+   - `/admin/nexus` is now split into left-rail sections:
+     - `Overview`
+     - `Leads`
+     - `Publishing`
+     - `Reviews`
+     - `Connections`
+   - `Overview` is the only Mission Control section that keeps the global KPI strip
+   - non-overview sections now stay single-purpose instead of repeating global stats
+   - auxiliary explainer side-panels were removed from:
+     - `Overview`
+     - `Leads`
+     - `Publishing`
+     - `Reviews`
+     - `Connections`
+   - `/admin/inbox` is now a tighter triage workspace using the same shell
+   - Inbox behavior is now queue-scoped:
+     - `Quotes` shows only quote requests
+     - `Bookings` shows only booking requests
+     - `Contacts` shows only contact messages
+   - the redundant queue selector was removed
+   - desktop shell is now viewport-contained:
+     - no document-level scroll on local desktop verification
+     - long request lists scroll inside the active panel instead of getting cut off at the bottom
+   - Connections now include in-panel provider action buttons
+   - Google Business Profile now has a real in-app OAuth connect path:
+     - `/api/auth/social/gbp`
+     - `/api/auth/social/gbp/callback`
+   - Google Business Profile tokens and selected location metadata now persist in `public.nexus_config`
+   - `shared_slugs` persistence is now wired to `/api/v1/nexus/sync` results so successful publishes can surface in the Nexus matrix
+   - important implementation truth:
+     - Google Business Profile is the only provider with a live OAuth connect + posting path in this pass
+     - Meta / Pinterest / LinkedIn / X remain explicit deferred provider work
+   - database guardrail applied:
+     - enabled RLS on `public.nexus_config`
+     - extended `shared_slugs.platform` to include `x` for repo/runtime consistency
+   - local verification:
+     - `npm run build`
+     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+     - `POST /api/v1/nexus/sync` dry run:
+       - `slug=how-to-choose-a-jeweler`
+       - `platforms=["gbp"]`
+       - result: `skipped / dry_run`
+     - Playwright browser verification on local preview:
+       - `/admin/nexus?preview=1`
+       - `/admin/inbox?tab=quotes`
+       - `/admin/inbox?tab=bookings`
+       - `/admin/inbox?tab=contacts`
+     - `/admin/nexus?view=connections`
+     - `/api/auth/social/gbp?preview=1`
+       - verified `307` redirect to Google OAuth
+     - verified that non-overview Mission Control sections render without the removed side-panels
+2. Added lead-notification spam guardrails across quote, booking, and contact.
    - new shared spam evaluator:
      - `src/lib/lead-spam.ts`
    - suspicious submissions now:
@@ -242,6 +295,10 @@ Do not open another `/services` micro-iteration loop during closeout.
    - review redirected Wix URLs over the next 2 weeks
 4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
 5. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
+6. For the admin redesign + GBP-first social path:
+   - complete one authenticated Google Business Profile consent locally from `/admin/nexus?view=connections`
+   - run one controlled `dryRun=false` sync against a low-risk slug and verify `shared_slugs` records the real result
+   - if accepted, commit the redesign and GBP-first integration before expanding to Meta / Pinterest / LinkedIn / X
 
 ## External-Agent Output Rule (Mandatory)
 

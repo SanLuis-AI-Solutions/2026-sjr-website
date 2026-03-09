@@ -22,7 +22,7 @@
 
 ## Growth And Content Tasks
 
-- Collect social media API tokens to activate outbound publishing in the SJR Content Nexus.
+- Extend the GBP-first social path to Meta, Pinterest, LinkedIn, and X with real OAuth/token storage and provider-specific posting adapters.
 - Complete the "Masterpiece Recognition" review automation cycle in n8n.
 - Expand the highest-intent existing blog articles with richer local detail, stronger service links, and in-body FAQ blocks.
 - Build the first geo-expansion service-area pages for Deer Park and La Porte once the content pattern is locked.

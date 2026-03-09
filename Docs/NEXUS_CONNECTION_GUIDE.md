@@ -1,45 +1,99 @@
 # SJR Content Nexus: Connection & Token Guide
 
-Use this guide to gather the necessary "keys" to activate the full automation power of your dashboard.
+Use this guide to activate the real provider connections behind the Connections tab in `/admin/nexus`.
 
-## 🟩 Master Checklist
-| Platform | Requirement | Status | Env Var Name |
+## Current Reality
+| Platform | Current Path | Status | Where It Lives |
 | :--- | :--- | :--- | :--- |
-| **Meta** | Page Access Token | ⏳ Pending | `NEXUS_META_ACCESS_TOKEN` |
-| **Google Business**| Refresh Token | ⏳ Pending | `NEXUS_GBP_ACCESS_TOKEN` |
-| **X (Twitter)** | Bearer Token | ⏳ Pending | `NEXUS_X_ACCESS_TOKEN` |
-| **Pinterest** | Board Access Token | ⏳ Pending | `NEXUS_PINTEREST_ACCESS_TOKEN` |
-| **LinkedIn** | OAuth2 Token | ⏳ Pending | `NEXUS_LINKEDIN_ACCESS_TOKEN` |
+| **Google Business Profile** | In-app OAuth connect + refresh token storage + real post dispatch | Local-ready | `public.nexus_config` or env fallback |
+| **Meta** | Manual token only | Deferred | `NEXUS_META_ACCESS_TOKEN` |
+| **Pinterest** | Manual token only | Deferred | `NEXUS_PINTEREST_ACCESS_TOKEN` |
+| **LinkedIn** | Manual token only | Deferred | `NEXUS_LINKEDIN_ACCESS_TOKEN` |
+| **X** | Manual token only | Deferred | `NEXUS_X_ACCESS_TOKEN` |
 
 ---
 
-## 🟦 Meta (Facebook/Instagram) Setup
-1.  Navigate to [Meta for Developers](https://developers.facebook.com/).
-2.  Click **My Apps** > **Create App** > **Business**.
-3.  Add **Facebook Login for Business** and **Page Public Content Access**.
-4.  Use the [Graph API Explorer](https://developers.facebook.com/tools/explorer/) to generate a "Long-Lived" token that won't expire every 60 days.
+## Google Business Profile
 
-## 🟨 Google Business Profile Setup
-1.  Open the [Google Cloud Console](https://console.cloud.google.com/).
-2.  Create a project named `SJR-Nexus-Automation`.
-3.  Enable the **Google My Business API**.
-4.  Create **OAuth 2.0 Client IDs** and authorize the `https://www.googleapis.com/auth/business.manage` scope.
+### What now works
+1. Go to `/admin/nexus?view=connections`.
+2. Click **Connect** on the Google row.
+3. Complete Google OAuth consent.
+4. Nexus stores:
+   - access token
+   - refresh token
+   - token metadata
+   - selected account + location resource
+5. `/api/v1/nexus/sync` can then use that stored connection for real GBP posting.
 
-## ⬛ X (Twitter) Setup
-1.  Go to the [X Developer Portal](https://developer.x.com/).
-2.  Apply for a **Basic** account (Free tier allows posting).
-3.  Create a Project and App.
-4.  Regenerate **API Key & Secret** and **Access Token & Secret**.
-5.  Ensure permissions are set to **"Read and Write"**.
+### Required env
+- `NEXUS_GBP_CLIENT_ID`
+- `NEXUS_GBP_CLIENT_SECRET`
+- `NEXUS_OAUTH_BASE_URL`
+
+Accepted fallback for local development:
+- `GOOGLE_OAUTH_CLIENT_ID`
+- `GOOGLE_OAUTH_CLIENT_SECRET`
+
+Optional manual fallback:
+- `NEXUS_GBP_ACCESS_TOKEN`
+- `NEXUS_GBP_LOCATION_NAME`
+
+`NEXUS_GBP_LOCATION_NAME` should be the full resource path:
+`accounts/{accountId}/locations/{locationId}`
+
+### Google Cloud setup
+1. Open the [Google Cloud Console](https://console.cloud.google.com/).
+2. Enable the Business Profile APIs required for your approved project.
+3. Create a Web OAuth client.
+4. Add the correct redirect URI:
+   - local example: `http://localhost:3000/api/auth/social/gbp/callback`
+   - production example: `https://www.susiesjewelryrepair.com/api/auth/social/gbp/callback`
+5. Make sure the OAuth client is allowed to request:
+   - `https://www.googleapis.com/auth/business.manage`
+
+### Verification path
+1. Visit `/admin/nexus?view=connections`.
+2. Click **Connect** for Google.
+3. Confirm the browser redirects to Google Accounts OAuth.
+4. After consent, verify the Connections tab shows Google as connected.
+5. Run a controlled sync:
+   - `POST /api/v1/nexus/sync`
+   - `slug=...`
+   - `platforms=["gbp"]`
+   - `dryRun=false`
+6. Confirm `shared_slugs` updates and the Publishing matrix reflects the result.
 
 ---
 
-## 🛠 How to Add These to the Website
-Once you have a token:
-1.  Log in to your **Vercel Dashboard**.
-2.  Go to **Settings > Environment Variables**.
-3.  Add the key name (e.g., `NEXUS_X_ACCESS_TOKEN`) and paste your token value.
-4.  Trigger a "Redeploy" and your Nexus dashboard Pulse will turn **Green (Live)**.
+## Other Providers
+
+These buttons are intentionally honest placeholders right now. They do not have completed OAuth or posting adapters in this pass.
+
+### Meta
+- still manual token-driven
+- future work: real OAuth, page selection, page post adapter
+
+### Pinterest
+- still manual token-driven
+- future work: board selection + pin creation adapter
+
+### LinkedIn
+- still manual token-driven
+- future work: organization/member selection + post adapter
+
+### X
+- still manual token-driven
+- future work: OAuth + post adapter
 
 ---
-**Need Help?** Just ask Antigravity to "Assist with [Platform] connection."
+
+## Storage + Security Notes
+- Provider connection state now persists in `public.nexus_config`.
+- `public.nexus_config` should remain protected with RLS enabled.
+- Publish result state is written into `shared_slugs` so Mission Control can surface live platform status.
+
+---
+
+Need help with the next provider:
+- ask for a provider-specific implementation pass instead of adding placeholder buttons

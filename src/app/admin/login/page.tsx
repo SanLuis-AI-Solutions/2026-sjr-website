@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { SiteShell } from "@/components/site-shell";
 
 /*
  * Date: 2026-02-26
@@ -38,74 +37,76 @@ export default function LoginPage() {
     };
 
     return (
-        <SiteShell>
-            <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
-                <div className="max-w-md w-full space-y-8 glass-card p-10 rounded-3xl shadow-2xl border border-brand-gold/20">
-                    <div>
-                        <div className="flex justify-center">
-                            <span className="h-12 w-12 rounded-full bg-brand-burgundy flex items-center justify-center text-white font-serif text-2xl shadow-lg ring-4 ring-brand-gold/10">
-                                S
-                            </span>
-                        </div>
-                        <h2 className="mt-6 text-center text-3xl font-serif text-stone-900">
-                            Admin <span className="text-brand-gold">Access</span>
-                        </h2>
-                        <p className="mt-2 text-center text-xs uppercase tracking-[0.2em] text-stone-500">
-                            Secure entrance for SJR Master Craftsmen
+        <div className="min-h-screen bg-[#eef0eb]">
+            <a
+                href="#admin-login-panel"
+                className="pointer-events-none fixed left-4 top-4 z-[999] -translate-y-24 rounded-full bg-brand-burgundy px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-lg transition focus:pointer-events-auto focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+            >
+                Skip to login
+            </a>
+            <div className="admin-dashboard-frame flex min-h-screen items-center justify-center px-4 py-8 md:px-6">
+                <section
+                    id="admin-login-panel"
+                    className="w-full max-w-[460px] rounded-[2rem] border border-white/70 bg-[#faf7f2]/94 p-6 shadow-[0_24px_80px_rgba(58,25,16,0.12)] backdrop-blur-xl md:p-8"
+                >
+                    <div className="text-center">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-burgundy">
+                            SJR Nexus
+                        </p>
+                        <h1 className="mt-3 font-serif text-4xl text-stone-900 md:text-5xl">
+                            Secure login
+                        </h1>
+                        <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                            Sign in with an allowlisted admin account.
                         </p>
                     </div>
-                    <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-                        <div className="rounded-md space-y-4">
+
+                    <form className="mt-8 space-y-5" onSubmit={handleLogin}>
+                        <div className="space-y-4">
                             <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-burgundy mb-2 ml-1">
-                                    Craftsman Email
+                                <label className="mb-2 ml-1 block text-[10px] font-bold uppercase tracking-widest text-brand-burgundy">
+                                    Email
                                 </label>
                                 <input
                                     type="email"
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="appearance-none relative block w-full px-4 py-3 border border-stone-200 placeholder-stone-400 text-stone-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
+                                    className="block min-h-12 w-full rounded-[1.15rem] border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 placeholder-stone-400 transition-all focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
                                     placeholder="craftsman@susiesjewelryrepair.com"
                                 />
                             </div>
                             <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-burgundy mb-2 ml-1">
-                                    Security Phrase
+                                <label className="mb-2 ml-1 block text-[10px] font-bold uppercase tracking-widest text-brand-burgundy">
+                                    Password
                                 </label>
                                 <input
                                     type="password"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="appearance-none relative block w-full px-4 py-3 border border-stone-200 placeholder-stone-400 text-stone-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
+                                    className="block min-h-12 w-full rounded-[1.15rem] border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 placeholder-stone-400 transition-all focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
                                     placeholder="••••••••"
                                 />
                             </div>
                         </div>
 
                         {error && (
-                            <div className="text-red-600 text-[10px] font-bold uppercase tracking-wider text-center bg-red-50 p-3 rounded-xl border border-red-100">
+                            <div className="rounded-[1rem] border border-red-100 bg-red-50 px-4 py-3 text-center text-[10px] font-bold uppercase tracking-wider text-red-600">
                                 {error}
                             </div>
                         )}
 
-                        <div>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-xs font-bold uppercase tracking-[0.3em] rounded-full text-white bg-brand-burgundy hover:bg-brand-burgundy-deep focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-burgundy transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {loading ? "Verifying..." : "Authorize →"}
-                            </button>
-                        </div>
-
-                        <p className="text-center text-[10px] text-stone-400 uppercase tracking-widest">
-                            Protected by Master-Grade MFA
-                        </p>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-4 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors hover:bg-brand-burgundy-deep focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            {loading ? "Verifying..." : "Enter Mission Control"}
+                        </button>
                     </form>
-                </div>
+                </section>
             </div>
-        </SiteShell>
+        </div>
     );
 }

@@ -143,7 +143,7 @@ create index if not exists contact_requests_status_idx on contact_requests(statu
 create table if not exists shared_slugs (
   id uuid primary key default gen_random_uuid(),
   slug text not null,
-  platform text not null check (platform in ('gbp', 'meta', 'pinterest', 'linkedin')),
+  platform text not null check (platform in ('gbp', 'meta', 'pinterest', 'linkedin', 'x')),
   status text not null default 'shared' check (status in ('shared', 'failed', 'skipped')),
   shared_at timestamptz not null default now(),
   external_post_id text,
@@ -154,6 +154,20 @@ create table if not exists shared_slugs (
 
 create unique index if not exists shared_slugs_slug_platform_unique on shared_slugs(slug, platform);
 create index if not exists shared_slugs_shared_at_idx on shared_slugs(shared_at desc);
+
+create table if not exists nexus_config (
+  platform text primary key check (platform in ('gbp', 'meta', 'x', 'pinterest', 'linkedin')),
+  access_token text,
+  refresh_token text,
+  token_type text,
+  scope text,
+  expires_at timestamptz,
+  payload jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table nexus_config enable row level security;
 
 create table if not exists review_request_status (
   id uuid primary key default gen_random_uuid(),

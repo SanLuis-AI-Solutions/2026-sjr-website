@@ -6,6 +6,7 @@ import {
   SocialDispatcher,
   SocialPlatform,
 } from "@/lib/automation/social-dispatcher";
+import { supabaseUpsert } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +38,35 @@ function json(payload: Record<string, unknown>, status = 200) {
   return NextResponse.json(payload, { status });
 }
 
+async function persistDispatchResults(
+  slug: string,
+  results: Awaited<ReturnType<SocialDispatcher["dispatch"]>>["results"]
+) {
+  await Promise.all(
+    results.map((result) =>
+      supabaseUpsert(
+        "shared_slugs",
+        {
+          slug,
+          platform: result.platform,
+          status:
+            result.status === "sent"
+              ? "shared"
+              : result.status === "failed"
+                ? "failed"
+                : "skipped",
+          shared_at: new Date().toISOString(),
+          external_post_id: result.externalId || null,
+          external_post_url: result.externalUrl || null,
+          error: result.reason || null,
+          payload: result.payload || {},
+        },
+        "slug,platform"
+      )
+    )
+  );
+}
+
 export async function GET() {
   return json({ ok: true, service: "nexus-sync", route: "/api/v1/nexus/sync" });
 }
@@ -64,7 +94,7 @@ export async function POST(request: Request) {
     const parsedPlatforms = parsePlatforms(body.platforms);
     if (parsedPlatforms === null) {
       return json(
-        { ok: false, error: "invalid_platforms", supported: ["gbp", "meta", "pinterest", "linkedin"] },
+        { ok: false, error: "invalid_platforms", supported: ["gbp", "meta", "pinterest", "linkedin", "x"] },
         400
       );
     }
@@ -81,6 +111,10 @@ export async function POST(request: Request) {
       platforms: parsedPlatforms,
       dryRun,
     });
+
+    if (!dryRun) {
+      await persistDispatchResults(post.slug, dispatch.results);
+    }
 
     return json({ ok: true, dispatch });
   } catch (err) {

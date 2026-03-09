@@ -52,9 +52,28 @@ export async function updateSession(request: NextRequest) {
     );
 
     const pathname = request.nextUrl.pathname;
+    const hostname = (request.nextUrl.hostname || "").toLowerCase();
     const isAdminPath = pathname.startsWith("/admin");
     const isLoginPage = pathname === "/admin/login";
     const isSocialOAuthPath = pathname.startsWith("/api/auth/social/");
+    const wantsPreview = request.nextUrl.searchParams.get("preview") === "1";
+    const hasPreviewCookie = request.cookies.get("sjr_admin_preview")?.value === "1";
+    const isLocalPreviewHost = hostname === "127.0.0.1" || hostname === "localhost";
+    const isDevPreview =
+        process.env.NODE_ENV === "development" &&
+        isLocalPreviewHost &&
+        (wantsPreview || hasPreviewCookie);
+
+    if (isDevPreview && (isAdminPath || isSocialOAuthPath)) {
+        if (wantsPreview && !hasPreviewCookie) {
+            response.cookies.set("sjr_admin_preview", "1", {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+            });
+        }
+        return response;
+    }
 
     if (isAdminPath || isSocialOAuthPath) {
         if (!user) {

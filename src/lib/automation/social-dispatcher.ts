@@ -1,3 +1,5 @@
+import { publishGoogleBusinessPost } from "@/lib/automation/google-business-profile";
+
 export const SUPPORTED_SOCIAL_PLATFORMS = [
   "gbp",
   "meta",
@@ -22,7 +24,9 @@ export type SocialDispatchResult = {
   platform: SocialPlatform;
   status: "sent" | "skipped" | "failed";
   externalId?: string;
+  externalUrl?: string;
   reason?: string;
+  payload?: Record<string, unknown>;
 };
 
 export type SocialDispatchSummary = {
@@ -94,6 +98,23 @@ export class SocialDispatcher {
     platform: SocialPlatform,
     request: SocialDispatchRequest
   ): Promise<SocialDispatchResult> {
+    if (platform === "gbp") {
+      if (request.dryRun) {
+        return {
+          platform,
+          status: "skipped",
+          reason: "dry_run",
+        };
+      }
+
+      return publishGoogleBusinessPost({
+        title: request.title,
+        excerpt: request.excerpt,
+        canonicalUrl: request.canonicalUrl,
+        imageUrl: request.imageUrl,
+      });
+    }
+
     const tokenEnvName = PLATFORM_TOKEN_ENV[platform];
     const token = (this.env[tokenEnvName] || "").trim();
 
@@ -113,13 +134,13 @@ export class SocialDispatcher {
       };
     }
 
-    // Placeholder transport: adapter-specific API clients will be added per platform.
-    await Promise.resolve();
-
     return {
       platform,
-      status: "sent",
-      externalId: createExternalId(platform, request.slug),
+      status: "skipped",
+      reason: "provider_not_implemented",
+      payload: {
+        placeholderExternalId: createExternalId(platform, request.slug),
+      },
     };
   }
 }
