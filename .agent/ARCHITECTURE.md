@@ -1,15 +1,38 @@
 # Antigravity Kit Architecture
 
-> **Version 6.0** - Expanded AI Agent, Skill, and Workflow System
+> **Version 6.1** - Current Repo Runtime, Assets, and Integration Map
 
 ---
 
 ## 📋 Overview
 
-Antigravity Kit is a modular system consisting of:
-- **30 Specialist Agents** - Role-based AI personas
-- **55 Local Skills** + **77 Global Skills** - Domain-specific knowledge modules (local is source of truth)
-- **37 Workflows** - Slash command procedures (local and global are synchronized)
+Antigravity Kit in this repo is a modular operating layer for AI-assisted delivery. The current local asset state is:
+- **30 Specialist Agents** in `.agent/agents` as markdown agent specs
+- **108 Local Skill Folders** in `.agent/skills` including synced and system skills
+- **47 Local Workflows** in `.agent/workflows` as markdown slash-command procedures
+
+Human-facing discovery should use the catalogs first:
+- `skills-catalog.txt` currently lists **83** cataloged skills
+- `agents-catalog.txt` currently lists **33** cataloged agents
+- `workflows-catalog.txt` currently lists **47** cataloged workflows
+
+When counts disagree, treat the catalogs as the quickest operator reference and the local `.agent/` tree as the actual installed asset set.
+
+---
+
+## 🧭 Runtime Contract
+
+The runtime contract for this repo is:
+- `AGENTS.md` is the enforcement layer
+- `OPERATING_MODEL.md` is the execution playbook
+- `.agent/ARCHITECTURE.md` explains the installed agent/skill/workflow system and integration layout
+- `skills-catalog.txt`, `agents-catalog.txt`, and `workflows-catalog.txt` are the discovery index for current capabilities
+
+Current operating expectations:
+- follow `triage -> choose workflow -> implement -> verify -> document`
+- prefer minimal targeted file reads
+- use MCP tooling when evidence quality matters
+- keep repo changes small, reversible, and documented
 
 ---
 
@@ -18,9 +41,9 @@ Antigravity Kit is a modular system consisting of:
 ```
 .agent/
 ├── ARCHITECTURE.md          # This file
-├── agents/                  # 30 Specialist Agents (local)
-├── skills/                  # 55 Skills (local)
-├── workflows/               # 37 Slash Commands (local)
+├── agents/                  # 30 markdown agent specs (local)
+├── skills/                  # 108 installed skill folders (local)
+├── workflows/               # 47 markdown workflow specs (local)
 ├── rules/                   # Global Rules
 └── .shared/                 # Shared Resources
 ```
@@ -219,9 +242,11 @@ See `skills-catalog.txt` for the full list.
 
 ---
 
-## 🔄 Workflows (37)
+## 🔄 Workflows (47)
 
 Slash command procedures. Invoke with `/command`.
+
+This section is a selected reference list. Use `workflows-catalog.txt` for the full current catalog.
 
 Note: `/installall` now runs MCP preflight scripts in `./scripts`.
 
@@ -302,10 +327,11 @@ skill-name/
 | Metric | Value |
 |--------|-------|
 | **Total Agents** | 30 |
-| **Local Skills** | 55 |
-| **Global Skills** | 77 |
-| **Total Workflows** | 37 |
-| **Coverage** | Web, mobile, automation, AI products, analytics, SEO, growth |
+| **Local Skill Folders** | 108 |
+| **Cataloged Skills** | 83 |
+| **Cataloged Agents** | 33 |
+| **Local / Cataloged Workflows** | 47 |
+| **Coverage** | Web, mobile, automation, AI products, analytics, SEO, growth, NotebookLM, Google Workspace |
 
 ---
 
@@ -323,7 +349,24 @@ skill-name/
 | Plan | `project-planner` | brainstorming, plan-writing |
 
 ## MCP Configuration
-Use C:\Users\ninef\.codex\config.toml for MCP server connections.
+
+Use `C:\Users\ninef\.codex\config.toml` for MCP server connections.
+
+Current configured MCP footprint for this repo runtime:
+- `github`
+- `supabase`
+- `vercel`
+- `MCP_DOCKER`
+- `chrome_devtools`
+- `stitch`
+- `playwright`
+- `notebooklm`
+- `google_workspace`
+
+Notes:
+- `notebooklm` is installed and authenticated for direct NotebookLM access
+- `google_workspace` is installed in read-only mode and authenticated for Workspace reads
+- user-machine MCP state can evolve independently of the local `.agent/` asset tree, so `config.toml` remains the live source of truth for connected servers
 
 ## Bootstrap Repo (Global Source of Truth)
 Canonical bootstrap repo (Option 2):

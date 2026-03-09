@@ -71,8 +71,8 @@ This operating model defines how Codex should choose workflows/agents/skills/too
 
 ### MCPs (evidence, external systems)
 Use MCP servers when they materially improve evidence quality or reduce manual steps:
-- Browser evidence: `chrome_devtools`, `puppeteer`
-- External systems: `github`, `vercel`, `supabase-mcp-server`, `google-workspace`
+- Browser evidence: `chrome_devtools`, `playwright`
+- External systems: `github`, `vercel`, `supabase`, `google_workspace`, `notebooklm`
 - Design exploration: `stitch`
 
 Operational notes:
@@ -96,10 +96,10 @@ When improving layout/design on major screens (Login, Dashboard shell, Inputs, A
 | Task Type | Workflows | Agents | Skills | MCPs |
 | --- | --- | --- | --- | --- |
 | Visual redesign | `/plan` -> `/ui-ux-pro-max` -> `/qa-gate` | `frontend-specialist` + `orchestrator` | `ui-ux-pro-max`, `frontend-design`, `scroll-experience` | `chrome_devtools`, `stitch` |
-| New page build | `/plan` -> `/create` -> `/qa-gate` | `frontend-specialist` | `react-patterns`, `tailwind-patterns` | `chrome_devtools` |
-| Bug / runtime error | `/debug` -> `/qa-gate` | `debugger` | `systematic-debugging` | `chrome_devtools` |
+| New page build | `/plan` -> `/create` -> `/qa-gate` | `frontend-specialist` | `react-patterns`, `tailwind-patterns` | `chrome_devtools`, `playwright` |
+| Bug / runtime error | `/debug` -> `/qa-gate` | `debugger` | `systematic-debugging` | `chrome_devtools`, `playwright` |
 | Performance regression | `/debug` -> `/qa-gate` | `performance-optimizer` | `web-performance-optimization` | `chrome_devtools` |
-| Database migration | `/plan` -> `/qa-gate` | `database-architect` | `database-design` | `supabase-mcp-server` |
+| Database migration | `/plan` -> `/qa-gate` | `database-architect` | `database-design` | `supabase` |
 | Deploy | `/qa-gate` -> `/deploy` | `devops-engineer` | `deployment-procedures` | `vercel` |
 | Repo automation | `/repo-automation` | `repo-automation-specialist` | `github-workflow-automation` | `github` |
 
