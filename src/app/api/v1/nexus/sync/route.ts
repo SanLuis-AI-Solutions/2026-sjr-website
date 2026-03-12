@@ -6,7 +6,7 @@ import {
   SocialDispatcher,
   SocialPlatform,
 } from "@/lib/automation/social-dispatcher";
-import { supabaseUpsert } from "@/lib/supabase/admin";
+import { persistDispatchResults } from "@/lib/admin/nexus-publishing";
 
 export const dynamic = "force-dynamic";
 
@@ -36,35 +36,6 @@ function parsePlatforms(value: unknown): SocialPlatform[] | null | undefined {
 
 function json(payload: Record<string, unknown>, status = 200) {
   return NextResponse.json(payload, { status });
-}
-
-async function persistDispatchResults(
-  slug: string,
-  results: Awaited<ReturnType<SocialDispatcher["dispatch"]>>["results"]
-) {
-  await Promise.all(
-    results.map((result) =>
-      supabaseUpsert(
-        "shared_slugs",
-        {
-          slug,
-          platform: result.platform,
-          status:
-            result.status === "sent"
-              ? "shared"
-              : result.status === "failed"
-                ? "failed"
-                : "skipped",
-          shared_at: new Date().toISOString(),
-          external_post_id: result.externalId || null,
-          external_post_url: result.externalUrl || null,
-          error: result.reason || null,
-          payload: result.payload || {},
-        },
-        "slug,platform"
-      )
-    )
-  );
 }
 
 export async function GET() {

@@ -5,6 +5,37 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Local publishing approval workflow is now browser-verified and still local-only pending commit:
+  - `Mission Control > Publishing` now uses a fixed-height approval queue
+  - each row shows:
+    - post title
+    - direct article link
+    - GBP live status
+    - approval status
+    - last publish signal
+  - inline row actions now exist in the workspace:
+    - `Open post`
+    - `Save approved draft`
+    - `Publish now`
+    - `Clear approval`
+  - new persistence surface:
+    - `public.nexus_publish_queue`
+  - new admin routes:
+    - `/api/v1/nexus/publish-preview`
+    - `/api/v1/nexus/publish-approve`
+    - `/api/v1/nexus/publish-now`
+  - preview and live publish now share the same GBP payload builder
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+    - local browser verification:
+      - `/admin/nexus?preview=1&view=publishing`
+      - no right-side preview pane remains
+      - row actions are available directly in the queue
+      - desktop viewport remains height-contained with no document-level scroll
+  - database guardrail:
+    - `public.nexus_publish_queue` created
+    - RLS enabled on `public.nexus_publish_queue`
 - Local admin redesign pass is browser-verified and still local-only pending commit:
   - `/admin/login` is now a minimal login-only entry screen
   - `/admin/nexus` now uses left-rail section tabs (`Overview`, `Leads`, `Publishing`, `Reviews`, `Connections`) instead of one long stacked page

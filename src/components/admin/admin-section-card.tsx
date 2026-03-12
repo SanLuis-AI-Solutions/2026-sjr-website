@@ -8,6 +8,7 @@ type AdminSectionCardProps = {
   children: ReactNode;
   className?: string;
   contentClassName?: string;
+  compactHeader?: boolean;
 };
 
 export function AdminSectionCard({
@@ -18,6 +19,7 @@ export function AdminSectionCard({
   children,
   className = "",
   contentClassName = "",
+  compactHeader = false,
 }: AdminSectionCardProps) {
   return (
     <section
@@ -26,23 +28,42 @@ export function AdminSectionCard({
         className,
       ].join(" ")}
     >
-      <div className="flex flex-col gap-3 border-b border-stone-100 pb-3 sm:flex-row sm:items-start sm:justify-between">
+      <div
+        className={[
+          "flex flex-col border-b border-stone-100 sm:flex-row sm:items-start sm:justify-between",
+          compactHeader ? "gap-2 pb-2" : "gap-3 pb-3",
+        ].join(" ")}
+      >
         <div className="min-w-0">
           {eyebrow ? (
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy">
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="mt-1 font-serif text-[1.8rem] leading-none text-stone-900">{title}</h2>
+          <h2
+            className={[
+              "mt-1 font-serif text-stone-900",
+              compactHeader ? "text-[1.45rem] leading-none" : "text-[1.8rem] leading-none",
+            ].join(" ")}
+          >
+            {title}
+          </h2>
           {description ? (
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-600">
+            <p
+              className={[
+                "max-w-2xl text-stone-600",
+                compactHeader ? "mt-1 text-[13px] leading-relaxed" : "mt-2 text-sm leading-relaxed",
+              ].join(" ")}
+            >
               {description}
             </p>
           ) : null}
         </div>
         {action ? <div className="shrink-0">{action}</div> : null}
       </div>
-      <div className={["mt-4", contentClassName].join(" ").trim()}>{children}</div>
+      <div className={[compactHeader ? "mt-3" : "mt-4", contentClassName].join(" ").trim()}>
+        {children}
+      </div>
     </section>
   );
 }

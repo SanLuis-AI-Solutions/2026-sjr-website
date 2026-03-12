@@ -169,6 +169,27 @@ create table if not exists nexus_config (
 
 alter table nexus_config enable row level security;
 
+create table if not exists nexus_publish_queue (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null,
+  platform text not null check (platform in ('gbp', 'meta', 'pinterest', 'linkedin', 'x')),
+  status text not null default 'draft' check (status in ('draft', 'approved', 'published', 'failed')),
+  preview_payload jsonb not null,
+  preview_hash text not null,
+  approved_by text,
+  approved_at timestamptz,
+  published_at timestamptz,
+  last_result jsonb,
+  last_error text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create unique index if not exists nexus_publish_queue_slug_platform_unique
+  on nexus_publish_queue(slug, platform);
+create index if not exists nexus_publish_queue_updated_at_idx on nexus_publish_queue(updated_at desc);
+alter table nexus_publish_queue enable row level security;
+
 create table if not exists review_request_status (
   id uuid primary key default gen_random_uuid(),
   customer_key text not null,

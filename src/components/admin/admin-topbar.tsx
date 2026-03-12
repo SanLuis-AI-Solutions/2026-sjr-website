@@ -23,6 +23,7 @@ export function AdminTopbar() {
   const { title, description } = getTopbarContent(pathname);
   const queryValue = searchParams.get("q") || "";
   const activeView = searchParams.get("view");
+  const activeSlug = searchParams.get("slug");
   const activeTab = searchParams.get("tab");
   const activeStatus = searchParams.get("status");
   const viewLabel = pathname.startsWith("/admin/inbox")
@@ -55,6 +56,9 @@ export function AdminTopbar() {
             aria-label="Dashboard filter"
           >
             {activeView ? <input type="hidden" name="view" value={activeView} /> : null}
+            {activeSlug && pathname.startsWith("/admin/nexus") ? (
+              <input type="hidden" name="slug" value={activeSlug} />
+            ) : null}
             {activeTab ? <input type="hidden" name="tab" value={activeTab} /> : null}
             {activeStatus ? <input type="hidden" name="status" value={activeStatus} /> : null}
             <svg

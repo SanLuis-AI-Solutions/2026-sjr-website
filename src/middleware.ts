@@ -16,5 +16,8 @@ export const config = {
          * Feel free to modify this pattern to include more paths.
          */
         "/admin/:path*",
+        "/api/v1/nexus/publish-preview",
+        "/api/v1/nexus/publish-approve",
+        "/api/v1/nexus/publish-now",
     ],
 };

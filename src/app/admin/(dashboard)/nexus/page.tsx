@@ -1,18 +1,33 @@
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { AdminSectionCard } from "@/components/admin/admin-section-card";
 import { InboxSummaryPanel } from "@/components/admin/nexus/inbox-summary-panel";
 import { IntegrationHealthPanel } from "@/components/admin/nexus/integration-health-panel";
 import { MetricStrip } from "@/components/admin/nexus/metric-strip";
-import { PublishingMatrix } from "@/components/admin/nexus/publishing-matrix";
+import { PublishingWorkspace } from "@/components/admin/nexus/publishing-workspace";
 import { ReviewSummaryPanel } from "@/components/admin/nexus/review-summary-panel";
 import { getNexusDashboardData } from "@/lib/admin/nexus-dashboard";
+import {
+  clearPublishingApproval,
+  publishApprovedPublishingPreview,
+  saveApprovedPublishingPreview,
+} from "@/lib/admin/nexus-publishing";
+import { getAdminIdentity } from "@/lib/admin/auth";
 
 export const dynamic = "force-dynamic";
 
 type NexusView = "overview" | "leads" | "publishing" | "reviews" | "connections";
 
 type NexusPageProps = {
-  searchParams?: Promise<{ q?: string; view?: string; oauth?: string; provider?: string }>;
+  searchParams?: Promise<{
+    q?: string;
+    view?: string;
+    oauth?: string;
+    provider?: string;
+    slug?: string;
+    result?: string;
+  }>;
 };
 
 function normalizeView(value: string | undefined): NexusView {
@@ -40,6 +55,8 @@ function filterDashboardRows(
       row.title,
       row.slug,
       row.publishedAt,
+      row.approvalStatus,
+      row.approvalError || "",
       Object.entries(row.statuses)
         .map(([platform, status]) => `${platform} ${status}`)
         .join(" "),
@@ -132,24 +149,66 @@ function LeadsWorkspace({
   );
 }
 
-function PublishingWorkspace({
-  rows,
-}: {
-  rows: Awaited<ReturnType<typeof getNexusDashboardData>>["syncRows"];
-}) {
-  return (
-    <div className="grid h-full gap-3 lg:min-h-0">
-      <AdminSectionCard
-        title="Publishing matrix"
-        eyebrow="Publishing"
-        description="One dense matrix. No stacked article cards. Filter from the top bar when you need to isolate a post or platform."
-        className="flex h-full min-h-0 flex-col"
-        contentClassName="flex-1 min-h-0"
-      >
-        <PublishingMatrix rows={rows} />
-      </AdminSectionCard>
-    </div>
-  );
+function getPublishingNotice(result: string | undefined): {
+  tone: "success" | "warning" | "error";
+  title: string;
+  body: string;
+} | null {
+  switch (result) {
+    case "approved":
+      return {
+        tone: "success",
+        title: "Draft approved",
+        body: "This GBP payload is now locked for publish unless the source blog content changes.",
+      };
+    case "cleared":
+      return {
+        tone: "warning",
+        title: "Approval cleared",
+        body: "The row returned to draft state. Review and approve again before publishing.",
+      };
+    case "published":
+      return {
+        tone: "success",
+        title: "Post published",
+        body: "Google Business Profile accepted the post and Nexus stored the live result.",
+      };
+    case "approval-required":
+      return {
+        tone: "warning",
+        title: "Approval required",
+        body: "Save an approved draft before publishing live.",
+      };
+    case "stale-approval":
+      return {
+        tone: "error",
+        title: "Approval expired",
+        body: "The source content changed after approval. Review the refreshed preview and approve again.",
+      };
+    case "missing-connection":
+      return {
+        tone: "warning",
+        title: "Connection required",
+        body: "Google Business Profile must be connected before this post can go live.",
+      };
+    case "publish-failed":
+      return {
+        tone: "error",
+        title: "Publish failed",
+        body: "The GBP API rejected the publish attempt. Review the row error state, then reopen the article and try again.",
+      };
+    default:
+      return null;
+  }
+}
+
+function buildPublishingRedirect(slug: string, query: string, result?: string) {
+  const params = new URLSearchParams();
+  params.set("view", "publishing");
+  params.set("slug", slug);
+  if (query.trim()) params.set("q", query.trim());
+  if (result) params.set("result", result);
+  return `/admin/nexus?${params.toString()}`;
 }
 
 function ReviewsWorkspace({
@@ -235,8 +294,87 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
   const view = normalizeView(resolvedSearchParams?.view);
   const oauthState = resolvedSearchParams?.oauth;
   const provider = resolvedSearchParams?.provider;
+  const requestedSlug = resolvedSearchParams?.slug;
+  const result = resolvedSearchParams?.result;
   const dashboard = await getNexusDashboardData();
   const filteredRows = filterDashboardRows(dashboard.syncRows, query);
+  const selectedSlug =
+    view === "publishing"
+      ? filteredRows.some((row) => row.slug === requestedSlug)
+        ? (requestedSlug as string)
+        : filteredRows[0]?.slug || null
+      : null;
+  const notice = getPublishingNotice(result);
+  const googleConnected = dashboard.apiHealth.find((item) => item.platform === "gbp")?.active ?? false;
+
+  async function saveApprovedDraftAction(formData: FormData) {
+    "use server";
+
+    const slug = String(formData.get("slug") || "").trim();
+    if (!slug) {
+      redirect(buildPublishingRedirect(selectedSlug || "", query));
+    }
+
+    const admin = await getAdminIdentity();
+    if (!admin) {
+      redirect("/admin/login");
+    }
+
+    await saveApprovedPublishingPreview({
+      slug,
+      platform: "gbp",
+      approvedBy: admin.email,
+    });
+    revalidatePath("/admin/nexus");
+    redirect(buildPublishingRedirect(slug, query, "approved"));
+  }
+
+  async function clearApprovalAction(formData: FormData) {
+    "use server";
+
+    const slug = String(formData.get("slug") || "").trim();
+    if (!slug) {
+      redirect(buildPublishingRedirect(selectedSlug || "", query));
+    }
+
+    await clearPublishingApproval({
+      slug,
+      platform: "gbp",
+    });
+    revalidatePath("/admin/nexus");
+    redirect(buildPublishingRedirect(slug, query, "cleared"));
+  }
+
+  async function publishNowAction(formData: FormData) {
+    "use server";
+
+    const slug = String(formData.get("slug") || "").trim();
+    if (!slug) {
+      redirect(buildPublishingRedirect(selectedSlug || "", query));
+    }
+
+    const outcome = await publishApprovedPublishingPreview({
+      slug,
+      platform: "gbp",
+    });
+
+    revalidatePath("/admin/nexus");
+
+    if (outcome.ok) {
+      redirect(buildPublishingRedirect(slug, query, "published"));
+    }
+
+    const mappedResult =
+      outcome.code === "approval_required"
+        ? "approval-required"
+        : outcome.code === "stale_approval"
+          ? "stale-approval"
+          : outcome.code === "missing_connection"
+            ? "missing-connection"
+            : "publish-failed";
+
+    redirect(buildPublishingRedirect(slug, query, mappedResult));
+  }
 
   return (
     <div className="flex h-full flex-col gap-3 lg:min-h-0 lg:overflow-hidden">
@@ -264,6 +402,12 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
         {view === "publishing" ? (
           <PublishingWorkspace
             rows={filteredRows}
+            selectedSlug={selectedSlug}
+            googleConnected={googleConnected}
+            notice={notice}
+            saveAction={saveApprovedDraftAction}
+            publishAction={publishNowAction}
+            clearAction={clearApprovalAction}
           />
         ) : null}
 

@@ -56,6 +56,10 @@ export async function updateSession(request: NextRequest) {
     const isAdminPath = pathname.startsWith("/admin");
     const isLoginPage = pathname === "/admin/login";
     const isSocialOAuthPath = pathname.startsWith("/api/auth/social/");
+    const isNexusPublishApiPath =
+        pathname === "/api/v1/nexus/publish-preview" ||
+        pathname === "/api/v1/nexus/publish-approve" ||
+        pathname === "/api/v1/nexus/publish-now";
     const wantsPreview = request.nextUrl.searchParams.get("preview") === "1";
     const hasPreviewCookie = request.cookies.get("sjr_admin_preview")?.value === "1";
     const isLocalPreviewHost = hostname === "127.0.0.1" || hostname === "localhost";
@@ -64,7 +68,7 @@ export async function updateSession(request: NextRequest) {
         isLocalPreviewHost &&
         (wantsPreview || hasPreviewCookie);
 
-    if (isDevPreview && (isAdminPath || isSocialOAuthPath)) {
+    if (isDevPreview && (isAdminPath || isSocialOAuthPath || isNexusPublishApiPath)) {
         if (wantsPreview && !hasPreviewCookie) {
             response.cookies.set("sjr_admin_preview", "1", {
                 httpOnly: true,
@@ -75,9 +79,9 @@ export async function updateSession(request: NextRequest) {
         return response;
     }
 
-    if (isAdminPath || isSocialOAuthPath) {
+    if (isAdminPath || isSocialOAuthPath || isNexusPublishApiPath) {
         if (!user) {
-            if (isSocialOAuthPath) {
+            if (isSocialOAuthPath || isNexusPublishApiPath) {
                 return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
             }
 
@@ -94,7 +98,7 @@ export async function updateSession(request: NextRequest) {
         if (user && !allowedAdminEmails.has((user.email || "").toLowerCase())) {
             await supabase.auth.signOut();
 
-            if (isSocialOAuthPath) {
+            if (isSocialOAuthPath || isNexusPublishApiPath) {
                 return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
             }
 

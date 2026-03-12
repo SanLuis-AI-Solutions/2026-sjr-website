@@ -30,11 +30,31 @@ type GoogleBusinessTokenContext = {
   source: "oauth" | "env";
 };
 
-type GoogleBusinessPostInput = {
+export type GoogleBusinessPostInput = {
   title: string;
   excerpt: string;
   canonicalUrl: string;
   imageUrl?: string | null;
+};
+
+export type GoogleBusinessPreviewPayload = {
+  languageCode: "en-US";
+  summary: string;
+  topicType: "STANDARD";
+  callToAction: {
+    actionType: "LEARN_MORE";
+    url: string;
+  };
+  media?: Array<{
+    mediaFormat: "PHOTO";
+    sourceUrl: string;
+  }>;
+};
+
+export type GoogleBusinessConnectionStatus = {
+  active: boolean;
+  source: "oauth" | "env" | "missing";
+  label: string | null;
 };
 
 function trimToNull(value?: string | null) {
@@ -95,6 +115,42 @@ function buildPostSummary(input: GoogleBusinessPostInput) {
     [input.title.trim(), input.excerpt.trim()].filter(Boolean).join("\n\n"),
     1400
   );
+}
+
+function resolveAbsoluteMediaUrl(imageUrl: string, canonicalUrl: string) {
+  try {
+    return new URL(imageUrl, canonicalUrl).toString();
+  } catch {
+    return imageUrl;
+  }
+}
+
+export function buildGoogleBusinessPreview(
+  input: GoogleBusinessPostInput
+): GoogleBusinessPreviewPayload {
+  const mediaUrl = trimToNull(input.imageUrl)
+    ? resolveAbsoluteMediaUrl(input.imageUrl as string, input.canonicalUrl)
+    : null;
+
+  return {
+    languageCode: "en-US",
+    summary: buildPostSummary(input),
+    topicType: "STANDARD",
+    callToAction: {
+      actionType: "LEARN_MORE",
+      url: input.canonicalUrl,
+    },
+    ...(mediaUrl
+      ? {
+          media: [
+            {
+              mediaFormat: "PHOTO",
+              sourceUrl: mediaUrl,
+            },
+          ],
+        }
+      : {}),
+  };
 }
 
 export function hasGoogleBusinessOAuthConfig(origin?: string) {
@@ -231,6 +287,41 @@ export async function persistGoogleBusinessConnection(opts: {
   });
 }
 
+export async function getGoogleBusinessConnectionStatus(): Promise<GoogleBusinessConnectionStatus> {
+  const config = await getNexusConfig(GBP_PLATFORM);
+  const oauthLabel =
+    config?.payload && typeof config.payload.locationTitle === "string"
+      ? config.payload.locationTitle
+      : config?.payload && typeof config.payload.locationResourceName === "string"
+        ? config.payload.locationResourceName
+        : "Connected in Nexus";
+
+  if (config?.refresh_token || config?.access_token) {
+    return {
+      active: true,
+      source: "oauth",
+      label: oauthLabel,
+    };
+  }
+
+  const envAccessToken = trimToNull(process.env.NEXUS_GBP_ACCESS_TOKEN);
+  const envLocation = resolveGoogleBusinessLocationFromEnv();
+
+  if (envAccessToken) {
+    return {
+      active: true,
+      source: "env",
+      label: envLocation || "NEXUS_GBP_ACCESS_TOKEN",
+    };
+  }
+
+  return {
+    active: false,
+    source: "missing",
+    label: null,
+  };
+}
+
 async function resolveGoogleBusinessAccessToken(): Promise<GoogleBusinessTokenContext | null> {
   const config = await getNexusConfig(GBP_PLATFORM);
   const persistedLocation =
@@ -306,25 +397,7 @@ export async function publishGoogleBusinessPost(input: GoogleBusinessPostInput) 
     };
   }
 
-  const requestBody = {
-    languageCode: "en-US",
-    summary: buildPostSummary(input),
-    topicType: "STANDARD",
-    callToAction: {
-      actionType: "LEARN_MORE",
-      url: input.canonicalUrl,
-    },
-    ...(input.imageUrl
-      ? {
-          media: [
-            {
-              mediaFormat: "PHOTO",
-              sourceUrl: input.imageUrl,
-            },
-          ],
-        }
-      : {}),
-  };
+  const requestBody = buildGoogleBusinessPreview(input);
 
   const response = await fetch(
     `https://mybusiness.googleapis.com/v4/${auth.locationResourceName}/localPosts`,

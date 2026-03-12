@@ -25,6 +25,10 @@ Use this guide to activate the real provider connections behind the Connections 
    - token metadata
    - selected account + location resource
 5. `/api/v1/nexus/sync` can then use that stored connection for real GBP posting.
+6. `Mission Control > Publishing` can now:
+   - open the full article directly from the queue
+   - save an approved draft in `public.nexus_publish_queue`
+   - publish the approved row live
 
 ### Required env
 - `NEXUS_GBP_CLIENT_ID`
@@ -57,12 +61,19 @@ Optional manual fallback:
 2. Click **Connect** for Google.
 3. Confirm the browser redirects to Google Accounts OAuth.
 4. After consent, verify the Connections tab shows Google as connected.
-5. Run a controlled sync:
-   - `POST /api/v1/nexus/sync`
-   - `slug=...`
-   - `platforms=["gbp"]`
-   - `dryRun=false`
-6. Confirm `shared_slugs` updates and the Publishing matrix reflects the result.
+5. Open `/admin/nexus?view=publishing`.
+6. Confirm each queue row exposes:
+   - the post title
+   - an `Open post` action
+   - `Save approved draft`
+   - `Publish now`
+7. Open the article in full from the queue and review it there.
+8. Click **Save approved draft**.
+9. Click **Publish now**.
+10. Confirm:
+   - `public.nexus_publish_queue` updates
+   - `shared_slugs` updates
+   - the Publishing workspace reflects the live result
 
 ---
 
@@ -91,6 +102,8 @@ These buttons are intentionally honest placeholders right now. They do not have 
 ## Storage + Security Notes
 - Provider connection state now persists in `public.nexus_config`.
 - `public.nexus_config` should remain protected with RLS enabled.
+- Publishing approval state now persists in `public.nexus_publish_queue`.
+- `public.nexus_publish_queue` should remain protected with RLS enabled.
 - Publish result state is written into `shared_slugs` so Mission Control can surface live platform status.
 
 ---

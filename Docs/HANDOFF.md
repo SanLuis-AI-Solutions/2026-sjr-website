@@ -23,7 +23,33 @@
   - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
-1. Built and browser-verified a local-only admin shell redesign pass for pre-commit review.
+1. Built and browser-verified a local-only publishing approval workflow inside Nexus for pre-commit review.
+   - `Mission Control > Publishing` now renders a fixed-height approval queue instead of the old matrix-only table
+   - each queue row now keeps the operator flow in one place:
+     - post title and direct article link
+     - GBP live status
+     - approval status
+     - last publish signal
+     - inline actions for `Open post`, `Save approved draft`, `Publish now`, and `Clear approval`
+   - new persistence surface:
+     - `public.nexus_publish_queue`
+   - new admin publish routes:
+     - `/api/v1/nexus/publish-preview`
+     - `/api/v1/nexus/publish-approve`
+     - `/api/v1/nexus/publish-now`
+   - preview and live publish now share the same GBP payload builder
+   - local verification:
+     - `npm run build`
+     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+     - local Playwright browser verification:
+       - `/admin/nexus?preview=1&view=publishing`
+       - no right-side preview pane remains
+       - queue rows expose direct article links and inline approval actions without page-level scroll
+       - document height matches viewport during desktop verification
+   - database guardrail applied:
+     - created `public.nexus_publish_queue`
+     - enabled RLS on `public.nexus_publish_queue`
+2. Built and browser-verified a local-only admin shell redesign pass for pre-commit review.
    - `/admin/login` is now a minimal login-only screen
    - `/admin/nexus` is now split into left-rail sections:
      - `Overview`
@@ -76,7 +102,7 @@
      - `/api/auth/social/gbp?preview=1`
        - verified `307` redirect to Google OAuth
      - verified that non-overview Mission Control sections render without the removed side-panels
-2. Added lead-notification spam guardrails across quote, booking, and contact.
+3. Added lead-notification spam guardrails across quote, booking, and contact.
    - new shared spam evaluator:
      - `src/lib/lead-spam.ts`
    - suspicious submissions now:
@@ -87,9 +113,9 @@
    - suspicious submissions remain visible in `/admin/inbox`
    - artifact:
      - `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
-2. Verified Google Workspace MCP access is live in read-only mode for `9xfold@gmail.com`.
+4. Verified Google Workspace MCP access is live in read-only mode for `9xfold@gmail.com`.
    - confirmed via `list_calendars`
-3. Implemented the SEO + analytics integrity recovery pass.
+5. Implemented the SEO + analytics integrity recovery pass.
    - production GA4 is now gated to `www.susiesjewelryrepair.com`
    - added explicit App Router pageview tracking
    - added additive `quote_form_start`, `booking_form_start`, and `contact_form_start` events
@@ -98,17 +124,17 @@
    - added `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
-4. Verified the discrepancy with fresh saved evidence.
+6. Verified the discrepancy with fresh saved evidence.
    - `.health/ga4-gsc-reconciliation-90d-latest.md`
    - `.health/weekly-seo-health-latest.md`
    - key finding:
      - GA4 `2,366` active users over 90 days vs Search Console `102` clicks is primarily explained by `2,073` localhost / `127.0.0.1` users polluting GA4
-5. Verified the code changes locally.
+7. Verified the code changes locally.
    - `npm run build`
    - `npm test`
    - `npm run google:reconcile-90d`
    - `npm run google:weekly-seo-health`
-6. Validated the weekly GitHub reminder automation end to end.
+8. Validated the weekly GitHub reminder automation end to end.
    - workflow:
      - `.github/workflows/weekly-health.yml`
    - validation runs:
@@ -118,10 +144,10 @@
      - `22792076143`
        - workflow `success`
        - weekly SEO snapshots passed after GitHub secrets and repo variables were added
-7. Added a one-time Google-admin cleanup runbook.
+9. Added a one-time Google-admin cleanup runbook.
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
-8. Existing growth work remains live and unchanged:
+10. Existing growth work remains live and unchanged:
    - audit adjudication
    - blog commercial-intent expansions
    - geo service-area pages and internal links

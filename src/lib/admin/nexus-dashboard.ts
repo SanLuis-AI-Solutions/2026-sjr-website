@@ -4,6 +4,11 @@ import {
   type SocialPlatform,
 } from "@/lib/automation/social-dispatcher";
 import {
+  getPublishQueueRows,
+  type PublishingQueueRow,
+  type PublishingQueueStatus,
+} from "@/lib/admin/nexus-publishing";
+import {
   getNexusConfigs,
   type NexusConfigRow,
 } from "@/lib/automation/nexus-config";
@@ -96,6 +101,10 @@ export type SyncMatrixRow = {
   publishedAt: string;
   image: string;
   statuses: Record<SocialPlatform, "live" | "pending" | "failed" | "skipped">;
+  approvalStatus: PublishingQueueStatus;
+  approvedAt: string | null;
+  approvedBy: string | null;
+  approvalError: string | null;
   lastSharedAt: string | null;
 };
 
@@ -198,16 +207,21 @@ function buildApiHealth(configRows: NexusConfigRow[]): ApiHealthSummary[] {
   });
 }
 
-function buildSyncRows(sharedRows: SharedSlugRow[]): SyncMatrixRow[] {
+function buildSyncRows(
+  sharedRows: SharedSlugRow[],
+  queueRows: PublishingQueueRow[]
+): SyncMatrixRow[] {
   const grouped = sharedRows.reduce<Map<string, SharedSlugRow[]>>((map, row) => {
     const current = map.get(row.slug) || [];
     current.push(row);
     map.set(row.slug, current);
     return map;
   }, new Map());
+  const queueMap = new Map(queueRows.map((row) => [`${row.slug}:${row.platform}`, row]));
 
   return BLOG_POSTS.map((post) => {
     const postRows = grouped.get(post.slug) || [];
+    const approvalRow = queueMap.get(`${post.slug}:gbp`) || null;
     const statuses = Object.fromEntries(
       SUPPORTED_SOCIAL_PLATFORMS.map((platform) => {
         const latest = postRows
@@ -232,6 +246,10 @@ function buildSyncRows(sharedRows: SharedSlugRow[]): SyncMatrixRow[] {
       publishedAt: post.publishedAt,
       image: post.image,
       statuses,
+      approvalStatus: approvalRow?.status || "draft",
+      approvedAt: approvalRow?.approved_at || null,
+      approvedBy: approvalRow?.approved_by || null,
+      approvalError: approvalRow?.last_error || null,
       lastSharedAt,
     };
   });
@@ -350,17 +368,18 @@ export async function getRecentContacts(limit = 50): Promise<ContactRequestRow[]
 }
 
 export async function getNexusDashboardData(): Promise<NexusDashboardData> {
-  const [sharedRows, reviewRows, quotes, bookings, contacts, configRows] = await Promise.all([
+  const [sharedRows, reviewRows, quotes, bookings, contacts, configRows, queueRows] = await Promise.all([
     getSharedSlugs(),
     getReviewStatuses(),
     getRecentQuotes(200),
     getRecentBookings(200),
     getRecentContacts(200),
     getNexusConfigs(),
+    getPublishQueueRows(),
   ]);
 
   const apiHealth = buildApiHealth(configRows);
-  const syncRows = buildSyncRows(sharedRows);
+  const syncRows = buildSyncRows(sharedRows, queueRows);
 
   return {
     apiHealth,
