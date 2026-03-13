@@ -23,7 +23,12 @@
   - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
-1. Built and browser-verified a local-only publishing approval workflow inside Nexus for pre-commit review.
+1. Tightened the production deploy workflow to reduce wasted GitHub Actions usage.
+   - docs/process-only pushes are now ignored by `.github/workflows/deploy-production.yml`
+   - workflow-only or CI-only pushes can still run the workflow, but expensive steps now require real production-impacting file changes
+   - Node install, Playwright, smoke tests, Vercel deploy, and perf gates are skipped automatically when only non-production files changed
+   - job timeout is now capped at `30` minutes
+2. Built and browser-verified a local-only publishing approval workflow inside Nexus for pre-commit review.
    - `Mission Control > Publishing` now renders a fixed-height approval queue instead of the old matrix-only table
    - each queue row now keeps the operator flow in one place:
      - post title and direct article link
@@ -49,7 +54,7 @@
    - database guardrail applied:
      - created `public.nexus_publish_queue`
      - enabled RLS on `public.nexus_publish_queue`
-2. Built and browser-verified a local-only admin shell redesign pass for pre-commit review.
+3. Built and browser-verified a local-only admin shell redesign pass for pre-commit review.
    - `/admin/login` is now a minimal login-only screen
    - `/admin/nexus` is now split into left-rail sections:
      - `Overview`
@@ -102,7 +107,7 @@
      - `/api/auth/social/gbp?preview=1`
        - verified `307` redirect to Google OAuth
      - verified that non-overview Mission Control sections render without the removed side-panels
-3. Added lead-notification spam guardrails across quote, booking, and contact.
+4. Added lead-notification spam guardrails across quote, booking, and contact.
    - new shared spam evaluator:
      - `src/lib/lead-spam.ts`
    - suspicious submissions now:
@@ -113,9 +118,9 @@
    - suspicious submissions remain visible in `/admin/inbox`
    - artifact:
      - `Docs/artifacts/analytics/2026-03-09--lead-notification-spam-guardrails.md`
-4. Verified Google Workspace MCP access is live in read-only mode for `9xfold@gmail.com`.
+5. Verified Google Workspace MCP access is live in read-only mode for `9xfold@gmail.com`.
    - confirmed via `list_calendars`
-5. Implemented the SEO + analytics integrity recovery pass.
+6. Implemented the SEO + analytics integrity recovery pass.
    - production GA4 is now gated to `www.susiesjewelryrepair.com`
    - added explicit App Router pageview tracking
    - added additive `quote_form_start`, `booking_form_start`, and `contact_form_start` events
@@ -124,17 +129,17 @@
    - added `DASHBOARD.md` and `Docs/WEEKLY-SEO-HEALTH.md`
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--ga4-gsc-integrity-recovery.md`
-6. Verified the discrepancy with fresh saved evidence.
+7. Verified the discrepancy with fresh saved evidence.
    - `.health/ga4-gsc-reconciliation-90d-latest.md`
    - `.health/weekly-seo-health-latest.md`
    - key finding:
      - GA4 `2,366` active users over 90 days vs Search Console `102` clicks is primarily explained by `2,073` localhost / `127.0.0.1` users polluting GA4
-7. Verified the code changes locally.
+8. Verified the code changes locally.
    - `npm run build`
    - `npm test`
    - `npm run google:reconcile-90d`
    - `npm run google:weekly-seo-health`
-8. Validated the weekly GitHub reminder automation end to end.
+9. Validated the weekly GitHub reminder automation end to end.
    - workflow:
      - `.github/workflows/weekly-health.yml`
    - validation runs:
@@ -144,10 +149,10 @@
      - `22792076143`
        - workflow `success`
        - weekly SEO snapshots passed after GitHub secrets and repo variables were added
-9. Added a one-time Google-admin cleanup runbook.
+10. Added a one-time Google-admin cleanup runbook.
    - artifact:
      - `Docs/artifacts/analytics/2026-03-06--google-admin-cleanup-runbook.md`
-10. Existing growth work remains live and unchanged:
+11. Existing growth work remains live and unchanged:
    - audit adjudication
    - blog commercial-intent expansions
    - geo service-area pages and internal links

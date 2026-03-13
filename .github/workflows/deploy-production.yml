@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'Docs/**'
+      - '.health/**'
+      - '.agent/**'
+      - 'AGENTS.md'
+      - 'OPERATING_MODEL.md'
+      - 'skills-catalog.txt'
+      - 'agents-catalog.txt'
+      - 'workflows-catalog.txt'
+      - '*.md'
   workflow_dispatch: {}
 
 permissions:
@@ -16,16 +26,23 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect perf-relevant changes
+      - name: Detect deploy-relevant changes
         id: changes
         uses: dorny/paths-filter@v3
         with:
           list-files: shell
           filters: |
+            deploy_relevant:
+              - 'src/**'
+              - 'public/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'next.config.*'
             perf_relevant:
               - 'src/**'
               - 'tests/**'
@@ -37,13 +54,27 @@ jobs:
               - 'scripts/perf/**'
               - '.github/workflows/deploy-production.yml'
 
+      - name: Deployment mode
+        run: |
+          echo "Deploy-relevant changes: ${{ steps.changes.outputs.deploy_relevant }}"
+          echo "Perf-relevant changes: ${{ steps.changes.outputs.perf_relevant }}"
+          if [ "${{ steps.changes.outputs.deploy_relevant }}" = "true" ]; then
+            echo "Production-impacting files changed, so install, test, and deploy steps will run."
+            echo "Matched deploy files:"
+            printf '%s\n' "${{ steps.changes.outputs.deploy_relevant_files }}"
+          else
+            echo "No production-impacting files changed. Expensive CI and deploy steps will be skipped."
+          fi
+
       - name: Setup Node
+        if: steps.changes.outputs.deploy_relevant == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: "npm"
 
       - name: Performance gating mode
+        if: steps.changes.outputs.deploy_relevant == 'true'
         run: |
           echo "Perf-relevant changes: ${{ steps.changes.outputs.perf_relevant }}"
           if [ "${{ steps.changes.outputs.perf_relevant }}" = "true" ]; then
@@ -55,12 +86,15 @@ jobs:
           fi
 
       - name: Install
+        if: steps.changes.outputs.deploy_relevant == 'true'
         run: npm ci
 
       - name: Install Playwright (Chromium)
+        if: steps.changes.outputs.deploy_relevant == 'true'
         run: npx playwright install --with-deps chromium
 
       - name: Smoke tests (mobile navigation)
+        if: steps.changes.outputs.deploy_relevant == 'true'
         env:
           NEXT_PUBLIC_SUPABASE_URL: "https://mock.supabase.co"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key"
@@ -69,12 +103,14 @@ jobs:
         run: npm test
 
       - name: Audit image URLs (Supabase public assets)
+        if: steps.changes.outputs.deploy_relevant == 'true'
         shell: pwsh
         run: pwsh -File scripts/audit-images.ps1
 
       # This deploy path does NOT rely on Vercel Git integration.
       # Add repo secret: VERCEL_TOKEN
       - name: Deploy to Vercel (production)
+        if: steps.changes.outputs.deploy_relevant == 'true'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: team_WhqqnF14OMjd8EfHj7lVzx7A
@@ -83,10 +119,15 @@ jobs:
           npx -y vercel@50.15.1 deploy --prod --yes --token="$VERCEL_TOKEN"
 
       - name: Wait for production alias propagation
+        if: steps.changes.outputs.deploy_relevant == 'true'
         run: sleep 20
 
+      - name: Skip deploy summary
+        if: steps.changes.outputs.deploy_relevant != 'true'
+        run: echo "Skipped install, tests, Vercel deploy, and perf guardrails because no production-impacting files changed."
+
       - name: Post-deploy conversion performance guardrail (isolated p50)
-        if: steps.changes.outputs.perf_relevant == 'true'
+        if: steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
           node scripts/perf/launch-performance-gate.mjs \
             --base-url https://www.susiesjewelryrepair.com \
@@ -101,7 +142,7 @@ jobs:
             --path /book
 
       - name: Compare conversion gate vs locked baseline (delta budget)
-        if: steps.changes.outputs.perf_relevant == 'true'
+        if: steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
           conversion_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
           node scripts/perf/compare-perf-gate-baseline.mjs \
@@ -111,7 +152,7 @@ jobs:
             --write .health/perf-delta-conversion-latest.json
 
       - name: Post-deploy service performance guardrail (isolated p50)
-        if: steps.changes.outputs.perf_relevant == 'true'
+        if: steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
           node scripts/perf/launch-performance-gate.mjs \
             --base-url https://www.susiesjewelryrepair.com \
@@ -126,7 +167,7 @@ jobs:
             --path /services/custom-design
 
       - name: Compare service gate vs locked baseline (delta budget)
-        if: steps.changes.outputs.perf_relevant == 'true'
+        if: steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
           service_summary=$(ls -1dt .health/perf-gate-*/summary.json | head -n1)
           node scripts/perf/compare-perf-gate-baseline.mjs \
@@ -136,7 +177,7 @@ jobs:
             --write .health/perf-delta-service-latest.json
 
       - name: Extract LCP diagnostics from gate runs
-        if: always() && steps.changes.outputs.perf_relevant == 'true'
+        if: always() && steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
           gate_dirs=$(ls -1dt .health/perf-gate-*/ 2>/dev/null | sed 's:/*$::')
           if [ -z "$gate_dirs" ]; then
@@ -152,7 +193,7 @@ jobs:
           EOF
 
       - name: Upload performance artifacts
-        if: always() && steps.changes.outputs.perf_relevant == 'true'
+        if: always() && steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: perf-gate-${{ github.run_id }}

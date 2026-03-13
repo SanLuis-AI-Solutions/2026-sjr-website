@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Deploy workflow is now cost-optimized locally pending commit:
+  - docs/process-only pushes no longer trigger the production deploy workflow
+  - workflow-only or CI-only pushes can still run the workflow, but they now skip Node install, Playwright, tests, Vercel deploy, and perf gates unless production-impacting files changed
+  - deploy timeout now caps at `30` minutes to reduce hanging-run waste
 - Local publishing approval workflow is now browser-verified and still local-only pending commit:
   - `Mission Control > Publishing` now uses a fixed-height approval queue
   - each row shows:
