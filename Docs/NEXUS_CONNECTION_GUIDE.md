@@ -5,7 +5,7 @@ Use this guide to activate the real provider connections behind the Connections 
 ## Current Reality
 | Platform | Current Path | Status | Where It Lives |
 | :--- | :--- | :--- | :--- |
-| **Google Business Profile** | In-app OAuth connect + refresh token storage + real post dispatch | Local-ready | `public.nexus_config` or env fallback |
+| **Google Business Profile** | In-app OAuth connect + refresh token storage + real post dispatch | Production-ready | `public.nexus_config` or env fallback |
 | **Meta** | Manual token only | Deferred | `NEXUS_META_ACCESS_TOKEN` |
 | **Pinterest** | Manual token only | Deferred | `NEXUS_PINTEREST_ACCESS_TOKEN` |
 | **LinkedIn** | Manual token only | Deferred | `NEXUS_LINKEDIN_ACCESS_TOKEN` |

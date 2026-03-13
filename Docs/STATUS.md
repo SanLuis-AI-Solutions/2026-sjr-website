@@ -5,6 +5,12 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Google Business Profile production OAuth is now configured and live:
+  - added `NEXUS_GBP_CLIENT_ID`, `NEXUS_GBP_CLIENT_SECRET`, and `NEXUS_OAUTH_BASE_URL` in Vercel production
+  - reran deploy workflow `23069413332` successfully
+  - live route verification:
+    - `/api/auth/social/gbp` now redirects to Google Accounts OAuth
+    - production no longer returns `oauth=not-configured` for GBP
 - Coverage-validation follow-through is now completed locally for the top manual indexing targets:
   - strengthened internal links into `/services/heirloom-restoration`, `/services/pearl-restringing`, and `/services/deer-park`
   - reused compact `Helpful reads` blocks instead of introducing a new page module

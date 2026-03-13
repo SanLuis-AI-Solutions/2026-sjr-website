@@ -34,6 +34,16 @@ Latest local follow-up:
     - added a matching `Helpful reads` sidebar card on the Deer Park geo page
   - verification:
     - `npm run build`
+- Completed the next Google Business Profile production unblock step.
+  - added the missing Vercel production envs:
+    - `NEXUS_GBP_CLIENT_ID`
+    - `NEXUS_GBP_CLIENT_SECRET`
+    - `NEXUS_OAUTH_BASE_URL`
+  - reran production deploy workflow:
+    - `23069413332` (`success`)
+  - live verification:
+    - `https://www.susiesjewelryrepair.com/api/auth/social/gbp` now redirects to Google OAuth instead of `oauth=not-configured`
+    - callback target in the live redirect is `https://www.susiesjewelryrepair.com/api/auth/social/gbp/callback`
 
 1. Tightened the production deploy workflow to reduce wasted GitHub Actions usage.
    - docs/process-only pushes are now ignored by `.github/workflows/deploy-production.yml`
