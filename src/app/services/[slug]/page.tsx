@@ -10,6 +10,7 @@ import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { buildServiceVisualSet } from "@/lib/service-visuals";
+import { getBlogPostBySlug } from "@/lib/blog";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 
@@ -71,6 +72,12 @@ type MarketSnapshot = {
   summary: string;
   scenarios: MarketScenario[];
   footnote: string;
+};
+
+type HelpfulReadLink = {
+  href: string;
+  title: string;
+  excerpt: string;
 };
 
 async function DeferredServiceSections({ children }: { children: ReactNode }) {
@@ -196,6 +203,19 @@ const DECISION_MODULES: Record<string, DecisionModule> = {
       "Piece has sentimental value but limited wearability",
     ],
   },
+};
+
+const HELPFUL_READ_SLUGS_BY_SERVICE: Record<string, string[]> = {
+  "heirloom-restoration": [
+    "heirloom-jewelry-restoration-repair-or-redesign",
+    "heirloom-restoration-planning-guide",
+    "safe-to-clean-vintage-diamond-ring-at-home",
+  ],
+  "pearl-restringing": [
+    "pearl-restringing-timing-guide",
+    "professional-cleaning-vs-home-care",
+    "how-to-choose-a-jeweler",
+  ],
 };
 
 const PROOF_SNIPPETS: Record<string, ProofSnippet[]> = {
@@ -1147,6 +1167,18 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const relatedServices = SERVICES
     .filter((item) => item.slug !== service.slug)
     .slice(0, 4);
+  const helpfulReads: HelpfulReadLink[] = (HELPFUL_READ_SLUGS_BY_SERVICE[slug] ?? [])
+    .map((postSlug) => {
+      const post = getBlogPostBySlug(postSlug);
+      if (!post) return null;
+
+      return {
+        href: `/blog/${post.slug}`,
+        title: post.title,
+        excerpt: post.excerpt,
+      };
+    })
+    .filter((item): item is HelpfulReadLink => item !== null);
   const startingAt =
     formatStartingAt(service.starting_price ?? service.startingPrice ?? null) ??
     formatStartingAt(service.startingPrice ?? null);
@@ -2254,6 +2286,44 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <section data-service-section="related-services" className="cv-section bg-stone-100 py-16">
         <div className="mx-auto max-w-6xl px-6">
+          {helpfulReads.length > 0 ? (
+            <div className="mb-10">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                    Helpful reads
+                  </p>
+                  <h2 className="mt-2 font-serif text-2xl text-stone-900">
+                    Explore related guidance before you book
+                  </h2>
+                </div>
+                <Link
+                  href="/blog"
+                  prefetch={false}
+                  className="text-sm font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  View all articles →
+                </Link>
+              </div>
+              <div className="mt-6 grid gap-4 md:grid-cols-3">
+                {helpfulReads.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    prefetch={false}
+                    className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                      Blog guide
+                    </p>
+                    <h3 className="mt-3 text-base font-semibold text-stone-900">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">{item.excerpt}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">

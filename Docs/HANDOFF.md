@@ -23,6 +23,18 @@
   - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
+Latest local follow-up:
+- Completed the next indexing-support step after Search Console submission for the five priority URLs.
+  - strengthened contextual internal links into:
+    - `/services/heirloom-restoration`
+    - `/services/pearl-restringing`
+    - `/services/deer-park`
+  - implementation:
+    - added compact `Helpful reads` article links on the two flagship service pages
+    - added a matching `Helpful reads` sidebar card on the Deer Park geo page
+  - verification:
+    - `npm run build`
+
 1. Tightened the production deploy workflow to reduce wasted GitHub Actions usage.
    - docs/process-only pushes are now ignored by `.github/workflows/deploy-production.yml`
    - workflow-only or CI-only pushes can still run the workflow, but expensive steps now require real production-impacting file changes

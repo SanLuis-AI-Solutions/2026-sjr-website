@@ -19,6 +19,10 @@ export type ServiceAreaPage = {
     question: string;
     answer: string;
   }>;
+  helpfulReads?: Array<{
+    label: string;
+    href: string;
+  }>;
 };
 
 export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
@@ -72,6 +76,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         question: "Can I get same-day jewelry repair near Deer Park?",
         answer:
           "Many standard repairs follow our Same Day/Next Day pattern, depending on the piece, the damage, and current bench load.",
+      },
+    ],
+    helpfulReads: [
+      {
+        label: "Where to get a watch battery replaced today near Deer Park / Pasadena?",
+        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+      },
+      {
+        label: "Can a severely bent ring prong be fixed, or do I need a new setting?",
+        href: "/blog/can-a-severely-bent-ring-prong-be-fixed",
+      },
+      {
+        label: "How to Choose a Trustworthy Jeweler",
+        href: "/blog/how-to-choose-a-jeweler",
       },
     ],
   },

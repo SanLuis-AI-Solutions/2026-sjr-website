@@ -5,6 +5,11 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Coverage-validation follow-through is now completed locally for the top manual indexing targets:
+  - strengthened internal links into `/services/heirloom-restoration`, `/services/pearl-restringing`, and `/services/deer-park`
+  - reused compact `Helpful reads` blocks instead of introducing a new page module
+  - verification:
+    - `npm run build`
 - Vercel Git auto-deploys are now disabled locally pending commit:
   - this repo already deploys production via GitHub Actions + Vercel CLI
   - disabling Vercel Git deployments prevents Hobby-team contributor blocks on commit-author mismatch

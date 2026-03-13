@@ -211,6 +211,25 @@ export function ServiceAreaLandingPage({ page }: Props) {
               </div>
             </section>
 
+            {page.helpfulReads?.length ? (
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Helpful reads
+                </p>
+                <div className="mt-4 space-y-2">
+                  {page.helpfulReads.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
             <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
               <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                 Quick answers
