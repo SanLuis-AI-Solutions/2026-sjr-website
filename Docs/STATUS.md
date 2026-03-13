@@ -5,6 +5,10 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Vercel Git auto-deploys are now disabled locally pending commit:
+  - this repo already deploys production via GitHub Actions + Vercel CLI
+  - disabling Vercel Git deployments prevents Hobby-team contributor blocks on commit-author mismatch
+  - production deploys should now come from the GitHub Actions workflow only
 - Deploy workflow is now cost-optimized locally pending commit:
   - docs/process-only pushes no longer trigger the production deploy workflow
   - workflow-only or CI-only pushes can still run the workflow, but they now skip Node install, Playwright, tests, Vercel deploy, and perf gates unless production-impacting files changed

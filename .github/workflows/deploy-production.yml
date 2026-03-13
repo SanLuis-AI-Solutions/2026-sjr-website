@@ -43,6 +43,8 @@ jobs:
               - 'package.json'
               - 'package-lock.json'
               - 'next.config.*'
+              - 'vercel.json'
+              - 'vercel.ts'
             perf_relevant:
               - 'src/**'
               - 'tests/**'
