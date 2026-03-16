@@ -8,10 +8,51 @@ import {
 
 export const dynamic = "force-dynamic";
 
-function redirectToConnections(request: NextRequest, oauthState: string) {
-  return NextResponse.redirect(
-    new URL(`/admin/nexus?view=connections&oauth=${oauthState}&provider=gbp`, request.nextUrl.origin)
-  );
+function redirectToConnections(
+  request: NextRequest,
+  oauthState: string,
+  oauthReason?: string
+) {
+  const url = new URL("/admin/nexus", request.nextUrl.origin);
+  url.searchParams.set("view", "connections");
+  url.searchParams.set("oauth", oauthState);
+  url.searchParams.set("provider", "gbp");
+  if (oauthReason) {
+    url.searchParams.set("oauth_reason", oauthReason);
+  }
+  return NextResponse.redirect(url);
+}
+
+function classifyGoogleBusinessOAuthError(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error || "");
+  const normalized = message.toLowerCase();
+
+  if (normalized.includes("no accessible google business profile locations")) {
+    return "no-location";
+  }
+
+  if (
+    normalized.includes("permission_denied") ||
+    normalized.includes("insufficient") ||
+    normalized.includes("not authorized") ||
+    normalized.includes("forbidden")
+  ) {
+    return "permission-denied";
+  }
+
+  if (
+    normalized.includes("invalid_grant") ||
+    normalized.includes("invalid_request") ||
+    normalized.includes("token")
+  ) {
+    return "token-exchange";
+  }
+
+  if (normalized.includes("nexus_config") || normalized.includes("upsert")) {
+    return "persist-failed";
+  }
+
+  return "callback-failed";
 }
 
 export async function GET(request: NextRequest) {
@@ -21,13 +62,13 @@ export async function GET(request: NextRequest) {
   const cookieState = request.cookies.get(GBP_OAUTH_STATE_COOKIE)?.value?.trim() || "";
 
   if (oauthError) {
-    const response = redirectToConnections(request, "denied");
+    const response = redirectToConnections(request, "denied", oauthError);
     response.cookies.delete(GBP_OAUTH_STATE_COOKIE);
     return response;
   }
 
   if (!state || !cookieState || state !== cookieState || !code) {
-    const response = redirectToConnections(request, "failed");
+    const response = redirectToConnections(request, "failed", "state-mismatch");
     response.cookies.delete(GBP_OAUTH_STATE_COOKIE);
     return response;
   }
@@ -50,8 +91,12 @@ export async function GET(request: NextRequest) {
     const response = redirectToConnections(request, "connected");
     response.cookies.delete(GBP_OAUTH_STATE_COOKIE);
     return response;
-  } catch {
-    const response = redirectToConnections(request, "failed");
+  } catch (error) {
+    const response = redirectToConnections(
+      request,
+      "failed",
+      classifyGoogleBusinessOAuthError(error)
+    );
     response.cookies.delete(GBP_OAUTH_STATE_COOKIE);
     return response;
   }

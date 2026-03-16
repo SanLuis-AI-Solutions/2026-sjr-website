@@ -24,6 +24,7 @@ type NexusPageProps = {
     q?: string;
     view?: string;
     oauth?: string;
+    oauth_reason?: string;
     provider?: string;
     slug?: string;
     result?: string;
@@ -234,10 +235,12 @@ function ReviewsWorkspace({
 function ConnectionsWorkspace({
   dashboard,
   oauthState,
+  oauthReason,
   provider,
 }: {
   dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
   oauthState?: string;
+  oauthReason?: string;
   provider?: string;
 }) {
   const providerLabel =
@@ -250,8 +253,22 @@ function ConnectionsWorkspace({
           : provider === "linkedin"
             ? "LinkedIn"
             : provider === "x"
-              ? "X"
+            ? "X"
               : "Selected provider";
+  const failureBody =
+    oauthReason === "no-location"
+      ? "Google accepted the login, but no accessible Business Profile locations were returned for this account."
+      : oauthReason === "permission-denied"
+        ? "Google accepted the login, but the account or app does not currently have permission to read Business Profile locations."
+        : oauthReason === "token-exchange"
+          ? "Google returned the callback, but the token exchange failed. Recheck the OAuth client, consent screen, and Business Profile API access."
+          : oauthReason === "persist-failed"
+            ? "Google returned the callback, but Nexus could not save the connection state. Review the Nexus config table and server logs."
+            : oauthReason === "state-mismatch"
+              ? "The OAuth callback did not match the expected session state. Start the sign-in flow again from the Connections tab."
+              : oauthReason
+                ? `Google returned this callback issue: ${oauthReason}.`
+                : "Reconnect and review the callback error details before treating the provider as live.";
 
   return (
     <div className="grid h-full gap-3 lg:min-h-0">
@@ -274,7 +291,7 @@ function ConnectionsWorkspace({
         ) : null}
         {oauthState === "failed" ? (
           <div className="mb-4 rounded-[1.35rem] border border-rose-200 bg-rose-50 px-4 py-4 text-sm leading-relaxed text-stone-700">
-            {providerLabel} sign-in failed. Reconnect and review the callback error details before treating the provider as live.
+            {providerLabel} sign-in failed. {failureBody}
           </div>
         ) : null}
         {oauthState === "denied" ? (
@@ -293,6 +310,7 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
   const query = resolvedSearchParams?.q || "";
   const view = normalizeView(resolvedSearchParams?.view);
   const oauthState = resolvedSearchParams?.oauth;
+  const oauthReason = resolvedSearchParams?.oauth_reason;
   const provider = resolvedSearchParams?.provider;
   const requestedSlug = resolvedSearchParams?.slug;
   const result = resolvedSearchParams?.result;
@@ -417,6 +435,7 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
           <ConnectionsWorkspace
             dashboard={dashboard}
             oauthState={oauthState}
+            oauthReason={oauthReason}
             provider={provider}
           />
         ) : null}
