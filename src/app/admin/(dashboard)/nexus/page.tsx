@@ -25,6 +25,7 @@ type NexusPageProps = {
     view?: string;
     oauth?: string;
     oauth_reason?: string;
+    oauth_detail?: string;
     provider?: string;
     slug?: string;
     result?: string;
@@ -236,11 +237,13 @@ function ConnectionsWorkspace({
   dashboard,
   oauthState,
   oauthReason,
+  oauthDetail,
   provider,
 }: {
   dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
   oauthState?: string;
   oauthReason?: string;
+  oauthDetail?: string;
   provider?: string;
 }) {
   const providerLabel =
@@ -262,12 +265,16 @@ function ConnectionsWorkspace({
         ? "Google accepted the login, but the account or app does not currently have permission to read Business Profile locations."
         : oauthReason === "token-exchange"
           ? "Google returned the callback, but the token exchange failed. Recheck the OAuth client, consent screen, and Business Profile API access."
+          : oauthReason === "service-disabled"
+            ? "Google returned the callback, but the required Business Profile APIs are not enabled for this OAuth client project."
           : oauthReason === "persist-failed"
             ? "Google returned the callback, but Nexus could not save the connection state. Review the Nexus config table and server logs."
             : oauthReason === "state-mismatch"
               ? "The OAuth callback did not match the expected session state. Start the sign-in flow again from the Connections tab."
-              : oauthReason
-                ? `Google returned this callback issue: ${oauthReason}.`
+              : oauthReason && oauthDetail
+                ? `Google returned this callback issue: ${oauthReason}. ${oauthDetail}`
+                : oauthReason
+                  ? `Google returned this callback issue: ${oauthReason}.`
                 : "Reconnect and review the callback error details before treating the provider as live.";
 
   return (
@@ -311,6 +318,7 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
   const view = normalizeView(resolvedSearchParams?.view);
   const oauthState = resolvedSearchParams?.oauth;
   const oauthReason = resolvedSearchParams?.oauth_reason;
+  const oauthDetail = resolvedSearchParams?.oauth_detail;
   const provider = resolvedSearchParams?.provider;
   const requestedSlug = resolvedSearchParams?.slug;
   const result = resolvedSearchParams?.result;
@@ -433,12 +441,13 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
 
         {view === "connections" ? (
           <ConnectionsWorkspace
-            dashboard={dashboard}
-            oauthState={oauthState}
-            oauthReason={oauthReason}
-            provider={provider}
-          />
-        ) : null}
+          dashboard={dashboard}
+          oauthState={oauthState}
+          oauthReason={oauthReason}
+          oauthDetail={oauthDetail}
+          provider={provider}
+        />
+      ) : null}
       </div>
     </div>
   );
