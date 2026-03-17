@@ -36,6 +36,32 @@
 
 ## Session Summary (Most Recent)
 Latest follow-up:
+- Completed the second NotebookLM-backed thin-post expansion pass.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-thin-post-expansion-pass-2.md`
+  - notebooks used:
+    - `SJR Services` — `7ccc981f-7c0c-412e-becc-855cb7ce933c`
+    - `SJR Reviews And Voice` — `38a675d2-08b7-4f12-b017-10f47fa97c85`
+  - Nexus content ops updates:
+    - inserted `5` new `nexus_content_research` items for thin-post expansion
+    - inserted `5` new `nexus_content_queue` brief rows with `brief_payload.mode = thin_post_expansion`
+  - blog expansion pass completed in `src/lib/blog.ts` for:
+    - `professional-cleaning-vs-home-care`
+    - `chain-repair-weak-points`
+    - `watch-battery-replacement`
+    - `stone-security-checklist`
+    - `ring-sizing-guide`
+  - verified depth after expansion:
+    - `professional-cleaning-vs-home-care` — `965` words
+    - `chain-repair-weak-points` — `963` words
+    - `watch-battery-replacement` — `997` words
+    - `stone-security-checklist` — `962` words
+    - `ring-sizing-guide` — `1065` words
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "mobile blog detail"`
+    - NotebookLM per-post research queries
+    - Supabase SQL verification for the `5` new research rows and `5` new brief rows
 - Activated NotebookLM as the real SJR research backbone and completed the first thin-post expansion pass.
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-activation-and-thin-post-expansion-pass.md`
@@ -463,12 +489,13 @@ Latest follow-up:
 Do not open another `/services` micro-iteration loop during closeout.
 
 1. Expand the next thin-post cluster from the newly active NotebookLM research stack:
-   - `professional-cleaning-vs-home-care`
-   - `chain-repair-weak-points`
-   - `watch-battery-replacement`
-   - `stone-security-checklist`
-   - `ring-sizing-guide`
-2. Plan the `Connections -> Stack` refactor so Mission Control reflects the real operating stack:
+   - completed:
+     - `professional-cleaning-vs-home-care`
+     - `chain-repair-weak-points`
+     - `watch-battery-replacement`
+     - `stone-security-checklist`
+     - `ring-sizing-guide`
+2. Plan and implement the `Connections -> Stack` refactor so Mission Control reflects the real operating stack:
    - `Upload-Post`
    - `n8n`
    - `NotebookLM`

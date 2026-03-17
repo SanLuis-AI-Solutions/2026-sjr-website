@@ -80,33 +80,88 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "ring-sizing-guide",
     title: "Ring Sizing: What to Know Before You Resize",
     excerpt:
-      "When to size up or down, what affects pricing, and how to protect setting integrity throughout the sizing process.",
+      "How to tell if a ring really needs resizing, what affects cost and timing, and how to protect stones and finish quality during the process.",
     image: "/images/blog/ring-sizing-guide-cover.jpg",
     topics: ["Ring Care", "Pricing & Timing"],
     publishedAt: "2026-02-17",
     reviewedAt: "2026-02-18",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Sizing method depends on metal type, style, and size change.",
-      "Stone settings should be checked before and after sizing.",
-      "White gold often benefits from rhodium refinishing after work.",
+      "The right sizing plan depends on metal type, ring style, and how much the fit needs to change.",
+      "Poor fit signs matter more than one bad day of swelling or tightness.",
+      "Stone checks, seam finishing, and rhodium refinishing are often part of getting the ring back in wearable condition.",
     ],
     sections: [
       {
-        heading: "Sizing up vs. sizing down in Pasadena",
+        heading: "When to resize a ring and when to wait",
         body: [
-          "Sizing up usually requires adding metal and blending the seam so the ring keeps its shape and finish. At our Fairmont Pkwy workshop, we ensure these seams are invisible to the naked eye.",
-          "Both approaches should start with a fit discussion, including seasonal swelling and stacking preferences.",
+          "A ring that spins until the stone faces palm-side, slides off too easily when your hands are cool, or catches painfully over the knuckle is usually giving you a real fit signal. A ring that only feels tight after heat, exercise, or travel may not need an immediate size change if the problem is occasional and predictable.",
+          "At Susie's, the first conversation is about fit behavior, not just the number stamped on a mandrel. Daily wear, stacking, seasonal swelling, and whether the ring is an engagement ring, wedding band, or heirloom piece all affect whether sizing now is the right decision.",
+          "That matters because customers often assume any discomfort means 'size it up' or any looseness means 'size it down.' In reality, the best outcome comes from deciding whether the ring needs a permanent size change, a temporary sizing aid, or a more careful setting and shank inspection before anything is altered.",
         ],
       },
       {
-        heading: "Protecting stones and settings",
+        heading: "How sizing up and sizing down actually work",
         body: [
-          "Prongs and settings should be inspected before and after sizing, especially on rings with multiple stones. We perform this check as standard for all Pasadena ring resizing clients.",
+          "Sizing down means removing a section of metal, reshaping the shank, and restoring roundness so the ring still feels natural on the hand. Sizing up usually means cutting the shank, adding matched metal, then soldering or welding and blending the seam so the finished ring does not look patched.",
+          "Those two directions are not interchangeable in labor or risk. Sizing up usually takes more material and more finish work, while sizing down puts more emphasis on reshaping and making sure the band still balances correctly once metal is removed.",
+          "For Pasadena customers, the practical question is whether the result will look clean and feel stable after the work is done. That is why we treat seam finish, roundness, and everyday comfort as part of the repair, not as optional cosmetic extras.",
         ],
       },
+      {
+        heading: "What limits ring sizing",
+        body: [
+          "Most standard gold, silver, and platinum rings can be resized safely, but not every design is a good candidate. Alternative metals like tungsten and titanium usually cannot be resized in the same way, and eternity bands or rings with stones all the way around often have hard structural limits.",
+          "Decorative engraving, continuous pave, fragile antique details, or prior repair history can also change what is safe. A ring may technically be adjustable, but only within a narrow range if you want to preserve its pattern, symmetry, and stone security.",
+          "This is where a real bench assessment matters. A quick answer from a kiosk or chain counter will not always account for thin shanks, hidden wear, or the amount of stress a design can actually take before it starts risking prongs or side stones.",
+        ],
+      },
+      {
+        heading: "Protecting stones, finish, and white gold color",
+        body: [
+          "Stone settings should be inspected before and after sizing, especially on multi-stone rings, halos, and bands with side stones. If a ring already has worn prongs or movement in the setting, the safest path may include reinforcement as part of the same job.",
+          "White gold deserves special mention because a clean size adjustment does not automatically restore the ring's bright white appearance. Many white gold rings benefit from polishing and fresh rhodium after the bench work so the seam does not leave a dull or mismatched section behind.",
+          "At Susie's, the goal is not simply changing the size. It is returning the ring in wearable condition, with the fit corrected and the finish, settings, and comfort all checked before pickup.",
+        ],
+      },
+      {
+        heading: "What ring sizing costs and how long it takes",
+        body: [
+          "Basic ring sizing often starts around the lower end of our pricing range, while complex sizing starts higher once stone checks, metal additions, wide shanks, or structural reinforcement are involved. The final number depends on the metal, the direction of the size change, the design constraints, and whether finishing work like rhodium is needed afterward.",
+          "Most straightforward jobs still follow our Same Day/Next Day pattern, but some rings naturally need more care. If the ring is for a proposal, wedding, anniversary, or upcoming event, that should be part of the first conversation so timing can be planned around the real deadline instead of guessed afterward.",
+          "The easiest next step is to start with a fast quote or bring the ring in for a fit and structure assessment. That gives you a real answer on timing and scope before the work begins.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers before resizing a ring",
+    faqs: [
+      {
+        question: "How do I know if my ring needs resizing or if my finger size is just changing temporarily?",
+        answer:
+          "If the ring is only tight or loose occasionally, seasonal swelling or temperature may be the bigger factor. If it consistently spins, slides off too easily, or hurts at the knuckle, it usually needs a real fit assessment.",
+      },
+      {
+        question: "Can all rings be resized?",
+        answer:
+          "No. Most gold, silver, and platinum rings can be resized, but tungsten, titanium, some eternity bands, and highly intricate designs may have sizing limits or may not be safe candidates at all.",
+      },
+      {
+        question: "Will resizing affect my stones or finish?",
+        answer:
+          "It can, which is why settings are checked before and after sizing. White gold rings also often benefit from polishing and rhodium refinishing after the size change so the color stays consistent.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your ring fit still feels uncertain",
+    nextStepsIntro:
+      "If you want a clear answer on safety, pricing, and timing, start with ring sizing service details or request a fast quote before committing to the resize.",
+    nextSteps: [
+      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting", "jewelry-cleaning"],
   },
@@ -114,33 +169,87 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "watch-battery-replacement",
     title: "Watch Battery Replacement: Timing and Care Tips",
     excerpt:
-      "What to expect during battery service, when pressure testing matters, and how to reduce avoidable watch damage.",
+      "What a proper watch battery service includes, when water-resistance checks matter, and how to avoid bigger movement damage by waiting too long.",
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Preventive Care"],
     publishedAt: "2026-02-17",
     reviewedAt: "2026-02-18",
-    readTime: "4 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Not every battery issue is just a battery issue.",
-      "Seal checks and pressure tests matter on water-exposed watches.",
-      "Same Day service is available for most watch batteries in Pasadena.",
+      "A stopped watch is not always just a dead battery, especially if moisture or old leakage is involved.",
+      "Battery service should include case care, gasket awareness, and a realistic conversation about water exposure.",
+      "Most standard watch battery replacements still fit the Same Day/Next Day service pattern in Pasadena.",
     ],
     sections: [
       {
-        heading: "When to seek watch repair in Pasadena",
+        heading: "Why battery timing matters more than most owners think",
         body: [
-          "When a battery weakens, some watches start losing time before they stop. Our shop on Fairmont Pkwy offers quick battery replacements to avoid movement damage from leakage.",
-          "Early replacement is usually faster and lower risk than waiting for complete failure.",
+          "Quartz watches often give subtle warnings before they stop completely. Some begin losing time, some start skipping seconds, and others simply go dead without much notice. The bigger issue is what happens when an old battery is left inside too long, especially if leakage begins inside the movement.",
+          "At Susie's, battery replacement is treated as preventive care rather than a last-minute task after a watch has been sitting dead in a drawer. Early replacement is usually faster, cleaner, and lower risk than waiting until the watch has moisture exposure, corrosion, or a gasket problem layered on top.",
+          "That matters whether the watch is an everyday work piece, a sentimental family watch, or something you only pull out for travel and special events. The safest service is not just getting the hands moving again. It is preventing the avoidable damage that starts when battery service is delayed too long.",
         ],
       },
       {
-        heading: "What our watch service includes",
+        heading: "What proper battery service should include",
         body: [
-          "A quality battery service at Susie's includes fit and function checks, plus a seal or gasket review to maintain water resistance where possible.",
+          "A proper battery replacement should involve more than opening the back, swapping a cell, and closing it again. The case should be handled carefully to avoid scratches, the battery should match the watch correctly, and the watch should be checked for basic fit and function before it goes back on your wrist.",
+          "Seal and gasket condition matter too, especially if the watch sees sweat, rain, splashes, or occasional water exposure. A watch can seem fine after a battery swap and still have compromised water resistance if the gasket is dry, dirty, or no longer seating the way it should.",
+          "At Susie's, those checks are part of the conversation because battery service is one of the easiest moments to catch a deeper issue early. If the watch needs a more complete service, you should know that before it is treated like a simple battery-only job.",
         ],
       },
+      {
+        heading: "When pressure testing or moisture checks matter",
+        body: [
+          "Not every watch needs the same level of post-battery verification. A standard everyday quartz watch may only need a basic seal review, while a water-resistant or sports watch deserves a more careful discussion about moisture, gasket condition, and whether a deeper pressure-related check is appropriate.",
+          "If the watch has been in the pool, near steam, out in heavy rain, or has ever fogged under the crystal, the risk level changes. Once moisture gets inside, a fresh battery alone will not solve the real problem.",
+          "This is where honest service matters. It is better to hear that your watch needs more than a battery than to leave with a quick swap and discover later that water damage was already starting inside the case.",
+        ],
+      },
+      {
+        heading: "When a stopped watch may need more than a battery",
+        body: [
+          "A dead battery is common, but it is not the only reason a watch stops. Corrosion, moisture intrusion, stem issues, crystal damage, or other movement problems can show up with the same symptom: the watch no longer runs.",
+          "If the watch recently started losing time, stopped after being stored for a long period, or has visible signs of moisture or impact, it is worth treating the battery as one part of the diagnosis rather than the whole diagnosis.",
+          "This is especially important for sentimental or higher-end watches. A little caution now is often the difference between a simple local battery service and a larger repair later.",
+        ],
+      },
+      {
+        heading: "Timing, local convenience, and the best next step",
+        body: [
+          "Most standard battery replacements still follow our Same Day/Next Day pattern, and many can be handled quickly when the watch is straightforward. More complicated cases take longer for the right reasons: careful opening, seal review, parts condition, or a broader diagnosis if the battery is not the true issue.",
+          "For customers coming from Pasadena, Deer Park, La Porte, Webster, or Clear Lake, the easiest move is to start with a quick quote or bring the watch in for a direct in-house assessment. That keeps the process local, transparent, and under one roof.",
+          "If the watch matters to you, do not wait until it has sat too long with an aging battery. Early service usually protects both the movement and the long-term cost of ownership.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about watch battery service",
+    faqs: [
+      {
+        question: "How long does a watch battery replacement usually take?",
+        answer:
+          "Most straightforward battery replacements follow our Same Day/Next Day service pattern. Timing can stretch if the watch needs careful opening, seal attention, or broader diagnostics.",
+      },
+      {
+        question: "Do you check seals or gaskets during battery replacement?",
+        answer:
+          "Yes. Seal and gasket condition are part of the service conversation, especially if the watch has water exposure or the owner expects water resistance to remain dependable.",
+      },
+      {
+        question: "Can a stopped watch need more than a battery?",
+        answer:
+          "Yes. Moisture, corrosion, stem issues, or other movement problems can look like a battery issue, so the watch may need a deeper check than a battery swap alone.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your watch just stopped",
+    nextStepsIntro:
+      "If you want a local answer before the problem gets bigger, start with the watch repair page or request a fast quote for battery service and condition review.",
+    nextSteps: [
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair", "bracelet-repair", "heirloom-restoration"],
   },
@@ -148,33 +257,88 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "stone-security-checklist",
     title: "Stone Security Checklist: Preventing Loose Diamonds",
     excerpt:
-      "How to spot warning signs early, what inspections matter, and when to secure stones before loss happens.",
+      "How to spot the warning signs of a loose stone, what makes settings fail, and when to act before a diamond or gemstone is lost.",
     image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Small movement in a stone is an early warning, not normal wear.",
-      "Prong checks should happen before and after major repairs.",
-      "Quick reinforcement costs less than replacing a lost stone.",
+      "A rattling stone, snagging prong, or ring that rotates heavily are early warning signs, not harmless quirks.",
+      "Weak prongs and unstable seats should be addressed before cleaning, resizing, or daily wear continue.",
+      "Reinforcement and resetting are almost always easier than replacing a lost stone later.",
     ],
     sections: [
       {
-        heading: "Early signs your stone may be at risk",
+        heading: "The first warning signs of an unsafe setting",
         body: [
-          "If you hear a faint rattle or notice a snagging prong, your setting may already be compromised. At our Pasadena shop, we use specialized magnification to spot these micro-issues.",
-          "These signs are easiest to correct early, before a stone shifts further or falls out during daily wear.",
+          "If you hear a faint rattle, feel a prong catching on fabric, or notice the stone no longer looks perfectly centered, the setting may already be compromised. These are not cosmetic annoyances. They are early indicators that the stone may be shifting or that the metal securing it has worn down enough to create risk.",
+          "At Susie's, this kind of issue is easier to solve when it is caught early. A slightly worn prong or shallow seat can often be reinforced before the stone actually moves far enough to fall out. Waiting usually turns a simple repair into a more stressful and more expensive problem.",
+          "A ring that rotates constantly so the stone faces palm-side can also take more daily impact than people realize. Poor fit and weak settings often work together to create the kind of wear that customers only notice after the stone already feels exposed.",
         ],
       },
       {
-        heading: "When to reinforce settings",
+        heading: "What actually puts stones at risk",
         body: [
-          "Minor wear can often be solved with targeted retipping. We provide free stone security checks for all Pasadena walk-ins to ensure your diamonds stay exactly where they belong.",
+          "Worn prongs are one of the most common causes, but they are not the only one. Thin shanks, open or shallow seats, past impact damage, and settings that were already delicate for everyday wear can all create security issues over time.",
+          "Home cleaning can also make a weak situation worse if the ring is scrubbed aggressively or exposed to harsh products while the prongs are already compromised. In that case, the cleaning itself is not the root problem. The hidden wear was already there and needed an inspection first.",
+          "Vintage rings, halo styles, and pieces with multiple side stones deserve extra caution because small weak points can be harder to spot without magnification.",
         ],
       },
+      {
+        heading: "When to bring the piece in immediately",
+        body: [
+          "If the stone moves, tilts, rattles, or suddenly snags, stop wearing the jewelry. The safest move is to put it away and bring it in before another day of errands, work, or gym wear turns the issue into a missing-stone situation.",
+          "You should also bring the piece in quickly if it recently took a hit, if a prong looks visibly flattened or shorter than the others, or if the ring has just gone through sizing or another repair and you want the setting rechecked afterward.",
+          "At Susie's, that inspection is part of how we protect sentimental and everyday jewelry from preventable loss. It is easier to reinforce a weak setting than to replace the original center stone once it is gone.",
+        ],
+      },
+      {
+        heading: "What professional stone-security work can include",
+        body: [
+          "Depending on the condition, the safest fix may be retipping a worn prong, tightening a loose seat, resetting the stone, rebuilding part of the head, or recommending a stronger overall setting if the current one is too compromised for daily use.",
+          "That is also why ring sizing, heirloom restoration, and custom redesign can tie into stone security. Sometimes the real solution is not only tightening the stone. It is strengthening the whole structure that is supposed to protect it.",
+          "The right repair path should be explained before the work starts, especially if the customer needs to choose between reinforcement, restoration, or a larger redesign using the original stone.",
+        ],
+      },
+      {
+        heading: "The lowest-risk next step for a ring you do not fully trust",
+        body: [
+          "If a ring already feels questionable, do not wait for a special occasion to test it. Bring it in for a quote-first inspection and let the condition decide whether the piece needs immediate work or simply closer monitoring.",
+          "For Pasadena customers, the value is not only the repair itself. It is knowing the jewelry stays in-house, the risks are explained clearly, and the next decision is based on what the setting actually needs rather than on guesswork.",
+          "That makes stone-security checks one of the easiest preventive services to justify. A small repair now is usually the cheaper decision compared with replacing a missing diamond later.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about loose stones and weak settings",
+    faqs: [
+      {
+        question: "Is a tiny rattle in my ring really a problem?",
+        answer:
+          "Yes. Even slight movement is an early warning sign that the setting may no longer be holding the stone correctly, and it should be checked before the ring is worn much more.",
+      },
+      {
+        question: "Should I clean my ring at home if I think a stone might be loose?",
+        answer:
+          "No. If the setting already feels questionable, aggressive home cleaning can make the problem worse. Get the setting inspected first.",
+      },
+      {
+        question: "Can a weak setting be repaired without replacing the whole ring?",
+        answer:
+          "Often yes. Retipping, tightening, or resetting can solve many issues, but badly worn or structurally compromised mountings may need a broader repair or redesign.",
+      },
+    ],
+    nextStepsHeading: "Best next step if a stone no longer feels secure",
+    nextStepsIntro:
+      "Start with a stone-setting inspection if the piece shows movement, snagging, or a visible prong issue. If the structure is too compromised, the next conversation may move into restoration or redesign.",
+    nextSteps: [
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["stone-setting", "jewelry-cleaning", "heirloom-restoration"],
   },
@@ -182,33 +346,87 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "chain-repair-weak-points",
     title: "Chain Repair 101: Necklace and Bracelet Weak Points",
     excerpt:
-      "Where chains usually fail, which clasp issues are most common, and how to prevent repeat breakage.",
+      "Where chains usually fail, how clasps and jump rings wear out, and what makes one repair last longer than a quick temporary fix.",
     image: "/images/blog/chain-repair-weak-points-cover.jpg",
     topics: ["Chain Repair", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "5 min read",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Jump rings and clasp joints are the most common weak points.",
-      "Delicate chains need matching solder and controlled heat handling.",
-      "Reinforcing one weak section can prevent repeat repairs.",
+      "Jump rings, clasp connections, and thin chain segments are the most common weak points.",
+      "A lasting repair depends on matching the chain style, the solder work, and the clasp condition instead of only closing the broken spot.",
+      "It is usually smarter to fix a weak chain before it fails again and risks losing the piece altogether.",
     ],
     sections: [
       {
-        heading: "Predictable weak points in local chains",
+        heading: "Where chains usually break first",
         body: [
-          "Most chain failures happen at stress points: clasp connections and jump rings. In the Houston humidity, even sweat and oils can accelerate wear on these small joints.",
-          "Identifying these thin areas early prevents accidental loss of your favorite necklace.",
+          "Most chain failures happen at predictable stress points: the jump ring near the clasp, the clasp itself, and the thinnest links in the area that takes the most daily pull. That pattern holds for both necklaces and bracelets because those are the points where tension, twisting, and repeated opening-and-closing tend to collect.",
+          "Humidity, sweat, lotions, and everyday movement do not destroy a chain on their own, but over time they can contribute to wear on small joints that are already taking repeated stress. The result is usually a chain that looks fine from a distance until one weak link finally opens or snaps.",
+          "Catching those weak points early is one of the easiest ways to prevent a bigger loss, especially if the chain carries a sentimental pendant or is part of your everyday routine.",
         ],
       },
       {
-        heading: "How to make repairs last",
+        heading: "Necklace weak points and bracelet weak points are not always the same",
         body: [
-          "We offer Same Day/Next Day service for most chain repairs in Pasadena, ensuring you aren't without your jewelry for long while maintaining structural integrity.",
+          "Necklaces often fail at the clasp connection, the jump ring, or in a fine segment that kinks repeatedly near the front or side. Bracelets can face the same issues, but they also tend to take more abrupt impact during typing, lifting, carrying bags, and normal wrist movement.",
+          "That difference matters because a bracelet that catches on counters or desks may need a stronger clasp or a more durable repair strategy than a necklace that mainly suffers from fine-link fatigue.",
+          "At Susie's, we treat both categories as in-house repair work, but the most durable fix depends on how the piece is actually worn and where the stress is occurring.",
         ],
       },
+      {
+        heading: "Why clasps deserve more attention than most customers give them",
+        body: [
+          "A chain can be professionally repaired and still feel unreliable if the clasp is worn, bent, or difficult to close. In many cases the clasp is not just an accessory part. It is one of the core structural weak points in the entire piece.",
+          "That is why clasp replacement or an upgrade is often part of the repair conversation, especially on pieces that have already failed once. If the clasp feels weak in your fingers, pops open too easily, or no longer lines up well, it is worth addressing before the chain comes back into rotation.",
+          "For a customer, that can feel like an extra step. In reality, it is what helps turn a quick repair into a repair that actually lasts.",
+        ],
+      },
+      {
+        heading: "What makes one chain repair last longer than another",
+        body: [
+          "A durable repair is not just about reconnecting a broken point. It depends on using the right method for the chain style, applying controlled heat where appropriate, keeping the repair clean in appearance, and checking whether nearby links or the clasp are also becoming weak.",
+          "If only the obvious break is closed while the surrounding links stay thin or distorted, the chain often fails again close to the original repair. That is why reinforcement and inspection matter as much as the actual solder point.",
+          "At Susie's, the goal is a clean finish that looks natural and feels comfortable to wear, not a bulky or mismatched spot that solves today's break and creates tomorrow's failure.",
+        ],
+      },
+      {
+        heading: "Timing, local service, and the best next step",
+        body: [
+          "Most chain repairs still fit our Same Day/Next Day pattern when the issue is straightforward and the needed parts are standard. If a premium clasp, uncommon chain style, or more delicate reconstruction is involved, the scope should be explained before the work starts.",
+          "For Pasadena customers, the easiest next step is to use the fast quote path or bring the piece in for a direct in-house assessment. That is the fastest way to learn whether the chain needs a simple link repair, a clasp replacement, or a broader reinforcement plan.",
+          "If the chain already broke once, do not assume the weak point is gone. Ask whether the clasp and nearby links should be addressed too so the repair actually lasts.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about weak chains and clasp issues",
+    faqs: [
+      {
+        question: "What part of a chain usually breaks first?",
+        answer:
+          "The most common weak points are the jump ring near the clasp, the clasp itself, and the thinnest links in the section that takes the most daily stress.",
+      },
+      {
+        question: "Should I replace the clasp if the chain already broke once?",
+        answer:
+          "Often yes. If the clasp feels weak, misaligned, or unreliable, replacing or upgrading it can be part of making the repair last longer.",
+      },
+      {
+        question: "How long does chain repair usually take?",
+        answer:
+          "Most straightforward chain repairs follow our Same Day/Next Day pattern, but timing can stretch if the chain is delicate, needs an uncommon clasp, or requires broader reinforcement.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your chain already feels unreliable",
+    nextStepsIntro:
+      "If the chain has a broken link, weak clasp, or repeat failure point, start with the repair service that matches the piece and request a quote-first assessment.",
+    nextSteps: [
+      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
+      { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
   },
@@ -392,26 +610,88 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "professional-cleaning-vs-home-care",
     title: "Professional Jewelry Cleaning vs. At-Home Cleaning",
     excerpt:
-      "When home cleaning is enough, when to bring pieces in, and how to avoid accidental damage.",
+      "When gentle home cleaning is enough, when a piece should be professionally cleaned instead, and how to avoid accidental damage to stones, settings, and vintage jewelry.",
     image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
     topics: ["Cleaning & Polish", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Not all stones are safe for ultrasonic methods.",
-      "Professional cleaning includes safety checks, not just shine.",
-      "Routine cleanings help catch loose settings early.",
+      "Home cleaning works best for sturdy jewelry and only with mild, low-risk methods.",
+      "Professional cleaning is about structure and safety, not just making a piece look brighter.",
+      "Vintage jewelry, fragile settings, and white gold often benefit from in-house care instead of stronger home methods.",
     ],
     sections: [
       {
-        heading: "The Pasadena local advantage",
+        heading: "When home cleaning is enough",
         body: [
-          "Professional cleaning at Susie's isn't just about shine—it's about safety. We inspect every prong and setting as part of the process, a service home cleaning simply can't match.",
+          "For many standard everyday pieces, a simple at-home routine is enough. Mild dish soap, lukewarm water, a short soak, and a very soft brush are usually the safest baseline for removing normal buildup without introducing unnecessary risk.",
+          "The important part is knowing what home cleaning can and cannot do. It can remove surface residue and restore some sparkle, but it cannot tell you whether a prong is thinning, whether a seat is opening up, or whether a white gold ring needs more than soap and water to look finished again.",
+          "At-home care is best treated as maintenance for sturdy jewelry, not as a replacement for inspection. If the piece is valuable, delicate, sentimental, or already showing signs of wear, home cleaning should stay conservative.",
         ],
       },
+      {
+        heading: "When home cleaning becomes risky",
+        body: [
+          "The biggest problems usually come from harsh products or from cleaning a piece that already has a structural issue. Bleach, strong ammonia, abrasive compounds, and aggressive scrubbing can all create damage that customers do not notice until prongs weaken, finishes dull, or older metal starts showing stress.",
+          "Vintage and heirloom pieces deserve extra caution because they often have thinner prongs, older solder seams, and more fragile details than modern jewelry. The wrong cleaner or too much force can turn a piece that only needed safe cleaning into a restoration problem.",
+          "If a ring already has a loose-feeling stone, an open-looking prong, or delicate gallery work, stop trying to clean it at home until it is inspected. Shine is never more important than security.",
+        ],
+      },
+      {
+        heading: "What professional cleaning adds that home cleaning cannot",
+        body: [
+          "Professional cleaning at Susie's is not just about brightness. It is also a chance to inspect prongs, settings, seams, and overall wear so hidden issues can be caught early. That matters because customers often think a piece only needs polishing when it actually needs a security check first.",
+          "Professional service also gives better control over finish decisions. Some customers want a piece polished to a ready-to-wear shine, while others want to preserve more of the vintage character rather than strip everything back to a newer look.",
+          "In-house cleaning is especially valuable for white gold, heirlooms, and pieces that have not been inspected in a while. It keeps the conversation local and lets the same team evaluate whether the jewelry only needs cleaning or whether it is time to address a structural concern too.",
+        ],
+      },
+      {
+        heading: "Special cases: white gold, heirlooms, and stone security",
+        body: [
+          "White gold often needs more than basic home cleaning because the ring's color and finish can look uneven after years of wear or after bench work like sizing. A professional clean and polish can be the moment to decide whether rhodium refinishing is the better next step.",
+          "Heirloom jewelry should be treated more like preservation work than routine maintenance. The question is not only how to make it shine. It is how to clean it without erasing the character or stressing the structure that makes it sentimental in the first place.",
+          "Stone security is another reason professional cleaning matters. A cleaning appointment is one of the easiest opportunities to catch loose settings early, before the customer experiences the much worse version of the problem: a missing stone.",
+        ],
+      },
+      {
+        heading: "How to decide which path is right for your piece",
+        body: [
+          "If the jewelry is sturdy, modern, and free from visible wear, a gentle home routine may be enough between visits. If the piece is vintage, white gold, stone-heavy, or simply too important to gamble with, professional cleaning is usually the better decision.",
+          "At Susie's, the advantage is not just that the piece gets cleaned. It is that the same in-house team can tell you whether the jewelry should stay on a cleaning track, move into repair, or be handled more carefully because of age or structural wear.",
+          "The safest next step is to choose based on the piece itself, not on a one-size-fits-all cleaning rule.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about home cleaning versus professional cleaning",
+    faqs: [
+      {
+        question: "What is the safest way to clean jewelry at home?",
+        answer:
+          "For many sturdy pieces, the safest method is mild dish soap, lukewarm water, and a very soft brush. Skip harsh chemicals and aggressive scrubbing.",
+      },
+      {
+        question: "When should I stop cleaning jewelry at home and bring it in?",
+        answer:
+          "Bring it in if the piece is vintage, has a loose-feeling stone, delicate details, or a finish issue that home care will not solve safely.",
+      },
+      {
+        question: "Does professional cleaning include more than polishing?",
+        answer:
+          "Yes. Professional cleaning also gives the jeweler a chance to inspect settings, seams, and wear so small structural issues can be caught before they become bigger repairs.",
+      },
+    ],
+    nextStepsHeading: "Best next step if the piece matters too much to guess",
+    nextStepsIntro:
+      "If you want to know whether a piece only needs safe cleaning or also needs a security check, start with professional cleaning or an heirloom-focused inspection.",
+    nextSteps: [
+      { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
   },

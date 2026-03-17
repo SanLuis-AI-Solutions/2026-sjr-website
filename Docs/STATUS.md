@@ -5,6 +5,32 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- The second NotebookLM-backed thin-post expansion pass is now complete:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-thin-post-expansion-pass-2.md`
+  - notebooks used:
+    - `SJR Services`
+    - `SJR Reviews And Voice`
+  - research + brief queue rows added for:
+    - `professional-cleaning-vs-home-care`
+    - `chain-repair-weak-points`
+    - `watch-battery-replacement`
+    - `stone-security-checklist`
+    - `ring-sizing-guide`
+  - all `5` research rows now verify as `ready_for_brief`
+  - all `5` brief rows now verify as `brief_ready`
+  - expanded directly in `src/lib/blog.ts`
+  - verified post depth after expansion:
+    - `professional-cleaning-vs-home-care` — `965` words
+    - `chain-repair-weak-points` — `963` words
+    - `watch-battery-replacement` — `997` words
+    - `stone-security-checklist` — `962` words
+    - `ring-sizing-guide` — `1065` words
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "mobile blog detail"`
+    - NotebookLM per-post research queries
+    - Supabase SQL verification for the `5` new research rows and `5` new brief rows
 - NotebookLM is now active again as the SJR research backbone:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-activation-and-thin-post-expansion-pass.md`
@@ -99,8 +125,7 @@ Update cadence: weekly (or after major milestones).
     - add upstream `Research`, `Briefs`, and `Results` stages ahead of the current `Publishing` queue
     - treat SJR as the proving ground before any SanLuis multi-client extraction
   - next build scope:
-    - expand the next thin-post cluster from the active NotebookLM stack
-    - plan the `Connections -> Stack` refactor around `Upload-Post`, `n8n`, `NotebookLM`, and `.health`
+    - implement the `Connections -> Stack` refactor around `Upload-Post`, `n8n`, `NotebookLM`, and `.health`
     - keep direct GBP unblock work as a dependency lane rather than the main operating model
 - Direct Google Business Profile OAuth is currently blocked by Google project approval / quota state:
   - latest callback failure indicates quota blocking on `mybusinessaccountmanagement.googleapis.com`
