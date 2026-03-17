@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { AdminSectionCard } from "@/components/admin/admin-section-card";
 import { ContentBriefsPanel } from "@/components/admin/nexus/content-briefs-panel";
+import { ContentResultsPanel } from "@/components/admin/nexus/content-results-panel";
 import { ContentResearchPanel } from "@/components/admin/nexus/content-research-panel";
 import { InboxSummaryPanel } from "@/components/admin/nexus/inbox-summary-panel";
 import { IntegrationHealthPanel } from "@/components/admin/nexus/integration-health-panel";
@@ -24,6 +25,7 @@ type NexusView =
   | "overview"
   | "research"
   | "briefs"
+  | "results"
   | "leads"
   | "publishing"
   | "reviews"
@@ -47,6 +49,7 @@ function normalizeView(value: string | undefined): NexusView {
     value === "overview" ||
     value === "research" ||
     value === "briefs" ||
+    value === "results" ||
     value === "leads" ||
     value === "publishing" ||
     value === "reviews" ||
@@ -237,6 +240,18 @@ function BriefsWorkspace({
         seedAction={seedAction}
         notice={notice}
       />
+    </div>
+  );
+}
+
+function ResultsWorkspace({
+  dashboard,
+}: {
+  dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
+}) {
+  return (
+    <div className="grid h-full gap-3 lg:min-h-0">
+      <ContentResultsPanel rows={dashboard.resultsRows} summary={dashboard.resultsSummary} />
     </div>
   );
 }
@@ -608,6 +623,8 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
             notice={contentOpsNotice}
           />
         ) : null}
+
+        {view === "results" ? <ResultsWorkspace dashboard={dashboard} /> : null}
 
         {view === "leads" ? <LeadsWorkspace dashboard={dashboard} /> : null}
 

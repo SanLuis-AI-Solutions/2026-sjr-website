@@ -24,6 +24,26 @@
 
 ## Session Summary (Most Recent)
 Latest local follow-up:
+- Implemented a first-pass `Results` section locally in Mission Control.
+  - new section:
+    - `Results`
+  - current data sources:
+    - `.health/weekly-seo-health-latest.json`
+    - `.health/ga4-gsc-reconciliation-90d-latest.json`
+    - `shared_slugs`
+    - `nexus_content_queue`
+    - `BLOG_POSTS`
+  - current output:
+    - weekly clicks, organic sessions, lead starts, and lead outcomes scorecards
+    - per-post rows showing publish state, 7-day organic movement, 90-day clicks, and next-step guidance
+  - local verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+- Evaluated `Upload-Post` against `OneUp` for SJR.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--social-publishing-vendor-evaluation-upload-post-vs-oneup.md`
+  - current recommendation:
+    - prefer `Upload-Post` for SJR if the real-world test passes because it better fits the planned `Nexus -> n8n -> publisher` execution model
 - Implemented SJR content ops `Phase 1A` locally and aligned the live Supabase schema.
   - new Mission Control sections:
     - `Research`

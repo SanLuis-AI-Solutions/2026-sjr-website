@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { BLOG_POSTS } from "@/lib/blog";
 import {
   buildContentSummary,
@@ -146,16 +148,69 @@ export type InboxSummary = {
   contacts: InboxBucketSummary;
 };
 
+export type ResultsSummary = {
+  trackedContentCount: number;
+  publishedContentCount: number;
+  weeklySearchClicks: number;
+  weeklyOrganicSessions: number;
+  weeklyLeadStarts: number;
+  weeklyLeadOutcomes: number;
+};
+
+export type ContentResultsRow = {
+  slug: string;
+  title: string;
+  publishedAt: string;
+  serviceLabel: string;
+  publishedPlatforms: SocialPlatform[];
+  approvalStatus: ContentQueueRow["status"] | PublishingQueueStatus | "untracked";
+  weeklyOrganicSessions: number;
+  ninetyDayOrganicSessions: number;
+  ninetyDaySearchClicks: number;
+  recommendation: string;
+};
+
 export type NexusDashboardData = {
   apiHealth: ApiHealthSummary[];
   contentSummary: ContentSummary;
+  resultsSummary: ResultsSummary;
   syncSummary: SyncSummary;
   reviewSummary: ReviewSummary;
   inboxSummary: InboxSummary;
+  resultsRows: ContentResultsRow[];
   contentQueueRows: ContentQueueRow[];
   contentResearchRows: ContentResearchRow[];
   syncRows: SyncMatrixRow[];
   recentReviews: ReviewStatusRow[];
+};
+
+type WeeklyHealthSnapshot = {
+  searchConsole?: {
+    clicks?: number;
+  };
+  ga4?: {
+    organicSessions?: number;
+    keyEvents?: Record<string, number>;
+    topLandingPages?: Array<{
+      page?: string;
+      sessions?: number;
+    }>;
+  };
+};
+
+type ReconcileSnapshot = {
+  ga4?: {
+    topOrganicLandingPages?: Array<{
+      page?: string;
+      sessions?: number;
+    }>;
+  };
+  searchConsole?: {
+    topPages?: Array<{
+      page?: string;
+      clicks?: number;
+    }>;
+  };
 };
 
 const PLATFORM_LABELS: Record<SocialPlatform, string> = {
@@ -215,6 +270,119 @@ function buildApiHealth(configRows: NexusConfigRow[]): ApiHealthSummary[] {
       source: config?.refresh_token || config?.access_token ? "oauth" : envValue ? "env" : "missing",
       detail: config?.refresh_token || config?.access_token ? configDetail : envValue ? envKey : envKey,
     };
+  });
+}
+
+function readJsonSnapshot<T>(fileName: string): T | null {
+  try {
+    const target = path.join(process.cwd(), ".health", fileName);
+    if (!fs.existsSync(target)) return null;
+    return JSON.parse(fs.readFileSync(target, "utf8")) as T;
+  } catch {
+    return null;
+  }
+}
+
+function matchesRoutePath(candidate: string | undefined, routePath: string) {
+  if (!candidate) return false;
+  return candidate === routePath || candidate.startsWith(`${routePath}?`);
+}
+
+function matchesCanonicalUrl(candidate: string | undefined, canonicalUrl: string) {
+  if (!candidate) return false;
+  return candidate === canonicalUrl || candidate.startsWith(`${canonicalUrl}?`);
+}
+
+function buildResultsSummary(
+  sharedRows: SharedSlugRow[],
+  queueRows: ContentQueueRow[],
+  weeklySnapshot: WeeklyHealthSnapshot | null
+): ResultsSummary {
+  const publishedContentCount = new Set(
+    sharedRows.filter((row) => row.status === "shared").map((row) => row.slug)
+  ).size;
+  const weeklyKeyEvents = weeklySnapshot?.ga4?.keyEvents || {};
+
+  return {
+    trackedContentCount: queueRows.length,
+    publishedContentCount,
+    weeklySearchClicks: Number(weeklySnapshot?.searchConsole?.clicks || 0),
+    weeklyOrganicSessions: Number(weeklySnapshot?.ga4?.organicSessions || 0),
+    weeklyLeadStarts:
+      Number(weeklyKeyEvents.quote_form_start || 0) + Number(weeklyKeyEvents.booking_form_start || 0),
+    weeklyLeadOutcomes:
+      Number(weeklyKeyEvents.quote_submit_success || 0) +
+      Number(weeklyKeyEvents.booking_submit_success || 0) +
+      Number(weeklyKeyEvents.booking_submit_pending || 0),
+  };
+}
+
+function buildResultsRows(
+  sharedRows: SharedSlugRow[],
+  queueRows: ContentQueueRow[],
+  syncRows: SyncMatrixRow[],
+  weeklySnapshot: WeeklyHealthSnapshot | null,
+  reconcileSnapshot: ReconcileSnapshot | null
+): ContentResultsRow[] {
+  const landingPages7d = weeklySnapshot?.ga4?.topLandingPages || [];
+  const landingPages90d = reconcileSnapshot?.ga4?.topOrganicLandingPages || [];
+  const searchPages90d = reconcileSnapshot?.searchConsole?.topPages || [];
+  const queueBySlug = new Map(
+    queueRows
+      .filter((row) => row.slug_candidate)
+      .map((row) => [row.slug_candidate as string, row])
+  );
+  const syncBySlug = new Map(syncRows.map((row) => [row.slug, row]));
+
+  return BLOG_POSTS.map((post) => {
+    const routePath = `/blog/${post.slug}`;
+    const canonicalUrl = `https://www.susiesjewelryrepair.com${routePath}`;
+    const publishedPlatforms = Array.from(
+      new Set(
+        sharedRows
+          .filter((row) => row.slug === post.slug && row.status === "shared")
+          .map((row) => row.platform)
+      )
+    );
+    const weeklyOrganicSessions = landingPages7d
+      .filter((row) => matchesRoutePath(row.page, routePath))
+      .reduce((sum, row) => sum + Number(row.sessions || 0), 0);
+    const ninetyDayOrganicSessions = landingPages90d
+      .filter((row) => matchesRoutePath(row.page, routePath))
+      .reduce((sum, row) => sum + Number(row.sessions || 0), 0);
+    const ninetyDaySearchClicks = searchPages90d
+      .filter((row) => matchesCanonicalUrl(row.page, canonicalUrl))
+      .reduce((sum, row) => sum + Number(row.clicks || 0), 0);
+    const queueRow = queueBySlug.get(post.slug) || null;
+    const syncRow = syncBySlug.get(post.slug) || null;
+    const approvalStatus: ContentResultsRow["approvalStatus"] =
+      queueRow?.status || syncRow?.approvalStatus || "untracked";
+
+    let recommendation = "Watch for signal after distribution.";
+    if (publishedPlatforms.length === 0) {
+      recommendation = "Approve and distribute first.";
+    } else if (weeklyOrganicSessions === 0 && ninetyDayOrganicSessions === 0 && ninetyDaySearchClicks === 0) {
+      recommendation = "Redistribute or tighten the angle.";
+    } else if (weeklyOrganicSessions > 0 || ninetyDaySearchClicks > 0) {
+      recommendation = "Monitor leads and consider a follow-up asset.";
+    }
+
+    return {
+      slug: post.slug,
+      title: post.title,
+      publishedAt: post.publishedAt,
+      serviceLabel: post.relatedServiceSlugs.slice(0, 2).join(", ") || "General",
+      publishedPlatforms,
+      approvalStatus,
+      weeklyOrganicSessions,
+      ninetyDayOrganicSessions,
+      ninetyDaySearchClicks,
+      recommendation,
+    };
+  }).sort((a, b) => {
+    const aSignal = a.weeklyOrganicSessions + a.ninetyDayOrganicSessions + a.ninetyDaySearchClicks;
+    const bSignal = b.weeklyOrganicSessions + b.ninetyDayOrganicSessions + b.ninetyDaySearchClicks;
+    return bSignal - aSignal || b.publishedPlatforms.length - a.publishedPlatforms.length;
   });
 }
 
@@ -403,13 +571,24 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
 
   const apiHealth = buildApiHealth(configRows);
   const syncRows = buildSyncRows(sharedRows, queueRows);
+  const weeklySnapshot = readJsonSnapshot<WeeklyHealthSnapshot>("weekly-seo-health-latest.json");
+  const reconcileSnapshot = readJsonSnapshot<ReconcileSnapshot>("ga4-gsc-reconciliation-90d-latest.json");
+  const resultsRows = buildResultsRows(
+    sharedRows,
+    contentQueueRows,
+    syncRows,
+    weeklySnapshot,
+    reconcileSnapshot
+  );
 
   return {
     apiHealth,
     contentSummary: buildContentSummary(contentResearchRows, contentQueueRows),
+    resultsSummary: buildResultsSummary(sharedRows, contentQueueRows, weeklySnapshot),
     syncSummary: buildSyncSummary(syncRows, apiHealth),
     reviewSummary: buildReviewSummary(reviewRows),
     inboxSummary: buildInboxSummary(quotes, bookings, contacts),
+    resultsRows,
     contentQueueRows,
     contentResearchRows,
     syncRows,

@@ -68,6 +68,13 @@ const NEXUS_VIEWS = [
     icon: <DashboardIcon />,
   },
   {
+    key: "results",
+    label: "Results",
+    href: "/admin/nexus?view=results",
+    description: "Directional outcome signals.",
+    icon: <DashboardIcon />,
+  },
+  {
     key: "leads",
     label: "Leads",
     href: "/admin/nexus?view=leads",

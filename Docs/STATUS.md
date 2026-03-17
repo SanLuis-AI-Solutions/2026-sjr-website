@@ -5,6 +5,26 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- SJR content ops `Phase 1B` now has a first-pass `Results` section implemented locally:
+  - new Mission Control section:
+    - `Results`
+  - current data sources:
+    - `.health/weekly-seo-health-latest.json`
+    - `.health/ga4-gsc-reconciliation-90d-latest.json`
+    - `shared_slugs`
+    - `nexus_content_queue`
+    - `BLOG_POSTS`
+  - current output:
+    - directional scorecards for weekly clicks, organic sessions, lead starts, and lead outcomes
+    - per-post rows showing publish state, 7-day organic movement, 90-day clicks, and next-step guidance
+  - local verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+- Social publishing vendor direction is now narrowed for SJR:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--social-publishing-vendor-evaluation-upload-post-vs-oneup.md`
+  - current recommendation:
+    - `Upload-Post` is the better fit than `OneUp` for SJR because it supports `Google Business Profile`, exposes an API, and has an official `n8n` path that fits the planned `Nexus -> n8n -> publisher` architecture
 - SJR content ops `Phase 1A` is now implemented locally and seeded in the live Supabase project:
   - new Mission Control sections:
     - `Research`
