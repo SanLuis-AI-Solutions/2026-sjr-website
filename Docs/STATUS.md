@@ -5,7 +5,16 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
-- SJR content ops `Phase 1B` now has a first-pass `Results` section implemented locally:
+- SJR content strategy and research stack are now explicitly tightened:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
+  - decisions:
+    - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
+    - treat `NotebookLM` as the required research backbone for future briefs and content refreshes
+    - stop shipping thin blog posts; legacy sub-250-word posts now need expansion before large-scale new content work
+  - current blocker:
+    - `NotebookLM` MCP cache is expired, and the local browser-backed NotebookLM skill also needs re-authentication before notebook queries or notebook creation are reliable
+- SJR content ops `Phase 1B` is now live:
   - new Mission Control section:
     - `Results`
   - current data sources:
@@ -17,15 +26,17 @@ Update cadence: weekly (or after major milestones).
   - current output:
     - directional scorecards for weekly clicks, organic sessions, lead starts, and lead outcomes
     - per-post rows showing publish state, 7-day organic movement, 90-day clicks, and next-step guidance
-  - local verification:
+  - verification:
     - `npm run build`
     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+  - deploy:
+    - `23215416924` (`success`)
 - Social publishing vendor direction is now narrowed for SJR:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--social-publishing-vendor-evaluation-upload-post-vs-oneup.md`
   - current recommendation:
     - `Upload-Post` is the better fit than `OneUp` for SJR because it supports `Google Business Profile`, exposes an API, and has an official `n8n` path that fits the planned `Nexus -> n8n -> publisher` architecture
-- SJR content ops `Phase 1A` is now implemented locally and seeded in the live Supabase project:
+- SJR content ops `Phase 1A` is now live and seeded in the live Supabase project:
   - new Mission Control sections:
     - `Research`
     - `Briefs`
@@ -42,11 +53,11 @@ Update cadence: weekly (or after major milestones).
   - live starter seed now exists:
     - `4` research items
     - `1` starter brief
-  - local verification:
+  - verification:
     - `npm run build`
     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
-  - remaining release step:
-    - commit, deploy, and visually verify the new `Research` / `Briefs` sections in the live admin shell
+  - deploy:
+    - `23212715219` (`success`)
 - SJR content ops Phase 1 is now defined inside the current repo rather than as a separate new project:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-content-ops-phase-1-plan.md`
@@ -55,10 +66,9 @@ Update cadence: weekly (or after major milestones).
     - add upstream `Research`, `Briefs`, and `Results` stages ahead of the current `Publishing` queue
     - treat SJR as the proving ground before any SanLuis multi-client extraction
   - next build scope:
-    - `Phase 1A`
-    - add `nexus_content_research`
-    - add `nexus_content_queue`
-    - add `Research` and `Briefs` Mission Control sections
+    - repair `NotebookLM`
+    - create the five SJR research notebooks with valid sources
+    - start the thin-post expansion pass from research-backed briefs
 - Direct Google Business Profile OAuth is currently blocked by Google project approval / quota state:
   - latest callback failure indicates quota blocking on `mybusinessaccountmanagement.googleapis.com`
   - this is now treated as a provider approval blocker, not a front-end or redirect bug

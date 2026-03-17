@@ -6,15 +6,18 @@
 - Primary status ledger: `Docs/STATUS.md`
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
 - Latest code commit:
-  - `653a7dd` `fix: suppress spam lead notifications`
+  - `8dedb98` `feat: add nexus results view`
 - Latest deploy workflow:
-  - `22870252426` (`success`)
-  - note: initial spam-guardrail deploy run `22870062917` was cancelled during the Vercel production step and then superseded by the successful descendant deploy above
+  - `23215416924` (`success`)
+  - latest feature deploys still live:
+    - `23212715219` (`success`) for `cd875c7` `feat: add nexus research and briefs queues`
+    - `23215416924` (`success`) for `8dedb98` `feat: add nexus results view`
 
 ## Tooling State
 - NotebookLM MCP:
-  - installed, authenticated, and working
-  - notebook listing verified in-session
+  - installed, but MCP auth cache is currently stale
+  - `refresh_auth` reports success, but `notebook_list` still returns `Authentication expired`
+  - local NotebookLM skill can still read its own library metadata, but browser-query execution times out against the aged session and needs re-authentication
 - Google Workspace MCP:
   - installed, authenticated, and working in read-only mode
   - verified via `list_calendars` for `9xfold@gmail.com`
@@ -23,8 +26,17 @@
   - latest successful validation run: `22792076143`
 
 ## Session Summary (Most Recent)
-Latest local follow-up:
-- Implemented a first-pass `Results` section locally in Mission Control.
+Latest follow-up:
+- Tightened the SJR content/research operating standard.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
+  - decisions:
+    - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
+    - treat `NotebookLM` as the required research backbone for briefs and future content refreshes
+    - stop shipping thin blog posts; legacy sub-250-word posts are now explicitly queued for expansion
+  - current blocker:
+    - `NotebookLM` cannot yet be used reliably in-session because the MCP cache is expired and the local skill browser state is too old to answer notebook queries
+- Implemented and deployed a first-pass `Results` section in Mission Control.
   - new section:
     - `Results`
   - current data sources:
@@ -36,15 +48,17 @@ Latest local follow-up:
   - current output:
     - weekly clicks, organic sessions, lead starts, and lead outcomes scorecards
     - per-post rows showing publish state, 7-day organic movement, 90-day clicks, and next-step guidance
-  - local verification:
+  - verification:
     - `npm run build`
     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+  - deploy:
+    - `23215416924` (`success`)
 - Evaluated `Upload-Post` against `OneUp` for SJR.
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--social-publishing-vendor-evaluation-upload-post-vs-oneup.md`
   - current recommendation:
     - prefer `Upload-Post` for SJR if the real-world test passes because it better fits the planned `Nexus -> n8n -> publisher` execution model
-- Implemented SJR content ops `Phase 1A` locally and aligned the live Supabase schema.
+- Implemented and deployed SJR content ops `Phase 1A` and aligned the live Supabase schema.
   - new Mission Control sections:
     - `Research`
     - `Briefs`
@@ -64,8 +78,8 @@ Latest local follow-up:
   - verification:
     - `npm run build`
     - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
-  - current remaining step:
-    - commit + deploy the Nexus code changes so the new `Research` / `Briefs` sections become visible in production
+  - deploy:
+    - `23212715219` (`success`)
 - Defined the next SJR build track as a content operating system inside the current repo, not a separate new product repo.
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-content-ops-phase-1-plan.md`
@@ -73,10 +87,14 @@ Latest local follow-up:
     - keep `SJR` as the proving ground
     - extend the existing `Nexus` admin shell with upstream `Research`, `Briefs`, and `Results` stages
     - keep the current `Publishing` queue as the downstream execution stage
-  - planned Phase 1A implementation:
-    - add `nexus_content_research`
-    - add `nexus_content_queue`
-    - add `Research` and `Briefs` sections in Mission Control
+  - completed Phase 1A / 1B layers:
+    - `Research`
+    - `Briefs`
+    - `Results`
+  - next product direction:
+    - repair `NotebookLM` auth
+    - create the five SJR notebooks with valid sources
+    - expand the thinnest service-adjacent blog posts from research-backed briefs
 - Confirmed the latest Google Business Profile connect blocker is no longer redirect configuration.
   - current blocker:
     - Google callback now returns quota blocking on `mybusinessaccountmanagement.googleapis.com`
@@ -403,27 +421,28 @@ Latest local follow-up:
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Build `SJR Content Ops Phase 1A` inside the existing Nexus admin:
-   - add `nexus_content_research`
-   - add `nexus_content_queue`
-   - add `Research` and `Briefs` Mission Control sections
-   - keep `Publishing` as the downstream approval/distribution stage
-2. Continue GBP provider unblock work only as a dependency lane:
+1. Repair `NotebookLM` auth and create the five SJR notebooks defined in:
+   - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
+2. Start the thin-post expansion pass from research-backed briefs:
+   - `custom-design-timeline-guide`
+   - `heirloom-restoration-planning-guide`
+   - `pearl-restringing-timing-guide`
+3. Treat direct GBP provider unblock work as a dependency lane only:
    - resolve Google Business Profile project approval / quota state for the new Cloud project
    - use `9xfold@gmail.com` as the Google-side consent account because it owns the SJR GBP listing
-3. Monitor live lead traffic for the new spam guardrails:
+4. Monitor live lead traffic for the new spam guardrails:
    - verify Google Chat noise drops
    - verify suspicious leads land in `/admin/inbox` as `spam`
    - verify real leads still notify correctly
-4. Keep the weekly review loop lightweight:
+5. Keep the weekly review loop lightweight:
    - run `npm run google:weekly-seo-health`
    - update `DASHBOARD.md`
    - review `Docs/WEEKLY-SEO-HEALTH.md`
-5. Continue Google-admin monitoring:
+6. Continue Google-admin monitoring:
    - review indexing state of `/watch-repair`, `/book`, and `/quote`
    - review redirected Wix URLs over the next 2 weeks
-6. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
-7. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
+7. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+8. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 
 ## External-Agent Output Rule (Mandatory)
 
