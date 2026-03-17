@@ -15,9 +15,17 @@
 
 ## Tooling State
 - NotebookLM MCP:
-  - installed, but MCP auth cache is currently stale
-  - `refresh_auth` reports success, but `notebook_list` still returns `Authentication expired`
-  - local NotebookLM skill can still read its own library metadata, but browser-query execution times out against the aged session and needs re-authentication
+  - installed, repaired, and usable again in-session
+  - local skill browser state was refreshed and MCP auth tokens were re-synced successfully
+  - verified with:
+    - `notebooklm.notebook_list`
+    - `notebooklm.notebook_query`
+  - active SJR notebooks now exist:
+    - `SJR Services` — `7ccc981f-7c0c-412e-becc-855cb7ce933c`
+    - `SJR Reviews And Voice` — `38a675d2-08b7-4f12-b017-10f47fa97c85`
+    - `SJR Local SEO And Coverage` — `dabe259e-d5b6-42a6-9039-1fa77f8e3c16`
+    - `SJR Competitors` — `0ec10071-e9b8-4a63-94e8-53d97b2867be`
+    - `SJR Seasonal And Occasion Demand` — `7b67c145-2615-4633-ae0d-2f1edeff921a`
 - Google Workspace MCP:
   - installed, authenticated, and working in read-only mode
   - verified via `list_calendars` for `9xfold@gmail.com`
@@ -27,6 +35,36 @@
 
 ## Session Summary (Most Recent)
 Latest follow-up:
+- Activated NotebookLM as the real SJR research backbone and completed the first thin-post expansion pass.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-activation-and-thin-post-expansion-pass.md`
+  - NotebookLM recovery:
+    - repaired the stale MCP auth path by refreshing local browser state, saving fresh cookies into the MCP auth cache, and reloading NotebookLM auth
+    - verified `notebook_list` and `notebook_query` successfully after repair
+  - notebooks created and seeded:
+    - `SJR Services`
+    - `SJR Reviews And Voice`
+    - `SJR Local SEO And Coverage`
+    - `SJR Competitors`
+    - `SJR Seasonal And Occasion Demand`
+  - Nexus content ops updates:
+    - inserted `3` new `nexus_content_research` items for thin-post expansion
+    - inserted `3` new `nexus_content_queue` brief rows with `brief_payload.mode = thin_post_expansion`
+  - blog expansion pass completed in `src/lib/blog.ts` for:
+    - `custom-design-timeline-guide`
+    - `heirloom-restoration-planning-guide`
+    - `pearl-restringing-timing-guide`
+  - verified depth after expansion:
+    - `custom-design-timeline-guide` — `1003` words
+    - `heirloom-restoration-planning-guide` — `983` words
+    - `pearl-restringing-timing-guide` — `962` words
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "mobile blog detail"`
+    - multiple `notebooklm.notebook_query` checks
+    - Supabase SQL verification for `nexus_content_research` and `nexus_content_queue`
+  - known unrelated verification gap:
+    - `npm test` still fails on pre-existing hydration / mobile-nav / service-detail smoke issues outside this content pass
 - Tightened the SJR content/research operating standard.
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
@@ -34,8 +72,6 @@ Latest follow-up:
     - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
     - treat `NotebookLM` as the required research backbone for briefs and future content refreshes
     - stop shipping thin blog posts; legacy sub-250-word posts are now explicitly queued for expansion
-  - current blocker:
-    - `NotebookLM` cannot yet be used reliably in-session because the MCP cache is expired and the local skill browser state is too old to answer notebook queries
 - Implemented and deployed a first-pass `Results` section in Mission Control.
   - new section:
     - `Results`
@@ -421,12 +457,17 @@ Latest follow-up:
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Repair `NotebookLM` auth and create the five SJR notebooks defined in:
-   - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
-2. Start the thin-post expansion pass from research-backed briefs:
-   - `custom-design-timeline-guide`
-   - `heirloom-restoration-planning-guide`
-   - `pearl-restringing-timing-guide`
+1. Expand the next thin-post cluster from the newly active NotebookLM research stack:
+   - `professional-cleaning-vs-home-care`
+   - `chain-repair-weak-points`
+   - `watch-battery-replacement`
+   - `stone-security-checklist`
+   - `ring-sizing-guide`
+2. Plan the `Connections -> Stack` refactor so Mission Control reflects the real operating stack:
+   - `Upload-Post`
+   - `n8n`
+   - `NotebookLM`
+   - `.health` freshness
 3. Treat direct GBP provider unblock work as a dependency lane only:
    - resolve Google Business Profile project approval / quota state for the new Cloud project
    - use `9xfold@gmail.com` as the Google-side consent account because it owns the SJR GBP listing

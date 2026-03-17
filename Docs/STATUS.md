@@ -5,6 +5,37 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- NotebookLM is now active again as the SJR research backbone:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-activation-and-thin-post-expansion-pass.md`
+  - recovery:
+    - local skill auth was refreshed and NotebookLM MCP cookies were re-synced
+    - verified working again with:
+      - `notebooklm.notebook_list`
+      - `notebooklm.notebook_query`
+  - active notebooks:
+    - `SJR Services`
+    - `SJR Reviews And Voice`
+    - `SJR Local SEO And Coverage`
+    - `SJR Competitors`
+    - `SJR Seasonal And Occasion Demand`
+- The first thin-post expansion pass is now complete:
+  - research + brief queue rows added for:
+    - `custom-design-timeline-guide`
+    - `heirloom-restoration-planning-guide`
+    - `pearl-restringing-timing-guide`
+  - all three brief rows are now `brief_ready` with `brief_payload.mode = thin_post_expansion`
+  - expanded directly in `src/lib/blog.ts`
+  - verified post depth after expansion:
+    - `custom-design-timeline-guide` — `1003` words
+    - `heirloom-restoration-planning-guide` — `983` words
+    - `pearl-restringing-timing-guide` — `962` words
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "mobile blog detail"`
+    - Supabase SQL verification for `nexus_content_research` and `nexus_content_queue`
+  - known unrelated test gap:
+    - `npm test` still fails on pre-existing hydration / nav / service-detail smoke issues outside this content pass
 - SJR content strategy and research stack are now explicitly tightened:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
@@ -12,8 +43,6 @@ Update cadence: weekly (or after major milestones).
     - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
     - treat `NotebookLM` as the required research backbone for future briefs and content refreshes
     - stop shipping thin blog posts; legacy sub-250-word posts now need expansion before large-scale new content work
-  - current blocker:
-    - `NotebookLM` MCP cache is expired, and the local browser-backed NotebookLM skill also needs re-authentication before notebook queries or notebook creation are reliable
 - SJR content ops `Phase 1B` is now live:
   - new Mission Control section:
     - `Results`
@@ -66,9 +95,9 @@ Update cadence: weekly (or after major milestones).
     - add upstream `Research`, `Briefs`, and `Results` stages ahead of the current `Publishing` queue
     - treat SJR as the proving ground before any SanLuis multi-client extraction
   - next build scope:
-    - repair `NotebookLM`
-    - create the five SJR research notebooks with valid sources
-    - start the thin-post expansion pass from research-backed briefs
+    - expand the next thin-post cluster from the active NotebookLM stack
+    - plan the `Connections -> Stack` refactor around `Upload-Post`, `n8n`, `NotebookLM`, and `.health`
+    - keep direct GBP unblock work as a dependency lane rather than the main operating model
 - Direct Google Business Profile OAuth is currently blocked by Google project approval / quota state:
   - latest callback failure indicates quota blocking on `mybusinessaccountmanagement.googleapis.com`
   - this is now treated as a provider approval blocker, not a front-end or redirect bug

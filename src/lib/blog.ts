@@ -216,27 +216,87 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "pearl-restringing-timing-guide",
     title: "Pearl Restringing Timing: When to Restring and Why",
     excerpt:
-      "A practical schedule for restringing pearls and beads before strings stretch, fray, or fail.",
+      "A practical guide to when pearls should be restrung, what warning signs matter, and how to avoid strand failure before an important event.",
     image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
     topics: ["Pearl Care", "Preventive Care"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "4 min read",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Frequent wear usually means restringing every 1–2 years.",
-      "Hand-knotting protects pearls from rubbing and abrupt loss.",
-      "Most strands benefit from fresh silk before string failure.",
+      "Many frequently worn strands benefit from restringing every 1-2 years.",
+      "Visible gaps, fuzzy string, discoloration, and fraying near the clasp are early warning signs.",
+      "Hand-knotting and clasp inspection are part of what makes professional restringing safer than waiting for failure.",
     ],
     sections: [
       {
-        heading: "Signs your strand needs service",
+        heading: "Why timely restringing matters",
         body: [
-          "Visible gaps between pearls and string discoloration are warning signs. At Susie's, we use specialized silk thread to restore the strength and drape of your pearls.",
-          "If a strand looks stretched, it's safer to restring it now than to risk it snapping during an event.",
+          "Pearls and beads usually do not fail without warning. The string stretches, knots loosen, or the clasp area starts to fray long before the whole strand breaks. The problem is that many owners notice the issue only after the necklace already feels risky to wear.",
+          "In our Pasadena workshop, pearl restringing is treated as preventive care rather than emergency cleanup. A strand that still looks mostly intact is often the best candidate for service because the pearls can be restrung, cleaned, and returned to a comfortable drape before anything is lost.",
+          "That matters even more if you wear the strand for church, work, weddings, anniversaries, or family gatherings. Waiting until the necklace snaps usually creates a more stressful repair and can mean searching for missing pearls or dealing with a damaged clasp at the same time.",
         ],
       },
+      {
+        heading: "How often should pearls be restrung?",
+        body: [
+          "A practical baseline for many pearl strands is every 1-2 years if they are worn often. That recommendation changes based on how the strand is stored, how frequently it is worn, and how much strain the clasp area sees when it is put on and taken off.",
+          "A special-occasion strand that comes out only a few times a year may last longer. A favorite strand worn weekly usually needs closer attention. The important thing is not chasing a calendar date; it is noticing whether the string still looks clean, firm, and evenly spaced.",
+          "If you are unsure whether your pearls are still safe, bring them in before an event rather than after. An in-house assessment is more useful than guessing from one small section of string at home.",
+        ],
+      },
+      {
+        heading: "Signs it is time to restring now",
+        body: [
+          "The clearest warning signs are visible gaps between pearls, string discoloration, fuzzy or frayed silk, uneven knot spacing, and wear near the clasp. If the strand no longer sits evenly, that usually means the string has already stretched beyond its ideal tension.",
+          "Another overlooked warning sign is when the necklace feels different against the neck. If the drape looks looser than it used to or the clasp area feels twisted, the strand may not be distributing tension evenly anymore.",
+          "These are the kinds of details we look for during pearl restringing quotes in Pasadena. Catching them early is usually the difference between a simple preventive restring and a higher-stress situation after a break.",
+        ],
+      },
+      {
+        heading: "What professional restringing includes",
+        body: [
+          "At Susie's, restringing is more than sliding pearls onto fresh thread. The service typically includes fresh silk stringing, hand-knotting between pearls, clasp inspection, and length adjustment if needed. Hand-knotting helps protect pearls from rubbing against each other and keeps spacing more consistent along the strand.",
+          "The clasp is worth paying attention to as well. A strand can be perfectly restrung and still feel unreliable if the clasp is worn, dirty, or difficult to close. That is why clasp cleaning, inspection, and possible replacement are part of the same conversation.",
+          "If the strand is part of a bigger refresh, this is also the right moment to ask about cleaning, length changes, or a clasp upgrade. Combining those decisions into one visit keeps the repair plan clearer and prevents repeat handling of the same piece.",
+        ],
+      },
+      {
+        heading: "What to expect on timing and cost",
+        body: [
+          "Most pearl restringing work follows our Same Day/Next Day pattern when the strand is straightforward and does not need unusual clasp work. More complex strands, very long pieces, or projects that need extra matching or adjustments can take longer, but timing is confirmed before work starts.",
+          "Pricing is usually shaped by strand length, knot count, and clasp condition rather than one flat number for every necklace. That is why the best quote happens after we see the actual strand, not from a vague description alone.",
+          "If your pearls matter to you, the safest move is not waiting for failure. Bring the strand in while it is still wearable enough to evaluate calmly, then let the quote and condition check tell you whether service should happen now.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about pearl restringing timing",
+    faqs: [
+      {
+        question: "How often should pearls be restrung if I wear them regularly?",
+        answer:
+          "Many frequently worn strands benefit from restringing every 1-2 years, but the real trigger is condition. If the string looks stretched, frayed, discolored, or uneven, it is time to bring the strand in.",
+      },
+      {
+        question: "Do you knot between each pearl?",
+        answer:
+          "Yes. Hand-knotting helps reduce rubbing between pearls, keeps spacing cleaner, and adds protection if part of the strand is stressed.",
+      },
+      {
+        question: "Can you replace or upgrade the clasp during restringing?",
+        answer:
+          "Often, yes. We can inspect, clean, replace, or upgrade the clasp during the same service so the whole strand feels secure when it goes back into rotation.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your strand already looks stretched or uneven",
+    nextStepsIntro:
+      "If you want a real assessment before the strand fails, start with the pearl restringing service or send photos for a quote-first recommendation.",
+    nextSteps: [
+      { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
+      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
   },
@@ -244,26 +304,87 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
-      "What to expect at each custom stage, how approvals work, and what impacts final timeline.",
+      "What the custom design timeline actually looks like, where approvals happen, and how to plan around proposals, anniversaries, and other important deadlines.",
     image: "/images/blog/custom-design-timeline-guide-cover.jpg",
     topics: ["Custom Design", "Pricing & Timing"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "6 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Clear design approvals prevent timeline drift.",
-      "Stone sourcing and structural complexity are major schedule drivers.",
-      "Most custom work follows the 7-business-day baseline once approved.",
+      "Most custom projects follow a roughly 7-business-day build window once the design is fully approved.",
+      "The strongest timelines start with a clear consultation, realistic deadline, and firm approval checkpoints.",
+      "Stone reuse, sourcing, and design complexity all affect how quickly a project can move from idea to finished piece.",
     ],
     sections: [
       {
-        heading: "Designing for Pasadena lifestyle",
+        heading: "What the custom design timeline usually looks like",
         body: [
-          "Whether it's an anniversary piece or a reset of heirloom stones, we design for durability and daily wear. Our local consultation process ensures your vision matches our craftsman's output.",
+          "Custom jewelry timelines feel confusing when customers are only told a finished date and not what happens in between. In our Pasadena shop, the clearer way to think about the process is in phases: consultation, design direction, approvals, production, and final finishing.",
+          "Most custom work follows a roughly 7-business-day build window once the design is officially approved. That does not mean every project starts the clock on the day you first ask about it. The consultation, design direction, and approval steps happen first, and that is where most timeline misunderstandings begin.",
+          "If the piece is tied to a proposal, anniversary, graduation, or holiday gift, say that at the beginning. Deadline context matters. It is much easier to protect quality and still meet an important date when the timeline is planned around the actual event instead of rushed at the last minute.",
         ],
       },
+      {
+        heading: "What to bring to the first consultation",
+        body: [
+          "The first appointment moves faster when you bring the things that actually guide the project: reference photos, any existing stones or jewelry you want to reuse, a rough budget range, and your target timing. Those four inputs usually answer the first round of design questions better than vague style terms alone.",
+          "If you are resetting heirloom stones, bring the original piece even if it is damaged. Wear patterns, weak settings, and previous repairs help us judge what can be reused safely and what should be rebuilt from scratch.",
+          "This is also the moment to be honest about how the piece will be worn. Daily wear, occasional wear, stacking, travel, and childcare all affect whether a design should sit lower, feel sturdier, or avoid delicate details that do not match your lifestyle.",
+        ],
+      },
+      {
+        heading: "Where approvals happen and what changes the schedule",
+        body: [
+          "Approval checkpoints are what keep custom design from drifting. Once the design direction is clear, we confirm the look, the materials, the pricing, and the expected timing before production begins. If any of those are still moving targets, the schedule is not really locked yet.",
+          "Projects usually slow down for predictable reasons: waiting on a design decision, changing direction after the initial concept, special stone sourcing, or adding structural complexity that was not part of the first plan. None of those are bad, but they do need to be acknowledged as timeline changes rather than surprises.",
+          "The good version of custom work is not speed at any cost. It is a process where you know when to review the design, when to approve it, and when the in-house bench work actually starts.",
+        ],
+      },
+      {
+        heading: "How heirloom stones and old gold fit into the process",
+        body: [
+          "One of the most common custom requests in Pasadena is reusing heirloom stones or redesigning an older piece into something more wearable. That is often possible, but it still starts with evaluation rather than assumption.",
+          "We look at whether the stones are structurally suitable for reset, whether the old mounting is helping or hurting the new goal, and whether any existing gold should be reused or simply treated as sentimental reference. The right answer depends on durability, finish quality, and how closely you want the new piece to echo the original one.",
+          "This is where a custom design consultation can overlap with heirloom restoration. Some projects are true redesigns. Others only need a controlled remount or a small structural change to make the piece wearable again.",
+        ],
+      },
+      {
+        heading: "What custom design usually costs and when to start",
+        body: [
+          "The cost question is easier to answer when the project type is clear. A remount can start much lower than a fully custom engagement ring, and a straightforward custom band sits in a different pricing lane than a more complex multi-stone project.",
+          "Our current planning guidance is to treat custom wedding bands, remounts, and engagement-ring-level projects as different conversations, not one generic 'custom jewelry' category. That keeps the estimate anchored to the real amount of design, sourcing, and finishing involved.",
+          "If the piece is tied to a hard date, start earlier than you think you need to. The best custom projects have enough room for design approvals without turning every revision into a deadline problem.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about custom jewelry timelines",
+    faqs: [
+      {
+        question: "How long does custom jewelry usually take once I approve the design?",
+        answer:
+          "Most custom projects follow a roughly 7-business-day build window once the design is approved, but sourcing, revisions, or added complexity can extend that timeline.",
+      },
+      {
+        question: "Can you use my existing stones or some of my old gold?",
+        answer:
+          "Often, yes. We evaluate heirloom stones and existing metal during the consultation and recommend the best path for durability, finish quality, and the look you want.",
+      },
+      {
+        question: "When should I start if the piece is for a proposal or anniversary?",
+        answer:
+          "Start earlier than the event date suggests. The safest timeline includes room for consultation, approvals, and any needed design changes before bench work begins.",
+      },
+    ],
+    nextStepsHeading: "Best next step if you already have the idea but need a real timeline",
+    nextStepsIntro:
+      "If you want a custom piece or remount grounded in real timing, start with a consultation or quote so the design, budget, and deadline can be aligned early.",
+    nextSteps: [
+      { label: "Explore Custom Design", href: "/services/custom-design" },
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
   },
@@ -298,26 +419,87 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "heirloom-restoration-planning-guide",
     title: "Heirloom Restoration Planning: What to Bring and Ask",
     excerpt:
-      "How to prepare for heirloom restoration consultations and get clear scope, risk, and timeline decisions.",
+      "How to prepare for an heirloom restoration consultation, what to bring, and how to ask the right questions before approving work on a sentimental piece.",
     image: "/images/blog/heirloom-restoration-planning-guide-cover.jpg",
     topics: ["Heirloom Care", "Trust & Buying"],
     publishedAt: "2026-02-18",
     reviewedAt: "2026-02-18",
-    readTime: "5 min read",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Bring context: history, wear patterns, and desired outcome.",
-      "Ask about structural priorities before cosmetic refinishing.",
-      "Approval checkpoints are essential for sentimental pieces.",
+      "Bring the piece itself, any missing parts, timing needs, and the story behind how you want it worn.",
+      "Ask about structural safety first, then about polishing, finish matching, and preserving original character.",
+      "Sentimental pieces deserve clear in-house assessment and approval checkpoints before any work begins.",
     ],
     sections: [
       {
-        heading: "Restoring history in Pasadena",
+        heading: "How to tell whether your heirloom needs attention now",
         body: [
-          "Heirlooms require a respectful approach. At our workshop, we focus on structural integrity first, ensuring your legacy pieces are safe for the next generation to wear.",
+          "Heirloom pieces rarely fit neatly into a simple repair checklist. Some need urgent structural work because prongs are worn, the shank is thinning, or the stone seats no longer feel safe. Others mainly need a careful assessment because the piece has sentimental value and you do not want the wrong kind of polishing or rebuilding to erase its character.",
+          "A good rule is to separate structural risk from cosmetic age. Wear that threatens the piece should move faster than surface patina that is simply part of the jewelry's history. If you are unsure which is which, that is exactly what the first consultation is for.",
+          "At Susie's, heirloom restoration starts with structural safety and preservation goals, not with an automatic promise to make an older piece look brand new. That difference matters if your priority is keeping the piece wearable without stripping away what made it special.",
         ],
       },
+      {
+        heading: "What to bring to the consultation",
+        body: [
+          "Bring the heirloom itself, any missing parts, and any details you already know about its history. If the piece has been repaired before, that context helps us understand where weak points may already exist.",
+          "It also helps to bring photos of how you want to wear it now. Is this something you want to keep for special occasions only, or do you want to return it to regular daily wear? The safest repair plan changes depending on how the piece will actually be used.",
+          "If timing matters, say so clearly. A family event, anniversary, or estate-related handoff can affect how we prioritize the consultation and whether the safest next step is immediate stabilization, full restoration, or simply a staged plan.",
+        ],
+      },
+      {
+        heading: "Questions to ask before you approve restoration work",
+        body: [
+          "The most useful restoration questions are not generic pricing questions first. Ask what absolutely needs to be stabilized, what can be preserved as-is, and whether polishing, finish matching, or rebuilding will change the piece's original character.",
+          "If the piece is antique or fragile, ask what the safest repair path is, not just the fastest one. The right jeweler should be able to explain whether the goal is reinforcement, restoration, or redesign, and what tradeoffs come with each choice.",
+          "You should also ask whether the work stays in-house. For sentimental pieces, direct communication with the team doing the work is part of the value, especially when the repair involves judgment rather than a routine replacement part.",
+        ],
+      },
+      {
+        heading: "Restoration versus redesign",
+        body: [
+          "Some heirloom pieces are best restored because the original look still fits how you want to wear them and the structure can be strengthened safely. Others are better candidates for redesign because the style no longer suits your life, the mounting is too compromised, or the piece is more meaningful as reused stones than as an untouched object.",
+          "That decision does not have to be emotional versus practical. A redesign can still preserve the family connection if the stones, story, or some of the original materials carry forward into a new piece. A restoration can also be the better emotional choice when the visual identity of the original ring or necklace matters more than modernizing it.",
+          "The key is to make that decision on purpose rather than defaulting to the first repair idea you hear.",
+        ],
+      },
+      {
+        heading: "What to expect on timing, scope, and approvals",
+        body: [
+          "Many straightforward heirloom repairs still follow our Same Day/Next Day pattern, but older or more delicate pieces often need a more careful scope review before timing can be confirmed. The important part is that pricing, timeline, and tradeoffs are explained before work begins.",
+          "That approval step protects both the jewelry and the customer. You should leave the consultation knowing what is being restored, what is being preserved, and whether there are any fragile areas that make a more limited repair the safer choice.",
+          "If the piece needs broader reconstruction or naturally leads into custom work, that should be treated as a separate decision, not rolled into the job without a clear conversation.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers before an heirloom restoration visit",
+    faqs: [
+      {
+        question: "What should I bring to an heirloom restoration consultation?",
+        answer:
+          "Bring the piece, any missing parts, any known repair history, and details about how you want to wear it going forward. Photos or timing notes can also help clarify the safest plan.",
+      },
+      {
+        question: "Should I ask for restoration or redesign?",
+        answer:
+          "Ask for the safest recommendation based on the piece's condition and your wear goals. Some heirlooms are best preserved, while others are better candidates for redesign using the original stones or materials.",
+      },
+      {
+        question: "Will restoration work stay in-house?",
+        answer:
+          "At Susie's, the goal is in-house assessment and repair so the piece is not shipped out. That is especially valuable for sentimental or fragile jewelry that needs careful judgment.",
+      },
+    ],
+    nextStepsHeading: "Best next step for sentimental jewelry you do not want to risk",
+    nextStepsIntro:
+      "If you want a real recommendation before approving work, start with heirloom restoration. If the consultation confirms the piece needs a bigger redesign, the custom-design path can follow from there.",
+    nextSteps: [
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Explore Custom Design", href: "/services/custom-design" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
   },
