@@ -6,10 +6,11 @@
 - Primary status ledger: `Docs/STATUS.md`
 - Canonical release decision: `Docs/RELEASE-DECISION.md`
 - Latest code commit:
-  - `8dedb98` `feat: add nexus results view`
+  - `0c3e671` `feat: activate notebooklm and expand thin sjr posts`
 - Latest deploy workflow:
-  - `23215416924` (`success`)
+  - `23218820393` (`success`)
   - latest feature deploys still live:
+    - `23218820393` (`success`) for `0c3e671` `feat: activate notebooklm and expand thin sjr posts`
     - `23212715219` (`success`) for `cd875c7` `feat: add nexus research and briefs queues`
     - `23215416924` (`success`) for `8dedb98` `feat: add nexus results view`
 
@@ -63,6 +64,10 @@ Latest follow-up:
     - `npx playwright test -g "mobile blog detail"`
     - multiple `notebooklm.notebook_query` checks
     - Supabase SQL verification for `nexus_content_research` and `nexus_content_queue`
+    - live content fetch verification on:
+      - `https://www.susiesjewelryrepair.com/blog/custom-design-timeline-guide`
+  - deploy:
+    - `23218820393` (`success`)
   - known unrelated verification gap:
     - `npm test` still fails on pre-existing hydration / mobile-nav / service-detail smoke issues outside this content pass
 - Tightened the SJR content/research operating standard.

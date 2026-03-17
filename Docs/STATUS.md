@@ -34,6 +34,10 @@ Update cadence: weekly (or after major milestones).
     - `npm run build`
     - `npx playwright test -g "mobile blog detail"`
     - Supabase SQL verification for `nexus_content_research` and `nexus_content_queue`
+    - live fetch verification on:
+      - `https://www.susiesjewelryrepair.com/blog/custom-design-timeline-guide`
+  - deploy:
+    - `23218820393` (`success`)
   - known unrelated test gap:
     - `npm test` still fails on pre-existing hydration / nav / service-detail smoke issues outside this content pass
 - SJR content strategy and research stack are now explicitly tightened:
