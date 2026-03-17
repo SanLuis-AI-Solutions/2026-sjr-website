@@ -265,6 +265,8 @@ function ConnectionsWorkspace({
         ? "Google accepted the login, but the account or app does not currently have permission to read Business Profile locations."
         : oauthReason === "token-exchange"
           ? "Google returned the callback, but the token exchange failed. Recheck the OAuth client, consent screen, and Business Profile API access."
+          : oauthReason === "quota-blocked"
+            ? "Google returned the callback, but this Cloud project is blocked by Business Profile quota limits. That usually means the project is not yet approved for Google My Business API access."
           : oauthReason === "service-disabled"
             ? "Google returned the callback, but the required Business Profile APIs are not enabled for this OAuth client project."
           : oauthReason === "persist-failed"

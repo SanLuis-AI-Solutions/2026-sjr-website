@@ -53,6 +53,15 @@ function classifyGoogleBusinessOAuthError(error: unknown) {
   }
 
   if (
+    normalized.includes("quota exceeded") ||
+    normalized.includes("requests per minute") ||
+    normalized.includes("queries per minute") ||
+    normalized.includes("mybusinessaccountmanagement.googleapis.com")
+  ) {
+    return "quota-blocked";
+  }
+
+  if (
     normalized.includes("service_disabled") ||
     normalized.includes("accessnotconfigured") ||
     normalized.includes("has not been used in project") ||
