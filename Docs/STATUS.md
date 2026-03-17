@@ -5,6 +5,21 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- SJR content ops Phase 1 is now defined inside the current repo rather than as a separate new project:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-content-ops-phase-1-plan.md`
+  - decision:
+    - keep building inside the existing `Nexus` admin shell
+    - add upstream `Research`, `Briefs`, and `Results` stages ahead of the current `Publishing` queue
+    - treat SJR as the proving ground before any SanLuis multi-client extraction
+  - next build scope:
+    - `Phase 1A`
+    - add `nexus_content_research`
+    - add `nexus_content_queue`
+    - add `Research` and `Briefs` Mission Control sections
+- Direct Google Business Profile OAuth is currently blocked by Google project approval / quota state:
+  - latest callback failure indicates quota blocking on `mybusinessaccountmanagement.googleapis.com`
+  - this is now treated as a provider approval blocker, not a front-end or redirect bug
 - Google Business Profile production OAuth is now configured and live:
   - added `NEXUS_GBP_CLIENT_ID`, `NEXUS_GBP_CLIENT_SECRET`, and `NEXUS_OAUTH_BASE_URL` in Vercel production
   - reran deploy workflow `23069413332` successfully

@@ -24,6 +24,24 @@
 
 ## Session Summary (Most Recent)
 Latest local follow-up:
+- Defined the next SJR build track as a content operating system inside the current repo, not a separate new product repo.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-17--sjr-content-ops-phase-1-plan.md`
+  - decision:
+    - keep `SJR` as the proving ground
+    - extend the existing `Nexus` admin shell with upstream `Research`, `Briefs`, and `Results` stages
+    - keep the current `Publishing` queue as the downstream execution stage
+  - planned Phase 1A implementation:
+    - add `nexus_content_research`
+    - add `nexus_content_queue`
+    - add `Research` and `Briefs` sections in Mission Control
+- Confirmed the latest Google Business Profile connect blocker is no longer redirect configuration.
+  - current blocker:
+    - Google callback now returns quota blocking on `mybusinessaccountmanagement.googleapis.com`
+    - this indicates Business Profile API project approval / usable quota is still the active blocker for the new Google Cloud project
+  - latest diagnostic commits:
+    - `cbeb71a` `fix: expose gbp oauth callback details`
+    - `a1fca6a` `fix: classify gbp quota approval failures`
 - Completed the next indexing-support step after Search Console submission for the five priority URLs.
   - strengthened contextual internal links into:
     - `/services/heirloom-restoration`
@@ -343,23 +361,27 @@ Latest local follow-up:
 
 Do not open another `/services` micro-iteration loop during closeout.
 
-1. Monitor live lead traffic for the new spam guardrails:
+1. Build `SJR Content Ops Phase 1A` inside the existing Nexus admin:
+   - add `nexus_content_research`
+   - add `nexus_content_queue`
+   - add `Research` and `Briefs` Mission Control sections
+   - keep `Publishing` as the downstream approval/distribution stage
+2. Continue GBP provider unblock work only as a dependency lane:
+   - resolve Google Business Profile project approval / quota state for the new Cloud project
+   - use `9xfold@gmail.com` as the Google-side consent account because it owns the SJR GBP listing
+3. Monitor live lead traffic for the new spam guardrails:
    - verify Google Chat noise drops
    - verify suspicious leads land in `/admin/inbox` as `spam`
    - verify real leads still notify correctly
-2. Keep the weekly review loop lightweight:
+4. Keep the weekly review loop lightweight:
    - run `npm run google:weekly-seo-health`
    - update `DASHBOARD.md`
    - review `Docs/WEEKLY-SEO-HEALTH.md`
-3. Continue Google-admin monitoring:
+5. Continue Google-admin monitoring:
    - review indexing state of `/watch-repair`, `/book`, and `/quote`
    - review redirected Wix URLs over the next 2 weeks
-4. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
-5. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
-6. For the admin redesign + GBP-first social path:
-   - complete one authenticated Google Business Profile consent locally from `/admin/nexus?view=connections`
-   - run one controlled `dryRun=false` sync against a low-risk slug and verify `shared_slugs` records the real result
-   - if accepted, commit the redesign and GBP-first integration before expanding to Meta / Pinterest / LinkedIn / X
+6. Treat Houston as a later, broader city play that needs a more differentiated angle than the suburban pages.
+7. Treat future third-party model audits as lead sources only; verify technical claims against the repo before reprioritizing.
 
 ## External-Agent Output Rule (Mandatory)
 
