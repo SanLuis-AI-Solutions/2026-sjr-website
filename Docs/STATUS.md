@@ -5,6 +5,28 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- SJR content ops `Phase 1A` is now implemented locally and seeded in the live Supabase project:
+  - new Mission Control sections:
+    - `Research`
+    - `Briefs`
+  - new shared helper:
+    - `src/lib/admin/nexus-content-ops.ts`
+  - live schema alignment completed for:
+    - `public.nexus_content_research`
+    - `public.nexus_content_queue`
+  - old draft fields/values were normalized:
+    - `seed_key` -> `dedupe_key`
+    - `lead|seo|review` -> `lead_signal|seo_gap|review_signal`
+    - `decision` -> `conversion`
+    - `review_reply` -> `gbp_post`
+  - live starter seed now exists:
+    - `4` research items
+    - `1` starter brief
+  - local verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+  - remaining release step:
+    - commit, deploy, and visually verify the new `Research` / `Briefs` sections in the live admin shell
 - SJR content ops Phase 1 is now defined inside the current repo rather than as a separate new project:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-content-ops-phase-1-plan.md`

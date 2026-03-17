@@ -188,6 +188,57 @@ create table if not exists nexus_publish_queue (
 create unique index if not exists nexus_publish_queue_slug_platform_unique
   on nexus_publish_queue(slug, platform);
 create index if not exists nexus_publish_queue_updated_at_idx on nexus_publish_queue(updated_at desc);
+
+create table if not exists nexus_content_research (
+  id uuid primary key default gen_random_uuid(),
+  dedupe_key text not null unique,
+  topic text not null,
+  source_type text not null check (source_type in ('notebooklm', 'lead_signal', 'seo_gap', 'review_signal', 'manual')),
+  source_ref text,
+  service_slug text references services(slug) on delete set null,
+  location_slug text,
+  funnel_stage text not null check (funnel_stage in ('awareness', 'consideration', 'conversion', 'retention')),
+  research_notes text not null,
+  recommended_angle text not null,
+  status text not null default 'new' check (status in ('new', 'ready_for_brief', 'rejected')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table nexus_content_research enable row level security;
+
+create index if not exists nexus_content_research_status_idx
+  on nexus_content_research(status, updated_at desc);
+
+create table if not exists nexus_content_queue (
+  id uuid primary key default gen_random_uuid(),
+  research_id uuid references nexus_content_research(id) on delete set null,
+  dedupe_key text not null unique,
+  content_type text not null check (content_type in ('blog', 'gbp_post', 'faq', 'service_update')),
+  title text not null,
+  slug_candidate text,
+  service_slug text references services(slug) on delete set null,
+  location_slug text,
+  funnel_stage text not null check (funnel_stage in ('awareness', 'consideration', 'conversion', 'retention')),
+  platform_targets jsonb not null default '[]'::jsonb,
+  primary_cta text not null,
+  business_goal text not null,
+  brief_payload jsonb not null default '{}'::jsonb,
+  status text not null default 'research_ready' check (status in ('research_ready', 'brief_ready', 'approved', 'draft_ready', 'scheduled', 'published', 'archived')),
+  approved_by text,
+  approved_at timestamptz,
+  published_asset_slug text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table nexus_content_queue enable row level security;
+
+create index if not exists nexus_content_queue_status_idx
+  on nexus_content_queue(status, updated_at desc);
+create unique index if not exists nexus_content_queue_research_id_unique
+  on nexus_content_queue(research_id)
+  where research_id is not null;
 alter table nexus_publish_queue enable row level security;
 
 create table if not exists review_request_status (

@@ -1,5 +1,13 @@
 import { BLOG_POSTS } from "@/lib/blog";
 import {
+  buildContentSummary,
+  getContentQueueRows,
+  getContentResearchRows,
+  type ContentQueueRow,
+  type ContentResearchRow,
+  type ContentSummary,
+} from "@/lib/admin/nexus-content-ops";
+import {
   SUPPORTED_SOCIAL_PLATFORMS,
   type SocialPlatform,
 } from "@/lib/automation/social-dispatcher";
@@ -140,9 +148,12 @@ export type InboxSummary = {
 
 export type NexusDashboardData = {
   apiHealth: ApiHealthSummary[];
+  contentSummary: ContentSummary;
   syncSummary: SyncSummary;
   reviewSummary: ReviewSummary;
   inboxSummary: InboxSummary;
+  contentQueueRows: ContentQueueRow[];
+  contentResearchRows: ContentResearchRow[];
   syncRows: SyncMatrixRow[];
   recentReviews: ReviewStatusRow[];
 };
@@ -368,7 +379,17 @@ export async function getRecentContacts(limit = 50): Promise<ContactRequestRow[]
 }
 
 export async function getNexusDashboardData(): Promise<NexusDashboardData> {
-  const [sharedRows, reviewRows, quotes, bookings, contacts, configRows, queueRows] = await Promise.all([
+  const [
+    sharedRows,
+    reviewRows,
+    quotes,
+    bookings,
+    contacts,
+    configRows,
+    queueRows,
+    contentResearchRows,
+    contentQueueRows,
+  ] = await Promise.all([
     getSharedSlugs(),
     getReviewStatuses(),
     getRecentQuotes(200),
@@ -376,6 +397,8 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
     getRecentContacts(200),
     getNexusConfigs(),
     getPublishQueueRows(),
+    getContentResearchRows(),
+    getContentQueueRows(),
   ]);
 
   const apiHealth = buildApiHealth(configRows);
@@ -383,9 +406,12 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
 
   return {
     apiHealth,
+    contentSummary: buildContentSummary(contentResearchRows, contentQueueRows),
     syncSummary: buildSyncSummary(syncRows, apiHealth),
     reviewSummary: buildReviewSummary(reviewRows),
     inboxSummary: buildInboxSummary(quotes, bookings, contacts),
+    contentQueueRows,
+    contentResearchRows,
     syncRows,
     recentReviews: reviewRows.slice(0, 12),
   };

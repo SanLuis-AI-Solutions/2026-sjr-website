@@ -2,11 +2,14 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { AdminSectionCard } from "@/components/admin/admin-section-card";
+import { ContentBriefsPanel } from "@/components/admin/nexus/content-briefs-panel";
+import { ContentResearchPanel } from "@/components/admin/nexus/content-research-panel";
 import { InboxSummaryPanel } from "@/components/admin/nexus/inbox-summary-panel";
 import { IntegrationHealthPanel } from "@/components/admin/nexus/integration-health-panel";
 import { MetricStrip } from "@/components/admin/nexus/metric-strip";
 import { PublishingWorkspace } from "@/components/admin/nexus/publishing-workspace";
 import { ReviewSummaryPanel } from "@/components/admin/nexus/review-summary-panel";
+import { promoteResearchToBrief, seedInitialContentOpsData } from "@/lib/admin/nexus-content-ops";
 import { getNexusDashboardData } from "@/lib/admin/nexus-dashboard";
 import {
   clearPublishingApproval,
@@ -17,7 +20,14 @@ import { getAdminIdentity } from "@/lib/admin/auth";
 
 export const dynamic = "force-dynamic";
 
-type NexusView = "overview" | "leads" | "publishing" | "reviews" | "connections";
+type NexusView =
+  | "overview"
+  | "research"
+  | "briefs"
+  | "leads"
+  | "publishing"
+  | "reviews"
+  | "connections";
 
 type NexusPageProps = {
   searchParams?: Promise<{
@@ -35,6 +45,8 @@ type NexusPageProps = {
 function normalizeView(value: string | undefined): NexusView {
   if (
     value === "overview" ||
+    value === "research" ||
+    value === "briefs" ||
     value === "leads" ||
     value === "publishing" ||
     value === "reviews" ||
@@ -127,6 +139,104 @@ function OverviewWorkspace({
           ))}
         </div>
       </AdminSectionCard>
+    </div>
+  );
+}
+
+function getContentOpsNotice(result: string | undefined): {
+  tone: "success" | "warning" | "error";
+  title: string;
+  body: string;
+} | null {
+  switch (result) {
+    case "seeded":
+      return {
+        tone: "success",
+        title: "Starter items added",
+        body: "The Phase 1A starter queue was saved and is ready for operator review.",
+      };
+    case "seed-failed":
+      return {
+        tone: "error",
+        title: "Could not seed content ops",
+        body: "The content-op tables may not be applied yet. Review the schema step before trying again.",
+      };
+    case "brief-created":
+      return {
+        tone: "success",
+        title: "Brief created",
+        body: "The selected research item was promoted into the brief queue.",
+      };
+    case "brief-failed":
+      return {
+        tone: "error",
+        title: "Could not create brief",
+        body: "The promotion step failed. Review the content-op tables and try again.",
+      };
+    default:
+      return null;
+  }
+}
+
+function buildContentOpsRedirect(view: "research" | "briefs", result?: string) {
+  const params = new URLSearchParams();
+  params.set("view", view);
+  if (result) params.set("result", result);
+  return `/admin/nexus?${params.toString()}`;
+}
+
+function ResearchWorkspace({
+  dashboard,
+  seedAction,
+  createBriefAction,
+  notice,
+}: {
+  dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
+  seedAction: () => void | Promise<void>;
+  createBriefAction: (formData: FormData) => void | Promise<void>;
+  notice?: {
+    tone: "success" | "warning" | "error";
+    title: string;
+    body: string;
+  } | null;
+}) {
+  return (
+    <div className="grid h-full gap-3 lg:min-h-0">
+      <ContentResearchPanel
+        rows={dashboard.contentResearchRows}
+        briefResearchIds={
+          new Set(dashboard.contentQueueRows.map((row) => row.research_id).filter(Boolean) as string[])
+        }
+        summary={dashboard.contentSummary}
+        seedAction={seedAction}
+        createBriefAction={createBriefAction}
+        notice={notice}
+      />
+    </div>
+  );
+}
+
+function BriefsWorkspace({
+  dashboard,
+  seedAction,
+  notice,
+}: {
+  dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
+  seedAction: () => void | Promise<void>;
+  notice?: {
+    tone: "success" | "warning" | "error";
+    title: string;
+    body: string;
+  } | null;
+}) {
+  return (
+    <div className="grid h-full gap-3 lg:min-h-0">
+      <ContentBriefsPanel
+        rows={dashboard.contentQueueRows}
+        summary={dashboard.contentSummary}
+        seedAction={seedAction}
+        notice={notice}
+      />
     </div>
   );
 }
@@ -333,7 +443,64 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
         : filteredRows[0]?.slug || null
       : null;
   const notice = getPublishingNotice(result);
+  const contentOpsNotice = getContentOpsNotice(result);
   const googleConnected = dashboard.apiHealth.find((item) => item.platform === "gbp")?.active ?? false;
+
+  async function seedResearchAction() {
+    "use server";
+
+    const admin = await getAdminIdentity();
+    if (!admin) {
+      redirect("/admin/login");
+    }
+
+    try {
+      await seedInitialContentOpsData();
+    } catch {
+      redirect(buildContentOpsRedirect("research", "seed-failed"));
+    }
+    revalidatePath("/admin/nexus");
+    redirect(buildContentOpsRedirect("research", "seeded"));
+  }
+
+  async function seedBriefsAction() {
+    "use server";
+
+    const admin = await getAdminIdentity();
+    if (!admin) {
+      redirect("/admin/login");
+    }
+
+    try {
+      await seedInitialContentOpsData();
+    } catch {
+      redirect(buildContentOpsRedirect("briefs", "seed-failed"));
+    }
+    revalidatePath("/admin/nexus");
+    redirect(buildContentOpsRedirect("briefs", "seeded"));
+  }
+
+  async function createBriefAction(formData: FormData) {
+    "use server";
+
+    const researchId = String(formData.get("researchId") || "").trim();
+    if (!researchId) {
+      redirect(buildContentOpsRedirect("research"));
+    }
+
+    const admin = await getAdminIdentity();
+    if (!admin) {
+      redirect("/admin/login");
+    }
+
+    try {
+      await promoteResearchToBrief(researchId);
+    } catch {
+      redirect(buildContentOpsRedirect("research", "brief-failed"));
+    }
+    revalidatePath("/admin/nexus");
+    redirect(buildContentOpsRedirect("briefs", "brief-created"));
+  }
 
   async function saveApprovedDraftAction(formData: FormData) {
     "use server";
@@ -425,6 +592,23 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
           />
         ) : null}
 
+        {view === "research" ? (
+          <ResearchWorkspace
+            dashboard={dashboard}
+            seedAction={seedResearchAction}
+            createBriefAction={createBriefAction}
+            notice={contentOpsNotice}
+          />
+        ) : null}
+
+        {view === "briefs" ? (
+          <BriefsWorkspace
+            dashboard={dashboard}
+            seedAction={seedBriefsAction}
+            notice={contentOpsNotice}
+          />
+        ) : null}
+
         {view === "leads" ? <LeadsWorkspace dashboard={dashboard} /> : null}
 
         {view === "publishing" ? (
@@ -443,13 +627,13 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
 
         {view === "connections" ? (
           <ConnectionsWorkspace
-          dashboard={dashboard}
-          oauthState={oauthState}
-          oauthReason={oauthReason}
-          oauthDetail={oauthDetail}
-          provider={provider}
-        />
-      ) : null}
+            dashboard={dashboard}
+            oauthState={oauthState}
+            oauthReason={oauthReason}
+            oauthDetail={oauthDetail}
+            provider={provider}
+          />
+        ) : null}
       </div>
     </div>
   );

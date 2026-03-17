@@ -54,6 +54,20 @@ const NEXUS_VIEWS = [
     icon: <DashboardIcon />,
   },
   {
+    key: "research",
+    label: "Research",
+    href: "/admin/nexus?view=research",
+    description: "NotebookLM and SEO findings.",
+    icon: <DashboardIcon />,
+  },
+  {
+    key: "briefs",
+    label: "Briefs",
+    href: "/admin/nexus?view=briefs",
+    description: "Operator review queue.",
+    icon: <DashboardIcon />,
+  },
+  {
     key: "leads",
     label: "Leads",
     href: "/admin/nexus?view=leads",
