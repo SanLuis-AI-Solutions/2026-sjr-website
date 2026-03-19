@@ -50,7 +50,7 @@ export function IntegrationHealthPanel({
                   </span>
                 ) : (
                   <a
-                    href={`/admin/nexus?view=connections&oauth=not-configured&provider=${platform.platform}`}
+                    href={`/admin/nexus?view=stack&oauth=not-configured&provider=${platform.platform}`}
                     className="inline-flex min-h-10 items-center justify-center rounded-full bg-brand-burgundy px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Setup

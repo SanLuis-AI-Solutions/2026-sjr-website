@@ -15,7 +15,7 @@ function redirectToConnections(
   oauthDetail?: string
 ) {
   const url = new URL("/admin/nexus", request.nextUrl.origin);
-  url.searchParams.set("view", "connections");
+  url.searchParams.set("view", "stack");
   url.searchParams.set("oauth", oauthState);
   url.searchParams.set("provider", "gbp");
   if (oauthReason) {

@@ -96,10 +96,10 @@ const NEXUS_VIEWS = [
     icon: <DashboardIcon />,
   },
   {
-    key: "connections",
-    label: "Connections",
-    href: "/admin/nexus?view=connections",
-    description: "Provider access status.",
+    key: "stack",
+    label: "Stack",
+    href: "/admin/nexus?view=stack",
+    description: "Publishing, research, and ops health.",
     icon: <DashboardIcon />,
   },
 ] as const;
@@ -187,7 +187,8 @@ function NavGroup({
 export function AdminSidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentView = searchParams.get("view") || "overview";
+  const currentViewParam = searchParams.get("view");
+  const currentView = currentViewParam === "connections" ? "stack" : currentViewParam || "overview";
   const currentTab = searchParams.get("tab") || "quotes";
 
   const workspaceItems: NavItem[] = [

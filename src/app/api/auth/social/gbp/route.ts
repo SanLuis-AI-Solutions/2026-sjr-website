@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
   if (!hasGoogleBusinessOAuthConfig(origin)) {
     return NextResponse.redirect(
-      new URL("/admin/nexus?view=connections&oauth=not-configured&provider=gbp", origin)
+      new URL("/admin/nexus?view=stack&oauth=not-configured&provider=gbp", origin)
     );
   }
 

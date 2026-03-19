@@ -5,6 +5,24 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Mission Control `Connections` has been refactored into `Stack`:
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-19--nexus-stack-workspace-refactor.md`
+  - user-facing changes:
+    - sidebar section renamed from `Connections` to `Stack`
+    - `view=stack` is now the canonical route token
+    - old `view=connections` links still normalize into the new workspace for backward compatibility
+    - direct provider-auth buttons/messages are no longer the main content of the workspace
+  - stack model now reflects:
+    - `Upload-Post` planned publisher state
+    - `n8n` planned orchestration state
+    - `NotebookLM` live research-pipeline state
+    - `.health` snapshot freshness
+  - legacy direct GBP OAuth is still present as a fallback path, but no longer frames Mission Control
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+    - targeted local Stack browser verification against `/admin/nexus?preview=1&view=stack`
 - The second NotebookLM-backed thin-post expansion pass is now complete:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-thin-post-expansion-pass-2.md`
@@ -70,7 +88,7 @@ Update cadence: weekly (or after major milestones).
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
   - decisions:
-    - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
+    - keep the final Mission Control section, but repurpose it into stack health once `Upload-Post` replaces direct social-provider OAuth
     - treat `NotebookLM` as the required research backbone for future briefs and content refreshes
     - stop shipping thin blog posts; legacy sub-250-word posts now need expansion before large-scale new content work
 - SJR content ops `Phase 1B` is now live:
@@ -125,7 +143,7 @@ Update cadence: weekly (or after major milestones).
     - add upstream `Research`, `Briefs`, and `Results` stages ahead of the current `Publishing` queue
     - treat SJR as the proving ground before any SanLuis multi-client extraction
   - next build scope:
-    - implement the `Connections -> Stack` refactor around `Upload-Post`, `n8n`, `NotebookLM`, and `.health`
+    - run the first `Upload-Post` pilot and then wire the first bounded `Nexus -> n8n -> Upload-Post` handoff
     - keep direct GBP unblock work as a dependency lane rather than the main operating model
 - Direct Google Business Profile OAuth is currently blocked by Google project approval / quota state:
   - latest callback failure indicates quota blocking on `mybusinessaccountmanagement.googleapis.com`
@@ -182,9 +200,9 @@ Update cadence: weekly (or after major milestones).
     - RLS enabled on `public.nexus_publish_queue`
 - Local admin redesign pass is browser-verified and still local-only pending commit:
   - `/admin/login` is now a minimal login-only entry screen
-  - `/admin/nexus` now uses left-rail section tabs (`Overview`, `Leads`, `Publishing`, `Reviews`, `Connections`) instead of one long stacked page
+  - `/admin/nexus` now uses left-rail section tabs (`Overview`, `Research`, `Briefs`, `Results`, `Leads`, `Publishing`, `Reviews`, `Stack`) instead of one long stacked page
   - `Overview` is now the only Mission Control section that shows the global KPI strip
-  - `Leads`, `Publishing`, `Reviews`, and `Connections` now stay section-specific without repeated global stats
+  - `Leads`, `Publishing`, `Reviews`, and `Stack` now stay section-specific without repeated global stats
   - auxiliary explainer side-panels were removed from all Mission Control sections so each tab now renders a single focused working surface
   - `/admin/inbox` is now queue-scoped:
     - `Quotes` shows only quote requests
@@ -194,9 +212,9 @@ Update cadence: weekly (or after major milestones).
   - desktop shell is now viewport-contained:
     - document height matches viewport during local desktop verification
     - long lists scroll inside the active workspace panel instead of being cut off at the bottom
-  - Connections now include provider action buttons inside the workspace
-  - connection truth is now explicit:
-    - Google Business Profile now has a real in-app OAuth connect path plus persisted `nexus_config` storage
+  - the final workspace now reflects stack health instead of provider action buttons
+  - direct provider truth is now secondary:
+    - Google Business Profile still has a real direct OAuth path plus persisted `nexus_config` storage
     - Meta / Pinterest / LinkedIn / X remain deferred provider work
   - verification:
     - `npm run build`
@@ -212,7 +230,7 @@ Update cadence: weekly (or after major milestones).
       - `/admin/nexus?view=leads`
       - `/admin/nexus?view=publishing`
       - `/admin/nexus?view=reviews`
-      - `/admin/nexus?view=connections`
+      - `/admin/nexus?view=stack`
       - `/admin/inbox?tab=quotes`
       - `/admin/inbox?tab=bookings`
       - `/admin/inbox?tab=contacts`

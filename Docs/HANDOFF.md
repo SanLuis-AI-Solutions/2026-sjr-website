@@ -36,6 +36,24 @@
 
 ## Session Summary (Most Recent)
 Latest follow-up:
+- Refactored Mission Control `Connections` into `Stack`.
+  - artifact:
+    - `Docs/artifacts/strategy/2026-03-19--nexus-stack-workspace-refactor.md`
+  - user-facing changes:
+    - sidebar section renamed from `Connections` to `Stack`
+    - `view=stack` is now the canonical route token
+    - old `view=connections` links still normalize into the new workspace
+    - provider-auth framing was removed from the primary workspace surface
+  - stack workspace now reports:
+    - `Upload-Post` planned publisher status
+    - `n8n` planned orchestration status
+    - `NotebookLM` live research-pipeline status
+    - `.health` snapshot freshness
+  - verification:
+    - `npm run build`
+    - `npx playwright test -g "admin routes: protected nexus and inbox redirect unauthenticated users to login"`
+    - targeted local Stack verification on:
+      - `/admin/nexus?preview=1&view=stack`
 - Completed the second NotebookLM-backed thin-post expansion pass.
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-notebooklm-thin-post-expansion-pass-2.md`
@@ -100,7 +118,7 @@ Latest follow-up:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-17--sjr-research-stack-and-blog-quality-standard.md`
   - decisions:
-    - keep `Connections` for now, but repurpose it later into stack health once `Upload-Post` replaces direct social-provider OAuth
+    - keep the final Mission Control section, but repurpose it into stack health once `Upload-Post` replaces direct social-provider OAuth
     - treat `NotebookLM` as the required research backbone for briefs and future content refreshes
     - stop shipping thin blog posts; legacy sub-250-word posts are now explicitly queued for expansion
 - Implemented and deployed a first-pass `Results` section in Mission Control.

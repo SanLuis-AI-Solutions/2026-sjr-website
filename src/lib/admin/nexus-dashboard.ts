@@ -105,6 +105,24 @@ export type ApiHealthSummary = {
   detail: string;
 };
 
+export type StackHealthStatus = "live" | "attention" | "planned";
+
+export type StackHealthItem = {
+  key: "upload-post" | "n8n" | "notebooklm" | "health";
+  label: string;
+  status: StackHealthStatus;
+  detail: string;
+  meta: string;
+  nextStep: string;
+};
+
+export type StackSummary = {
+  liveCount: number;
+  attentionCount: number;
+  plannedCount: number;
+  healthFreshnessLabel: string;
+};
+
 export type SyncMatrixRow = {
   slug: string;
   title: string;
@@ -172,6 +190,8 @@ export type ContentResultsRow = {
 
 export type NexusDashboardData = {
   apiHealth: ApiHealthSummary[];
+  stackHealth: StackHealthItem[];
+  stackSummary: StackSummary;
   contentSummary: ContentSummary;
   resultsSummary: ResultsSummary;
   syncSummary: SyncSummary;
@@ -185,6 +205,7 @@ export type NexusDashboardData = {
 };
 
 type WeeklyHealthSnapshot = {
+  generatedAt?: string;
   searchConsole?: {
     clicks?: number;
   };
@@ -199,6 +220,7 @@ type WeeklyHealthSnapshot = {
 };
 
 type ReconcileSnapshot = {
+  generatedAt?: string;
   ga4?: {
     topOrganicLandingPages?: Array<{
       page?: string;
@@ -227,6 +249,12 @@ const PLATFORM_TOKEN_ENV: Record<SocialPlatform, string> = {
   pinterest: "NEXUS_PINTEREST_ACCESS_TOKEN",
   linkedin: "NEXUS_LINKEDIN_ACCESS_TOKEN",
   x: "NEXUS_X_ACCESS_TOKEN",
+};
+
+type SnapshotMeta = {
+  exists: boolean;
+  generatedAt: Date | null;
+  ageDays: number | null;
 };
 
 function asArray<T>(value: unknown): T[] {
@@ -281,6 +309,147 @@ function readJsonSnapshot<T>(fileName: string): T | null {
   } catch {
     return null;
   }
+}
+
+function parseDate(value: string | null | undefined) {
+  if (!value) return null;
+  const parsed = Date.parse(value);
+  return Number.isNaN(parsed) ? null : new Date(parsed);
+}
+
+function readSnapshotMeta(fileName: string, generatedAt?: string | null): SnapshotMeta {
+  try {
+    const target = path.join(process.cwd(), ".health", fileName);
+    if (!fs.existsSync(target)) {
+      return {
+        exists: false,
+        generatedAt: null,
+        ageDays: null,
+      };
+    }
+
+    const stats = fs.statSync(target);
+    const generated = parseDate(generatedAt) || stats.mtime;
+    const ageDays = Math.max(
+      0,
+      Math.floor((Date.now() - generated.getTime()) / (1000 * 60 * 60 * 24))
+    );
+
+    return {
+      exists: true,
+      generatedAt: generated,
+      ageDays,
+    };
+  } catch {
+    return {
+      exists: false,
+      generatedAt: null,
+      ageDays: null,
+    };
+  }
+}
+
+function formatSnapshotDate(value: Date | null) {
+  if (!value) return "Unavailable";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(value);
+}
+
+function formatAgeLabel(ageDays: number | null) {
+  if (ageDays === null) return "No snapshot";
+  if (ageDays === 0) return "Updated today";
+  if (ageDays === 1) return "1 day old";
+  return `${ageDays} days old`;
+}
+
+function buildStackHealth(
+  contentResearchRows: ContentResearchRow[],
+  contentQueueRows: ContentQueueRow[],
+  weeklySnapshot: WeeklyHealthSnapshot | null,
+  reconcileSnapshot: ReconcileSnapshot | null
+) {
+  const notebookResearchCount = contentResearchRows.filter(
+    (row) => row.source_type === "notebooklm"
+  ).length;
+  const briefReadyCount = contentQueueRows.filter((row) => row.status === "brief_ready").length;
+  const weeklyMeta = readSnapshotMeta(
+    "weekly-seo-health-latest.json",
+    weeklySnapshot?.generatedAt
+  );
+  const reconcileMeta = readSnapshotMeta(
+    "ga4-gsc-reconciliation-90d-latest.json",
+    reconcileSnapshot?.generatedAt
+  );
+  const healthAgeValues = [weeklyMeta.ageDays, reconcileMeta.ageDays].filter(
+    (value): value is number => value !== null
+  );
+  const maxHealthAge = healthAgeValues.length ? Math.max(...healthAgeValues) : null;
+  const healthFreshnessLabel = formatAgeLabel(maxHealthAge);
+  const weeklyLabel = `${formatSnapshotDate(weeklyMeta.generatedAt)} (${formatAgeLabel(weeklyMeta.ageDays)})`;
+  const reconcileLabel = `${formatSnapshotDate(reconcileMeta.generatedAt)} (${formatAgeLabel(
+    reconcileMeta.ageDays
+  )})`;
+
+  const items: StackHealthItem[] = [
+    {
+      key: "upload-post",
+      label: "Upload-Post",
+      status: "planned",
+      detail:
+        "Chosen publishing execution layer for SJR social distribution. No live account connection is stored in Nexus yet.",
+      meta: "Publisher pilot pending",
+      nextStep: "Create the account and validate one low-risk post through the Upload-Post path.",
+    },
+    {
+      key: "n8n",
+      label: "n8n",
+      status: "planned",
+      detail:
+        "Reserved as the orchestration layer between Nexus and Upload-Post. This repo does not yet store instance credentials or workflow health.",
+      meta: "Workflow handoff pending",
+      nextStep: "Wire the first bounded Nexus -> n8n -> Upload-Post handoff after the publisher pilot passes.",
+    },
+    {
+      key: "notebooklm",
+      label: "NotebookLM",
+      status: notebookResearchCount > 0 ? "live" : "attention",
+      detail:
+        notebookResearchCount > 0
+          ? `${notebookResearchCount} research items and ${briefReadyCount} brief-ready queue rows are already grounded in NotebookLM.`
+          : "NotebookLM is part of the content strategy, but no source-grounded research items are loaded yet.",
+      meta: notebookResearchCount > 0 ? "Research pipeline active" : "Research pipeline needs seeding",
+      nextStep:
+        notebookResearchCount > 0
+          ? "Keep expanding thin or underperforming posts through Research and Briefs."
+          : "Seed the research queue with source-grounded NotebookLM findings before drafting more content.",
+    },
+    {
+      key: "health",
+      label: ".health snapshots",
+      status:
+        weeklyMeta.exists && reconcileMeta.exists && maxHealthAge !== null && maxHealthAge <= 7
+          ? "live"
+          : "attention",
+      detail: `Weekly SEO snapshot: ${weeklyLabel}. GA4/GSC 90-day reconciliation: ${reconcileLabel}.`,
+      meta: healthFreshnessLabel,
+      nextStep:
+        weeklyMeta.exists && reconcileMeta.exists && maxHealthAge !== null && maxHealthAge <= 7
+          ? "Use Results to act on the latest measurement signals."
+          : "Refresh the weekly health workflow so Results is working off current data again.",
+    },
+  ];
+
+  const summary: StackSummary = {
+    liveCount: items.filter((item) => item.status === "live").length,
+    attentionCount: items.filter((item) => item.status === "attention").length,
+    plannedCount: items.filter((item) => item.status === "planned").length,
+    healthFreshnessLabel,
+  };
+
+  return { items, summary };
 }
 
 function matchesRoutePath(candidate: string | undefined, routePath: string) {
@@ -573,6 +742,12 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
   const syncRows = buildSyncRows(sharedRows, queueRows);
   const weeklySnapshot = readJsonSnapshot<WeeklyHealthSnapshot>("weekly-seo-health-latest.json");
   const reconcileSnapshot = readJsonSnapshot<ReconcileSnapshot>("ga4-gsc-reconciliation-90d-latest.json");
+  const stackHealth = buildStackHealth(
+    contentResearchRows,
+    contentQueueRows,
+    weeklySnapshot,
+    reconcileSnapshot
+  );
   const resultsRows = buildResultsRows(
     sharedRows,
     contentQueueRows,
@@ -583,6 +758,8 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
 
   return {
     apiHealth,
+    stackHealth: stackHealth.items,
+    stackSummary: stackHealth.summary,
     contentSummary: buildContentSummary(contentResearchRows, contentQueueRows),
     resultsSummary: buildResultsSummary(sharedRows, contentQueueRows, weeklySnapshot),
     syncSummary: buildSyncSummary(syncRows, apiHealth),

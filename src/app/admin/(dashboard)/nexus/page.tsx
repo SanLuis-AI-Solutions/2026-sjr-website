@@ -6,10 +6,10 @@ import { ContentBriefsPanel } from "@/components/admin/nexus/content-briefs-pane
 import { ContentResultsPanel } from "@/components/admin/nexus/content-results-panel";
 import { ContentResearchPanel } from "@/components/admin/nexus/content-research-panel";
 import { InboxSummaryPanel } from "@/components/admin/nexus/inbox-summary-panel";
-import { IntegrationHealthPanel } from "@/components/admin/nexus/integration-health-panel";
 import { MetricStrip } from "@/components/admin/nexus/metric-strip";
 import { PublishingWorkspace } from "@/components/admin/nexus/publishing-workspace";
 import { ReviewSummaryPanel } from "@/components/admin/nexus/review-summary-panel";
+import { StackHealthPanel } from "@/components/admin/nexus/stack-health-panel";
 import { promoteResearchToBrief, seedInitialContentOpsData } from "@/lib/admin/nexus-content-ops";
 import { getNexusDashboardData } from "@/lib/admin/nexus-dashboard";
 import {
@@ -29,7 +29,7 @@ type NexusView =
   | "leads"
   | "publishing"
   | "reviews"
-  | "connections";
+  | "stack";
 
 type NexusPageProps = {
   searchParams?: Promise<{
@@ -53,9 +53,12 @@ function normalizeView(value: string | undefined): NexusView {
     value === "leads" ||
     value === "publishing" ||
     value === "reviews" ||
-    value === "connections"
+    value === "stack"
   ) {
     return value;
+  }
+  if (value === "connections") {
+    return "stack";
   }
   return "overview";
 }
@@ -87,15 +90,13 @@ function filterDashboardRows(
 function OverviewWorkspace({
   newLeads,
   spamCount,
-  connectedPlatforms,
-  missingPlatforms,
   reviewQueue,
+  stackSummary,
 }: {
   newLeads: number;
   spamCount: number;
-  connectedPlatforms: number;
-  missingPlatforms: number;
   reviewQueue: number;
+  stackSummary: Awaited<ReturnType<typeof getNexusDashboardData>>["stackSummary"];
 }) {
   const actions = [
     {
@@ -114,9 +115,9 @@ function OverviewWorkspace({
       href: "/admin/nexus?view=reviews",
     },
     {
-      label: "Inspect connections",
-      note: `${connectedPlatforms} connected, ${missingPlatforms} missing`,
-      href: "/admin/nexus?view=connections",
+      label: "Check stack",
+      note: `${stackSummary.liveCount} live, ${stackSummary.plannedCount} planned, ${stackSummary.healthFreshnessLabel.toLowerCase()}`,
+      href: "/admin/nexus?view=stack",
     },
   ];
 
@@ -358,19 +359,21 @@ function ReviewsWorkspace({
   );
 }
 
-function ConnectionsWorkspace({
-  dashboard,
+function getLegacyOAuthNotice({
   oauthState,
   oauthReason,
   oauthDetail,
   provider,
 }: {
-  dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
   oauthState?: string;
   oauthReason?: string;
   oauthDetail?: string;
   provider?: string;
-}) {
+}): {
+  tone: "success" | "warning" | "error";
+  title: string;
+  body: string;
+} | null {
   const providerLabel =
     provider === "gbp"
       ? "Google Business Profile"
@@ -397,44 +400,75 @@ function ConnectionsWorkspace({
           : oauthReason === "persist-failed"
             ? "Google returned the callback, but Nexus could not save the connection state. Review the Nexus config table and server logs."
             : oauthReason === "state-mismatch"
-              ? "The OAuth callback did not match the expected session state. Start the sign-in flow again from the Connections tab."
+              ? "The OAuth callback did not match the expected session state. Start the sign-in flow again from the Stack workspace."
               : oauthReason && oauthDetail
                 ? `Google returned this callback issue: ${oauthReason}. ${oauthDetail}`
                 : oauthReason
                   ? `Google returned this callback issue: ${oauthReason}.`
-                : "Reconnect and review the callback error details before treating the provider as live.";
+                  : "Reconnect and review the callback error details before treating the provider as live.";
+
+  if (oauthState === "not-configured") {
+    return {
+      tone: "warning",
+      title: "Legacy provider OAuth is not wired",
+      body: `${providerLabel} does not have a live direct OAuth connect flow here. SJR is moving toward Upload-Post as the publishing layer instead of expanding provider-specific auth inside Nexus.`,
+    };
+  }
+
+  if (oauthState === "connected") {
+    return {
+      tone: "success",
+      title: "Legacy GBP connection succeeded",
+      body: `${providerLabel} was connected through the legacy direct OAuth path. Keep treating Upload-Post as the primary long-term publishing direction for SJR.`,
+    };
+  }
+
+  if (oauthState === "failed") {
+    return {
+      tone: "error",
+      title: "Legacy direct provider auth failed",
+      body: `${providerLabel} did not complete through the legacy OAuth path. ${failureBody}`,
+    };
+  }
+
+  if (oauthState === "denied") {
+    return {
+      tone: "warning",
+      title: "Legacy direct provider auth was cancelled",
+      body: `${providerLabel} sign-in was cancelled before consent completed.`,
+    };
+  }
+
+  return null;
+}
+
+function StackWorkspace({
+  dashboard,
+  oauthState,
+  oauthReason,
+  oauthDetail,
+  provider,
+}: {
+  dashboard: Awaited<ReturnType<typeof getNexusDashboardData>>;
+  oauthState?: string;
+  oauthReason?: string;
+  oauthDetail?: string;
+  provider?: string;
+}) {
+  const legacyNotice = getLegacyOAuthNotice({
+    oauthState,
+    oauthReason,
+    oauthDetail,
+    provider,
+  });
 
   return (
     <div className="grid h-full gap-3 lg:min-h-0">
-      <AdminSectionCard
-        title="Connection status"
-        eyebrow="Connections"
-        description="Google Business Profile can now connect through OAuth here. Other providers remain explicit setup debt until their adapters are implemented."
-        className="flex h-full min-h-0 flex-col"
-        contentClassName="flex-1 min-h-0 overflow-auto"
-      >
-        {oauthState === "not-configured" ? (
-          <div className="mb-4 rounded-[1.35rem] border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-relaxed text-stone-700">
-            {providerLabel} does not have a live OAuth connect flow yet. Google Business Profile is the only provider wired end to end in this pass.
-          </div>
-        ) : null}
-        {oauthState === "connected" ? (
-          <div className="mb-4 rounded-[1.35rem] border border-brand-gold/40 bg-brand-gold/10 px-4 py-4 text-sm leading-relaxed text-stone-700">
-            {providerLabel} connected successfully. The token and selected location are now stored in Nexus config for server-side publishing.
-          </div>
-        ) : null}
-        {oauthState === "failed" ? (
-          <div className="mb-4 rounded-[1.35rem] border border-rose-200 bg-rose-50 px-4 py-4 text-sm leading-relaxed text-stone-700">
-            {providerLabel} sign-in failed. {failureBody}
-          </div>
-        ) : null}
-        {oauthState === "denied" ? (
-          <div className="mb-4 rounded-[1.35rem] border border-stone-200 bg-stone-100 px-4 py-4 text-sm leading-relaxed text-stone-700">
-            {providerLabel} sign-in was cancelled before consent completed.
-          </div>
-        ) : null}
-        <IntegrationHealthPanel apiHealth={dashboard.apiHealth} showConnectButtons />
-      </AdminSectionCard>
+      <StackHealthPanel
+        items={dashboard.stackHealth}
+        summary={dashboard.stackSummary}
+        notice={legacyNotice}
+      />
     </div>
   );
 }
@@ -601,9 +635,8 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
           <OverviewWorkspace
             newLeads={dashboard.inboxSummary.newCount}
             spamCount={dashboard.inboxSummary.spamCount}
-            connectedPlatforms={dashboard.syncSummary.connectedPlatforms}
-            missingPlatforms={dashboard.syncSummary.missingPlatforms}
             reviewQueue={dashboard.reviewSummary.queuedCount}
+            stackSummary={dashboard.stackSummary}
           />
         ) : null}
 
@@ -642,8 +675,8 @@ export default async function NexusPage({ searchParams }: NexusPageProps) {
 
         {view === "reviews" ? <ReviewsWorkspace dashboard={dashboard} /> : null}
 
-        {view === "connections" ? (
-          <ConnectionsWorkspace
+        {view === "stack" ? (
+          <StackWorkspace
             dashboard={dashboard}
             oauthState={oauthState}
             oauthReason={oauthReason}
