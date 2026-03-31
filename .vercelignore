@@ -1,0 +1,10 @@
+.git
+.github
+.health
+.claude
+.agent
+Docs
+playwright-report
+test-results
+coverage
+*.log

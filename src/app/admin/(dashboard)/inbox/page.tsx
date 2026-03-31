@@ -12,7 +12,7 @@ import {
   getRecentBookings,
   getRecentContacts,
   getRecentQuotes,
-} from "@/lib/admin/nexus-dashboard";
+} from "@/lib/admin/inbox-queries";
 import {
   supabaseCreateSignedObjectUrl,
   supabaseUpdateById,

@@ -118,7 +118,7 @@ export function ConversionQuickActions({
     <div className={containerClass} role="region" aria-label="Quick actions">
       <Link
         href={primary.href}
-        onClick={() => onTrack(primary.href)}
+        onClickCapture={() => onTrack(primary.href)}
         className={primaryClass}
       >
         {primary.label}
@@ -127,7 +127,7 @@ export function ConversionQuickActions({
         <Link
           key={`${action.href}-${action.label}`}
           href={action.href}
-          onClick={() => onTrack(action.href)}
+          onClickCapture={() => onTrack(action.href)}
           className={secondaryClass(action.tone)}
         >
           {action.label}

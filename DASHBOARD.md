@@ -11,12 +11,14 @@ Track whether Google visibility, production-host organic sessions, and high-inte
 Run these from the repo root:
 
 ```bash
+npm run google:kpi-weekly-snapshot
 npm run google:reconcile-90d
 npm run google:weekly-seo-health
 ```
 
 Generated outputs:
 
+- `.health/kpi-weekly-snapshot-latest.md`
 - `.health/ga4-gsc-reconciliation-90d-latest.md`
 - `.health/weekly-seo-health-latest.md`
 
@@ -26,7 +28,7 @@ The repo now includes a scheduled GitHub Actions workflow at [.github/workflows/
 
 - Schedule: every Monday at `14:00 UTC`
 - Reminder surface: GitHub issue `Weekly SEO Health Report` plus a fresh weekly comment on that issue
-- Artifacts: each run uploads the latest `.health` snapshots to the workflow run
+- Artifacts: each run uploads the latest weekly KPI snapshot, weekly SEO health snapshot, and 90-day reconciliation to the workflow run
 
 Required GitHub secrets:
 
@@ -67,6 +69,7 @@ Track these 5 metrics every week:
 ## Weekly Entry Template
 
 Copy this block each week and replace the values with the latest numbers from `.health/weekly-seo-health-latest.md`.
+Use `.health/kpi-weekly-snapshot-latest.md` for the funnel and route-conversion drill-down.
 
 ```md
 ## Week of YYYY-MM-DD
@@ -96,20 +99,30 @@ Copy this block each week and replace the values with the latest numbers from `.
 
 ## Current Baseline
 
-Week ending `2026-03-06`:
+Week ending `2026-03-26`:
 
 | Metric | Value |
 | --- | --- |
-| Google Search clicks | `8` |
-| Google Search impressions | `506` |
+| Google Search clicks | `12` |
+| Google Search impressions | `759` |
 | Production-host organic sessions | `0` |
 | Quote + booking starts | `0` |
 | Quote + booking outcomes | `0` |
 
+Supporting stats from `.health/kpi-weekly-snapshot-latest.md`:
+
+- Active users: `9`
+- Sessions: `9`
+- Engaged sessions: `0`
+- Page views: `2`
+- CTR: `1.58%`
+- Average position: `12.63`
+
 ## Review Rhythm
 
-1. Run the two Google commands every Monday.
+1. Run the three Google commands every Monday.
 2. Review `Docs/WEEKLY-SEO-HEALTH.md`.
-3. Update this file with the latest KPI row and action items.
-4. If Google clicks rise but production-host organic sessions do not, inspect redirects and canonicals first.
-5. If organic sessions rise but quote/booking starts do not, review landing-page CTA clarity and form friction next.
+3. Review `.health/kpi-weekly-snapshot-latest.md` for funnel and route-level detail.
+4. Update this file with the latest KPI row and action items.
+5. If Google clicks rise but production-host organic sessions do not, inspect redirects and canonicals first.
+6. If organic sessions rise but quote/booking starts do not, review landing-page CTA clarity and form friction next.

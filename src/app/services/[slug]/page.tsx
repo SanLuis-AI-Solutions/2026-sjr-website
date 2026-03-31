@@ -2392,9 +2392,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </div>
       <div className="h-24 md:hidden" aria-hidden="true" />
+          <ServiceInteractionTracker serviceSlug={slug} />
         </DeferredServiceSections>
       </Suspense>
-      <ServiceInteractionTracker serviceSlug={slug} />
 
       <script
         type="application/ld+json"

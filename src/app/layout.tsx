@@ -42,45 +42,20 @@ function getGaBootstrapScript(measurementId: string, allowedHostname: string) {
 
     window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
     if (typeof window.gtag !== "function") {
-      window.gtag = (...args) => {
-        window.dataLayer.push(args);
+      window.gtag = function() {
+        // GA expects the native gtag queue shape, which uses the function arguments object.
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments);
       };
     }
+    window.__sjrGaLoaded = true;
+    window.gtag("js", new Date());
+    window.gtag("config", measurementId, { send_page_view: false });
 
-    const loadGa = () => {
-      if (window.__sjrGaLoaded) return;
-      window.__sjrGaLoaded = true;
-      window.gtag("js", new Date());
-      window.gtag("config", measurementId, { send_page_view: false });
-
-      const script = document.createElement("script");
-      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
-      script.async = true;
-      document.head.appendChild(script);
-    };
-
-    const onFirstIntent = () => {
-      cleanup();
-      loadGa();
-    };
-
-    const listeners = [
-      ["pointerdown", onFirstIntent, { once: true, passive: true }],
-      ["keydown", onFirstIntent, { once: true, passive: true }],
-    ];
-
-    listeners.forEach(([eventName, handler, options]) => {
-      window.addEventListener(eventName, handler, options);
-    });
-
-    const timeoutId = window.setTimeout(onFirstIntent, 15000);
-
-    const cleanup = () => {
-      listeners.forEach(([eventName, handler]) => {
-        window.removeEventListener(eventName, handler);
-      });
-      window.clearTimeout(timeoutId);
-    };
+    const script = document.createElement("script");
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
+    script.async = true;
+    document.head.appendChild(script);
   })();`;
 }
 

@@ -3,6 +3,7 @@
 Run this once per week after:
 
 ```bash
+npm run google:kpi-weekly-snapshot
 npm run google:reconcile-90d
 npm run google:weekly-seo-health
 ```
@@ -12,6 +13,7 @@ Automated option:
 - GitHub Actions workflow: `.github/workflows/weekly-health.yml`
 - Schedule: every Monday at `14:00 UTC`
 - Reminder surface: GitHub issue `Weekly SEO Health Report`
+- Uploaded artifacts: weekly KPI snapshot, weekly SEO health snapshot, 90-day reconciliation
 - Required GitHub secrets:
   - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
   - `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
@@ -56,6 +58,9 @@ Automated option:
 - booking starts reviewed
 - quote outcomes reviewed
 - booking outcomes reviewed
+- start -> attempt rate reviewed
+- attempt -> outcome rate reviewed
+- route conversion reviewed for `/quote`, `/book`, and `/contact`
 - if starts increase but outcomes do not, log a CRO follow-up
 
 ## Escalation Rules

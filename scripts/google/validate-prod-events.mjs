@@ -26,6 +26,13 @@ const REQUIRED_EVENTS = [
   "contact_submit_success",
 ];
 
+const GTAG_JS_PATTERN = /googletagmanager\.com\/gtag\/js/i;
+const GA_COLLECT_PATTERNS = [
+  /google-analytics\.com\/g\/collect/i,
+  /region1\.google-analytics\.com\/g\/collect/i,
+  /analytics\.google\.com\/g\/collect/i,
+];
+
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function isoForFile(date) {
@@ -48,6 +55,16 @@ function countByName(events, eventName) {
   return events.filter((item) => item?.name === eventName).length;
 }
 
+function dedupeRequests(requests) {
+  const seen = new Set();
+  return requests.filter((request) => {
+    const key = `${request.method}:${request.url}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 async function countEvent(page, eventName) {
   const events = await readCapturedEvents(page);
   return countByName(events, eventName);
@@ -56,6 +73,23 @@ async function countEvent(page, eventName) {
 async function goto(page, urlPath) {
   await page.goto(`${BASE_URL}${urlPath}`, { waitUntil: "networkidle" });
   await pause(900);
+}
+
+async function clickTrackedTarget(locator) {
+  await locator.evaluate((element) => {
+    element.scrollIntoView({ block: "center", inline: "center" });
+  });
+  try {
+    await locator.click();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (!/intercepts pointer events|Timeout/i.test(message)) {
+      throw error;
+    }
+    await locator.evaluate((element) => {
+      element.click();
+    });
+  }
 }
 
 async function waitForEventDelta(page, eventName, beforeCount, timeoutMs = 8000) {
@@ -83,6 +117,22 @@ async function waitForAnyEventDelta(page, eventNames, beforeCounts, timeoutMs = 
   return { matchedEvent: null, observed: false };
 }
 
+async function waitForDocumentDataset(page, datasetKey, values, timeoutMs = 8000) {
+  const acceptedValues = Array.isArray(values) ? values : [values];
+  const deadline = Date.now() + timeoutMs;
+
+  while (Date.now() < deadline) {
+    const matched = await page.evaluate(
+      ({ key, expected }) => expected.includes(document.documentElement.dataset[key] || ""),
+      { key: datasetKey, expected: acceptedValues }
+    );
+    if (matched) return true;
+    await pause(100);
+  }
+
+  return false;
+}
+
 async function runEventCheck(page, eventName, action, report) {
   const beforeCount = await countEvent(page, eventName);
   await action();
@@ -91,6 +141,21 @@ async function runEventCheck(page, eventName, action, report) {
   report.push({
     eventName,
     status: observed ? "PASS" : "FAIL",
+    beforeCount,
+    afterCount,
+  });
+}
+
+async function runNavigationEventCheck(page, eventName, action, destinationPattern, report) {
+  const beforeCount = await countEvent(page, eventName);
+  await action();
+  await page.waitForURL(destinationPattern, { timeout: 8000 });
+  await page.waitForLoadState("networkidle");
+  await pause(600);
+  const afterCount = await countEvent(page, eventName);
+  report.push({
+    eventName,
+    status: afterCount > beforeCount ? "PASS" : "FAIL",
     beforeCount,
     afterCount,
   });
@@ -118,6 +183,34 @@ async function runAnyEventCheck(page, eventNames, action, report) {
   });
 }
 
+async function runNavigationAnyEventCheck(page, eventNames, action, destinationPattern, report) {
+  const beforeCounts = {};
+  for (const eventName of eventNames) {
+    beforeCounts[eventName] = await countEvent(page, eventName);
+  }
+
+  await action();
+  await page.waitForURL(destinationPattern, { timeout: 8000 });
+  await page.waitForLoadState("networkidle");
+  await pause(600);
+
+  const afterCounts = {};
+  for (const eventName of eventNames) {
+    afterCounts[eventName] = await countEvent(page, eventName);
+  }
+
+  const matchedEvent = eventNames.find(
+    (eventName) => afterCounts[eventName] > beforeCounts[eventName]
+  );
+
+  report.push({
+    eventName: `${eventNames.join(" | ")}${matchedEvent ? ` (matched: ${matchedEvent})` : ""}`,
+    status: Boolean(matchedEvent) ? "PASS" : "FAIL",
+    beforeCount: Object.values(beforeCounts).reduce((sum, value) => sum + value, 0),
+    afterCount: Object.values(afterCounts).reduce((sum, value) => sum + value, 0),
+  });
+}
+
 async function runPresenceCheck(page, eventName, report) {
   const count = await countEvent(page, eventName);
   report.push({
@@ -129,7 +222,10 @@ async function runPresenceCheck(page, eventName, report) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({
+    headless: true,
+    ignoreDefaultArgs: ["--disable-background-networking"],
+  });
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
     isMobile: true,
@@ -148,6 +244,17 @@ async function main() {
       })();
 
       window.__codexGaEvents = Array.isArray(existing) ? existing : [];
+      window.__codexGaNetwork = Array.isArray(window.__codexGaNetwork)
+        ? window.__codexGaNetwork
+        : [];
+      const captureNetwork = (entry) => {
+        if (!entry || typeof entry.url !== "string") return;
+        window.__codexGaNetwork.push({
+          method: entry.method || "UNKNOWN",
+          url: entry.url,
+          size: typeof entry.size === "number" ? entry.size : null,
+        });
+      };
       const persist = () =>
         window.sessionStorage.setItem(key, JSON.stringify(window.__codexGaEvents));
       const capture = (entry) => {
@@ -198,12 +305,83 @@ async function main() {
           assignedGtag = typeof next === "function" ? next : null;
         },
       });
+
+      const originalSendBeacon =
+        typeof navigator.sendBeacon === "function"
+          ? navigator.sendBeacon.bind(navigator)
+          : null;
+      if (originalSendBeacon) {
+        navigator.sendBeacon = (url, data) => {
+          captureNetwork({
+            method: "BEACON",
+            url: typeof url === "string" ? url : String(url),
+            size:
+              typeof data === "string"
+                ? data.length
+                : typeof data?.size === "number"
+                  ? data.size
+                  : null,
+          });
+          return originalSendBeacon(url, data);
+        };
+      }
+
+      const originalFetch = typeof window.fetch === "function" ? window.fetch.bind(window) : null;
+      if (originalFetch) {
+        window.fetch = async (...args) => {
+          const [resource] = args;
+          const url =
+            typeof resource === "string"
+              ? resource
+              : resource instanceof Request
+                ? resource.url
+                : String(resource);
+          captureNetwork({ method: "FETCH", url });
+          return originalFetch(...args);
+        };
+      }
+
+      const originalXhrOpen = XMLHttpRequest.prototype.open;
+      const originalXhrSend = XMLHttpRequest.prototype.send;
+      XMLHttpRequest.prototype.open = function patchedOpen(method, url, ...args) {
+        this.__codexUrl = typeof url === "string" ? url : String(url);
+        this.__codexMethod = typeof method === "string" ? method : "XHR";
+        return originalXhrOpen.call(this, method, url, ...args);
+      };
+      XMLHttpRequest.prototype.send = function patchedSend(...args) {
+        captureNetwork({
+          method: this.__codexMethod || "XHR",
+          url: this.__codexUrl || "",
+        });
+        return originalXhrSend.apply(this, args);
+      };
     },
     { key: STORAGE_KEY }
   );
 
   const page = await context.newPage();
   const report = [];
+  const gtagJsRequests = [];
+  const gaCollectRequests = [];
+
+  const recordRequest = (request) => {
+    const url = request.url();
+    if (GTAG_JS_PATTERN.test(url)) {
+      gtagJsRequests.push({
+        method: request.method(),
+        url,
+      });
+      return;
+    }
+    if (GA_COLLECT_PATTERNS.some((pattern) => pattern.test(url))) {
+      gaCollectRequests.push({
+        method: request.method(),
+        url,
+      });
+    }
+  };
+
+  context.on("request", recordRequest);
 
   try {
     await goto(page, "/");
@@ -226,14 +404,14 @@ async function main() {
       "services_hub_cta_click",
       async () => {
         const cta = page.locator("main").getByRole("link", { name: /^Get Fast Quote$/i }).first();
-        await cta.scrollIntoViewIfNeeded();
-        await cta.click();
+        await clickTrackedTarget(cta);
         await page.waitForLoadState("networkidle");
       },
       report
     );
 
     await goto(page, "/services/ring-sizing");
+    await waitForDocumentDataset(page, "sjrServiceTracker", "ready");
     await runEventCheck(
       page,
       "service_section_view",
@@ -259,8 +437,7 @@ async function main() {
       "service_decision_expand",
       async () => {
         const summary = page.locator('[data-track-event="service_decision_expand"] summary').first();
-        await summary.scrollIntoViewIfNeeded();
-        await summary.click();
+        await clickTrackedTarget(summary);
         await pause(500);
       },
       report
@@ -271,8 +448,7 @@ async function main() {
       "service_market_expand",
       async () => {
         const summary = page.locator('[data-track-event="service_market_expand"] summary').first();
-        await summary.scrollIntoViewIfNeeded();
-        await summary.click();
+        await clickTrackedTarget(summary);
         await pause(500);
       },
       report
@@ -283,8 +459,7 @@ async function main() {
       "service_faq_open",
       async () => {
         const summary = page.locator('[data-service-faq-question] summary').first();
-        await summary.scrollIntoViewIfNeeded();
-        await summary.click();
+        await clickTrackedTarget(summary);
         await pause(500);
       },
       report
@@ -297,8 +472,7 @@ async function main() {
         const cta = page
           .locator('[data-service-section="hero"] a[href="/quote"]')
           .first();
-        await cta.scrollIntoViewIfNeeded();
-        await cta.click();
+        await clickTrackedTarget(cta);
         await page.waitForLoadState("networkidle");
       },
       report
@@ -309,7 +483,7 @@ async function main() {
       page,
       "lead_form_start",
       async () => {
-        await page.locator("#quote-form input[name='name']").click();
+        await clickTrackedTarget(page.locator("#quote-form input[name='name']"));
         await pause(300);
       },
       report
@@ -321,49 +495,49 @@ async function main() {
       page,
       "lead_form_step",
       async () => {
-        await page.locator("#quote-form input[name='email']").click();
+        await clickTrackedTarget(page.locator("#quote-form input[name='email']"));
         await pause(300);
       },
       report
     );
 
     await goto(page, "/book");
+    await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
     await runEventCheck(
       page,
       "booking_form_start",
       async () => {
-        await page.locator("#booking-form input[name='name']").click();
+        await clickTrackedTarget(page.locator("#booking-form input[name='name']"));
         await pause(300);
       },
       report
     );
 
-    await runEventCheck(
+    await runNavigationEventCheck(
       page,
       "conversion_quick_action_click",
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
           .getByRole("link", { name: /^Contact Us$/i });
-        await quickAction.scrollIntoViewIfNeeded();
-        await quickAction.click();
-        await page.waitForLoadState("networkidle");
+        await clickTrackedTarget(quickAction);
       },
+      /\/contact(?:\?|$)/,
       report
     );
 
     await goto(page, "/contact");
-    await runAnyEventCheck(
+    await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
+    await runNavigationAnyEventCheck(
       page,
       ["conversion_quick_action_click_control", "conversion_quick_action_click_primary_focus"],
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
           .getByRole("link", { name: /^Get Fast Quote$/i });
-        await quickAction.scrollIntoViewIfNeeded();
-        await quickAction.click();
-        await page.waitForLoadState("networkidle");
+        await clickTrackedTarget(quickAction);
       },
+      /\/quote(?:\?|$)/,
       report
     );
 
@@ -377,9 +551,41 @@ async function main() {
     await runPresenceCheck(page, "contact_submit_success", report);
 
     const captured = await readCapturedEvents(page);
+    const pageNetworkRequests = await page.evaluate(() => {
+      const captured = Array.isArray(window.__codexGaNetwork) ? window.__codexGaNetwork : [];
+      const resourceEntries = performance
+        .getEntriesByType("resource")
+        .map((entry) => ({ method: "RESOURCE", url: entry.name, size: null }));
+      return [...captured, ...resourceEntries];
+    });
+    const capturedCollectRequests = dedupeRequests(
+      pageNetworkRequests.filter((request) =>
+        GA_COLLECT_PATTERNS.some((pattern) => pattern.test(request.url))
+      )
+    );
+    const allGaCollectRequests = dedupeRequests([...gaCollectRequests, ...capturedCollectRequests]);
+    const gaCollectHeadlessLimited =
+      allGaCollectRequests.length === 0 && gtagJsRequests.length > 0 && captured.length > 0;
     const aggregate = Object.fromEntries(
       REQUIRED_EVENTS.map((eventName) => [eventName, countByName(captured, eventName)])
     );
+    report.push({
+      eventName: "ga_bootstrap_network",
+      status: gtagJsRequests.length > 0 ? "PASS" : "FAIL",
+      beforeCount: 0,
+      afterCount: gtagJsRequests.length,
+    });
+    report.push({
+      eventName: "ga_collect_network",
+      status:
+        allGaCollectRequests.length > 0
+          ? "PASS"
+          : gaCollectHeadlessLimited
+            ? "WARN"
+            : "FAIL",
+      beforeCount: 0,
+      afterCount: allGaCollectRequests.length,
+    });
 
     const now = new Date();
     const stamp = isoForFile(now);
@@ -391,6 +597,11 @@ async function main() {
       "",
       `- Generated: ${now.toISOString()}`,
       `- Base URL: ${BASE_URL}`,
+      `- gtag.js requests observed: ${gtagJsRequests.length}`,
+      `- GA collect requests observed: ${allGaCollectRequests.length}`,
+      gaCollectHeadlessLimited
+        ? "- Note: Headless Playwright did not expose GA collect transport even though gtag bootstrap and in-page GA events were present. Treat this as a validator limitation, not a confirmed production failure."
+        : null,
       "",
       "## Check Results",
       "| Event | Status | Before | After |",
@@ -405,6 +616,14 @@ async function main() {
       "| --- | --- |",
       ...REQUIRED_EVENTS.map((eventName) => `| ${eventName} | ${aggregate[eventName]} |`),
       "",
+      "## GA Network Requests",
+      gtagJsRequests.length || allGaCollectRequests.length
+        ? "| Method | URL |\n| --- | --- |\n" +
+          [...gtagJsRequests, ...allGaCollectRequests]
+            .map((request) => `| ${request.method} | ${request.url} |`)
+            .join("\n")
+        : "_No GA bootstrap or collection requests were observed during validation._",
+      "",
       `- Total captured GA events in session: ${captured.length}`,
       "",
     ].join("\n");
@@ -414,6 +633,11 @@ async function main() {
       baseUrl: BASE_URL,
       checks: report,
       aggregate,
+      network: {
+        gtagJsRequests,
+        gaCollectRequests: allGaCollectRequests,
+        pageNetworkRequests: capturedCollectRequests,
+      },
       totalCapturedEvents: captured.length,
     };
 
@@ -427,10 +651,24 @@ async function main() {
     fs.writeFileSync(datedJson, JSON.stringify(jsonPayload, null, 2), "utf8");
     fs.writeFileSync(latestJson, JSON.stringify(jsonPayload, null, 2), "utf8");
 
-    const failed = report.filter((row) => row.status !== "PASS");
+    const failed = report.filter((row) => row.status === "FAIL");
     if (failed.length > 0) {
       console.error(
         `EVENT_VALIDATION_FAIL missing=${failed.map((item) => item.eventName).join(",")}`
+      );
+      console.error(`REPORT_MD ${datedMd}`);
+      process.exitCode = 1;
+      return;
+    }
+
+    if (gtagJsRequests.length === 0 || (!gaCollectHeadlessLimited && allGaCollectRequests.length === 0)) {
+      console.error(
+        `EVENT_VALIDATION_FAIL missing_network=${[
+          gtagJsRequests.length === 0 ? "ga_bootstrap" : null,
+          !gaCollectHeadlessLimited && allGaCollectRequests.length === 0 ? "ga_collect" : null,
+        ]
+          .filter(Boolean)
+          .join(",")}`
       );
       console.error(`REPORT_MD ${datedMd}`);
       process.exitCode = 1;

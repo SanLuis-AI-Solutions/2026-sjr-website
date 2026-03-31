@@ -84,6 +84,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/booking-form",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/booking-form/:path*",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/booking-calendar",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/booking-calendar/:path*",
+        destination: "/book",
+        permanent: true,
+      },
+      {
         source: "/watch-repair-battery",
         destination: "/services/watch-repair",
         permanent: true,

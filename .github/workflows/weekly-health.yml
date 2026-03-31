@@ -56,7 +56,7 @@ jobs:
             "available=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           }
 
-      - name: Run Weekly SEO Snapshots
+      - name: Run Weekly Analytics Snapshots
         id: seo_snapshots
         if: ${{ steps.google_config.outputs.available == 'true' }}
         shell: pwsh
@@ -69,6 +69,8 @@ jobs:
         run: |
           $failed = 0
           npm run google:weekly-seo-health
+          if ($LASTEXITCODE -ne 0) { $failed = 1 }
+          npm run google:kpi-weekly-snapshot
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
           npm run google:reconcile-90d
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
@@ -83,6 +85,8 @@ jobs:
             .health/report.md
             .health/weekly-seo-health-latest.md
             .health/weekly-seo-health-latest.json
+            .health/kpi-weekly-snapshot-latest.md
+            .health/kpi-weekly-snapshot-latest.json
             .health/ga4-gsc-reconciliation-90d-latest.md
             .health/ga4-gsc-reconciliation-90d-latest.json
           if-no-files-found: warn
@@ -98,6 +102,7 @@ jobs:
             const seoStepRan = '${{ steps.google_config.outputs.available }}' === 'true';
             const seoExitCode = Number('${{ steps.seo_snapshots.outputs.exit_code }}' || '0');
             const weeklySeoPath = '.health/weekly-seo-health-latest.md';
+            const kpiPath = '.health/kpi-weekly-snapshot-latest.md';
             const reconcilePath = '.health/ga4-gsc-reconciliation-90d-latest.md';
 
             function readIfExists(filePath, fallback) {
@@ -118,6 +123,12 @@ jobs:
                   `Weekly SEO snapshot missing: ${weeklySeoPath}\n\nSEO snapshot exit code: ${seoExitCode}`
                 )
               : 'Weekly SEO snapshots were skipped because Google service-account secrets are not configured in GitHub Actions.';
+            const kpiBody = seoStepRan
+              ? readIfExists(
+                  kpiPath,
+                  `Weekly KPI snapshot missing: ${kpiPath}\n\nSEO snapshot exit code: ${seoExitCode}`
+                )
+              : 'Weekly KPI snapshot was skipped because Google service-account secrets are not configured in GitHub Actions.';
             const reconcileBody = seoStepRan
               ? readIfExists(
                   reconcilePath,
@@ -141,6 +152,10 @@ jobs:
               '## Weekly SEO Snapshot',
               '',
               weeklySeoBody,
+              '',
+              '## Weekly KPI Snapshot',
+              '',
+              kpiBody,
               '',
               '## 90-Day Reconciliation',
               '',
