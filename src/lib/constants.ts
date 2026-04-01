@@ -33,6 +33,10 @@ export const SERVICE_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
   "custom-design": "/images/services/custom-design-hero-mobile.avif",
 };
 
+export const SERVICE_DETAIL_HERO_IMAGE_BY_SLUG: Record<string, string> = {
+  "ring-sizing": "/images/services/ring-sizing-hero-wide.jpg",
+};
+
 export const SERVICES = [
   {
     slug: "watch-repair",
@@ -92,7 +96,7 @@ export const SERVICES = [
       "Arthritic shank installations",
       "Shank thinning and tapering"
     ],
-    image: "/images/services/ring-sizing-hero.jpg",
+    image: "/images/services/ring-sizing-hero-wide.jpg",
     faqs: [
       {
         question: "Can any ring be resized?",

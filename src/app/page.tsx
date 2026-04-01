@@ -5,8 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowroomBand, Testimonials } from "@/components/home-sections";
-import { TrackedLink } from "@/components/analytics/tracked-link";
-import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
+import { MobileActionShelf } from "@/components/mobile-action-shelf";
 import { servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import { BUSINESS } from "@/lib/constants";
@@ -55,51 +54,39 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-24 md:pt-28">
         <Hero />
+        <MobileActionShelf
+          eyebrow="Mobile actions"
+          title="Get pricing or reach the shop without losing your place."
+          summary="Fast quote first, direct call if you need a quick answer, or reserve a repair visit."
+          actions={[
+            {
+              href: "/quote",
+              label: "Get Fast Quote",
+              eventName: "home_mobile_quick_action_click",
+              eventParams: { placement: "mobile_action_shelf", cta_target: "quote" },
+              kind: "primary",
+            },
+            {
+              href: `tel:${BUSINESS.phone}`,
+              label: "Call Now",
+              ariaLabel: `Call ${BUSINESS.phone}`,
+              eventName: "home_mobile_quick_action_click",
+              eventParams: { placement: "mobile_action_shelf", cta_target: "call" },
+              kind: "secondary",
+            },
+            {
+              href: "/book",
+              label: "Book repair instead",
+              eventName: "home_mobile_quick_action_click",
+              eventParams: { placement: "mobile_action_shelf", cta_target: "book" },
+              kind: "text",
+            },
+          ]}
+        />
         <Suspense fallback={null}>
           <HomeDeferredContent />
         </Suspense>
       </main>
-      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div
-          role="region"
-          aria-label="Homepage quick actions"
-          className="rounded-2xl border border-stone-200 bg-white/90 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
-        >
-          <p className="mb-3 text-center text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-600">
-            Same Day/Next Day service • In-house repairs
-          </p>
-          <div className="flex items-center gap-3">
-            <TrackedLink
-              href="/quote"
-              eventName="home_mobile_quick_action_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "quote" }}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </TrackedLink>
-            <TrackedAnchor
-              href={`tel:${BUSINESS.phone}`}
-              eventName="home_mobile_quick_action_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "call" }}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              aria-label={`Call ${BUSINESS.phone}`}
-            >
-              Call Now
-            </TrackedAnchor>
-          </div>
-          <div className="mt-3 text-center">
-            <TrackedLink
-              href="/book"
-              eventName="home_mobile_quick_action_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "book" }}
-              className="text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-700 underline decoration-brand-gold/60 underline-offset-4"
-            >
-              Prefer to reserve a time? Book repair
-            </TrackedLink>
-          </div>
-        </div>
-      </div>
-      <div className="h-24 md:hidden" aria-hidden="true" />
       <SiteFooter />
       <script
         type="application/ld+json"

@@ -4,6 +4,7 @@ import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
+import { MobileActionShelf } from "@/components/mobile-action-shelf";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 
 type ServiceListItem = {
@@ -121,12 +122,12 @@ export default async function ServicesPage() {
               </span>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <TrackedLink
                 href="/quote"
                 eventName="services_hub_cta_click"
                 eventParams={{ placement: "hero", cta_target: "quote" }}
-                className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Get Fast Quote
               </TrackedLink>
@@ -134,7 +135,7 @@ export default async function ServicesPage() {
                 href="/book"
                 eventName="services_hub_cta_click"
                 eventParams={{ placement: "hero", cta_target: "book" }}
-                className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Book Repair
               </TrackedLink>
@@ -148,7 +149,7 @@ export default async function ServicesPage() {
                 alt={featured?.name || "Featured service"}
                 fill
                 priority
-                sizes="(max-width: 768px) calc(100vw - 3rem), 50vw"
+                sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc((100vw - 6rem) / 2), 528px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent" />
@@ -164,6 +165,28 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <MobileActionShelf
+        eyebrow="Mobile actions"
+        title="Compare first, then move when you are ready."
+        summary="Get pricing before you visit, or reserve an in-shop assessment without jumping back to the top."
+        actions={[
+          {
+            href: "/quote",
+            label: "Get Fast Quote",
+            eventName: "services_hub_cta_click",
+            eventParams: { placement: "mobile_action_shelf", cta_target: "quote" },
+            kind: "primary",
+          },
+          {
+            href: "/book",
+            label: "Book Repair",
+            eventName: "services_hub_cta_click",
+            eventParams: { placement: "mobile_action_shelf", cta_target: "book" },
+            kind: "secondary",
+          },
+        ]}
+      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-6">
@@ -438,34 +461,6 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
-      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div
-          role="region"
-          aria-label="Quick actions"
-          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
-        >
-          <div className="flex items-center gap-3">
-            <TrackedLink
-              href="/quote"
-              eventName="services_hub_cta_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "quote" }}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </TrackedLink>
-            <TrackedLink
-              href="/book"
-              eventName="services_hub_cta_click"
-              eventParams={{ placement: "mobile_quick_actions", cta_target: "book" }}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Book Repair
-            </TrackedLink>
-          </div>
-        </div>
-      </div>
-      <div className="h-24 md:hidden" aria-hidden="true" />
     </SiteShell>
   );
 }
