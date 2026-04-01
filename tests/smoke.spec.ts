@@ -729,10 +729,14 @@ test("mobile services pages: hero actions are clear and image assets load", asyn
   for (const route of routes) {
     await page.goto(route, { waitUntil: "networkidle" });
 
-    await expect(page.getByText(/Mobile actions/i)).toHaveCount(0);
+    const quickActions = page
+      .locator("section")
+      .filter({ has: page.getByText(/Mobile actions/i) })
+      .first();
+    await expect(quickActions).toBeVisible();
 
-    const quote = page.getByRole("link", { name: /^Get Fast Quote$/i }).first();
-    const book = page.getByRole("link", { name: /^Book Repair$/i }).first();
+    const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
+    const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
     await expect(quote).toBeVisible();
     await expect(book).toBeVisible();
 
