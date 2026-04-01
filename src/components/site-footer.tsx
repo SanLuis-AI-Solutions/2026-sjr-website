@@ -1,21 +1,30 @@
 import Link from "next/link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
+import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
+import { BrandMark } from "@/components/brand-mark";
+import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
 export function SiteFooter() {
+  const facebookUrl = BUSINESS.sameAs.find((entry) => entry.includes("facebook.com"));
+  const yelpUrl = BUSINESS.sameAs.find((entry) => entry.includes("yelp.com"));
+
   return (
     <footer className="bg-brand-burgundy-deep text-stone-100 selection:bg-brand-gold selection:text-white">
       <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-16 md:grid-cols-4">
+        <div className="grid gap-16 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)]">
           <div className="md:col-span-1">
-            <Link href="/" className="font-serif text-2xl text-white">
-              Susie’s <span className="text-brand-gold">Jewelry Repair</span>
+            <Link href="/" className="inline-flex items-center gap-3 font-serif text-2xl text-white">
+              <BrandMark className="h-12 w-12 flex-none" />
+              <span>
+                Susie’s <span className="text-brand-gold">Jewelry Repair</span>
+              </span>
             </Link>
             <p className="mt-6 max-w-xs text-sm leading-relaxed">
               In-house watch and jewelry repair in Pasadena. Master craftsmanship with clear communication and fast turnaround.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 md:col-span-3 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 md:col-span-1 lg:grid-cols-4">
             <div>
               <p className="mb-6 font-serif text-lg text-white">Our Services</p>
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
@@ -32,17 +41,34 @@ export function SiteFooter() {
             </div>
 
             <div>
-              <p className="mb-6 font-serif text-lg text-white">Company</p>
+              <p className="mb-6 font-serif text-lg text-white">Explore</p>
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
                 <Link href="/about" className="transition-colors hover:text-brand-gold">About Us</Link>
                 <Link href="/faq" className="transition-colors hover:text-brand-gold">F.A.Q.</Link>
-                <Link href="/contact" className="transition-colors hover:text-brand-gold">Connect</Link>
-                <Link href="/blog" className="transition-colors hover:text-brand-gold">Journal</Link>
+                <Link href="/showroom" className="transition-colors hover:text-brand-gold">Gallery</Link>
+                <Link href="/blog" className="transition-colors hover:text-brand-gold">Blog</Link>
+                <Link href="/contact" className="transition-colors hover:text-brand-gold">Contact</Link>
+                <Link href="/quote" className="transition-colors hover:text-brand-gold">Get Quote</Link>
               </nav>
             </div>
 
             <div>
-              <p className="mb-6 font-serif text-lg text-white">Location</p>
+              <p className="mb-6 font-serif text-lg text-white">Nearby Areas</p>
+              <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
+                {SERVICE_AREA_PAGES.map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/services/${page.slug}`}
+                    className="transition-colors hover:text-brand-gold"
+                  >
+                    {page.city}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <p className="mb-6 font-serif text-lg text-white">Visit & Verify</p>
               <p className="text-sm italic text-stone-200">
                 {BUSINESS.address.city}, {BUSINESS.address.state}.
               </p>
@@ -51,8 +77,61 @@ export function SiteFooter() {
                 <span>
                   {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
                 </span>
-                <span className="mt-4 font-semibold text-brand-gold">{BUSINESS.phone}</span>
+                <TrackedAnchor
+                  href={`tel:${BUSINESS.phone}`}
+                  eventName="footer_call_click"
+                  eventParams={{ placement: "footer" }}
+                  className="mt-4 font-semibold text-brand-gold transition-colors hover:text-white"
+                >
+                  {BUSINESS.phone}
+                </TrackedAnchor>
+                <TrackedAnchor
+                  href={BUSINESS.googleMapsUrl}
+                  eventName="footer_maps_click"
+                  eventParams={{ placement: "footer" }}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                >
+                  Get Directions
+                </TrackedAnchor>
+                <TrackedAnchor
+                  href={BUSINESS.googleMapsUrl}
+                  eventName="footer_reviews_click"
+                  eventParams={{ placement: "footer" }}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                >
+                  Read Google Reviews
+                </TrackedAnchor>
               </address>
+              <div className="mt-4 flex flex-wrap gap-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-200">
+                {facebookUrl ? (
+                  <TrackedAnchor
+                    href={facebookUrl}
+                    eventName="footer_social_click"
+                    eventParams={{ network: "facebook", placement: "footer" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-brand-gold"
+                  >
+                    Facebook
+                  </TrackedAnchor>
+                ) : null}
+                {yelpUrl ? (
+                  <TrackedAnchor
+                    href={yelpUrl}
+                    eventName="footer_social_click"
+                    eventParams={{ network: "yelp", placement: "footer" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-brand-gold"
+                  >
+                    Yelp
+                  </TrackedAnchor>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

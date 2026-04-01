@@ -450,7 +450,7 @@ export default async function ServicesPage() {
               href="/quote"
               eventName="services_hub_cta_click"
               eventParams={{ placement: "mobile_quick_actions", cta_target: "quote" }}
-              className="flex-1 rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Get Fast Quote
             </TrackedLink>
@@ -458,7 +458,7 @@ export default async function ServicesPage() {
               href="/book"
               eventName="services_hub_cta_click"
               eventParams={{ placement: "mobile_quick_actions", cta_target: "book" }}
-              className="flex-1 rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               Book Repair
             </TrackedLink>

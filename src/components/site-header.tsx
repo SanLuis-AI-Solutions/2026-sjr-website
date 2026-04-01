@@ -1,28 +1,52 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { BUSINESS } from "@/lib/constants";
+import { BrandMark } from "@/components/brand-mark";
+import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
+import { TrackedLink } from "@/components/analytics/tracked-link";
+
+const navItems = [
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/showroom", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
 
 export function SiteHeader() {
-  const navItems = [
-    { href: "/services", label: "Services" },
-    { href: "/about", label: "About" },
-    { href: "/showroom", label: "Showroom" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
-  ];
+  const pathname = usePathname();
+  const currentPath = pathname || "/";
+  const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null);
+  const isMobileNavOpen = mobileMenuPath === currentPath;
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-stone-200/70 bg-[#faf7f2]/95 py-4 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <Link href="/" prefetch={false} className="group flex flex-col">
-          <span className="font-serif text-xl leading-none tracking-tight text-neutral-900 md:text-2xl">
-            Susie’s <span className="text-brand-burgundy">Jewelry Repair</span>
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.4em] text-stone-600 transition-colors group-hover:text-brand-gold">
-            Master Craftsmanship Est. 1984
+    <header className="fixed top-0 z-[120] w-full border-b border-stone-200/70 bg-[#faf7f2]/95 py-4 backdrop-blur">
+      {isMobileNavOpen ? (
+        <button
+          type="button"
+          aria-label="Close mobile navigation"
+          className="fixed inset-0 z-[110] bg-stone-950/20 backdrop-blur-[1px] lg:hidden"
+          onClick={() => setMobileMenuPath(null)}
+        />
+      ) : null}
+      <div className="relative z-[120] mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link href="/" prefetch={false} className="group flex items-center gap-3">
+          <BrandMark className="h-11 w-11 flex-none drop-shadow-[0_6px_18px_rgba(122,46,58,0.16)]" />
+          <span className="flex flex-col">
+            <span className="font-serif text-lg leading-none tracking-tight text-neutral-900 sm:text-xl xl:text-2xl">
+              Susie’s <span className="text-brand-burgundy">Jewelry Repair</span>
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.34em] text-stone-600 transition-colors group-hover:text-brand-gold sm:text-[10px]">
+              Master Craftsmanship Est. 1984
+            </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -34,58 +58,117 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link
+        <div className="flex items-center gap-2 sm:gap-3">
+          <TrackedAnchor
+            href={`tel:${BUSINESS.phone}`}
+            eventName="header_call_click"
+            eventParams={{ placement: "header" }}
+            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/55 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-sm transition hover:border-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:px-4"
+            aria-label={`Call ${BUSINESS.phone}`}
+          >
+            <span className="lg:hidden">Call</span>
+            <span className="hidden lg:inline">Call {BUSINESS.phone}</span>
+          </TrackedAnchor>
+
+          <TrackedLink
+            href="/book"
+            eventName="header_cta_click"
+            eventParams={{ target: "book", placement: "header" }}
+            className="micro-interaction hidden min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.28em] text-brand-burgundy transition hover:bg-brand-gold/10 lg:inline-flex"
+          >
+            Book Repair
+          </TrackedLink>
+
+          <TrackedLink
             href="/quote"
-            className="micro-interaction group relative hidden overflow-hidden rounded-full bg-brand-burgundy px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-white md:block"
+            eventName="header_cta_click"
+            eventParams={{ target: "quote", placement: "header" }}
+            className="micro-interaction group relative hidden overflow-hidden rounded-full bg-brand-burgundy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white shadow-[0_14px_30px_rgba(58,18,28,0.16)] sm:inline-flex sm:min-h-11 sm:items-center sm:justify-center"
           >
             <span className="relative z-10 font-sans">Get Fast Quote</span>
             <span className="absolute inset-0 z-0 translate-y-full bg-brand-burgundy-deep transition-transform duration-300 group-hover:translate-y-0" />
-          </Link>
+          </TrackedLink>
 
-          <details className="relative md:hidden">
-            <summary
-              role="button"
-              className="cursor-pointer list-none rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-stone-900"
-              aria-label="Toggle Menu"
-            >
-              Menu
-            </summary>
-            <div
-              id="mobile-nav"
-              role="dialog"
-              aria-label="Mobile navigation"
-              className="absolute right-0 mt-3 w-[19rem] rounded-3xl border border-stone-200 bg-[#faf7f2] p-5 shadow-2xl"
-            >
-              <nav className="grid gap-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-2xl border border-stone-200 bg-white px-5 py-4 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-              <div className="mt-6 grid gap-3">
-                <Link
-                  href="/quote"
-                  className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white"
-                >
-                  Get Fast Quote
-                </Link>
-                <Link
-                  href="/book"
-                  className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
-                >
-                  Book a Repair
-                </Link>
-              </div>
-            </div>
-          </details>
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-stone-900 lg:hidden"
+            aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-nav"
+            aria-label="Toggle menu"
+            onClick={() => setMobileMenuPath(isMobileNavOpen ? null : currentPath)}
+          >
+            Menu
+          </button>
         </div>
       </div>
+
+      {isMobileNavOpen ? (
+        <div
+          id="mobile-nav"
+          role="dialog"
+          aria-label="Mobile navigation"
+          className="absolute inset-x-4 top-[calc(100%+0.75rem)] z-[130] rounded-3xl border border-stone-200 bg-[#faf7f2] p-5 shadow-2xl lg:hidden"
+        >
+          <div className="mb-4 rounded-2xl border border-brand-gold/30 bg-white/90 p-4">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-burgundy">
+              Quick help
+            </p>
+            <div className="mt-3 grid gap-2">
+              <TrackedAnchor
+                href={`tel:${BUSINESS.phone}`}
+                eventName="header_call_click"
+                eventParams={{ placement: "mobile_menu" }}
+                className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+                onClick={() => setMobileMenuPath(null)}
+              >
+                Call {BUSINESS.phone}
+              </TrackedAnchor>
+              <TrackedAnchor
+                href={BUSINESS.googleMapsUrl}
+                eventName="header_reviews_click"
+                eventParams={{ placement: "mobile_menu" }}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+              >
+                Read Google Reviews
+              </TrackedAnchor>
+            </div>
+          </div>
+          <nav className="grid gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-2xl border border-stone-200 bg-white px-5 py-4 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+                onClick={() => setMobileMenuPath(null)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-6 grid gap-3">
+            <TrackedLink
+              href="/quote"
+              eventName="header_cta_click"
+              eventParams={{ target: "quote", placement: "mobile_menu" }}
+              className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white"
+              onClick={() => setMobileMenuPath(null)}
+            >
+              Get Fast Quote
+            </TrackedLink>
+            <TrackedLink
+              href="/book"
+              eventName="header_cta_click"
+              eventParams={{ target: "book", placement: "mobile_menu" }}
+              className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold bg-white/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+              onClick={() => setMobileMenuPath(null)}
+            >
+              Book a Repair
+            </TrackedLink>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }
