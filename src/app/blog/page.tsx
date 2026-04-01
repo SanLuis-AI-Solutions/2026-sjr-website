@@ -1,18 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { BLOG_POSTS, BLOG_TOPICS } from "@/lib/blog";
 import { BlogTopicFilterTracker } from "@/components/analytics/blog-topic-filter-tracker";
+import { createPageMetadata } from "@/lib/metadata";
+import { SERVICES } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
   description:
     "Practical repair guidance from our Pasadena in-house team: ring sizing, watch care, stone setting safety, and maintenance tips.",
-  alternates: {
-    canonical: "/blog",
-  },
-};
+  canonical: "/blog",
+});
 
 type BlogPageProps = {
   searchParams?: Promise<{
@@ -33,6 +32,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     : BLOG_POSTS;
   const visiblePosts = scopedPosts.length > 0 ? scopedPosts : BLOG_POSTS;
   const [featuredPost, ...libraryPosts] = visiblePosts;
+  const popularServiceLinks = ["watch-repair", "ring-sizing", "heirloom-restoration"]
+    .map((slug) => SERVICES.find((service) => service.slug === slug))
+    .filter((service): service is (typeof SERVICES)[number] => Boolean(service));
 
   return (
     <SiteShell>
@@ -97,6 +99,22 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Showing topic: {selectedTopic}
             </p>
           ) : null}
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-white/85 p-4 shadow-sm">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+              Start with a repair page
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {popularServiceLinks.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {featuredPost ? (
             <Link

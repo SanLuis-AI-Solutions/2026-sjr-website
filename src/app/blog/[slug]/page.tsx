@@ -12,11 +12,13 @@ import {
 } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
 import { TrackedLink } from "@/components/analytics/tracked-link";
+import { createPageMetadata } from "@/lib/metadata";
+import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 function formatPublishedDate(value: string) {
@@ -38,22 +40,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
-    return {
+    return createPageMetadata({
       title: "Article | Susie’s Jewelry Repair",
       description: "Repair guidance and local service advice from Susie’s Jewelry Repair.",
-      alternates: {
-        canonical: "/blog",
-      },
-    };
+      canonical: "/blog",
+    });
   }
 
-  return {
+  return createPageMetadata({
     title: `${post.title} | Susie’s Jewelry Repair`,
     description: post.excerpt,
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
-  };
+    canonical: `/blog/${post.slug}`,
+    image: post.image,
+    type: "article",
+  });
 }
 
 export default async function BlogDetailPage({ params }: PageProps) {
@@ -68,6 +68,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
     post.relatedServiceSlugs.includes(service.slug)
   ).slice(0, 3);
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Blog", href: "/blog" },
+    { name: post.title, href: `/blog/${post.slug}` },
+  ];
   const mobileHeroImageSrc = BLOG_MOBILE_HERO_IMAGE_BY_SLUG[post.slug] || null;
   const heroImageSizes = "(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(100vw - 3rem), 1200px";
   const desktopHeroImageProps = getImageProps({
@@ -109,25 +114,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
     image: [post.image],
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Blog",
-        item: "https://www.susiesjewelryrepair.com/blog",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: post.title,
-        item: `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
-      },
-    ],
-  };
-
   const faqSchema =
     post.faqs && post.faqs.length > 0
       ? {
@@ -150,10 +136,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
       {faqSchema ? (
         <script
           type="application/ld+json"
@@ -163,12 +145,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
       <article className="relative overflow-hidden bg-white pb-16 pt-14">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-5xl px-6">
-          <Link
-            href="/blog"
-            className="inline-flex min-h-11 items-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-          >
-            ← Back to Blog
-          </Link>
+          <BreadcrumbTrail items={breadcrumbItems} />
           <div className="relative mt-6 h-60 overflow-hidden rounded-xl md:h-96 md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_20px_55px_rgba(58,25,16,0.14)]">
             <picture>
               {mobileHeroImageProps?.srcSet ? (
@@ -348,9 +325,15 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     <Link
                       key={service.slug}
                       href={`/services/${service.slug}`}
-                      className="block rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      className="block rounded-2xl border border-stone-200 bg-stone-50 px-4 py-4 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     >
-                      {service.name}
+                      <p className="text-sm font-semibold text-stone-900">{service.name}</p>
+                      <p className="mt-2 text-sm leading-6 text-stone-600">
+                        {service.summary}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
+                        View service <span aria-hidden="true">→</span>
+                      </span>
                     </Link>
                   ))}
                 </div>

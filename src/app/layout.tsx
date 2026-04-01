@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
+import { defaultShareImagePath } from "@/lib/metadata";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
 import { GaFirstTouchCapture, GaPageViewTracker } from "@/components/analytics/ga-tracker";
@@ -23,11 +24,35 @@ const inter = Inter({
   display: 'swap',
 });
 
+const DEFAULT_TITLE = "Susie’s Jewelry Repair | Modern Luxury Master Craftsmanship";
+const DEFAULT_DESCRIPTION =
+  "Expert in-house jewelry, watch, and eyeglass repairs in Pasadena. Experience modern luxury meets master craftsmanship with transparent pricing and fast turnaround.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: "Susie’s Jewelry Repair | Modern Luxury Master Craftsmanship",
-  description:
-    "Expert in-house jewelry, watch, and eyeglass repairs in Pasadena. Experience modern luxury meets master craftsmanship with transparent pricing and fast turnaround.",
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  openGraph: {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: "/",
+    siteName: "Susie’s Jewelry Repair",
+    type: "website",
+    images: [
+      {
+        url: defaultShareImagePath,
+        width: 1200,
+        height: 630,
+        alt: "Susie’s Jewelry Repair",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [defaultShareImagePath],
+  },
 };
 
 export default function RootLayout({

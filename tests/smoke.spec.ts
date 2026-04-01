@@ -8,7 +8,12 @@ function isKnownBenignReactHydrationError(message: string) {
   );
 }
 
-function attachConsoleGuards(page: Page) {
+function attachConsoleGuards(
+  page: Page,
+  options?: {
+    ignoreConsoleErrors?: RegExp[];
+  }
+) {
   const errors: string[] = [];
 
   page.on("pageerror", (err: Error) => {
@@ -31,6 +36,7 @@ function attachConsoleGuards(page: Page) {
     if (msg.type?.() !== "error") return;
     const text = msg.text?.() || "";
     if (isKnownBenignReactHydrationError(text)) return;
+    if (options?.ignoreConsoleErrors?.some((pattern) => pattern.test(text))) return;
     errors.push(`console.error: ${text}`);
   });
 
@@ -192,6 +198,9 @@ test("mobile service detail: what-to-expect content + faqs render", async ({ pag
 
   await page.goto("/services/jewelry-cleaning", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1, name: /Jewelry Cleaning/i })).toBeVisible();
+  const serviceBreadcrumb = page.getByRole("navigation", { name: /breadcrumb/i });
+  await expect(serviceBreadcrumb).toBeVisible();
+  await expect(serviceBreadcrumb.getByRole("link", { name: /^Services$/i })).toBeVisible();
 
   // The flagship structure should render scoped expectation cards with bullet points.
   await expect(page.getByText(/What to expect/i).first()).toBeVisible();
@@ -218,6 +227,24 @@ test("legal pages: privacy + terms exist", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: /Terms of Service/i })).toBeVisible();
 
   guard.assertNoErrors("privacy/terms");
+});
+
+test("custom 404 page routes visitors back to key actions", async ({ page }) => {
+  const guard = attachConsoleGuards(page, {
+    ignoreConsoleErrors: [/Failed to load resource: the server responded with a status of 404/i],
+  });
+
+  const response = await page.goto("/missing-page-for-smoke", { waitUntil: "networkidle" });
+  expect(response?.status()).toBe(404);
+
+  await expect(
+    page.getByRole("heading", { level: 1, name: /That page is not here anymore/i })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Contact Us$/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Watch Repair$/i })).toBeVisible();
+
+  guard.assertNoErrors("custom 404 page");
 });
 
 test("admin routes: protected nexus and inbox redirect unauthenticated users to login", async ({
@@ -387,6 +414,15 @@ test("mobile informational pages: about, faq, and blog hero actions are clear", 
     await assertNoBrokenImages(page);
   }
 
+  await page.goto("/blog", { waitUntil: "networkidle" });
+  const blogHeroSection = page.locator("main section").first();
+  await expect(
+    blogHeroSection.getByRole("link", { name: /Watch Repair & Battery Replacement/i }).first()
+  ).toBeVisible();
+  await expect(
+    blogHeroSection.getByRole("link", { name: /Ring Sizing & Repair/i }).first()
+  ).toBeVisible();
+
   guard.assertNoErrors("informational pages hero actions");
 });
 
@@ -420,6 +456,9 @@ test("mobile blog detail: article content, related services, and CTAs render", a
 
   await page.goto("/blog/ring-sizing-guide", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1, name: /Ring Sizing/i })).toBeVisible();
+  const blogBreadcrumb = page.getByRole("navigation", { name: /breadcrumb/i });
+  await expect(blogBreadcrumb).toBeVisible();
+  await expect(blogBreadcrumb.getByRole("link", { name: /^Blog$/i })).toBeVisible();
   await expect(page.getByText(/Key takeaways/i)).toBeVisible();
   await expect(page.getByText(/Related services/i)).toBeVisible();
 
@@ -557,6 +596,9 @@ test("mobile service-area pages: nearby city pages render local guidance and her
   for (const route of routes) {
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+    const areaBreadcrumb = page.getByRole("navigation", { name: /breadcrumb/i });
+    await expect(areaBreadcrumb).toBeVisible();
+    await expect(areaBreadcrumb.getByRole("link", { name: /^Services$/i })).toBeVisible();
     const heroSection = page.locator("main section").first();
     await expect(heroSection.getByRole("link", { name: route.quickLink }).first()).toBeVisible();
     await expect(page.getByText(route.serviceLink).first()).toBeVisible();
@@ -577,7 +619,8 @@ test("mobile service detail: non-watch routes use a varied image set", async ({ 
     const uniqueServiceImageCount = await page.evaluate(() => {
       const urls = Array.from(document.querySelectorAll("main img"))
         .map((img) => {
-          const raw = img.currentSrc || img.getAttribute("src") || "";
+          const image = img as HTMLImageElement;
+          const raw = image.currentSrc || image.getAttribute("src") || "";
           try {
             return decodeURIComponent(raw);
           } catch {
@@ -606,6 +649,13 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   await expect(
     page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Watch Battery Replacement: Timing and Care Tips/i })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: /Watch Repair & Battery Replacement/i })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^View details$/i }).first()).toBeVisible();
 
   // Keep this smoke simple and stable: featured "View details" must route correctly.
   await page.getByRole("link", { name: /View details/i }).first().click();

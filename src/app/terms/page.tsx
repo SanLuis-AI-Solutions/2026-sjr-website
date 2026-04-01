@@ -1,17 +1,15 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/metadata";
 
 const UPDATED_DATE = "February 13, 2026";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Service | Susie’s Jewelry Repair",
   description:
     "Review the website and service request terms for Susie’s Jewelry Repair, including booking requests, quote ranges, repair timing, and communication expectations.",
-  alternates: {
-    canonical: "/terms",
-  },
-};
+  canonical: "/terms",
+});
 
 export default function TermsPage() {
   return (

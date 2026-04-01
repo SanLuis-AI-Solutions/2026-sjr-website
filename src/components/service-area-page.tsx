@@ -4,6 +4,7 @@ import { SiteShell } from "@/components/site-shell";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
 import type { ServiceAreaPage } from "@/lib/service-areas";
+import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 
 type Props = {
   page: ServiceAreaPage;
@@ -14,24 +15,11 @@ export function ServiceAreaLandingPage({ page }: Props) {
     ["watch-repair", "ring-sizing", "stone-setting", "heirloom-restoration"].includes(service.slug)
   );
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Services",
-        item: "https://www.susiesjewelryrepair.com/services",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: page.city,
-        item: `https://www.susiesjewelryrepair.com/services/${page.slug}`,
-      },
-    ],
-  };
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: page.city, href: `/services/${page.slug}` },
+  ];
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -74,10 +62,6 @@ export function ServiceAreaLandingPage({ page }: Props) {
     <SiteShell>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <script
@@ -89,6 +73,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
           <div>
+            <BreadcrumbTrail items={breadcrumbItems} className="mb-5" />
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
               Service area
             </p>

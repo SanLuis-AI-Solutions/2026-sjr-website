@@ -1220,3 +1220,10 @@ export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
     .slice(0, count)
     .map((entry) => entry.post);
 }
+
+export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
+  return BLOG_POSTS
+    .filter((post) => post.relatedServiceSlugs.includes(serviceSlug))
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, count);
+}

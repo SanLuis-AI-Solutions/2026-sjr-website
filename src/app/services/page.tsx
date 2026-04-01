@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
+import Link from "next/link";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
+import { createPageMetadata } from "@/lib/metadata";
+import { BLOG_POSTS } from "@/lib/blog";
 
 type ServiceListItem = {
   slug: string;
@@ -20,19 +22,24 @@ type ServiceListItem = {
   commonRequests?: string[];
 };
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Jewelry & Watch Repair Services | Susie’s Jewelry Repair",
   description:
     "Browse in-house jewelry and watch repair services with transparent pricing, Same Day/Next Day service on most work, and a fast path to quote or booking.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+  canonical: "/services",
+});
 
 export default async function ServicesPage() {
   const services = (await getServicesWithImages()) as ServiceListItem[];
   const servicesBySlug = new Map<string, ServiceListItem>();
   for (const s of services) servicesBySlug.set(s.slug, s);
+  const helpfulGuides = [
+    "watch-battery-replacement",
+    "ring-sizing-guide",
+    "heirloom-restoration-planning-guide",
+  ]
+    .map((slug) => BLOG_POSTS.find((post) => post.slug === slug))
+    .filter((post): post is (typeof BLOG_POSTS)[number] => Boolean(post));
 
   const groups = [
     {
@@ -434,6 +441,46 @@ export default async function ServicesPage() {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-stone-100 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Helpful guides
+              </p>
+              <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                Research the repair before you bring it in.
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
+                These are the clearest next reads for the services customers ask about most.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="text-sm font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              View all articles →
+            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {helpfulGuides.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                  Blog guide
+                </p>
+                <h3 className="mt-3 font-serif text-2xl text-stone-900">{post.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-stone-700">{post.excerpt}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

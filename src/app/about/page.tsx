@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/cta-band";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About Susie’s Jewelry Repair | In-House Family Craftsmanship",
   description:
     "Meet the family behind Susie’s Jewelry Repair in Pasadena, TX. Three generations, in-house service, and clear approvals on every repair.",
-  alternates: {
-    canonical: "/about",
-  },
-};
+  canonical: "/about",
+});
 
 const TIMELINE = [
   {

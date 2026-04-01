@@ -1,17 +1,15 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { createPageMetadata } from "@/lib/metadata";
 
 const UPDATED_DATE = "February 13, 2026";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy | Susie’s Jewelry Repair",
   description:
     "Read how Susie’s Jewelry Repair collects, uses, and protects customer information for quote, booking, and contact requests.",
-  alternates: {
-    canonical: "/privacy",
-  },
-};
+  canonical: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
