@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { BUSINESS } from "@/lib/constants";
+import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
 export function ProofBand() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fff7ef_0%,#f0d7c7_100%)]">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#faf7f2_0%,#f4ecdf_100%)]">
       <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.35),_transparent_70%)]" />
       <div className="mx-auto grid max-w-6xl gap-4 px-6 py-8 md:grid-cols-4">
         {[
@@ -13,7 +15,9 @@ export function ProofBand() {
           },
           {
             title: "4.5 ★ on Google",
-            description: "51 verified reviews.",
+            description: "51 verified reviews you can verify in one tap.",
+            href: BUSINESS.googleMapsUrl,
+            eventName: "home_reviews_click",
           },
           {
             title: "90-day workmanship warranty",
@@ -25,15 +29,43 @@ export function ProofBand() {
           },
         ].map((item, index) => {
           const delayClass = `reveal-delay-${(index % 4) + 1}`;
-          return (
-            <div
-              key={item.title}
-              className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-gold/30 bg-white/80 px-4 py-4 shadow-[0_12px_30px_rgba(90,55,35,0.12)]`}
-            >
+          const cardClass = `reveal-on-scroll ${delayClass} rounded-2xl border border-brand-gold/30 bg-white/80 px-4 py-4 shadow-[0_12px_30px_rgba(90,55,35,0.12)]`;
+          const cardContent = (
+            <>
               <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
                 {item.title}
               </div>
               <p className="mt-2 text-sm text-stone-600">{item.description}</p>
+              {"href" in item && item.href ? (
+                <span className="mt-4 inline-flex text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
+                  Read reviews →
+                </span>
+              ) : null}
+            </>
+          );
+
+          if ("href" in item && item.href) {
+            return (
+              <TrackedAnchor
+                key={item.title}
+                href={item.href}
+                eventName={item.eventName}
+                eventParams={{ placement: "proof_band" }}
+                target="_blank"
+                rel="noreferrer"
+                className={`${cardClass} transition hover:-translate-y-0.5 hover:border-brand-gold/55`}
+              >
+                {cardContent}
+              </TrackedAnchor>
+            );
+          }
+
+          return (
+            <div
+              key={item.title}
+              className={cardClass}
+            >
+              {cardContent}
             </div>
           );
         })}
@@ -44,7 +76,7 @@ export function ProofBand() {
 
 export function InHouseBadge() {
   return (
-    <section className="relative overflow-hidden bg-[#f7e4d7] py-14">
+    <section className="relative overflow-hidden bg-[#faf7f2] py-14">
       <div className="pointer-events-none absolute -left-24 top-8 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.18),_transparent_70%)]" />
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 text-center reveal-on-scroll">
         <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -63,7 +95,7 @@ export function InHouseBadge() {
 
 export function ProcessSteps() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fff_0%,#f3dfcf_100%)] py-20">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffdfa_0%,#f2e7d7_100%)] py-20">
       <div className="pointer-events-none absolute -right-32 top-10 h-60 w-60 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.25),_transparent_70%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
@@ -138,7 +170,7 @@ export function ProcessSteps() {
 
 export function CraftStory() {
   return (
-    <section className="relative overflow-hidden bg-[#f1dccb] py-16">
+    <section className="relative overflow-hidden bg-[#f5ede2] py-16">
       <div className="pointer-events-none absolute -left-28 bottom-10 h-52 w-52 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.16),_transparent_70%)]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
         <div className="space-y-4 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/80 p-8 shadow-[0_16px_40px_rgba(58,25,16,0.12)]">
@@ -223,14 +255,14 @@ export function ShowroomBand() {
           Not just repairing the past, but crafting your future.
         </h2>
         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-stone-300 md:text-base">
-          Browse our curated digital showroom of mountings, settings, and bespoke pieces. Hand-selected by our Master Jewelers to inspire your next custom design.
+          Browse our curated digital gallery of mountings, settings, and bespoke pieces. Hand-selected by our Master Jewelers to inspire your next custom design.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/showroom"
             className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 transition-colors"
           >
-            Enter Virtual Showroom
+            Enter the Gallery
           </Link>
         </div>
       </div>
@@ -240,7 +272,7 @@ export function ShowroomBand() {
 
 export function HomeFaq() {
   return (
-    <section className="cv-section bg-[#f0d3c0] py-16">
+    <section className="cv-section bg-[#f7efe6] py-16">
       <div className="mx-auto max-w-4xl px-6">
         <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy reveal-on-scroll">
           FAQs
@@ -294,7 +326,7 @@ export function HomeFaq() {
 
 export function Testimonials() {
   return (
-    <section className="cv-section bg-[#e7c4ae] py-16">
+    <section className="cv-section bg-[#f1e4d7] py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-end justify-between reveal-on-scroll">
           <div>
@@ -306,9 +338,16 @@ export function Testimonials() {
             </h2>
             <div className="mt-4 h-1 w-16 bg-brand-gold/60" />
           </div>
-          <span className="hidden text-xs uppercase tracking-[0.35em] text-stone-600 md:block">
+          <TrackedAnchor
+            href={BUSINESS.googleMapsUrl}
+            eventName="home_reviews_click"
+            eventParams={{ placement: "testimonials_heading" }}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden text-xs uppercase tracking-[0.35em] text-stone-600 transition-colors hover:text-brand-burgundy md:block"
+          >
             4.5 ★ from 51 Google reviews
-          </span>
+          </TrackedAnchor>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {[

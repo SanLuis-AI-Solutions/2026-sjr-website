@@ -237,7 +237,7 @@ async function DeferredContactSection() {
             {/* eslint-disable-next-line @next/next/no-img-element -- Static map preview avoids iframe performance cost while preserving clear location context. */}
             <img
               src="/images/contact/susies-map-preview.webp"
-              alt="Map preview centered on Susie's Jewelry and Watch Repair in Pasadena, Texas"
+              alt="Map preview centered on Susie’s Jewelry and Watch Repair in Pasadena, Texas"
               width={1365}
               height={768}
               loading="lazy"
@@ -247,7 +247,7 @@ async function DeferredContactSection() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
             <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-xl border border-white/35 bg-black/55 px-4 py-3 text-white shadow-[0_12px_30px_rgba(10,6,6,0.3)] backdrop-blur-sm">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-brand-gold">
-                Susie's Jewelry and Watch Repair
+                Susie’s Jewelry and Watch Repair
               </p>
               <p className="mt-1 text-sm leading-6 text-stone-100">
                 3910 Fairmont Pkwy #C, Pasadena, TX 77504

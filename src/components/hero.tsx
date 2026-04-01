@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BUSINESS } from "@/lib/constants";
 
 /*
  * Date: 2026-02-27
@@ -16,7 +17,7 @@ export function Hero() {
         {/* eslint-disable-next-line @next/next/no-img-element -- Intentional eager hero image for fastest mobile LCP paint */}
         <img
           src={mobileHeroImageSrc}
-          alt="Jewelry repair hero background"
+          alt="Diamond ring showcased for Susie’s Jewelry Repair"
           fetchPriority="high"
           decoding="async"
           loading="eager"
@@ -46,6 +47,22 @@ export function Hero() {
             <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-5 max-w-[24ch] text-[1.08rem] leading-relaxed text-stone-100/92 md:mt-6 md:max-w-[32ch] md:text-lg md:font-normal md:text-stone-600">
               On-site master craftsmanship with clear pricing and Same Day/Next Day service.
             </p>
+            <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-5 flex max-w-[24rem] flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-100/92 md:max-w-none md:text-[11px] md:text-stone-700">
+              <a
+                href={BUSINESS.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center rounded-full border border-brand-gold/45 bg-black/28 px-4 py-2 transition hover:border-brand-gold hover:text-brand-gold md:bg-white/90"
+              >
+                4.5 ★ on Google · 51 reviews
+              </a>
+              <span className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 md:border-stone-200 md:bg-white/85">
+                Since 1984
+              </span>
+              <span className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 md:border-stone-200 md:bg-white/85">
+                90-day workmanship warranty
+              </span>
+            </div>
             <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 h-px w-24 bg-gradient-to-r from-brand-gold/95 to-transparent md:hidden" />
             <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
@@ -57,7 +74,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/book"
-                className="micro-interaction inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold/70 bg-white/6 px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-sm transition-colors hover:bg-white/14 md:border md:border-brand-gold/80 md:bg-transparent md:text-brand-burgundy md:hover:bg-brand-gold/10 sm:w-auto"
+                className="micro-interaction inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold/75 bg-white/18 px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-[0_16px_34px_rgba(15,6,9,0.22)] backdrop-blur-sm transition-colors hover:bg-white/26 md:border md:border-brand-gold/80 md:bg-transparent md:text-brand-burgundy md:hover:bg-brand-gold/10 sm:w-auto"
               >
                 Book a Repair
               </Link>

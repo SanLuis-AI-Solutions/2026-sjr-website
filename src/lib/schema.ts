@@ -15,10 +15,13 @@ export function localBusinessSchema() {
     "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
     name: BUSINESS.name,
     url: "https://www.susiesjewelryrepair.com/",
-    logo: "https://www.susiesjewelryrepair.com/logo.png",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC2ZBEnv5lBMoo4GR7XvEais8YU7jNYeFpuZQorD9Xdw9lxy6n-DwQEVgU2ET8CTp_EdIcXvwwYrLl7bsAzkRZyfEw8DEO9Gsjf6uhWJ2Wid_waT5QRnDCHPXAlkt7zO1LHiweiyFC7wv-smvi0ahWOhPNjhrDcUWDrS90SNLAdAFutaUITFE_adoNoXgppWreQE_-nJ6srITzdw0spj72FzG3ZT56vFD747Eyfh0XsliuMGQ86Dgrrv-W0_utrfqU-ZWESpC7sUJG3",
+    image: [
+      "https://www.susiesjewelryrepair.com/images/about/storefront.jpg",
+      "https://www.susiesjewelryrepair.com/images/home/home-hero-ring.jpg",
+    ],
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
+    priceRange: "$$",
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.address.street,
@@ -27,6 +30,12 @@ export function localBusinessSchema() {
       postalCode: BUSINESS.address.zip,
       addressCountry: "US",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 29.6504877,
+      longitude: -95.1863662,
+    },
+    hasMap: BUSINESS.googleMapsUrl,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.5",
@@ -52,8 +61,9 @@ export function localBusinessSchema() {
         reviewBody: "They restored my grandmother’s necklace flawlessly. The craftsmanship is unreal.",
       },
     ],
-    openingHoursSpecification: (BUSINESS.hours || []).map((h) => {
+    openingHoursSpecification: (BUSINESS.hours || []).flatMap((h) => {
       const hoursStr = h.hours || "";
+      if (hoursStr.toLowerCase() === "closed") return [];
       const times = hoursStr.includes("–") ? hoursStr.split("–") : hoursStr.split("-");
       const parseTime = (t: string) => {
         const cleaned = t.trim();
@@ -69,13 +79,14 @@ export function localBusinessSchema() {
       const opens = parseTime(times[0] || "");
       const closes = times[1] ? parseTime(times[1]) : opens;
 
-      return {
+      return [{
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [h.day],
+        dayOfWeek: h.day,
         opens: opens || "00:00",
         closes: closes || "00:00",
-      };
+      }];
     }),
+    sameAs: BUSINESS.sameAs,
   };
 }
 
