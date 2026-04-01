@@ -4,6 +4,8 @@ import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { BrandMark } from "@/components/brand-mark";
 import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
+const COPYRIGHT_YEAR = 2026;
+
 export function SiteFooter() {
   const facebookUrl = BUSINESS.sameAs.find((entry) => entry.includes("facebook.com"));
   const yelpUrl = BUSINESS.sameAs.find((entry) => entry.includes("yelp.com"));
@@ -49,6 +51,7 @@ export function SiteFooter() {
                 <Link href="/blog" className="transition-colors hover:text-brand-gold">Blog</Link>
                 <Link href="/contact" className="transition-colors hover:text-brand-gold">Contact</Link>
                 <Link href="/quote" className="transition-colors hover:text-brand-gold">Get Quote</Link>
+                <Link href="/sitemap.xml" className="transition-colors hover:text-brand-gold">Sitemap</Link>
               </nav>
             </div>
 
@@ -137,7 +140,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-20 flex flex-col items-center justify-between border-t border-white/10 pt-10 text-xs font-sans uppercase tracking-[0.3em] md:flex-row">
-          <p>© {new Date().getFullYear()} Susie’s Jewelry Repair. All Rights Reserved.</p>
+          <p>© {COPYRIGHT_YEAR} Susie’s Jewelry Repair. All Rights Reserved.</p>
           <div className="mt-4 flex gap-8 md:mt-0">
             <Link href="/privacy" className="hover:text-white">Privacy</Link>
             <Link href="/terms" className="hover:text-white">Terms</Link>

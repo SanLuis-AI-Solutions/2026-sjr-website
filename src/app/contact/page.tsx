@@ -1,21 +1,19 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
+import { createPageMetadata } from "@/lib/metadata";
 
 const GOOGLE_MAPS_PRIMARY_URL = "https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
   description:
     "Talk to our Pasadena in-house repair team by phone, email, or message for jewelry and watch service guidance, next steps, and appointment support.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+  canonical: "/contact",
+});
 
 async function DeferredContactSection() {
   return (

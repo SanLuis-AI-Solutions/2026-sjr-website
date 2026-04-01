@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
+import { formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 
 type ServiceItem = {
@@ -87,9 +87,7 @@ export function ServicesGrid({
             const name = service.name || "Untitled Service";
             const summary = service.summary || service.short_summary || service.text || "";
             const image = service.image || service.image_url || svgDataUri(name);
-            const startingPriceRaw = service.starting_price ?? service.startingPrice ?? null;
             const timeEstimateRaw = service.time_estimate ?? service.timeEstimate ?? null;
-            const startingAt = formatStartingAt(startingPriceRaw);
             const timeEstimate = formatTimeEstimate(timeEstimateRaw);
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
             const cardClass = `reveal-on-scroll ${delayClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_24px_60px_rgba(58,25,16,0.18)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2`;
@@ -114,22 +112,16 @@ export function ServicesGrid({
                     {summary}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap gap-4 border-t border-stone-200 pt-6">
-                    <div className="flex flex-col">
-                      <span className="text-[10px] uppercase tracking-widest text-stone-600">Starts At</span>
-                      <span className="font-sans text-sm font-semibold text-brand-burgundy">
-                        {startingAt ?? "Request quote"}
-                      </span>
-                    </div>
-                    {timeEstimate && (
+                  {timeEstimate ? (
+                    <div className="mt-6 flex flex-wrap gap-4 border-t border-stone-200 pt-6">
                       <div className="flex flex-col">
                         <span className="text-[10px] uppercase tracking-widest text-stone-600">Turnaround</span>
                         <span className="font-sans text-sm font-semibold text-neutral-900">
                           {timeEstimate}
                         </span>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  ) : null}
 
                   <div className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep">
                     Explore Details

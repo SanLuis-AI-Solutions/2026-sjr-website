@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Fast Quote | Susie’s Jewelry Repair",
   description:
     "Get a transparent starting-at quote for jewelry or watch repair from our in-house Pasadena team, with photo-based guidance and a response within 1 business day.",
-  alternates: {
-    canonical: "/quote",
-  },
-};
+  canonical: "/quote",
+});
 
 export default async function QuotePage({
   searchParams,

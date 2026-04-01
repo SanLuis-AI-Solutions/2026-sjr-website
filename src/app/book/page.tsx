@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
@@ -6,15 +5,14 @@ import { ConversionQuickActions } from "@/components/analytics/conversion-quick-
 import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Book a Repair | Susie’s Jewelry Repair",
   description:
     "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch team, and get booking confirmation by email within 1 business day.",
-  alternates: {
-    canonical: "/book",
-  },
-};
+  canonical: "/book",
+});
 
 export default async function BookPage({
   searchParams,

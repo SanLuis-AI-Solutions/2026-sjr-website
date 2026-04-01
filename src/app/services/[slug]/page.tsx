@@ -15,14 +15,16 @@ import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { buildServiceVisualSet } from "@/lib/service-visuals";
-import { getBlogPostBySlug } from "@/lib/blog";
+import { getBlogPostBySlug, getBlogPostsByServiceSlug } from "@/lib/blog";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
+import { createPageMetadata } from "@/lib/metadata";
+import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 type FaqItem = {
@@ -1127,27 +1129,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = await getServiceBySlug(slug);
 
   if (!service) {
-    return {
+    return createPageMetadata({
       title: `Service | ${BUSINESS.name}`,
       description:
         "Explore our in-house jewelry and watch repair services in Pasadena, TX.",
-      alternates: {
-        canonical: "/services",
-      },
-    };
+      canonical: "/services",
+    });
   }
 
   const title = `${service.name} | Jewelry Repair Pasadena, TX`;
   const summary = service.summary || service.short_summary || "";
   const description = `${summary} Local in-house repair in Pasadena with clear approvals, transparent pricing, and Same Day/Next Day service when applicable.`;
 
-  return {
+  return createPageMetadata({
     title,
     description,
-    alternates: {
-      canonical: `/services/${slug}`,
-    },
-  };
+    canonical: `/services/${slug}`,
+    image: service.image || service.image_url || undefined,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
@@ -1172,18 +1171,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const relatedServices = SERVICES
     .filter((item) => item.slug !== service.slug)
     .slice(0, 4);
-  const helpfulReads: HelpfulReadLink[] = (HELPFUL_READ_SLUGS_BY_SERVICE[slug] ?? [])
-    .map((postSlug) => {
+  const helpfulReadPosts = [
+    ...(HELPFUL_READ_SLUGS_BY_SERVICE[slug] ?? []).flatMap((postSlug) => {
       const post = getBlogPostBySlug(postSlug);
-      if (!post) return null;
-
-      return {
-        href: `/blog/${post.slug}`,
-        title: post.title,
-        excerpt: post.excerpt,
-      };
-    })
-    .filter((item): item is HelpfulReadLink => item !== null);
+      return post ? [post] : [];
+    }),
+    ...getBlogPostsByServiceSlug(slug, 3),
+  ].filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
+    .slice(0, 3);
+  const helpfulReads: HelpfulReadLink[] = helpfulReadPosts.map((post) => ({
+    href: `/blog/${post.slug}`,
+    title: post.title,
+    excerpt: post.excerpt,
+  }));
+  const breadcrumbItems = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: service.name, href: `/services/${slug}` },
+  ];
   const startingAt =
     formatStartingAt(service.starting_price ?? service.startingPrice ?? null) ??
     formatStartingAt(service.startingPrice ?? null);
@@ -1560,6 +1565,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   return (
     <SiteShell>
+      <BreadcrumbTrail items={breadcrumbItems} className="mx-auto max-w-6xl px-6 pt-10" />
       <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-14 md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
