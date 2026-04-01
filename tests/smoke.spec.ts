@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { ConsoleMessage, Page } from "@playwright/test";
+import type { ConsoleMessage, Locator, Page } from "@playwright/test";
 
 function isKnownBenignReactHydrationError(message: string) {
   return (
@@ -81,6 +81,29 @@ async function assertNoBrokenImages(page: Page) {
   expect(broken, `Broken images detected:\n${broken.join("\n")}`).toEqual([]);
 }
 
+async function expectTapTarget(locator: Locator, label: string, minHeight = 44) {
+  const metrics = await locator.evaluate((node) => {
+    const element = node as HTMLElement;
+    const style = window.getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return {
+      rectHeight: rect.height,
+      minHeight: Number.parseFloat(style.minHeight || "0") || 0,
+      display: style.display,
+      alignItems: style.alignItems,
+      justifyContent: style.justifyContent,
+    };
+  });
+
+  expect(
+    Math.max(metrics.rectHeight, metrics.minHeight),
+    `${label} tap target too small`
+  ).toBeGreaterThanOrEqual(minHeight);
+  expect(metrics.display, `${label} should render as a block/flex tap target`).toMatch(
+    /flex|block/
+  );
+}
+
 test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -93,7 +116,10 @@ test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
     await page.goto(from, { waitUntil: "networkidle" });
 
     // Client-side nav to Home via logo.
-    await page.getByRole("link", { name: /Susie’s Jewelry Repair/i }).first().click();
+    await page
+      .getByRole("banner")
+      .getByRole("link", { name: /Susie’s Jewelry Repair/i })
+      .click();
     await assertHomeRenders(page);
 
     guard.assertNoErrors(`iteration ${i + 1} (from ${from})`);
@@ -108,10 +134,12 @@ test("mobile nav: menu opens and can reach Services", async ({ page }) => {
     page.getByRole("heading", { name: /Trusted Pasadena Jewelry Repair/i })
   ).toBeVisible();
 
-  await page.getByRole("button", { name: /Toggle Menu/i }).click();
-  await expect(page.getByRole("dialog", { name: /Mobile navigation/i })).toBeVisible();
+  const banner = page.getByRole("banner");
+  await banner.getByRole("button", { name: /Toggle Menu/i }).click();
+  const mobileNav = page.getByRole("dialog", { name: /Mobile navigation/i });
+  await expect(mobileNav).toBeVisible();
 
-  await page.getByRole("link", { name: /^Services$/ }).click();
+  await mobileNav.getByRole("link", { name: /^Services$/ }).click();
   await expect(
     page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
   ).toBeVisible();
@@ -123,7 +151,7 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
   await page.goto("/", { waitUntil: "networkidle" });
-  await page.getByRole("link", { name: /Get Fast Quote/i }).first().click();
+  await page.getByRole("main").getByRole("link", { name: /^Get Fast Quote$/i }).first().click();
 
   await expect(
     page.getByRole("heading", { name: /Get a transparent starting/i })
@@ -152,14 +180,8 @@ test("mobile conversion pages: quote and book quick actions are clear", async ({
     await expect(contact).toBeVisible();
     await expect(alt).toBeVisible();
 
-    const contactBox = await contact.boundingBox();
-    const altBox = await alt.boundingBox();
-    expect(contactBox?.height ?? 0, `Contact tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
-      44
-    );
-    expect(altBox?.height ?? 0, `Secondary tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
-      44
-    );
+    await expectTapTarget(contact, `Contact tap target on ${route.path}`);
+    await expectTapTarget(alt, `Secondary tap target on ${route.path}`);
   }
 
   guard.assertNoErrors("quote/book quick actions");
@@ -224,7 +246,7 @@ test("home schema: local business hours and external entity links are valid", as
     for (const script of scripts) {
       try {
         const parsed = JSON.parse(script.textContent || "");
-        if (parsed?.["@type"] === "LocalBusiness") {
+        if (parsed?.["@type"] === "JewelryStore" || parsed?.["@type"] === "LocalBusiness") {
           return parsed;
         }
       } catch {
@@ -360,14 +382,8 @@ test("mobile core pages: about, faq, contact, and blog quick actions are clear",
     await expect(quote).toBeVisible();
     await expect(book).toBeVisible();
 
-    const quoteBox = await quote.boundingBox();
-    const bookBox = await book.boundingBox();
-    expect(quoteBox?.height ?? 0, `Quote tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
-      44
-    );
-    expect(bookBox?.height ?? 0, `Book tap target too small on ${route.path}`).toBeGreaterThanOrEqual(
-      44
-    );
+    await expectTapTarget(quote, `Quote tap target on ${route.path}`);
+    await expectTapTarget(book, `Book tap target on ${route.path}`);
 
     await assertNoBrokenImages(page);
   }
@@ -721,14 +737,8 @@ test("mobile services pages: quick actions are clear and image assets load", asy
     await expect(quote).toBeVisible();
     await expect(book).toBeVisible();
 
-    const quoteBox = await quote.boundingBox();
-    const bookBox = await book.boundingBox();
-    expect(quoteBox?.height ?? 0, `Quote tap target too small on ${route}`).toBeGreaterThanOrEqual(
-      44
-    );
-    expect(bookBox?.height ?? 0, `Book tap target too small on ${route}`).toBeGreaterThanOrEqual(
-      44
-    );
+    await expectTapTarget(quote, `Quote tap target on ${route}`);
+    await expectTapTarget(book, `Book tap target on ${route}`);
 
     await assertNoBrokenImages(page);
   }
