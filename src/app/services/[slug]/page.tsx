@@ -5,7 +5,13 @@ import Image, { getImageProps } from "next/image";
 import { Suspense, type ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
-import { BUSINESS, SERVICES, SERVICE_MOBILE_HERO_IMAGE_BY_SLUG } from "@/lib/constants";
+import { MobileActionShelf } from "@/components/mobile-action-shelf";
+import {
+  BUSINESS,
+  SERVICES,
+  SERVICE_DETAIL_HERO_IMAGE_BY_SLUG,
+  SERVICE_MOBILE_HERO_IMAGE_BY_SLUG,
+} from "@/lib/constants";
 import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
@@ -1194,7 +1200,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
   const localServiceConfig = SERVICES.find((item) => item.slug === slug);
-  const localHeroImageSrc = localServiceConfig?.image;
+  const localHeroImageSrc =
+    SERVICE_DETAIL_HERO_IMAGE_BY_SLUG[slug] || localServiceConfig?.image;
   const heroImageSrc =
     localHeroImageSrc || service.image || service.image_url || svgDataUri(service.name);
   const commonRequests = (
@@ -1273,7 +1280,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
-  const heroImageSizes = "(max-width: 768px) calc(100vw - 3rem), 50vw";
+  const heroImageSizes =
+    "(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc((100vw - 6rem) / 2), 528px";
   const desktopHeroImageProps = getImageProps({
     src: heroImageSrc,
     alt: service.name,
@@ -1596,7 +1604,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
 
             {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/quote"
                 prefetch={false}
@@ -1604,7 +1612,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="quote"
-                className="micro-interaction rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Get Fast Quote
               </Link>
@@ -1615,7 +1623,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="book"
-                className="micro-interaction rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Book Repair
               </Link>
@@ -1653,6 +1661,28 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      <MobileActionShelf
+        eyebrow="Mobile actions"
+        title="Keep the page clear, keep the next step close."
+        summary="Quote first if you want pricing, or book when you are ready for a local in-shop assessment."
+        actions={[
+          {
+            href: "/quote",
+            label: "Get Fast Quote",
+            eventName: "service_cta_click",
+            eventParams: { service_slug: slug, placement: "mobile_action_shelf", cta_target: "quote" },
+            kind: "primary",
+          },
+          {
+            href: "/book",
+            label: "Book Repair",
+            eventName: "service_cta_click",
+            eventParams: { service_slug: slug, placement: "mobile_action_shelf", cta_target: "book" },
+            kind: "secondary",
+          },
+        ]}
+      />
 
       <Suspense fallback={null}>
         <DeferredServiceSections>
@@ -2358,40 +2388,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <CtaBand />
 
-      {/* Mobile conversion bar (75%+ traffic). Keeps primary actions one tap away. */}
-      <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-        <div
-          role="region"
-          aria-label="Quick actions"
-          className="rounded-2xl border border-stone-200 bg-white/85 p-3 shadow-[0_24px_60px_rgba(58,25,16,0.22)] backdrop-blur-sm"
-        >
-          <div className="flex items-center gap-3">
-            <Link
-              href="/quote"
-              prefetch={false}
-              data-track-event="service_cta_click"
-              data-track-slug={slug}
-              data-track-placement="mobile_quick_actions"
-              data-track-target="quote"
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-burgundy px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </Link>
-            <Link
-              href="/book"
-              prefetch={false}
-              data-track-event="service_cta_click"
-              data-track-slug={slug}
-              data-track-placement="mobile_quick_actions"
-              data-track-target="book"
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-brand-gold px-5 py-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Book Repair
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="h-24 md:hidden" aria-hidden="true" />
           <ServiceInteractionTracker serviceSlug={slug} />
         </DeferredServiceSections>
       </Suspense>

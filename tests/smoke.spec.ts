@@ -721,7 +721,7 @@ test("mobile service detail: non-watch and non-ring routes provide 7 FAQs", asyn
   guard.assertNoErrors("service faq depth");
 });
 
-test("mobile services pages: quick actions are clear and image assets load", async ({
+test("mobile services pages: hero actions are clear and image assets load", async ({
   page,
 }) => {
   const routes = ["/services", "/services/watch-repair", "/services/ring-sizing"];
@@ -729,11 +729,10 @@ test("mobile services pages: quick actions are clear and image assets load", asy
   for (const route of routes) {
     await page.goto(route, { waitUntil: "networkidle" });
 
-    const quickActions = page.getByRole("region", { name: /Quick actions/i });
-    await expect(quickActions).toBeVisible();
+    await expect(page.getByText(/Mobile actions/i)).toHaveCount(0);
 
-    const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
-    const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+    const quote = page.getByRole("link", { name: /^Get Fast Quote$/i }).first();
+    const book = page.getByRole("link", { name: /^Book Repair$/i }).first();
     await expect(quote).toBeVisible();
     await expect(book).toBeVisible();
 
