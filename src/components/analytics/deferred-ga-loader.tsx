@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import { isProductionAnalyticsHost } from "@/lib/analytics-host";
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __sjrGaLoaded?: boolean;
+    __sjrGaHostAllowed?: boolean;
   }
 }
 
@@ -30,6 +32,9 @@ export function DeferredGaLoader({
 }: DeferredGaLoaderProps) {
   useEffect(() => {
     if (!measurementId || typeof window === "undefined") return;
+    const isAllowedHost = isProductionAnalyticsHost(window.location.hostname);
+    window.__sjrGaHostAllowed = isAllowedHost;
+    if (!isAllowedHost) return;
     if (window.__sjrGaLoaded) return;
 
     ensureGtagStub();
@@ -39,7 +44,7 @@ export function DeferredGaLoader({
       window.__sjrGaLoaded = true;
 
       window.gtag?.("js", new Date());
-      window.gtag?.("config", measurementId);
+      window.gtag?.("config", measurementId, { send_page_view: false });
 
       const script = document.createElement("script");
       script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
