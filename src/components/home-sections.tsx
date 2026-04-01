@@ -242,27 +242,27 @@ export function CraftStory() {
   );
 }
 
-export function ShowroomBand() {
+export function ShowcaseBand() {
   return (
     <section className="relative overflow-hidden bg-stone-900 py-24 text-[#faf7f2]">
       <div className="pointer-events-none absolute -left-32 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.15),_transparent_70%)]" />
       <div className="pointer-events-none absolute -right-20 bottom-0 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.2),_transparent_70%)]" />
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
         <p className="text-xs uppercase tracking-[0.4em] text-brand-gold">
-          The Curated Collection
+          Custom Design Showcase
         </p>
         <h2 className="font-serif text-3xl md:text-5xl text-[#faf7f2]">
-          Not just repairing the past, but crafting your future.
+          Design your future heirloom.
         </h2>
         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-stone-300 md:text-base">
-          Browse our curated digital gallery of mountings, settings, and bespoke pieces. Hand-selected by our Master Jewelers to inspire your next custom design.
+          Explore our digital design showcase of mountings, settings, and bespoke inspiration, then work with our Pasadena bench to shape the right direction into a finished piece.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/showroom"
             className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold bg-transparent px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 transition-colors"
           >
-            Enter the Gallery
+            Explore the Showcase
           </Link>
         </div>
       </div>

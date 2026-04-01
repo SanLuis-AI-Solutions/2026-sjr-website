@@ -49,7 +49,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             Clear, practical advice from our in-house Pasadena team to help you protect your
             jewelry and watches between visits.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/quote"
               className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"

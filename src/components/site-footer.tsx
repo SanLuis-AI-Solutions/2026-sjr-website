@@ -45,7 +45,7 @@ export function SiteFooter() {
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
                 <Link href="/about" className="transition-colors hover:text-brand-gold">About Us</Link>
                 <Link href="/faq" className="transition-colors hover:text-brand-gold">F.A.Q.</Link>
-                <Link href="/showroom" className="transition-colors hover:text-brand-gold">Gallery</Link>
+                <Link href="/showroom" className="transition-colors hover:text-brand-gold">Showcase</Link>
                 <Link href="/blog" className="transition-colors hover:text-brand-gold">Blog</Link>
                 <Link href="/contact" className="transition-colors hover:text-brand-gold">Contact</Link>
                 <Link href="/quote" className="transition-colors hover:text-brand-gold">Get Quote</Link>
