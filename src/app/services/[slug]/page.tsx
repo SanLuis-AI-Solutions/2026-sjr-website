@@ -5,7 +5,6 @@ import Image, { getImageProps } from "next/image";
 import { Suspense, type ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 import { CtaBand } from "@/components/cta-band";
-import { MobileActionShelf } from "@/components/mobile-action-shelf";
 import {
   BUSINESS,
   SERVICES,
@@ -1661,28 +1660,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      <MobileActionShelf
-        eyebrow="Mobile actions"
-        title="Keep the page clear, keep the next step close."
-        summary="Quote first if you want pricing, or book when you are ready for a local in-shop assessment."
-        actions={[
-          {
-            href: "/quote",
-            label: "Get Fast Quote",
-            eventName: "service_cta_click",
-            eventParams: { service_slug: slug, placement: "mobile_action_shelf", cta_target: "quote" },
-            kind: "primary",
-          },
-          {
-            href: "/book",
-            label: "Book Repair",
-            eventName: "service_cta_click",
-            eventParams: { service_slug: slug, placement: "mobile_action_shelf", cta_target: "book" },
-            kind: "secondary",
-          },
-        ]}
-      />
 
       <Suspense fallback={null}>
         <DeferredServiceSections>
