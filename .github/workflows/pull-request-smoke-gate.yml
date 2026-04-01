@@ -1,0 +1,90 @@
+name: Pull Request Smoke Gate
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-smoke-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect runtime-impacting changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          list-files: shell
+          filters: |
+            runtime_relevant:
+              - 'src/**'
+              - 'public/**'
+              - 'tests/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'next.config.*'
+              - 'playwright.config.*'
+              - '.github/workflows/pull-request-smoke-gate.yml'
+
+      - name: Summary for skipped validation
+        if: steps.changes.outputs.runtime_relevant != 'true'
+        run: |
+          echo "No runtime-impacting files changed."
+          echo "Skipping install, build, and smoke validation for this PR."
+
+      - name: Setup Node
+        if: steps.changes.outputs.runtime_relevant == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        if: steps.changes.outputs.runtime_relevant == 'true'
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        if: steps.changes.outputs.runtime_relevant == 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Build app
+        if: steps.changes.outputs.runtime_relevant == 'true'
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://mock.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key"
+          SUPABASE_URL: "https://mock.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "mock-service-key"
+        run: npm run build
+
+      - name: Run mobile smoke suite
+        if: steps.changes.outputs.runtime_relevant == 'true'
+        env:
+          CI: "1"
+          NEXT_PUBLIC_SUPABASE_URL: "https://mock.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key"
+          SUPABASE_URL: "https://mock.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "mock-service-key"
+        run: npx playwright test tests/smoke.spec.ts
+
+      - name: Upload Playwright artifacts
+        if: failure() && steps.changes.outputs.runtime_relevant == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-smoke-${{ github.run_id }}
+          path: |
+            playwright-report/**
+            test-results/**
+          if-no-files-found: warn
