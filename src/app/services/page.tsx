@@ -4,7 +4,6 @@ import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
-import { MobileActionShelf } from "@/components/mobile-action-shelf";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 
 type ServiceListItem = {
@@ -165,28 +164,6 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
-
-      <MobileActionShelf
-        eyebrow="Mobile actions"
-        title="Compare first, then move when you are ready."
-        summary="Get pricing before you visit, or reserve an in-shop assessment without jumping back to the top."
-        actions={[
-          {
-            href: "/quote",
-            label: "Get Fast Quote",
-            eventName: "services_hub_cta_click",
-            eventParams: { placement: "mobile_action_shelf", cta_target: "quote" },
-            kind: "primary",
-          },
-          {
-            href: "/book",
-            label: "Book Repair",
-            eventName: "services_hub_cta_click",
-            eventParams: { placement: "mobile_action_shelf", cta_target: "book" },
-            kind: "secondary",
-          },
-        ]}
-      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-6">
