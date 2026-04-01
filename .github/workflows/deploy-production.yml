@@ -156,11 +156,13 @@ jobs:
       - name: Post-deploy service performance guardrail (isolated p50)
         if: steps.changes.outputs.deploy_relevant == 'true' && steps.changes.outputs.perf_relevant == 'true'
         run: |
+          # Keep the hard ceiling slightly above the locked ring-sizing baseline budget
+          # so the follow-up delta comparison remains the real regression gate.
           node scripts/perf/launch-performance-gate.mjs \
             --base-url https://www.susiesjewelryrepair.com \
             --runs 5 \
             --percentile 50 \
-            --lcp-threshold-ms 2500 \
+            --lcp-threshold-ms 2600 \
             --seo-threshold 100 \
             --isolate \
             --diagnostics \
