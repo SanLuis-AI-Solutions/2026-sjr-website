@@ -5,10 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowroomBand, Testimonials } from "@/components/home-sections";
-import { MobileActionShelf } from "@/components/mobile-action-shelf";
 import { servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
-import { BUSINESS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Jewelry Repair in Pasadena, TX | Watch, Ring & Stone Repair | Susie’s Jewelry Repair",
@@ -54,35 +52,6 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-24 md:pt-28">
         <Hero />
-        <MobileActionShelf
-          eyebrow="Mobile actions"
-          title="Get pricing or reach the shop without losing your place."
-          summary="Fast quote first, direct call if you need a quick answer, or reserve a repair visit."
-          actions={[
-            {
-              href: "/quote",
-              label: "Get Fast Quote",
-              eventName: "home_mobile_quick_action_click",
-              eventParams: { placement: "mobile_action_shelf", cta_target: "quote" },
-              kind: "primary",
-            },
-            {
-              href: `tel:${BUSINESS.phone}`,
-              label: "Call Now",
-              ariaLabel: `Call ${BUSINESS.phone}`,
-              eventName: "home_mobile_quick_action_click",
-              eventParams: { placement: "mobile_action_shelf", cta_target: "call" },
-              kind: "secondary",
-            },
-            {
-              href: "/book",
-              label: "Book repair instead",
-              eventName: "home_mobile_quick_action_click",
-              eventParams: { placement: "mobile_action_shelf", cta_target: "book" },
-              kind: "text",
-            },
-          ]}
-        />
         <Suspense fallback={null}>
           <HomeDeferredContent />
         </Suspense>
