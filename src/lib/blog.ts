@@ -1173,7 +1173,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book Repair", href: "/book" },
     ],
-    relatedServiceSlugs: ["heirloom-restoration", "custom-design"]
+    relatedServiceSlugs: ["custom-design", "heirloom-restoration"]
   }
 ];
 
@@ -1194,6 +1194,19 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 export const BLOG_TOPICS = Array.from(
   new Set(BLOG_POSTS.flatMap((post) => post.topics))
 );
+
+const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
+  "heirloom-restoration": [
+    "heirloom-jewelry-restoration-repair-or-redesign",
+    "heirloom-restoration-planning-guide",
+    "safe-to-clean-vintage-diamond-ring-at-home",
+  ],
+  "pearl-restringing": [
+    "pearl-restringing-timing-guide",
+    "professional-cleaning-vs-home-care",
+    "how-to-choose-a-jeweler",
+  ],
+};
 
 function overlapScore(a: string[], b: string[]) {
   const set = new Set(a);
@@ -1238,4 +1251,16 @@ export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogP
     })
     .slice(0, count)
     .map((entry) => entry.post);
+}
+
+export function getHelpfulBlogPostsForServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
+  return [
+    ...(HELPFUL_BLOG_POST_SLUGS_BY_SERVICE[serviceSlug] ?? []).flatMap((slug) => {
+      const post = getBlogPostBySlug(slug);
+      return post ? [post] : [];
+    }),
+    ...getBlogPostsByServiceSlug(serviceSlug, count * 2),
+  ]
+    .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
+    .slice(0, count);
 }
