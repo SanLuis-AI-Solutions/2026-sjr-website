@@ -110,7 +110,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3" role="region" aria-label="Quick actions">
+            <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink
                 href="/quote"
                 eventName="service_area_cta_click"

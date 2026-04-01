@@ -11,7 +11,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 const navItems = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/showroom", label: "Gallery" },
+  { href: "/showroom", label: "Showcase" },
   { href: "/faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },

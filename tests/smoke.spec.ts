@@ -356,7 +356,7 @@ test("sitemap excludes legacy Wix URLs and includes current geo routes", async (
   expect(bodyText).not.toContain("/ring-sizing-repair");
 });
 
-test("mobile core pages: about, faq, contact, and blog quick actions are clear", async ({
+test("mobile informational pages: about, faq, and blog hero actions are clear", async ({
   page,
 }) => {
   const guard = attachConsoleGuards(page);
@@ -366,7 +366,6 @@ test("mobile core pages: about, faq, contact, and blog quick actions are clear",
       path: "/faq",
       heading: /Answers before you hand over a meaningful piece/i,
     },
-    { path: "/contact", heading: /Talk to a local expert/i },
     { path: "/blog", heading: /Repair tips and local guidance/i },
   ];
 
@@ -374,11 +373,11 @@ test("mobile core pages: about, faq, contact, and blog quick actions are clear",
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
 
-    const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
-    await expect(quickActions).toBeVisible();
+    await expect(page.getByRole("region", { name: /^Quick actions$/i })).toHaveCount(0);
 
-    const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
-    const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+    const heroSection = page.locator("main section").first();
+    const quote = heroSection.getByRole("link", { name: /^Get Fast Quote$/i }).first();
+    const book = heroSection.getByRole("link", { name: /^Book Repair$/i }).first();
     await expect(quote).toBeVisible();
     await expect(book).toBeVisible();
 
@@ -388,7 +387,30 @@ test("mobile core pages: about, faq, contact, and blog quick actions are clear",
     await assertNoBrokenImages(page);
   }
 
-  guard.assertNoErrors("core pages quick actions");
+  guard.assertNoErrors("informational pages hero actions");
+});
+
+test("mobile contact page: direct actions remain clear", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/contact", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Talk to a local expert/i })).toBeVisible();
+
+  const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
+  await expect(quickActions).toBeVisible();
+
+  const message = quickActions.getByRole("link", { name: /^Send Message$/i });
+  const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
+  const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+  await expect(message).toBeVisible();
+  await expect(quote).toBeVisible();
+  await expect(book).toBeVisible();
+
+  await expectTapTarget(message, "Message tap target on /contact");
+  await expectTapTarget(quote, "Quote tap target on /contact");
+  await expectTapTarget(book, "Book tap target on /contact");
+
+  guard.assertNoErrors("contact direct actions");
 });
 
 test("mobile blog detail: article content, related services, and CTAs render", async ({
@@ -495,7 +517,7 @@ test("mobile blog detail: watch battery article links into deer park geo guidanc
   guard.assertNoErrors("blog detail watch battery geo link");
 });
 
-test("mobile service-area pages: nearby city pages render local guidance and quick actions", async ({
+test("mobile service-area pages: nearby city pages render local guidance and hero actions", async ({
   page,
 }) => {
   const guard = attachConsoleGuards(page);
@@ -535,8 +557,8 @@ test("mobile service-area pages: nearby city pages render local guidance and qui
   for (const route of routes) {
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
-    await expect(page.getByRole("region", { name: /^Quick actions$/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: route.quickLink }).first()).toBeVisible();
+    const heroSection = page.locator("main section").first();
+    await expect(heroSection.getByRole("link", { name: route.quickLink }).first()).toBeVisible();
     await expect(page.getByText(route.serviceLink).first()).toBeVisible();
     await assertNoBrokenImages(page);
   }
