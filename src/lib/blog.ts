@@ -74,7 +74,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
     ],
-    relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing"],
+    relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing", "watch-repair"],
   },
   {
     slug: "ring-sizing-guide",
@@ -1224,6 +1224,18 @@ export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
 export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
   return BLOG_POSTS
     .filter((post) => post.relatedServiceSlugs.includes(serviceSlug))
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-    .slice(0, count);
+    .map((post) => {
+      const priorityIndex = post.relatedServiceSlugs.indexOf(serviceSlug);
+      const priorityScore =
+        priorityIndex === 0 ? 40 : priorityIndex === 1 ? 24 : priorityIndex === 2 ? 12 : 6;
+      const specificityScore = Math.max(0, 5 - post.relatedServiceSlugs.length);
+      return { post, priorityScore, specificityScore };
+    })
+    .sort((a, b) => {
+      if (b.priorityScore !== a.priorityScore) return b.priorityScore - a.priorityScore;
+      if (b.specificityScore !== a.specificityScore) return b.specificityScore - a.specificityScore;
+      return b.post.publishedAt.localeCompare(a.post.publishedAt);
+    })
+    .slice(0, count)
+    .map((entry) => entry.post);
 }
