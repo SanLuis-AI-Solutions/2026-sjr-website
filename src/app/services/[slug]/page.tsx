@@ -15,7 +15,7 @@ import { getFaqsByService, getServiceBySlug } from "@/lib/content";
 import { serviceFaqSchema, serviceSchema } from "@/lib/schema";
 import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { buildServiceVisualSet } from "@/lib/service-visuals";
-import { getBlogPostBySlug, getBlogPostsByServiceSlug } from "@/lib/blog";
+import { getHelpfulBlogPostsForServiceSlug } from "@/lib/blog";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 import { createPageMetadata } from "@/lib/metadata";
@@ -210,19 +210,6 @@ const DECISION_MODULES: Record<string, DecisionModule> = {
       "Piece has sentimental value but limited wearability",
     ],
   },
-};
-
-const HELPFUL_READ_SLUGS_BY_SERVICE: Record<string, string[]> = {
-  "heirloom-restoration": [
-    "heirloom-jewelry-restoration-repair-or-redesign",
-    "heirloom-restoration-planning-guide",
-    "safe-to-clean-vintage-diamond-ring-at-home",
-  ],
-  "pearl-restringing": [
-    "pearl-restringing-timing-guide",
-    "professional-cleaning-vs-home-care",
-    "how-to-choose-a-jeweler",
-  ],
 };
 
 const PROOF_SNIPPETS: Record<string, ProofSnippet[]> = {
@@ -1171,14 +1158,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const relatedServices = SERVICES
     .filter((item) => item.slug !== service.slug)
     .slice(0, 4);
-  const helpfulReadPosts = [
-    ...(HELPFUL_READ_SLUGS_BY_SERVICE[slug] ?? []).flatMap((postSlug) => {
-      const post = getBlogPostBySlug(postSlug);
-      return post ? [post] : [];
-    }),
-    ...getBlogPostsByServiceSlug(slug, 3),
-  ].filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
-    .slice(0, 3);
+  const helpfulReadPosts = getHelpfulBlogPostsForServiceSlug(slug, 3);
   const helpfulReads: HelpfulReadLink[] = helpfulReadPosts.map((post) => ({
     href: `/blog/${post.slug}`,
     title: post.title,

@@ -74,7 +74,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
     ],
-    relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing"],
+    relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing", "watch-repair"],
   },
   {
     slug: "ring-sizing-guide",
@@ -1173,7 +1173,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book Repair", href: "/book" },
     ],
-    relatedServiceSlugs: ["heirloom-restoration", "custom-design"]
+    relatedServiceSlugs: ["custom-design", "heirloom-restoration"]
   }
 ];
 
@@ -1194,6 +1194,19 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 export const BLOG_TOPICS = Array.from(
   new Set(BLOG_POSTS.flatMap((post) => post.topics))
 );
+
+const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
+  "heirloom-restoration": [
+    "heirloom-jewelry-restoration-repair-or-redesign",
+    "heirloom-restoration-planning-guide",
+    "safe-to-clean-vintage-diamond-ring-at-home",
+  ],
+  "pearl-restringing": [
+    "pearl-restringing-timing-guide",
+    "professional-cleaning-vs-home-care",
+    "how-to-choose-a-jeweler",
+  ],
+};
 
 function overlapScore(a: string[], b: string[]) {
   const set = new Set(a);
@@ -1224,6 +1237,30 @@ export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
 export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
   return BLOG_POSTS
     .filter((post) => post.relatedServiceSlugs.includes(serviceSlug))
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .map((post) => {
+      const priorityIndex = post.relatedServiceSlugs.indexOf(serviceSlug);
+      const priorityScore =
+        priorityIndex === 0 ? 40 : priorityIndex === 1 ? 24 : priorityIndex === 2 ? 12 : 6;
+      const specificityScore = Math.max(0, 5 - post.relatedServiceSlugs.length);
+      return { post, priorityScore, specificityScore };
+    })
+    .sort((a, b) => {
+      if (b.priorityScore !== a.priorityScore) return b.priorityScore - a.priorityScore;
+      if (b.specificityScore !== a.specificityScore) return b.specificityScore - a.specificityScore;
+      return b.post.publishedAt.localeCompare(a.post.publishedAt);
+    })
+    .slice(0, count)
+    .map((entry) => entry.post);
+}
+
+export function getHelpfulBlogPostsForServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
+  return [
+    ...(HELPFUL_BLOG_POST_SLUGS_BY_SERVICE[serviceSlug] ?? []).flatMap((slug) => {
+      const post = getBlogPostBySlug(slug);
+      return post ? [post] : [];
+    }),
+    ...getBlogPostsByServiceSlug(serviceSlug, count * 2),
+  ]
+    .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
     .slice(0, count);
 }
