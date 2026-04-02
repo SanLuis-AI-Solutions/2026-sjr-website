@@ -13,6 +13,8 @@ export type BlogNextStep = {
   href: string;
 };
 
+type BlogDiscoverySurface = "blogFeatured" | "serviceHub" | "geoHelpfulReads";
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -32,6 +34,7 @@ export type BlogPost = {
   nextStepsIntro?: string;
   nextSteps?: BlogNextStep[];
   relatedServiceSlugs: string[];
+  discoveryBoosts?: Partial<Record<BlogDiscoverySurface, number>>;
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -861,7 +864,12 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
-    relatedServiceSlugs: ["ring-sizing", "stone-setting"]
+    relatedServiceSlugs: ["ring-sizing", "stone-setting"],
+    discoveryBoosts: {
+      blogFeatured: 8,
+      serviceHub: 10,
+      geoHelpfulReads: 10,
+    },
   },
   {
     slug: "can-a-severely-bent-ring-prong-be-fixed",
@@ -1017,7 +1025,11 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
-    relatedServiceSlugs: ["watch-repair"]
+    relatedServiceSlugs: ["watch-repair"],
+    discoveryBoosts: {
+      serviceHub: 7,
+      geoHelpfulReads: 7,
+    },
   },
   {
     slug: "safe-to-clean-vintage-diamond-ring-at-home",
@@ -1173,7 +1185,12 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book Repair", href: "/book" },
     ],
-    relatedServiceSlugs: ["custom-design", "heirloom-restoration"]
+    relatedServiceSlugs: ["custom-design", "heirloom-restoration"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 9,
+      geoHelpfulReads: 9,
+    },
   },
   {
     slug: "how-much-does-pearl-restringing-cost-pasadena",
@@ -1254,6 +1271,10 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
+    discoveryBoosts: {
+      serviceHub: 6,
+      geoHelpfulReads: 6,
+    },
   },
   {
     slug: "does-my-watch-need-battery-or-repair-pasadena",
@@ -1333,6 +1354,11 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair"],
+    discoveryBoosts: {
+      blogFeatured: 9,
+      serviceHub: 10,
+      geoHelpfulReads: 10,
+    },
   }
 ];
 
@@ -1380,6 +1406,10 @@ function commercialDiscoveryScore(post: BlogPost) {
   return post.topics.reduce((score, topic) => score + (COMMERCIAL_DISCOVERY_TOPICS.has(topic) ? 1 : 0), 0);
 }
 
+function discoveryBoostScore(post: BlogPost, surface: BlogDiscoverySurface) {
+  return post.discoveryBoosts?.[surface] ?? 0;
+}
+
 export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
   const current = getBlogPostBySlug(slug);
   if (!current) return [];
@@ -1401,15 +1431,24 @@ export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
     .map((entry) => entry.post);
 }
 
-export function sortBlogPostsForDiscovery(posts: BlogPost[]): BlogPost[] {
+export function sortBlogPostsForDiscovery(
+  posts: BlogPost[],
+  surface: BlogDiscoverySurface = "blogFeatured",
+): BlogPost[] {
   return [...posts].sort((a, b) => {
+    const boostDelta = discoveryBoostScore(b, surface) - discoveryBoostScore(a, surface);
+    if (boostDelta !== 0) return boostDelta;
     const commercialDelta = commercialDiscoveryScore(b) - commercialDiscoveryScore(a);
     if (commercialDelta !== 0) return commercialDelta;
     return b.publishedAt.localeCompare(a.publishedAt);
   });
 }
 
-export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
+export function getBlogPostsByServiceSlug(
+  serviceSlug: string,
+  count = 3,
+  surface: BlogDiscoverySurface = "serviceHub",
+): BlogPost[] {
   return BLOG_POSTS
     .filter((post) => post.relatedServiceSlugs.includes(serviceSlug))
     .map((post) => {
@@ -1417,9 +1456,11 @@ export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogP
       const priorityScore =
         priorityIndex === 0 ? 40 : priorityIndex === 1 ? 24 : priorityIndex === 2 ? 12 : 6;
       const specificityScore = Math.max(0, 5 - post.relatedServiceSlugs.length);
-      return { post, priorityScore, specificityScore };
+      const boostScore = discoveryBoostScore(post, surface);
+      return { post, boostScore, priorityScore, specificityScore };
     })
     .sort((a, b) => {
+      if (b.boostScore !== a.boostScore) return b.boostScore - a.boostScore;
       if (b.priorityScore !== a.priorityScore) return b.priorityScore - a.priorityScore;
       if (b.specificityScore !== a.specificityScore) return b.specificityScore - a.specificityScore;
       return b.post.publishedAt.localeCompare(a.post.publishedAt);
@@ -1428,13 +1469,17 @@ export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogP
     .map((entry) => entry.post);
 }
 
-export function getHelpfulBlogPostsForServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
+export function getHelpfulBlogPostsForServiceSlug(
+  serviceSlug: string,
+  count = 3,
+  surface: BlogDiscoverySurface = "serviceHub",
+): BlogPost[] {
   return [
     ...(HELPFUL_BLOG_POST_SLUGS_BY_SERVICE[serviceSlug] ?? []).flatMap((slug) => {
       const post = getBlogPostBySlug(slug);
       return post ? [post] : [];
     }),
-    ...getBlogPostsByServiceSlug(serviceSlug, count * 2),
+    ...getBlogPostsByServiceSlug(serviceSlug, count * 2, surface),
   ]
     .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
     .slice(0, count);
@@ -1450,9 +1495,10 @@ export function getServiceHubHelpfulGuides(
 export function getHelpfulBlogPostsForServiceSlugs(
   serviceSlugs: string[],
   count = serviceSlugs.length,
+  surface: BlogDiscoverySurface = "geoHelpfulReads",
 ): BlogPost[] {
   return serviceSlugs
-    .flatMap((serviceSlug) => getHelpfulBlogPostsForServiceSlug(serviceSlug, 1))
+    .flatMap((serviceSlug) => getHelpfulBlogPostsForServiceSlug(serviceSlug, 1, surface))
     .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
     .slice(0, count);
 }
