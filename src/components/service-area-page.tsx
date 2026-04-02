@@ -5,6 +5,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
 import type { ServiceAreaPage } from "@/lib/service-areas";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
+import { getHelpfulBlogPostsForServiceSlugs } from "@/lib/blog";
 
 type Props = {
   page: ServiceAreaPage;
@@ -14,6 +15,12 @@ export function ServiceAreaLandingPage({ page }: Props) {
   const highlightedServices = SERVICES.filter((service) =>
     ["watch-repair", "ring-sizing", "stone-setting", "heirloom-restoration"].includes(service.slug)
   );
+  const helpfulReads =
+    page.helpfulReads ??
+    getHelpfulBlogPostsForServiceSlugs(page.helpfulReadServiceSlugs ?? [], 3).map((post) => ({
+      label: post.title,
+      href: `/blog/${post.slug}`,
+    }));
 
   const breadcrumbItems = [
     { name: "Home", href: "/" },
@@ -196,13 +203,13 @@ export function ServiceAreaLandingPage({ page }: Props) {
               </div>
             </section>
 
-            {page.helpfulReads?.length ? (
+            {helpfulReads.length ? (
               <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                   Helpful reads
                 </p>
                 <div className="mt-4 space-y-2">
-                  {page.helpfulReads.map((item) => (
+                  {helpfulReads.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
