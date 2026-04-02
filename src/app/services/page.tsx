@@ -6,7 +6,7 @@ import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { createPageMetadata } from "@/lib/metadata";
-import { BLOG_POSTS } from "@/lib/blog";
+import { getServiceHubHelpfulGuides } from "@/lib/blog";
 
 type ServiceListItem = {
   slug: string;
@@ -33,13 +33,10 @@ export default async function ServicesPage() {
   const services = (await getServicesWithImages()) as ServiceListItem[];
   const servicesBySlug = new Map<string, ServiceListItem>();
   for (const s of services) servicesBySlug.set(s.slug, s);
-  const helpfulGuides = [
-    "watch-battery-replacement",
-    "ring-sizing-guide",
-    "heirloom-restoration-planning-guide",
-  ]
-    .map((slug) => BLOG_POSTS.find((post) => post.slug === slug))
-    .filter((post): post is (typeof BLOG_POSTS)[number] => Boolean(post));
+  const helpfulGuides = getServiceHubHelpfulGuides(
+    ["watch-repair", "ring-sizing", "heirloom-restoration"],
+    3,
+  );
 
   const groups = [
     {
