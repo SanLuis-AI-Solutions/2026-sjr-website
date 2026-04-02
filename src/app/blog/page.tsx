@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
-import { BLOG_POSTS, BLOG_TOPICS, sortBlogPostsForDiscovery } from "@/lib/blog";
+import {
+  BLOG_POSTS,
+  BLOG_TOPICS,
+  getBlogHubPopularServiceSlugs,
+  sortBlogPostsForDiscovery,
+} from "@/lib/blog";
 import { BlogTopicFilterTracker } from "@/components/analytics/blog-topic-filter-tracker";
 import { createPageMetadata } from "@/lib/metadata";
 import { SERVICES } from "@/lib/constants";
@@ -32,7 +37,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     : BLOG_POSTS;
   const visiblePosts = sortBlogPostsForDiscovery(scopedPosts.length > 0 ? scopedPosts : BLOG_POSTS);
   const [featuredPost, ...libraryPosts] = visiblePosts;
-  const popularServiceLinks = ["watch-repair", "ring-sizing", "heirloom-restoration"]
+  const popularServiceLinks = getBlogHubPopularServiceSlugs(3)
     .map((slug) => SERVICES.find((service) => service.slug === slug))
     .filter((service): service is (typeof SERVICES)[number] => Boolean(service));
 

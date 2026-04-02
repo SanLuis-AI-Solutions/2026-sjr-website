@@ -1383,6 +1383,11 @@ export const BLOG_TOPICS = Array.from(
 );
 
 const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"]);
+const BLOG_HUB_FALLBACK_SERVICE_SLUGS = [
+  "watch-repair",
+  "ring-sizing",
+  "heirloom-restoration",
+] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "heirloom-restoration": [
@@ -1490,6 +1495,17 @@ export function getServiceHubHelpfulGuides(
   count = serviceSlugs.length,
 ): BlogPost[] {
   return getHelpfulBlogPostsForServiceSlugs(serviceSlugs, count);
+}
+
+export function getBlogHubPopularServiceSlugs(count = 3): string[] {
+  return [
+    ...sortBlogPostsForDiscovery(BLOG_POSTS, "blogFeatured")
+      .flatMap((post) => post.relatedServiceSlugs)
+      .filter((slug) => BLOG_HUB_FALLBACK_SERVICE_SLUGS.includes(slug as (typeof BLOG_HUB_FALLBACK_SERVICE_SLUGS)[number])),
+    ...BLOG_HUB_FALLBACK_SERVICE_SLUGS,
+  ]
+    .filter((slug, index, slugs) => slugs.indexOf(slug) === index)
+    .slice(0, count);
 }
 
 export function getHelpfulBlogPostsForServiceSlugs(
