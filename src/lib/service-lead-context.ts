@@ -1,6 +1,7 @@
 import { SERVICES } from "@/lib/constants";
 
 export const SERVICES_FINDER_SOURCE = "services_finder";
+export const SERVICES_FINDER_WEBSITE_SOURCE = "website:services_finder";
 
 type QueryLike =
   | URLSearchParams
@@ -20,6 +21,16 @@ export type ServicesFinderLeadContext = {
   intentLabel: string | null;
   query: string | null;
   detailsSeed: string;
+};
+
+export type StoredServicesFinderLeadContext = {
+  isServicesFinderLead: boolean;
+  sourceLabel: string | null;
+  serviceSlug: string | null;
+  serviceName: string | null;
+  intentLabel: string | null;
+  query: string | null;
+  cleanCustomerNotes: string;
 };
 
 type ServicesFinderLeadContextInput = {
@@ -56,6 +67,28 @@ function buildServiceNameLookup(services?: Iterable<ServiceIdentity>) {
     const name = normalizeContextValue(service.name);
     if (!name) continue;
     lookup.set(service.slug, name);
+  }
+
+  return lookup;
+}
+
+function buildServiceIdentityLookup(services?: Iterable<ServiceIdentity>) {
+  const lookup = new Map<string, { slug: string; name: string }>();
+
+  for (const service of SERVICES) {
+    const normalizedName = service.name.trim().toLowerCase();
+    lookup.set(service.slug, { slug: service.slug, name: service.name });
+    lookup.set(normalizedName, { slug: service.slug, name: service.name });
+  }
+
+  if (!services) return lookup;
+
+  for (const service of services) {
+    const normalizedName = normalizeContextValue(service.name);
+    if (!normalizedName) continue;
+    const identity = { slug: service.slug, name: normalizedName };
+    lookup.set(service.slug, identity);
+    lookup.set(normalizedName.toLowerCase(), identity);
   }
 
   return lookup;
@@ -131,6 +164,98 @@ function stripDetailsSeed(details: string, seed: string) {
   }
 
   return details.trim();
+}
+
+function parseStoredLeadContextBlock(details: string | null | undefined) {
+  const normalizedDetails =
+    typeof details === "string" ? details.replace(/\r\n/g, "\n").trim() : "";
+
+  if (!normalizedDetails.startsWith("Lead context")) {
+    return {
+      hasStructuredContext: false,
+      serviceName: null,
+      intentLabel: null,
+      query: null,
+      cleanCustomerNotes: normalizedDetails,
+    };
+  }
+
+  const [contextBlock, ...noteBlocks] = normalizedDetails.split(/\n{2,}/);
+  const lines = contextBlock
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (
+    lines[0] !== "Lead context" ||
+    !lines.some((line) => line === "Origin: Services finder")
+  ) {
+    return {
+      hasStructuredContext: false,
+      serviceName: null,
+      intentLabel: null,
+      query: null,
+      cleanCustomerNotes: normalizedDetails,
+    };
+  }
+
+  const readPrefixedLine = (prefix: string) => {
+    const match = lines.find((line) => line.startsWith(prefix));
+    return match ? normalizeContextValue(match.slice(prefix.length)) : null;
+  };
+
+  return {
+    hasStructuredContext: true,
+    serviceName: readPrefixedLine("Suggested service: "),
+    intentLabel: readPrefixedLine("Intent: "),
+    query: readPrefixedLine("Search phrase: "),
+    cleanCustomerNotes: noteBlocks.join("\n\n").trim(),
+  };
+}
+
+export function resolveStoredServicesFinderLeadContext(
+  input: {
+    source?: string | null;
+    details?: string | null;
+  },
+  services?: Iterable<ServiceIdentity>,
+): StoredServicesFinderLeadContext {
+  const source = normalizeContextValue(input.source);
+  const parsedDetails = parseStoredLeadContextBlock(input.details);
+  const isServicesFinderLead =
+    source === SERVICES_FINDER_WEBSITE_SOURCE ||
+    source === SERVICES_FINDER_SOURCE ||
+    parsedDetails.hasStructuredContext;
+
+  if (!isServicesFinderLead) {
+    return {
+      isServicesFinderLead: false,
+      sourceLabel: null,
+      serviceSlug: null,
+      serviceName: null,
+      intentLabel: null,
+      query: null,
+      cleanCustomerNotes: parsedDetails.cleanCustomerNotes,
+    };
+  }
+
+  const serviceIdentityLookup = buildServiceIdentityLookup(services);
+  const resolvedService =
+    (parsedDetails.serviceName &&
+      serviceIdentityLookup.get(parsedDetails.serviceName.toLowerCase())) ||
+    (parsedDetails.serviceName &&
+      serviceIdentityLookup.get(parsedDetails.serviceName)) ||
+    null;
+
+  return {
+    isServicesFinderLead: true,
+    sourceLabel: "Services finder",
+    serviceSlug: resolvedService?.slug || null,
+    serviceName: resolvedService?.name || parsedDetails.serviceName,
+    intentLabel: parsedDetails.intentLabel,
+    query: parsedDetails.query,
+    cleanCustomerNotes: parsedDetails.cleanCustomerNotes,
+  };
 }
 
 export function resolveServicesFinderLeadContext(

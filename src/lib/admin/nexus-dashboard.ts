@@ -34,6 +34,7 @@ import {
   getNexusConfigs,
   type NexusConfigRow,
 } from "@/lib/automation/nexus-config";
+import { resolveStoredServicesFinderLeadContext } from "@/lib/service-lead-context";
 import { supabaseGet } from "@/lib/supabase/server";
 
 export type SharedSlugRow = {
@@ -113,6 +114,21 @@ export type InboxBucketSummary = {
   spamCount: number;
 };
 
+export type FinderLeadSummaryChip = {
+  label: string;
+  count: number;
+};
+
+export type FinderLeadSummary = {
+  total: number;
+  quoteCount: number;
+  bookingCount: number;
+  newCount: number;
+  spamCount: number;
+  topServices: FinderLeadSummaryChip[];
+  topIntents: FinderLeadSummaryChip[];
+};
+
 export type InboxSummary = {
   totalLeads: number;
   newCount: number;
@@ -120,6 +136,7 @@ export type InboxSummary = {
   quotes: InboxBucketSummary;
   bookings: InboxBucketSummary;
   contacts: InboxBucketSummary;
+  finder: FinderLeadSummary;
 };
 
 export type ResultsSummary = {
@@ -227,6 +244,18 @@ function countByStatus(rows: { status: string }[]) {
     },
     { total: 0, newCount: 0, spamCount: 0 }
   );
+}
+
+function incrementCount(map: Map<string, number>, label: string | null) {
+  if (!label) return;
+  map.set(label, (map.get(label) || 0) + 1);
+}
+
+function mapTopCounts(map: Map<string, number>, limit = 3): FinderLeadSummaryChip[] {
+  return [...map.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, limit)
+    .map(([label, count]) => ({ label, count }));
 }
 
 function buildApiHealth(configRows: NexusConfigRow[]): ApiHealthSummary[] {
@@ -600,6 +629,44 @@ function buildInboxSummary(
   const quoteSummary = countByStatus(quotes);
   const bookingSummary = countByStatus(bookings);
   const contactSummary = countByStatus(contacts);
+  const serviceCounts = new Map<string, number>();
+  const intentCounts = new Map<string, number>();
+
+  const finderLeadRows = [
+    ...quotes.map((quote) => ({
+      leadType: "quote" as const,
+      status: quote.status,
+      context: resolveStoredServicesFinderLeadContext({
+        source: quote.source,
+        details: quote.details,
+      }),
+    })),
+    ...bookings.map((booking) => ({
+      leadType: "booking" as const,
+      status: booking.status,
+      context: resolveStoredServicesFinderLeadContext({
+        source: booking.source,
+        details: booking.details,
+      }),
+    })),
+  ].filter((row) => row.context.isServicesFinderLead);
+
+  for (const row of finderLeadRows) {
+    incrementCount(serviceCounts, row.context.serviceName || row.context.serviceSlug);
+    incrementCount(intentCounts, row.context.intentLabel || row.context.query);
+  }
+
+  const finderSummary = {
+    total: finderLeadRows.length,
+    quoteCount: finderLeadRows.filter((row) => row.leadType === "quote").length,
+    bookingCount: finderLeadRows.filter((row) => row.leadType === "booking").length,
+    newCount: finderLeadRows.filter(
+      (row) => row.status === "new" || row.status === "queued"
+    ).length,
+    spamCount: finderLeadRows.filter((row) => row.status === "spam").length,
+    topServices: mapTopCounts(serviceCounts),
+    topIntents: mapTopCounts(intentCounts),
+  };
 
   return {
     totalLeads: quoteSummary.total + bookingSummary.total + contactSummary.total,
@@ -608,6 +675,7 @@ function buildInboxSummary(
     quotes: quoteSummary,
     bookings: bookingSummary,
     contacts: contactSummary,
+    finder: finderSummary,
   };
 }
 

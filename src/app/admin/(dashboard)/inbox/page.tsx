@@ -17,6 +17,10 @@ import {
   supabaseCreateSignedObjectUrl,
   supabaseUpdateById,
 } from "@/lib/supabase/admin";
+import {
+  resolveStoredServicesFinderLeadContext,
+  type StoredServicesFinderLeadContext,
+} from "@/lib/service-lead-context";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +61,44 @@ function matchesQuery(parts: Array<string | null | undefined>, query: string) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return true;
   return parts.some((part) => (part || "").toLowerCase().includes(normalized));
+}
+
+function FinderLeadContextStrip({
+  context,
+}: {
+  context: StoredServicesFinderLeadContext;
+}) {
+  if (!context.isServicesFinderLead) return null;
+
+  return (
+    <div className="mb-3 rounded-[1.1rem] border border-brand-gold/35 bg-[#f6efe3] px-3 py-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="inline-flex min-h-8 items-center justify-center rounded-full bg-brand-burgundy px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+          {context.sourceLabel}
+        </span>
+        {context.serviceName ? (
+          <span className="text-xs font-medium text-stone-700">
+            Suggested service:{" "}
+            <span className="font-semibold text-stone-900">{context.serviceName}</span>
+          </span>
+        ) : null}
+      </div>
+      {(context.intentLabel || context.query) ? (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {context.intentLabel ? (
+            <span className="inline-flex min-h-8 items-center rounded-full border border-stone-200 bg-white px-3 text-[11px] font-medium text-stone-700">
+              Intent: {context.intentLabel}
+            </span>
+          ) : null}
+          {context.query ? (
+            <span className="inline-flex min-h-8 items-center rounded-full border border-stone-200 bg-white px-3 text-[11px] font-medium text-stone-700">
+              Search phrase: {context.query}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 async function signAttachment(att: QuoteAttachment) {
@@ -192,6 +234,12 @@ async function QuoteRows({ rows }: { rows: QuoteRequestRow[] }) {
       {rows.map((quote) => {
         const attachments = Array.isArray(quote.attachments) ? quote.attachments : [];
         const signed = signedLookup.get(quote.id) || [];
+        const finderContext = resolveStoredServicesFinderLeadContext({
+          source: quote.source,
+          details: quote.details,
+        });
+        const requestDetails =
+          finderContext.cleanCustomerNotes || "No additional customer notes.";
 
         return (
           <article
@@ -211,11 +259,12 @@ async function QuoteRows({ rows }: { rows: QuoteRequestRow[] }) {
                   </div>
                 </div>
                 <div>
+                  <FinderLeadContextStrip context={finderContext} />
                   <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
                     Request details
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-stone-600">
-                    {clampText(quote.details, 260)}
+                    {clampText(requestDetails, 260)}
                   </p>
                   {signed.length > 0 ? (
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -271,80 +320,86 @@ async function QuoteRows({ rows }: { rows: QuoteRequestRow[] }) {
 function BookingRows({ rows }: { rows: BookingRequestRow[] }) {
   return (
     <div className="space-y-3">
-      {rows.map((booking) => (
-        <article
-          key={booking.id}
-          className="rounded-[1.4rem] border border-stone-200 bg-white px-4 py-4 shadow-[0_12px_28px_rgba(58,25,16,0.05)]"
-        >
-          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
-            <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-              <div>
-                <p className="text-sm font-semibold text-stone-900">{booking.name}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-stone-500">
-                  {new Date(booking.created_at).toLocaleString()}
-                </p>
-                <div className="mt-3 space-y-1 text-sm text-stone-600">
-                  <p className="break-all">{booking.email}</p>
-                  {booking.phone ? <p>{booking.phone}</p> : null}
-                </div>
-              </div>
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
-                  Schedule
-                </p>
-                <p className="mt-2 text-sm text-stone-700">
-                  {booking.date} at {booking.time}
-                </p>
-                {booking.details ? (
-                  <p className="mt-2 text-sm leading-relaxed text-stone-600">
-                    {clampText(booking.details, 240)}
-                  </p>
-                ) : (
-                  <p className="mt-2 text-sm text-stone-500">No additional details.</p>
-                )}
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {booking.calendar_event?.htmlLink ? (
-                    <a
-                      href={booking.calendar_event.htmlLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-10 items-center justify-center rounded-full border border-stone-200 bg-[#faf7f2] px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition-colors hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      Open event
-                    </a>
-                  ) : null}
-                  {booking.error ? (
-                    <span className="inline-flex min-h-10 items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-rose-700">
-                      {clampText(booking.error, 64)}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-            </div>
+      {rows.map((booking) => {
+        const finderContext = resolveStoredServicesFinderLeadContext({
+          source: booking.source,
+          details: booking.details,
+        });
+        const bookingDetails =
+          finderContext.cleanCustomerNotes || "No additional customer notes.";
 
-            <form action={updateBookingStatus} className="flex w-full shrink-0 items-center gap-2 xl:w-[250px]">
-              <input type="hidden" name="id" value={booking.id} />
-              <select
-                name="status"
-                defaultValue={booking.status || "new"}
-                className="min-h-12 flex-1 rounded-full border border-stone-200 bg-[#faf7f2] px-4 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                {BOOKING_STATUSES.map((status) => (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="submit"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Save
-              </button>
-            </form>
-          </div>
-        </article>
-      ))}
+        return (
+          <article
+            key={booking.id}
+            className="rounded-[1.4rem] border border-stone-200 bg-white px-4 py-4 shadow-[0_12px_28px_rgba(58,25,16,0.05)]"
+          >
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+              <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+                <div>
+                  <p className="text-sm font-semibold text-stone-900">{booking.name}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-stone-500">
+                    {new Date(booking.created_at).toLocaleString()}
+                  </p>
+                  <div className="mt-3 space-y-1 text-sm text-stone-600">
+                    <p className="break-all">{booking.email}</p>
+                    {booking.phone ? <p>{booking.phone}</p> : null}
+                  </div>
+                </div>
+                <div>
+                  <FinderLeadContextStrip context={finderContext} />
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
+                    Schedule
+                  </p>
+                  <p className="mt-2 text-sm text-stone-700">
+                    {booking.date} at {booking.time}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                    {clampText(bookingDetails, 240)}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {booking.calendar_event?.htmlLink ? (
+                      <a
+                        href={booking.calendar_event.htmlLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-10 items-center justify-center rounded-full border border-stone-200 bg-[#faf7f2] px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition-colors hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      >
+                        Open event
+                      </a>
+                    ) : null}
+                    {booking.error ? (
+                      <span className="inline-flex min-h-10 items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-rose-700">
+                        {clampText(booking.error, 64)}
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <form action={updateBookingStatus} className="flex w-full shrink-0 items-center gap-2 xl:w-[250px]">
+                <input type="hidden" name="id" value={booking.id} />
+                <select
+                  name="status"
+                  defaultValue={booking.status || "new"}
+                  className="min-h-12 flex-1 rounded-full border border-stone-200 bg-[#faf7f2] px-4 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {BOOKING_STATUSES.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="submit"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  Save
+                </button>
+              </form>
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
 }
@@ -432,15 +487,38 @@ export default async function InboxPage({ searchParams }: InboxPageProps) {
 
   const filteredQuotes = quotes.filter((quote) => {
     const statusMatch = currentTab !== "quotes" || currentStatus === "all" || quote.status === currentStatus;
+    const finderContext = resolveStoredServicesFinderLeadContext({
+      source: quote.source,
+      details: quote.details,
+    });
     return (
       statusMatch &&
-      matchesQuery([quote.name, quote.email, quote.phone, quote.details, quote.status], query)
+      matchesQuery(
+        [
+          quote.name,
+          quote.email,
+          quote.phone,
+          quote.details,
+          quote.status,
+          quote.source,
+          finderContext.sourceLabel,
+          finderContext.serviceName,
+          finderContext.serviceSlug,
+          finderContext.intentLabel,
+          finderContext.query,
+        ],
+        query
+      )
     );
   });
 
   const filteredBookings = bookings.filter((booking) => {
     const statusMatch =
       currentTab !== "bookings" || currentStatus === "all" || booking.status === currentStatus;
+    const finderContext = resolveStoredServicesFinderLeadContext({
+      source: booking.source,
+      details: booking.details,
+    });
     return (
       statusMatch &&
       matchesQuery(
@@ -452,6 +530,12 @@ export default async function InboxPage({ searchParams }: InboxPageProps) {
           booking.time,
           booking.details,
           booking.status,
+          booking.source,
+          finderContext.sourceLabel,
+          finderContext.serviceName,
+          finderContext.serviceSlug,
+          finderContext.intentLabel,
+          finderContext.query,
         ],
         query
       )
