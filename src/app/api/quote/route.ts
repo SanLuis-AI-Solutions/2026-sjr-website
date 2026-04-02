@@ -6,7 +6,9 @@ import { evaluateLeadSpam } from "@/lib/lead-spam";
 import {
   appendServicesFinderLeadContextToUrl,
   prependServicesFinderLeadContext,
+  resolveStoredServicesFinderLeadContext,
   resolveServicesFinderLeadContextFromFormData,
+  SERVICES_FINDER_WEBSITE_SOURCE,
 } from "@/lib/service-lead-context";
 
 export async function POST(request: Request) {
@@ -21,6 +23,20 @@ export async function POST(request: Request) {
     const details = String(formData.get("details") || "").trim();
     finderContext = resolveServicesFinderLeadContextFromFormData(formData);
     const storedDetails = prependServicesFinderLeadContext(details, finderContext);
+    const storedLeadContext = resolveStoredServicesFinderLeadContext({
+      source: finderContext ? SERVICES_FINDER_WEBSITE_SOURCE : "website",
+      details: storedDetails,
+    });
+    const chatDetailsLine = storedLeadContext.cleanCustomerNotes
+      ? `details: ${storedLeadContext.cleanCustomerNotes.slice(0, 500)}`
+      : storedLeadContext.isServicesFinderLead
+        ? "details: none provided beyond finder context"
+        : null;
+    const emailDetailsLine = storedLeadContext.cleanCustomerNotes
+      ? `details: ${storedLeadContext.cleanCustomerNotes}`
+      : storedLeadContext.isServicesFinderLead
+        ? "details: none provided beyond finder context"
+        : null;
 
     // Honeypot: if filled, treat as spam and still return a success-style redirect.
     if (company) {
@@ -119,7 +135,8 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         `photos: ${attachments.length}`,
-        `details: ${storedDetails.slice(0, 500)}`,
+        ...storedLeadContext.internalSummaryLines,
+        chatDetailsLine,
       ]
         .filter(Boolean)
         .join("\n"),
@@ -136,7 +153,8 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         `photos: ${attachments.length}`,
-        `details: ${storedDetails}`,
+        ...storedLeadContext.internalSummaryLines,
+        emailDetailsLine,
       ]
         .filter(Boolean)
         .join("\n"),

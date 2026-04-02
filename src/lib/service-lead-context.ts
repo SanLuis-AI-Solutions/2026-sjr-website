@@ -31,6 +31,7 @@ export type StoredServicesFinderLeadContext = {
   intentLabel: string | null;
   query: string | null;
   cleanCustomerNotes: string;
+  internalSummaryLines: string[];
 };
 
 type ServicesFinderLeadContextInput = {
@@ -213,6 +214,31 @@ function parseStoredLeadContextBlock(details: string | null | undefined) {
   };
 }
 
+function buildStoredLeadInternalSummaryLines(input: {
+  sourceLabel: string | null;
+  serviceName: string | null;
+  serviceSlug: string | null;
+  intentLabel: string | null;
+  query: string | null;
+}) {
+  const lines: string[] = [];
+
+  if (input.sourceLabel) {
+    lines.push(`Lead source: ${input.sourceLabel}`);
+  }
+  if (input.serviceName || input.serviceSlug) {
+    lines.push(`Suggested service: ${input.serviceName || input.serviceSlug}`);
+  }
+  if (input.intentLabel) {
+    lines.push(`Intent: ${input.intentLabel}`);
+  }
+  if (input.query) {
+    lines.push(`Search phrase: ${input.query}`);
+  }
+
+  return lines;
+}
+
 export function resolveStoredServicesFinderLeadContext(
   input: {
     source?: string | null;
@@ -236,6 +262,7 @@ export function resolveStoredServicesFinderLeadContext(
       intentLabel: null,
       query: null,
       cleanCustomerNotes: parsedDetails.cleanCustomerNotes,
+      internalSummaryLines: [],
     };
   }
 
@@ -247,14 +274,27 @@ export function resolveStoredServicesFinderLeadContext(
       serviceIdentityLookup.get(parsedDetails.serviceName)) ||
     null;
 
+  const sourceLabel = "Services finder";
+  const serviceSlug = resolvedService?.slug || null;
+  const serviceName = resolvedService?.name || parsedDetails.serviceName;
+  const intentLabel = parsedDetails.intentLabel;
+  const query = parsedDetails.query;
+
   return {
     isServicesFinderLead: true,
-    sourceLabel: "Services finder",
-    serviceSlug: resolvedService?.slug || null,
-    serviceName: resolvedService?.name || parsedDetails.serviceName,
-    intentLabel: parsedDetails.intentLabel,
-    query: parsedDetails.query,
+    sourceLabel,
+    serviceSlug,
+    serviceName,
+    intentLabel,
+    query,
     cleanCustomerNotes: parsedDetails.cleanCustomerNotes,
+    internalSummaryLines: buildStoredLeadInternalSummaryLines({
+      sourceLabel,
+      serviceSlug,
+      serviceName,
+      intentLabel,
+      query,
+    }),
   };
 }
 
