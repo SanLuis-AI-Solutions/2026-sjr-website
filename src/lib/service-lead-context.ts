@@ -91,16 +91,18 @@ function normalizeServicesFinderLeadContextInput(
     return null;
   }
 
-  const serviceSlug = normalizeContextValue(input.service);
+  const rawServiceSlug = normalizeContextValue(input.service);
   const intentLabel = normalizeContextValue(input.intent);
   const query = normalizeContextValue(input.query);
+
+  const serviceNameLookup = buildServiceNameLookup(services);
+  const serviceSlug =
+    rawServiceSlug && serviceNameLookup.has(rawServiceSlug) ? rawServiceSlug : null;
+  const serviceName = serviceSlug ? serviceNameLookup.get(serviceSlug) || null : null;
 
   if (!serviceSlug && !intentLabel && !query) {
     return null;
   }
-
-  const serviceNameLookup = buildServiceNameLookup(services);
-  const serviceName = serviceSlug ? serviceNameLookup.get(serviceSlug) || null : null;
 
   return {
     leadSourceContext: SERVICES_FINDER_SOURCE,
