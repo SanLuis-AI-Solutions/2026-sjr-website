@@ -329,6 +329,74 @@ test("analytics guard: localhost does not load the production GA script", async 
   guard.assertNoErrors("localhost analytics guard");
 });
 
+test("analytics: services finder lead context reaches CTA, form start, and conversion", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.addInitScript(() => {
+    const storageKey = "sjr_test_ga_events";
+    Object.defineProperty(window, "__sjrGaHostAllowed", {
+      configurable: true,
+      get: () => true,
+      set: () => undefined,
+    });
+    window.dataLayer = [];
+    window.gtag = (...args: unknown[]) => {
+      const existing = JSON.parse(window.sessionStorage.getItem(storageKey) || "[]");
+      existing.push(args);
+      window.sessionStorage.setItem(storageKey, JSON.stringify(existing));
+      window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
+      window.dataLayer.push(args);
+    };
+  });
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
+
+  const finder = page.getByTestId("services-finder-region");
+  await finder.getByLabel(/Describe the repair you need/i).fill("watch battery");
+  await finder.getByRole("link", { name: /Use this for a quote/i }).click();
+  await expect(page).toHaveURL(
+    /\/quote\?from=services_finder&service=watch-repair&query=watch\+battery$/,
+  );
+  await page.getByLabel(/Full name/i).focus();
+
+  let events = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "lead_form_start" &&
+        params.prefill_source === "services_finder" &&
+        params.service_slug === "watch-repair" &&
+        params.finder_query === "watch battery",
+    ),
+  ).toBe(true);
+
+  await page.goto(
+    "/quote?submitted=1&id=smoke-context-quote&from=services_finder&service=watch-repair&query=watch%20battery",
+    { waitUntil: "networkidle" },
+  );
+  events = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "quote_submit_success" &&
+        params.prefill_source === "services_finder" &&
+        params.service_slug === "watch-repair" &&
+        params.finder_query === "watch battery",
+    ),
+  ).toBe(true);
+
+  guard.assertNoErrors("services finder analytics context");
+});
+
 test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = [
@@ -713,6 +781,62 @@ test("services hub: intent finder narrows results and resets cleanly", async ({ 
   ).toBeVisible();
 
   guard.assertNoErrors("services hub intent finder");
+});
+
+test("services hub: finder quote CTA carries context into quote form", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  const finder = page.getByTestId("services-finder-region");
+  await finder.getByLabel(/Describe the repair you need/i).fill("watch battery");
+  await finder.getByRole("link", { name: /Use this for a quote/i }).click();
+
+  await expect(page).toHaveURL(
+    /\/quote\?from=services_finder&service=watch-repair&query=watch\+battery$/,
+  );
+  await expect(page.getByText(/Repair focus/i).first()).toBeVisible();
+  await expect(page.getByText(/Suggested service:/i)).toContainText(/Watch Repair/i);
+  await expect(page.locator('textarea[name="details"]')).toHaveValue(
+    /Repair focus: Watch Repair & Battery Replacement[\s\S]*Issue: watch battery/i,
+  );
+
+  guard.assertNoErrors("services finder quote context");
+});
+
+test("services hub: finder booking CTA carries context into booking form", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  const finder = page.getByTestId("services-finder-region");
+  await finder.getByRole("button", { name: /Redesign or heirloom help/i }).click();
+  await finder.getByRole("link", { name: /Use this for booking/i }).click();
+
+  await expect(page).toHaveURL(
+    /\/book\?from=services_finder&service=custom-design&intent=Redesign\+or\+heirloom\+help$/,
+  );
+  await expect(page.getByText(/Repair focus/i).first()).toBeVisible();
+  await expect(page.getByText(/Suggested service:/i)).toContainText(/Custom Design/i);
+  await expect(page.locator('textarea[name="details"]')).toHaveValue(
+    /Repair focus: Custom Design[\s\S]*Issue: Redesign or heirloom help/i,
+  );
+
+  guard.assertNoErrors("services finder booking context");
+});
+
+test("services hub: zero-result quote CTA preserves finder query", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  const finder = page.getByTestId("services-finder-region");
+  await finder.getByLabel(/Describe the repair you need/i).fill("broken toaster");
+  await expect(finder.getByText(/No direct service match yet/i)).toBeVisible();
+  await finder.getByRole("link", { name: /^Get Fast Quote$/i }).click();
+
+  await expect(page).toHaveURL(/\/quote\?from=services_finder&query=broken\+toaster$/);
+  await expect(page.getByText(/Repair focus/i).first()).toBeVisible();
+  await expect(page.locator('textarea[name="details"]')).toHaveValue(/Issue: broken toaster/i);
+
+  guard.assertNoErrors("services finder zero-result quote");
 });
 
 test("home services grid: full card click navigates to service detail", async ({ page }) => {

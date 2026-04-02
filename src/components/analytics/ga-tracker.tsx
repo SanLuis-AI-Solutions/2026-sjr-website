@@ -4,6 +4,10 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { readCurrentCtaVariant } from "./cta-variant";
 import { isProductionAnalyticsHost } from "@/lib/analytics-host";
+import {
+  getServicesFinderAnalyticsParams,
+  resolveServicesFinderLeadContext,
+} from "@/lib/service-lead-context";
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
 
@@ -161,6 +165,8 @@ export function GaConversionTracker({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchKey = searchParams.toString();
+  const finderContext = resolveServicesFinderLeadContext(searchParams);
+  const finderAnalyticsParams = getServicesFinderAnalyticsParams(finderContext);
 
   useEffect(() => {
     if (!active) return;
@@ -180,11 +186,22 @@ export function GaConversionTracker({
       utm_content: firstTouch.utm_content,
       page_path: pathname || "/",
       cta_variant: readCurrentCtaVariant(),
+      ...finderAnalyticsParams,
     };
 
     sendGtagEvent(eventName, params);
     markEventSent(eventName, submissionId);
-  }, [active, eventName, submissionId, leadType, status, pathname, searchKey, searchParams]);
+  }, [
+    active,
+    eventName,
+    submissionId,
+    leadType,
+    status,
+    pathname,
+    searchKey,
+    searchParams,
+    finderAnalyticsParams,
+  ]);
 
   return null;
 }
