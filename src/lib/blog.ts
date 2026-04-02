@@ -1444,6 +1444,13 @@ export function getServiceHubHelpfulGuides(
   serviceSlugs: string[],
   count = serviceSlugs.length,
 ): BlogPost[] {
+  return getHelpfulBlogPostsForServiceSlugs(serviceSlugs, count);
+}
+
+export function getHelpfulBlogPostsForServiceSlugs(
+  serviceSlugs: string[],
+  count = serviceSlugs.length,
+): BlogPost[] {
   return serviceSlugs
     .flatMap((serviceSlug) => getHelpfulBlogPostsForServiceSlug(serviceSlug, 1))
     .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)

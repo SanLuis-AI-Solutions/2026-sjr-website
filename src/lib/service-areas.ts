@@ -23,6 +23,7 @@ export type ServiceAreaPage = {
     label: string;
     href: string;
   }>;
+  helpfulReadServiceSlugs?: string[];
 };
 
 export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
@@ -78,20 +79,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Many standard repairs follow our Same Day/Next Day pattern, depending on the piece, the damage, and current bench load.",
       },
     ],
-    helpfulReads: [
-      {
-        label: "Where to get a watch battery replaced today near Deer Park / Pasadena?",
-        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
-      },
-      {
-        label: "Can a severely bent ring prong be fixed, or do I need a new setting?",
-        href: "/blog/can-a-severely-bent-ring-prong-be-fixed",
-      },
-      {
-        label: "How to Choose a Trustworthy Jeweler",
-        href: "/blog/how-to-choose-a-jeweler",
-      },
-    ],
+    helpfulReadServiceSlugs: ["watch-repair", "stone-setting", "heirloom-restoration"],
   },
   {
     slug: "la-porte",
@@ -145,6 +133,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes, especially if you have photos. A quote request helps us direct you to the right service and sets expectations before you make the trip.",
       },
     ],
+    helpfulReadServiceSlugs: ["watch-repair", "heirloom-restoration", "custom-design"],
   },
   {
     slug: "webster",
@@ -198,6 +187,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Many standard repairs still follow our Same Day/Next Day pattern, depending on the item, the damage, and current bench load.",
       },
     ],
+    helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "stone-setting"],
   },
   {
     slug: "friendswood",
@@ -251,6 +241,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes. Ring sizing, prong repair, stone tightening, and related engagement-ring work are common requests.",
       },
     ],
+    helpfulReadServiceSlugs: ["ring-sizing", "stone-setting", "heirloom-restoration"],
   },
   {
     slug: "clear-lake",
@@ -305,6 +296,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes. A quote request with photos gives you the fastest path into the right repair conversation before you drive over.",
       },
     ],
+    helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],
   },
 ];
 
