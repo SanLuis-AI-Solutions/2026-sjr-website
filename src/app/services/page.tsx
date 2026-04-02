@@ -6,7 +6,11 @@ import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { createPageMetadata } from "@/lib/metadata";
-import { getServiceHubHelpfulGuides, getServicesHubFeaturedServiceSlug } from "@/lib/blog";
+import {
+  getServiceHubHelpfulGuides,
+  getServicesHubFeaturedServiceSlug,
+  getServicesHubHelpfulGuideServiceSlugs,
+} from "@/lib/blog";
 
 type ServiceListItem = {
   slug: string;
@@ -33,9 +37,10 @@ export default async function ServicesPage() {
   const services = (await getServicesWithImages()) as ServiceListItem[];
   const servicesBySlug = new Map<string, ServiceListItem>();
   for (const s of services) servicesBySlug.set(s.slug, s);
+  const helpfulGuideServiceSlugs = getServicesHubHelpfulGuideServiceSlugs(3);
   const helpfulGuides = getServiceHubHelpfulGuides(
-    ["watch-repair", "ring-sizing", "heirloom-restoration"],
-    3,
+    helpfulGuideServiceSlugs,
+    helpfulGuideServiceSlugs.length,
   );
   const featuredServiceSlug = getServicesHubFeaturedServiceSlug();
 
