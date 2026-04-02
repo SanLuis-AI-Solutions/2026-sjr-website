@@ -6,6 +6,7 @@ import { BUSINESS, SERVICES } from "@/lib/constants";
 import type { ServiceAreaPage } from "@/lib/service-areas";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 import { getHelpfulBlogPostsForServiceSlugs } from "@/lib/blog";
+import { getServiceAreaHighlightedServiceSlugs } from "@/lib/service-taxonomy";
 
 type Props = {
   page: ServiceAreaPage;
@@ -13,7 +14,7 @@ type Props = {
 
 export function ServiceAreaLandingPage({ page }: Props) {
   const highlightedServices = SERVICES.filter((service) =>
-    ["watch-repair", "ring-sizing", "stone-setting", "heirloom-restoration"].includes(service.slug)
+    getServiceAreaHighlightedServiceSlugs().includes(service.slug)
   );
   const helpfulReads =
     page.helpfulReads ??
