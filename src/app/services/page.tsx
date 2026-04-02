@@ -11,7 +11,15 @@ import {
   getServicesHubFeaturedServiceSlug,
   getServicesHubHelpfulGuideServiceSlugs,
 } from "@/lib/blog";
-import { getServicesHubGroups } from "@/lib/service-taxonomy";
+import {
+  buildServicesHubFinderEntries,
+  getServicesHubFinderChips,
+  getServicesHubGroups,
+} from "@/lib/service-taxonomy";
+import {
+  ServicesHubBrowser,
+  type ServicesHubGroupView,
+} from "@/components/services-hub-browser";
 
 type ServiceListItem = {
   slug: string;
@@ -45,6 +53,8 @@ export default async function ServicesPage() {
   );
   const featuredServiceSlug = getServicesHubFeaturedServiceSlug();
   const groups = getServicesHubGroups();
+  const finderChips = getServicesHubFinderChips();
+  const finderEntries = buildServicesHubFinderEntries(services);
 
   function svgDataUri(title: string) {
     const safe = (title || "Service").replace(/&/g, "and").slice(0, 36);
@@ -74,6 +84,25 @@ export default async function ServicesPage() {
   const featuredBestFor =
     featured?.commonRequests?.slice(0, 4).join(", ") ||
     "Battery replacement, crystal issues, moisture checks, and full service when needed.";
+  const groupedServices: ServicesHubGroupView[] = groups.map((group) => ({
+    id: group.id,
+    label: group.label,
+    description: group.description,
+    items: group.slugs
+      .map((slug) => servicesBySlug.get(slug))
+      .filter((item): item is ServiceListItem => Boolean(item))
+      .map((service) => ({
+        slug: service.slug,
+        name: service.name,
+        summary: service.summary || service.short_summary || "",
+        imageSrc: service.image_url || service.image || svgDataUri(service.name),
+        startingAt: formatStartingAt(service.starting_price ?? service.startingPrice ?? null),
+        serviceSpeed: formatTimeEstimate(
+          service.time_estimate ?? service.timeEstimate ?? null,
+        ),
+        popular: (service.commonRequests?.[0] as string) || "Assessment",
+      })),
+  }));
   return (
     <SiteShell>
       <div id="top" className="sr-only" />
@@ -250,176 +279,11 @@ export default async function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,_rgba(122,46,58,0.08),_transparent_52%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
-            <aside className="lg:sticky lg:top-28 lg:self-start">
-              {/* Desktop: keep a persistent sticky directory for quick navigation. */}
-              <div className="hidden rounded-3xl border border-stone-200 bg-stone-100/60 p-6 lg:block">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Directory
-                </div>
-                <p className="mt-3 text-sm text-stone-600">
-                  Jump to a category or browse down the page.
-                </p>
-                <div className="mt-6 space-y-2">
-                  {groups.map((g) => (
-                    <a
-                      key={g.id}
-                      href={`#group-${g.id}`}
-                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold/50 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      {g.label}
-                    </a>
-                  ))}
-                </div>
-                <div className="mt-6 border-t border-stone-200 pt-6">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Not sure?
-                  </div>
-                  <p className="mt-2 text-sm text-stone-600">
-                    Send one photo and we will recommend the right next step.
-                  </p>
-                  <TrackedLink
-                    href="/quote"
-                    eventName="services_hub_cta_click"
-                    eventParams={{ placement: "directory_aside", cta_target: "quote" }}
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    Get Fast Quote
-                  </TrackedLink>
-                </div>
-              </div>
-            </aside>
-
-            <div className="space-y-16">
-              {groups.map((group) => {
-                const items = group.slugs
-                  .map((slug) => servicesBySlug.get(slug))
-                  .filter((item): item is ServiceListItem => Boolean(item));
-
-                return (
-                  <section
-                    key={group.id}
-                    id={`group-${group.id}`}
-                    aria-labelledby={`group-heading-${group.id}`}
-                    className="scroll-mt-[120px]"
-                  >
-                    <div className="flex flex-wrap items-end justify-between gap-4">
-                      <div>
-                        <h2 id={`group-heading-${group.id}`} className="text-3xl text-stone-900">
-                          {group.label}
-                        </h2>
-                        <p className="mt-3 text-sm leading-7 text-stone-700">
-                          {group.description}
-                        </p>
-                      </div>
-                      <a
-                        href="#top"
-                        className="text-xs font-bold uppercase tracking-[0.35em] text-stone-500 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                      >
-                        Back to top ↑
-                      </a>
-                    </div>
-
-                    <div className="mt-7 h-px bg-[linear-gradient(90deg,rgba(122,46,58,0.25),rgba(209,184,130,0.35),rgba(0,0,0,0))]" />
-
-                    <div className="mt-8 grid gap-6 md:grid-cols-2">
-                      {items.map((service) => {
-                        const startingAt = formatStartingAt(
-                          service.starting_price ?? service.startingPrice ?? null
-                        );
-                        const serviceSpeed = formatTimeEstimate(
-                          service.time_estimate ?? service.timeEstimate ?? null
-                        );
-                        const imageSrc =
-                          service.image_url || service.image || svgDataUri(service.name);
-                        const popular =
-                          (service.commonRequests?.[0] as string) || "Assessment";
-                        const isSingle = items.length === 1;
-
-                        return (
-                          <TrackedLink
-                            key={service.slug}
-                            id={`service-${service.slug}`}
-                            className={`group scroll-mt-[120px] overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_18px_55px_rgba(58,25,16,0.12)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_70px_rgba(58,25,16,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50 ${isSingle ? "md:col-span-2" : ""}`}
-                            href={`/services/${service.slug}`}
-                            eventName="service_card_click"
-                            eventParams={{
-                              placement: `services_hub_${group.id}`,
-                              service_slug: service.slug,
-                              service_name: service.name,
-                            }}
-                            aria-label={`View details: ${service.name}`}
-                          >
-                            <div className="relative h-48">
-                              <Image
-                                src={imageSrc}
-                                alt={service.name}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 520px"
-                                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f10]/65 via-transparent to-transparent" />
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)]" />
-                              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                                <span className="inline-flex items-center rounded-full border border-brand-gold/35 bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
-                                  In-house
-                                </span>
-                                <span className="inline-flex items-center rounded-full border border-brand-gold/35 bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-white backdrop-blur-sm">
-                                  Same Day/Next Day service
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="p-7">
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                                    Service
-                                  </div>
-                                  <h3 className="mt-3 font-serif text-2xl leading-[1.1] text-stone-900">
-                                    {service.name}
-                                  </h3>
-                                </div>
-                                <span className="mt-2 inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-burgundy transition group-hover:border-brand-gold/60 group-hover:bg-brand-gold/10">
-                                  View details
-                                  <span aria-hidden="true">→</span>
-                                </span>
-                              </div>
-
-                              <p className="mt-4 text-sm leading-7 text-stone-700">
-                                {service.summary || service.short_summary}
-                              </p>
-
-                              <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.25em]">
-                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
-                                  Starting at{" "}
-                                  <span className="font-semibold text-brand-burgundy">
-                                    {startingAt ?? "Request quote"}
-                                  </span>
-                                </span>
-                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
-                                  Service{" "}
-                                  <span className="font-semibold text-stone-900">
-                                    {serviceSpeed ?? "Same Day/Next Day service"}
-                                  </span>
-                                </span>
-                                <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
-                                  Popular{" "}
-                                  <span className="font-semibold text-stone-900">
-                                    {popular}
-                                  </span>
-                                </span>
-                              </div>
-                            </div>
-                          </TrackedLink>
-                        );
-                      })}
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
-          </div>
+          <ServicesHubBrowser
+            groups={groupedServices}
+            finderChips={finderChips}
+            finderEntries={finderEntries}
+          />
         </div>
       </section>
 
