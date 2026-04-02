@@ -1356,6 +1356,8 @@ export const BLOG_TOPICS = Array.from(
   new Set(BLOG_POSTS.flatMap((post) => post.topics))
 );
 
+const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"]);
+
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "heirloom-restoration": [
     "heirloom-jewelry-restoration-repair-or-redesign",
@@ -1372,6 +1374,10 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
 function overlapScore(a: string[], b: string[]) {
   const set = new Set(a);
   return b.reduce((score, item) => score + (set.has(item) ? 1 : 0), 0);
+}
+
+function commercialDiscoveryScore(post: BlogPost) {
+  return post.topics.reduce((score, topic) => score + (COMMERCIAL_DISCOVERY_TOPICS.has(topic) ? 1 : 0), 0);
 }
 
 export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
@@ -1393,6 +1399,14 @@ export function getRelatedBlogPosts(slug: string, count = 2): BlogPost[] {
     })
     .slice(0, count)
     .map((entry) => entry.post);
+}
+
+export function sortBlogPostsForDiscovery(posts: BlogPost[]): BlogPost[] {
+  return [...posts].sort((a, b) => {
+    const commercialDelta = commercialDiscoveryScore(b) - commercialDiscoveryScore(a);
+    if (commercialDelta !== 0) return commercialDelta;
+    return b.publishedAt.localeCompare(a.publishedAt);
+  });
 }
 
 export function getBlogPostsByServiceSlug(serviceSlug: string, count = 3): BlogPost[] {
@@ -1422,6 +1436,16 @@ export function getHelpfulBlogPostsForServiceSlug(serviceSlug: string, count = 3
     }),
     ...getBlogPostsByServiceSlug(serviceSlug, count * 2),
   ]
+    .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
+    .slice(0, count);
+}
+
+export function getServiceHubHelpfulGuides(
+  serviceSlugs: string[],
+  count = serviceSlugs.length,
+): BlogPost[] {
+  return serviceSlugs
+    .flatMap((serviceSlug) => getHelpfulBlogPostsForServiceSlug(serviceSlug, 1))
     .filter((post, index, posts) => posts.findIndex((entry) => entry.slug === post.slug) === index)
     .slice(0, count);
 }

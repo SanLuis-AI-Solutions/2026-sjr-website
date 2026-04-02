@@ -646,12 +646,13 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   const guard = attachConsoleGuards(page);
 
   await page.goto("/services", { waitUntil: "networkidle" });
+  const helpfulGuidesSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: /Research the repair before you bring it in/i }),
+  }).first();
   await expect(
     page.getByRole("heading", { name: /A curated menu of in-house repairs/i })
   ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: /Watch Battery Replacement: Timing and Care Tips/i })
-  ).toBeVisible();
+  await expect(helpfulGuidesSection.getByRole("link", { name: /watch/i }).first()).toBeVisible();
   await expect(
     page.getByRole("heading", { level: 2, name: /Watch Repair & Battery Replacement/i })
   ).toBeVisible();
