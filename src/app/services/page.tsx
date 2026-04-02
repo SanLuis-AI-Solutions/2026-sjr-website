@@ -6,7 +6,7 @@ import { formatStartingAt, formatTimeEstimate } from "@/lib/format";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { createPageMetadata } from "@/lib/metadata";
-import { getServiceHubHelpfulGuides } from "@/lib/blog";
+import { getServiceHubHelpfulGuides, getServicesHubFeaturedServiceSlug } from "@/lib/blog";
 
 type ServiceListItem = {
   slug: string;
@@ -37,6 +37,7 @@ export default async function ServicesPage() {
     ["watch-repair", "ring-sizing", "heirloom-restoration"],
     3,
   );
+  const featuredServiceSlug = getServicesHubFeaturedServiceSlug();
 
   const groups = [
     {
@@ -91,11 +92,14 @@ export default async function ServicesPage() {
     return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   }
 
-  const featured = servicesBySlug.get("watch-repair") || services[0];
+  const featured = servicesBySlug.get(featuredServiceSlug) || services[0];
   const featuredImage =
     (featured?.image_url as string) ||
     (featured?.image as string) ||
-    svgDataUri(featured?.name || "Watch Repair");
+    svgDataUri(featured?.name || "Featured Service");
+  const featuredBestFor =
+    featured?.commonRequests?.slice(0, 4).join(", ") ||
+    "Battery replacement, crystal issues, moisture checks, and full service when needed.";
   return (
     <SiteShell>
       <div id="top" className="sr-only" />
@@ -234,9 +238,12 @@ export default async function ServicesPage() {
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <TrackedLink
-                    href="/services/watch-repair"
+                    href={`/services/${featured?.slug || featuredServiceSlug}`}
                     eventName="service_card_click"
-                    eventParams={{ placement: "services_hub_featured", service_slug: "watch-repair" }}
+                    eventParams={{
+                      placement: "services_hub_featured",
+                      service_slug: featured?.slug || featuredServiceSlug,
+                    }}
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-7 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     View details
@@ -257,7 +264,7 @@ export default async function ServicesPage() {
                   Best for
                 </div>
                 <p className="mt-2 text-sm text-stone-600">
-                  Battery replacement, crystal issues, moisture checks, and full service when needed.
+                  {featuredBestFor}
                 </p>
               </div>
             </div>
