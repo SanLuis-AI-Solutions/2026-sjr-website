@@ -1174,6 +1174,165 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "heirloom-restoration"]
+  },
+  {
+    slug: "how-much-does-pearl-restringing-cost-pasadena",
+    title: "How much does pearl restringing cost in Pasadena?",
+    excerpt:
+      "A local guide to pearl restringing cost, what changes the quote, when clasp work is part of the job, and how to know whether same-day service is realistic.",
+    image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
+    topics: ["Pearl Care", "Pricing & Timing"],
+    publishedAt: "2026-04-01",
+    reviewedAt: "2026-04-01",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Pearl restringing cost usually depends on strand length, knot count, clasp condition, and whether the strand needs cleanup or matching work.",
+      "A straight restring is different from a restring plus clasp replacement, length change, or rebuilding a strand after breakage.",
+      "The clearest quote comes after an in-house look or clear photos, not from guessing at strand length over the phone.",
+    ],
+    sections: [
+      {
+        heading: "What usually determines pearl restringing cost",
+        body: [
+          "Pearl restringing is not usually priced from one flat number because not every strand takes the same amount of work. Length, pearl count, knotting style, clasp condition, and how much cleanup the strand needs all influence the final quote.",
+          "A straightforward strand that only needs fresh silk and clean hand-knotting is a different job from a strand that already snapped, has a failing clasp, or needs spacing corrected because the old string stretched unevenly. The more the strand has drifted from a simple preventive restring, the more the quote tends to reflect bench time rather than just materials.",
+          "For Pasadena customers, the fastest way to get a real answer is a photo-first quote or an in-house assessment. That lets us judge whether the piece is still a clean restring candidate or whether clasp work and strand correction should be part of the same visit.",
+        ],
+      },
+      {
+        heading: "What is usually included in a professional restring",
+        body: [
+          "Professional pearl restringing is more than threading pearls onto fresh silk. The work typically includes inspecting the strand layout, re-knotting between pearls, checking the clasp area, and making sure the drape feels consistent again when the necklace goes back into rotation.",
+          "That matters because many pearl strands feel 'fine enough' until you look closely at the clasp area, the spacing between pearls, or the amount of stretch already visible along the strand. A proper restring is supposed to restore confidence, not just buy a few more weeks before the next failure.",
+          "If you have an heirloom strand or one you wear to church, weddings, work events, or anniversaries, the goal is a result that feels calm and dependable again, not a quick fix that leaves the weak points untouched.",
+        ],
+      },
+      {
+        heading: "When clasp work, cleaning, or breakage change the quote",
+        body: [
+          "The quote changes when the job moves beyond a simple restring. A worn clasp, a clasp upgrade, a strand that already broke, or pearls that need to be re-sorted can all add work because the service is no longer only about fresh string.",
+          "Broken strands are a common example. If the pearls came loose, the job may include sorting, counting, cleaning, and restoring the original order before the actual restring even begins. That is a very different situation from a strand that came in early, before failure, with visible stretch but no missing pearls.",
+          "Clasp issues matter too. A strand can be perfectly restrung and still feel unreliable if the clasp is worn or hard to close. When that part of the necklace is already failing, it is smarter to address it during the same visit than to pay for beautiful new stringing attached to weak hardware.",
+        ],
+      },
+      {
+        heading: "Timing, same-day expectations, and the best next step",
+        body: [
+          "Many straightforward pearl restringing jobs still fit our Same Day/Next Day pattern, especially when the strand is intact and the clasp is serviceable. Timing stretches when the strand is unusually long, the clasp needs replacement, or the necklace needs broader cleanup after a break.",
+          "If you need the pearls for an event, say that up front. That helps us tell you whether a same-day path is realistic or whether the smarter move is to leave enough room for careful knotting and clasp work without rushing the finish.",
+          "For most customers, the best next step is either a fast photo quote or bringing the strand in before it fails completely. That is what gives you the clearest pricing conversation and the safest recommendation on whether to restring now or wait.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about pearl restringing cost",
+    faqs: [
+      {
+        question: "Is pearl restringing priced by strand length?",
+        answer:
+          "Length is one major factor, but not the only one. Knot count, clasp condition, cleanup needs, and whether the strand already failed also affect the quote.",
+      },
+      {
+        question: "Can you replace or upgrade the clasp during restringing?",
+        answer:
+          "Yes. Clasp replacement or upgrade can be handled as part of the same service when the hardware no longer feels secure or comfortable to wear.",
+      },
+      {
+        question: "Can I get a quote from photos first?",
+        answer:
+          "Usually, yes. Clear photos often let us give a strong starting recommendation, then we confirm the final scope once we inspect the strand in person.",
+      },
+    ],
+    nextStepsHeading: "Best next step if you want a real pearl restringing quote",
+    nextStepsIntro:
+      "If the strand looks stretched, the clasp feels unreliable, or you need pricing before an event, start with pearl restringing details or send photos for a quote-first recommendation.",
+    nextSteps: [
+      { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
+      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+    ],
+    relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
+  },
+  {
+    slug: "does-my-watch-need-battery-or-repair-pasadena",
+    title: "Does my watch need a battery replacement or full watch repair in Pasadena?",
+    excerpt:
+      "How to tell when a stopped watch is probably just a battery, when it points to a deeper problem, and what an in-house watch assessment should catch before the quote.",
+    image: "/images/blog/watch-battery-replacement-cover.jpg",
+    topics: ["Watch Service", "Diagnostics"],
+    publishedAt: "2026-04-01",
+    reviewedAt: "2026-04-01",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "A watch that simply stopped may need only a battery, but moisture, corrosion, stem issues, and movement problems can look the same at first.",
+      "Jumping seconds, fog under the crystal, or a watch that stopped after water exposure are signs the problem may be bigger than a battery.",
+      "A good local diagnosis saves money because it separates quick battery service from the watches that need repair or deeper evaluation.",
+    ],
+    sections: [
+      {
+        heading: "Signs it may only need a battery",
+        body: [
+          "Some watches give the classic signs of a simple battery issue. Quartz pieces may begin losing time, start ticking in larger jumps, or stop after a long period without any obvious moisture or impact history. In those cases, a battery replacement is often the right first move.",
+          "That is especially true when the watch was otherwise running normally, the case is clean, and there is no sign of fogging, corrosion, or a damaged stem. A straightforward battery service is usually faster and lower-stress than owners expect when the watch is still structurally healthy.",
+          "The important part is not assuming every stopped watch fits that description. Battery symptoms are common, but they are not exclusive to battery-only problems.",
+        ],
+      },
+      {
+        heading: "Signs the watch may need more than a battery",
+        body: [
+          "If the crystal fogged, the watch took a hit, the crown feels loose, or the hands stopped after water exposure, the problem may go beyond a dead cell. Moisture, battery leakage, corrosion, and stem damage can all leave the watch looking 'dead' when the real issue is deeper inside the case.",
+          "A watch that sat too long with an old battery can also move out of the quick-fix category. Once leakage starts, the risk shifts from simple battery service to whether the movement already picked up avoidable damage.",
+          "For sentimental or higher-end watches, that distinction matters a lot. The wrong assumption can turn a quick local fix into a larger repair later if the real cause is missed at intake.",
+        ],
+      },
+      {
+        heading: "What an in-house watch assessment should tell you",
+        body: [
+          "A useful assessment should tell you whether the watch is a clean battery candidate, whether the case and seal condition look stable, and whether there are signs that point toward deeper repair. That is the real value of bringing the piece to an in-house bench instead of treating every stopped watch like the same kiosk-level service.",
+          "At Susie's, that means looking at the obvious symptoms and the context around them: how the watch stopped, whether moisture is visible, whether the crown and stem feel right, and whether the watch category suggests a simple swap or a more careful path. The goal is clarity before approval, not surprises after the back is opened.",
+          "That conversation is also where we set timing honestly. Some watches are same-day battery work. Others need slower handling for the right reasons.",
+        ],
+      },
+      {
+        heading: "Timing, pricing direction, and the best next step",
+        body: [
+          "If the watch really is a basic battery job, service often fits the Same Day/Next Day pattern. If the watch shows moisture, stripped screws, crown issues, or signs of corrosion, timing depends on what the inspection finds after intake.",
+          "That is why the best commercial-intent question is not only 'how much is a battery?' It is 'am I paying for a battery or for diagnosis plus repair?' A real quote starts by separating those two paths.",
+          "If your watch stopped recently and you want the fastest honest answer, start with watch repair details or send a quote request with a quick note about the symptoms. That is the fastest way to learn whether you are likely dealing with a battery, a seal issue, or something bigger.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about battery vs watch repair",
+    faqs: [
+      {
+        question: "If my second hand jumps every few seconds, is that usually a battery?",
+        answer:
+          "Often, yes. Many quartz watches use that jump as a low-battery warning, but a bench check still confirms whether the watch is otherwise healthy.",
+      },
+      {
+        question: "If my watch stopped after water exposure, should I try a battery first?",
+        answer:
+          "No. Water exposure changes the risk immediately. The watch should be inspected for moisture and seal-related damage before it is treated as a simple battery-only job.",
+      },
+      {
+        question: "Can you usually tell the difference the same day?",
+        answer:
+          "In many cases, yes. A same-day intake assessment usually tells you whether the watch fits a straightforward battery path or needs broader repair attention.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your watch stopped and you do not want to guess",
+    nextStepsIntro:
+      "If the watch might only need a battery, or might be something bigger, start with watch repair details or send symptoms through the quote form before you drive over.",
+    nextSteps: [
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+    ],
+    relatedServiceSlugs: ["watch-repair"],
   }
 ];
 
@@ -1185,6 +1344,8 @@ export const BLOG_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
   "custom-design-timeline-guide": "/images/blog/custom-design-timeline-guide-cover-mobile.avif",
   "watch-battery-replacement": "/images/blog/watch-battery-replacement-cover-mobile.avif",
   "where-to-get-watch-battery-replaced-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
+  "how-much-does-pearl-restringing-cost-pasadena": "/images/blog/pearl-restringing-timing-guide-cover-mobile.avif",
+  "does-my-watch-need-battery-or-repair-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
 };
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
@@ -1202,9 +1363,9 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
     "safe-to-clean-vintage-diamond-ring-at-home",
   ],
   "pearl-restringing": [
+    "how-much-does-pearl-restringing-cost-pasadena",
     "pearl-restringing-timing-guide",
     "professional-cleaning-vs-home-care",
-    "how-to-choose-a-jeweler",
   ],
 };
 
