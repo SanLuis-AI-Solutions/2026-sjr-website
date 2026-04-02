@@ -11,6 +11,7 @@ import {
   getServicesHubFeaturedServiceSlug,
   getServicesHubHelpfulGuideServiceSlugs,
 } from "@/lib/blog";
+import { getServicesHubGroups } from "@/lib/service-taxonomy";
 
 type ServiceListItem = {
   slug: string;
@@ -43,39 +44,7 @@ export default async function ServicesPage() {
     helpfulGuideServiceSlugs.length,
   );
   const featuredServiceSlug = getServicesHubFeaturedServiceSlug();
-
-  const groups = [
-    {
-      id: "watches",
-      label: "Watch Services",
-      description: "Battery, water resistance checks, crystal and stem repair, and full service.",
-      slugs: ["watch-repair"],
-    },
-    {
-      id: "rings",
-      label: "Rings",
-      description: "Sizing, stone security, and setting integrity for daily wear and heirlooms.",
-      slugs: ["ring-sizing", "stone-setting"],
-    },
-    {
-      id: "chains",
-      label: "Chains & Bracelets",
-      description: "Clasp upgrades, broken links, and delicate chain repair with clean finishing.",
-      slugs: ["necklace-repair", "bracelet-repair"],
-    },
-    {
-      id: "care",
-      label: "Care & Restoration",
-      description: "Refresh, polish, and restore pieces you want to wear for decades.",
-      slugs: ["jewelry-cleaning", "pearl-restringing", "heirloom-restoration"],
-    },
-    {
-      id: "custom",
-      label: "Custom & Remounting",
-      description: "Handmade work, stone remounts, and custom builds with a guided process.",
-      slugs: ["custom-design"],
-    },
-  ] as const;
+  const groups = getServicesHubGroups();
 
   function svgDataUri(title: string) {
     const safe = (title || "Service").replace(/&/g, "and").slice(0, 36);

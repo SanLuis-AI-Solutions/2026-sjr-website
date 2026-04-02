@@ -1,3 +1,5 @@
+import { getServicesHubPriorityServiceSlugs } from "@/lib/service-taxonomy";
+
 export type BlogSection = {
   heading: string;
   body: string[];
@@ -1383,21 +1385,6 @@ export const BLOG_TOPICS = Array.from(
 );
 
 const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"]);
-const BLOG_HUB_FALLBACK_SERVICE_SLUGS = [
-  "watch-repair",
-  "ring-sizing",
-  "heirloom-restoration",
-] as const;
-const SERVICES_HUB_HELPFUL_GUIDE_SERVICE_SLUGS = [
-  "watch-repair",
-  "ring-sizing",
-  "heirloom-restoration",
-] as const;
-const SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS = [
-  "watch-repair",
-  "ring-sizing",
-  "heirloom-restoration",
-] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "heirloom-restoration": [
@@ -1508,31 +1495,29 @@ export function getServiceHubHelpfulGuides(
 }
 
 export function getServicesHubHelpfulGuideServiceSlugs(count = 3): string[] {
-  return [...SERVICES_HUB_HELPFUL_GUIDE_SERVICE_SLUGS].slice(0, count);
+  return getServicesHubPriorityServiceSlugs(count);
 }
 
 export function getBlogHubPopularServiceSlugs(count = 3): string[] {
+  const fallbackServiceSlugs = getServicesHubPriorityServiceSlugs(count);
   return [
     ...sortBlogPostsForDiscovery(BLOG_POSTS, "blogFeatured")
       .flatMap((post) => post.relatedServiceSlugs)
-      .filter((slug) => BLOG_HUB_FALLBACK_SERVICE_SLUGS.includes(slug as (typeof BLOG_HUB_FALLBACK_SERVICE_SLUGS)[number])),
-    ...BLOG_HUB_FALLBACK_SERVICE_SLUGS,
+      .filter((slug) => fallbackServiceSlugs.includes(slug)),
+    ...fallbackServiceSlugs,
   ]
     .filter((slug, index, slugs) => slugs.indexOf(slug) === index)
     .slice(0, count);
 }
 
 export function getServicesHubFeaturedServiceSlug(): string {
+  const fallbackFeaturedServiceSlugs = getServicesHubPriorityServiceSlugs();
   return (
     [
       ...sortBlogPostsForDiscovery(BLOG_POSTS, "blogFeatured")
         .flatMap((post) => post.relatedServiceSlugs)
-        .filter((slug) =>
-          SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS.includes(
-            slug as (typeof SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS)[number],
-          ),
-        ),
-      ...SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS,
+        .filter((slug) => fallbackFeaturedServiceSlugs.includes(slug)),
+      ...fallbackFeaturedServiceSlugs,
     ].find((slug, index, slugs) => slugs.indexOf(slug) === index) ?? "watch-repair"
   );
 }
