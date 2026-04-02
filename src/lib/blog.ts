@@ -1388,6 +1388,11 @@ const BLOG_HUB_FALLBACK_SERVICE_SLUGS = [
   "ring-sizing",
   "heirloom-restoration",
 ] as const;
+const SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS = [
+  "watch-repair",
+  "ring-sizing",
+  "heirloom-restoration",
+] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "heirloom-restoration": [
@@ -1506,6 +1511,21 @@ export function getBlogHubPopularServiceSlugs(count = 3): string[] {
   ]
     .filter((slug, index, slugs) => slugs.indexOf(slug) === index)
     .slice(0, count);
+}
+
+export function getServicesHubFeaturedServiceSlug(): string {
+  return (
+    [
+      ...sortBlogPostsForDiscovery(BLOG_POSTS, "blogFeatured")
+        .flatMap((post) => post.relatedServiceSlugs)
+        .filter((slug) =>
+          SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS.includes(
+            slug as (typeof SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS)[number],
+          ),
+        ),
+      ...SERVICES_HUB_FALLBACK_FEATURED_SERVICE_SLUGS,
+    ].find((slug, index, slugs) => slugs.indexOf(slug) === index) ?? "watch-repair"
+  );
 }
 
 export function getHelpfulBlogPostsForServiceSlugs(
