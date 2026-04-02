@@ -672,6 +672,49 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   guard.assertNoErrors("services featured link");
 });
 
+test("services hub: intent finder narrows results and resets cleanly", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+  const finder = page.getByTestId("services-finder-region");
+  const results = page.getByTestId("services-finder-results");
+
+  await expect(finder.getByRole("heading", { name: /What do you need fixed/i })).toBeVisible();
+  await expect(results.getByRole("heading", { level: 2, name: /Watch Services/i })).toBeVisible();
+
+  await finder.getByRole("button", { name: /Broken necklace or chain/i }).click();
+  await expect(
+    results.getByRole("heading", { level: 2, name: /Chains & Bracelets/i }),
+  ).toBeVisible();
+  await expect(
+    results.getByRole("heading", { level: 3, name: /^Necklace Repair$/i }),
+  ).toBeVisible();
+  await expect(
+    results.getByRole("heading", { level: 3, name: /Watch Repair & Battery Replacement/i }),
+  ).toHaveCount(0);
+
+  const query = finder.getByLabel(/Describe the repair you need/i);
+  await query.fill("watch battery");
+  await expect(
+    results.getByRole("heading", { level: 2, name: /Watch Services/i }),
+  ).toBeVisible();
+  await expect(
+    results.getByRole("heading", { level: 3, name: /Watch Repair & Battery Replacement/i }),
+  ).toBeVisible();
+
+  await query.fill("broken toaster");
+  await expect(finder.getByText(/No direct service match yet/i)).toBeVisible();
+  await finder.getByRole("button", { name: /Clear finder/i }).click();
+  await expect(
+    results.getByRole("heading", { level: 2, name: /Watch Services/i }),
+  ).toBeVisible();
+  await expect(
+    results.getByRole("heading", { level: 3, name: /Watch Repair & Battery Replacement/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("services hub intent finder");
+});
+
 test("home services grid: full card click navigates to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
