@@ -14,7 +14,9 @@ import { evaluateLeadSpam } from "@/lib/lead-spam";
 import {
   appendServicesFinderLeadContextToUrl,
   prependServicesFinderLeadContext,
+  resolveStoredServicesFinderLeadContext,
   resolveServicesFinderLeadContextFromFormData,
+  SERVICES_FINDER_WEBSITE_SOURCE,
 } from "@/lib/service-lead-context";
 
 /*
@@ -38,6 +40,21 @@ export async function POST(request: Request) {
     const details = String(formData.get("details") || "").trim();
     finderContext = resolveServicesFinderLeadContextFromFormData(formData);
     const storedDetails = prependServicesFinderLeadContext(details, finderContext);
+    const storedLeadContext = resolveStoredServicesFinderLeadContext({
+      source: finderContext ? SERVICES_FINDER_WEBSITE_SOURCE : "website",
+      details: storedDetails,
+    });
+    const chatDetailsLine = storedLeadContext.cleanCustomerNotes
+      ? `details: ${storedLeadContext.cleanCustomerNotes.slice(0, 500)}`
+      : storedLeadContext.isServicesFinderLead
+        ? "details: none provided beyond finder context"
+        : null;
+    const emailDetailsLine = storedLeadContext.cleanCustomerNotes
+      ? `details: ${storedLeadContext.cleanCustomerNotes}`
+      : storedLeadContext.isServicesFinderLead
+        ? "details: none provided beyond finder context"
+        : null;
+    const customerVisibleDetails = storedLeadContext.cleanCustomerNotes || undefined;
 
     if (company) {
       return redirectOrJson(request, { ok: true }, 200, finderContext);
@@ -118,7 +135,8 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
-          storedDetails ? `details: ${storedDetails.slice(0, 500)}` : null,
+          ...storedLeadContext.internalSummaryLines,
+          chatDetailsLine,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -137,7 +155,8 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
-          storedDetails ? `details: ${storedDetails}` : null,
+          ...storedLeadContext.internalSummaryLines,
+          emailDetailsLine,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -151,7 +170,7 @@ export async function POST(request: Request) {
         email,
         date,
         time,
-        details: storedDetails || undefined,
+        details: customerVisibleDetails,
         pending: false,
         bookingId: String(created?.id || bookingId),
         calendarLink: event?.htmlLink || undefined,
@@ -177,9 +196,13 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           `error: ${msg}`,
-          storedDetails ? `details: ${storedDetails.slice(0, 500)}` : null,
-        ].join("\n")
-      , { timeoutMs: 1500, kind: "bookings" }).catch(() => null);
+          ...storedLeadContext.internalSummaryLines,
+          chatDetailsLine,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+        { timeoutMs: 1500, kind: "bookings" }
+      ).catch(() => null);
       const emailResult = await sendLeadEmail({
         kind: "bookings",
         subject: `New Booking (Pending Calendar) - ${name} (${date} ${time})`,
@@ -193,7 +216,8 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           `error: ${msg}`,
-          storedDetails ? `details: ${storedDetails}` : null,
+          ...storedLeadContext.internalSummaryLines,
+          emailDetailsLine,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -207,7 +231,7 @@ export async function POST(request: Request) {
         email,
         date,
         time,
-        details: storedDetails || undefined,
+        details: customerVisibleDetails,
         pending: true,
         bookingId: String(created?.id || bookingId),
       }).catch(() => null);
