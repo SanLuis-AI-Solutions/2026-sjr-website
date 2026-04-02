@@ -17,6 +17,7 @@ export type QuoteRequestRow = {
   details: string;
   attachments: QuoteAttachment[] | null;
   status: string;
+  source: string | null;
 };
 
 export type BookingRequestRow = {
@@ -31,6 +32,7 @@ export type BookingRequestRow = {
   status: string;
   calendar_event: { id?: string; htmlLink?: string } | null;
   error: string | null;
+  source: string | null;
 };
 
 export type ContactRequestRow = {
@@ -64,7 +66,7 @@ export async function getRecentQuotes(limit = 50): Promise<QuoteRequestRow[]> {
   try {
     const rows = await supabaseGet(
       "quote_requests",
-      `?select=id,created_at,name,email,phone,details,attachments,status&order=created_at.desc&limit=${limit}`
+      `?select=id,created_at,name,email,phone,details,attachments,status,source&order=created_at.desc&limit=${limit}`
     );
     return asArray<QuoteRequestRow>(rows);
   } catch {
@@ -76,7 +78,7 @@ export async function getRecentBookings(limit = 50): Promise<BookingRequestRow[]
   try {
     const rows = await supabaseGet(
       "booking_requests",
-      `?select=id,created_at,name,email,phone,date,time,details,status,calendar_event,error&order=created_at.desc&limit=${limit}`
+      `?select=id,created_at,name,email,phone,date,time,details,status,calendar_event,error,source&order=created_at.desc&limit=${limit}`
     );
     return asArray<BookingRequestRow>(rows);
   } catch {

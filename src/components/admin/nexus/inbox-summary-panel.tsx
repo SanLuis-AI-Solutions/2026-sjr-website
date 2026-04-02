@@ -47,6 +47,73 @@ export function InboxSummaryPanel({ inboxSummary }: InboxSummaryPanelProps) {
       >
         Open spam triage
       </Link>
+
+      {inboxSummary.finder.total > 0 ? (
+        <div className="rounded-[1.35rem] border border-brand-gold/35 bg-[#f6efe3] px-4 py-4">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-stone-900">Services finder leads</p>
+              <p className="mt-1 text-xs text-stone-600">
+                Recent quote and booking requests that arrived with guided repair intent.
+              </p>
+            </div>
+            <span className="font-serif text-2xl text-brand-burgundy">
+              {inboxSummary.finder.total}
+            </span>
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700">
+              {inboxSummary.finder.quoteCount} quotes
+            </span>
+            <span className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700">
+              {inboxSummary.finder.bookingCount} bookings
+            </span>
+            <span className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700">
+              {inboxSummary.finder.newCount} new
+            </span>
+            <span className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700">
+              {inboxSummary.finder.spamCount} spam
+            </span>
+          </div>
+
+          {inboxSummary.finder.topServices.length > 0 ? (
+            <div className="mt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-500">
+                Top services
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {inboxSummary.finder.topServices.map((item) => (
+                  <span
+                    key={`finder-service-${item.label}`}
+                    className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700"
+                  >
+                    {item.label} ({item.count})
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {inboxSummary.finder.topIntents.length > 0 ? (
+            <div className="mt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-500">
+                Top intents
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {inboxSummary.finder.topIntents.map((item) => (
+                  <span
+                    key={`finder-intent-${item.label}`}
+                    className="inline-flex min-h-8 items-center rounded-full border border-white/70 bg-white px-3 text-[11px] font-medium text-stone-700"
+                  >
+                    {item.label} ({item.count})
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
