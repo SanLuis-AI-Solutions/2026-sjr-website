@@ -5,6 +5,12 @@ import { ConversionQuickActions } from "@/components/analytics/conversion-quick-
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
+import { getServices } from "@/lib/content";
+import {
+  buildServicesFinderLeadContextHref,
+  getServicesFinderHiddenFields,
+  resolveServicesFinderLeadContext,
+} from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
   title: "Fast Quote | Susie’s Jewelry Repair",
@@ -16,11 +22,30 @@ export const metadata = createPageMetadata({
 export default async function QuotePage({
   searchParams,
 }: {
-  searchParams?: Promise<{ submitted?: string; error?: string; id?: string }>;
+  searchParams?: Promise<{
+    submitted?: string;
+    error?: string;
+    id?: string;
+    from?: string;
+    service?: string;
+    intent?: string;
+    query?: string;
+  }>;
 }) {
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const submitted = resolvedSearchParams?.submitted === "1";
   const error = resolvedSearchParams?.error === "1";
+  const services =
+    resolvedSearchParams?.from === "services_finder" ? await getServices() : [];
+  const finderContext = resolveServicesFinderLeadContext(resolvedSearchParams || {}, services);
+  const hiddenFields = getServicesFinderHiddenFields(finderContext);
+  const bookingHref = finderContext
+    ? buildServicesFinderLeadContextHref("/book", {
+        serviceSlug: finderContext.serviceSlug,
+        intentLabel: finderContext.intentLabel,
+        query: finderContext.query,
+      })
+    : "/book";
   return (
     <SiteShell>
       <section className="relative overflow-hidden bg-stone-100 py-16">
@@ -73,7 +98,7 @@ export default async function QuotePage({
               page="quote"
               primary={{ href: "#quote-form", label: "Start Quote" }}
               secondary={[
-                { href: "/book", label: "Book Repair" },
+                { href: bookingHref, label: "Book Repair" },
                 { href: "/contact", label: "Contact Us", tone: "muted" },
               ]}
             />
@@ -102,13 +127,47 @@ export default async function QuotePage({
             </div>
           </div>
 
-          <form
-            id="quote-form"
-            action="/api/quote"
-            method="post"
-            encType="multipart/form-data"
-            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
-          >
+          <div className="space-y-4">
+            {finderContext ? (
+              <div className="reveal-on-scroll rounded-3xl border border-brand-gold/40 bg-brand-gold/10 p-5 text-sm text-stone-700">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Repair focus
+                </div>
+                <div className="mt-3 space-y-2">
+                  {finderContext.serviceName || finderContext.serviceSlug ? (
+                    <p>
+                      Suggested service:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.serviceName || finderContext.serviceSlug}
+                      </span>
+                    </p>
+                  ) : null}
+                  {finderContext.intentLabel ? (
+                    <p>
+                      Selected issue:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.intentLabel}
+                      </span>
+                    </p>
+                  ) : null}
+                  {finderContext.query ? (
+                    <p>
+                      Search phrase:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.query}
+                      </span>
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+            <form
+              id="quote-form"
+              action="/api/quote"
+              method="post"
+              encType="multipart/form-data"
+              className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
+            >
             <input
               type="text"
               name="company"
@@ -117,6 +176,14 @@ export default async function QuotePage({
               autoComplete="off"
               aria-hidden="true"
             />
+            {hiddenFields ? (
+              <>
+                <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />
+                <input type="hidden" name="service_slug" value={hiddenFields.service_slug} />
+                <input type="hidden" name="intent_label" value={hiddenFields.intent_label} />
+                <input type="hidden" name="intent_query" value={hiddenFields.intent_query} />
+              </>
+            ) : null}
 
             <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
               Full name
@@ -159,6 +226,7 @@ export default async function QuotePage({
               <textarea
                 name="details"
                 className="mt-2 min-h-[160px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                defaultValue={finderContext?.detailsSeed || undefined}
                 placeholder="What needs repair? Include metal type, stones, and anything that seems loose or broken."
                 required
               />
@@ -190,7 +258,8 @@ export default async function QuotePage({
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · 1 business day response.
             </p>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
     </SiteShell>

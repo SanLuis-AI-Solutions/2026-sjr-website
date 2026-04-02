@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { trackGaEvent } from "./ga-tracker";
+import {
+  getServicesFinderAnalyticsParams,
+  resolveServicesFinderLeadContext,
+} from "@/lib/service-lead-context";
 
 type LeadType = "quote" | "booking" | "contact";
 
@@ -14,7 +18,10 @@ type LeadFormTrackerProps = {
 
 export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const sentKeysRef = useRef<Set<string>>(new Set());
+  const finderContext = resolveServicesFinderLeadContext(searchParams);
+  const finderAnalyticsParams = getServicesFinderAnalyticsParams(finderContext);
 
   useEffect(() => {
     if (!hasError) return;
@@ -25,9 +32,10 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       page_path: pathname || "/",
       form_id: formId,
       lead_type: leadType,
+      ...finderAnalyticsParams,
     });
     sentKeysRef.current.add(key);
-  }, [formId, hasError, leadType, pathname]);
+  }, [finderAnalyticsParams, formId, hasError, leadType, pathname]);
 
   useEffect(() => {
     const form = document.getElementById(formId) as HTMLFormElement | null;
@@ -44,6 +52,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
         form_id: formId,
         lead_type: leadType,
         source,
+        ...finderAnalyticsParams,
       };
       trackGaEvent("lead_form_start", sharedParams);
       trackGaEvent(`${leadType}_form_start`, sharedParams);
@@ -64,6 +73,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
         form_id: formId,
         lead_type: leadType,
         field_name: fieldName,
+        ...finderAnalyticsParams,
       });
     };
 
@@ -76,6 +86,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
         page_path: pathname || "/",
         form_id: formId,
         lead_type: leadType,
+        ...finderAnalyticsParams,
       });
     };
 
@@ -88,7 +99,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       form.removeEventListener("input", onInput);
       form.removeEventListener("submit", onSubmit);
     };
-  }, [formId, leadType, pathname]);
+  }, [finderAnalyticsParams, formId, leadType, pathname]);
 
   return null;
 }

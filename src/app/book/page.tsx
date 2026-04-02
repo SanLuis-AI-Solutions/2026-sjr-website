@@ -6,6 +6,12 @@ import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
+import { getServices } from "@/lib/content";
+import {
+  buildServicesFinderLeadContextHref,
+  getServicesFinderHiddenFields,
+  resolveServicesFinderLeadContext,
+} from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
   title: "Book a Repair | Susie’s Jewelry Repair",
@@ -17,12 +23,32 @@ export const metadata = createPageMetadata({
 export default async function BookPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ submitted?: string; error?: string; pending?: string; id?: string }>;
+  searchParams?: Promise<{
+    submitted?: string;
+    error?: string;
+    pending?: string;
+    id?: string;
+    from?: string;
+    service?: string;
+    intent?: string;
+    query?: string;
+  }>;
 }) {
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const submitted = resolvedSearchParams?.submitted === "1";
   const error = resolvedSearchParams?.error === "1";
   const pending = resolvedSearchParams?.pending === "1";
+  const services =
+    resolvedSearchParams?.from === "services_finder" ? await getServices() : [];
+  const finderContext = resolveServicesFinderLeadContext(resolvedSearchParams || {}, services);
+  const hiddenFields = getServicesFinderHiddenFields(finderContext);
+  const quoteHref = finderContext
+    ? buildServicesFinderLeadContextHref("/quote", {
+        serviceSlug: finderContext.serviceSlug,
+        intentLabel: finderContext.intentLabel,
+        query: finderContext.query,
+      })
+    : "/quote";
   const bookingEventName = pending
     ? "booking_submit_pending"
     : "booking_submit_success";
@@ -80,7 +106,7 @@ export default async function BookPage({
               page="book"
               primary={{ href: "#booking-form", label: "Start Booking" }}
               secondary={[
-                { href: "/quote", label: "Get Fast Quote" },
+                { href: quoteHref, label: "Get Fast Quote" },
                 { href: "/contact", label: "Contact Us", tone: "muted" },
               ]}
             />
@@ -105,12 +131,46 @@ export default async function BookPage({
             </div>
           </div>
 
-          <form
-            id="booking-form"
-            action="/api/book"
-            method="post"
-            className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
-          >
+          <div className="space-y-4">
+            {finderContext ? (
+              <div className="reveal-on-scroll rounded-3xl border border-brand-gold/40 bg-brand-gold/10 p-5 text-sm text-stone-700">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Repair focus
+                </div>
+                <div className="mt-3 space-y-2">
+                  {finderContext.serviceName || finderContext.serviceSlug ? (
+                    <p>
+                      Suggested service:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.serviceName || finderContext.serviceSlug}
+                      </span>
+                    </p>
+                  ) : null}
+                  {finderContext.intentLabel ? (
+                    <p>
+                      Selected issue:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.intentLabel}
+                      </span>
+                    </p>
+                  ) : null}
+                  {finderContext.query ? (
+                    <p>
+                      Search phrase:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.query}
+                      </span>
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+            <form
+              id="booking-form"
+              action="/api/book"
+              method="post"
+              className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
+            >
             <input
               type="text"
               name="company"
@@ -119,6 +179,14 @@ export default async function BookPage({
               autoComplete="off"
               aria-hidden="true"
             />
+            {hiddenFields ? (
+              <>
+                <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />
+                <input type="hidden" name="service_slug" value={hiddenFields.service_slug} />
+                <input type="hidden" name="intent_label" value={hiddenFields.intent_label} />
+                <input type="hidden" name="intent_query" value={hiddenFields.intent_query} />
+              </>
+            ) : null}
 
             <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
               Full name
@@ -163,6 +231,7 @@ export default async function BookPage({
               <textarea
                 name="details"
                 className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                defaultValue={finderContext?.detailsSeed || undefined}
                 placeholder="What should we know before you arrive?"
               />
             </label>
@@ -176,7 +245,8 @@ export default async function BookPage({
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · Booking confirmation within 1 business day.
             </p>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
     </SiteShell>

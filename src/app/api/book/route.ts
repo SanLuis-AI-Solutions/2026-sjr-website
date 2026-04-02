@@ -11,6 +11,11 @@ import {
   minutesFromTime,
 } from "@/lib/booking-schedule";
 import { evaluateLeadSpam } from "@/lib/lead-spam";
+import {
+  appendServicesFinderLeadContextToUrl,
+  prependServicesFinderLeadContext,
+  resolveServicesFinderLeadContextFromFormData,
+} from "@/lib/service-lead-context";
 
 /*
  * Date: 2026-02-26
@@ -20,6 +25,7 @@ import { evaluateLeadSpam } from "@/lib/lead-spam";
  */
 
 export async function POST(request: Request) {
+  let finderContext: ReturnType<typeof resolveServicesFinderLeadContextFromFormData> | null = null;
   try {
     const formData = await request.formData();
 
@@ -30,26 +36,28 @@ export async function POST(request: Request) {
     const date = String(formData.get("date") || "").trim();
     const time = String(formData.get("time") || "").trim();
     const details = String(formData.get("details") || "").trim();
+    finderContext = resolveServicesFinderLeadContextFromFormData(formData);
+    const storedDetails = prependServicesFinderLeadContext(details, finderContext);
 
     if (company) {
-      return redirectOrJson(request, { ok: true });
+      return redirectOrJson(request, { ok: true }, 200, finderContext);
     }
 
     if (!name || !email || !date || !time) {
-      return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400);
+      return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400, finderContext);
     }
 
     if (!isValidDateString(date) || !isValidTimeString(time)) {
-      return redirectOrJson(request, { ok: false, error: "invalid_date_time" }, 400);
+      return redirectOrJson(request, { ok: false, error: "invalid_date_time" }, 400, finderContext);
     }
 
     const tz = normalizeTimeZone(process.env.GOOGLE_CALENDAR_TIMEZONE);
     if (!isWithinBookingHours(date, time)) {
-      return redirectOrJson(request, { ok: false, error: "outside_business_hours" }, 400);
+      return redirectOrJson(request, { ok: false, error: "outside_business_hours" }, 400, finderContext);
     }
 
     if (isInPast(date, time, tz)) {
-      return redirectOrJson(request, { ok: false, error: "in_past" }, 400);
+      return redirectOrJson(request, { ok: false, error: "in_past" }, 400, finderContext);
     }
 
     const spamCheck = evaluateLeadSpam({
@@ -57,7 +65,7 @@ export async function POST(request: Request) {
       name,
       email,
       phone,
-      details,
+      details: storedDetails,
     });
 
     const bookingId = crypto.randomUUID();
@@ -68,16 +76,20 @@ export async function POST(request: Request) {
       phone: phone || null,
       date,
       time,
-      details: details || null,
+      details: storedDetails || null,
       status: spamCheck.isSpam ? "spam" : "new",
-      source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
+      source: spamCheck.isSpam
+        ? `website_spam_suspected:${spamCheck.reason}`
+        : finderContext
+          ? "website:services_finder"
+          : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,
       ip: (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || null,
     });
 
     if (spamCheck.isSpam) {
-      return redirectOrJson(request, { ok: true, id: created?.id || bookingId });
+      return redirectOrJson(request, { ok: true, id: created?.id || bookingId }, 200, finderContext);
     }
 
     try {
@@ -87,7 +99,7 @@ export async function POST(request: Request) {
         phone: phone || undefined,
         date,
         time,
-        details: details || undefined,
+        details: storedDetails || undefined,
       });
 
       await supabaseUpdateById("booking_requests", bookingId, {
@@ -106,7 +118,7 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
-          details ? `details: ${details.slice(0, 500)}` : null,
+          storedDetails ? `details: ${storedDetails.slice(0, 500)}` : null,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -125,7 +137,7 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
-          details ? `details: ${details}` : null,
+          storedDetails ? `details: ${storedDetails}` : null,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -139,7 +151,7 @@ export async function POST(request: Request) {
         email,
         date,
         time,
-        details: details || undefined,
+        details: storedDetails || undefined,
         pending: false,
         bookingId: String(created?.id || bookingId),
         calendarLink: event?.htmlLink || undefined,
@@ -148,7 +160,7 @@ export async function POST(request: Request) {
         console.error(customerEmailResult.error);
       }
 
-      return redirectOrJson(request, { ok: true, id: created?.id || bookingId });
+      return redirectOrJson(request, { ok: true, id: created?.id || bookingId }, 200, finderContext);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "calendar_error";
       await supabaseUpdateById("booking_requests", bookingId, {
@@ -165,7 +177,7 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           `error: ${msg}`,
-          details ? `details: ${details.slice(0, 500)}` : null,
+          storedDetails ? `details: ${storedDetails.slice(0, 500)}` : null,
         ].join("\n")
       , { timeoutMs: 1500, kind: "bookings" }).catch(() => null);
       const emailResult = await sendLeadEmail({
@@ -181,7 +193,7 @@ export async function POST(request: Request) {
           `date: ${date}`,
           `time: ${time}`,
           `error: ${msg}`,
-          details ? `details: ${details}` : null,
+          storedDetails ? `details: ${storedDetails}` : null,
         ]
           .filter(Boolean)
           .join("\n"),
@@ -195,7 +207,7 @@ export async function POST(request: Request) {
         email,
         date,
         time,
-        details: details || undefined,
+        details: storedDetails || undefined,
         pending: true,
         bookingId: String(created?.id || bookingId),
       }).catch(() => null);
@@ -207,12 +219,13 @@ export async function POST(request: Request) {
       return redirectOrJson(
         request,
         { ok: true, id: created?.id || bookingId, pending: true },
-        202
+        202,
+        finderContext
       );
     }
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown_error";
-    return redirectOrJson(request, { ok: false, error: msg }, 500);
+    return redirectOrJson(request, { ok: false, error: msg }, 500, finderContext);
   }
 }
 
@@ -224,7 +237,8 @@ function wantsHtml(request: Request) {
 function redirectOrJson(
   request: Request,
   payload: Record<string, unknown>,
-  status = 200
+  status = 200,
+  finderContext = null as ReturnType<typeof resolveServicesFinderLeadContextFromFormData> | null,
 ) {
   if (!wantsHtml(request)) {
     return NextResponse.json(payload, { status });
@@ -238,10 +252,12 @@ function redirectOrJson(
       `/book?submitted=1${id ? `&id=${encodeURIComponent(id)}` : ""}${pending}`,
       url
     );
+    appendServicesFinderLeadContextToUrl(target, finderContext);
     return NextResponse.redirect(target, 303);
   }
 
   const target = new URL("/book?error=1", url);
+  appendServicesFinderLeadContextToUrl(target, finderContext);
   return NextResponse.redirect(target, 303);
 }
 

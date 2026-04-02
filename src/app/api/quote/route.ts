@@ -3,8 +3,14 @@ import { supabaseInsert, supabaseUploadObject } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
 import { sendLeadEmail } from "@/lib/lead-email";
 import { evaluateLeadSpam } from "@/lib/lead-spam";
+import {
+  appendServicesFinderLeadContextToUrl,
+  prependServicesFinderLeadContext,
+  resolveServicesFinderLeadContextFromFormData,
+} from "@/lib/service-lead-context";
 
 export async function POST(request: Request) {
+  let finderContext: ReturnType<typeof resolveServicesFinderLeadContextFromFormData> | null = null;
   try {
     const formData = await request.formData();
 
@@ -13,14 +19,16 @@ export async function POST(request: Request) {
     const email = String(formData.get("email") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
     const details = String(formData.get("details") || "").trim();
+    finderContext = resolveServicesFinderLeadContextFromFormData(formData);
+    const storedDetails = prependServicesFinderLeadContext(details, finderContext);
 
     // Honeypot: if filled, treat as spam and still return a success-style redirect.
     if (company) {
-      return redirectOrJson(request, { ok: true });
+      return redirectOrJson(request, { ok: true }, 200, finderContext);
     }
 
     if (!name || !email || !details) {
-      return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400);
+      return redirectOrJson(request, { ok: false, error: "missing_fields" }, 400, finderContext);
     }
 
     const spamCheck = evaluateLeadSpam({
@@ -28,7 +36,7 @@ export async function POST(request: Request) {
       name,
       email,
       phone,
-      details,
+      details: storedDetails,
     });
 
     const bucket = process.env.SUPABASE_QUOTES_BUCKET || "quote-uploads";
@@ -85,17 +93,21 @@ export async function POST(request: Request) {
       name,
       email,
       phone: phone || null,
-      details,
+      details: storedDetails,
       attachments,
       status: spamCheck.isSpam ? "spam" : "new",
-      source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
+      source: spamCheck.isSpam
+        ? `website_spam_suspected:${spamCheck.reason}`
+        : finderContext
+          ? "website:services_finder"
+          : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,
       ip: (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || null,
     });
 
     if (spamCheck.isSpam) {
-      return redirectOrJson(request, { ok: true, id: inserted?.id || requestId });
+      return redirectOrJson(request, { ok: true, id: inserted?.id || requestId }, 200, finderContext);
     }
 
     // Best-effort notification; never block lead capture on messaging failures.
@@ -107,7 +119,7 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         `photos: ${attachments.length}`,
-        `details: ${details.slice(0, 500)}`,
+        `details: ${storedDetails.slice(0, 500)}`,
       ]
         .filter(Boolean)
         .join("\n"),
@@ -124,7 +136,7 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         `photos: ${attachments.length}`,
-        `details: ${details}`,
+        `details: ${storedDetails}`,
       ]
         .filter(Boolean)
         .join("\n"),
@@ -133,10 +145,10 @@ export async function POST(request: Request) {
       console.error(emailResult.error);
     }
 
-    return redirectOrJson(request, { ok: true, id: inserted?.id || requestId });
+    return redirectOrJson(request, { ok: true, id: inserted?.id || requestId }, 200, finderContext);
   } catch (err) {
     const msg = err instanceof Error ? err.message : "unknown_error";
-    return redirectOrJson(request, { ok: false, error: msg }, 500);
+    return redirectOrJson(request, { ok: false, error: msg }, 500, finderContext);
   }
 }
 
@@ -148,7 +160,8 @@ function wantsHtml(request: Request) {
 function redirectOrJson(
   request: Request,
   payload: Record<string, unknown>,
-  status = 200
+  status = 200,
+  finderContext = null as ReturnType<typeof resolveServicesFinderLeadContextFromFormData> | null,
 ) {
   if (!wantsHtml(request)) {
     return NextResponse.json(payload, { status });
@@ -157,10 +170,15 @@ function redirectOrJson(
   const url = new URL(request.url);
   if (payload.ok) {
     const id = typeof payload.id === "string" ? payload.id : "";
-    const target = new URL(`/quote?submitted=1${id ? `&id=${encodeURIComponent(id)}` : ""}`, url);
+    const target = new URL(
+      `/quote?submitted=1${id ? `&id=${encodeURIComponent(id)}` : ""}`,
+      url,
+    );
+    appendServicesFinderLeadContextToUrl(target, finderContext);
     return NextResponse.redirect(target, 303);
   }
 
   const target = new URL("/quote?error=1", url);
+  appendServicesFinderLeadContextToUrl(target, finderContext);
   return NextResponse.redirect(target, 303);
 }

@@ -9,6 +9,7 @@ import type {
   ServicesHubFinderChip,
   ServicesHubFinderEntry,
 } from "@/lib/service-taxonomy";
+import { buildServicesFinderLeadContextHref } from "@/lib/service-lead-context";
 
 export type ServicesHubCardView = {
   slug: string;
@@ -69,6 +70,28 @@ export function ServicesHubBrowser({
   const visibleServiceCount = filteredGroups.reduce((count, group) => count + group.items.length, 0);
   const hasActiveFinder = Boolean(activeChip || normalizedQuery);
   const pagePath = pathname || "/services";
+  const primaryMatchSlug =
+    activeChip?.serviceSlugs[0] ?? filteredGroups[0]?.items[0]?.slug ?? null;
+  const trimmedQuery = query.trim() || null;
+  const quoteHref =
+    hasActiveFinder && visibleServiceCount > 0
+      ? buildServicesFinderLeadContextHref("/quote", {
+          serviceSlug: primaryMatchSlug,
+          intentLabel: activeChip?.label ?? null,
+          query: trimmedQuery,
+        })
+      : null;
+  const bookingHref =
+    hasActiveFinder && visibleServiceCount > 0
+      ? buildServicesFinderLeadContextHref("/book", {
+          serviceSlug: primaryMatchSlug,
+          intentLabel: activeChip?.label ?? null,
+          query: trimmedQuery,
+        })
+      : null;
+  const zeroStateQuoteHref = buildServicesFinderLeadContextHref("/quote", {
+    query: trimmedQuery,
+  });
 
   useEffect(() => {
     if (!normalizedQuery || normalizedQuery.length < 2) return;
@@ -227,21 +250,61 @@ export function ServicesHubBrowser({
           {hasActiveFinder ? (
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4 text-sm text-stone-700">
               {visibleServiceCount > 0 ? (
-                <p>
-                  Showing{" "}
-                  <span className="font-semibold text-stone-900">{visibleServiceCount}</span>{" "}
-                  matching {visibleServiceCount === 1 ? "service" : "services"}
-                  {activeChip ? (
-                    <>
-                      {" "}for <span className="font-semibold text-brand-burgundy">{activeChip.label}</span>
-                    </>
-                  ) : normalizedQuery ? (
-                    <>
-                      {" "}for <span className="font-semibold text-brand-burgundy">"{query.trim()}"</span>
-                    </>
-                  ) : null}
-                  .
-                </p>
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <p>
+                    Showing{" "}
+                    <span className="font-semibold text-stone-900">{visibleServiceCount}</span>{" "}
+                    matching {visibleServiceCount === 1 ? "service" : "services"}
+                    {activeChip ? (
+                      <>
+                        {" "}for <span className="font-semibold text-brand-burgundy">{activeChip.label}</span>
+                      </>
+                    ) : normalizedQuery ? (
+                      <>
+                        {" "}for <span className="font-semibold text-brand-burgundy">"{query.trim()}"</span>
+                      </>
+                    ) : null}
+                    .
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {quoteHref ? (
+                      <TrackedLink
+                        href={quoteHref}
+                        eventName="services_finder_cta_click"
+                        eventParams={{
+                          page_path: pagePath,
+                          cta_target: "quote",
+                          service_slug: primaryMatchSlug || "",
+                          chip_id: activeChip?.id || "",
+                          chip_label: activeChip?.label || "",
+                          query: trimmedQuery || "",
+                          match_count: visibleServiceCount,
+                        }}
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      >
+                        Use this for a quote
+                      </TrackedLink>
+                    ) : null}
+                    {bookingHref ? (
+                      <TrackedLink
+                        href={bookingHref}
+                        eventName="services_finder_cta_click"
+                        eventParams={{
+                          page_path: pagePath,
+                          cta_target: "book",
+                          service_slug: primaryMatchSlug || "",
+                          chip_id: activeChip?.id || "",
+                          chip_label: activeChip?.label || "",
+                          query: trimmedQuery || "",
+                          match_count: visibleServiceCount,
+                        }}
+                        className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      >
+                        Use this for booking
+                      </TrackedLink>
+                    ) : null}
+                  </div>
+                </div>
               ) : (
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                   <div>
@@ -252,9 +315,16 @@ export function ServicesHubBrowser({
                     </p>
                   </div>
                   <TrackedLink
-                    href="/quote"
-                    eventName="services_hub_cta_click"
-                    eventParams={{ placement: "finder_zero_state", cta_target: "quote" }}
+                    href={zeroStateQuoteHref}
+                    eventName="services_finder_cta_click"
+                    eventParams={{
+                      cta_target: "quote",
+                      service_slug: "",
+                      chip_id: activeChip?.id || "",
+                      chip_label: activeChip?.label || "",
+                      query: trimmedQuery || "",
+                      match_count: visibleServiceCount,
+                    }}
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Get Fast Quote
