@@ -2,6 +2,7 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -203,12 +204,14 @@ async function DeferredContactSection() {
             </button>
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
               Secure form · Local in-house team support.
-              <a
+              <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
+                action="phone_call"
+                placement="contact_form_notice"
                 className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Need urgent help? Call now.
-              </a>
+              </BusinessActionLink>
             </div>
           </form>
         </div>
@@ -225,8 +228,10 @@ async function DeferredContactSection() {
               Tap Anywhere For Directions
             </span>
           </div>
-          <a
+          <BusinessActionLink
             href={GOOGLE_MAPS_PRIMARY_URL}
+            action="directions"
+            placement="contact_map_card"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open Susie's Jewelry and Watch Repair on Google Maps"
@@ -254,7 +259,7 @@ async function DeferredContactSection() {
                 Open In Google Maps
               </p>
             </div>
-          </a>
+          </BusinessActionLink>
         </section>
       </div>
     </section>
@@ -354,24 +359,28 @@ export default async function ContactPage({
               Reach us immediately.
             </h2>
             <div className="mt-5 space-y-3">
-              <a
+              <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
+                action="phone_call"
+                placement="contact_direct_panel"
                 className="micro-interaction block rounded-2xl border border-white/25 bg-white/10 px-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
               >
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
                   Call now
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">{BUSINESS.phone}</p>
-              </a>
-              <a
+              </BusinessActionLink>
+              <BusinessActionLink
                 href={`mailto:${BUSINESS.email}`}
+                action="email_contact"
+                placement="contact_direct_panel"
                 className="micro-interaction block rounded-2xl border border-white/25 bg-white/10 px-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
               >
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
                   Email photos
                 </p>
                 <p className="mt-2 break-all text-sm font-semibold text-white">{BUSINESS.email}</p>
-              </a>
+              </BusinessActionLink>
             </div>
             <div className="mt-5 overflow-hidden rounded-2xl border border-white/20 bg-black/15">
               <div className="p-4 text-sm text-stone-100/90">
@@ -383,14 +392,16 @@ export default async function ContactPage({
                   <br />
                   {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
                 </p>
-                <a
+                <BusinessActionLink
                   href={GOOGLE_MAPS_PRIMARY_URL}
+                  action="directions"
+                  placement="contact_visit_panel"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="micro-interaction mt-4 inline-flex items-center justify-center rounded-full border border-brand-gold px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
                 >
                   Open in Google Maps
-                </a>
+                </BusinessActionLink>
               </div>
             </div>
           </aside>

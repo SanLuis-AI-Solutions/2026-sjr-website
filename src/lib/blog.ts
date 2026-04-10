@@ -1387,6 +1387,26 @@ export const BLOG_TOPICS = Array.from(
 const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"]);
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
+  "watch-repair": [
+    "watch-battery-replacement",
+    "does-my-watch-need-battery-or-repair-pasadena",
+    "where-to-get-watch-battery-replaced-pasadena",
+  ],
+  "ring-sizing": [
+    "cost-to-resize-gold-ring-pasadena",
+    "ring-sizing-guide",
+    "can-a-severely-bent-ring-prong-be-fixed",
+  ],
+  "stone-setting": [
+    "stone-security-checklist",
+    "can-a-severely-bent-ring-prong-be-fixed",
+    "cost-to-resize-gold-ring-pasadena",
+  ],
+  "necklace-repair": [
+    "chain-repair-weak-points",
+    "professional-cleaning-vs-home-care",
+    "heirloom-jewelry-restoration-repair-or-redesign",
+  ],
   "heirloom-restoration": [
     "heirloom-jewelry-restoration-repair-or-redesign",
     "heirloom-restoration-planning-guide",

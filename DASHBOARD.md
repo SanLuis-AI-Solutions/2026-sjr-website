@@ -14,6 +14,7 @@ Run these from the repo root:
 npm run google:kpi-weekly-snapshot
 npm run google:reconcile-90d
 npm run google:weekly-seo-health
+npm run google:seo-quick-wins
 ```
 
 Generated outputs:
@@ -21,6 +22,8 @@ Generated outputs:
 - `.health/kpi-weekly-snapshot-latest.md`
 - `.health/ga4-gsc-reconciliation-90d-latest.md`
 - `.health/weekly-seo-health-latest.md`
+- `.health/seo-quick-wins-latest.json`
+- `Docs/SEO_QUICK_WINS.md`
 
 ## Automation
 
@@ -99,24 +102,41 @@ Use `.health/kpi-weekly-snapshot-latest.md` for the funnel and route-conversion 
 
 ## Current Baseline
 
-Week ending `2026-03-26`:
+Week ending `2026-04-09`:
 
 | Metric | Value |
 | --- | --- |
-| Google Search clicks | `12` |
-| Google Search impressions | `759` |
+| Google Search clicks | `6` |
+| Google Search impressions | `667` |
 | Production-host organic sessions | `0` |
 | Quote + booking starts | `0` |
 | Quote + booking outcomes | `0` |
 
 Supporting stats from `.health/kpi-weekly-snapshot-latest.md`:
 
-- Active users: `9`
-- Sessions: `9`
+- Active users: `0`
+- Sessions: `0`
 - Engaged sessions: `0`
-- Page views: `2`
-- CTR: `1.58%`
-- Average position: `12.63`
+- Page views: `0`
+- CTR: `0.90%`
+- Average position: `16.59`
+
+## Current Quick-Win Cluster
+
+Latest GSC quick-win audit: `Docs/SEO_QUICK_WINS.md`
+
+- Primary opportunity page: `/`
+- Top query cluster:
+  - `jewelry repair near me`
+  - `jewelry store near me`
+  - `jewelry store pasadena tx`
+  - `jewelry repair pasadena`
+- Immediate CTR test now live:
+  - homepage title and description were rewritten locally to push stronger near-me/Pasadena value props
+- Current interpretation:
+  - visibility exists, but the site is still outside the reliable click zone on most terms
+  - CTR remains the fastest near-term lever while waiting on broader ranking movement
+  - the CTR test does not start until the homepage metadata rewrite is deployed to production
 
 ## Review Rhythm
 
@@ -124,5 +144,6 @@ Supporting stats from `.health/kpi-weekly-snapshot-latest.md`:
 2. Review `Docs/WEEKLY-SEO-HEALTH.md`.
 3. Review `.health/kpi-weekly-snapshot-latest.md` for funnel and route-level detail.
 4. Update this file with the latest KPI row and action items.
-5. If Google clicks rise but production-host organic sessions do not, inspect redirects and canonicals first.
-6. If organic sessions rise but quote/booking starts do not, review landing-page CTA clarity and form friction next.
+5. Review `Docs/SEO_QUICK_WINS.md` and note whether the homepage quick-win cluster changes.
+6. If Google clicks rise but production-host organic sessions do not, inspect analytics bootstrap, redirects, and canonicals first.
+7. If organic sessions rise but quote/booking starts do not, review landing-page CTA clarity and form friction next.

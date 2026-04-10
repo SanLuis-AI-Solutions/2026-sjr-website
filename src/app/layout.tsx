@@ -7,7 +7,7 @@ import { defaultShareImagePath } from "@/lib/metadata";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
 import { GaFirstTouchCapture, GaPageViewTracker } from "@/components/analytics/ga-tracker";
-import { DeferredGaLoader } from "@/components/analytics/deferred-ga-loader";
+import { GaHeadScripts } from "@/components/analytics/ga-head-scripts";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -64,13 +64,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>{gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}</head>
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
         {children}
         <ScrollRevealManager />
         <LocalBusinessSchema />
         {gaMeasurementId ? (
           <Suspense fallback={null}>
-            <DeferredGaLoader measurementId={gaMeasurementId} />
             <GaFirstTouchCapture />
             <GaPageViewTracker />
           </Suspense>

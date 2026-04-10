@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BUSINESS } from "@/lib/constants";
 import { BrandMark } from "@/components/brand-mark";
-import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 
 const navItems = [
@@ -59,16 +59,16 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <TrackedAnchor
+          <BusinessActionLink
             href={`tel:${BUSINESS.phone}`}
-            eventName="header_call_click"
-            eventParams={{ placement: "header" }}
+            action="phone_call"
+            placement="header"
             className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/55 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-sm transition hover:border-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:px-4"
             aria-label={`Call ${BUSINESS.phone}`}
           >
             <span className="lg:hidden">Call</span>
             <span className="hidden lg:inline">Call {BUSINESS.phone}</span>
-          </TrackedAnchor>
+          </BusinessActionLink>
 
           <TrackedLink
             href="/book"
@@ -114,25 +114,25 @@ export function SiteHeader() {
               Quick help
             </p>
             <div className="mt-3 grid gap-2">
-              <TrackedAnchor
+              <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
-                eventName="header_call_click"
-                eventParams={{ placement: "mobile_menu" }}
+                action="phone_call"
+                placement="mobile_menu"
                 className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
                 onClick={() => setMobileMenuPath(null)}
               >
                 Call {BUSINESS.phone}
-              </TrackedAnchor>
-              <TrackedAnchor
+              </BusinessActionLink>
+              <BusinessActionLink
                 href={BUSINESS.googleMapsUrl}
-                eventName="header_reviews_click"
-                eventParams={{ placement: "mobile_menu" }}
+                action="reviews"
+                placement="mobile_menu"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
               >
                 Read Google Reviews
-              </TrackedAnchor>
+              </BusinessActionLink>
             </div>
           </div>
           <nav className="grid gap-2">

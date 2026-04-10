@@ -8,6 +8,7 @@ import {
   prependServicesFinderLeadContext,
   resolveStoredServicesFinderLeadContext,
   resolveServicesFinderLeadContextFromFormData,
+  SERVICE_AREA_WEBSITE_SOURCE,
   SERVICES_FINDER_WEBSITE_SOURCE,
 } from "@/lib/service-lead-context";
 
@@ -24,7 +25,11 @@ export async function POST(request: Request) {
     finderContext = resolveServicesFinderLeadContextFromFormData(formData);
     const storedDetails = prependServicesFinderLeadContext(details, finderContext);
     const storedLeadContext = resolveStoredServicesFinderLeadContext({
-      source: finderContext ? SERVICES_FINDER_WEBSITE_SOURCE : "website",
+      source: finderContext
+        ? finderContext.leadSourceContext === "service_area"
+          ? SERVICE_AREA_WEBSITE_SOURCE
+          : SERVICES_FINDER_WEBSITE_SOURCE
+        : "website",
       details: storedDetails,
     });
     const chatDetailsLine = storedLeadContext.cleanCustomerNotes
@@ -115,7 +120,9 @@ export async function POST(request: Request) {
       source: spamCheck.isSpam
         ? `website_spam_suspected:${spamCheck.reason}`
         : finderContext
-          ? "website:services_finder"
+          ? finderContext.leadSourceContext === "service_area"
+            ? "website:service_area"
+            : "website:services_finder"
           : "website",
       page_url: request.headers.get("referer") || null,
       user_agent: request.headers.get("user-agent") || null,

@@ -9,9 +9,10 @@ import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Jewelry Repair in Pasadena, TX | Watch, Ring & Stone Repair | Susie’s Jewelry Repair",
+  title:
+    "Jewelry Repair Near You in Pasadena, TX | Same Day Watch, Ring & Stone Repair",
   description:
-    "Visit our Pasadena, TX workshop for in-house jewelry repair, watch batteries, ring sizing, stone replacement, and heirloom restoration with clear quote-first guidance.",
+    "Need jewelry repair near you? Visit our Pasadena workshop for same-day or next-day watch batteries, ring sizing, stone repair, cleanings, and quote-first service.",
   canonical: "/",
 });
 

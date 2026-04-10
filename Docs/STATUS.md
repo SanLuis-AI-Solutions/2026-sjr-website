@@ -5,6 +5,44 @@ This file is the lightweight, human-readable heartbeat of the project.
 Update cadence: weekly (or after major milestones).
 
 ## Current Focus
+- Optimization-plan execution is active on `codex/optimization-plan`:
+  - source plan:
+    - `Docs/OPTIMIZATION_PLAN.md`
+  - current reality check:
+    - Google Search Console is already verified
+    - GA4 access is already configured
+    - the actual measurement blocker is a current GSC-clicks vs GA4-sessions mismatch in weekly reporting
+  - Batch 1 completed:
+    - earlier GA boot to reduce dropped low-engagement visits
+    - generic business-action tracking for phone/email/directions/reviews
+    - weekly reporting updates to surface data-quality mismatches clearly
+  - Batch 2 completed locally:
+    - added `/services/pasadena`
+    - aligned local-business/service schema with the actual nearby-city footprint
+    - added direct geo-page cross-links via `Nearby cities we also serve`
+  - Batch 3 completed locally:
+    - service-area pages now pass city context into quote and booking flows
+    - quote/booking forms show `Customer area` context when entered from geo pages
+    - GA lead-form events and stored lead summaries now retain the originating service-area signal
+  - Batch 4 completed locally:
+    - curated stronger helpful-read mappings for `watch-repair`, `ring-sizing`, `stone-setting`, and `necklace-repair`
+    - service pages now lean less on fallback topic overlap for blog discovery
+  - Batch 5 completed locally:
+    - GA bootstrap now runs from `<head>` with host-gated async script loading instead of deferred idle/interaction loading
+    - added `npm run google:seo-quick-wins` plus `Docs/SEO_QUICK_WINS.md`
+    - homepage metadata CTR test is prepared locally for the current near-me/Pasadena quick-win cluster
+    - refreshed `DASHBOARD.md` and weekly SEO health outputs with the `2026-04-09` baseline
+  - correction after live verification:
+    - the homepage CTR rewrite is implemented locally, but it is **not live on production yet**
+    - `Docs/SEO_CTR_TESTS.md` now tracks the before-state and deployment dependency explicitly
+  - current production GA evidence:
+    - `gtag.js` loads on the live site after interaction/idle
+    - no CSP errors were observed
+    - event delivery is still not fully proven from live DevTools evidence, so GA reporting needs another 24-48h check
+  - next likely tranche:
+    - deploy the homepage CTR rewrite so the CTR test actually starts on production
+    - watch the next 24-48 hours to see whether GA4 starts reflecting search visits after the head-bootstrap change reaches production
+    - if sessions still stay at zero while GSC clicks continue, continue live-browser GA debugging from the current evidence base
 - Mission Control `Connections` has been refactored into `Stack`:
   - artifact:
     - `Docs/artifacts/strategy/2026-03-19--nexus-stack-workspace-refactor.md`

@@ -397,6 +397,77 @@ test("analytics: services finder lead context reaches CTA, form start, and conve
   guard.assertNoErrors("services finder analytics context");
 });
 
+test("analytics: contact business-action links emit generic lead events", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.addInitScript(() => {
+    const storageKey = "sjr_test_ga_events";
+    Object.defineProperty(window, "__sjrGaHostAllowed", {
+      configurable: true,
+      get: () => true,
+      set: () => undefined,
+    });
+    window.dataLayer = [];
+    window.gtag = (...args: unknown[]) => {
+      const existing = JSON.parse(window.sessionStorage.getItem(storageKey) || "[]");
+      existing.push(args);
+      window.sessionStorage.setItem(storageKey, JSON.stringify(existing));
+      window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
+      window.dataLayer.push(args);
+    };
+  });
+
+  await page.goto("/contact", { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    for (const selector of ['a[href^="tel:"]', 'a[href^="mailto:"]', 'a[href*="maps.app.goo.gl"]']) {
+      document.querySelectorAll<HTMLAnchorElement>(selector).forEach((anchor) => {
+        anchor.addEventListener("click", (event) => event.preventDefault(), {
+          capture: true,
+        });
+      });
+    }
+    window.sessionStorage.removeItem("sjr_test_ga_events");
+  });
+
+  await page.getByRole("link", { name: /Call now/i }).first().click();
+  await page
+    .getByRole("link", { name: /contact@susiesjewelryrepair\.com/i })
+    .first()
+    .click();
+  await page.getByRole("link", { name: /^Open in Google Maps$/i }).first().click();
+
+  const events = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "phone_call_click" &&
+        params.placement === "contact_direct_panel",
+    ),
+  ).toBe(true);
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "email_contact_click" &&
+        params.placement === "contact_direct_panel",
+    ),
+  ).toBe(true);
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "directions_click" &&
+        params.placement === "contact_visit_panel",
+    ),
+  ).toBe(true);
+
+  guard.assertNoErrors("contact business-action analytics");
+});
+
 test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = [
@@ -837,6 +908,77 @@ test("services hub: zero-result quote CTA preserves finder query", async ({ page
   await expect(page.locator('textarea[name="details"]')).toHaveValue(/Issue: broken toaster/i);
 
   guard.assertNoErrors("services finder zero-result quote");
+});
+
+test("service area: pasadena page ships local schema and nearby city links", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/pasadena", { waitUntil: "networkidle" });
+  await expect(
+    page.getByRole("heading", { level: 1, name: /Jewelry repair near Pasadena/i }),
+  ).toBeVisible();
+  await expect(page.getByText(/Nearby cities we also serve/i)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Jewelry repair near Deer Park/i }),
+  ).toBeVisible();
+
+  const schemaScripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(
+    schemaScripts.some(
+      (script) =>
+        script.includes('"@id":"https://www.susiesjewelryrepair.com/services/pasadena#service-area"') &&
+        script.includes('"provider":{"@id":"https://www.susiesjewelryrepair.com/#localbusiness"}'),
+    ),
+  ).toBe(true);
+
+  guard.assertNoErrors("service area pasadena schema");
+});
+
+test("service area: quote CTA carries city context into quote form and analytics", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.addInitScript(() => {
+    const storageKey = "sjr_test_ga_events";
+    Object.defineProperty(window, "__sjrGaHostAllowed", {
+      configurable: true,
+      get: () => true,
+      set: () => undefined,
+    });
+    window.dataLayer = [];
+    window.gtag = (...args: unknown[]) => {
+      const existing = JSON.parse(window.sessionStorage.getItem(storageKey) || "[]");
+      existing.push(args);
+      window.sessionStorage.setItem(storageKey, JSON.stringify(existing));
+      window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
+      window.dataLayer.push(args);
+    };
+  });
+
+  await page.goto("/services/pasadena", { waitUntil: "networkidle" });
+  await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
+  await page.getByRole("link", { name: /^Get Fast Quote$/i }).click();
+
+  await expect(page).toHaveURL(/\/quote\?from=service_area&area=pasadena$/);
+  await expect(page.getByText(/Customer area: Pasadena/i).first()).toBeVisible();
+  await expect(page.locator('textarea[name="details"]')).toHaveValue(/Customer area: Pasadena/i);
+
+  await page.getByLabel(/Full name/i).focus();
+  const events = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "lead_form_start" &&
+        params.prefill_source === "service_area" &&
+        params.area_slug === "pasadena",
+    ),
+  ).toBe(true);
+
+  guard.assertNoErrors("service area quote context");
 });
 
 test("home services grid: full card click navigates to service detail", async ({ page }) => {

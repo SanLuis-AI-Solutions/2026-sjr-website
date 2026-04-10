@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { createPageMetadata } from "@/lib/metadata";
 
 const UPDATED_DATE = "February 13, 2026";
@@ -64,19 +65,23 @@ export default function TermsPage() {
               <h2 className="font-serif text-2xl text-stone-900">Contact</h2>
               <p className="mt-4 text-sm text-stone-600">
                 {BUSINESS.name} ·{" "}
-                <a
+                <BusinessActionLink
                   className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`mailto:${BUSINESS.email}`}
+                  action="email_contact"
+                  placement="terms_page"
                 >
                   {BUSINESS.email}
-                </a>{" "}
+                </BusinessActionLink>{" "}
                 ·{" "}
-                <a
+                <BusinessActionLink
                   className="hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`tel:${BUSINESS.phone}`}
+                  action="phone_call"
+                  placement="terms_page"
                 >
                   {BUSINESS.phone}
-                </a>
+                </BusinessActionLink>
               </p>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -27,6 +28,7 @@ export default async function QuotePage({
     error?: string;
     id?: string;
     from?: string;
+    area?: string;
     service?: string;
     intent?: string;
     query?: string;
@@ -116,12 +118,14 @@ export default async function QuotePage({
               </div>
               <p>
                 Prefer to talk now? Call{" "}
-                <a
+                <BusinessActionLink
                   className="inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`tel:${BUSINESS.phone}`}
+                  action="phone_call"
+                  placement="quote_page"
                 >
                   {BUSINESS.phone}
-                </a>
+                </BusinessActionLink>
                 .
               </p>
             </div>
@@ -139,6 +143,14 @@ export default async function QuotePage({
                       Suggested service:{" "}
                       <span className="font-semibold text-stone-900">
                         {finderContext.serviceName || finderContext.serviceSlug}
+                      </span>
+                    </p>
+                  ) : null}
+                  {finderContext.areaLabel ? (
+                    <p>
+                      Customer area:{" "}
+                      <span className="font-semibold text-stone-900">
+                        {finderContext.areaLabel}
                       </span>
                     </p>
                   ) : null}
@@ -179,6 +191,7 @@ export default async function QuotePage({
             {hiddenFields ? (
               <>
                 <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />
+                <input type="hidden" name="area_slug" value={hiddenFields.area_slug} />
                 <input type="hidden" name="service_slug" value={hiddenFields.service_slug} />
                 <input type="hidden" name="intent_label" value={hiddenFields.intent_label} />
                 <input type="hidden" name="intent_query" value={hiddenFields.intent_query} />

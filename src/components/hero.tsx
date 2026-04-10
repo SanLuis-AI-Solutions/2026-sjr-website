@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BUSINESS } from "@/lib/constants";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 
 /*
  * Date: 2026-02-27
@@ -48,14 +49,16 @@ export function Hero() {
               On-site master craftsmanship with clear pricing and Same Day/Next Day service.
             </p>
             <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-5 flex max-w-[24rem] flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-100/92 md:max-w-none md:text-[11px] md:text-stone-700">
-              <a
+              <BusinessActionLink
                 href={BUSINESS.googleMapsUrl}
+                action="reviews"
+                placement="home_hero"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center rounded-full border border-brand-gold/45 bg-black/28 px-4 py-2 transition hover:border-brand-gold hover:text-brand-gold md:bg-white/90"
               >
                 4.5 ★ on Google · 51 reviews
-              </a>
+              </BusinessActionLink>
               <span className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 md:border-stone-200 md:bg-white/85">
                 Since 1984
               </span>

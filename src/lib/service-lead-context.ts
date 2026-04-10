@@ -1,7 +1,10 @@
 import { SERVICES } from "@/lib/constants";
+import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 
 export const SERVICES_FINDER_SOURCE = "services_finder";
 export const SERVICES_FINDER_WEBSITE_SOURCE = "website:services_finder";
+export const SERVICE_AREA_SOURCE = "service_area";
+export const SERVICE_AREA_WEBSITE_SOURCE = "website:service_area";
 
 type QueryLike =
   | URLSearchParams
@@ -14,8 +17,10 @@ type ServiceIdentity = {
 };
 
 export type ServicesFinderLeadContext = {
-  leadSourceContext: typeof SERVICES_FINDER_SOURCE;
-  prefillSource: typeof SERVICES_FINDER_SOURCE;
+  leadSourceContext: typeof SERVICES_FINDER_SOURCE | typeof SERVICE_AREA_SOURCE;
+  prefillSource: typeof SERVICES_FINDER_SOURCE | typeof SERVICE_AREA_SOURCE;
+  areaSlug: string | null;
+  areaLabel: string | null;
   serviceSlug: string | null;
   serviceName: string | null;
   intentLabel: string | null;
@@ -26,6 +31,8 @@ export type ServicesFinderLeadContext = {
 export type StoredServicesFinderLeadContext = {
   isServicesFinderLead: boolean;
   sourceLabel: string | null;
+  areaSlug: string | null;
+  areaLabel: string | null;
   serviceSlug: string | null;
   serviceName: string | null;
   intentLabel: string | null;
@@ -36,6 +43,7 @@ export type StoredServicesFinderLeadContext = {
 
 type ServicesFinderLeadContextInput = {
   from?: unknown;
+  area?: unknown;
   service?: unknown;
   intent?: unknown;
   query?: unknown;
@@ -73,6 +81,12 @@ function buildServiceNameLookup(services?: Iterable<ServiceIdentity>) {
   return lookup;
 }
 
+function buildAreaLookup() {
+  return new Map(
+    SERVICE_AREA_PAGES.map((page) => [page.slug, page.city] as const),
+  );
+}
+
 function buildServiceIdentityLookup(services?: Iterable<ServiceIdentity>) {
   const lookup = new Map<string, { slug: string; name: string }>();
 
@@ -96,17 +110,22 @@ function buildServiceIdentityLookup(services?: Iterable<ServiceIdentity>) {
 }
 
 function buildDetailsSeed({
+  areaLabel,
   serviceName,
   serviceSlug,
   intentLabel,
   query,
 }: {
+  areaLabel: string | null;
   serviceName: string | null;
   serviceSlug: string | null;
   intentLabel: string | null;
   query: string | null;
 }) {
   const lines: string[] = [];
+  if (areaLabel) {
+    lines.push(`Customer area: ${areaLabel}`);
+  }
   const resolvedService = serviceName || serviceSlug;
   if (resolvedService) {
     lines.push(`Repair focus: ${resolvedService}`);
@@ -121,10 +140,15 @@ function normalizeServicesFinderLeadContextInput(
   input: ServicesFinderLeadContextInput,
   services?: Iterable<ServiceIdentity>,
 ): ServicesFinderLeadContext | null {
-  if (normalizeContextValue(input.from) !== SERVICES_FINDER_SOURCE) {
+  const source = normalizeContextValue(input.from);
+  if (source !== SERVICES_FINDER_SOURCE && source !== SERVICE_AREA_SOURCE) {
     return null;
   }
 
+  const areaLookup = buildAreaLookup();
+  const rawAreaSlug = normalizeContextValue(input.area);
+  const areaSlug = rawAreaSlug && areaLookup.has(rawAreaSlug) ? rawAreaSlug : null;
+  const areaLabel = areaSlug ? areaLookup.get(areaSlug) || null : null;
   const rawServiceSlug = normalizeContextValue(input.service);
   const intentLabel = normalizeContextValue(input.intent);
   const query = normalizeContextValue(input.query);
@@ -134,18 +158,21 @@ function normalizeServicesFinderLeadContextInput(
     rawServiceSlug && serviceNameLookup.has(rawServiceSlug) ? rawServiceSlug : null;
   const serviceName = serviceSlug ? serviceNameLookup.get(serviceSlug) || null : null;
 
-  if (!serviceSlug && !intentLabel && !query) {
+  if (!areaSlug && !serviceSlug && !intentLabel && !query) {
     return null;
   }
 
   return {
-    leadSourceContext: SERVICES_FINDER_SOURCE,
-    prefillSource: SERVICES_FINDER_SOURCE,
+    leadSourceContext: source,
+    prefillSource: source,
+    areaSlug,
+    areaLabel,
     serviceSlug,
     serviceName,
     intentLabel,
     query,
     detailsSeed: buildDetailsSeed({
+      areaLabel,
       serviceName,
       serviceSlug,
       intentLabel,
@@ -174,6 +201,8 @@ function parseStoredLeadContextBlock(details: string | null | undefined) {
   if (!normalizedDetails.startsWith("Lead context")) {
     return {
       hasStructuredContext: false,
+      sourceLabel: null,
+      areaLabel: null,
       serviceName: null,
       intentLabel: null,
       query: null,
@@ -187,12 +216,12 @@ function parseStoredLeadContextBlock(details: string | null | undefined) {
     .map((line) => line.trim())
     .filter(Boolean);
 
-  if (
-    lines[0] !== "Lead context" ||
-    !lines.some((line) => line === "Origin: Services finder")
-  ) {
+  const originLine = lines.find((line) => line.startsWith("Origin: "));
+  if (lines[0] !== "Lead context" || !originLine) {
     return {
       hasStructuredContext: false,
+      sourceLabel: null,
+      areaLabel: null,
       serviceName: null,
       intentLabel: null,
       query: null,
@@ -207,6 +236,8 @@ function parseStoredLeadContextBlock(details: string | null | undefined) {
 
   return {
     hasStructuredContext: true,
+    sourceLabel: normalizeContextValue(originLine.slice("Origin: ".length)),
+    areaLabel: readPrefixedLine("Customer area: "),
     serviceName: readPrefixedLine("Suggested service: "),
     intentLabel: readPrefixedLine("Intent: "),
     query: readPrefixedLine("Search phrase: "),
@@ -216,6 +247,7 @@ function parseStoredLeadContextBlock(details: string | null | undefined) {
 
 function buildStoredLeadInternalSummaryLines(input: {
   sourceLabel: string | null;
+  areaLabel: string | null;
   serviceName: string | null;
   serviceSlug: string | null;
   intentLabel: string | null;
@@ -225,6 +257,9 @@ function buildStoredLeadInternalSummaryLines(input: {
 
   if (input.sourceLabel) {
     lines.push(`Lead source: ${input.sourceLabel}`);
+  }
+  if (input.areaLabel) {
+    lines.push(`Customer area: ${input.areaLabel}`);
   }
   if (input.serviceName || input.serviceSlug) {
     lines.push(`Suggested service: ${input.serviceName || input.serviceSlug}`);
@@ -248,8 +283,10 @@ export function resolveStoredServicesFinderLeadContext(
 ): StoredServicesFinderLeadContext {
   const source = normalizeContextValue(input.source);
   const parsedDetails = parseStoredLeadContextBlock(input.details);
+  const areaLookup = buildAreaLookup();
   const isServicesFinderLead =
     source === SERVICES_FINDER_WEBSITE_SOURCE ||
+    source === SERVICE_AREA_WEBSITE_SOURCE ||
     source === SERVICES_FINDER_SOURCE ||
     parsedDetails.hasStructuredContext;
 
@@ -257,6 +294,8 @@ export function resolveStoredServicesFinderLeadContext(
     return {
       isServicesFinderLead: false,
       sourceLabel: null,
+      areaSlug: null,
+      areaLabel: null,
       serviceSlug: null,
       serviceName: null,
       intentLabel: null,
@@ -274,7 +313,17 @@ export function resolveStoredServicesFinderLeadContext(
       serviceIdentityLookup.get(parsedDetails.serviceName)) ||
     null;
 
-  const sourceLabel = "Services finder";
+  const normalizedSourceLabel = parsedDetails.sourceLabel?.toLowerCase() || "";
+  const sourceLabel =
+    source === SERVICE_AREA_WEBSITE_SOURCE || normalizedSourceLabel === "service area page"
+      ? "Service area page"
+      : "Services finder";
+  const areaLabel = parsedDetails.areaLabel;
+  const areaSlug =
+    areaLabel
+      ? SERVICE_AREA_PAGES.find((page) => page.city.toLowerCase() === areaLabel.toLowerCase())?.slug ||
+        null
+      : null;
   const serviceSlug = resolvedService?.slug || null;
   const serviceName = resolvedService?.name || parsedDetails.serviceName;
   const intentLabel = parsedDetails.intentLabel;
@@ -283,6 +332,8 @@ export function resolveStoredServicesFinderLeadContext(
   return {
     isServicesFinderLead: true,
     sourceLabel,
+    areaSlug,
+    areaLabel,
     serviceSlug,
     serviceName,
     intentLabel,
@@ -290,6 +341,7 @@ export function resolveStoredServicesFinderLeadContext(
     cleanCustomerNotes: parsedDetails.cleanCustomerNotes,
     internalSummaryLines: buildStoredLeadInternalSummaryLines({
       sourceLabel,
+      areaLabel,
       serviceSlug,
       serviceName,
       intentLabel,
@@ -306,6 +358,7 @@ export function resolveServicesFinderLeadContext(
     "get" in queryLike || queryLike instanceof URLSearchParams
       ? {
           from: readQueryValue(queryLike, "from"),
+          area: readQueryValue(queryLike, "area"),
           service: readQueryValue(queryLike, "service"),
           intent: readQueryValue(queryLike, "intent"),
           query: readQueryValue(queryLike, "query"),
@@ -322,6 +375,7 @@ export function resolveServicesFinderLeadContextFromFormData(
   return normalizeServicesFinderLeadContextInput(
     {
       from: formData.get("lead_source_context"),
+      area: formData.get("area_slug"),
       service: formData.get("service_slug"),
       intent: formData.get("intent_label"),
       query: formData.get("intent_query"),
@@ -333,16 +387,23 @@ export function resolveServicesFinderLeadContextFromFormData(
 export function buildServicesFinderLeadContextHref(
   pathname: string,
   input: {
+    areaSlug?: string | null;
     serviceSlug?: string | null;
     intentLabel?: string | null;
     query?: string | null;
   },
 ) {
-  const params = new URLSearchParams({ from: SERVICES_FINDER_SOURCE });
+  const source =
+    normalizeContextValue(input.areaSlug) && !normalizeContextValue(input.serviceSlug) && !normalizeContextValue(input.intentLabel) && !normalizeContextValue(input.query)
+      ? SERVICE_AREA_SOURCE
+      : SERVICES_FINDER_SOURCE;
+  const params = new URLSearchParams({ from: source });
+  const areaSlug = normalizeContextValue(input.areaSlug);
   const serviceSlug = normalizeContextValue(input.serviceSlug);
   const intentLabel = normalizeContextValue(input.intentLabel);
   const query = normalizeContextValue(input.query);
 
+  if (areaSlug) params.set("area", areaSlug);
   if (serviceSlug) params.set("service", serviceSlug);
   if (intentLabel) params.set("intent", intentLabel);
   if (query) params.set("query", query);
@@ -357,6 +418,9 @@ export function appendServicesFinderLeadContextToUrl(
   if (!context) return url;
 
   url.searchParams.set("from", context.leadSourceContext);
+  if (context.areaSlug) {
+    url.searchParams.set("area", context.areaSlug);
+  }
   if (context.serviceSlug) {
     url.searchParams.set("service", context.serviceSlug);
   }
@@ -374,6 +438,7 @@ export function getServicesFinderHiddenFields(context: ServicesFinderLeadContext
 
   return {
     lead_source_context: context.leadSourceContext,
+    area_slug: context.areaSlug || "",
     service_slug: context.serviceSlug || "",
     intent_label: context.intentLabel || "",
     intent_query: context.query || "",
@@ -385,6 +450,7 @@ export function getServicesFinderAnalyticsParams(context: ServicesFinderLeadCont
 
   return {
     prefill_source: context.prefillSource,
+    area_slug: context.areaSlug || "",
     service_slug: context.serviceSlug || "",
     finder_intent: context.intentLabel || "",
     finder_query: context.query || "",
@@ -399,8 +465,13 @@ export function prependServicesFinderLeadContext(
   if (!context) return normalizedDetails.trim();
 
   const userDetails = stripDetailsSeed(normalizedDetails, context.detailsSeed);
-  const lines = ["Lead context", "Origin: Services finder"];
+  const originLabel =
+    context.leadSourceContext === SERVICE_AREA_SOURCE ? "Service area page" : "Services finder";
+  const lines = ["Lead context", `Origin: ${originLabel}`];
 
+  if (context.areaLabel) {
+    lines.push(`Customer area: ${context.areaLabel}`);
+  }
   if (context.serviceName || context.serviceSlug) {
     lines.push(`Suggested service: ${context.serviceName || context.serviceSlug}`);
   }

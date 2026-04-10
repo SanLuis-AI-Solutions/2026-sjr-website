@@ -15,6 +15,10 @@ const TRACKED_EVENTS = [
   "conversion_quick_action_click",
   "conversion_quick_action_click_control",
   "conversion_quick_action_click_primary_focus",
+  "phone_call_click",
+  "email_contact_click",
+  "directions_click",
+  "review_click",
   "lead_form_start",
   "lead_form_step",
   "lead_form_submit_attempt",
@@ -200,6 +204,18 @@ async function main() {
   ctaVariant.controlShare = safeRate(ctaVariant.control, ctaVariant.total);
   ctaVariant.primaryFocusShare = safeRate(ctaVariant.primaryFocus, ctaVariant.total);
 
+  const businessActions = {
+    phoneCall: eventCounts.phone_call_click,
+    emailContact: eventCounts.email_contact_click,
+    directions: eventCounts.directions_click,
+    reviews: eventCounts.review_click,
+  };
+  businessActions.total =
+    businessActions.phoneCall +
+    businessActions.emailContact +
+    businessActions.directions +
+    businessActions.reviews;
+
   const snapshot = {
     generatedAt: new Date().toISOString(),
     dateRange: { startDate, endDate },
@@ -261,6 +277,13 @@ async function main() {
     "## Quick Action Variant Split",
     `- Control clicks: ${formatInt(ctaVariant.control)} (${asPercent(ctaVariant.controlShare)})`,
     `- Primary-focus clicks: ${formatInt(ctaVariant.primaryFocus)} (${asPercent(ctaVariant.primaryFocusShare)})`,
+    "",
+    "## Business Action Clicks",
+    `- Phone calls: ${formatInt(businessActions.phoneCall)}`,
+    `- Email clicks: ${formatInt(businessActions.emailContact)}`,
+    `- Directions clicks: ${formatInt(businessActions.directions)}`,
+    `- Review clicks: ${formatInt(businessActions.reviews)}`,
+    `- Total business-action clicks: ${formatInt(businessActions.total)}`,
     "",
     "## Tracked Event Counts (7d)",
     "| Event | Count |",

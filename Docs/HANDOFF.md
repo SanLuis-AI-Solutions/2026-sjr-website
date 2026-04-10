@@ -1,3 +1,83 @@
+# Handoff Snapshot — 2026-04-09 (CST)
+
+## Current State
+- Branch: `codex/optimization-plan`
+- Worktree: `worktrees/codex-optimization-plan`
+- Primary status ledger: `Docs/STATUS.md`
+- Source plan under execution: `Docs/OPTIMIZATION_PLAN.md`
+
+## Session Summary (Most Recent)
+- Corrected the optimization-plan assumptions before implementation:
+  - Google Search Console is already verified for `https://www.susiesjewelryrepair.com/`
+  - GA4 access is already live for property `350925141`
+  - immediate measurement issue is still unresolved: Search Console reports clicks while recent GA4 organic/session reporting remains sparse or zero
+- Completed Batch 1 measurement-recovery work:
+  - loaded GA earlier in `src/components/analytics/deferred-ga-loader.tsx`
+  - standardized phone/email/directions/review tracking through `src/components/analytics/business-action-link.tsx`
+  - wired those generic business-action events through the primary site CTA surfaces
+  - expanded weekly reporting so GSC-vs-GA4 mismatches are explicit in `.health/weekly-seo-health-latest.md`
+  - verification completed:
+    - `npm run build`
+    - `npm run google:weekly-seo-health`
+    - `npm run google:kpi-weekly-snapshot`
+    - targeted Playwright smoke coverage for analytics/contact flows
+- Completed Batch 2 local-SEO service-area work:
+  - added a dedicated `/services/pasadena` route using the shared service-area system
+  - expanded geo coverage consistency so schema reflects Pasadena plus the shipped nearby-city pages
+  - enriched service-area JSON-LD with page `@id`, `url`, and provider linkage back to `#localbusiness`
+  - added an in-page `Nearby cities we also serve` block so geo pages now cross-link directly instead of relying only on global navigation/footer paths
+  - verification completed:
+    - `npm run build`
+    - targeted Playwright smoke coverage for Pasadena service-area schema/linking plus retained contact analytics coverage
+- Completed Batch 3 service-area attribution work:
+  - service-area CTAs now carry `from=service_area&area=<slug>` into `/quote` and `/book`
+  - quote and booking forms now surface `Customer area` context when a visit starts from a geo page
+  - hidden form fields, redirect persistence, GA lead-form analytics, and stored lead context now retain the service-area slug/city
+  - lead records sourced from geo pages now store as `website:service_area` instead of blending into generic website traffic
+  - verification completed:
+    - `npm run build`
+    - targeted Playwright smoke coverage for service-area quote context, Pasadena geo page schema, and business-action analytics
+- Completed Batch 4 service-page blog curation work:
+  - expanded manual helpful-read mappings in `src/lib/blog.ts` for:
+    - `watch-repair`
+    - `ring-sizing`
+    - `stone-setting`
+    - `necklace-repair`
+  - result:
+    - high-intent service pages now surface stronger, less-generic article links instead of relying mostly on topic-overlap fallback ordering
+  - verification completed:
+    - `npm run build`
+- Completed Batch 5 measurement + CTR quick-win work:
+  - moved GA bootstrap into `<head>` with host-gated async `gtag.js` loading via `src/components/analytics/ga-head-scripts.tsx`
+  - removed the deferred GA loader so analytics now initializes before hydration instead of waiting on idle/interaction
+  - added a repeatable GSC ranking audit script:
+    - `npm run google:seo-quick-wins`
+    - output:
+      - `.health/seo-quick-wins-latest.json`
+      - `Docs/SEO_QUICK_WINS.md`
+  - current quick-win audit result:
+    - the immediate ranking/CTR cluster is overwhelmingly the homepage `/`
+    - strongest current query opportunity is `jewelry repair near me`
+  - homepage metadata CTR test is now live:
+    - rewrote the homepage title/description to emphasize `near you`, `Pasadena`, and same-day / next-day value
+  - weekly reporting refreshed:
+    - `npm run google:weekly-seo-health`
+    - `DASHBOARD.md` updated to the `2026-04-09` baseline plus quick-win cluster notes
+    - `Docs/SEO_CTR_TESTS.md` created with the first homepage CTR test log
+  - verification completed:
+    - `npm run build`
+    - `npm run google:seo-quick-wins`
+    - `npm run google:weekly-seo-health`
+    - Playwright:
+      - `analytics guard: localhost does not load the production GA script`
+      - `service area: pasadena page ships local schema and nearby city links`
+      - `service area: quote CTA carries city context into quote form and analytics`
+  - live production diagnostic on `2026-04-10`:
+    - live homepage still shows the old title/description, so the CTR rewrite is not yet live
+    - no CSP console errors were observed for GA on production
+    - `gtag.js` does load on production after interaction/idle on the current live build
+    - `window.gtag` exists, but an obvious analytics collect request was not confirmed from the captured DevTools network list after a manual `page_view` call
+
 # Handoff Snapshot — 2026-03-09 (CST)
 
 ## Current State

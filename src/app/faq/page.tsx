@@ -3,6 +3,7 @@ import Script from "next/script";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
 import { FAQS } from "@/lib/faq";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { FaqContent } from "./faq-content";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -65,12 +66,14 @@ export default function FaqPage() {
             <h2 className="font-serif text-2xl text-stone-900">Still need help?</h2>
             <p className="mt-3 text-[15px] leading-7 text-stone-600">
               Call us at{" "}
-              <Link
+              <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
+                action="phone_call"
+                placement="faq_help"
                 className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.phone}
-              </Link>{" "}
+              </BusinessActionLink>{" "}
               or send a message and we’ll guide you to the best next step.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">

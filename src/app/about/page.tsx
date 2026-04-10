@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/cta-band";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/metadata";
@@ -369,21 +370,25 @@ export default function AboutPage() {
             </article>
             <article className="reveal-on-scroll reveal-delay-1 rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Phone</h3>
-              <Link
+              <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
+                action="phone_call"
+                placement="about_visit"
                 className="mt-3 inline-flex min-h-12 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.phone}
-              </Link>
+              </BusinessActionLink>
             </article>
             <article className="reveal-on-scroll reveal-delay-2 rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">Email</h3>
-              <Link
+              <BusinessActionLink
                 href={`mailto:${BUSINESS.email}`}
+                action="email_contact"
+                placement="about_visit"
                 className="mt-3 inline-flex min-h-12 items-center text-[15px] font-semibold text-stone-800 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 {BUSINESS.email}
-              </Link>
+              </BusinessActionLink>
             </article>
           </div>
         </div>

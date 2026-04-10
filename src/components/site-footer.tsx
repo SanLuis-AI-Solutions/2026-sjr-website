@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { BrandMark } from "@/components/brand-mark";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
 const COPYRIGHT_YEAR = 2026;
@@ -80,34 +81,34 @@ export function SiteFooter() {
                 <span>
                   {BUSINESS.address.city}, {BUSINESS.address.state} {BUSINESS.address.zip}
                 </span>
-                <TrackedAnchor
+                <BusinessActionLink
                   href={`tel:${BUSINESS.phone}`}
-                  eventName="footer_call_click"
-                  eventParams={{ placement: "footer" }}
+                  action="phone_call"
+                  placement="footer"
                   className="mt-4 font-semibold text-brand-gold transition-colors hover:text-white"
                 >
                   {BUSINESS.phone}
-                </TrackedAnchor>
-                <TrackedAnchor
+                </BusinessActionLink>
+                <BusinessActionLink
                   href={BUSINESS.googleMapsUrl}
-                  eventName="footer_maps_click"
-                  eventParams={{ placement: "footer" }}
+                  action="directions"
+                  placement="footer"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-4 text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
                 >
                   Get Directions
-                </TrackedAnchor>
-                <TrackedAnchor
+                </BusinessActionLink>
+                <BusinessActionLink
                   href={BUSINESS.googleMapsUrl}
-                  eventName="footer_reviews_click"
-                  eventParams={{ placement: "footer" }}
+                  action="reviews"
+                  placement="footer"
                   target="_blank"
                   rel="noreferrer"
                   className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
                 >
                   Read Google Reviews
-                </TrackedAnchor>
+                </BusinessActionLink>
               </address>
               <div className="mt-4 flex flex-wrap gap-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-200">
                 {facebookUrl ? (

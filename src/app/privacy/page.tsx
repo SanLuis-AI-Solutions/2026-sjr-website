@@ -1,5 +1,6 @@
 import { SiteShell } from "@/components/site-shell";
 import { BUSINESS } from "@/lib/constants";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { createPageMetadata } from "@/lib/metadata";
 
 const UPDATED_DATE = "February 13, 2026";
@@ -65,12 +66,14 @@ export default function PrivacyPage() {
               <p className="mt-4 text-sm leading-7 text-stone-600">
                 You can request access, updates, or deletion of your contact
                 information by emailing{" "}
-                <a
+                <BusinessActionLink
                   className="font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`mailto:${BUSINESS.email}`}
+                  action="email_contact"
+                  placement="privacy_page"
                 >
                   {BUSINESS.email}
-                </a>
+                </BusinessActionLink>
                 .
               </p>
             </div>
@@ -81,12 +84,14 @@ export default function PrivacyPage() {
                 {BUSINESS.name} · {BUSINESS.address.street},{" "}
                 {BUSINESS.address.city}, {BUSINESS.address.state}{" "}
                 {BUSINESS.address.zip} ·{" "}
-                <a
+                <BusinessActionLink
                   className="hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   href={`tel:${BUSINESS.phone}`}
+                  action="phone_call"
+                  placement="privacy_page"
                 >
                   {BUSINESS.phone}
-                </a>
+                </BusinessActionLink>
               </p>
             </div>
           </div>

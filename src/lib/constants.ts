@@ -24,7 +24,15 @@ export const BUSINESS = {
     { day: "Saturday", hours: "10:00 AM – 4:00 PM" },
     { day: "Sunday", hours: "Closed" },
   ],
-  serviceAreas: ["Pasadena", "Deer Park", "La Porte", "Houston Area"],
+  serviceAreas: [
+    "Pasadena",
+    "Deer Park",
+    "La Porte",
+    "Friendswood",
+    "Webster",
+    "Clear Lake",
+    "Houston Area",
+  ],
 };
 
 export const SERVICE_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {

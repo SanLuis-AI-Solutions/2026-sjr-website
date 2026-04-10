@@ -1,4 +1,5 @@
 import { BUSINESS, SERVICES } from "./constants";
+import { SERVICE_AREA_PAGES } from "./service-areas";
 
 type Service = (typeof SERVICES)[number] & {
   short_summary?: string;
@@ -9,6 +10,13 @@ type ServiceFaq = {
 };
 
 export function localBusinessSchema() {
+  const areaServed = Array.from(
+    new Set([BUSINESS.address.city, ...SERVICE_AREA_PAGES.map((page) => page.city)]),
+  ).map((area) => ({
+    "@type": "City",
+    name: area,
+  }));
+
   return {
     "@context": "https://schema.org",
     "@type": "JewelryStore",
@@ -36,6 +44,7 @@ export function localBusinessSchema() {
       longitude: -95.1863662,
     },
     hasMap: BUSINESS.googleMapsUrl,
+    areaServed,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.5",
@@ -125,6 +134,12 @@ export function faqSchema() {
 }
 export function serviceSchema(service: Service | undefined) {
   if (!service) return {};
+  const areaServed = Array.from(
+    new Set([BUSINESS.address.city, ...SERVICE_AREA_PAGES.map((page) => page.city)]),
+  ).map((area) => ({
+    "@type": "City",
+    name: area,
+  }));
   const summary = service.summary || service.short_summary || "";
   return {
     "@context": "https://schema.org",
@@ -133,13 +148,9 @@ export function serviceSchema(service: Service | undefined) {
     name: service.name,
     description: summary,
     provider: {
-      "@type": "JewelryStore",
-      name: BUSINESS.name,
+      "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
     },
-    areaServed: (BUSINESS.serviceAreas || []).map((area) => ({
-      "@type": "City",
-      name: area,
-    })),
+    areaServed,
   };
 }
 

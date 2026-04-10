@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BUSINESS } from "@/lib/constants";
+import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
 export function ProofBand() {
@@ -49,8 +50,8 @@ export function ProofBand() {
               <TrackedAnchor
                 key={item.title}
                 href={item.href}
-                eventName={item.eventName}
-                eventParams={{ placement: "proof_band" }}
+                eventName="review_click"
+                eventParams={{ business_action: "reviews", placement: "proof_band" }}
                 target="_blank"
                 rel="noreferrer"
                 className={`${cardClass} transition hover:-translate-y-0.5 hover:border-brand-gold/55`}
@@ -338,16 +339,16 @@ export function Testimonials() {
             </h2>
             <div className="mt-4 h-1 w-16 bg-brand-gold/60" />
           </div>
-          <TrackedAnchor
+          <BusinessActionLink
             href={BUSINESS.googleMapsUrl}
-            eventName="home_reviews_click"
-            eventParams={{ placement: "testimonials_heading" }}
+            action="reviews"
+            placement="testimonials_heading"
             target="_blank"
             rel="noreferrer"
             className="hidden text-xs uppercase tracking-[0.35em] text-stone-600 transition-colors hover:text-brand-burgundy md:block"
           >
             4.5 ★ from 51 Google reviews
-          </TrackedAnchor>
+          </BusinessActionLink>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {[

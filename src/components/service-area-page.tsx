@@ -3,9 +3,10 @@ import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
-import type { ServiceAreaPage } from "@/lib/service-areas";
+import { SERVICE_AREA_PAGES, type ServiceAreaPage } from "@/lib/service-areas";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 import { getHelpfulBlogPostsForServiceSlugs } from "@/lib/blog";
+import { buildServicesFinderLeadContextHref } from "@/lib/service-lead-context";
 import { getServiceAreaHighlightedServiceSlugs } from "@/lib/service-taxonomy";
 
 type Props = {
@@ -28,6 +29,10 @@ export function ServiceAreaLandingPage({ page }: Props) {
     { name: "Services", href: "/services" },
     { name: page.city, href: `/services/${page.slug}` },
   ];
+  const nearbyAreas = SERVICE_AREA_PAGES.filter((entry) => entry.slug !== page.slug).slice(0, 4);
+  const canonicalUrl = `https://www.susiesjewelryrepair.com/services/${page.slug}`;
+  const quoteHref = buildServicesFinderLeadContextHref("/quote", { areaSlug: page.slug });
+  const bookingHref = buildServicesFinderLeadContextHref("/book", { areaSlug: page.slug });
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -45,6 +50,8 @@ export function ServiceAreaLandingPage({ page }: Props) {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${canonicalUrl}#service-area`,
+    url: canonicalUrl,
     name: `Jewelry Repair Near ${page.city}, TX`,
     serviceType: "Jewelry repair and watch repair",
     areaServed: {
@@ -52,17 +59,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
       name: page.city,
     },
     provider: {
-      "@type": "JewelryStore",
-      name: BUSINESS.name,
-      telephone: BUSINESS.phone,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: BUSINESS.address.street,
-        addressLocality: BUSINESS.address.city,
-        addressRegion: BUSINESS.address.state,
-        postalCode: BUSINESS.address.zip,
-        addressCountry: "US",
-      },
+      "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
     },
   };
 
@@ -105,7 +102,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink
-                href="/quote"
+                href={quoteHref}
                 eventName="service_area_cta_click"
                 eventParams={{ area_slug: page.slug, cta_target: "quote" }}
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
@@ -113,7 +110,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 Get Fast Quote
               </TrackedLink>
               <TrackedLink
-                href="/book"
+                href={bookingHref}
                 eventName="service_area_cta_click"
                 eventParams={{ area_slug: page.slug, cta_target: "book" }}
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
@@ -217,6 +214,25 @@ export function ServiceAreaLandingPage({ page }: Props) {
                       className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     >
                       {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            {nearbyAreas.length ? (
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Nearby cities we also serve
+                </p>
+                <div className="mt-4 space-y-2">
+                  {nearbyAreas.map((area) => (
+                    <Link
+                      key={area.slug}
+                      href={`/services/${area.slug}`}
+                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      Jewelry repair near {area.city}
                     </Link>
                   ))}
                 </div>

@@ -28,6 +28,60 @@ export type ServiceAreaPage = {
 
 export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
   {
+    slug: "pasadena",
+    city: "Pasadena",
+    title: "Jewelry Repair in Pasadena, TX | In-House Jewelry & Watch Repair",
+    description:
+      "Looking for jewelry repair in Pasadena, TX? Work directly with our in-house workshop for ring sizing, watch batteries, prong repair, chain repair, heirloom restoration, and clear quote-first service.",
+    cardDescription:
+      "Start here for Pasadena jewelry repair, watch service, heirloom work, and quote-first guidance from the local in-house workshop.",
+    heroImage: "/images/about/storefront.jpg",
+    heroAlt: "Susie's Jewelry Repair storefront in Pasadena, Texas",
+    intro:
+      "Pasadena customers usually want a repair shop they can reach quickly, trust with sentimental pieces, and talk to directly before work begins. Our Fairmont Parkway workshop gives you that local path for jewelry repair, watch service, heirloom restoration, and custom guidance without sending the piece off-site.",
+    trustPoints: [
+      "Pasadena storefront and in-house workshop on Fairmont Pkwy",
+      "Same Day/Next Day service on many standard repairs",
+      "Clear approvals before repair work begins",
+    ],
+    whyHeading: "Why Pasadena customers use our in-house workshop",
+    whyBody: [
+      "The biggest advantage is direct local access. You are not dropping your ring, watch, or necklace at a counter that ships it somewhere else. You can ask questions, get a realistic assessment, and work with the same Pasadena shop from intake to pickup.",
+      "That matters for common Pasadena requests like ring sizing before an event, a watch battery that died during the workweek, a chain that snapped unexpectedly, or a diamond that feels loose and needs to be checked before it is worn again.",
+      "If the repair is simple, we say so. If the piece needs structural work, restoration, or redesign, we explain that early so the next step is clear before you commit.",
+    ],
+    commonRepairsHeading: "Common jewelry and watch repairs in Pasadena",
+    commonRepairsBody: [
+      "The most common Pasadena repair requests are watch battery replacement, ring sizing, prong tightening, chain repair, jewelry cleaning, bracelet repair, and heirloom restoration. These are the repairs where timing and trust matter because the piece is already failing or at risk.",
+      "A loose stone, worn clasp, bent shank, or stopped watch can look minor until it leads to a lost stone, a broken chain, or a missed event. That is why a nearby in-house jeweler is often the better answer than waiting or mailing the piece away.",
+      "For older or sentimental pieces, Pasadena customers also come in when they need help deciding whether to restore the original design, reinforce the existing structure, or repurpose materials into something stronger for regular wear.",
+    ],
+    visitHeading: "What to expect when you visit our Pasadena shop",
+    visitBody: [
+      "If you are already in Pasadena, the fastest path is to request a quote online with a photo or come in with the piece so we can inspect it in person. We will confirm whether the issue is routine, urgent, or better treated as restoration before repair begins.",
+      "Once we review the item, we walk through the likely timing, the starting price, and whether Same Day/Next Day service is realistic for that specific job. That keeps the decision grounded in the actual condition of the piece, not guesswork.",
+      "Because the work stays in-house, follow-up is easier too. If you have questions after pickup or need another adjustment, you are still working with the same local team.",
+    ],
+    faqs: [
+      {
+        question: "Do you do jewelry repair in Pasadena or send it somewhere else?",
+        answer:
+          "Our jewelry and watch repair work is handled through the Pasadena storefront and in-house workshop, so you can work directly with the local team.",
+      },
+      {
+        question: "What repairs are most common for Pasadena customers?",
+        answer:
+          "Watch batteries, ring sizing, prong repair, chain repair, jewelry cleaning, and heirloom inspection are some of the most common Pasadena requests.",
+      },
+      {
+        question: "Should I request a quote before visiting the Pasadena shop?",
+        answer:
+          "Yes, especially if you have photos. A quote request helps us guide you toward the right service and set expectations before you arrive.",
+      },
+    ],
+    helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],
+  },
+  {
     slug: "deer-park",
     city: "Deer Park",
     title: "Jewelry Repair Near Deer Park, TX | In-House Pasadena Workshop",
