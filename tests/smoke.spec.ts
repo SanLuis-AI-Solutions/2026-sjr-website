@@ -732,6 +732,43 @@ test("mobile blog detail: broad pricing article stays net-new and routes into co
   guard.assertNoErrors("blog detail broad pricing article");
 });
 
+test("mobile blog detail: broad timing article routes urgency traffic into quote and services", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/how-long-does-jewelry-repair-take", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /How Long Does Jewelry Repair Take/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Quick answers about jewelry repair timing/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Can you usually tell the same day whether my repair will be quick or more involved/i)
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Best next step if you need a real timeline estimate/i,
+    })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Get Fast Quote$/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Watch Repair Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Ring Sizing Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Heirloom Restoration Service/i })).toBeVisible();
+
+  guard.assertNoErrors("blog detail broad timing article");
+});
+
 test("mobile service-area pages: nearby city pages render local guidance and hero actions", async ({
   page,
 }) => {

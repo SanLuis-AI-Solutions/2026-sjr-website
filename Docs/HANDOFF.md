@@ -97,6 +97,19 @@
   - verification target:
     - `npm run build`
     - `npx playwright test -g "broad pricing article"`
+- Drafted the second net-new article in the same content lane:
+  - slug:
+    - `how-long-does-jewelry-repair-take`
+  - role in funnel:
+    - broad timeline / urgency intent
+  - duplicate-avoidance note:
+    - this is intentionally broader than the existing ring sizing, watch battery, and pearl timing posts
+  - route targets:
+    - `/quote`
+    - `/book`
+    - `/services/watch-repair`
+    - `/services/ring-sizing`
+    - `/services/heirloom-restoration`
 
 # Handoff Snapshot — 2026-03-09 (CST)
 

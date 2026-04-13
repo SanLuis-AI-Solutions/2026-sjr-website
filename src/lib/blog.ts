@@ -1279,6 +1279,114 @@ export const BLOG_POSTS: BlogPost[] = [
     },
   },
   {
+    slug: "how-long-does-jewelry-repair-take",
+    title: "How Long Does Jewelry Repair Take?",
+    excerpt:
+      "A local guide to jewelry repair timing in Pasadena, which jobs still fit same-day or next-day service, what slows turnaround down, and how to get a realistic timeline before you visit.",
+    image: "/images/blog/custom-design-timeline-guide-cover.jpg",
+    topics: ["Pricing & Timing", "Trust & Buying"],
+    publishedAt: "2026-04-13",
+    reviewedAt: "2026-04-13",
+    readTime: "8 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Many straightforward jewelry repairs still fit a Same Day/Next Day pattern, but not every repair belongs in the fast lane.",
+      "Turnaround depends on repair category, hidden structural issues, parts needs, and whether the safest path is a small fix or a larger rebuild.",
+      "The fastest way to get a real timeline is a quote-first review with photos or an in-house assessment, not guessing from the most optimistic online promise.",
+    ],
+    sections: [
+      {
+        heading: "Why repair timing varies more than most customers expect",
+        body: [
+          "People usually ask about timing because they are trying to fit the repair around work, errands, school pickup, travel, or an upcoming event. The honest answer is that jewelry repair timing depends less on the category name and more on whether the piece is still a straightforward bench job or whether inspection uncovers something that changes the safe repair path.",
+          "A ring sizing, chain repair, loose-stone check, clasp repair, cleaning, or watch battery replacement may all sound simple at intake. Some really are. Others only look simple until the piece is on the bench and the team sees thin metal, hidden wear, failing prongs, stretched links, damage from a previous repair, or a part that should be handled during the same visit instead of ignored.",
+          "That is why a local, quote-first process matters. It lets us tell you quickly whether the jewelry fits the same-day lane, the next-day lane, or a slower structural path before you build your day around the wrong expectation.",
+        ],
+      },
+      {
+        heading: "Which repairs are most likely to stay same-day or next-day",
+        body: [
+          "Many standard repairs still move quickly when the piece is otherwise healthy. Clean ring sizings, straightforward watch battery work, some chain and clasp repairs, pearl restringing that has not already failed, and preventive maintenance jobs often stay inside the Same Day/Next Day pattern.",
+          "The reason those jobs move faster is not luck. It is that the scope is contained. The repair does not need added metal beyond the normal plan, the stones do not show fresh movement, the clasp or chain has not started failing in multiple places, and there is no sign that a larger rebuild or redesign conversation is about to replace the quick fix.",
+          "For Pasadena and nearby-city customers, that speed matters because the practical question is often not just 'how long does it take?' It is 'can I get this handled without turning one repair into a week of uncertainty?'",
+        ],
+      },
+      {
+        heading: "What usually pushes a repair out of the fast lane",
+        body: [
+          "Structural problems are the biggest reason timing changes. A ring that needs more than sizing, a stone setting with real wear, a chain with multiple weak points, or an heirloom that needs stabilization instead of a cosmetic touch-up all require slower handling for the right reasons.",
+          "Parts and material needs can extend turnaround too. If the repair needs a replacement component, added metal, clasp work, or a more involved finish step, the timeline naturally changes because the job is no longer a simple bench correction. The same thing happens when a piece needs more than one repair and the safest path is to handle the issues together instead of sending the jewelry back into wear half-finished.",
+          "This is where transparent timing matters most. Customers do not mind careful work when they understand why the extra time protects the piece. What frustrates them is being promised 'fast' before anyone has looked closely enough to know whether fast is responsible.",
+        ],
+      },
+      {
+        heading: "How to think about timing when a deadline matters",
+        body: [
+          "If the repair is for a proposal, wedding, anniversary, church event, work trip, or family handoff, say that at the start. Timing is easiest to plan when the real deadline is part of the first conversation rather than something revealed after the assessment is already underway.",
+          "A good shop should tell you clearly whether the deadline fits the job. Sometimes the answer is yes and the repair moves quickly. Sometimes the safer answer is that the piece needs more time, or that a temporary backup plan is smarter than rushing a sentimental or structurally weak item through the bench.",
+          "For local customers, that honesty is part of the value. A realistic timeline is more useful than the fastest possible promise, especially when the jewelry is meaningful or the event cannot move.",
+        ],
+      },
+      {
+        heading: "Why local, in-house timing is easier to trust",
+        body: [
+          "When your jewelry stays on-site with one team, the timing conversation is clearer. You are not waiting on a chain counter to call a third-party bench, wondering whether the piece was shipped out, or trying to decode why the timeline changed after drop-off. The same people who inspect the piece are the ones who can explain the repair path and its timing.",
+          "That local visibility matters for cautious customers. Many are less worried about whether the repair takes one day or two days than whether the timeline is honest and whether the jewelry is still under control. In-house handling, approval-first communication, and clear updates reduce the uncertainty that makes any repair feel longer than it should.",
+          "That is also why a quote-first estimate works well. It gives you an early sense of what belongs in the quick lane, what belongs in the careful lane, and whether the repair is worth fitting into your schedule now or after a larger decision about restoration or redesign.",
+        ],
+      },
+      {
+        heading: "Best next step if you need a realistic repair timeline",
+        body: [
+          "If you already know the service category, start with that service page and send a quote request with the timing question upfront. If the jewelry might need more than one repair, or you are not sure whether the problem is small or structural, the fastest path is a photo-first quote or an in-house assessment that can separate quick work from bigger bench time.",
+          "That keeps the process practical for people coming from Pasadena, Deer Park, Clear Lake, Webster, Friendswood, and La Porte. It also means you are making your calendar around a real recommendation rather than around a guess pulled from a generic jewelry forum or a chain-store promise.",
+          "If the piece matters, the right timing question is not only 'how fast can this be done?' It is 'how fast can this be done well, with the right scope confirmed before the work starts?'",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about jewelry repair timing",
+    faqs: [
+      {
+        question: "Can you usually tell the same day whether my repair will be quick or more involved?",
+        answer:
+          "In many cases, yes. A quote-first review or in-house assessment usually tells you whether the piece fits a same-day or next-day path or whether structural work is likely to extend the timeline.",
+      },
+      {
+        question: "What usually makes jewelry repair take longer?",
+        answer:
+          "Hidden structural issues, multiple weak points, added metal or parts, stone-security work, and repairs that shift into restoration or redesign are the most common reasons a repair moves out of the fast lane.",
+      },
+      {
+        question: "Should I mention an event deadline before I bring the piece in?",
+        answer:
+          "Yes. A proposal, wedding, anniversary, trip, or other firm deadline should be part of the first conversation so the safest timeline can be planned around the real date.",
+      },
+    ],
+    nextStepsHeading: "Best next step if you need a real timeline estimate",
+    nextStepsIntro:
+      "If timing is the main question, start with a quote request or the service page that best matches the repair so the turnaround can be scoped before you visit.",
+    nextSteps: [
+      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "See Heirloom Restoration Service", href: "/services/heirloom-restoration" },
+    ],
+    relatedServiceSlugs: [
+      "watch-repair",
+      "ring-sizing",
+      "necklace-repair",
+      "stone-setting",
+      "heirloom-restoration",
+    ],
+    discoveryBoosts: {
+      blogFeatured: 9,
+      serviceHub: 8,
+      geoHelpfulReads: 7,
+    },
+  },
+  {
     slug: "how-much-does-jewelry-repair-cost-pasadena",
     title: "How much does jewelry repair cost in Pasadena?",
     excerpt:
@@ -1497,30 +1605,35 @@ const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"])
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "watch-repair": [
+    "how-long-does-jewelry-repair-take",
     "how-much-does-jewelry-repair-cost-pasadena",
     "watch-battery-replacement",
     "does-my-watch-need-battery-or-repair-pasadena",
     "where-to-get-watch-battery-replaced-pasadena",
   ],
   "ring-sizing": [
+    "how-long-does-jewelry-repair-take",
     "how-much-does-jewelry-repair-cost-pasadena",
     "cost-to-resize-gold-ring-pasadena",
     "ring-sizing-guide",
     "can-a-severely-bent-ring-prong-be-fixed",
   ],
   "stone-setting": [
+    "how-long-does-jewelry-repair-take",
     "how-much-does-jewelry-repair-cost-pasadena",
     "stone-security-checklist",
     "can-a-severely-bent-ring-prong-be-fixed",
     "cost-to-resize-gold-ring-pasadena",
   ],
   "necklace-repair": [
+    "how-long-does-jewelry-repair-take",
     "how-much-does-jewelry-repair-cost-pasadena",
     "chain-repair-weak-points",
     "professional-cleaning-vs-home-care",
     "heirloom-jewelry-restoration-repair-or-redesign",
   ],
   "heirloom-restoration": [
+    "how-long-does-jewelry-repair-take",
     "how-much-does-jewelry-repair-cost-pasadena",
     "heirloom-jewelry-restoration-repair-or-redesign",
     "heirloom-restoration-planning-guide",

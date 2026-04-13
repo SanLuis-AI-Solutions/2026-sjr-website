@@ -58,6 +58,18 @@ Update cadence: weekly (or after major milestones).
     - verification completed:
       - `npm run build`
       - `npx playwright test -g "broad pricing article"`
+    - second net-new article drafted locally:
+      - `how-long-does-jewelry-repair-take`
+    - this article opens a broad timing lane rather than repeating:
+      - ring sizing timing
+      - watch battery timing
+      - pearl restringing timing
+    - routes urgency and planning traffic into:
+      - `/quote`
+      - `/book`
+      - watch repair
+      - ring sizing
+      - heirloom restoration
   - next likely tranche:
     - deploy the homepage CTR rewrite so the CTR test actually starts on production
     - watch the next 24-48 hours to see whether GA4 starts reflecting search visits after the head-bootstrap change reaches production
