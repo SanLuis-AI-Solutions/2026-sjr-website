@@ -77,6 +77,26 @@
     - no CSP console errors were observed for GA on production
     - `gtag.js` does load on production after interaction/idle on the current live build
     - `window.gtag` exists, but an obvious analytics collect request was not confirmed from the captured DevTools network list after a manual `page_view` call
+- Started Phase 3B net-new blog implementation:
+  - added anti-cannibalization strategy docs:
+    - `Docs/BLOG_STRATEGY.md`
+    - `Docs/NOTEBOOKLM_BLOG_WORKFLOW.md`
+    - `Docs/BLOG_PUBLISHING_SCHEDULE.md`
+  - first net-new article added to `src/lib/blog.ts`:
+    - `how-much-does-jewelry-repair-cost-pasadena`
+  - source grounding used the existing NotebookLM stack:
+    - `SJR Services`
+    - `SJR Local SEO And Coverage`
+    - `SJR Reviews And Voice`
+  - post scope:
+    - broad local pricing intent
+    - quote-first conversion framing
+    - internal links to watch repair, ring sizing, necklace repair, quote, and booking
+  - duplicate-avoidance note:
+    - the new article is intentionally broader than the existing service-specific pricing posts and should not be reframed into another ring, pearl, watch, or heirloom cost article
+  - verification target:
+    - `npm run build`
+    - `npx playwright test -g "broad pricing article"`
 
 # Handoff Snapshot — 2026-03-09 (CST)
 

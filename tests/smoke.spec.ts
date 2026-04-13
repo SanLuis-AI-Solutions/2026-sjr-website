@@ -695,6 +695,43 @@ test("mobile blog detail: watch battery article links into deer park geo guidanc
   guard.assertNoErrors("blog detail watch battery geo link");
 });
 
+test("mobile blog detail: broad pricing article stays net-new and routes into conversion paths", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/how-much-does-jewelry-repair-cost-pasadena", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /How much does jewelry repair cost in Pasadena/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Quick answers about jewelry repair cost in Pasadena/i,
+    })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Can you give me one flat jewelry repair price before seeing the piece/i)
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: /Best next step if you want a real jewelry repair quote/i,
+    })
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Get Fast Quote$/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Watch Repair Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Ring Sizing Service/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /See Necklace Repair Service/i })).toBeVisible();
+
+  guard.assertNoErrors("blog detail broad pricing article");
+});
+
 test("mobile service-area pages: nearby city pages render local guidance and hero actions", async ({
   page,
 }) => {

@@ -39,6 +39,25 @@ Update cadence: weekly (or after major milestones).
     - `gtag.js` loads on the live site after interaction/idle
     - no CSP errors were observed
     - event delivery is still not fully proven from live DevTools evidence, so GA reporting needs another 24-48h check
+  - Phase 3B net-new blog tranche is now in progress locally:
+    - added a strict anti-duplication rule for new blog topics
+    - created `Docs/BLOG_STRATEGY.md`, `Docs/NOTEBOOKLM_BLOG_WORKFLOW.md`, and `Docs/BLOG_PUBLISHING_SCHEDULE.md`
+    - first net-new article added:
+      - `how-much-does-jewelry-repair-cost-pasadena`
+    - this article intentionally avoids duplication with:
+      - ring sizing cost / timing
+      - watch battery replacement / watch battery vs repair
+      - heirloom repair vs redesign
+      - bent prong / loose stone urgency
+      - pearl restringing cost
+    - it opens a broader local pricing lane that supports:
+      - homepage
+      - `/quote`
+      - the services hub
+      - multiple repair categories through internal links
+    - verification completed:
+      - `npm run build`
+      - `npx playwright test -g "broad pricing article"`
   - next likely tranche:
     - deploy the homepage CTR rewrite so the CTR test actually starts on production
     - watch the next 24-48 hours to see whether GA4 starts reflecting search visits after the head-bootstrap change reaches production
