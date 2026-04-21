@@ -4,84 +4,62 @@ import path from "node:path";
 const BASE_URL = "https://www.susiesjewelryrepair.com";
 const GENERATED_AT = "2026-04-21";
 
+const OBSERVED_ON = "2026-04-21";
+
 const OBSERVED_STATUSES = {
-  "/": {
-    category: "static",
-    status: "indexed",
-    observedOn: "2026-04-21",
-    action: "monitor",
-    note: "GSC reported `URL is on Google`.",
-  },
-  "/services/watch-repair": {
-    category: "service-detail",
-    status: "indexed",
-    observedOn: "2026-04-21",
-    action: "monitor",
-    note: "GSC reported `URL is on Google`.",
-  },
+  "/": { status: "indexed" },
+  "/about": { status: "indexed" },
+  "/blog": { status: "indexed" },
+  "/book": { status: "indexed" },
+  "/contact": { status: "indexed" },
+  "/faq": { status: "indexed" },
+  "/privacy": { status: "indexed" },
+  "/quote": { status: "indexed" },
+  "/services": { status: "indexed" },
+  "/terms": { status: "indexed" },
+  "/services/bracelet-repair": { status: "indexed" },
+  "/services/custom-design": { status: "indexed" },
+  "/services/deer-park": { status: "indexed" },
+  "/services/heirloom-restoration": { status: "indexed" },
+  "/services/jewelry-cleaning": { status: "indexed" },
+  "/services/necklace-repair": { status: "indexed" },
+  "/services/ring-sizing": { status: "indexed" },
+  "/services/stone-setting": { status: "indexed" },
+  "/services/watch-repair": { status: "indexed" },
+  "/blog/can-a-severely-bent-ring-prong-be-fixed": { status: "indexed" },
   "/blog/cost-to-resize-gold-ring-pasadena": {
-    category: "blog",
     status: "indexed",
-    observedOn: "2026-04-21",
-    action: "monitor",
     note: "Strongest confirmed indexed commercial blog sample.",
   },
-  "/services/pasadena": {
-    category: "service-area",
-    status: "discovered-currently-not-indexed",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC showed sitemap source and homepage as referring page.",
-  },
-  "/services/la-porte": {
-    category: "service-area",
-    status: "discovered-currently-not-indexed",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC showed sitemap source and a referring page under `/blog`.",
-  },
-  "/services/friendswood": {
-    category: "service-area",
-    status: "discovered-currently-not-indexed",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC showed sitemap source and a referring page under `/blog`.",
-  },
-  "/services/clear-lake": {
-    category: "service-area",
-    status: "discovered-currently-not-indexed",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC showed sitemap source and a referring page under `/blog`.",
-  },
+  "/blog/custom-design-timeline-guide": { status: "indexed" },
+  "/blog/heirloom-jewelry-restoration-repair-or-redesign": { status: "indexed" },
+  "/blog/ring-sizing-guide": { status: "indexed" },
+  "/blog/watch-battery-replacement": { status: "indexed" },
+  "/services/clear-lake": { status: "discovered-currently-not-indexed" },
+  "/services/friendswood": { status: "discovered-currently-not-indexed" },
+  "/services/pearl-restringing": { status: "discovered-currently-not-indexed" },
+  "/services/webster": { status: "discovered-currently-not-indexed" },
+  "/blog/chain-repair-weak-points": { status: "discovered-currently-not-indexed" },
   "/blog/does-my-watch-need-battery-or-repair-pasadena": {
-    category: "blog",
     status: "discovered-currently-not-indexed",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
     note: "Commercial blog sample still waiting on index selection.",
   },
-  "/services/webster": {
-    category: "service-area",
-    status: "unknown-to-google",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC reported no referring sitemap detected even though production sitemap includes it.",
-  },
-  "/services/pearl-restringing": {
-    category: "service-detail",
-    status: "unknown-to-google",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC reported no referring sitemap detected even though production sitemap includes it.",
-  },
+  "/blog/heirloom-restoration-planning-guide": { status: "discovered-currently-not-indexed" },
   "/blog/how-much-does-pearl-restringing-cost-pasadena": {
-    category: "blog",
-    status: "unknown-to-google",
-    observedOn: "2026-04-21",
-    action: "request-indexing-and-recheck",
-    note: "GSC reported no referring sitemap detected even though production sitemap includes it.",
+    status: "discovered-currently-not-indexed",
   },
+  "/blog/how-to-choose-a-jeweler": { status: "discovered-currently-not-indexed" },
+  "/blog/professional-cleaning-vs-home-care": { status: "discovered-currently-not-indexed" },
+  "/blog/safe-to-clean-vintage-diamond-ring-at-home": {
+    status: "discovered-currently-not-indexed",
+  },
+  "/blog/where-to-get-watch-battery-replaced-pasadena": {
+    status: "discovered-currently-not-indexed",
+  },
+  "/services/la-porte": { status: "unknown-to-google" },
+  "/services/pasadena": { status: "unknown-to-google" },
+  "/blog/pearl-restringing-timing-guide": { status: "unknown-to-google" },
+  "/blog/stone-security-checklist": { status: "unknown-to-google" },
 };
 
 function readFile(relativePath) {
@@ -177,13 +155,22 @@ function extractStaticRoutes() {
 
 function applyObservedState(route) {
   const observed = OBSERVED_STATUSES[route.path];
+  const status = observed?.status || "pending-gsc-inspection";
+  const nextAction =
+    status === "indexed" ? "monitor" : observed ? "request-indexing-and-recheck" : "inspect-and-request-indexing";
+  const note =
+    observed?.note ||
+    (observed
+      ? "GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow."
+      : "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed.");
+
   return {
     ...route,
     url: `${BASE_URL}${route.path}`,
-    observedStatus: observed?.status || "pending-gsc-inspection",
-    observedOn: observed?.observedOn || null,
-    nextAction: observed?.action || "inspect-and-request-indexing",
-    note: observed?.note || "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed.",
+    observedStatus: status,
+    observedOn: observed ? OBSERVED_ON : null,
+    nextAction,
+    note,
   };
 }
 

@@ -20,10 +20,9 @@ Generated on 2026-04-21 from canonical repo sources.
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 5
-- Indexed: 3
-- Pending GSC inspection: 30
-- URL is unknown to Google: 3
+- Discovered - currently not indexed: 12
+- Indexed: 25
+- URL is unknown to Google: 4
 
 ## Immediate GSC Queue
 
@@ -31,72 +30,26 @@ These URLs should be prioritized for indexing requests or follow-up rechecks bas
 
 | URL | Category | Current Status | Next Action | Notes |
 | --- | --- | --- | --- | --- |
-| `/services/bracelet-repair` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/custom-design` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/heirloom-restoration` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/jewelry-cleaning` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/necklace-repair` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/pearl-restringing` | service-detail | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC reported no referring sitemap detected even though production sitemap includes it. |
-| `/services/ring-sizing` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/stone-setting` | service-detail | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/clear-lake` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC showed sitemap source and a referring page under `/blog`. |
-| `/services/deer-park` | service-area | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/services/friendswood` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC showed sitemap source and a referring page under `/blog`. |
-| `/services/la-porte` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC showed sitemap source and a referring page under `/blog`. |
-| `/services/pasadena` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC showed sitemap source and homepage as referring page. |
-| `/services/webster` | service-area | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC reported no referring sitemap detected even though production sitemap includes it. |
-| `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/chain-repair-weak-points` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/custom-design-timeline-guide` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
+| `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/services/clear-lake` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/services/friendswood` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/services/la-porte` | service-area | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/services/pasadena` | service-area | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/services/webster` | service-area | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | Commercial blog sample still waiting on index selection. |
-| `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/heirloom-restoration-planning-guide` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC reported no referring sitemap detected even though production sitemap includes it. |
-| `/blog/how-to-choose-a-jeweler` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/pearl-restringing-timing-guide` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/professional-cleaning-vs-home-care` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/ring-sizing-guide` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/stone-security-checklist` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/watch-battery-replacement` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
-| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Pending GSC inspection | Inspect in GSC and request indexing | Canonical URL from codebase; inspect in GSC and request indexing if not already indexed. |
+| `/blog/heirloom-restoration-planning-guide` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/pearl-restringing-timing-guide` | blog | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/stone-security-checklist` | blog | URL is unknown to Google | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
+| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Discovered - currently not indexed | Request indexing and recheck on 2026-04-26/27 | GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow. |
 
 ## Remaining Canonical URLs Pending First Inspection
 
-- Count: 30
-
-| URL | Category | Label | Recommended Action |
-| --- | --- | --- | --- |
-| `/about` | static | About | Inspect in GSC and request indexing |
-| `/blog` | static | Blog hub | Inspect in GSC and request indexing |
-| `/book` | static | Book | Inspect in GSC and request indexing |
-| `/contact` | static | Contact | Inspect in GSC and request indexing |
-| `/faq` | static | FAQ | Inspect in GSC and request indexing |
-| `/privacy` | static | Privacy | Inspect in GSC and request indexing |
-| `/quote` | static | Quote | Inspect in GSC and request indexing |
-| `/services` | static | Services hub | Inspect in GSC and request indexing |
-| `/terms` | static | Terms | Inspect in GSC and request indexing |
-| `/services/bracelet-repair` | service-detail | Bracelet Repair | Inspect in GSC and request indexing |
-| `/services/custom-design` | service-detail | Custom Design | Inspect in GSC and request indexing |
-| `/services/heirloom-restoration` | service-detail | Heirloom Restorations | Inspect in GSC and request indexing |
-| `/services/jewelry-cleaning` | service-detail | Jewelry Cleaning & Polishing | Inspect in GSC and request indexing |
-| `/services/necklace-repair` | service-detail | Necklace Repair | Inspect in GSC and request indexing |
-| `/services/ring-sizing` | service-detail | Ring Sizing & Repair | Inspect in GSC and request indexing |
-| `/services/stone-setting` | service-detail | Stone Replacement & Settings | Inspect in GSC and request indexing |
-| `/services/deer-park` | service-area | Deer Park service area | Inspect in GSC and request indexing |
-| `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Inspect in GSC and request indexing |
-| `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | Inspect in GSC and request indexing |
-| `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Inspect in GSC and request indexing |
-| `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Inspect in GSC and request indexing |
-| `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Inspect in GSC and request indexing |
-| `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Inspect in GSC and request indexing |
-| `/blog/pearl-restringing-timing-guide` | blog | Pearl Restringing Timing: When to Restring and Why | Inspect in GSC and request indexing |
-| `/blog/professional-cleaning-vs-home-care` | blog | Professional Jewelry Cleaning vs. At-Home Cleaning | Inspect in GSC and request indexing |
-| `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Inspect in GSC and request indexing |
-| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Inspect in GSC and request indexing |
-| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Inspect in GSC and request indexing |
-| `/blog/watch-battery-replacement` | blog | Watch Battery Replacement: Timing and Care Tips | Inspect in GSC and request indexing |
-| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Where to get a watch battery replaced today near Deer Park / Pasadena? | Inspect in GSC and request indexing |
+- None.
 
 ## April 26-27 Checkpoint
 
@@ -117,45 +70,45 @@ Decision rule:
 | URL | Category | Label | Observed Status |
 | --- | --- | --- | --- |
 | `/` | static | Homepage | Indexed |
-| `/about` | static | About | Pending GSC inspection |
-| `/blog` | static | Blog hub | Pending GSC inspection |
-| `/book` | static | Book | Pending GSC inspection |
-| `/contact` | static | Contact | Pending GSC inspection |
-| `/faq` | static | FAQ | Pending GSC inspection |
-| `/privacy` | static | Privacy | Pending GSC inspection |
-| `/quote` | static | Quote | Pending GSC inspection |
-| `/services` | static | Services hub | Pending GSC inspection |
-| `/terms` | static | Terms | Pending GSC inspection |
-| `/services/bracelet-repair` | service-detail | Bracelet Repair | Pending GSC inspection |
-| `/services/custom-design` | service-detail | Custom Design | Pending GSC inspection |
-| `/services/heirloom-restoration` | service-detail | Heirloom Restorations | Pending GSC inspection |
-| `/services/jewelry-cleaning` | service-detail | Jewelry Cleaning & Polishing | Pending GSC inspection |
-| `/services/necklace-repair` | service-detail | Necklace Repair | Pending GSC inspection |
-| `/services/pearl-restringing` | service-detail | Pearl Restringing | URL is unknown to Google |
-| `/services/ring-sizing` | service-detail | Ring Sizing & Repair | Pending GSC inspection |
-| `/services/stone-setting` | service-detail | Stone Replacement & Settings | Pending GSC inspection |
+| `/about` | static | About | Indexed |
+| `/blog` | static | Blog hub | Indexed |
+| `/book` | static | Book | Indexed |
+| `/contact` | static | Contact | Indexed |
+| `/faq` | static | FAQ | Indexed |
+| `/privacy` | static | Privacy | Indexed |
+| `/quote` | static | Quote | Indexed |
+| `/services` | static | Services hub | Indexed |
+| `/terms` | static | Terms | Indexed |
+| `/services/bracelet-repair` | service-detail | Bracelet Repair | Indexed |
+| `/services/custom-design` | service-detail | Custom Design | Indexed |
+| `/services/heirloom-restoration` | service-detail | Heirloom Restorations | Indexed |
+| `/services/jewelry-cleaning` | service-detail | Jewelry Cleaning & Polishing | Indexed |
+| `/services/necklace-repair` | service-detail | Necklace Repair | Indexed |
+| `/services/pearl-restringing` | service-detail | Pearl Restringing | Discovered - currently not indexed |
+| `/services/ring-sizing` | service-detail | Ring Sizing & Repair | Indexed |
+| `/services/stone-setting` | service-detail | Stone Replacement & Settings | Indexed |
 | `/services/watch-repair` | service-detail | Watch Repair & Battery Replacement | Indexed |
 | `/services/clear-lake` | service-area | Clear Lake service area | Discovered - currently not indexed |
-| `/services/deer-park` | service-area | Deer Park service area | Pending GSC inspection |
+| `/services/deer-park` | service-area | Deer Park service area | Indexed |
 | `/services/friendswood` | service-area | Friendswood service area | Discovered - currently not indexed |
-| `/services/la-porte` | service-area | La Porte service area | Discovered - currently not indexed |
-| `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
-| `/services/webster` | service-area | Webster service area | URL is unknown to Google |
-| `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Pending GSC inspection |
-| `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | Pending GSC inspection |
+| `/services/la-porte` | service-area | La Porte service area | URL is unknown to Google |
+| `/services/pasadena` | service-area | Pasadena service area | URL is unknown to Google |
+| `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
+| `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |
+| `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | Discovered - currently not indexed |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |
-| `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Pending GSC inspection |
+| `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Indexed |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | Discovered - currently not indexed |
-| `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Pending GSC inspection |
-| `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Pending GSC inspection |
-| `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | URL is unknown to Google |
-| `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Pending GSC inspection |
-| `/blog/pearl-restringing-timing-guide` | blog | Pearl Restringing Timing: When to Restring and Why | Pending GSC inspection |
-| `/blog/professional-cleaning-vs-home-care` | blog | Professional Jewelry Cleaning vs. At-Home Cleaning | Pending GSC inspection |
-| `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Pending GSC inspection |
-| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Pending GSC inspection |
-| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Pending GSC inspection |
-| `/blog/watch-battery-replacement` | blog | Watch Battery Replacement: Timing and Care Tips | Pending GSC inspection |
-| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Where to get a watch battery replaced today near Deer Park / Pasadena? | Pending GSC inspection |
+| `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Indexed |
+| `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Discovered - currently not indexed |
+| `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Discovered - currently not indexed |
+| `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Discovered - currently not indexed |
+| `/blog/pearl-restringing-timing-guide` | blog | Pearl Restringing Timing: When to Restring and Why | URL is unknown to Google |
+| `/blog/professional-cleaning-vs-home-care` | blog | Professional Jewelry Cleaning vs. At-Home Cleaning | Discovered - currently not indexed |
+| `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Indexed |
+| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Discovered - currently not indexed |
+| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | URL is unknown to Google |
+| `/blog/watch-battery-replacement` | blog | Watch Battery Replacement: Timing and Care Tips | Indexed |
+| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Where to get a watch battery replaced today near Deer Park / Pasadena? | Discovered - currently not indexed |
 
 Generated by `npm run google:indexing-manifest`.

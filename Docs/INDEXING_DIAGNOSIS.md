@@ -275,6 +275,19 @@ The production sitemap was manually resubmitted in GSC on 2026-04-21. GSC return
 - Continue submitting the remaining affected blog, geo, and service URLs in batches.
 - Suggested next indexing review date: 2026-04-26.
 
+### Full Canonical Submission Batch (2026-04-21)
+
+After the initial sample checks, the remaining canonical URLs from `Docs/INDEXING_MANIFEST.md` were inspected in GSC and submitted for indexing from the URL Inspection flow.
+
+Current post-submission snapshot from the full canonical set:
+
+- `25` URLs currently show as indexed
+- `12` URLs currently show as `Discovered - currently not indexed`
+- `4` URLs currently show as `URL is unknown to Google`
+- `0` canonical URLs remain in a `pending first inspection` state
+
+This is the correct baseline for the April 26-27 checkpoint. These statuses can drift slightly between inspections even on the same day, so the trend matters more than any one individual label.
+
 ### Expanded Geo And Service Sample
 
 Additional GSC inspections run on 2026-04-21 against URLs that were part of the original affected set:
