@@ -1385,6 +1385,12 @@ export const BLOG_TOPICS = Array.from(
 );
 
 const COMMERCIAL_DISCOVERY_TOPICS = new Set(["Pricing & Timing", "Diagnostics"]);
+const COMMERCIAL_GUIDE_SLUGS = [
+  "cost-to-resize-gold-ring-pasadena",
+  "how-much-does-pearl-restringing-cost-pasadena",
+  "does-my-watch-need-battery-or-repair-pasadena",
+  "where-to-get-watch-battery-replaced-pasadena",
+] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "watch-repair": [
@@ -1512,6 +1518,21 @@ export function getServiceHubHelpfulGuides(
   count = serviceSlugs.length,
 ): BlogPost[] {
   return getHelpfulBlogPostsForServiceSlugs(serviceSlugs, count);
+}
+
+export function getCommercialIntentBlogPosts(
+  count: number = COMMERCIAL_GUIDE_SLUGS.length,
+): BlogPost[] {
+  return COMMERCIAL_GUIDE_SLUGS.flatMap((slug) => {
+    const post = getBlogPostBySlug(slug);
+    return post ? [post] : [];
+  }).slice(0, count);
+}
+
+export function getCommercialIntentRelatedPosts(slug: string, count = 2): BlogPost[] {
+  return getCommercialIntentBlogPosts()
+    .filter((post) => post.slug !== slug)
+    .slice(0, count);
 }
 
 export function getServicesHubHelpfulGuideServiceSlugs(count = 3): string[] {

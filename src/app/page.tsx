@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowcaseBand, Testimonials } from "@/components/home-sections";
+import { HomeCommercialGuides } from "@/components/home-commercial-guides";
 import { servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
@@ -51,6 +52,7 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pt-24 md:pt-28">
         <Hero />
+        <HomeCommercialGuides />
         <Suspense fallback={null}>
           <HomeDeferredContent />
         </Suspense>

@@ -14,9 +14,14 @@ type Props = {
 };
 
 export function ServiceAreaLandingPage({ page }: Props) {
-  const highlightedServices = SERVICES.filter((service) =>
-    getServiceAreaHighlightedServiceSlugs().includes(service.slug)
-  );
+  const serviceLookup = new Map(SERVICES.map((service) => [service.slug, service] as const));
+  const highlightedServiceSlugs =
+    page.helpfulReadServiceSlugs && page.helpfulReadServiceSlugs.length > 0
+      ? page.helpfulReadServiceSlugs
+      : getServiceAreaHighlightedServiceSlugs();
+  const highlightedServices = highlightedServiceSlugs
+    .map((slug) => serviceLookup.get(slug))
+    .filter((service): service is (typeof SERVICES)[number] => Boolean(service));
   const helpfulReads =
     page.helpfulReads ??
     getHelpfulBlogPostsForServiceSlugs(page.helpfulReadServiceSlugs ?? [], 3).map((post) => ({
@@ -186,7 +191,10 @@ export function ServiceAreaLandingPage({ page }: Props) {
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
               <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                Nearby service menu
+                Popular with {page.city} customers
+              </p>
+              <p className="mt-3 text-sm leading-7 text-stone-700">
+                These are the repair categories and quote-first topics we most often point {page.city} customers to before they make the drive to Pasadena.
               </p>
               <div className="mt-4 space-y-2">
                 {highlightedServices.map((service) => (

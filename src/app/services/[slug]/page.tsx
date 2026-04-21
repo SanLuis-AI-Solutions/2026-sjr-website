@@ -1164,6 +1164,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     title: post.title,
     excerpt: post.excerpt,
   }));
+  const primaryHelpfulRead = helpfulReadPosts[0];
   const breadcrumbItems = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -1563,6 +1564,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <p className="mt-4 max-w-2xl text-sm text-stone-700">
               {service.summary || service.short_summary}
             </p>
+            {primaryHelpfulRead ? (
+              <div className="mt-6 max-w-2xl rounded-2xl border border-brand-gold/30 bg-white/85 p-4 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                  Before you book
+                </p>
+                <TrackedLink
+                  href={`/blog/${primaryHelpfulRead.slug}`}
+                  eventName="service_primary_guide_click"
+                  eventParams={{ service_slug: slug, blog_slug: primaryHelpfulRead.slug }}
+                  className="mt-3 inline-flex text-sm font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {primaryHelpfulRead.title}
+                </TrackedLink>
+                <p className="mt-2 text-sm leading-7 text-stone-700">
+                  {primaryHelpfulRead.excerpt}
+                </p>
+              </div>
+            ) : null}
             {(startingAt || timeEstimateDisplay) && (
               <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-700">
                 {startingAt && (
@@ -2284,10 +2303,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-                    Helpful reads
+                    Pricing and repair guides
                   </p>
                   <h2 className="mt-2 font-serif text-2xl text-stone-900">
-                    Explore related guidance before you book
+                    Read the key questions customers ask before booking
                   </h2>
                 </div>
                 <Link

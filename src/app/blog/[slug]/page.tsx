@@ -8,6 +8,7 @@ import {
   BLOG_MOBILE_HERO_IMAGE_BY_SLUG,
   BLOG_POSTS,
   getBlogPostBySlug,
+  getCommercialIntentRelatedPosts,
   getRelatedBlogPosts,
 } from "@/lib/blog";
 import { SERVICES } from "@/lib/constants";
@@ -68,6 +69,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
     post.relatedServiceSlugs.includes(service.slug)
   ).slice(0, 3);
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
+  const commercialGuides = getCommercialIntentRelatedPosts(post.slug, 2);
   const breadcrumbItems = [
     { name: "Home", href: "/" },
     { name: "Blog", href: "/blog" },
@@ -293,6 +295,40 @@ export default async function BlogDetailPage({ params }: PageProps) {
                           className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-200 bg-stone-50 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-900 hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                         >
                           {item.label}
+                        </TrackedLink>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
+
+                {commercialGuides.length > 0 ? (
+                  <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                      Pricing and diagnosis guides
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">
+                      Keep reading the articles customers compare before booking
+                    </h2>
+                    <div className="mt-5 grid gap-4 md:grid-cols-2">
+                      {commercialGuides.map((entry) => (
+                        <TrackedLink
+                          key={entry.slug}
+                          href={`/blog/${entry.slug}`}
+                          eventName="related_read_click"
+                          eventParams={{
+                            from_blog_slug: post.slug,
+                            to_blog_slug: entry.slug,
+                            section: "commercial_guides",
+                          }}
+                          className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                        >
+                          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+                            Commercial guide
+                          </p>
+                          <h3 className="mt-3 text-base font-semibold text-stone-900">
+                            {entry.title}
+                          </h3>
+                          <p className="mt-2 text-sm leading-7 text-stone-700">{entry.excerpt}</p>
                         </TrackedLink>
                       ))}
                     </div>
