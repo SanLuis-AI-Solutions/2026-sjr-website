@@ -221,12 +221,48 @@ Implemented in repo on 2026-04-21:
 4. Added stronger blog-to-blog internal links between commercial pricing and diagnosis guides.
 5. Tightened geo-page uniqueness by making the service sidebar city-specific instead of using the same generic highlight set for every area page.
 
-## Post-Remediation GSC Check
+## Production Deploy Verification
 
-Manual step still required after deploy:
+Production deploy completed on 2026-04-21.
 
-1. Open Google Search Console URL Inspection for one homepage URL, one service URL, one geo URL, and one commercial blog URL.
-2. Run the live test.
-3. Confirm coverage and canonical status remain valid.
-4. Request indexing for the representative URLs after the live test passes.
-5. Record any new GSC findings here once the production deploy is complete.
+- Vercel deployment id: `dpl_7EArHQ77emngW29B7jW6P2K4ayPt`
+- Vercel production URL: `https://sjr-new-website-aiproject-797nrckcf.vercel.app`
+- Custom domain alias confirmed live: `https://susiesjewelryrepair.com`
+
+### Live Production Checks
+
+| URL | Expected change | Result | Evidence |
+| --- | --- | --- | --- |
+| `/sitemap.xml` | `<lastmod>` on static, service, geo, and blog URLs | Confirmed | Production sitemap now returns `<lastmod>` entries, including `2026-04-21T17:00:00.000Z` on homepage and service-area URLs |
+| `/` | Homepage commercial-intent internal links | Confirmed | Production HTML contains `Pricing and repair guides` and `Start with the questions customers ask before they book` |
+| `/services/pasadena` | City-specific sidebar copy | Confirmed | Production HTML contains `Popular with Pasadena customers` and city-specific supporting copy |
+| `/services/watch-repair` | Primary helpful-guide callout | Confirmed | Production HTML contains `Before you book` with a direct link to the watch battery guide |
+| `/blog/cost-to-resize-gold-ring-pasadena` | Commercial guide cross-links | Confirmed | Production HTML contains `Pricing and diagnosis guides` with cross-links to other commercial guides |
+
+## Post-Remediation GSC Check (2026-04-21)
+
+Status: pending manual completion in Google Search Console.
+
+I could not complete the GSC inspection clicks from this environment because there is no authenticated, navigable browser tool available for Search Console in this session. The production deploy is live, so the remaining work is ready to be completed manually in GSC without further code changes.
+
+### URLs To Inspect
+
+1. `https://www.susiesjewelryrepair.com/`
+2. `https://www.susiesjewelryrepair.com/blog/how-much-does-jewelry-repair-cost-pasadena`
+3. `https://www.susiesjewelryrepair.com/services/pasadena`
+4. `https://www.susiesjewelryrepair.com/services/watch-repair`
+
+### What To Record In GSC
+
+| URL | Status | Last Crawl | Lastmod Detected | Notes |
+| --- | --- | --- | --- | --- |
+| `/` | Pending manual check | Pending manual check | Pending manual check | Production deploy confirmed live on 2026-04-21 |
+| `/blog/how-much-does-jewelry-repair-cost-pasadena` | Pending manual check | Pending manual check | Pending manual check | Request indexing after inspection if available |
+| `/services/pasadena` | Pending manual check | Pending manual check | Pending manual check | City-specific content and fresh sitemap entry are live |
+| `/services/watch-repair` | Pending manual check | Pending manual check | Pending manual check | Service-to-blog internal link is live |
+
+### Indexing Requests
+
+- Request indexing for the four representative URLs above after inspection passes.
+- Then submit the remaining affected blog, geo, and service URLs in batches.
+- Suggested next indexing review date: 2026-04-26.
