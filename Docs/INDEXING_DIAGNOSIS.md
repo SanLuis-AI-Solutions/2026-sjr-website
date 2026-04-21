@@ -241,14 +241,14 @@ Production deploy completed on 2026-04-21.
 
 ## Post-Remediation GSC Check (2026-04-21)
 
-Status: pending manual completion in Google Search Console.
+Status: completed in Google Search Console against the live property `https://www.susiesjewelryrepair.com/`.
 
-I could not complete the GSC inspection clicks from this environment because there is no authenticated, navigable browser tool available for Search Console in this session. The production deploy is live, so the remaining work is ready to be completed manually in GSC without further code changes.
+The production sitemap was manually resubmitted in GSC on 2026-04-21. GSC returned `Sitemap submitted successfully`.
 
 ### URLs To Inspect
 
 1. `https://www.susiesjewelryrepair.com/`
-2. `https://www.susiesjewelryrepair.com/blog/how-much-does-jewelry-repair-cost-pasadena`
+2. `https://www.susiesjewelryrepair.com/blog/cost-to-resize-gold-ring-pasadena`
 3. `https://www.susiesjewelryrepair.com/services/pasadena`
 4. `https://www.susiesjewelryrepair.com/services/watch-repair`
 
@@ -256,13 +256,45 @@ I could not complete the GSC inspection clicks from this environment because the
 
 | URL | Status | Last Crawl | Lastmod Detected | Notes |
 | --- | --- | --- | --- | --- |
-| `/` | Pending manual check | Pending manual check | Pending manual check | Production deploy confirmed live on 2026-04-21 |
-| `/blog/how-much-does-jewelry-repair-cost-pasadena` | Pending manual check | Pending manual check | Pending manual check | Request indexing after inspection if available |
-| `/services/pasadena` | Pending manual check | Pending manual check | Pending manual check | City-specific content and fresh sitemap entry are live |
-| `/services/watch-repair` | Pending manual check | Pending manual check | Pending manual check | Service-to-blog internal link is live |
+| `/` | `URL is on Google` | Not surfaced in visible inspection UI | Not surfaced in visible inspection UI | `Page is indexed`; valid rich-result items shown for FAQ and review snippets; screenshot: `Docs/gsc-homepage-inspection.png` |
+| `/blog/cost-to-resize-gold-ring-pasadena` | `URL is on Google` | Not surfaced in visible inspection UI | Not surfaced in visible inspection UI | Real commercial blog URL is indexed; screenshot: `Docs/gsc-blog-cost-to-resize-inspection.png` |
+| `/services/pasadena` | `Page is not indexed: Discovered - currently not indexed` | `N/A` | Not surfaced in visible inspection UI | GSC shows sitemap source and homepage as referring page; screenshot: `Docs/gsc-services-pasadena-inspection.png` |
+| `/services/watch-repair` | `URL is on Google` | Not surfaced in visible inspection UI | Not surfaced in visible inspection UI | `Page is indexed`; valid rich-result items shown for breadcrumbs, FAQ, and review snippets; screenshot: `Docs/gsc-services-watch-repair-inspection.png` |
 
 ### Indexing Requests
 
-- Request indexing for the four representative URLs above after inspection passes.
-- Then submit the remaining affected blog, geo, and service URLs in batches.
+- Sitemap resubmitted successfully in GSC on 2026-04-21.
+- Indexing requests were submitted from the inspection flow for the four representative URLs above.
+- Continue submitting the remaining affected blog, geo, and service URLs in batches.
 - Suggested next indexing review date: 2026-04-26.
+
+### Expanded Geo And Service Sample
+
+Additional GSC inspections run on 2026-04-21 against URLs that were part of the original affected set:
+
+| URL | Status | Last Crawl | Notes |
+| --- | --- | --- | --- |
+| `/services/la-porte` | `Page is not indexed: Discovered - currently not indexed` | `N/A` | GSC shows sitemap source and a referring page under `/blog` |
+| `/services/webster` | `Page is not indexed: URL is unknown to Google` | `N/A` | GSC reports no referring sitemap detected and no referring page detected |
+| `/services/friendswood` | `Page is not indexed: Discovered - currently not indexed` | `N/A` | GSC shows sitemap source and a referring page under `/blog` |
+| `/services/clear-lake` | `Page is not indexed: Discovered - currently not indexed` | `N/A` | GSC shows sitemap source and a referring page under `/blog` |
+| `/services/pearl-restringing` | `Page is not indexed: URL is unknown to Google` | `N/A` | GSC reports no referring sitemap detected and no referring page detected |
+
+### Expanded Blog Sample
+
+Additional GSC inspections run on 2026-04-21 against real commercial blog URLs:
+
+| URL | Status | Last Crawl | Notes |
+| --- | --- | --- | --- |
+| `/blog/cost-to-resize-gold-ring-pasadena` | `URL is on Google` | Not surfaced in visible inspection UI | This is the strongest confirmed indexed commercial blog sample |
+| `/blog/how-much-does-pearl-restringing-cost-pasadena` | `Page is not indexed: URL is unknown to Google` | `N/A` | GSC reports no referring sitemap detected and no referring page detected |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | `Page is not indexed: Discovered - currently not indexed` | `N/A` | GSC shows sitemap source and a referring page under `/blog?topic=Diagnostics` |
+
+### Notes
+
+- The earlier 404 concern was caused by checking a nonexistent slug, `/blog/how-much-does-jewelry-repair-cost-pasadena`, not by a production blog-routing failure.
+- Real blog URLs are live and return `200`, but GSC status is mixed across the commercial blog set. The confirmed indexed sample is `/blog/cost-to-resize-gold-ring-pasadena`.
+- The remaining verified indexing gap is broader than one page. Pasadena, La Porte, Friendswood, and Clear Lake still show `Discovered - currently not indexed`.
+- Webster and `/services/pearl-restringing` are in a slightly earlier state: GSC currently reports them as `URL is unknown to Google`.
+- Live production verification on 2026-04-21 still shows `/services/webster`, `/services/pearl-restringing`, `/services/la-porte`, `/services/friendswood`, and `/services/clear-lake` in `/sitemap.xml`, and all five return `200`. That means the `URL is unknown to Google` state is currently a GSC processing state, not a live `404` or sitemap omission.
+- Live production verification on 2026-04-21 also shows `/blog/cost-to-resize-gold-ring-pasadena`, `/blog/how-much-does-pearl-restringing-cost-pasadena`, and `/blog/does-my-watch-need-battery-or-repair-pasadena` in `/sitemap.xml`, and all three return `200`.

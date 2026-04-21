@@ -60,3 +60,7 @@ next-env.d.ts
 
 # editor settings
 .vscode/
+
+# local agent/browser artifacts
+.claude/
+Docs/cookies.txt
