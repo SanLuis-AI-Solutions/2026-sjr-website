@@ -13,6 +13,7 @@ Inputs used for this diagnosis:
 - Repo metadata at `Docs/https___www.susiesjewelryrepair.com_-Coverage-Validation-2026-03-13/Metadata.csv`
 - Local implementation in `src/app/sitemap.ts`, `src/app/robots.ts`, `src/app/blog/[slug]/page.tsx`, and `src/components/service-area-page.tsx`
 - Live production fetches against `https://www.susiesjewelryrepair.com` on 2026-04-21
+- Canonical URL manifest generated from repo sources at `Docs/INDEXING_MANIFEST.md` and `Docs/INDEXING_MANIFEST.json`
 
 ## Conclusion
 
@@ -165,6 +166,12 @@ The current evidence does not support these as the main blocker:
 Those are the first things to check, but they are not where the current production evidence points.
 
 ## Recommended Next Actions
+
+Use the canonical manifest as the URL source of truth for any future GSC work:
+
+- `Docs/INDEXING_MANIFEST.md`
+- `Docs/INDEXING_MANIFEST.json`
+- Regenerate with `npm run google:indexing-manifest` after sitemap or route changes
 
 ### Immediate
 

@@ -1,0 +1,528 @@
+{
+  "generatedAt": "2026-04-21",
+  "baseUrl": "https://www.susiesjewelryrepair.com",
+  "sources": [
+    "src/app/sitemap.ts",
+    "src/lib/constants.ts",
+    "src/lib/service-areas.ts",
+    "src/lib/blog.ts",
+    "Docs/INDEXING_DIAGNOSIS.md"
+  ],
+  "countsByCategory": [
+    [
+      "blog",
+      16
+    ],
+    [
+      "service-area",
+      6
+    ],
+    [
+      "service-detail",
+      9
+    ],
+    [
+      "static",
+      10
+    ]
+  ],
+  "countsByObservedStatus": [
+    [
+      "discovered-currently-not-indexed",
+      5
+    ],
+    [
+      "indexed",
+      3
+    ],
+    [
+      "pending-gsc-inspection",
+      30
+    ],
+    [
+      "unknown-to-google",
+      3
+    ]
+  ],
+  "routes": [
+    {
+      "category": "static",
+      "path": "/",
+      "label": "Homepage",
+      "url": "https://www.susiesjewelryrepair.com/",
+      "observedStatus": "indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "monitor",
+      "note": "GSC reported `URL is on Google`."
+    },
+    {
+      "category": "static",
+      "path": "/about",
+      "label": "About",
+      "url": "https://www.susiesjewelryrepair.com/about",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/blog",
+      "label": "Blog hub",
+      "url": "https://www.susiesjewelryrepair.com/blog",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/book",
+      "label": "Book",
+      "url": "https://www.susiesjewelryrepair.com/book",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/contact",
+      "label": "Contact",
+      "url": "https://www.susiesjewelryrepair.com/contact",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/faq",
+      "label": "FAQ",
+      "url": "https://www.susiesjewelryrepair.com/faq",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/privacy",
+      "label": "Privacy",
+      "url": "https://www.susiesjewelryrepair.com/privacy",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/quote",
+      "label": "Quote",
+      "url": "https://www.susiesjewelryrepair.com/quote",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/services",
+      "label": "Services hub",
+      "url": "https://www.susiesjewelryrepair.com/services",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "static",
+      "path": "/terms",
+      "label": "Terms",
+      "url": "https://www.susiesjewelryrepair.com/terms",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "bracelet-repair",
+      "label": "Bracelet Repair",
+      "path": "/services/bracelet-repair",
+      "url": "https://www.susiesjewelryrepair.com/services/bracelet-repair",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "custom-design",
+      "label": "Custom Design",
+      "path": "/services/custom-design",
+      "url": "https://www.susiesjewelryrepair.com/services/custom-design",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "heirloom-restoration",
+      "label": "Heirloom Restorations",
+      "path": "/services/heirloom-restoration",
+      "url": "https://www.susiesjewelryrepair.com/services/heirloom-restoration",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "jewelry-cleaning",
+      "label": "Jewelry Cleaning & Polishing",
+      "path": "/services/jewelry-cleaning",
+      "url": "https://www.susiesjewelryrepair.com/services/jewelry-cleaning",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "necklace-repair",
+      "label": "Necklace Repair",
+      "path": "/services/necklace-repair",
+      "url": "https://www.susiesjewelryrepair.com/services/necklace-repair",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "pearl-restringing",
+      "label": "Pearl Restringing",
+      "path": "/services/pearl-restringing",
+      "url": "https://www.susiesjewelryrepair.com/services/pearl-restringing",
+      "observedStatus": "unknown-to-google",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC reported no referring sitemap detected even though production sitemap includes it."
+    },
+    {
+      "category": "service-detail",
+      "slug": "ring-sizing",
+      "label": "Ring Sizing & Repair",
+      "path": "/services/ring-sizing",
+      "url": "https://www.susiesjewelryrepair.com/services/ring-sizing",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "stone-setting",
+      "label": "Stone Replacement & Settings",
+      "path": "/services/stone-setting",
+      "url": "https://www.susiesjewelryrepair.com/services/stone-setting",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-detail",
+      "slug": "watch-repair",
+      "label": "Watch Repair & Battery Replacement",
+      "path": "/services/watch-repair",
+      "url": "https://www.susiesjewelryrepair.com/services/watch-repair",
+      "observedStatus": "indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "monitor",
+      "note": "GSC reported `URL is on Google`."
+    },
+    {
+      "category": "service-area",
+      "slug": "clear-lake",
+      "label": "Clear Lake service area",
+      "city": "Clear Lake",
+      "path": "/services/clear-lake",
+      "url": "https://www.susiesjewelryrepair.com/services/clear-lake",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC showed sitemap source and a referring page under `/blog`."
+    },
+    {
+      "category": "service-area",
+      "slug": "deer-park",
+      "label": "Deer Park service area",
+      "city": "Deer Park",
+      "path": "/services/deer-park",
+      "url": "https://www.susiesjewelryrepair.com/services/deer-park",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "service-area",
+      "slug": "friendswood",
+      "label": "Friendswood service area",
+      "city": "Friendswood",
+      "path": "/services/friendswood",
+      "url": "https://www.susiesjewelryrepair.com/services/friendswood",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC showed sitemap source and a referring page under `/blog`."
+    },
+    {
+      "category": "service-area",
+      "slug": "la-porte",
+      "label": "La Porte service area",
+      "city": "La Porte",
+      "path": "/services/la-porte",
+      "url": "https://www.susiesjewelryrepair.com/services/la-porte",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC showed sitemap source and a referring page under `/blog`."
+    },
+    {
+      "category": "service-area",
+      "slug": "pasadena",
+      "label": "Pasadena service area",
+      "city": "Pasadena",
+      "path": "/services/pasadena",
+      "url": "https://www.susiesjewelryrepair.com/services/pasadena",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC showed sitemap source and homepage as referring page."
+    },
+    {
+      "category": "service-area",
+      "slug": "webster",
+      "label": "Webster service area",
+      "city": "Webster",
+      "path": "/services/webster",
+      "url": "https://www.susiesjewelryrepair.com/services/webster",
+      "observedStatus": "unknown-to-google",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC reported no referring sitemap detected even though production sitemap includes it."
+    },
+    {
+      "category": "blog",
+      "slug": "can-a-severely-bent-ring-prong-be-fixed",
+      "label": "Can a severely bent ring prong be fixed, or do I need a new setting?",
+      "publishedAt": "2026-03-01",
+      "reviewedAt": "2026-03-01",
+      "path": "/blog/can-a-severely-bent-ring-prong-be-fixed",
+      "url": "https://www.susiesjewelryrepair.com/blog/can-a-severely-bent-ring-prong-be-fixed",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "chain-repair-weak-points",
+      "label": "Chain Repair 101: Necklace and Bracelet Weak Points",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/chain-repair-weak-points",
+      "url": "https://www.susiesjewelryrepair.com/blog/chain-repair-weak-points",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "cost-to-resize-gold-ring-pasadena",
+      "label": "How much does it cost to resize a gold ring in Pasadena?",
+      "publishedAt": "2026-03-01",
+      "reviewedAt": "2026-03-01",
+      "path": "/blog/cost-to-resize-gold-ring-pasadena",
+      "url": "https://www.susiesjewelryrepair.com/blog/cost-to-resize-gold-ring-pasadena",
+      "observedStatus": "indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "monitor",
+      "note": "Strongest confirmed indexed commercial blog sample."
+    },
+    {
+      "category": "blog",
+      "slug": "custom-design-timeline-guide",
+      "label": "Custom Jewelry Design Timeline: From Idea to Finished Piece",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/custom-design-timeline-guide",
+      "url": "https://www.susiesjewelryrepair.com/blog/custom-design-timeline-guide",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "does-my-watch-need-battery-or-repair-pasadena",
+      "label": "Does my watch need a battery replacement or full watch repair in Pasadena?",
+      "publishedAt": "2026-04-01",
+      "reviewedAt": "2026-04-01",
+      "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
+      "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "Commercial blog sample still waiting on index selection."
+    },
+    {
+      "category": "blog",
+      "slug": "heirloom-jewelry-restoration-repair-or-redesign",
+      "label": "Heirloom Jewelry Restoration: Should I Repair It or Redesign It?",
+      "publishedAt": "2026-03-01",
+      "reviewedAt": "2026-03-01",
+      "path": "/blog/heirloom-jewelry-restoration-repair-or-redesign",
+      "url": "https://www.susiesjewelryrepair.com/blog/heirloom-jewelry-restoration-repair-or-redesign",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "heirloom-restoration-planning-guide",
+      "label": "Heirloom Restoration Planning: What to Bring and Ask",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/heirloom-restoration-planning-guide",
+      "url": "https://www.susiesjewelryrepair.com/blog/heirloom-restoration-planning-guide",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "how-much-does-pearl-restringing-cost-pasadena",
+      "label": "How much does pearl restringing cost in Pasadena?",
+      "publishedAt": "2026-04-01",
+      "reviewedAt": "2026-04-01",
+      "path": "/blog/how-much-does-pearl-restringing-cost-pasadena",
+      "url": "https://www.susiesjewelryrepair.com/blog/how-much-does-pearl-restringing-cost-pasadena",
+      "observedStatus": "unknown-to-google",
+      "observedOn": "2026-04-21",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "GSC reported no referring sitemap detected even though production sitemap includes it."
+    },
+    {
+      "category": "blog",
+      "slug": "how-to-choose-a-jeweler",
+      "label": "How to Choose a Trustworthy Jeweler",
+      "publishedAt": "2026-02-17",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/how-to-choose-a-jeweler",
+      "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "pearl-restringing-timing-guide",
+      "label": "Pearl Restringing Timing: When to Restring and Why",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/pearl-restringing-timing-guide",
+      "url": "https://www.susiesjewelryrepair.com/blog/pearl-restringing-timing-guide",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "professional-cleaning-vs-home-care",
+      "label": "Professional Jewelry Cleaning vs. At-Home Cleaning",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/professional-cleaning-vs-home-care",
+      "url": "https://www.susiesjewelryrepair.com/blog/professional-cleaning-vs-home-care",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "ring-sizing-guide",
+      "label": "Ring Sizing: What to Know Before You Resize",
+      "publishedAt": "2026-02-17",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/ring-sizing-guide",
+      "url": "https://www.susiesjewelryrepair.com/blog/ring-sizing-guide",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "safe-to-clean-vintage-diamond-ring-at-home",
+      "label": "Is it safe to clean my vintage diamond ring with household products?",
+      "publishedAt": "2026-03-01",
+      "reviewedAt": "2026-03-01",
+      "path": "/blog/safe-to-clean-vintage-diamond-ring-at-home",
+      "url": "https://www.susiesjewelryrepair.com/blog/safe-to-clean-vintage-diamond-ring-at-home",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "stone-security-checklist",
+      "label": "Stone Security Checklist: Preventing Loose Diamonds",
+      "publishedAt": "2026-02-18",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/stone-security-checklist",
+      "url": "https://www.susiesjewelryrepair.com/blog/stone-security-checklist",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "watch-battery-replacement",
+      "label": "Watch Battery Replacement: Timing and Care Tips",
+      "publishedAt": "2026-02-17",
+      "reviewedAt": "2026-02-18",
+      "path": "/blog/watch-battery-replacement",
+      "url": "https://www.susiesjewelryrepair.com/blog/watch-battery-replacement",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    },
+    {
+      "category": "blog",
+      "slug": "where-to-get-watch-battery-replaced-pasadena",
+      "label": "Where to get a watch battery replaced today near Deer Park / Pasadena?",
+      "publishedAt": "2026-03-01",
+      "reviewedAt": "2026-03-01",
+      "path": "/blog/where-to-get-watch-battery-replaced-pasadena",
+      "url": "https://www.susiesjewelryrepair.com/blog/where-to-get-watch-battery-replaced-pasadena",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+    }
+  ]
+}

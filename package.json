@@ -13,6 +13,7 @@
     "google:baseline-7d": "node scripts/google/baseline-7d.mjs",
     "google:kpi-weekly-snapshot": "node scripts/google/kpi-weekly-snapshot.mjs",
     "google:reconcile-90d": "node scripts/google/reconcile-90d.mjs",
+    "google:indexing-manifest": "node scripts/google/generate-indexing-manifest.mjs",
     "google:weekly-seo-health": "node scripts/google/weekly-seo-health.mjs",
     "google:seo-quick-wins": "node scripts/google/seo-quick-wins.mjs",
     "google:service-impact-compare": "node scripts/google/service-impact-compare.mjs",
