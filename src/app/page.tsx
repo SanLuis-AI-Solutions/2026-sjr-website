@@ -11,9 +11,9 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   title:
-    "Jewelry Repair Near You in Pasadena, TX | Same Day Watch, Ring & Stone Repair",
+    "Same-Day Jewelry & Watch Repair Near Pasadena, TX",
   description:
-    "Need jewelry repair near you? Visit our Pasadena workshop for same-day or next-day watch batteries, ring sizing, stone repair, cleanings, and quote-first service.",
+    "Expert jewelry and watch repair in Pasadena. Same-day battery replacements, ring sizing, stone repairs, and more. No waiting. Local shop, transparent pricing.",
   canonical: "/",
 });
 
