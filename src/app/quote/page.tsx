@@ -3,6 +3,7 @@ import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
+import { FormSubmitInitializer } from "@/components/form-submit-initializer";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -50,6 +51,7 @@ export default async function QuotePage({
     : "/book";
   return (
     <SiteShell>
+      <FormSubmitInitializer />
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
@@ -235,38 +237,42 @@ export default async function QuotePage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Repair details
+              Repair details <span className="text-brand-burgundy">*</span>
               <textarea
                 name="details"
-                className="mt-2 min-h-[160px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[160px]"
                 defaultValue={finderContext?.detailsSeed || undefined}
                 placeholder="What needs repair? Include metal type, stones, and anything that seems loose or broken."
                 required
               />
             </label>
 
-            <div className="mt-5 grid gap-2">
-              <label className="text-xs uppercase tracking-[0.2em] text-stone-600" htmlFor="photos">
-                Photos (optional)
-              </label>
-              <input
-                id="photos"
-                type="file"
-                name="photos"
-                accept="image/*"
-                multiple
-                className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              />
-              <p className="text-xs text-stone-600">
-                Add up to 4 images. Close-ups of the issue help us quote accurately.
-              </p>
-            </div>
+            <details className="mt-5 group">
+              <summary className="cursor-pointer text-xs uppercase tracking-[0.2em] text-stone-600 hover:text-stone-800">
+                + Add photos (optional — helps us quote faster)
+              </summary>
+              <div className="mt-4 grid gap-2">
+                <input
+                  id="photos"
+                  type="file"
+                  name="photos"
+                  accept="image/*"
+                  multiple
+                  className="rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                />
+                <p className="text-xs text-stone-600">
+                  Add up to 4 images. Close-ups of the issue help us quote accurately.
+                </p>
+              </div>
+            </details>
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={false}
+              id="quote-submit"
             >
-              Request Quote
+              <span id="quote-submit-text">Request Quote</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · 1 business day response.

@@ -4,6 +4,7 @@ import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
+import { FormSubmitInitializer } from "@/components/form-submit-initializer";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -56,6 +57,7 @@ export default async function BookPage({
     : "booking_submit_success";
   return (
     <SiteShell>
+      <FormSubmitInitializer />
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
@@ -202,7 +204,7 @@ export default async function BookPage({
             ) : null}
 
             <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Full name
+              Full name <span className="text-brand-burgundy">*</span>
               <input
                 type="text"
                 name="name"
@@ -214,7 +216,7 @@ export default async function BookPage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Email
+              Email <span className="text-brand-burgundy">*</span>
               <input
                 type="email"
                 name="email"
@@ -243,7 +245,7 @@ export default async function BookPage({
               Details (optional)
               <textarea
                 name="details"
-                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[140px]"
                 defaultValue={finderContext?.detailsSeed || undefined}
                 placeholder="What should we know before you arrive?"
               />
@@ -251,9 +253,11 @@ export default async function BookPage({
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={false}
+              id="booking-submit"
             >
-              Request Booking
+              <span id="booking-submit-text">Request Booking</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · Booking confirmation within 1 business day.
