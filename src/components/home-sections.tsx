@@ -7,8 +7,7 @@ import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 export function ProofBand() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(180deg,#faf7f2_0%,#f4ecdf_100%)]">
-      <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.35),_transparent_70%)]" />
-      <div className="mx-auto grid max-w-6xl gap-4 px-6 py-8 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-3 px-6 py-7 md:grid-cols-4">
         {[
           {
             title: "Since 1984",
@@ -30,7 +29,7 @@ export function ProofBand() {
           },
         ].map((item, index) => {
           const delayClass = `reveal-delay-${(index % 4) + 1}`;
-          const cardClass = `reveal-on-scroll ${delayClass} rounded-2xl border border-brand-gold/30 bg-white/80 px-4 py-4 shadow-[0_12px_30px_rgba(90,55,35,0.12)]`;
+          const cardClass = `reveal-on-scroll ${delayClass} rounded-xl bg-white/72 px-4 py-4 shadow-[0_10px_30px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/20`;
           const cardContent = (
             <>
               <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -54,7 +53,7 @@ export function ProofBand() {
                 eventParams={{ business_action: "reviews", placement: "proof_band" }}
                 target="_blank"
                 rel="noreferrer"
-                className={`${cardClass} transition hover:-translate-y-0.5 hover:border-brand-gold/55`}
+                className={`${cardClass} transition hover:-translate-y-0.5 hover:ring-brand-gold/55`}
               >
                 {cardContent}
               </TrackedAnchor>

@@ -1547,68 +1547,40 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   return (
     <SiteShell>
       <BreadcrumbTrail items={breadcrumbItems} className="mx-auto max-w-6xl px-6 pt-10" />
-      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-14 md:py-20">
+      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-10 md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
-        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-2 md:items-center md:gap-12">
-          <div className="order-2 md:order-1">
-            <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-              Service Detail
+        <div className="relative mx-auto grid max-w-6xl gap-7 px-6 md:grid-cols-2 md:items-center md:gap-12">
+          <div className="order-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
+              In-house service
             </p>
             <h1
               className="lcp-heading"
-              style={{ marginTop: "0.75rem", fontSize: "2.25rem", lineHeight: "2.5rem", color: "#1c1917" }}
+              style={{ marginTop: "0.65rem", fontSize: "2.35rem", lineHeight: "2.35rem", color: "#1c1917" }}
             >
               {service.name}
             </h1>
-            <p className="mt-4 max-w-2xl text-sm text-stone-700">
+            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-stone-700">
               {service.summary || service.short_summary}
             </p>
-            {primaryHelpfulRead ? (
-              <div className="mt-6 max-w-2xl rounded-2xl border border-brand-gold/30 bg-white/85 p-4 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
-                  Before you book
-                </p>
-                <TrackedLink
-                  href={`/blog/${primaryHelpfulRead.slug}`}
-                  eventName="service_primary_guide_click"
-                  eventParams={{ service_slug: slug, blog_slug: primaryHelpfulRead.slug }}
-                  className="mt-3 inline-flex text-sm font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  {primaryHelpfulRead.title}
-                </TrackedLink>
-                <p className="mt-2 text-sm leading-7 text-stone-700">
-                  {primaryHelpfulRead.excerpt}
-                </p>
-              </div>
-            ) : null}
             {(startingAt || timeEstimateDisplay) && (
-              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-700">
+              <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-700">
                 {startingAt && (
-                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
+                  <span className="rounded-full border border-stone-200 bg-white px-3.5 py-2 shadow-sm">
                     Starts at {startingAt}
                   </span>
                 )}
                 {timeEstimateDisplay && (
-                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
+                  <span className="rounded-full border border-stone-200 bg-white px-3.5 py-2 shadow-sm">
                     Service: {timeEstimateDisplay}
                   </span>
                 )}
               </div>
             )}
-            <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/85 p-5 shadow-sm">
-              <p className="text-sm font-semibold text-stone-900">
-                Need {service.name} in {BUSINESS.address.city}?
-              </p>
-              <p className="mt-2 text-sm leading-7 text-stone-700">
-                {isWatchRepair
-                  ? "Yes. We service watches in-house with clear options, transparent estimates, and a confirmed pickup timeline before work begins."
-                  : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing, clear timing, and local pickup at our ${BUSINESS.address.city} shop.`}
-              </p>
-            </div>
 
             {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/quote"
                 prefetch={false}
@@ -1616,7 +1588,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="quote"
-                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_18px_38px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Get Fast Quote
               </Link>
@@ -1627,14 +1599,39 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="book"
-                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
                 Book Repair
               </Link>
             </div>
+            <div className="mt-5 rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25">
+              <p className="text-sm font-semibold text-stone-900">
+                Need {service.name} in {BUSINESS.address.city}?
+              </p>
+              <p className="mt-1.5 text-sm leading-6 text-stone-700">
+                {isWatchRepair
+                  ? "Yes. We service watches in-house with clear options and a confirmed pickup timeline before work begins."
+                  : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing and local pickup at our ${BUSINESS.address.city} shop.`}
+              </p>
+            </div>
+            {primaryHelpfulRead ? (
+              <div className="mt-4 max-w-2xl rounded-2xl bg-white/72 p-4 ring-1 ring-stone-200">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
+                  Before you book
+                </p>
+                <TrackedLink
+                  href={`/blog/${primaryHelpfulRead.slug}`}
+                  eventName="service_primary_guide_click"
+                  eventParams={{ service_slug: slug, blog_slug: primaryHelpfulRead.slug }}
+                  className="mt-2 inline-flex text-sm font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  {primaryHelpfulRead.title}
+                </TrackedLink>
+              </div>
+            ) : null}
           </div>
-          <div className="relative order-1 md:order-2">
-            <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
+          <div className="relative order-2">
+            <div className="relative h-[220px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
               <picture>
                 {mobileHeroImageProps?.srcSet ? (
                   <source
@@ -1645,6 +1642,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 ) : null}
                 <img
                   {...desktopHeroImageProps}
+                  alt={`${service.name} at Susie's Jewelry Repair`}
                   fetchPriority="high"
                   loading="eager"
                   decoding="async"
@@ -1654,8 +1652,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
               <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
             </div>
-            <div className="mt-3 rounded-xl border border-stone-200 bg-white p-4 md:absolute md:-bottom-8 md:left-6 md:right-6 md:mt-0 md:shadow-sm">
-              <div className="text-xs uppercase tracking-[0.25em] text-brand-burgundy">
+            <div className="mt-3 rounded-xl bg-white p-4 shadow-[0_12px_30px_rgba(90,55,35,0.08)] ring-1 ring-stone-200 md:absolute md:-bottom-8 md:left-6 md:right-6 md:mt-0">
+              <div className="text-xs uppercase tracking-[0.18em] text-brand-burgundy">
                 In-house assessment
               </div>
               <p className="mt-2 text-sm text-stone-600">

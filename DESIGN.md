@@ -1,35 +1,114 @@
-# Design System: SJR Website (Susie’s Jewelry Repair)
-**Project ID:** 18277865047607243696
+---
+version: "alpha"
+name: "Susie's Jewelry Repair Premium Local"
+description: "A conversion-led boutique design system for a trusted Pasadena jewelry and watch repair workshop."
+colors:
+  primary: "#181112"
+  secondary: "#4A3A3C"
+  tertiary: "#7A2E3A"
+  tertiary-container: "#5E2230"
+  accent: "#C6A85C"
+  neutral: "#FAF7F2"
+  surface: "#FFFFFF"
+  surface-warm: "#F4ECDF"
+  border: "#E2D5D7"
+  on-primary: "#FAF7F2"
+  on-tertiary: "#FFFFFF"
+typography:
+  display:
+    fontFamily: "Playfair Display"
+    fontSize: "clamp(3rem, 12vw, 5.5rem)"
+    fontWeight: 700
+    lineHeight: 0.9
+    letterSpacing: "0"
+  h1:
+    fontFamily: "Playfair Display"
+    fontSize: "clamp(2.75rem, 8vw, 4.5rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "0"
+  h2:
+    fontFamily: "Playfair Display"
+    fontSize: "clamp(2rem, 5vw, 3rem)"
+    fontWeight: 650
+    lineHeight: 1.06
+    letterSpacing: "0"
+  body:
+    fontFamily: "Inter"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.65
+    letterSpacing: "0"
+  label-caps:
+    fontFamily: "Inter"
+    fontSize: "0.68rem"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "0.22em"
+rounded:
+  sm: "6px"
+  md: "10px"
+  lg: "18px"
+  xl: "28px"
+  pill: "999px"
+spacing:
+  xs: "4px"
+  sm: "8px"
+  md: "16px"
+  lg: "24px"
+  xl: "40px"
+  section: "80px"
+components:
+  button-primary:
+    backgroundColor: "{colors.tertiary}"
+    textColor: "{colors.on-tertiary}"
+    rounded: "{rounded.pill}"
+    padding: "16px 28px"
+    height: "52px"
+  button-primary-hover:
+    backgroundColor: "{colors.tertiary-container}"
+    textColor: "{colors.on-tertiary}"
+  button-secondary:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.tertiary}"
+    rounded: "{rounded.pill}"
+    padding: "15px 26px"
+    height: "52px"
+  trust-chip:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.secondary}"
+    rounded: "{rounded.pill}"
+    padding: "10px 14px"
+---
 
-## 1. Visual Theme & Atmosphere
-Bright, airy luxury with a restrained, boutique‑grade calm. The overall feel is high‑key and trustworthy: warm ivory foundations, deep burgundy anchors, and champagne highlights. The UI prioritizes breathing room, soft dividers, and understated depth to communicate precision and premium care.
+## Overview
 
-## 2. Color Palette & Roles
-- **Modern Reserve Burgundy (#7A2E3A)** — Primary actions, hero headlines, key section titles.
-- **Deep Plum Anchor (#5E2230)** — Footer base and deep accent panels for grounded contrast.
-- **Champagne Gold Accent (#D1B882)** — Secondary CTA outlines, icon accents, and dividers.
-- **Warm Ivory Base (#FAF7F2)** — Primary page background and soft panels.
-- **Ink Charcoal (#181112)** — Primary body text for high readability.
-- **Night Maroon (#1E1416)** — Deep contrast tone used sparingly on dark elements.
-- **Rose‑Dust Border (#E2D5D7)** — Card borders and subtle separators.
-- **Muted Cocoa (#4A3A3C)** — Secondary text and supportive copy.
-- **Soft Paper (#F8F6F6)** — Light text on deep surfaces and gentle section contrast.
+Susie's Jewelry Repair should feel like a calm, expensive local workshop, not a crowded marketing template. The visual language is editorial luxury with practical conversion discipline: fewer competing panels, clearer first-screen actions, and stronger trust proof near every high-intent decision.
 
-## 3. Typography Rules
-- **Headlines:** Playfair Display; editorial, high‑contrast serif for luxury tone and clear hierarchy.
-- **Body:** Inter; clean, modern sans for readability on mobile and forms.
-- **CTA Text:** Uppercase with increased tracking (≈0.25em–0.35em) to feel crisp and premium.
+## Colors
 
-## 4. Component Stylings
-* **Buttons:** Pill‑shaped (rounded‑full). Primary is filled burgundy with white text; secondary is champagne outline with burgundy text; both use subtle shadow and micro‑interaction transitions. Height 44–52px on mobile for tap comfort.
-* **Cards/Containers:** Generously rounded (rounded‑3xl). Warm‑white surfaces with thin borders and soft, diffused shadows (premium depth, not “flat SaaS”).
-* **Meta chips:** Pill chips with subtle borders, warm backgrounds, and small uppercase tracking; used to summarize Starting at / Service / Popular without extra CTA noise.
-* **Inputs/Forms:** Rounded fields, white background, 1px light border, burgundy focus ring. Forms are chunked into short sections with clear labels and calm spacing.
+The palette uses warm ivory, ink charcoal, reserve burgundy, and restrained antique gold. Burgundy is reserved for primary conversion actions and decisive headings. Gold is a trust and craft accent, never a large background color. Surfaces stay warm and quiet so repair photos, quotes, pricing cues, and CTAs carry the hierarchy.
 
-## 5. Layout Principles
-Mobile‑first, single‑column flow with generous whitespace and consistent vertical rhythm. Sections are padded (24–32px), cards align to a clean grid, and CTAs repeat at key decision points without visual clutter. Trust signals live near heroes and forms to reduce hesitation.
+## Typography
 
-### Services Directory Layout
-- Category headings are lightweight (label + description + divider).
-- Each service is its own primary card unit (entire card clickable).
-- Cards include: image, title, one‑line summary, meta chips, and a single arrow affordance.
+Headlines use Playfair Display for jewelry-category character and editorial polish. Body text uses Inter for legibility on mobile forms and service pages. Heading tracking may tighten slightly for polish; uppercase labels are the only place with wide tracking.
+
+## Layout
+
+Mobile is the primary canvas. Every important landing page must show a call path plus either quote or booking in the first viewport. Service detail pages lead with the decision, not with long explanation. Secondary proof, guides, and market snapshots come after the first conversion choice.
+
+## Elevation & Depth
+
+Use depth sparingly. Prefer full-width warm bands, quiet inset panels, and photography over stacked card grids. When a card is needed, use soft warm shadows and no harsh gray borders. Avoid decorative blobs and heavy blur on scrolling content.
+
+## Shapes
+
+Buttons are pill-shaped for tap comfort. Content containers use moderate radii, not oversized generic cards. Image containers may use softer corners, but nested cards inside cards are avoided.
+
+## Components
+
+Primary CTAs are filled burgundy with white text. Secondary CTAs are white or transparent with burgundy text and a gold hairline. Trust chips summarize proof in short, scannable phrases: In-house repairs, Since 1984, 4.5 Google rating, 90-day workmanship warranty.
+
+## Do's and Don'ts
+
+Do keep the first screen quiet, clear, and conversion-ready. Do make phone, quote, and booking paths touch-friendly. Do preserve SEO content and schema. Do not add decorative visual noise, generic three-card rows, fake urgency, or extra required form fields.
