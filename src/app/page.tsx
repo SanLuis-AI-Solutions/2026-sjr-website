@@ -2,18 +2,18 @@ import { Suspense } from "react";
 import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { MobileStickyCta } from "@/components/mobile-sticky-cta";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowcaseBand, Testimonials } from "@/components/home-sections";
 import { HomeCommercialGuides } from "@/components/home-commercial-guides";
 import { servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
-
 export const metadata = createPageMetadata({
   title:
-    "Same-Day Jewelry & Watch Repair Near Pasadena, TX",
+    "Jewelry Repair Near Me in Pasadena, TX | Expert Service",
   description:
-    "Expert jewelry and watch repair in Pasadena. Same-day battery replacements, ring sizing, stone repairs, and more. No waiting. Local shop, transparent pricing.",
+    "Jewelry and watch repair near you in Pasadena, TX. Professional in-house repairs, same-day service, free quotes. Ring sizing, stone setting, battery replacement, and more. Expert jeweler. Transparent pricing.",
   canonical: "/",
 });
 
@@ -50,13 +50,14 @@ export default async function Home() {
         Skip to main content
       </a>
       <SiteHeader />
-      <main id="main-content" className="overflow-hidden pt-24 md:pt-28">
+      <main id="main-content" className="overflow-hidden pb-24 pt-24 md:pb-0 md:pt-28">
         <Hero />
         <HomeCommercialGuides />
         <Suspense fallback={null}>
           <HomeDeferredContent />
         </Suspense>
       </main>
+      <MobileStickyCta />
       <SiteFooter />
       <script
         type="application/ld+json"
