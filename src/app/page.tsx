@@ -13,7 +13,7 @@ export const metadata = createPageMetadata({
   title:
     "Jewelry Repair Near Me in Pasadena, TX | Expert Service",
   description:
-    "Jewelry and watch repair near you in Pasadena, TX. Professional in-house repairs, same-day service, free quotes. Ring sizing, stone setting, battery replacement, and more. Expert jeweler. Transparent pricing.",
+    "Need jewelry repair near me in Pasadena, TX? Get expert in-house ring sizing, watch repair, stone setting, cleaning, same-day service, and free quotes.",
   canonical: "/",
 });
 
