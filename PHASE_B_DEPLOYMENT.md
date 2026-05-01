@@ -1,7 +1,8 @@
 # Phase B: Title/Meta Optimization for "Jewelry Repair Near Me"
-**Status:** Implementation Complete | Ready for Deployment  
-**Date:** 2026-05-01  
-**Commits:** `75faca6` + deployability fix `ff195a9`
+**Status:** Live in Production | Monitoring
+**Date:** 2026-05-01
+**Commits:** `75faca6`, `124020a`, `4f714f4`, `2fd223b`, `1b70385`
+**Production URL:** `https://www.susiesjewelryrepair.com/`
 
 ---
 
@@ -49,34 +50,28 @@ NEW: "Need jewelry repair near me in Pasadena, TX? Get expert in-house ring sizi
 
 ---
 
-## Deployment Instructions
+## Deployment Status
 
 ### 1. Build Verification (Local)
 ```bash
 npm run build
 # Expected: Build completes successfully with no errors
-# Status: ✓ PASSED - see git commit ff195a9
+# Status: ✓ PASSED
 ```
 
 ### 2. Deploy to Production
-Option A: **Vercel Automatic Deployment** (if using Vercel git integration)
-```bash
-git push origin master
-# Vercel will automatically detect the commit and deploy
-# Deploy should take 2-3 minutes
-```
+- ✓ Pushed to `origin/master`
+- ✓ Vercel deployment created: `https://sjr-new-website-aiproject-ig6wz6vop.vercel.app`
+- ✓ Production aliases assigned:
+  - `https://www.susiesjewelryrepair.com/`
+  - `https://susiesjewelryrepair.com/`
 
-Option B: **Manual Deployment**
-```bash
-vercel --prod
-# Or use Vercel dashboard to trigger deployment
-```
+Note: GitHub Actions run `25220489824` showed red because the Vercel CLI hit a final API read timeout after deployment. Vercel inspect confirmed the deployment is `Ready`, and the production domain serves the new metadata.
 
 ### 3. Verify Deployment (Post-Deploy Checklist)
-- [ ] Navigate to `https://www.susiesjewelryrepair.com/` in incognito/private browser
-- [ ] Right-click → "View Page Source" (or DevTools)
-- [ ] Search for `<title>` tag - should see: "Jewelry Repair Near Me in Pasadena, TX | Expert Service"
-- [ ] Search for `<meta name="description"` - should see full new description with "in-house repairs" and "free quotes"
+- [x] Navigate to `https://www.susiesjewelryrepair.com/`
+- [x] Confirm `<title>` tag: "Jewelry Repair Near Me in Pasadena, TX | Expert Service"
+- [x] Confirm `<meta name="description">`: "Need jewelry repair near me in Pasadena, TX? Get expert in-house ring sizing, watch repair, stone setting, cleaning, same-day service, and free quotes."
 - [ ] Verify Open Graph tags are updated (twitter:title, og:title, og:description)
 
 ### 4. Index Update in Google Search Console
@@ -137,7 +132,7 @@ After deployment:
 
 ### Immediate (Week 1)
 - [ ] Monitor GSC CTR for "jewelry repair near me" daily
-- [ ] Deploy Phase B to production
+- [x] Deploy Phase B to production
 - [ ] Request indexing in GSC
 
 ### Phase C (Week 2) - Expand CTR Optimization to Related Keywords
@@ -171,12 +166,15 @@ Begin blog content targeting high-intent keywords:
 
 ## Git Reference
 ```
-Commits: 75faca6, ff195a9
-Type: feat
-Scope: Phase B - title/meta optimization
+Commits: 75faca6, 124020a, 4f714f4, 2fd223b, 1b70385
+Type: feat/fix/test/docs
+Scope: Phase A/B - mobile CTA, luxury hero, and homepage title/meta optimization
 Messages:
 - optimize homepage title/meta for jewelry repair near me keyword
 - make Phase B metadata deployable
+- refine luxury hero and mobile service CTAs
+- save SEO and GA4 audit baselines
+- align home smoke check with luxury hero
 ```
 
 ---
@@ -184,7 +182,7 @@ Messages:
 ## Rollback Instructions (If Needed)
 If CTR doesn't improve or issues arise:
 ```bash
-git revert ff195a9 75faca6
+git revert 1b70385 2fd223b 4f714f4 124020a 75faca6
 git push origin master
 # Vercel will auto-deploy the revert
 # Original title/meta will be restored within 2-3 minutes
