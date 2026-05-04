@@ -31,6 +31,7 @@ async function HomeDeferredContent() {
       <InHouseBadge />
       <ProcessSteps />
       <ServicesGridSection />
+      <HomeCommercialGuides />
       <CraftStory />
       <ShowcaseBand />
       <Testimonials />
@@ -52,7 +53,6 @@ export default async function Home() {
       <SiteHeader />
       <main id="main-content" className="overflow-hidden pb-24 pt-24 md:pb-0 md:pt-28">
         <Hero />
-        <HomeCommercialGuides />
         <Suspense fallback={null}>
           <HomeDeferredContent />
         </Suspense>
