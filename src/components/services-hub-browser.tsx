@@ -261,7 +261,7 @@ export function ServicesHubBrowser({
                       </>
                     ) : normalizedQuery ? (
                       <>
-                        {" "}for <span className="font-semibold text-brand-burgundy">"{query.trim()}"</span>
+                        {" "}for <span className="font-semibold text-brand-burgundy">&quot;{query.trim()}&quot;</span>
                       </>
                     ) : null}
                     .

@@ -13,6 +13,14 @@ type Props = {
   page: ServiceAreaPage;
 };
 
+const PRIORITY_SERVICE_AREA_SLUGS = [
+  "pasadena",
+  "friendswood",
+  "webster",
+  "clear-lake",
+  "la-porte",
+];
+
 export function ServiceAreaLandingPage({ page }: Props) {
   const serviceLookup = new Map(SERVICES.map((service) => [service.slug, service] as const));
   const highlightedServiceSlugs =
@@ -34,7 +42,15 @@ export function ServiceAreaLandingPage({ page }: Props) {
     { name: "Services", href: "/services" },
     { name: page.city, href: `/services/${page.slug}` },
   ];
-  const nearbyAreas = SERVICE_AREA_PAGES.filter((entry) => entry.slug !== page.slug).slice(0, 4);
+  const nearbyAreas = SERVICE_AREA_PAGES.filter((entry) => entry.slug !== page.slug)
+    .sort((a, b) => {
+      const aPriority = PRIORITY_SERVICE_AREA_SLUGS.indexOf(a.slug);
+      const bPriority = PRIORITY_SERVICE_AREA_SLUGS.indexOf(b.slug);
+      const normalizedA = aPriority === -1 ? Number.MAX_SAFE_INTEGER : aPriority;
+      const normalizedB = bPriority === -1 ? Number.MAX_SAFE_INTEGER : bPriority;
+      return normalizedA - normalizedB;
+    })
+    .slice(0, 5);
   const canonicalUrl = `https://www.susiesjewelryrepair.com/services/${page.slug}`;
   const quoteHref = buildServicesFinderLeadContextHref("/quote", { areaSlug: page.slug });
   const bookingHref = buildServicesFinderLeadContextHref("/book", { areaSlug: page.slug });

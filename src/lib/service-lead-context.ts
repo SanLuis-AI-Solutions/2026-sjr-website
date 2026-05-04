@@ -283,7 +283,6 @@ export function resolveStoredServicesFinderLeadContext(
 ): StoredServicesFinderLeadContext {
   const source = normalizeContextValue(input.source);
   const parsedDetails = parseStoredLeadContextBlock(input.details);
-  const areaLookup = buildAreaLookup();
   const isServicesFinderLead =
     source === SERVICES_FINDER_WEBSITE_SOURCE ||
     source === SERVICE_AREA_WEBSITE_SOURCE ||

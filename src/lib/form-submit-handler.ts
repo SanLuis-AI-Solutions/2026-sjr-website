@@ -27,7 +27,7 @@ export function initializeFormSubmitHandler(options: FormSubmitOptions) {
   if (!form || !submitButton) return;
 
   // Handle form submission
-  form.addEventListener("submit", async (e: Event) => {
+  form.addEventListener("submit", async () => {
     // Clear previous error messages
     clearFieldErrors(form);
 
@@ -41,7 +41,7 @@ export function initializeFormSubmitHandler(options: FormSubmitOptions) {
     if (onSubmit) {
       try {
         await onSubmit(form);
-      } catch (error) {
+      } catch {
         // Error handling done in onSubmit
         submitButton.disabled = false;
         if (submitText) {

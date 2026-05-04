@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint src next.config.ts playwright.config.ts postcss.config.mjs eslint.config.mjs generate-alts.mjs",
     "test": "npm run build && playwright test",
     "google:verify-access": "node scripts/google/verify-access.mjs",
     "google:report-weekly": "node scripts/google/report-weekly.mjs",

@@ -79,6 +79,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes, especially if you have photos. A quote request helps us guide you toward the right service and set expectations before you arrive.",
       },
     ],
+    helpfulReads: [
+      {
+        label: "Does my watch need a battery or deeper repair?",
+        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
+      },
+      {
+        label: "How much does pearl restringing cost in Pasadena?",
+        href: "/blog/how-much-does-pearl-restringing-cost-pasadena",
+      },
+      {
+        label: "Where weak chains usually fail first",
+        href: "/blog/chain-repair-weak-points",
+      },
+    ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],
   },
   {
@@ -187,6 +201,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes, especially if you have photos. A quote request helps us direct you to the right service and sets expectations before you make the trip.",
       },
     ],
+    helpfulReads: [
+      {
+        label: "Where to get a watch battery replaced near Pasadena",
+        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+      },
+      {
+        label: "Heirloom restoration planning guide",
+        href: "/blog/heirloom-restoration-planning-guide",
+      },
+      {
+        label: "Pearl restringing timing guide",
+        href: "/blog/pearl-restringing-timing-guide",
+      },
+    ],
     helpfulReadServiceSlugs: ["watch-repair", "heirloom-restoration", "custom-design"],
   },
   {
@@ -239,6 +267,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         question: "Can standard repairs still be same-day for Webster customers?",
         answer:
           "Many standard repairs still follow our Same Day/Next Day pattern, depending on the item, the damage, and current bench load.",
+      },
+    ],
+    helpfulReads: [
+      {
+        label: "Does my watch need a battery or deeper repair?",
+        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
+      },
+      {
+        label: "Where to get a watch battery replaced near Pasadena",
+        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+      },
+      {
+        label: "Stone security checklist before you keep wearing a ring",
+        href: "/blog/stone-security-checklist",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "stone-setting"],
@@ -295,6 +337,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes. Ring sizing, prong repair, stone tightening, and related engagement-ring work are common requests.",
       },
     ],
+    helpfulReads: [
+      {
+        label: "Heirloom restoration planning guide",
+        href: "/blog/heirloom-restoration-planning-guide",
+      },
+      {
+        label: "How to choose a jeweler for repair work",
+        href: "/blog/how-to-choose-a-jeweler",
+      },
+      {
+        label: "Stone security checklist before a loose stone becomes a loss",
+        href: "/blog/stone-security-checklist",
+      },
+    ],
     helpfulReadServiceSlugs: ["ring-sizing", "stone-setting", "heirloom-restoration"],
   },
   {
@@ -348,6 +404,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         question: "Should I request a quote before visiting from Clear Lake?",
         answer:
           "Yes. A quote request with photos gives you the fastest path into the right repair conversation before you drive over.",
+      },
+    ],
+    helpfulReads: [
+      {
+        label: "Where to get a watch battery replaced near Pasadena",
+        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+      },
+      {
+        label: "Where weak chains usually fail first",
+        href: "/blog/chain-repair-weak-points",
+      },
+      {
+        label: "Professional cleaning vs home care",
+        href: "/blog/professional-cleaning-vs-home-care",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],

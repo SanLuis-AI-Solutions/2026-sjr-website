@@ -2,12 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { BLOG_POSTS } from "@/lib/blog";
 import {
-  BOOKING_STATUSES,
-  CONTACT_STATUSES,
-  QUOTE_STATUSES,
   type BookingRequestRow,
   type ContactRequestRow,
-  type QuoteAttachment,
   type QuoteRequestRow,
   getRecentBookings,
   getRecentContacts,

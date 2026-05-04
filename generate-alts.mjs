@@ -1,7 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 
-const apiKey = "AIzaSyAUrxlcCO__O1Dp3hsCX-znICIFt2AyB-4";
+const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey) {
+  throw new Error("GEMINI_API_KEY is required to generate image alt text.");
+}
 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
 const dir = "C:/Users/ninef/SanLuis Solutions projects/sjr-new-website-aiproject/public/images/services";
@@ -14,7 +17,7 @@ async function generateAlts() {
   try {
     const existing = await fs.readFile(altsJsonPath, "utf-8");
     alts = JSON.parse(existing);
-  } catch (e) {
+  } catch {
     console.log("No existing alts found, starting fresh.");
   }
 

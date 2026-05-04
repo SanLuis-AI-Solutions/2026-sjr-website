@@ -1390,6 +1390,10 @@ const COMMERCIAL_GUIDE_SLUGS = [
   "how-much-does-pearl-restringing-cost-pasadena",
   "does-my-watch-need-battery-or-repair-pasadena",
   "where-to-get-watch-battery-replaced-pasadena",
+  "chain-repair-weak-points",
+  "stone-security-checklist",
+  "heirloom-restoration-planning-guide",
+  "pearl-restringing-timing-guide",
 ] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {

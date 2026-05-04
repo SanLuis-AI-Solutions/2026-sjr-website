@@ -159,6 +159,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
               ) : null}
               <img
                 {...desktopHeroImageProps}
+                alt={post.title}
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"

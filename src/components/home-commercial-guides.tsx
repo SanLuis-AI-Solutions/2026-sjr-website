@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getCommercialIntentBlogPosts } from "@/lib/blog";
 
 export function HomeCommercialGuides() {
-  const commercialGuides = getCommercialIntentBlogPosts(3);
+  const commercialGuides = getCommercialIntentBlogPosts(6);
 
   if (commercialGuides.length === 0) {
     return null;
