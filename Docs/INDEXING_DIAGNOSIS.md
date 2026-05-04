@@ -318,3 +318,42 @@ Additional GSC inspections run on 2026-04-21 against real commercial blog URLs:
 - Webster and `/services/pearl-restringing` are in a slightly earlier state: GSC currently reports them as `URL is unknown to Google`.
 - Live production verification on 2026-04-21 still shows `/services/webster`, `/services/pearl-restringing`, `/services/la-porte`, `/services/friendswood`, and `/services/clear-lake` in `/sitemap.xml`, and all five return `200`. That means the `URL is unknown to Google` state is currently a GSC processing state, not a live `404` or sitemap omission.
 - Live production verification on 2026-04-21 also shows `/blog/cost-to-resize-gold-ring-pasadena`, `/blog/how-much-does-pearl-restringing-cost-pasadena`, and `/blog/does-my-watch-need-battery-or-repair-pasadena` in `/sitemap.xml`, and all three return `200`.
+
+## Live GSC Re-Inspection (2026-05-04)
+
+Authenticated URL Inspection was rerun on 2026-05-04 for the remaining unresolved queue.
+
+### Confirmed Upgrades Since The April 21 Baseline
+
+- `/blog/how-much-does-pearl-restringing-cost-pasadena` moved to `URL is on Google`
+- `/blog/pearl-restringing-timing-guide` moved from `URL is unknown to Google` to `Discovered - currently not indexed`
+- `/blog/stone-security-checklist` moved from `URL is unknown to Google` to `Discovered - currently not indexed`
+
+### Still Stuck In `Discovered - currently not indexed`
+
+- `/services/pearl-restringing`
+- `/services/clear-lake`
+- `/services/la-porte`
+- `/blog/chain-repair-weak-points`
+- `/blog/does-my-watch-need-battery-or-repair-pasadena`
+- `/blog/heirloom-restoration-planning-guide`
+- `/blog/how-to-choose-a-jeweler`
+- `/blog/professional-cleaning-vs-home-care`
+- `/blog/safe-to-clean-vintage-diamond-ring-at-home`
+- `/blog/where-to-get-watch-battery-replaced-pasadena`
+
+### Still In `URL is unknown to Google`
+
+- `/services/pasadena`
+- `/services/friendswood`
+- `/services/webster`
+
+### Interpretation
+
+The indexing pattern is improving, but it is not broad enough yet to call the local service-area cluster healthy. The clearest positive signal is that one previously unresolved commercial blog page is now indexed, and two more blog pages improved from `unknown` to `discovered`.
+
+The immediate next action should be weighting, not pruning:
+
+1. Add more internal-link weight into the still-stuck service-area and commercial blog pages from already-indexed pages.
+2. Recheck the unresolved queue on the next monitoring pass before consolidating URLs.
+3. Only move to pruning if the same pages remain stalled after another weighted crawl window.

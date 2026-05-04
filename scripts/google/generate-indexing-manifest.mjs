@@ -2,9 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const BASE_URL = "https://www.susiesjewelryrepair.com";
-const GENERATED_AT = "2026-04-21";
+const GENERATED_AT = "2026-05-04";
 
-const OBSERVED_ON = "2026-04-21";
+const OBSERVED_ON = "2026-05-04";
 
 const OBSERVED_STATUSES = {
   "/": { status: "indexed" },
@@ -35,31 +35,32 @@ const OBSERVED_STATUSES = {
   "/blog/heirloom-jewelry-restoration-repair-or-redesign": { status: "indexed" },
   "/blog/ring-sizing-guide": { status: "indexed" },
   "/blog/watch-battery-replacement": { status: "indexed" },
+  "/blog/how-much-does-pearl-restringing-cost-pasadena": {
+    status: "indexed",
+    note: "Moved from unresolved to indexed by the 2026-05-04 GSC re-inspection.",
+  },
   "/services/clear-lake": { status: "discovered-currently-not-indexed" },
-  "/services/friendswood": { status: "discovered-currently-not-indexed" },
+  "/services/friendswood": { status: "unknown-to-google" },
+  "/services/la-porte": { status: "discovered-currently-not-indexed" },
   "/services/pearl-restringing": { status: "discovered-currently-not-indexed" },
-  "/services/webster": { status: "discovered-currently-not-indexed" },
+  "/services/webster": { status: "unknown-to-google" },
   "/blog/chain-repair-weak-points": { status: "discovered-currently-not-indexed" },
   "/blog/does-my-watch-need-battery-or-repair-pasadena": {
     status: "discovered-currently-not-indexed",
     note: "Commercial blog sample still waiting on index selection.",
   },
   "/blog/heirloom-restoration-planning-guide": { status: "discovered-currently-not-indexed" },
-  "/blog/how-much-does-pearl-restringing-cost-pasadena": {
-    status: "discovered-currently-not-indexed",
-  },
   "/blog/how-to-choose-a-jeweler": { status: "discovered-currently-not-indexed" },
+  "/blog/pearl-restringing-timing-guide": { status: "discovered-currently-not-indexed" },
   "/blog/professional-cleaning-vs-home-care": { status: "discovered-currently-not-indexed" },
   "/blog/safe-to-clean-vintage-diamond-ring-at-home": {
     status: "discovered-currently-not-indexed",
   },
+  "/blog/stone-security-checklist": { status: "discovered-currently-not-indexed" },
   "/blog/where-to-get-watch-battery-replaced-pasadena": {
     status: "discovered-currently-not-indexed",
   },
-  "/services/la-porte": { status: "unknown-to-google" },
   "/services/pasadena": { status: "unknown-to-google" },
-  "/blog/pearl-restringing-timing-guide": { status: "unknown-to-google" },
-  "/blog/stone-security-checklist": { status: "unknown-to-google" },
 };
 
 function readFile(relativePath) {
@@ -161,7 +162,7 @@ function applyObservedState(route) {
   const note =
     observed?.note ||
     (observed
-      ? "GSC inspection run on 2026-04-21 and request indexing was submitted from the inspection flow."
+      ? "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
       : "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed.");
 
   return {
@@ -186,7 +187,7 @@ function toStatusLabel(status) {
 function toActionLabel(action) {
   return {
     monitor: "Monitor only",
-    "request-indexing-and-recheck": "Request indexing and recheck on 2026-04-26/27",
+    "request-indexing-and-recheck": "Recheck and weight at next monitoring pass",
     "inspect-and-request-indexing": "Inspect in GSC and request indexing",
   }[action] || action;
 }
@@ -243,7 +244,7 @@ function buildMarkdown(manifest) {
     "",
     "## Immediate GSC Queue",
     "",
-    "These URLs should be prioritized for indexing requests or follow-up rechecks based on the April 21 baseline.",
+    "These URLs should be prioritized for weighting or follow-up rechecks based on the May 4 re-inspection.",
     "",
     "| URL | Category | Current Status | Next Action | Notes |",
     "| --- | --- | --- | --- | --- |",
