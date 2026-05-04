@@ -63,4 +63,5 @@ next-env.d.ts
 
 # local agent/browser artifacts
 .claude/
+.playwright-mcp/
 Docs/cookies.txt
