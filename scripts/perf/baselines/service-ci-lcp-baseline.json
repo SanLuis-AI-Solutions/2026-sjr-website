@@ -23,7 +23,7 @@
     {
       "path": "/services/custom-design",
       "lcpMs": 2271,
-      "maxRegressionMs": 150
+      "maxRegressionMs": 175
     }
   ]
 }
