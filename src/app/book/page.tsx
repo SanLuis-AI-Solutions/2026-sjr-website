@@ -100,7 +100,7 @@ export default async function BookPage({
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Book a Repair
             </p>
-            <h1 className="mt-3 font-serif text-4xl text-stone-900">
+            <h1 className="lcp-heading mt-3 text-4xl text-stone-900">
               Reserve a free 15‑minute assessment
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
