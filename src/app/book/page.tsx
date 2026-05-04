@@ -71,7 +71,7 @@ export default async function BookPage({
             />
             <LeadFormTracker formId="booking-form" leadType="booking" hasError={error} />
           </Suspense>
-          <div className="reveal-on-scroll">
+          <div>
             {submitted ? (
               <div
                 role="status"

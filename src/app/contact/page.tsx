@@ -22,7 +22,7 @@ async function DeferredContactSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.2),_transparent_44%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.11),_transparent_46%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="reveal-on-scroll mb-7 rounded-[1.7rem] border border-stone-200 bg-white/85 p-5 shadow-[0_16px_42px_rgba(58,25,16,0.12)]">
+        <div className="mb-7 rounded-[1.7rem] border border-stone-200 bg-white/85 p-5 shadow-[0_16px_42px_rgba(58,25,16,0.12)]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
             Visit experience
           </p>

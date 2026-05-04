@@ -65,7 +65,7 @@ export default async function QuotePage({
             />
             <LeadFormTracker formId="quote-form" leadType="quote" hasError={error} />
           </Suspense>
-          <div className="reveal-on-scroll">
+          <div>
             {submitted ? (
               <div
                 role="status"
