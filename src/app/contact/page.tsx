@@ -310,7 +310,7 @@ export default async function ContactPage({
             <h1 className="lcp-heading mt-3 max-w-2xl text-balance text-[2.35rem] leading-[1.07] text-white md:text-6xl">
               Talk to a local expert
             </h1>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-100/90 md:text-base">
+            <p className="mt-5 max-w-lg text-sm leading-6 text-stone-100/90 md:text-[15px]">
               Call, email, or send a quick note. We reply with the fastest next step and confirm
               timing before work begins.
             </p>
