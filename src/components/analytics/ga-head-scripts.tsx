@@ -24,10 +24,28 @@ function buildInlineGaBootstrap(measurementId: string) {
       window.gtag("js", new Date());
       window.gtag("config", measurementId, { send_page_view: false });
 
-      var script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
-      document.head.appendChild(script);
+      var loadGtag = function() {
+        if (window.__sjrGaScriptAppended) return;
+        window.__sjrGaScriptAppended = true;
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
+        document.head.appendChild(script);
+      };
+
+      var scheduleLoad = function() {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadGtag, { timeout: 3000 });
+          return;
+        }
+        window.setTimeout(loadGtag, 1800);
+      };
+
+      if (document.readyState === "complete") {
+        scheduleLoad();
+      } else {
+        window.addEventListener("load", scheduleLoad, { once: true });
+      }
     })();
   `;
 }

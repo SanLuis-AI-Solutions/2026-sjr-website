@@ -21,7 +21,7 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
+  display: "optional",
 });
 
 const DEFAULT_TITLE = "Susie’s Jewelry Repair | Modern Luxury Master Craftsmanship";
