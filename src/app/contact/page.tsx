@@ -279,7 +279,7 @@ export default async function ContactPage({
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-brand-burgundy-deep py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-brand-burgundy-deep py-12 text-white md:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.3)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.35)_100%)]" />
@@ -309,7 +309,7 @@ export default async function ContactPage({
             ) : null}
 
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Contact desk</p>
-            <h1 className="lcp-sans mt-3 max-w-2xl text-balance text-[2.35rem] font-semibold leading-[1.07] tracking-tight text-white md:text-6xl">
+            <h1 className="lcp-sans mt-3 max-w-2xl text-[2.05rem] font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
               Talk to a local expert
             </h1>
             <p className="lcp-sans mt-5 max-w-lg text-sm leading-6 text-stone-100/90 md:text-[15px]">
