@@ -11,13 +11,21 @@ import {
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
 
-type FirstTouch = {
+export type FirstTouch = {
   landing_path: string;
+  landing_search: string | null;
+  referrer: string | null;
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
   utm_term: string | null;
   utm_content: string | null;
+  utm_id: string | null;
+  gclid: string | null;
+  gbraid: string | null;
+  wbraid: string | null;
+  msclkid: string | null;
+  first_touch_at: string | null;
 };
 
 declare global {
@@ -28,10 +36,10 @@ declare global {
   }
 }
 
-const FIRST_TOUCH_KEY = "sjr_first_touch";
+export const FIRST_TOUCH_KEY = "sjr_first_touch";
 const EVENT_SENT_PREFIX = "sjr_ga4_sent";
 
-function readFirstTouch(): FirstTouch | null {
+export function readFirstTouch(): FirstTouch | null {
   if (typeof window === "undefined") return null;
   const raw = window.sessionStorage.getItem(FIRST_TOUCH_KEY);
   if (!raw) return null;
@@ -53,11 +61,19 @@ function getOrCreateFirstTouch(pathname: string, search: URLSearchParams): First
 
   const firstTouch: FirstTouch = {
     landing_path: pathname || "/",
+    landing_search: search.toString() ? `?${search.toString()}` : null,
+    referrer: document.referrer || null,
     utm_source: search.get("utm_source"),
     utm_medium: search.get("utm_medium"),
     utm_campaign: search.get("utm_campaign"),
     utm_term: search.get("utm_term"),
     utm_content: search.get("utm_content"),
+    utm_id: search.get("utm_id"),
+    gclid: search.get("gclid"),
+    gbraid: search.get("gbraid"),
+    wbraid: search.get("wbraid"),
+    msclkid: search.get("msclkid"),
+    first_touch_at: new Date().toISOString(),
   };
   writeFirstTouch(firstTouch);
   return firstTouch;
@@ -179,11 +195,19 @@ export function GaConversionTracker({
       lead_type: leadType,
       lead_status: status,
       landing_path: firstTouch.landing_path,
+      landing_search: firstTouch.landing_search,
+      referrer: firstTouch.referrer,
       utm_source: firstTouch.utm_source,
       utm_medium: firstTouch.utm_medium,
       utm_campaign: firstTouch.utm_campaign,
       utm_term: firstTouch.utm_term,
       utm_content: firstTouch.utm_content,
+      utm_id: firstTouch.utm_id,
+      gclid: firstTouch.gclid,
+      gbraid: firstTouch.gbraid,
+      wbraid: firstTouch.wbraid,
+      msclkid: firstTouch.msclkid,
+      first_touch_at: firstTouch.first_touch_at,
       page_path: pathname || "/",
       cta_variant: readCurrentCtaVariant(),
       ...finderAnalyticsParams,

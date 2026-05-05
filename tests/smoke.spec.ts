@@ -981,6 +981,31 @@ test("service area: quote CTA carries city context into quote form and analytics
   guard.assertNoErrors("service area quote context");
 });
 
+test("lead forms preserve first-touch attribution fields", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto(
+    "/quote?utm_source=google&utm_medium=cpc&utm_campaign=repair-test&gclid=test-click",
+    { waitUntil: "networkidle" },
+  );
+  await page.goto("/book", { waitUntil: "networkidle" });
+  await expect(page).toHaveURL(/\/book$/);
+
+  await expect(page.locator('input[name="attribution_landing_path"]')).toHaveValue("/quote");
+  await expect(page.locator('input[name="attribution_landing_search"]')).toHaveValue(
+    "?utm_source=google&utm_medium=cpc&utm_campaign=repair-test&gclid=test-click",
+  );
+  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue("google");
+  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("cpc");
+  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue(
+    "repair-test",
+  );
+  await expect(page.locator('input[name="attribution_gclid"]')).toHaveValue("test-click");
+  await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue("/book");
+
+  guard.assertNoErrors("lead attribution fields");
+});
+
 test("home services grid: full card click navigates to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
+import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
@@ -193,6 +194,7 @@ export default async function BookPage({
               autoComplete="off"
               aria-hidden="true"
             />
+            <LeadAttributionFields />
             {hiddenFields ? (
               <>
                 <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />

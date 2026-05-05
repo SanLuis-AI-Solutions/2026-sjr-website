@@ -3,6 +3,11 @@ import { supabaseInsert } from "@/lib/supabase/admin";
 import { notifyGoogleChat } from "@/lib/notify";
 import { sendLeadEmail } from "@/lib/lead-email";
 import { evaluateLeadSpam } from "@/lib/lead-spam";
+import {
+  appendLeadAttributionBlock,
+  buildLeadAttributionLines,
+  resolveLeadAttributionFromFormData,
+} from "@/lib/lead-attribution";
 
 export async function POST(request: Request) {
   try {
@@ -14,6 +19,9 @@ export async function POST(request: Request) {
     const phone = String(formData.get("phone") || "").trim();
     const preferredContact = String(formData.get("preferredContact") || "").trim();
     const message = String(formData.get("message") || "").trim();
+    const attribution = resolveLeadAttributionFromFormData(formData, request);
+    const attributionLines = buildLeadAttributionLines(attribution);
+    const storedMessage = appendLeadAttributionBlock(message, attribution);
 
     // Honeypot: if filled, treat as spam and still return a success-style redirect.
     if (company) {
@@ -39,7 +47,7 @@ export async function POST(request: Request) {
       email,
       phone: phone || null,
       preferred_contact: preferredContact || null,
-      message,
+      message: storedMessage,
       status: spamCheck.isSpam ? "spam" : "new",
       source: spamCheck.isSpam ? `website_spam_suspected:${spamCheck.reason}` : "website",
       page_url: request.headers.get("referer") || null,
@@ -60,6 +68,7 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         preferredContact ? `preferred_contact: ${preferredContact}` : null,
+        ...attributionLines,
         `message: ${message.slice(0, 500)}`,
       ]
         .filter(Boolean)
@@ -77,6 +86,7 @@ export async function POST(request: Request) {
         `email: ${email}`,
         phone ? `phone: ${phone}` : null,
         preferredContact ? `preferred_contact: ${preferredContact}` : null,
+        ...attributionLines,
         `message: ${message}`,
       ]
         .filter(Boolean)

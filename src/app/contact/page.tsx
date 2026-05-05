@@ -1,6 +1,7 @@
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
+import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
 import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { BUSINESS } from "@/lib/constants";
@@ -134,6 +135,7 @@ async function DeferredContactSection() {
               autoComplete="off"
               aria-hidden="true"
             />
+            <LeadAttributionFields />
 
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
