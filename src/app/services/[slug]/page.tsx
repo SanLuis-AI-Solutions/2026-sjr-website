@@ -1325,6 +1325,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
   const heroImageSizes =
     "(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc((100vw - 6rem) / 2), 528px";
+  const mobileHeroImageSizes = isCustomDesign
+    ? "(max-width: 767px) 320px, (max-width: 1279px) calc((100vw - 6rem) / 2), 528px"
+    : heroImageSizes;
   const desktopHeroImageProps = getImageProps({
     src: heroImageSrc,
     alt: service.name,
@@ -1338,7 +1341,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         alt: service.name,
         width: 800,
         height: 540,
-        sizes: heroImageSizes,
+        sizes: mobileHeroImageSizes,
+        quality: isCustomDesign ? 58 : undefined,
       }).props
     : null;
   const howItWorksSupportCopy = isWatchRepair
@@ -1697,13 +1701,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             ) : null}
           </div>
           <div className="relative order-2">
-            <div className="relative h-[220px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
+            <div
+              className={`relative ${
+                isCustomDesign ? "h-[160px]" : "h-[220px]"
+              } overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]`}
+            >
               <picture>
                 {mobileHeroImageProps?.srcSet ? (
                   <source
                     media="(max-width: 767px)"
                     srcSet={mobileHeroImageProps.srcSet}
-                    sizes={heroImageSizes}
+                    sizes={mobileHeroImageSizes}
                   />
                 ) : null}
                 <img
