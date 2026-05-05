@@ -1726,6 +1726,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       {directAnswerSnapshot ? (
         <section
           data-service-section="direct-answer"
+          aria-label={`${service.name} direct answer`}
           className="border-t border-brand-gold/25 bg-[#fffaf3] py-10"
         >
           <div className="mx-auto max-w-6xl px-6">
