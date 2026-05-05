@@ -1106,6 +1106,30 @@ test("mobile service detail: decision module and proof blocks render", async ({ 
   guard.assertNoErrors("service decision/proof modules");
 });
 
+test("mobile service detail: commercial pages expose direct answer blocks", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const slugs = [
+    "watch-repair",
+    "ring-sizing",
+    "stone-setting",
+    "pearl-restringing",
+  ];
+
+  for (const slug of slugs) {
+    await page.goto(`/services/${slug}`, { waitUntil: "networkidle" });
+
+    const directAnswer = page.getByTestId("service-direct-answer");
+    await expect(directAnswer).toBeVisible();
+    await expect(directAnswer.getByText(/Direct answer/i)).toBeVisible();
+    await expect(directAnswer.getByText(/Best next step/i)).toBeVisible();
+    await expect(directAnswer.getByText(/Why this matters/i)).toBeVisible();
+  }
+
+  guard.assertNoErrors("service direct answer blocks");
+});
+
 test("mobile service detail: non-watch and non-ring routes provide 7 FAQs", async ({
   page,
 }) => {

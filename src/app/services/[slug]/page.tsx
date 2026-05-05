@@ -81,6 +81,13 @@ type MarketSnapshot = {
   footnote: string;
 };
 
+type DirectAnswerSnapshot = {
+  question: string;
+  answer: string;
+  decision: string;
+  proofPoints: string[];
+};
+
 type HelpfulReadLink = {
   href: string;
   title: string;
@@ -620,6 +627,57 @@ const MARKET_SNAPSHOTS: Record<string, MarketSnapshot> = {
     ],
     footnote:
       "Planning benchmark only. Final estimate depends on preservation goals, condition risk, and fabrication needs.",
+  },
+};
+
+const DIRECT_ANSWER_SNAPSHOTS: Record<string, DirectAnswerSnapshot> = {
+  "watch-repair": {
+    question: "Can I get watch repair or battery replacement in Pasadena?",
+    answer:
+      "Yes. Susie’s handles watch battery replacement, band sizing, crystal issues, crown/stem problems, and mechanical watch service in-house at the Pasadena shop.",
+    decision:
+      "Start with a fast quote if the watch stopped, drains batteries quickly, fogs under the crystal, or has a loose crown. Book an assessment if you want intake timing confirmed before visiting.",
+    proofPoints: [
+      "Most quick watch services follow Same Day/Next Day service.",
+      "Parts, pressure testing, and full movement work are confirmed before proceeding.",
+      "The work is handled by the local in-house repair team, not routed through a mail-away flow.",
+    ],
+  },
+  "ring-sizing": {
+    question: "Can my ring be resized safely?",
+    answer:
+      "Usually, yes. Susie’s resizes most gold, silver, and platinum rings after checking the shank, stones, and setting style so the fit improves without weakening the piece.",
+    decision:
+      "Request sizing if the ring spins, slips over the knuckle too easily, pinches, or changed fit after weather, weight, or hand-size changes.",
+    proofPoints: [
+      "Sizing includes fit guidance, seam finishing, and setting checks.",
+      "Continuous patterns, pave, tungsten, and titanium can have limits that are explained before work begins.",
+      "Same Day/Next Day service applies to many straightforward sizing jobs.",
+    ],
+  },
+  "stone-setting": {
+    question: "What should I do if a stone is loose or missing?",
+    answer:
+      "Bring it in before wearing it again. Susie’s checks prongs, seats, bezels, and channels first, then confirms whether the safest fix is tightening, retipping, rebuilding, or replacing the stone.",
+    decision:
+      "Treat movement, clicking, snagging prongs, or an uneven setting as urgent because a loose stone can become a lost stone quickly.",
+    proofPoints: [
+      "Security comes before cosmetic polishing on loose-stone repairs.",
+      "Replacement stones can be matched when an accent stone is already missing.",
+      "Repair scope and pricing are approved before setting work begins.",
+    ],
+  },
+  "pearl-restringing": {
+    question: "When should pearls be restrung?",
+    answer:
+      "Pearls should be restrung when thread stretches, knots gap, the strand hangs unevenly, or the clasp area looks worn. Susie’s can restring pearls and inspect the clasp during the same intake.",
+    decision:
+      "Do not wait for a strand to break. Fraying near the clasp, fuzzy thread, or uneven knot spacing means the strand is already giving warning signs.",
+    proofPoints: [
+      "Hand-knot spacing helps keep pearls separated and reduces loss risk if the strand breaks.",
+      "Clasp wear can be addressed during restringing when needed.",
+      "The team confirms timing and care guidance before pickup.",
+    ],
   },
 };
 
@@ -1531,6 +1589,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   ]).slice(0, 3);
   const marketSnapshot =
     MARKET_SNAPSHOTS[slug] || buildDefaultMarketSnapshot(service.name);
+  const directAnswerSnapshot = DIRECT_ANSWER_SNAPSHOTS[slug];
   const schemaBase = SERVICES.find((item) => item.slug === service.slug) || SERVICES[0];
   const schemaService = {
     ...schemaBase,
@@ -1663,6 +1722,53 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {directAnswerSnapshot ? (
+        <section
+          data-service-section="direct-answer"
+          className="border-t border-brand-gold/25 bg-[#fffaf3] py-10"
+        >
+          <div className="mx-auto max-w-6xl px-6">
+            <div
+              className="rounded-[2rem] border border-brand-gold/35 bg-white p-5 shadow-[0_18px_42px_rgba(58,25,16,0.10)] md:p-7"
+              data-testid="service-direct-answer"
+            >
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Direct answer
+              </p>
+              <h2 className="mt-3 font-serif text-2xl leading-tight text-stone-900 md:text-3xl">
+                {directAnswerSnapshot.question}
+              </h2>
+              <p className="mt-4 max-w-3xl text-[15px] leading-7 text-stone-700">
+                {directAnswerSnapshot.answer}
+              </p>
+              <div className="mt-6 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-stone-600">
+                    Best next step
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-stone-700">
+                    {directAnswerSnapshot.decision}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-stone-600">
+                    Why this matters
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-stone-700">
+                    {directAnswerSnapshot.proofPoints.map((point) => (
+                      <li key={point} className="flex items-start gap-3">
+                        <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <Suspense fallback={null}>
         <DeferredServiceSections>
