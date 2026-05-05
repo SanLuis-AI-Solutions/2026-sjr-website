@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { readFirstTouch, type FirstTouch } from "@/components/analytics/ga-tracker";
+import { readFirstTouch, type FirstTouch } from "@/lib/first-touch";
 
 type LeadAttributionFields = {
   landing_path: string;

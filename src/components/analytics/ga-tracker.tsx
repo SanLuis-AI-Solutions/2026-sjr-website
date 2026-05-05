@@ -4,29 +4,13 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { readCurrentCtaVariant } from "./cta-variant";
 import { isProductionAnalyticsHost } from "@/lib/analytics-host";
+import { readFirstTouch, writeFirstTouch, type FirstTouch } from "@/lib/first-touch";
 import {
   getServicesFinderAnalyticsParams,
   resolveServicesFinderLeadContext,
 } from "@/lib/service-lead-context";
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
-
-export type FirstTouch = {
-  landing_path: string;
-  landing_search: string | null;
-  referrer: string | null;
-  utm_source: string | null;
-  utm_medium: string | null;
-  utm_campaign: string | null;
-  utm_term: string | null;
-  utm_content: string | null;
-  utm_id: string | null;
-  gclid: string | null;
-  gbraid: string | null;
-  wbraid: string | null;
-  msclkid: string | null;
-  first_touch_at: string | null;
-};
 
 declare global {
   interface Window {
@@ -36,24 +20,7 @@ declare global {
   }
 }
 
-export const FIRST_TOUCH_KEY = "sjr_first_touch";
 const EVENT_SENT_PREFIX = "sjr_ga4_sent";
-
-export function readFirstTouch(): FirstTouch | null {
-  if (typeof window === "undefined") return null;
-  const raw = window.sessionStorage.getItem(FIRST_TOUCH_KEY);
-  if (!raw) return null;
-  try {
-    return JSON.parse(raw) as FirstTouch;
-  } catch {
-    return null;
-  }
-}
-
-function writeFirstTouch(firstTouch: FirstTouch) {
-  if (typeof window === "undefined") return;
-  window.sessionStorage.setItem(FIRST_TOUCH_KEY, JSON.stringify(firstTouch));
-}
 
 function getOrCreateFirstTouch(pathname: string, search: URLSearchParams): FirstTouch {
   const existing = readFirstTouch();
