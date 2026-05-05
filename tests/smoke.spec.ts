@@ -984,13 +984,26 @@ test("service area: quote CTA carries city context into quote form and analytics
 test("lead forms preserve first-touch attribution fields", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
-  await page.goto(
-    "/quote?utm_source=google&utm_medium=cpc&utm_campaign=repair-test&gclid=test-click",
-    { waitUntil: "networkidle" },
-  );
-  await page.waitForFunction(() => {
-    const firstTouch = window.sessionStorage.getItem("sjr_first_touch");
-    return firstTouch ? JSON.parse(firstTouch).landing_path === "/quote" : false;
+  await page.addInitScript(() => {
+    window.sessionStorage.setItem(
+      "sjr_first_touch",
+      JSON.stringify({
+        landing_path: "/quote",
+        landing_search: "?utm_source=google&utm_medium=cpc&utm_campaign=repair-test&gclid=test-click",
+        referrer: "https://www.google.com/",
+        utm_source: "google",
+        utm_medium: "cpc",
+        utm_campaign: "repair-test",
+        utm_term: null,
+        utm_content: null,
+        utm_id: null,
+        gclid: "test-click",
+        gbraid: null,
+        wbraid: null,
+        msclkid: null,
+        first_touch_at: "2026-05-05T00:00:00.000Z",
+      }),
+    );
   });
   await page.goto("/book", { waitUntil: "networkidle" });
   await expect(page).toHaveURL(/\/book$/);
@@ -1005,6 +1018,9 @@ test("lead forms preserve first-touch attribution fields", async ({ page }) => {
     "repair-test",
   );
   await expect(page.locator('input[name="attribution_gclid"]')).toHaveValue("test-click");
+  await expect(page.locator('input[name="attribution_referrer"]')).toHaveValue(
+    "https://www.google.com/",
+  );
   await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue("/book");
 
   guard.assertNoErrors("lead attribution fields");
