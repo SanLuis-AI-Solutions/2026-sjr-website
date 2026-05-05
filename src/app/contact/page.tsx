@@ -313,8 +313,11 @@ export default async function ContactPage({
               Talk to a local expert
             </h1>
             <p className="lcp-sans mt-5 max-w-lg text-sm leading-6 text-stone-100/90 md:text-[15px]">
-              Call, email, or send a quick note. We reply with the fastest next step and confirm
-              timing before work begins.
+              <span className="md:hidden">Call, email, or send a quick note for the fastest next step.</span>
+              <span className="hidden md:inline">
+                Call, email, or send a quick note. We reply with the fastest next step and confirm
+                timing before work begins.
+              </span>
             </p>
 
             <ConversionQuickActions
