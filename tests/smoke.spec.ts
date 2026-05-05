@@ -1026,6 +1026,30 @@ test("lead forms preserve first-touch attribution fields", async ({ page }) => {
   guard.assertNoErrors("lead attribution fields");
 });
 
+test("lead forms capture current URL attribution before first-touch storage settles", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto(
+    "/contact?utm_source=codex&utm_medium=verification&utm_campaign=lead-attribution&gclid=test-click",
+    { waitUntil: "networkidle" },
+  );
+
+  await expect(page.locator('input[name="attribution_landing_path"]')).toHaveValue("/contact");
+  await expect(page.locator('input[name="attribution_landing_search"]')).toHaveValue(
+    "?utm_source=codex&utm_medium=verification&utm_campaign=lead-attribution&gclid=test-click",
+  );
+  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue("codex");
+  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("verification");
+  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue(
+    "lead-attribution",
+  );
+  await expect(page.locator('input[name="attribution_gclid"]')).toHaveValue("test-click");
+
+  guard.assertNoErrors("current URL attribution fields");
+});
+
 test("home services grid: full card click navigates to service detail", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

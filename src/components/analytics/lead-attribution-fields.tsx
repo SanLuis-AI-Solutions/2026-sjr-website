@@ -48,20 +48,22 @@ export function LeadAttributionFields() {
 
   useEffect(() => {
     const firstTouch = readFirstTouch();
+    const currentParams = new URLSearchParams(window.location.search);
+    const paramValue = (key: string) => value(firstTouch, key as keyof FirstTouch) || currentParams.get(key) || "";
     const fields: LeadAttributionFields = {
       landing_path: value(firstTouch, "landing_path") || window.location.pathname,
-      landing_search: value(firstTouch, "landing_search"),
+      landing_search: value(firstTouch, "landing_search") || window.location.search,
       referrer: value(firstTouch, "referrer") || document.referrer || "",
-      utm_source: value(firstTouch, "utm_source"),
-      utm_medium: value(firstTouch, "utm_medium"),
-      utm_campaign: value(firstTouch, "utm_campaign"),
-      utm_term: value(firstTouch, "utm_term"),
-      utm_content: value(firstTouch, "utm_content"),
-      utm_id: value(firstTouch, "utm_id"),
-      gclid: value(firstTouch, "gclid"),
-      gbraid: value(firstTouch, "gbraid"),
-      wbraid: value(firstTouch, "wbraid"),
-      msclkid: value(firstTouch, "msclkid"),
+      utm_source: paramValue("utm_source"),
+      utm_medium: paramValue("utm_medium"),
+      utm_campaign: paramValue("utm_campaign"),
+      utm_term: paramValue("utm_term"),
+      utm_content: paramValue("utm_content"),
+      utm_id: paramValue("utm_id"),
+      gclid: paramValue("gclid"),
+      gbraid: paramValue("gbraid"),
+      wbraid: paramValue("wbraid"),
+      msclkid: paramValue("msclkid"),
       first_touch_at: value(firstTouch, "first_touch_at"),
       submit_path: `${window.location.pathname}${window.location.search}`,
     };
