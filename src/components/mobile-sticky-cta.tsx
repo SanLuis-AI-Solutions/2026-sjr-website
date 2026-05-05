@@ -5,7 +5,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 
 export function MobileStickyCta() {
   const pathname = usePathname() || "/";
-  const hideOnConversionPage = pathname === "/quote" || pathname === "/book";
+  const hideOnConversionPage = pathname === "/contact" || pathname === "/quote" || pathname === "/book";
 
   if (hideOnConversionPage) return null;
 
