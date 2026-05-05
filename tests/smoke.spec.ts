@@ -988,6 +988,10 @@ test("lead forms preserve first-touch attribution fields", async ({ page }) => {
     "/quote?utm_source=google&utm_medium=cpc&utm_campaign=repair-test&gclid=test-click",
     { waitUntil: "networkidle" },
   );
+  await page.waitForFunction(() => {
+    const firstTouch = window.sessionStorage.getItem("sjr_first_touch");
+    return firstTouch ? JSON.parse(firstTouch).landing_path === "/quote" : false;
+  });
   await page.goto("/book", { waitUntil: "networkidle" });
   await expect(page).toHaveURL(/\/book$/);
 
