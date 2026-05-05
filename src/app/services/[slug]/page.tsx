@@ -1615,8 +1615,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               In-house service
             </p>
             <h1
-              className="lcp-heading"
-              style={{ marginTop: "0.65rem", fontSize: "2.35rem", lineHeight: "2.35rem", color: "#1c1917" }}
+              className="lcp-sans"
+              style={{
+                marginTop: "0.65rem",
+                fontSize: "2.35rem",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                lineHeight: "2.35rem",
+                color: "#1c1917",
+              }}
             >
               {service.name}
             </h1>
@@ -1663,7 +1670,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Book Repair
               </Link>
             </div>
-            <div className="mt-5 rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25">
+            <div className="mt-5 hidden rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25 md:block">
               <p className="text-sm font-semibold text-stone-900">
                 Need {service.name} in {BUSINESS.address.city}?
               </p>
