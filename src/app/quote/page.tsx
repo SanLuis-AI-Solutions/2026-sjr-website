@@ -290,7 +290,7 @@ export default async function QuotePage({
               <span id="quote-submit-text">Get My Quote Range</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · No obligation · 1 business day response.
+              Secure form · No obligation to approve work · 1 business day response.
             </p>
             </form>
           </div>

@@ -275,7 +275,7 @@ export default async function BookPage({
               <span id="booking-submit-text">Request My Time</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · No payment required · Confirmation within 1 business day.
+              Secure form · No payment required to request a time · Confirmation within 1 business day.
             </p>
             </form>
           </div>
