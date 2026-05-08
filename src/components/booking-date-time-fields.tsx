@@ -165,7 +165,7 @@ export function BookingDateTimeFields() {
   return (
     <div className="mt-4 grid gap-4 sm:grid-cols-2">
       <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-        Date
+        Preferred date
         <div ref={wrapperRef} className="relative mt-2">
           <input type="hidden" name="date" value={date} />
           <input
@@ -275,7 +275,7 @@ export function BookingDateTimeFields() {
         </div>
       </label>
       <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-        Time
+        Preferred time
         <select
           name="time"
           value={selectedTime}

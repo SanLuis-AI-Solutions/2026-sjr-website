@@ -23,6 +23,7 @@ export function initializeFormSubmitHandler(options: FormSubmitOptions) {
   const form = document.getElementById(formId) as HTMLFormElement | null;
   const submitButton = document.getElementById(submitButtonId) as HTMLButtonElement | null;
   const submitText = document.getElementById(submitTextId) as HTMLElement | null;
+  const defaultSubmitText = submitText?.textContent || "";
 
   if (!form || !submitButton) return;
 
@@ -45,9 +46,7 @@ export function initializeFormSubmitHandler(options: FormSubmitOptions) {
         // Error handling done in onSubmit
         submitButton.disabled = false;
         if (submitText) {
-          submitText.textContent = submitTextId === "quote-submit-text"
-            ? "Request Quote"
-            : "Request Booking";
+          submitText.textContent = defaultSubmitText;
         }
       }
     }

@@ -183,6 +183,15 @@ export default async function QuotePage({
               encType="multipart/form-data"
               className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
             >
+            <div className="mb-5 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                Takes about 60 seconds
+              </p>
+              <p className="mt-2 leading-6">
+                Send your name, email, and one sentence about the repair. Photos are optional,
+                but close-ups usually help us give a better starting range.
+              </p>
+            </div>
             <input
               type="text"
               name="company"
@@ -239,15 +248,19 @@ export default async function QuotePage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Repair details <span className="text-brand-burgundy">*</span>
+              What needs repair? <span className="text-brand-burgundy">*</span>
               <textarea
                 name="details"
                 className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[160px]"
                 defaultValue={finderContext?.detailsSeed || undefined}
-                placeholder="What needs repair? Include metal type, stones, and anything that seems loose or broken."
+                aria-describedby="quote-details-help"
+                placeholder="Example: Gold ring with one loose prong, or watch stopped after a battery change."
                 required
               />
             </label>
+            <p id="quote-details-help" className="mt-2 text-xs leading-5 text-stone-600">
+              Not sure what it is? Say what you can see. “Not sure” is acceptable.
+            </p>
 
             <details className="mt-5 group">
               <summary className="cursor-pointer text-xs uppercase tracking-[0.2em] text-stone-600 hover:text-stone-800">
@@ -274,10 +287,10 @@ export default async function QuotePage({
               disabled={false}
               id="quote-submit"
             >
-              <span id="quote-submit-text">Request Quote</span>
+              <span id="quote-submit-text">Get My Quote Range</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · 1 business day response.
+              Secure form · No obligation · 1 business day response.
             </p>
             </form>
           </div>

@@ -186,6 +186,15 @@ export default async function BookPage({
               method="post"
               className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
             >
+            <div className="mb-5 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+                No payment required
+              </p>
+              <p className="mt-2 leading-6">
+                Pick your preferred assessment time. We confirm availability by email, and if
+                the timing does not work, we send the closest available option.
+              </p>
+            </div>
             <input
               type="text"
               name="company"
@@ -249,9 +258,13 @@ export default async function BookPage({
                 name="details"
                 className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[140px]"
                 defaultValue={finderContext?.detailsSeed || undefined}
-                placeholder="What should we know before you arrive?"
+                aria-describedby="booking-details-help"
+                placeholder="Example: Ring sizing, watch battery, loose stone, or not sure yet."
               />
             </label>
+            <p id="booking-details-help" className="mt-2 text-xs leading-5 text-stone-600">
+              A short note helps us prepare, but you can leave this blank if you only need an assessment.
+            </p>
 
             <button
               type="submit"
@@ -259,10 +272,10 @@ export default async function BookPage({
               disabled={false}
               id="booking-submit"
             >
-              <span id="booking-submit-text">Request Booking</span>
+              <span id="booking-submit-text">Request My Time</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · Booking confirmation within 1 business day.
+              Secure form · No payment required · Confirmation within 1 business day.
             </p>
             </form>
           </div>
