@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04",
+  "generatedAt": "2026-05-08",
   "baseUrl": "https://www.susiesjewelryrepair.com",
   "sources": [
     "src/app/sitemap.ts",
@@ -29,15 +29,11 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      12
+      15
     ],
     [
       "indexed",
       26
-    ],
-    [
-      "unknown-to-google",
-      3
     ]
   ],
   "routes": [
@@ -47,9 +43,9 @@
       "label": "Homepage",
       "url": "https://www.susiesjewelryrepair.com/",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -57,9 +53,9 @@
       "label": "About",
       "url": "https://www.susiesjewelryrepair.com/about",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -67,9 +63,9 @@
       "label": "Blog hub",
       "url": "https://www.susiesjewelryrepair.com/blog",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -77,9 +73,9 @@
       "label": "Book",
       "url": "https://www.susiesjewelryrepair.com/book",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -87,9 +83,9 @@
       "label": "Contact",
       "url": "https://www.susiesjewelryrepair.com/contact",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -97,9 +93,9 @@
       "label": "FAQ",
       "url": "https://www.susiesjewelryrepair.com/faq",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -107,9 +103,9 @@
       "label": "Privacy",
       "url": "https://www.susiesjewelryrepair.com/privacy",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -117,9 +113,9 @@
       "label": "Quote",
       "url": "https://www.susiesjewelryrepair.com/quote",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -127,9 +123,9 @@
       "label": "Services hub",
       "url": "https://www.susiesjewelryrepair.com/services",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "static",
@@ -137,9 +133,9 @@
       "label": "Terms",
       "url": "https://www.susiesjewelryrepair.com/terms",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -148,9 +144,9 @@
       "path": "/services/bracelet-repair",
       "url": "https://www.susiesjewelryrepair.com/services/bracelet-repair",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -159,9 +155,9 @@
       "path": "/services/custom-design",
       "url": "https://www.susiesjewelryrepair.com/services/custom-design",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -170,9 +166,9 @@
       "path": "/services/heirloom-restoration",
       "url": "https://www.susiesjewelryrepair.com/services/heirloom-restoration",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -181,9 +177,9 @@
       "path": "/services/jewelry-cleaning",
       "url": "https://www.susiesjewelryrepair.com/services/jewelry-cleaning",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -192,9 +188,9 @@
       "path": "/services/necklace-repair",
       "url": "https://www.susiesjewelryrepair.com/services/necklace-repair",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -203,9 +199,9 @@
       "path": "/services/pearl-restringing",
       "url": "https://www.susiesjewelryrepair.com/services/pearl-restringing",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -214,9 +210,9 @@
       "path": "/services/ring-sizing",
       "url": "https://www.susiesjewelryrepair.com/services/ring-sizing",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -225,9 +221,9 @@
       "path": "/services/stone-setting",
       "url": "https://www.susiesjewelryrepair.com/services/stone-setting",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-detail",
@@ -236,9 +232,9 @@
       "path": "/services/watch-repair",
       "url": "https://www.susiesjewelryrepair.com/services/watch-repair",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -248,9 +244,9 @@
       "path": "/services/clear-lake",
       "url": "https://www.susiesjewelryrepair.com/services/clear-lake",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -260,9 +256,9 @@
       "path": "/services/deer-park",
       "url": "https://www.susiesjewelryrepair.com/services/deer-park",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -271,10 +267,10 @@
       "city": "Friendswood",
       "path": "/services/friendswood",
       "url": "https://www.susiesjewelryrepair.com/services/friendswood",
-      "observedStatus": "unknown-to-google",
-      "observedOn": "2026-05-04",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -284,9 +280,9 @@
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -295,10 +291,10 @@
       "city": "Pasadena",
       "path": "/services/pasadena",
       "url": "https://www.susiesjewelryrepair.com/services/pasadena",
-      "observedStatus": "unknown-to-google",
-      "observedOn": "2026-05-04",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "service-area",
@@ -307,10 +303,10 @@
       "city": "Webster",
       "path": "/services/webster",
       "url": "https://www.susiesjewelryrepair.com/services/webster",
-      "observedStatus": "unknown-to-google",
-      "observedOn": "2026-05-04",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -321,9 +317,9 @@
       "path": "/blog/can-a-severely-bent-ring-prong-be-fixed",
       "url": "https://www.susiesjewelryrepair.com/blog/can-a-severely-bent-ring-prong-be-fixed",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -334,9 +330,9 @@
       "path": "/blog/chain-repair-weak-points",
       "url": "https://www.susiesjewelryrepair.com/blog/chain-repair-weak-points",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -347,7 +343,7 @@
       "path": "/blog/cost-to-resize-gold-ring-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/cost-to-resize-gold-ring-pasadena",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
       "note": "Strongest confirmed indexed commercial blog sample."
     },
@@ -360,9 +356,9 @@
       "path": "/blog/custom-design-timeline-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/custom-design-timeline-guide",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -373,7 +369,7 @@
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
       "note": "Commercial blog sample still waiting on index selection."
     },
@@ -386,9 +382,9 @@
       "path": "/blog/heirloom-jewelry-restoration-repair-or-redesign",
       "url": "https://www.susiesjewelryrepair.com/blog/heirloom-jewelry-restoration-repair-or-redesign",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -399,9 +395,9 @@
       "path": "/blog/heirloom-restoration-planning-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/heirloom-restoration-planning-guide",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -412,7 +408,7 @@
       "path": "/blog/how-much-does-pearl-restringing-cost-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/how-much-does-pearl-restringing-cost-pasadena",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
       "note": "Moved from unresolved to indexed by the 2026-05-04 GSC re-inspection."
     },
@@ -425,9 +421,9 @@
       "path": "/blog/how-to-choose-a-jeweler",
       "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -438,9 +434,9 @@
       "path": "/blog/pearl-restringing-timing-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/pearl-restringing-timing-guide",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -451,9 +447,9 @@
       "path": "/blog/professional-cleaning-vs-home-care",
       "url": "https://www.susiesjewelryrepair.com/blog/professional-cleaning-vs-home-care",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -464,9 +460,9 @@
       "path": "/blog/ring-sizing-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/ring-sizing-guide",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -477,9 +473,9 @@
       "path": "/blog/safe-to-clean-vintage-diamond-ring-at-home",
       "url": "https://www.susiesjewelryrepair.com/blog/safe-to-clean-vintage-diamond-ring-at-home",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -490,9 +486,9 @@
       "path": "/blog/stone-security-checklist",
       "url": "https://www.susiesjewelryrepair.com/blog/stone-security-checklist",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -503,9 +499,9 @@
       "path": "/blog/watch-battery-replacement",
       "url": "https://www.susiesjewelryrepair.com/blog/watch-battery-replacement",
       "observedStatus": "indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "monitor",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     },
     {
       "category": "blog",
@@ -516,9 +512,9 @@
       "path": "/blog/where-to-get-watch-battery-replaced-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/where-to-get-watch-battery-replaced-pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-04",
+      "observedOn": "2026-05-08",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
     }
   ]
 }

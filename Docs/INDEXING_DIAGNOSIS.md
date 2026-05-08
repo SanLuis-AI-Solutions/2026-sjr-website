@@ -357,3 +357,31 @@ The immediate next action should be weighting, not pruning:
 1. Add more internal-link weight into the still-stuck service-area and commercial blog pages from already-indexed pages.
 2. Recheck the unresolved queue on the next monitoring pass before consolidating URLs.
 3. Only move to pruning if the same pages remain stalled after another weighted crawl window.
+
+## URL Inspection API Recheck (2026-05-08)
+
+Authenticated URL Inspection API checks were added and run against the 15 unresolved URLs from `Docs/INDEXING_MANIFEST.json`.
+
+### Status Summary
+
+- `15` unresolved URLs now report `Discovered - currently not indexed`.
+- `0` unresolved URLs report `URL is unknown to Google`.
+- This is progress from the May 4 manifest because `/services/friendswood`, `/services/pasadena`, and `/services/webster` moved from `URL is unknown to Google` to `Discovered - currently not indexed`.
+- Live sanity checks on prior unknown URLs confirmed `200` responses, sitemap inclusion, self-canonical tags, and no robots noindex tags.
+
+### Current Interpretation
+
+The unresolved queue is no longer a discovery problem. Google has discovered every unresolved URL, but has not selected those 15 pages for indexing yet. The next move is still weighting and quality improvement, not pruning.
+
+### Automation Added
+
+Run this command for future URL Inspection API checkpoints:
+
+```bash
+npm run google:indexing-status
+```
+
+It writes:
+
+- `.health/indexing-status-latest.json`
+- `.health/indexing-status-latest.md`

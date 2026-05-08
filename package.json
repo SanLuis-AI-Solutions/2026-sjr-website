@@ -16,6 +16,7 @@
     "google:indexing-manifest": "node scripts/google/generate-indexing-manifest.mjs",
     "google:weekly-seo-health": "node scripts/google/weekly-seo-health.mjs",
     "google:seo-quick-wins": "node scripts/google/seo-quick-wins.mjs",
+    "google:indexing-status": "node scripts/google/indexing-status.mjs",
     "google:service-impact-compare": "node scripts/google/service-impact-compare.mjs",
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",

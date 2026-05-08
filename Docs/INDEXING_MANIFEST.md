@@ -1,6 +1,6 @@
 # Indexing Manifest
 
-Generated on 2026-05-04 from canonical repo sources.
+Generated on 2026-05-08 from canonical repo sources.
 
 ## Sources
 
@@ -20,31 +20,30 @@ Generated on 2026-05-04 from canonical repo sources.
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 12
+- Discovered - currently not indexed: 15
 - Indexed: 26
-- URL is unknown to Google: 3
 
 ## Immediate GSC Queue
 
-These URLs should be prioritized for weighting or follow-up rechecks based on the May 4 re-inspection.
+These URLs should be prioritized for weighting or follow-up rechecks based on the May 8 URL Inspection API recheck.
 
 | URL | Category | Current Status | Next Action | Notes |
 | --- | --- | --- | --- | --- |
-| `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/services/friendswood` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/services/pasadena` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/services/webster` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
+| `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/services/friendswood` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Commercial blog sample still waiting on index selection. |
-| `/blog/heirloom-restoration-planning-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/pearl-restringing-timing-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
-| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch. |
+| `/blog/heirloom-restoration-planning-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/pearl-restringing-timing-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
+| `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch. |
 
 ## Remaining Canonical URLs Pending First Inspection
 
@@ -89,10 +88,10 @@ Decision rule:
 | `/services/watch-repair` | service-detail | Watch Repair & Battery Replacement | Indexed |
 | `/services/clear-lake` | service-area | Clear Lake service area | Discovered - currently not indexed |
 | `/services/deer-park` | service-area | Deer Park service area | Indexed |
-| `/services/friendswood` | service-area | Friendswood service area | URL is unknown to Google |
+| `/services/friendswood` | service-area | Friendswood service area | Discovered - currently not indexed |
 | `/services/la-porte` | service-area | La Porte service area | Discovered - currently not indexed |
-| `/services/pasadena` | service-area | Pasadena service area | URL is unknown to Google |
-| `/services/webster` | service-area | Webster service area | URL is unknown to Google |
+| `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
+| `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
 | `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |
 | `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | Discovered - currently not indexed |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |

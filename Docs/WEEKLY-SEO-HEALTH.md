@@ -6,6 +6,8 @@ Run this once per week after:
 npm run google:kpi-weekly-snapshot
 npm run google:reconcile-90d
 npm run google:weekly-seo-health
+npm run google:seo-quick-wins
+npm run google:indexing-status
 ```
 
 Automated option:
@@ -51,6 +53,8 @@ Automated option:
 - average position reviewed for unusual drops
 - top landing pages reviewed
 - top landing pages do not show unexpected legacy URLs dominating
+- unresolved indexation queue reviewed with `npm run google:indexing-status`
+- URLs should move from `URL is unknown to Google` to `Discovered - currently not indexed` to indexed search visibility
 
 ## Commercial Intent
 

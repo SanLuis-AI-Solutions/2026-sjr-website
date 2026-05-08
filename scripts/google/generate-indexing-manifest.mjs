@@ -2,9 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const BASE_URL = "https://www.susiesjewelryrepair.com";
-const GENERATED_AT = "2026-05-04";
+const GENERATED_AT = "2026-05-08";
 
-const OBSERVED_ON = "2026-05-04";
+const OBSERVED_ON = "2026-05-08";
 
 const OBSERVED_STATUSES = {
   "/": { status: "indexed" },
@@ -40,10 +40,10 @@ const OBSERVED_STATUSES = {
     note: "Moved from unresolved to indexed by the 2026-05-04 GSC re-inspection.",
   },
   "/services/clear-lake": { status: "discovered-currently-not-indexed" },
-  "/services/friendswood": { status: "unknown-to-google" },
+  "/services/friendswood": { status: "discovered-currently-not-indexed" },
   "/services/la-porte": { status: "discovered-currently-not-indexed" },
   "/services/pearl-restringing": { status: "discovered-currently-not-indexed" },
-  "/services/webster": { status: "unknown-to-google" },
+  "/services/webster": { status: "discovered-currently-not-indexed" },
   "/blog/chain-repair-weak-points": { status: "discovered-currently-not-indexed" },
   "/blog/does-my-watch-need-battery-or-repair-pasadena": {
     status: "discovered-currently-not-indexed",
@@ -60,7 +60,7 @@ const OBSERVED_STATUSES = {
   "/blog/where-to-get-watch-battery-replaced-pasadena": {
     status: "discovered-currently-not-indexed",
   },
-  "/services/pasadena": { status: "unknown-to-google" },
+  "/services/pasadena": { status: "discovered-currently-not-indexed" },
 };
 
 function readFile(relativePath) {
@@ -162,7 +162,7 @@ function applyObservedState(route) {
   const note =
     observed?.note ||
     (observed
-      ? "GSC re-inspection run on 2026-05-04 after the 2026-04-21 indexing submission batch."
+      ? `GSC URL Inspection API recheck run on ${OBSERVED_ON} after the 2026-04-21 indexing submission batch.`
       : "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed.");
 
   return {
@@ -244,7 +244,7 @@ function buildMarkdown(manifest) {
     "",
     "## Immediate GSC Queue",
     "",
-    "These URLs should be prioritized for weighting or follow-up rechecks based on the May 4 re-inspection.",
+    "These URLs should be prioritized for weighting or follow-up rechecks based on the May 8 URL Inspection API recheck.",
     "",
     "| URL | Category | Current Status | Next Action | Notes |",
     "| --- | --- | --- | --- | --- |",
