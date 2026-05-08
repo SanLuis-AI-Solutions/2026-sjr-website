@@ -13,6 +13,9 @@ export function BrandMark({ className }: BrandMarkProps) {
       className={className}
       width={389}
       height={474}
+      sizes="44px"
+      priority
+      fetchPriority="high"
       decoding="async"
     />
   );
