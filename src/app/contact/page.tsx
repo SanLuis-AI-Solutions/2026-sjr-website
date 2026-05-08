@@ -279,10 +279,10 @@ export default async function ContactPage({
 
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-brand-burgundy-deep py-12 text-white md:py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.3)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.35)_100%)]" />
+      <section className="relative overflow-hidden bg-brand-burgundy-deep py-8 text-white md:py-20">
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)] md:block" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)] md:block" />
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.22)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.28)_100%)]" />
 
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div>
@@ -309,10 +309,10 @@ export default async function ContactPage({
             ) : null}
 
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Contact desk</p>
-            <h1 className="lcp-sans mt-3 max-w-2xl text-[2.05rem] font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
+            <h1 className="lcp-sans mt-2 max-w-2xl text-[1.75rem] font-semibold leading-[1.08] tracking-tight text-white md:mt-3 md:text-6xl">
               Talk to a local expert
             </h1>
-            <p className="lcp-sans mt-5 max-w-lg text-sm leading-6 text-stone-100/90 md:text-[15px]">
+            <p className="lcp-sans mt-3 max-w-lg text-sm leading-6 text-stone-100/90 md:mt-5 md:text-[15px]">
               <span className="md:hidden">Call, email, or send a quick note for the fastest next step.</span>
               <span className="hidden md:inline">
                 Call, email, or send a quick note. We reply with the fastest next step and confirm
@@ -323,7 +323,7 @@ export default async function ContactPage({
             <ConversionQuickActions
               page="contact"
               tone="dark"
-              className="mt-7 flex flex-wrap gap-3"
+              className="mt-5 flex flex-wrap gap-3 md:mt-7"
               primary={{ href: "#contact-form", label: "Send Message" }}
               secondary={[
                 { href: "/quote", label: "Get Fast Quote" },
@@ -331,7 +331,7 @@ export default async function ContactPage({
               ]}
             />
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-8 hidden gap-3 sm:grid-cols-3 md:grid">
               <article className="rounded-2xl border border-white/20 bg-white/10 p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
                   Response
@@ -356,7 +356,7 @@ export default async function ContactPage({
             </div>
           </div>
 
-          <aside className="rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)]">
+          <aside className="hidden rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)] lg:block">
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
               Direct lines
             </p>
