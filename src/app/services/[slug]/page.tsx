@@ -1700,7 +1700,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             ) : null}
           </div>
-          <div className="relative order-2">
+          <div className={`relative order-2 ${isCustomDesign ? "hidden md:block" : ""}`}>
             <div
               className={`relative ${
                 isCustomDesign ? "h-[160px]" : "h-[220px]"
