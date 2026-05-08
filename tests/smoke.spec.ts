@@ -162,7 +162,7 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: /Get a transparent starting/i })
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: /Request Quote/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Get My Quote Range/i })).toBeVisible();
 
   guard.assertNoErrors("home -> quote");
 });
