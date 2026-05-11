@@ -20,6 +20,7 @@ import {
   ServicesHubBrowser,
   type ServicesHubGroupView,
 } from "@/components/services-hub-browser";
+import { PRIORITY_REPAIR_PATHS } from "@/lib/priority-repair-paths";
 
 type ServiceListItem = {
   slug: string;
@@ -323,6 +324,39 @@ export default async function ServicesPage() {
                 <p className="mt-3 text-sm leading-7 text-stone-700">{post.excerpt}</p>
               </Link>
             ))}
+          </div>
+
+          <div
+            role="region"
+            aria-label="Repair planning paths"
+            className="mt-8 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm"
+          >
+            <div className="max-w-3xl">
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                Repair planning
+              </p>
+              <h3 className="mt-3 font-serif text-3xl text-stone-900">
+                Not sure which repair path fits yet?
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-stone-700">
+                These routes answer the questions customers usually ask before they request a
+                quote: whether the issue is routine, how urgent it is, and what service to start
+                with first.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {PRIORITY_REPAIR_PATHS.map((path) => (
+                <Link
+                  key={path.href}
+                  href={path.href}
+                  className="rounded-2xl border border-stone-200 bg-stone-50 p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  <h4 className="font-serif text-2xl text-stone-900">{path.label}</h4>
+                  <p className="mt-3 text-sm leading-7 text-stone-700">{path.description}</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

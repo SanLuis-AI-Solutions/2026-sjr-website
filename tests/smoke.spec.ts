@@ -828,6 +828,26 @@ test("services hub: featured detail link routes to service detail", async ({ pag
   guard.assertNoErrors("services featured link");
 });
 
+test("services hub: repair planning paths expose priority routes", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+
+  const planningPaths = page.getByLabel(/^Repair planning paths$/i);
+  await expect(planningPaths).toBeVisible();
+  await expect(
+    planningPaths.getByRole("link", { name: /Pearl restringing service/i }),
+  ).toHaveAttribute("href", "/services/pearl-restringing");
+  await expect(
+    planningPaths.getByRole("link", { name: /Heirloom repair planning/i }),
+  ).toHaveAttribute("href", "/blog/heirloom-restoration-planning-guide");
+  await expect(
+    planningPaths.getByRole("link", { name: /Watch battery or repair/i }),
+  ).toHaveAttribute("href", "/blog/does-my-watch-need-battery-or-repair-pasadena");
+
+  guard.assertNoErrors("services hub repair planning paths");
+});
+
 test("services hub: intent finder narrows results and resets cleanly", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

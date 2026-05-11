@@ -1,28 +1,6 @@
 import Link from "next/link";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
-
-const priorityGuides = [
-  {
-    label: "Pearl restringing service",
-    href: "/services/pearl-restringing",
-    description: "Use this if strands feel loose, stretched, or ready for preventive restringing.",
-  },
-  {
-    label: "Watch battery or repair?",
-    href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
-    description: "Compare quick battery service against symptoms that point to full watch repair.",
-  },
-  {
-    label: "Heirloom repair planning",
-    href: "/blog/heirloom-restoration-planning-guide",
-    description: "What to bring, photograph, and ask before restoring sentimental jewelry.",
-  },
-  {
-    label: "Chain weak points",
-    href: "/blog/chain-repair-weak-points",
-    description: "How clasps, jump rings, solder joints, and thin links usually fail.",
-  },
-];
+import { PRIORITY_REPAIR_PATHS } from "@/lib/priority-repair-paths";
 
 export function HomeLocalRepairPaths() {
   return (
@@ -67,7 +45,7 @@ export function HomeLocalRepairPaths() {
                   Decision guides
                 </p>
                 <div className="mt-3 grid gap-2">
-                  {priorityGuides.map((guide) => (
+                  {PRIORITY_REPAIR_PATHS.slice(0, 4).map((guide) => (
                     <Link
                       key={guide.href}
                       href={guide.href}

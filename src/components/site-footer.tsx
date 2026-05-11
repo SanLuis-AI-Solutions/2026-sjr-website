@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BUSINESS, SERVICES } from "@/lib/constants";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
+import { PRIORITY_REPAIR_PATHS } from "@/lib/priority-repair-paths";
 import { BrandMark } from "@/components/brand-mark";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
@@ -27,7 +28,7 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 md:col-span-1 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 md:col-span-1 lg:grid-cols-5">
             <div>
               <p className="mb-6 font-serif text-lg text-white">Our Services</p>
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
@@ -66,6 +67,21 @@ export function SiteFooter() {
                     className="transition-colors hover:text-brand-gold"
                   >
                     {page.city}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <p className="mb-6 font-serif text-lg text-white">Repair Guides</p>
+              <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
+                {PRIORITY_REPAIR_PATHS.slice(1, 5).map((path) => (
+                  <Link
+                    key={path.href}
+                    href={path.href}
+                    className="transition-colors hover:text-brand-gold"
+                  >
+                    {path.label}
                   </Link>
                 ))}
               </nav>
