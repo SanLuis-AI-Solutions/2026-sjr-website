@@ -196,10 +196,15 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
 
   const bookToday = stickyShortcut.getByRole("link", { name: /^Book a Repair Today$/i });
   await expect(bookToday).toBeVisible();
-  await expect(bookToday).toHaveAttribute("href", "/book");
+  await expect(bookToday).toHaveAttribute(
+    "href",
+    "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut",
+  );
   await expectTapTarget(bookToday, "Mobile sticky booking shortcut");
   await bookToday.click();
-  await expect(page).toHaveURL(/\/book$/);
+  await expect(page).toHaveURL(
+    /\/book\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut$/,
+  );
 
   const events = await page.evaluate(() =>
     JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
@@ -210,11 +215,22 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
         type === "event" &&
         eventName === "mobile_sticky_cta_click" &&
         params.page_path === "/" &&
-        params.destination === "/book" &&
+        params.destination ===
+          "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut" &&
         params.placement === "mobile_sticky_bar" &&
         params.cta_target === "book",
     ),
   ).toBe(true);
+  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue(
+    "mobile_sticky_cta",
+  );
+  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("site_cta");
+  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue(
+    "booking_shortcut",
+  );
+  await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue(
+    "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut",
+  );
 
   guard.assertNoErrors("mobile sticky shortcut");
 });

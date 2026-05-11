@@ -484,3 +484,18 @@ Result:
 
 - the live site now has verified event evidence for the compact mobile booking CTA
 - future GA4 reviews can compare `mobile_sticky_cta_click` volume against `booking_form_start`, `booking_submit_success`, and organic landing pages
+
+## Mobile CTA Attribution Continuity (2026-05-11)
+
+After verifying the click event, the remaining measurement gap was attribution continuity from sticky CTA click to booking form start or submission.
+
+Implemented on 2026-05-11:
+
+1. Updated the compact mobile sticky CTA destination to include UTM context:
+   `/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut`
+2. Extended the mobile sticky CTA smoke test to verify the destination URL and booking form hidden attribution fields.
+3. Confirmed `attribution_utm_source`, `attribution_utm_medium`, `attribution_utm_campaign`, and `attribution_submit_path` are populated on the booking form after the sticky CTA click.
+
+Result:
+
+- future booking form starts and submissions can be attributed back to the compact mobile sticky CTA through both GA click events and submitted attribution fields
