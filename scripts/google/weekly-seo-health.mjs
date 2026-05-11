@@ -18,6 +18,11 @@ const KEY_EVENTS = [
   "booking_submit_success",
   "booking_submit_pending",
 ];
+const MOBILE_STICKY_CTA_BOOKING_EVENTS = [
+  "booking_form_start",
+  "booking_submit_success",
+  "booking_submit_pending",
+];
 
 function toNum(value) {
   const n = Number(value || 0);
@@ -48,6 +53,59 @@ async function runGaReport(analyticsData, propertyId, requestBody) {
   return response.data.rows || [];
 }
 
+async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate, endDate) {
+  const buildRequestBody = (pathDimension) => ({
+    dateRanges: [{ startDate, endDate }],
+    dimensions: [{ name: "eventName" }],
+    metrics: [{ name: "eventCount" }],
+    dimensionFilter: {
+      andGroup: {
+        expressions: [
+          {
+            filter: {
+              fieldName: "hostName",
+              stringFilter: { matchType: "EXACT", value: PRODUCTION_HOST },
+            },
+          },
+          {
+            filter: {
+              fieldName: "eventName",
+              inListFilter: { values: MOBILE_STICKY_CTA_BOOKING_EVENTS },
+            },
+          },
+          {
+            filter: {
+              fieldName: pathDimension,
+              stringFilter: { matchType: "CONTAINS", value: "utm_source=mobile_sticky_cta" },
+            },
+          },
+        ],
+      },
+    },
+    limit: 20,
+  });
+
+  for (const pathDimension of ["pagePathPlusQueryString", "pageLocation"]) {
+    try {
+      return {
+        pathDimension,
+        rows: await runGaReport(analyticsData, propertyId, buildRequestBody(pathDimension)),
+        error: null,
+      };
+    } catch (error) {
+      if (pathDimension === "pageLocation") {
+        return {
+          pathDimension,
+          rows: [],
+          error: error?.message || String(error),
+        };
+      }
+    }
+  }
+
+  return { pathDimension: null, rows: [], error: "No supported page URL dimension found." };
+}
+
 async function main() {
   const localEnv = loadLocalEnv();
   const { analyticsAdmin, analyticsData, webmasters } = await createGoogleClients(localEnv);
@@ -65,6 +123,7 @@ async function main() {
     gscResponse,
     organicSessionRows,
     keyEventRows,
+    mobileStickyCtaPathReport,
     landingRows,
     allHostRows,
     organicHostRows,
@@ -107,6 +166,7 @@ async function main() {
       },
       limit: 20,
     }),
+    runMobileStickyCtaPathReport(analyticsData, targetPropertyId, startDate, endDate),
     runGaReport(analyticsData, targetPropertyId, {
       dateRanges: [{ startDate, endDate }],
       dimensions: [{ name: "landingPagePlusQueryString" }],
@@ -162,6 +222,14 @@ async function main() {
     if (!(eventName in keyEvents)) continue;
     keyEvents[eventName] = toNum(row.metricValues?.[0]?.value);
   }
+  const mobileStickyCtaBookingEvents = Object.fromEntries(
+    MOBILE_STICKY_CTA_BOOKING_EVENTS.map((eventName) => [eventName, 0])
+  );
+  for (const row of mobileStickyCtaPathReport.rows) {
+    const eventName = row.dimensionValues?.[0]?.value || "";
+    if (!(eventName in mobileStickyCtaBookingEvents)) continue;
+    mobileStickyCtaBookingEvents[eventName] = toNum(row.metricValues?.[0]?.value);
+  }
   const hostnameSessions = allHostRows.map((row) => ({
     hostName: row.dimensionValues?.[0]?.value || "(not set)",
     sessions: toNum(row.metricValues?.[0]?.value),
@@ -185,6 +253,11 @@ async function main() {
       "Organic sessions exist in GA4, but none are attributed to the canonical production host filter."
     );
   }
+  if (mobileStickyCtaPathReport.error) {
+    dataQualityAlerts.push(
+      `Mobile sticky CTA booking-path report could not run: ${mobileStickyCtaPathReport.error}`
+    );
+  }
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -201,6 +274,10 @@ async function main() {
       organicSessionsAllHosts,
       totalSessionsAllHosts,
       keyEvents,
+      mobileStickyCta: {
+        bookingPathDimension: mobileStickyCtaPathReport.pathDimension,
+        bookingPathEvents: mobileStickyCtaBookingEvents,
+      },
       dataQualityAlerts,
       hostnameSessions,
       organicHostnameSessions,
@@ -278,6 +355,32 @@ async function main() {
         ["booking_submit_pending", formatInt(snapshot.ga4.keyEvents.booking_submit_pending)],
       ]
     ),
+    "",
+    "## Mobile Sticky CTA Funnel",
+    "",
+    table(
+      ["Step", "Count"],
+      [
+        [
+          "mobile_sticky_cta_click",
+          formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
+        ],
+        [
+          "booking_form_start on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_form_start),
+        ],
+        [
+          "booking_submit_success on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_submit_success),
+        ],
+        [
+          "booking_submit_pending on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_submit_pending),
+        ],
+      ]
+    ),
+    "",
+    `- Booking path filter dimension: ${snapshot.ga4.mobileStickyCta.bookingPathDimension || "unavailable"}`,
     "",
     "## Hostname Coverage",
     "",

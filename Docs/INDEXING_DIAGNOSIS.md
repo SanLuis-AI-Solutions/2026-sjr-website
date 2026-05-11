@@ -525,3 +525,28 @@ Interpretation:
 
 - The compact mobile sticky CTA shipped near the end of this reporting window, so `0` clicks is not yet a regression signal.
 - The next weekly window is the first meaningful read on whether the one-button CTA creates booking intent.
+
+## Mobile CTA Funnel Reporting (2026-05-11)
+
+The weekly health report now separates booking intent that arrives through the compact mobile sticky CTA UTM path.
+
+Implemented on 2026-05-11:
+
+1. Added a `Mobile Sticky CTA Funnel` section to `scripts/google/weekly-seo-health.mjs`.
+2. Queried GA4 for `booking_form_start`, `booking_submit_success`, and `booking_submit_pending` events where the booking page URL contains `utm_source=mobile_sticky_cta`.
+3. Preserved `mobile_sticky_cta_click` as the top-of-funnel click count because that event fires before navigation to `/book`.
+4. Added a fallback from `pagePathPlusQueryString` to `pageLocation` in case GA4 dimension support changes.
+
+Latest generated baseline:
+
+- Date range: 2026-05-04 to 2026-05-10
+- Mobile sticky CTA clicks: `0`
+- Booking starts on sticky CTA UTM path: `0`
+- Booking success submissions on sticky CTA UTM path: `0`
+- Booking pending submissions on sticky CTA UTM path: `0`
+- Booking path filter dimension: `pagePathPlusQueryString`
+
+Interpretation:
+
+- The reporting path is now in place before the first full post-change measurement window.
+- The next meaningful read is the week ending 2026-05-17, when sticky CTA clicks can be compared against attributed booking starts and submissions.
