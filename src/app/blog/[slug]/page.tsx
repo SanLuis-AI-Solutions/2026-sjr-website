@@ -275,6 +275,35 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   </section>
                 ) : null}
 
+                {post.decisionSignals && post.decisionSignals.length > 0 ? (
+                  <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                      Repair decision guide
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl text-stone-900">
+                      What the symptom usually means
+                    </h2>
+                    <div className="mt-5 grid gap-4">
+                      {post.decisionSignals.map((item) => (
+                        <article
+                          key={item.signal}
+                          className="rounded-2xl border border-stone-200 bg-stone-50 p-5"
+                        >
+                          <h3 className="text-base font-semibold text-stone-900">{item.signal}</h3>
+                          <p className="mt-2 text-sm leading-7 text-stone-700">
+                            <span className="font-semibold text-stone-900">Likely meaning: </span>
+                            {item.meaning}
+                          </p>
+                          <p className="mt-2 text-sm leading-7 text-stone-700">
+                            <span className="font-semibold text-stone-900">Best next action: </span>
+                            {item.nextAction}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
+
                 {post.nextSteps && post.nextSteps.length > 0 ? (
                   <section className="rounded-3xl border border-brand-gold/40 bg-white p-6 shadow-[0_18px_48px_rgba(58,25,16,0.08)]">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">

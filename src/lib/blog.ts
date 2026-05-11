@@ -15,6 +15,12 @@ export type BlogNextStep = {
   href: string;
 };
 
+export type BlogDecisionSignal = {
+  signal: string;
+  meaning: string;
+  nextAction: string;
+};
+
 type BlogDiscoverySurface = "blogFeatured" | "serviceHub" | "geoHelpfulReads";
 
 export type BlogPost = {
@@ -35,6 +41,7 @@ export type BlogPost = {
   nextStepsHeading?: string;
   nextStepsIntro?: string;
   nextSteps?: BlogNextStep[];
+  decisionSignals?: BlogDecisionSignal[];
   relatedServiceSlugs: string[];
   discoveryBoosts?: Partial<Record<BlogDiscoverySurface, number>>;
 };
@@ -433,6 +440,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
+    decisionSignals: [
+      {
+        signal: "The clasp feels loose or opens too easily",
+        meaning: "The weak point may be the hardware, not only the broken chain link.",
+        nextAction: "Ask for clasp inspection during the chain repair quote.",
+      },
+      {
+        signal: "The chain broke near a jump ring",
+        meaning: "Stress is collecting at a connection point that may need reinforcement.",
+        nextAction: "Request necklace or bracelet repair with nearby-link inspection.",
+      },
+      {
+        signal: "The chain has failed more than once",
+        meaning: "A spot repair may not be enough if surrounding links are thin or distorted.",
+        nextAction: "Bring the chain in for an in-house durability check before wearing it again.",
+      },
+    ],
     relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
   },
   {
@@ -786,6 +810,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
+    decisionSignals: [
+      {
+        signal: "You want to preserve the original look",
+        meaning: "Restoration should start with structural safety and finish restraint, not a full redesign.",
+        nextAction: "Ask what can be stabilized while keeping the piece's original character.",
+      },
+      {
+        signal: "The mounting is fragile or no longer wearable",
+        meaning: "The piece may need reinforcement or redesign before it can safely return to regular wear.",
+        nextAction: "Bring any missing parts and ask for a restoration-versus-redesign recommendation.",
+      },
+      {
+        signal: "There is a deadline or family event",
+        meaning: "The safest plan may need to be staged so urgent stabilization is separated from full restoration.",
+        nextAction: "Share the date during the quote request so timing is evaluated before approval.",
+      },
+    ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
   },
   {
@@ -1026,6 +1067,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
+    ],
+    decisionSignals: [
+      {
+        signal: "The watch stopped without moisture or impact",
+        meaning: "A same-day battery replacement may be the likely starting point.",
+        nextAction: "Start with watch repair or a quick quote if the model is unusual.",
+      },
+      {
+        signal: "The crystal fogged or the watch saw water",
+        meaning: "Moisture changes the risk; a battery swap alone may hide movement damage.",
+        nextAction: "Ask for seal and moisture review before approving battery-only service.",
+      },
+      {
+        signal: "The watch sat dead for a long time",
+        meaning: "Battery leakage or corrosion is more likely than with a recently stopped watch.",
+        nextAction: "Plan for diagnosis first, then battery service if the movement checks out.",
+      },
     ],
     relatedServiceSlugs: ["watch-repair"],
     discoveryBoosts: {
@@ -1354,6 +1412,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
+    ],
+    decisionSignals: [
+      {
+        signal: "Second hand jumps every few seconds",
+        meaning: "That often points to low battery on many quartz watches, but condition still matters.",
+        nextAction: "Use the watch repair path and mention the jumping-second symptom.",
+      },
+      {
+        signal: "Stopped after water exposure",
+        meaning: "Treat it as a repair risk, not a simple battery request.",
+        nextAction: "Ask for moisture and gasket review before opening the repair approval.",
+      },
+      {
+        signal: "Crown, stem, or hands feel wrong",
+        meaning: "The visible symptom may come from handling damage or movement trouble.",
+        nextAction: "Request an in-house diagnosis instead of asking for battery-only pricing.",
+      },
     ],
     relatedServiceSlugs: ["watch-repair"],
     discoveryBoosts: {

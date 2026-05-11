@@ -452,3 +452,20 @@ Purpose:
 - increase independent page value for the geo URLs still stuck in `Discovered - currently not indexed`
 - reduce the risk that Google treats the service-area set as structurally interchangeable
 - keep the content user-facing and conversion-relevant instead of adding hidden or purely mechanical SEO text
+
+## Commercial Blog Decision-Signal Pass (2026-05-11)
+
+The remaining stalled blog queue includes several commercial-intent or diagnosis-oriented guides. The template already had Article schema, FAQ schema, related services, commercial cross-links, and quote/book CTAs, so the next quality pass targeted information gain inside the article body rather than more navigation links.
+
+Implemented on 2026-05-11:
+
+1. Added optional `decisionSignals` to blog posts in `src/lib/blog.ts`.
+2. Rendered a visible `Repair decision guide` section on blog detail pages when signals are present.
+3. Added decision-signal blocks to the priority stalled guides for chain repair weak points, heirloom restoration planning, same-day watch battery replacement, and battery-versus-repair diagnosis.
+4. Added smoke coverage confirming the commercial watch diagnosis guide exposes the decision-signal section.
+
+Purpose:
+
+- make the stalled commercial guides less generic by answering symptom-level decisions directly
+- improve AEO/GEO usefulness with concise signal → meaning → next-action guidance
+- keep the added content tied to actual repair decision paths and conversion intent

@@ -529,6 +529,22 @@ test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ pag
   guard.assertNoErrors("legacy Wix redirects");
 });
 
+test("commercial blog guides expose repair decision signals", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/does-my-watch-need-battery-or-repair-pasadena", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(page.getByText(/Repair decision guide/i)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Second hand jumps every few seconds", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText(/Best next action:/i).first()).toBeVisible();
+
+  guard.assertNoErrors("commercial blog decision signals");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";
