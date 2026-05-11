@@ -1,0 +1,92 @@
+import Link from "next/link";
+import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
+
+const priorityGuides = [
+  {
+    label: "Pearl restringing service",
+    href: "/services/pearl-restringing",
+    description: "Use this if strands feel loose, stretched, or ready for preventive restringing.",
+  },
+  {
+    label: "Watch battery or repair?",
+    href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
+    description: "Compare quick battery service against symptoms that point to full watch repair.",
+  },
+  {
+    label: "Heirloom repair planning",
+    href: "/blog/heirloom-restoration-planning-guide",
+    description: "What to bring, photograph, and ask before restoring sentimental jewelry.",
+  },
+  {
+    label: "Chain weak points",
+    href: "/blog/chain-repair-weak-points",
+    description: "How clasps, jump rings, solder joints, and thin links usually fail.",
+  },
+];
+
+export function HomeLocalRepairPaths() {
+  return (
+    <section className="bg-[#faf7f2] py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="rounded-3xl border border-stone-200 bg-white/82 p-6 shadow-[0_18px_44px_rgba(58,25,16,0.10)] md:p-8">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                Local repair paths
+              </p>
+              <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                Start with the route that matches your repair.
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-stone-700">
+                If you are comparing nearby service, city pages explain the drive-in workflow.
+                If the issue is specific, these guides help you decide whether to quote first or
+                book an in-shop assessment.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500">
+                  Nearby cities
+                </p>
+                <div className="mt-3 grid gap-2">
+                  {SERVICE_AREA_PAGES.map((area) => (
+                    <Link
+                      key={area.slug}
+                      href={`/services/${area.slug}`}
+                      className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      Jewelry repair near {area.city}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500">
+                  Decision guides
+                </p>
+                <div className="mt-3 grid gap-2">
+                  {priorityGuides.map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      <span className="block text-sm font-semibold text-stone-900">
+                        {guide.label}
+                      </span>
+                      <span className="mt-1 block text-xs leading-5 text-stone-600">
+                        {guide.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

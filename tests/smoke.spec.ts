@@ -167,6 +167,23 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   guard.assertNoErrors("home -> quote");
 });
 
+test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  const stickyShortcut = page.getByRole("region", { name: /^Mobile booking shortcut$/i });
+  await expect(stickyShortcut).toBeVisible();
+  await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
+
+  const bookToday = stickyShortcut.getByRole("link", { name: /^Book a Repair Today$/i });
+  await expect(bookToday).toBeVisible();
+  await expect(bookToday).toHaveAttribute("href", "/book");
+  await expectTapTarget(bookToday, "Mobile sticky booking shortcut");
+
+  guard.assertNoErrors("mobile sticky shortcut");
+});
+
 test("mobile conversion pages: quote and book quick actions are clear", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = [

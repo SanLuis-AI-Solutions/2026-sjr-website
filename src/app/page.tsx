@@ -6,6 +6,7 @@ import { MobileStickyCta } from "@/components/mobile-sticky-cta";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowcaseBand, Testimonials } from "@/components/home-sections";
 import { HomeCommercialGuides } from "@/components/home-commercial-guides";
+import { HomeLocalRepairPaths } from "@/components/home-local-repair-paths";
 import { servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
@@ -31,6 +32,7 @@ async function HomeDeferredContent() {
       <InHouseBadge />
       <ProcessSteps />
       <ServicesGridSection />
+      <HomeLocalRepairPaths />
       <HomeCommercialGuides />
       <CraftStory />
       <ShowcaseBand />
@@ -51,7 +53,7 @@ export default async function Home() {
         Skip to main content
       </a>
       <SiteHeader />
-      <main id="main-content" className="overflow-hidden pb-24 pt-24 md:pb-0 md:pt-28">
+      <main id="main-content" className="overflow-hidden pb-20 pt-24 md:pb-0 md:pt-28">
         <Hero />
         <Suspense fallback={null}>
           <HomeDeferredContent />
