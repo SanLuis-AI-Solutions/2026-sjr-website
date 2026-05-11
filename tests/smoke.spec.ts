@@ -596,6 +596,30 @@ test("commercial blog guides expose repair decision signals", async ({ page }) =
   guard.assertNoErrors("commercial blog decision signals");
 });
 
+test("heirloom planning guide exposes bench-intake differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/heirloom-restoration-planning-guide", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The bench-intake checklist that prevents vague restoration quotes/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/preserve the engraving/i)).toBeVisible();
+
+  await page.goto("/blog/heirloom-jewelry-restoration-repair-or-redesign", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("link", { name: /Plan an Heirloom Restoration Visit/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("heirloom planning differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";

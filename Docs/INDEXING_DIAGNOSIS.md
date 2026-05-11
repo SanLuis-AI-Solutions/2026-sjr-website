@@ -581,3 +581,21 @@ Purpose:
 - strengthen the page beyond generic service-template language
 - make the page more independently useful than the related pearl blog posts
 - give Google a clearer commercial-service reason to index `/services/pearl-restringing`
+
+## Heirloom Planning Guide Differentiation Pass (2026-05-11)
+
+The 2026-05-11 URL Inspection API recheck showed `/blog/heirloom-restoration-planning-guide` still stuck in `Discovered - currently not indexed` with `0` referring URLs, the weakest referring signal in the unresolved queue.
+
+Implemented on 2026-05-11:
+
+1. Added a bench-intake checklist section to `/blog/heirloom-restoration-planning-guide`.
+2. Differentiated the planning guide from the already indexed repair-vs-redesign heirloom article by focusing on what the customer should bring, preserve, and clarify before work is approved.
+3. Added targeted discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+4. Added a direct link from the indexed `/blog/heirloom-jewelry-restoration-repair-or-redesign` article to the planning guide.
+5. Added smoke coverage confirming the planning guide renders the bench-intake content and the indexed peer exposes the link.
+
+Purpose:
+
+- reduce overlap between the two heirloom articles
+- give the planning guide a distinct pre-visit/search-intent role
+- address the `0` referring URL signal without adding another broad sitewide link block

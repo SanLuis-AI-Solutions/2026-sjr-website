@@ -759,6 +759,14 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
+        heading: "The bench-intake checklist that prevents vague restoration quotes",
+        body: [
+          "Before a sentimental piece reaches the bench, we want the consultation to answer six practical questions: what must stay original, what can be reinforced, what should not be polished away, whether any stones move, whether the piece is intended for daily wear, and whether a date-driven event changes the safest order of work.",
+          "That checklist matters because heirloom repair decisions can drift if the only instruction is 'make it look better.' A better intake note is more specific: preserve the engraving, keep the old finish soft, stabilize the center stone first, avoid reshaping the gallery, or make the piece safe enough for occasional wear only.",
+          "If the inherited piece includes loose stones, a split shank, missing accent stones, stretched pearl or bead sections, or a clasp that no longer feels trustworthy, bring every loose part with the piece. Small parts often change whether the first visit is a repair, a restoration plan, or a redesign conversation.",
+        ],
+      },
+      {
         heading: "Questions to ask before you approve restoration work",
         body: [
           "The most useful restoration questions are not generic pricing questions first. Ask what absolutely needs to be stabilized, what can be preserved as-is, and whether polishing, finish matching, or rebuilding will change the piece's original character.",
@@ -828,6 +836,11 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
+    discoveryBoosts: {
+      blogFeatured: 8,
+      serviceHub: 9,
+      geoHelpfulReads: 9,
+    },
   },
   {
     slug: "cost-to-resize-gold-ring-pasadena",
@@ -1240,6 +1253,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you want to preserve the original piece, start with heirloom restoration. If you already know the current style is not right for you, the custom design path is the better starting point.",
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Plan an Heirloom Restoration Visit", href: "/blog/heirloom-restoration-planning-guide" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
