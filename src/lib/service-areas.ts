@@ -15,6 +15,10 @@ export type ServiceAreaPage = {
   commonRepairsBody: string[];
   visitHeading: string;
   visitBody: string[];
+  localScenarios: Array<{
+    title: string;
+    body: string;
+  }>;
   faqs: Array<{
     question: string;
     answer: string;
@@ -61,6 +65,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "If you are already in Pasadena, the fastest path is to request a quote online with a photo or come in with the piece so we can inspect it in person. We will confirm whether the issue is routine, urgent, or better treated as restoration before repair begins.",
       "Once we review the item, we walk through the likely timing, the starting price, and whether Same Day/Next Day service is realistic for that specific job. That keeps the decision grounded in the actual condition of the piece, not guesswork.",
       "Because the work stays in-house, follow-up is easier too. If you have questions after pickup or need another adjustment, you are still working with the same local team.",
+    ],
+    localScenarios: [
+      {
+        title: "Quick in-town repair stop",
+        body:
+          "Best fit when you are already nearby and need a watch battery, ring fit check, or loose-stone assessment handled without turning the visit into a full-day errand.",
+      },
+      {
+        title: "Event-driven repair",
+        body:
+          "Useful when the piece needs to be wearable before a wedding, anniversary, or family gathering and you need a realistic same-day versus next-day answer.",
+      },
+      {
+        title: "Sentimental-piece review",
+        body:
+          "The right path when an heirloom needs a direct conversation about repair, reinforcement, or redesign before anyone starts altering it.",
+      },
     ],
     faqs: [
       {
@@ -130,6 +151,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Once you arrive, we inspect the piece, confirm whether the issue is straightforward or structural, and walk through timing and pricing before any repair begins. That is useful for busy customers fitting a repair into lunch breaks, school pickup windows, or weekend errands.",
       "Because the workshop is local and on-site, follow-up is simpler too. If you have a question after pickup, you are talking to the same business that handled the work, not a disconnected support line.",
     ],
+    localScenarios: [
+      {
+        title: "Fast weekday repair",
+        body:
+          "A good match for Deer Park customers fitting in ring sizing, battery service, or a prong check around work and family schedules.",
+      },
+      {
+        title: "Quote before the drive",
+        body:
+          "Helpful when photos can clarify whether the visit is likely to be a routine repair, a structural issue, or something that can wait.",
+      },
+      {
+        title: "Heirloom before a gathering",
+        body:
+          "Best when older jewelry needs to look right and wear safely before a family event rather than just receive a quick cosmetic touch-up.",
+      },
+    ],
     faqs: [
       {
         question: "Do you repair jewelry for Deer Park customers even though the shop is in Pasadena?",
@@ -183,6 +221,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "If you are coming from La Porte, start with the service page that matches the problem or send a quote request with one or two photos. That is the fastest way to get pointed toward ring sizing, watch repair, heirloom restoration, or custom work without guessing.",
       "When you arrive, we inspect the item, explain the safest path forward, and confirm the starting price and likely timeline before work begins. That makes the trip more efficient and keeps the decision grounded in the actual condition of the piece.",
       "If the repair is simple, it may follow the Same Day/Next Day pattern. If it is more complex, you will still leave with a clearer plan and a real recommendation rather than a vague estimate.",
+    ],
+    localScenarios: [
+      {
+        title: "Battery plus seal concern",
+        body:
+          "Especially relevant for La Porte watch owners when a stopped watch may also need gasket or moisture-related attention, not only a quick battery swap.",
+      },
+      {
+        title: "Repair versus redesign",
+        body:
+          "Useful when inherited jewelry is sentimental but structurally tired and the better answer may be strengthening or redesigning the piece.",
+      },
+      {
+        title: "Trip-efficient visit",
+        body:
+          "Best when you want the service category narrowed before leaving La Porte so the Pasadena visit starts with the right bench conversation.",
+      },
     ],
     faqs: [
       {
@@ -252,6 +307,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "When you arrive, we inspect the item, confirm the likely timeline, and explain the starting price before work begins. That keeps the trip focused and avoids unnecessary back-and-forth.",
       "If the repair is straightforward, it may fit the Same Day/Next Day pattern. If it is more complex, you still leave with a clear plan from the same shop that will handle the work.",
     ],
+    localScenarios: [
+      {
+        title: "Workday watch issue",
+        body:
+          "A practical fit when a watch stops before work and you need to know quickly whether it is a simple battery path or a deeper repair issue.",
+      },
+      {
+        title: "Before-you-drive triage",
+        body:
+          "Useful when Webster customers want a photo-based first answer before deciding whether the trip should be for a quote, a booking, or a later visit.",
+      },
+      {
+        title: "Loose ring or stone",
+        body:
+          "The better path when something suddenly feels wrong and the safest move is to inspect it before normal daily wear continues.",
+      },
+    ],
     faqs: [
       {
         question: "Do you help Webster customers even though the storefront is in Pasadena?",
@@ -319,6 +391,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "If you are coming from Friendswood, the easiest workflow is to start with a photo and quote request, especially for ring or heirloom work. That helps us point you toward the right service before you arrive.",
       "Once you are in the shop, we inspect the piece, confirm whether the issue is cosmetic or structural, and walk through starting price and timing before any repair begins.",
       "That keeps the visit useful whether you need a quick ring fix or a more thoughtful heirloom restoration plan.",
+    ],
+    localScenarios: [
+      {
+        title: "Engagement ring confidence check",
+        body:
+          "A strong fit when a ring needs sizing, prong work, or stone security reviewed before it is worn daily again.",
+      },
+      {
+        title: "Inherited jewelry decision",
+        body:
+          "Useful when a family piece needs a careful recommendation on preservation, reinforcement, or redesign rather than a generic repair answer.",
+      },
+      {
+        title: "Quote-first heirloom visit",
+        body:
+          "Best when photos can help establish whether the trip is likely to be a straightforward fix or a deeper restoration conversation.",
+      },
     ],
     faqs: [
       {
@@ -388,6 +477,23 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "If you are coming from Clear Lake, start with a fast quote if you can share photos. That helps us tell you whether the issue is likely straightforward or whether the piece needs a deeper in-house assessment.",
       "When you arrive, we inspect the item, explain the safest next step, and confirm the likely timing and starting price before any work begins.",
       "That makes the trip more worthwhile, especially when you are trying to solve the repair without guessing which service category applies.",
+    ],
+    localScenarios: [
+      {
+        title: "Stopped watch decision",
+        body:
+          "Helpful when you need to separate a routine battery issue from the kind of watch problem that deserves deeper diagnosis before more time passes.",
+      },
+      {
+        title: "Preventive stone check",
+        body:
+          "Useful when a prong, clasp, or setting feels questionable and the priority is avoiding a more expensive loss later.",
+      },
+      {
+        title: "Category clarification",
+        body:
+          "Best when the issue is real but not obvious yet and you want the Pasadena visit to start with the right service path.",
+      },
     ],
     faqs: [
       {

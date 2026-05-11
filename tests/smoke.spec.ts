@@ -958,6 +958,8 @@ test("service area: pasadena page ships local schema and nearby city links", asy
   await expect(
     page.getByRole("link", { name: /Jewelry repair near Deer Park/i }),
   ).toBeVisible();
+  await expect(page.getByText(/Best starting points for Pasadena/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Quick in-town repair stop/i })).toBeVisible();
 
   const schemaScripts = await page.locator('script[type="application/ld+json"]').allTextContents();
   expect(

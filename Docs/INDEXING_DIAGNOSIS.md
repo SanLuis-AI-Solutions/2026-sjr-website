@@ -435,3 +435,20 @@ Evidence still required before the goal can be called achieved:
 - post-weighting indexing improvement on the unresolved queue
 - post-weighting organic visibility improvement on the affected pages or queries
 - post-weighting conversion evidence showing the mobile CTA change helps or at least does not regress lead behavior
+
+## Service-Area Differentiation Pass (2026-05-11)
+
+Because the May 8 and May 10 URL Inspection API checks showed every unresolved service-area URL as discovered but not indexed, the next quality pass targeted page differentiation instead of adding more generic links.
+
+Implemented on 2026-05-11:
+
+1. Added `localScenarios` to each service-area page in `src/lib/service-areas.ts`.
+2. Rendered a new `Best starting points for {city}` section on service-area pages.
+3. Made each city page expose three unique decision scenarios tied to that area’s likely repair intent, such as Pasadena in-town repair stops, Webster workday watch issues, Friendswood heirloom decisions, and La Porte battery-plus-seal concerns.
+4. Added smoke coverage confirming the Pasadena service-area page renders the new city-specific scenario section.
+
+Purpose:
+
+- increase independent page value for the geo URLs still stuck in `Discovered - currently not indexed`
+- reduce the risk that Google treats the service-area set as structurally interchangeable
+- keep the content user-facing and conversion-relevant instead of adding hidden or purely mechanical SEO text

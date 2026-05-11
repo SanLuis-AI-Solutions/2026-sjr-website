@@ -202,6 +202,20 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 ))}
               </div>
             </section>
+
+            <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                Best starting points for {page.city}
+              </p>
+              <div className="mt-5 grid gap-4 md:grid-cols-3">
+                {page.localScenarios.map((scenario) => (
+                  <article key={scenario.title} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                    <h2 className="font-serif text-2xl text-stone-900">{scenario.title}</h2>
+                    <p className="mt-3 text-sm leading-7 text-stone-700">{scenario.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
