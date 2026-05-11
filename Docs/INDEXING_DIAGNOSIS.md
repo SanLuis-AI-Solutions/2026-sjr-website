@@ -385,3 +385,21 @@ It writes:
 
 - `.health/indexing-status-latest.json`
 - `.health/indexing-status-latest.md`
+
+## Weighting Pass 2 (2026-05-11)
+
+The unresolved queue remained fully discovered but not indexed on the 2026-05-10 checkpoint, so the next remediation step was additional internal-link weighting rather than pruning.
+
+Implemented on 2026-05-11:
+
+1. Replaced the mobile floating dual CTA with one compact `Book a Repair Today` action to reduce small-screen friction while preserving the primary conversion path.
+2. Added a homepage `Local repair paths` section linking directly to unresolved service-area and commercial repair pages.
+3. Added a shared `PRIORITY_REPAIR_PATHS` source of truth for the highest-priority unresolved URLs.
+4. Added a user-facing `Repair planning` block on `/services` so the indexed services hub reinforces priority stuck pages directly.
+5. Added a restrained footer `Repair Guides` link set so selected commercial guides receive repeated sitewide crawl paths without overloading the navigation.
+
+Current interpretation:
+
+- The queue is still an index-selection problem, not a discovery problem.
+- The next checkpoint should measure whether the newly weighted URLs start moving from `Discovered - currently not indexed` into the indexed set.
+- If the same commercial and service-area URLs remain stalled after another crawl window, the next decision should shift from more linking to selective consolidation or deeper content differentiation.
