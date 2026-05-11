@@ -170,7 +170,25 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
 test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
+  await page.addInitScript(() => {
+    const storageKey = "sjr_test_ga_events";
+    Object.defineProperty(window, "__sjrGaHostAllowed", {
+      configurable: true,
+      get: () => true,
+      set: () => undefined,
+    });
+    window.dataLayer = [];
+    window.gtag = (...args: unknown[]) => {
+      const existing = JSON.parse(window.sessionStorage.getItem(storageKey) || "[]");
+      existing.push(args);
+      window.sessionStorage.setItem(storageKey, JSON.stringify(existing));
+      window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
+      window.dataLayer.push(args);
+    };
+  });
+
   await page.goto("/", { waitUntil: "networkidle" });
+  await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
 
   const stickyShortcut = page.getByRole("region", { name: /^Mobile booking shortcut$/i });
   await expect(stickyShortcut).toBeVisible();
@@ -180,6 +198,23 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
   await expect(bookToday).toBeVisible();
   await expect(bookToday).toHaveAttribute("href", "/book");
   await expectTapTarget(bookToday, "Mobile sticky booking shortcut");
+  await bookToday.click();
+  await expect(page).toHaveURL(/\/book$/);
+
+  const events = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "mobile_sticky_cta_click" &&
+        params.page_path === "/" &&
+        params.destination === "/book" &&
+        params.placement === "mobile_sticky_bar" &&
+        params.cta_target === "book",
+    ),
+  ).toBe(true);
 
   guard.assertNoErrors("mobile sticky shortcut");
 });

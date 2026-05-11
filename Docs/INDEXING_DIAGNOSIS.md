@@ -469,3 +469,18 @@ Purpose:
 - make the stalled commercial guides less generic by answering symptom-level decisions directly
 - improve AEO/GEO usefulness with concise signal → meaning → next-action guidance
 - keep the added content tied to actual repair decision paths and conversion intent
+
+## Mobile CTA Measurement Gate (2026-05-11)
+
+The compact mobile sticky CTA already emitted `mobile_sticky_cta_click`, but the verification suite only checked that the button rendered. Measurement coverage was tightened so future conversion analysis can distinguish whether the one-button mobile CTA is helping.
+
+Implemented on 2026-05-11:
+
+1. Updated the mobile sticky CTA smoke test to assert the `mobile_sticky_cta_click` event fires with `page_path`, `destination`, `placement`, and `cta_target`.
+2. Added `mobile_sticky_cta_click` to the production GA4 event validator in `scripts/google/validate-prod-events.mjs`.
+3. Ran `npm run google:validate-prod-events` against production. The validator passed for `mobile_sticky_cta_click` and wrote `.health/ga4-prod-event-validation-2026-05-11T21-59-25Z.md`.
+
+Result:
+
+- the live site now has verified event evidence for the compact mobile booking CTA
+- future GA4 reviews can compare `mobile_sticky_cta_click` volume against `booking_form_start`, `booking_submit_success`, and organic landing pages

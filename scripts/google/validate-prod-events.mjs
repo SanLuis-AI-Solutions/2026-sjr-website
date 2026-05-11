@@ -14,6 +14,7 @@ const REQUIRED_EVENTS = [
   "service_market_expand",
   "service_faq_open",
   "service_cta_click",
+  "mobile_sticky_cta_click",
   "conversion_quick_action_click",
   "conversion_quick_action_click_control",
   "conversion_quick_action_click_primary_focus",
@@ -384,6 +385,21 @@ async function main() {
   context.on("request", recordRequest);
 
   try {
+    await goto(page, "/");
+
+    await runNavigationEventCheck(
+      page,
+      "mobile_sticky_cta_click",
+      async () => {
+        const cta = page
+          .getByRole("region", { name: /^Mobile booking shortcut$/i })
+          .getByRole("link", { name: /^Book a Repair Today$/i });
+        await clickTrackedTarget(cta);
+      },
+      /\/book(?:\?|$)/,
+      report
+    );
+
     await goto(page, "/");
 
     await runEventCheck(
