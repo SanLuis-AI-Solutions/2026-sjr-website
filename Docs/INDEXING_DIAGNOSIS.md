@@ -403,3 +403,35 @@ Current interpretation:
 - The queue is still an index-selection problem, not a discovery problem.
 - The next checkpoint should measure whether the newly weighted URLs start moving from `Discovered - currently not indexed` into the indexed set.
 - If the same commercial and service-area URLs remain stalled after another crawl window, the next decision should shift from more linking to selective consolidation or deeper content differentiation.
+
+### Next Checkpoint Decision Rule
+
+At the next indexing checkpoint, use `npm run google:indexing-status` together with the weekly SEO reports.
+
+Treat the May 11 weighting pass as successful only if at least one of these is true:
+
+1. one or more weighted URLs move from `Discovered - currently not indexed` to indexed
+2. the unresolved queue shrinks below `15`
+3. referring-url counts improve on the weighted pages, followed by movement toward indexing
+
+If none of those conditions occur after the next crawl window:
+
+1. stop adding more generic internal links
+2. compare the stuck URLs against indexed peers for uniqueness, intent overlap, and page-level proof
+3. decide page by page whether to deepen content, consolidate overlap, or leave the URL in place with a stronger business case
+
+### Goal Completion Audit Status
+
+The traffic-and-conversion goal is not complete as of 2026-05-11.
+
+Evidence already satisfied:
+
+- mobile CTA friction reduced from two floating actions to one compact booking action
+- additional internal-link weighting shipped from the homepage, services hub, and footer
+- production build, smoke tests, and post-deploy performance gates passed
+
+Evidence still required before the goal can be called achieved:
+
+- post-weighting indexing improvement on the unresolved queue
+- post-weighting organic visibility improvement on the affected pages or queries
+- post-weighting conversion evidence showing the mobile CTA change helps or at least does not regress lead behavior
