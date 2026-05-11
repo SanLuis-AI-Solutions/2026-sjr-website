@@ -499,3 +499,29 @@ Implemented on 2026-05-11:
 Result:
 
 - future booking form starts and submissions can be attributed back to the compact mobile sticky CTA through both GA click events and submitted attribution fields
+
+## Weekly Health Mobile CTA Reporting (2026-05-11)
+
+The weekly SEO health report now includes `mobile_sticky_cta_click` in its GA4 key-event snapshot.
+
+Implemented on 2026-05-11:
+
+1. Added `mobile_sticky_cta_click` to `scripts/google/weekly-seo-health.mjs`.
+2. Added a `Mobile sticky CTA clicks` row to the weekly Core KPIs table.
+3. Added `mobile_sticky_cta_click` to the weekly Conversion Detail table.
+4. Verified with `npm run google:weekly-seo-health`.
+
+Latest generated baseline:
+
+- Date range: 2026-05-04 to 2026-05-10
+- Google Search clicks: `9`
+- Google Search impressions: `1,261`
+- Production-host organic sessions: `7`
+- Quote + booking starts: `2`
+- Mobile sticky CTA clicks: `0`
+- Quote + booking outcomes: `2`
+
+Interpretation:
+
+- The compact mobile sticky CTA shipped near the end of this reporting window, so `0` clicks is not yet a regression signal.
+- The next weekly window is the first meaningful read on whether the one-button CTA creates booking intent.

@@ -12,6 +12,7 @@ const PRODUCTION_HOST = "www.susiesjewelryrepair.com";
 const KEY_EVENTS = [
   "quote_form_start",
   "booking_form_start",
+  "mobile_sticky_cta_click",
   "phone_call_click",
   "quote_submit_success",
   "booking_submit_success",
@@ -234,6 +235,11 @@ async function main() {
           formatInt(snapshot.ga4.keyEvents.quote_form_start + snapshot.ga4.keyEvents.booking_form_start),
           "Commercial-intent starts before form completion",
         ],
+        [
+          "Mobile sticky CTA clicks",
+          formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
+          "Clicks from the compact mobile booking shortcut",
+        ],
         ["Phone call clicks", formatInt(snapshot.ga4.keyEvents.phone_call_click), "Direct call intent from the site"],
         [
           "Quote + booking outcomes",
@@ -265,6 +271,7 @@ async function main() {
       [
         ["quote_form_start", formatInt(snapshot.ga4.keyEvents.quote_form_start)],
         ["booking_form_start", formatInt(snapshot.ga4.keyEvents.booking_form_start)],
+        ["mobile_sticky_cta_click", formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click)],
         ["phone_call_click", formatInt(snapshot.ga4.keyEvents.phone_call_click)],
         ["quote_submit_success", formatInt(snapshot.ga4.keyEvents.quote_submit_success)],
         ["booking_submit_success", formatInt(snapshot.ga4.keyEvents.booking_submit_success)],
