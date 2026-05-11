@@ -550,3 +550,34 @@ Interpretation:
 
 - The reporting path is now in place before the first full post-change measurement window.
 - The next meaningful read is the week ending 2026-05-17, when sticky CTA clicks can be compared against attributed booking starts and submissions.
+
+## May 11 URL Inspection Recheck And Pearl-Service Deepening
+
+`npm run google:indexing-status` was rerun on 2026-05-11 against the unresolved manifest queue.
+
+Result:
+
+- Checked URLs: `15`
+- Current status: `15` still show `Discovered - currently not indexed`
+- Indexed movement since May 8 manifest: `0`
+- Every unresolved URL remains present in the sitemap
+- Referring URL counts are still thin: most unresolved URLs show `1` referring URL; `/services/pearl-restringing` shows `2`; `/blog/heirloom-restoration-planning-guide` shows `0`
+
+Decision:
+
+- This triggered the documented post-weighting decision rule.
+- The next action is no longer broad internal-link expansion.
+- The remediation path is page-level uniqueness, proof, and intent-depth improvement on the highest-value unresolved URLs.
+
+Implemented first because it is the only unresolved commercial service-detail URL:
+
+1. Expanded `/services/pearl-restringing` source copy with strand-specific warning signs, clasp inspection, knot spacing, and drape language.
+2. Added pearl-specific `What to expect` cards for thread condition, knotting and spacing, and clasp decisions.
+3. Added pearl-specific intake guidance for loose pearls, broken thread, clasp reuse/replacement, and desired finished length.
+4. Added smoke coverage confirming the pearl page renders strand-specific decision content.
+
+Purpose:
+
+- strengthen the page beyond generic service-template language
+- make the page more independently useful than the related pearl blog posts
+- give Google a clearer commercial-service reason to index `/services/pearl-restringing`

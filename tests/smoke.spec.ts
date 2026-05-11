@@ -1276,6 +1276,23 @@ test("mobile service detail: commercial pages expose direct answer blocks", asyn
   guard.assertNoErrors("service direct answer blocks");
 });
 
+test("mobile service detail: pearl restringing exposes strand-specific decisions", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/pearl-restringing", { waitUntil: "networkidle" });
+
+  await expect(page.getByRole("heading", { level: 1, name: /Pearl Restringing/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Thread condition/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Knotting and spacing/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Clasp decisions/i })).toBeVisible();
+  await expect(page.getByText("Fraying near the clasp", { exact: true })).toBeVisible();
+  await expect(page.getByText(/The full pearl strand, including any loose pearls/i)).toBeVisible();
+
+  guard.assertNoErrors("pearl restringing strand-specific decisions");
+});
+
 test("mobile service detail: non-watch and non-ring routes provide 7 FAQs", async ({
   page,
 }) => {

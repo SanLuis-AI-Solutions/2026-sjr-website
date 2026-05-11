@@ -1240,6 +1240,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   const isWatchRepair = slug === "watch-repair";
   const isRingSizing = slug === "ring-sizing";
+  const isPearlRestringing = slug === "pearl-restringing";
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
   const localServiceConfig = SERVICES.find((item) => item.slug === slug);
@@ -1423,6 +1424,42 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           ],
         },
       ]
+      : isPearlRestringing
+        ? [
+          {
+            title: "Thread condition",
+            eyebrow: "Early warning signs",
+            copy:
+              "We check for stretched silk, fuzzy thread, visible gaps, and weak clasp-side wear before recommending restringing.",
+            bullets: [
+              "Fraying near the clasp",
+              "Uneven knot spacing",
+              "Discolored or stretched thread",
+            ],
+          },
+          {
+            title: "Knotting and spacing",
+            eyebrow: "Protecting each pearl",
+            copy:
+              "Hand-knotting helps keep pearls from rubbing and limits pearl loss if a strand breaks later.",
+            bullets: [
+              "Fresh silk restringing",
+              "Hand knots between pearls",
+              "Drape and spacing check",
+            ],
+          },
+          {
+            title: "Clasp decisions",
+            eyebrow: "Security at pickup",
+            copy:
+              "If the clasp is worn, loose, or hard to close, we review cleaning, adjustment, or replacement during the same service plan.",
+            bullets: [
+              "Clasp inspection",
+              "Optional clasp upgrade",
+              "Length adjustment if needed",
+            ],
+          },
+        ]
       : [
         {
           title: "Service scope",
@@ -1459,6 +1496,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? "pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions."
     : isRingSizing
       ? "some styles (eternity bands, certain metals, engraved patterns) can have sizing limits. We confirm the safest path before service."
+      : isPearlRestringing
+        ? "final restringing scope depends on strand length, knot count, pearl condition, and whether the clasp should be cleaned, adjusted, or replaced."
       : isCustomDesign
         ? "custom design work includes approval checkpoints before production so you can confirm direction, materials, and final finish."
         : "timing and scope may vary by condition, materials, or parts availability.";
@@ -1466,11 +1505,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? "Final price depends on parts and condition."
     : isRingSizing
       ? "Final price depends on metal type, size change, and setting checks."
+      : isPearlRestringing
+        ? "Final price depends on strand length, knot count, clasp condition, and any length adjustment."
       : "Final price depends on materials, condition, and required parts.";
   const turnaroundDetailCopy = isWatchRepair
     ? "Battery work is often Same Day/Next Day service. Full service varies by parts."
     : isRingSizing
       ? "Most sizing jobs follow Same Day/Next Day service. Structural work may add time."
+      : isPearlRestringing
+        ? "Most pearl restringing follows Same Day/Next Day service. Multi-strand layouts or clasp replacements may add time."
       : isCustomDesign
         ? "Custom design projects typically follow a 7 business day timeline after design approval."
         : "Most requests follow Same Day/Next Day service. Structural work or parts sourcing may add time.";
@@ -1486,6 +1529,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         "Any sizing history or recent fit changes (optional)",
         "If white gold: let us know if you want rhodium refinishing",
       ]
+      : isPearlRestringing
+        ? [
+          "The full pearl strand, including any loose pearls or broken thread",
+          "The clasp you want reused, replaced, cleaned, or adjusted",
+          "Your preferred finished length if the strand currently feels too long or short",
+        ]
       : isCustomDesign
         ? [
           "Reference photos or style ideas",

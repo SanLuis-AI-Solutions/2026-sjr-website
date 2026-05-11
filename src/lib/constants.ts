@@ -264,23 +264,27 @@ export const SERVICES = [
   {
     slug: "pearl-restringing",
     name: "Pearl Restringing",
-    summary: "Fresh silk stringing with secure knots for pearls and beads.",
+    summary: "Fresh silk restringing, hand-knot spacing, and clasp checks for pearl strands.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "Pearls should be restrung to keep them safe and evenly spaced.",
-      "We use quality silk and hand-knot between pearls for a clean, classic finish."
+      "Pearl strands should be restrung before the thread fails, especially when the strand looks stretched, fuzzy, discolored, or uneven near the clasp.",
+      "We inspect the clasp, pearl spacing, and strand length before restringing so the final result protects the pearls and hangs correctly when you wear it.",
+      "Hand-knotting between pearls is available for classic pearl strands because the knots reduce rubbing and help limit pearl loss if a strand ever breaks."
     ],
     includes: [
       "Silk restringing",
       "Hand-knotting between pearls",
       "Clasp inspection and cleaning",
-      "Length adjustment if needed"
+      "Length adjustment if needed",
+      "Pearl spacing and drape check"
     ],
     commonRequests: [
       "Loose or stretched strings",
       "Broken pearl strand",
       "Bead necklace repair",
-      "Clasp upgrade"
+      "Clasp upgrade",
+      "Uneven knot spacing",
+      "Inherited pearl strand refresh"
     ],
     image: "/images/services/pearl-restringing-hero.jpg",
     faqs: [
