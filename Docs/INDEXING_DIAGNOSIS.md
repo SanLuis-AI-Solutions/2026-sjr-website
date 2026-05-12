@@ -819,3 +819,26 @@ Purpose:
 - increase independent page value for a stalled same-day watch battery URL
 - strengthen local visit intent for Deer Park, Pasadena, Clear Lake, and La Porte customers
 - connect diagnostic watch searchers back to the commercial same-day battery service path
+
+## GSC Recheck And Freshness Repair (2026-05-12)
+
+Re-ran the authenticated GSC indexing status script on 2026-05-12 after the latest crawl-weight passes.
+
+Result:
+
+1. 14 unresolved URLs still report `Discovered - currently not indexed`.
+2. `/services/clear-lake` reports `URL is unknown to Google` with 0 sitemap sources and 0 referring URLs in the URL Inspection API response.
+3. Live production verification shows `/services/clear-lake` returns `200`, has a canonical URL for `https://www.susiesjewelryrepair.com/services/clear-lake`, and is present in the live sitemap.
+4. The live sitemap still showed service and geo pages with `2026-04-21` `lastmod` despite material May 12 service-area/content updates.
+
+Implemented on 2026-05-12:
+
+1. Updated service and service-area sitemap `lastmod` to `2026-05-12T12:00:00-05:00`.
+2. Updated `reviewedAt` dates to `2026-05-12` for blog posts materially changed during the indexing recovery passes so their sitemap `lastmod` reflects the actual content refresh.
+3. Refreshed `Docs/SEO_QUICK_WINS.md` with the May 12 Search Console quick-win report.
+
+Purpose:
+
+- repair stale freshness signals that could suppress recrawl priority
+- give Clear Lake and the recently updated service/geo pages a current sitemap signal
+- align blog `reviewedAt`/sitemap dates with actual content updates rather than stale February-April timestamps
