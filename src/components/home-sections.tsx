@@ -76,7 +76,7 @@ export function ProofBand() {
 
 export function InHouseBadge() {
   return (
-    <section className="relative overflow-hidden bg-[#faf7f2] py-14">
+    <section className="relative overflow-hidden bg-[#faf7f2] py-10 md:py-14">
       <div className="pointer-events-none absolute -left-24 top-8 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.18),_transparent_70%)]" />
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 text-center reveal-on-scroll">
         <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -95,7 +95,7 @@ export function InHouseBadge() {
 
 export function ProcessSteps() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffdfa_0%,#f2e7d7_100%)] py-20">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffdfa_0%,#f2e7d7_100%)] py-12 md:py-20">
       <div className="pointer-events-none absolute -right-32 top-10 h-60 w-60 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.25),_transparent_70%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
@@ -123,7 +123,7 @@ export function ProcessSteps() {
             </div>
           </div>
 
-          <div className="relative space-y-10 pl-8">
+          <div className="relative space-y-5 pl-8 md:space-y-10">
             <div className="absolute left-3 top-0 h-full w-px bg-brand-gold/40" />
             {[
               {
@@ -146,7 +146,7 @@ export function ProcessSteps() {
               return (
                 <div
                   key={item.step}
-                  className={`reveal-on-scroll ${delayClass} relative rounded-3xl border border-stone-200 bg-white p-7 shadow-[0_18px_45px_rgba(58,25,16,0.16)]`}
+                  className={`reveal-on-scroll ${delayClass} relative rounded-3xl border border-stone-200 bg-white p-5 shadow-[0_18px_45px_rgba(58,25,16,0.16)] md:p-7`}
                 >
                   <span className="absolute -left-10 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow-lg">
                     {item.step}
@@ -170,7 +170,7 @@ export function ProcessSteps() {
 
 export function CraftStory() {
   return (
-    <section className="relative overflow-hidden bg-[#f5ede2] py-16">
+    <section className="relative hidden overflow-hidden bg-[#f5ede2] py-16 md:block">
       <div className="pointer-events-none absolute -left-28 bottom-10 h-52 w-52 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.16),_transparent_70%)]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
         <div className="space-y-4 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/80 p-8 shadow-[0_16px_40px_rgba(58,25,16,0.12)]">
@@ -244,7 +244,7 @@ export function CraftStory() {
 
 export function ShowcaseBand() {
   return (
-    <section className="relative overflow-hidden bg-stone-900 py-24 text-[#faf7f2]">
+    <section className="relative hidden overflow-hidden bg-stone-900 py-24 text-[#faf7f2] md:block">
       <div className="pointer-events-none absolute -left-32 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.15),_transparent_70%)]" />
       <div className="pointer-events-none absolute -right-20 bottom-0 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.2),_transparent_70%)]" />
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
@@ -326,7 +326,7 @@ export function HomeFaq() {
 
 export function Testimonials() {
   return (
-    <section className="cv-section bg-[#f1e4d7] py-16">
+    <section className="cv-section bg-[#f1e4d7] py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-end justify-between reveal-on-scroll">
           <div>

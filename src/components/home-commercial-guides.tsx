@@ -9,7 +9,7 @@ export function HomeCommercialGuides() {
   }
 
   return (
-    <section className="bg-white py-12">
+    <section className="bg-white py-10 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -19,7 +19,7 @@ export function HomeCommercialGuides() {
             <h2 className="mt-3 font-serif text-3xl text-stone-900">
               Start with the questions customers ask before they book.
             </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700 md:block">
               These guides answer the pricing, timing, and battery-vs-repair questions that
               usually drive the first call or quote request.
             </p>
@@ -33,17 +33,23 @@ export function HomeCommercialGuides() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {commercialGuides.map((post) => (
+          {commercialGuides.map((post, index) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="rounded-2xl border border-stone-200 bg-stone-50 p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className={`rounded-2xl border border-stone-200 bg-stone-50 p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+                index > 2 ? "hidden md:block" : ""
+              }`}
             >
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
-                Commercial intent
+                Repair guide
               </p>
-              <h3 className="mt-3 font-serif text-2xl text-stone-900">{post.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-stone-700">{post.excerpt}</p>
+              <h3 className="mt-3 font-serif text-xl leading-tight text-stone-900 md:text-2xl">
+                {post.title}
+              </h3>
+              <p className="mt-3 hidden text-sm leading-7 text-stone-700 md:block">
+                {post.excerpt}
+              </p>
             </Link>
           ))}
         </div>

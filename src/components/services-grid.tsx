@@ -57,17 +57,17 @@ export function ServicesGrid({
 
   return (
     <section
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#f6e4d7_0%,#efd1be_100%)] py-24"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#f6e4d7_0%,#efd1be_100%)] py-14 md:py-24"
       id={id}
     >
       <div className="pointer-events-none absolute -left-32 top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.25),_transparent_70%)]" />
       <div className="mx-auto max-w-7xl px-6">
         {!hideHeader && (
-          <header className="mb-16 text-center reveal-on-scroll">
+          <header className="mb-10 text-center reveal-on-scroll md:mb-16">
             <p className="text-xs uppercase tracking-[0.4em] text-brand-burgundy">
               {kicker}
             </p>
-            <h2 aria-label={title} className="mt-4 font-serif text-4xl text-neutral-900 md:text-5xl">
+            <h2 aria-label={title} className="mt-4 font-serif text-3xl text-neutral-900 md:text-5xl">
               {titleLead}
               {titleAccent ? (
                 <>
@@ -80,7 +80,7 @@ export function ServicesGrid({
           </header>
         )}
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {services.map((service, index) => {
             if (!service) return null;
             const slug = service.slug || "unavailable";
@@ -104,8 +104,8 @@ export function ServicesGrid({
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />
                 </div>
 
-                <div className="p-8">
-                  <h3 className="font-serif text-2xl text-neutral-900">
+                <div className="p-5 md:p-8">
+                  <h3 className="font-serif text-xl text-neutral-900 md:text-2xl">
                     {name}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-stone-600">
@@ -113,7 +113,7 @@ export function ServicesGrid({
                   </p>
 
                   {timeEstimate ? (
-                    <div className="mt-6 flex flex-wrap gap-4 border-t border-stone-200 pt-6">
+                    <div className="mt-4 flex flex-wrap gap-4 border-t border-stone-200 pt-4 md:mt-6 md:pt-6">
                       <div className="flex flex-col">
                         <span className="text-[10px] uppercase tracking-widest text-stone-600">Turnaround</span>
                         <span className="font-sans text-sm font-semibold text-neutral-900">
@@ -123,7 +123,7 @@ export function ServicesGrid({
                     </div>
                   ) : null}
 
-                  <div className="mt-8 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep">
+                  <div className="mt-5 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep md:mt-8">
                     Explore Details
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

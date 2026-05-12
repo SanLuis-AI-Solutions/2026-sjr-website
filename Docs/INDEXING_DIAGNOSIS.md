@@ -992,3 +992,27 @@ Interpretation:
 - The homepage is currently the only organic landing page with tracked lead conversion in this window.
 - The stalled commercial blog and geo/service pages are still an indexing and visibility opportunity, not yet proven conversion pages.
 - Once those pages index, this report will show whether they produce qualified lead actions or only impressions/sessions.
+
+## Mobile Homepage Flow Simplification (2026-05-12)
+
+The homepage is currently the only Organic Search landing page with a tracked quote start and quote success, so it should stay clear and conversion-oriented on mobile. Recent indexing work added useful crawl paths, but the mobile flow needed a restraint pass to avoid feeling like a content directory.
+
+Implemented on 2026-05-12:
+
+1. Moved the services grid higher in the homepage flow so mobile users reach repair choices before secondary process/story sections.
+2. Reduced mobile spacing and card padding in the services and process sections.
+3. Limited the homepage repair-guide section to three visible guide cards on mobile, while keeping the full desktop grid.
+4. Hid the decorative workshop story and custom showcase band on mobile; those remain available on desktop and through normal navigation.
+5. Added smoke coverage to keep the mobile homepage flow from drifting back into clutter.
+
+Validation:
+
+```bash
+npm test -- --grep "mobile home flow|mobile conversion: home CTA|mobile sticky CTA"
+npm run lint
+```
+
+Interpretation:
+
+- Mobile users now see the proven quote path, compact booking shortcut, service choices, local repair paths, and limited guide options without extra decorative sections competing for attention.
+- Crawlable commercial paths remain available through services, local repair paths, guide cards, site navigation, and `/site-map`.

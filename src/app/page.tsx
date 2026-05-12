@@ -29,10 +29,10 @@ async function HomeDeferredContent() {
   return (
     <>
       <ProofBand />
-      <InHouseBadge />
-      <ProcessSteps />
       <ServicesGridSection />
       <HomeLocalRepairPaths />
+      <ProcessSteps />
+      <InHouseBadge />
       <HomeCommercialGuides />
       <CraftStory />
       <ShowcaseBand />

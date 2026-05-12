@@ -167,6 +167,27 @@ test("mobile conversion: home CTA reaches quote form", async ({ page }) => {
   guard.assertNoErrors("home -> quote");
 });
 
+test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(
+    page.getByRole("heading", { name: /Beauty restored\. Elegance preserved\./i })
+  ).toBeVisible();
+
+  const servicesHeading = page.getByRole("heading", { name: /Expert Repair Services/i });
+  await servicesHeading.scrollIntoViewIfNeeded();
+  await expect(servicesHeading).toBeVisible();
+
+  const pricingGuides = page.locator("section", { hasText: "Pricing and repair guides" });
+  await pricingGuides.scrollIntoViewIfNeeded();
+  await expect(pricingGuides.getByRole("link")).toHaveCount(4);
+  await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeHidden();
+
+  guard.assertNoErrors("mobile home flow");
+});
+
 test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
