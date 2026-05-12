@@ -1057,3 +1057,19 @@ Interpretation:
 
 - This adds sitewide crawl weight without adding another above-the-fold mobile section.
 - The change supports stalled commercial pages while preserving the simpler mobile page flow.
+
+## Mobile Sticky CTA Quote Alignment (2026-05-12)
+
+The May 5-11 GA4 window showed `0` mobile sticky CTA clicks, `0` booking starts, and `1` organic quote start plus `1` organic quote success from the homepage. The compact mobile shortcut was already one button, but it pointed to booking even though the lower-friction quote path is the only proven organic conversion path so far.
+
+Implemented on 2026-05-12:
+
+1. Changed the mobile sticky shortcut from `Book Repair Today` to `Get Fast Quote`.
+2. Pointed the shortcut to `/quote` with `utm_campaign=quote_shortcut`.
+3. Kept a single compact mobile button and continued hiding it on quote, book, and contact pages.
+4. Updated smoke coverage for the new destination, tracking payload, and attribution fields.
+
+Interpretation:
+
+- This reduces mobile CTA friction without adding more buttons.
+- The next GA4 checkpoint should compare `mobile_sticky_cta_click`, quote starts, and quote outcomes on the `quote_shortcut` UTM path.

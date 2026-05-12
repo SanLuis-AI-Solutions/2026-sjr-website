@@ -188,7 +188,7 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   guard.assertNoErrors("mobile home flow");
 });
 
-test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
+test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
   await page.addInitScript(() => {
@@ -215,16 +215,16 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
   await expect(stickyShortcut).toBeVisible();
   await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
 
-  const bookToday = stickyShortcut.getByRole("link", { name: /^Book Repair Today$/i });
-  await expect(bookToday).toBeVisible();
-  await expect(bookToday).toHaveAttribute(
+  const fastQuote = stickyShortcut.getByRole("link", { name: /^Get Fast Quote$/i });
+  await expect(fastQuote).toBeVisible();
+  await expect(fastQuote).toHaveAttribute(
     "href",
-    "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut",
+    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
   );
-  await expectTapTarget(bookToday, "Mobile sticky booking shortcut");
-  await bookToday.click();
+  await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
+  await fastQuote.click();
   await expect(page).toHaveURL(
-    /\/book\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut$/,
+    /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut$/,
   );
 
   const events = await page.evaluate(() =>
@@ -237,9 +237,9 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
         eventName === "mobile_sticky_cta_click" &&
         params.page_path === "/" &&
         params.destination ===
-          "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut" &&
+          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut" &&
         params.placement === "mobile_sticky_bar" &&
-        params.cta_target === "book",
+        params.cta_target === "quote",
     ),
   ).toBe(true);
   await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue(
@@ -247,10 +247,10 @@ test("mobile sticky CTA uses one compact booking action", async ({ page }) => {
   );
   await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("site_cta");
   await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue(
-    "booking_shortcut",
+    "quote_shortcut",
   );
   await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue(
-    "/book?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=booking_shortcut",
+    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
   );
 
   guard.assertNoErrors("mobile sticky shortcut");
