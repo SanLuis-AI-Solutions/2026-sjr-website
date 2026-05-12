@@ -912,6 +912,22 @@ test("service area: clear lake page exposes moisture and stone-risk differentiat
   guard.assertNoErrors("service area clear lake differentiation");
 });
 
+test("service area: friendswood page exposes heirloom and ring-intake differentiation", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/friendswood", { waitUntil: "networkidle" });
+
+  await expect(page.getByText(/family schedules, school events, church weekends/i)).toBeVisible();
+  await expect(page.getByText(/whether the ring spins, feels tight by the end of the day/i))
+    .toBeVisible();
+  await expect(page.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
+    .toBeVisible();
+
+  guard.assertNoErrors("service area friendswood differentiation");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];

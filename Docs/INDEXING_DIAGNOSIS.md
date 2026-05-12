@@ -669,3 +669,21 @@ Purpose:
 - increase independent page value for another stalled geo URL
 - reduce duplication across service-area pages
 - connect Clear Lake searchers to commercial watch and ring repair paths
+
+## Friendswood Service-Area Differentiation Pass (2026-05-11)
+
+The unresolved manifest still includes `/services/friendswood` as `Discovered - currently not indexed` with only one referring URL. Friendswood has strong commercial alignment for ring, heirloom, and stone-security searches, but the page needed more distinct intake value beyond the shared service-area pattern.
+
+Implemented on 2026-05-11:
+
+1. Added Friendswood-specific visit context around family schedules, school events, church weekends, weddings, and longer Pasadena errand planning.
+2. Expanded engagement-ring intake guidance around spinning rings, end-of-day tightness, clothing catches, and uneven side stones.
+3. Expanded heirloom intake guidance around what should be preserved: engraving, patina, original stones, family metal, or silhouette.
+4. Added quote-prep guidance for close/full-piece photos, daily-wear versus event-driven context, loose stones, missing parts, and past repair history.
+5. Added a commercial ring-sizing cost/timing helpful read and smoke coverage for the new Friendswood content.
+
+Purpose:
+
+- increase independent page value for another stalled geo URL
+- reduce location-page template overlap
+- connect Friendswood visitors to commercial ring, heirloom, and stone-security paths

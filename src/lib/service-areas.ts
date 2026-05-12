@@ -384,17 +384,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The biggest reason is trust. Meaningful pieces are easier to hand over when you know the work stays local and the person inspecting the issue can explain whether the item needs a quick repair, a structural rebuild, or a redesign conversation.",
       "That matters for Friendswood customers bringing in inherited jewelry, delicate side-stone rings, worn prongs, or sentimental chains that have already been repaired once before. The goal is not just to patch the issue. It is to return the piece in a safer, longer-lasting condition.",
+      "Friendswood visits also tend to be planned around family schedules, school events, church weekends, weddings, or a longer errand loop toward Pasadena. A quote-first intake helps separate a quick ring or chain fix from a more careful heirloom appointment before you make the drive.",
       "A quote-first workflow also reduces guesswork. You can start with photos, understand the likely path, and decide whether the trip is for a same-day fix or a deeper bench assessment.",
     ],
     commonRepairsHeading: "Common repairs we see from Friendswood customers",
     commonRepairsBody: [
       "Friendswood customers most often come in for ring sizing, stone security work, chain repair, jewelry cleaning, and heirloom restoration. These are high-trust repairs because they affect how safely the piece can be worn and whether the original look can be preserved.",
       "A loose diamond, worn prong, thin shank, or inherited ring with accumulated wear is exactly the kind of problem that benefits from an in-house inspection before anyone promises a quick fix.",
+      "For engagement rings, the useful intake detail is whether the ring spins, feels tight by the end of the day, catches on clothing, or has side stones that no longer sit evenly. For heirlooms, the useful detail is what should be preserved: engraving, patina, original stones, family metal, or the overall silhouette.",
       "For pieces with sentimental value, the right answer is sometimes restoration and sometimes redesign. We help make that distinction before work begins.",
     ],
     visitHeading: "What to expect if you are visiting from Friendswood",
     visitBody: [
       "If you are coming from Friendswood, the easiest workflow is to start with a photo and quote request, especially for ring or heirloom work. That helps us point you toward the right service before you arrive.",
+      "Send one close photo of the damage, one full-piece photo, and a short note about whether the piece is daily wear, event-driven, or sentimental. If it is an inherited piece, include any loose stones, missing parts, or past repair history so the first conversation is not too vague.",
       "Once you are in the shop, we inspect the piece, confirm whether the issue is cosmetic or structural, and walk through starting price and timing before any repair begins.",
       "That keeps the visit useful whether you need a quick ring fix or a more thoughtful heirloom restoration plan.",
     ],
@@ -410,9 +413,9 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Useful when a family piece needs a careful recommendation on preservation, reinforcement, or redesign rather than a generic repair answer.",
       },
       {
-        title: "Quote-first heirloom visit",
+        title: "Event or heirloom deadline",
         body:
-          "Best when photos can help establish whether the trip is likely to be a straightforward fix or a deeper restoration conversation.",
+          "Best when photos can help establish whether the trip is likely to be a straightforward fix, an event-driven repair, or a deeper restoration conversation.",
       },
     ],
     faqs: [
@@ -436,6 +439,10 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         label: "Heirloom restoration planning guide",
         href: "/blog/heirloom-restoration-planning-guide",
+      },
+      {
+        label: "Gold ring resizing cost and timing guide",
+        href: "/blog/cost-to-resize-gold-ring-pasadena",
       },
       {
         label: "How to choose a jeweler for repair work",
