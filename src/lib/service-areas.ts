@@ -291,32 +291,34 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     ],
     whyHeading: "Why Webster customers choose a nearby in-house repair shop",
     whyBody: [
-      "The main advantage is clarity. If your ring is loose, your watch stopped, or a sentimental piece needs inspection, you can start with a quote request and arrive with a more realistic next step instead of guessing whether the repair is simple or structural.",
-      "That matters for Webster customers balancing tight schedules. A quick battery swap, ring sizing assessment, or prong inspection is easier when the shop can explain what is urgent, what is routine, and what can wait until a more convenient visit.",
+      "The main advantage is clarity before the drive. If your ring is loose, your watch stopped, or a sentimental piece needs inspection, you can start with a quote request and arrive with a more realistic next step instead of guessing whether the repair is simple or structural.",
+      "That matters for Webster customers balancing Bay Area schedules around work, school pickup, medical appointments, Baybrook errands, or the NASA/Clear Lake corridor. A quick battery swap, ring sizing assessment, or prong inspection is easier when the shop can explain what is urgent, what is routine, and what can wait until a more convenient visit.",
       "Because the work stays in-house, you do not lose visibility once the piece leaves the counter. You are dealing with one local team from intake to pickup.",
     ],
     commonRepairsHeading: "Common jewelry and watch repairs from the Webster area",
     commonRepairsBody: [
       "The most common Webster requests are watch battery service, ring sizing, prong repair, chain repair, and jewelry cleaning. These are practical repairs tied to daily wear and the need to get a piece safely wearable again.",
-      "Many Webster customers come in because a watch stopped before work, an engagement ring suddenly feels loose, or a chain failed at exactly the wrong time. These are the kinds of repairs where a nearby in-house workshop is more useful than a generic intake counter.",
+      "Many Webster customers come in because a watch stopped before work, an engagement ring suddenly feels loose, or a chain failed before a weekend event. These are the kinds of repairs where a nearby in-house workshop is more useful than a generic intake counter because the first question is whether the item is safe to keep wearing.",
+      "For watch requests, the useful intake detail is whether the watch simply stopped, started jumping seconds, fogged under the crystal, or has a crown that feels loose. For ring requests, the useful detail is whether the fit changed, a stone moves, or a prong catches fabric. Those details help separate a routine visit from a repair that should be inspected before normal wear continues.",
       "If the issue turns out to be more structural, the quote-first process helps you understand whether the better answer is a spot repair, a rebuild, or a redesign path.",
     ],
     visitHeading: "Planning a visit from Webster",
     visitBody: [
       "If you are coming from Webster, the most efficient path is to start with photos and a fast quote request. That helps us tell you whether you are likely dealing with a quick battery replacement, a ring sizing appointment, or a more detailed repair assessment.",
+      "Include one close photo of the problem area and one wider photo of the full piece. For watches, add the brand and whether the watch stopped after water, impact, or sitting unused. For rings, add whether the piece is worn daily and whether any stone movement is visible. That makes the Webster-to-Pasadena trip more focused.",
       "When you arrive, we inspect the item, confirm the likely timeline, and explain the starting price before work begins. That keeps the trip focused and avoids unnecessary back-and-forth.",
       "If the repair is straightforward, it may fit the Same Day/Next Day pattern. If it is more complex, you still leave with a clear plan from the same shop that will handle the work.",
     ],
     localScenarios: [
       {
-        title: "Workday watch issue",
+        title: "Bay Area workday watch issue",
         body:
-          "A practical fit when a watch stops before work and you need to know quickly whether it is a simple battery path or a deeper repair issue.",
+          "A practical fit when a watch stops before work, Baybrook errands, or a NASA/Clear Lake-area appointment and you need to know whether it is a simple battery path or a deeper repair issue.",
       },
       {
         title: "Before-you-drive triage",
         body:
-          "Useful when Webster customers want a photo-based first answer before deciding whether the trip should be for a quote, a booking, or a later visit.",
+          "Useful when Webster customers want a photo-based first answer before deciding whether the trip should be for a quote, a booking, or a later visit with more time set aside.",
       },
       {
         title: "Loose ring or stone",
@@ -347,8 +349,12 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
       },
       {
-        label: "Where to get a watch battery replaced near Pasadena",
+        label: "Watch intake details before you make the drive",
         href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+      },
+      {
+        label: "Gold ring resizing cost and timing guide",
+        href: "/blog/cost-to-resize-gold-ring-pasadena",
       },
       {
         label: "Stone security checklist before you keep wearing a ring",

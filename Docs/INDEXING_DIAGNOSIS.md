@@ -633,3 +633,21 @@ Purpose:
 - reduce overlap between same-day battery intent and repair-diagnosis intent
 - strengthen the unresolved diagnostic article with practical intake evidence
 - increase relevant internal referring weight from a closely related watch battery guide
+
+## Webster Service-Area Differentiation Pass (2026-05-11)
+
+The unresolved manifest still includes `/services/webster` as `Discovered - currently not indexed`. Earlier GSC work showed Webster had previously been `URL is unknown to Google`, so it remains one of the weaker geo-page candidates even after moving into discovered state.
+
+Implemented on 2026-05-11:
+
+1. Expanded Webster page copy with Bay Area-specific scheduling context, including Baybrook errands and the NASA/Clear Lake corridor.
+2. Added more concrete intake guidance for watch and ring requests so the page is less like a generic city template.
+3. Added quote-prep guidance around close/wide photos, watch brand, water or impact history, daily ring wear, and visible stone movement.
+4. Refined Webster helpful-read links to include watch intake, ring resizing cost/timing, and stone-security guidance.
+5. Added smoke coverage confirming the Webster page renders the Bay Area intake differentiation.
+
+Purpose:
+
+- increase independent page value for a stalled geo URL
+- reduce thin-template risk across service-area pages
+- connect Webster traffic to commercial watch, ring, and stone-security paths

@@ -882,6 +882,21 @@ test("mobile service-area pages: nearby city pages render local guidance and her
   guard.assertNoErrors("service-area pages");
 });
 
+test("service area: webster page exposes Bay Area intake differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/webster", { waitUntil: "networkidle" });
+
+  await expect(page.getByText(/Baybrook errands, or a NASA\/Clear Lake-area appointment/i))
+    .toBeVisible();
+  await expect(page.getByText(/Include one close photo of the problem area/i)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Watch intake details before you make the drive/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("service area webster differentiation");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];
