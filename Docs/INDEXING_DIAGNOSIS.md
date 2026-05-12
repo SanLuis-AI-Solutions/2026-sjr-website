@@ -948,3 +948,24 @@ Interpretation:
 - The crawl-path work is producing the expected early-stage movement: unknown URLs are becoming discovered.
 - The remaining blocker is Google choosing which discovered pages to index, not live routing, robots, sitemap inclusion, or internal-link availability.
 - Keep monitoring; do not add more sitewide links unless a future audit shows a specific unresolved URL has weak indexed-source coverage.
+
+## Organic Conversion Measurement Split (2026-05-12)
+
+The weekly SEO health report previously showed total quote/booking starts and outcomes, but it did not separate whether those conversions came from Organic Search. That made it harder to judge the actual quality of SEO traffic.
+
+Implemented on 2026-05-12:
+
+1. Added an Organic Search-only GA4 event query to `scripts/google/weekly-seo-health.mjs`.
+2. Added `Organic quote + booking starts` and `Organic quote + booking outcomes` to the Core KPIs table.
+3. Added an `Organic Conversion Detail` section for quote, booking, phone, and mobile sticky CTA events.
+
+Latest result for 2026-05-05 to 2026-05-11:
+
+- Organic quote + booking starts: `1`
+- Organic quote + booking outcomes: `1`
+- Organic sessions: `12`
+
+Interpretation:
+
+- Organic traffic is not only producing visits; it produced a tracked quote start and successful quote outcome in the latest reporting window.
+- Future monitoring can now distinguish SEO traffic quality from total-site conversion activity.

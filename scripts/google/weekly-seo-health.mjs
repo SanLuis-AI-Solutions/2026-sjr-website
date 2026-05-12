@@ -123,6 +123,7 @@ async function main() {
     gscResponse,
     organicSessionRows,
     keyEventRows,
+    organicKeyEventRows,
     mobileStickyCtaPathReport,
     landingRows,
     allHostRows,
@@ -162,6 +163,36 @@ async function main() {
         filter: {
           fieldName: "eventName",
           inListFilter: { values: KEY_EVENTS },
+        },
+      },
+      limit: 20,
+    }),
+    runGaReport(analyticsData, targetPropertyId, {
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [{ name: "eventName" }],
+      metrics: [{ name: "eventCount" }],
+      dimensionFilter: {
+        andGroup: {
+          expressions: [
+            {
+              filter: {
+                fieldName: "hostName",
+                stringFilter: { matchType: "EXACT", value: PRODUCTION_HOST },
+              },
+            },
+            {
+              filter: {
+                fieldName: "sessionDefaultChannelGroup",
+                stringFilter: { matchType: "EXACT", value: "Organic Search" },
+              },
+            },
+            {
+              filter: {
+                fieldName: "eventName",
+                inListFilter: { values: KEY_EVENTS },
+              },
+            },
+          ],
         },
       },
       limit: 20,
@@ -222,6 +253,12 @@ async function main() {
     if (!(eventName in keyEvents)) continue;
     keyEvents[eventName] = toNum(row.metricValues?.[0]?.value);
   }
+  const organicKeyEvents = Object.fromEntries(KEY_EVENTS.map((eventName) => [eventName, 0]));
+  for (const row of organicKeyEventRows) {
+    const eventName = row.dimensionValues?.[0]?.value || "";
+    if (!(eventName in organicKeyEvents)) continue;
+    organicKeyEvents[eventName] = toNum(row.metricValues?.[0]?.value);
+  }
   const mobileStickyCtaBookingEvents = Object.fromEntries(
     MOBILE_STICKY_CTA_BOOKING_EVENTS.map((eventName) => [eventName, 0])
   );
@@ -274,6 +311,7 @@ async function main() {
       organicSessionsAllHosts,
       totalSessionsAllHosts,
       keyEvents,
+      organicKeyEvents,
       mobileStickyCta: {
         bookingPathDimension: mobileStickyCtaPathReport.pathDimension,
         bookingPathEvents: mobileStickyCtaBookingEvents,
@@ -313,6 +351,14 @@ async function main() {
           "Commercial-intent starts before form completion",
         ],
         [
+          "Organic quote + booking starts",
+          formatInt(
+            snapshot.ga4.organicKeyEvents.quote_form_start +
+              snapshot.ga4.organicKeyEvents.booking_form_start
+          ),
+          "Commercial starts attributed to Organic Search",
+        ],
+        [
           "Mobile sticky CTA clicks",
           formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
           "Clicks from the compact mobile booking shortcut",
@@ -326,6 +372,15 @@ async function main() {
               snapshot.ga4.keyEvents.booking_submit_pending
           ),
           "Submitted or pending lead outcomes from the high-intent flows",
+        ],
+        [
+          "Organic quote + booking outcomes",
+          formatInt(
+            snapshot.ga4.organicKeyEvents.quote_submit_success +
+              snapshot.ga4.organicKeyEvents.booking_submit_success +
+              snapshot.ga4.organicKeyEvents.booking_submit_pending
+          ),
+          "Submitted or pending lead outcomes attributed to Organic Search",
         ],
       ]
     ),
@@ -353,6 +408,21 @@ async function main() {
         ["quote_submit_success", formatInt(snapshot.ga4.keyEvents.quote_submit_success)],
         ["booking_submit_success", formatInt(snapshot.ga4.keyEvents.booking_submit_success)],
         ["booking_submit_pending", formatInt(snapshot.ga4.keyEvents.booking_submit_pending)],
+      ]
+    ),
+    "",
+    "## Organic Conversion Detail",
+    "",
+    table(
+      ["Event", "Organic Count"],
+      [
+        ["quote_form_start", formatInt(snapshot.ga4.organicKeyEvents.quote_form_start)],
+        ["booking_form_start", formatInt(snapshot.ga4.organicKeyEvents.booking_form_start)],
+        ["mobile_sticky_cta_click", formatInt(snapshot.ga4.organicKeyEvents.mobile_sticky_cta_click)],
+        ["phone_call_click", formatInt(snapshot.ga4.organicKeyEvents.phone_call_click)],
+        ["quote_submit_success", formatInt(snapshot.ga4.organicKeyEvents.quote_submit_success)],
+        ["booking_submit_success", formatInt(snapshot.ga4.organicKeyEvents.booking_submit_success)],
+        ["booking_submit_pending", formatInt(snapshot.ga4.organicKeyEvents.booking_submit_pending)],
       ]
     ),
     "",
