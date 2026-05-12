@@ -569,6 +569,21 @@ Result:
 - booking events remain in the report for continuity, but the primary path now matches the live mobile UX
 - the sticky CTA now supports mid-scroll conversion recovery instead of adding clutter above the fold
 
+## Mobile Sticky CTA Form-Anchor Friction Reduction (2026-05-12)
+
+After the sticky CTA was aligned to the lower-friction quote path, the remaining click-to-form friction was that mobile users landed at the top of `/quote` and still had to scroll to the form.
+
+Implemented on 2026-05-12:
+
+1. Updated the sticky CTA destination to `/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form`.
+2. Kept UTM attribution unchanged so GA4 and submitted lead fields still preserve `mobile_sticky_cta`, `site_cta`, and `quote_shortcut`.
+3. Updated smoke coverage to verify the destination hash, the tracking destination payload, and that `#quote-form` is in viewport after click.
+
+Interpretation:
+
+- mobile sticky CTA clicks now land directly on the quote form instead of creating another scroll step
+- analytics continuity remains intact because the query string is unchanged
+
 ## Mobile Homepage Service Flow Compression (2026-05-12)
 
 The mobile homepage service grid had become the main clutter risk: a viewport audit showed the services section consuming roughly `4,783px` before users could reach local paths, process, guides, and downstream proof.

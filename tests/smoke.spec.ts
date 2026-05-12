@@ -229,13 +229,14 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await expect(fastQuote).toBeVisible();
   await expect(fastQuote).toHaveAttribute(
     "href",
-    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
+    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form",
   );
   await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
   await fastQuote.click();
   await expect(page).toHaveURL(
-    /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut$/,
+    /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form$/,
   );
+  await expect(page.locator("#quote-form")).toBeInViewport();
 
   const events = await page.evaluate(() =>
     JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
@@ -247,7 +248,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
         eventName === "mobile_sticky_cta_click" &&
         params.page_path === "/" &&
         params.destination ===
-          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut" &&
+          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form" &&
         params.placement === "mobile_sticky_bar" &&
         params.cta_target === "quote",
     ),
