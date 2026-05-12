@@ -1029,6 +1029,7 @@ Implemented on 2026-05-12:
 4. Limited customer proof to one visible quote on mobile while keeping the full proof set on desktop.
 5. Limited lower-page guide cards to two visible items on mobile while keeping all guide links available on desktop.
 6. Added smoke coverage to prevent secondary service-detail content from becoming cluttered again on mobile.
+7. Made the watch-repair hero visual desktop-only and lowered its fetch priority because mobile LCP diagnostics showed the hero text was the LCP element while the eager hero image competed for early load.
 
 Validation:
 
@@ -1041,3 +1042,4 @@ Interpretation:
 
 - Service pages keep their crawlable and answer-oriented structure without forcing mobile users through every secondary proof/image block.
 - The mobile journey now better matches the commercial intent: identify the repair, understand next step, quote or book.
+- Watch repair now prioritizes a faster mobile answer-and-CTA path over decorative hero imagery, while desktop still keeps the visual treatment.

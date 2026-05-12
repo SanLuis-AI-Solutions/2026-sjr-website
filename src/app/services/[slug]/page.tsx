@@ -1749,7 +1749,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             ) : null}
           </div>
-          <div className={`relative order-2 ${isCustomDesign ? "hidden md:block" : ""}`}>
+          <div
+            className={`relative order-2 ${
+              isWatchRepair || isCustomDesign ? "hidden md:block" : ""
+            }`}
+          >
             <div
               className={`relative ${
                 isCustomDesign ? "h-[160px]" : "h-[220px]"
@@ -1766,8 +1770,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <img
                   {...desktopHeroImageProps}
                   alt={`${service.name} at Susie's Jewelry Repair`}
-                  fetchPriority="high"
-                  loading="eager"
+                  fetchPriority={isWatchRepair ? "low" : "high"}
+                  loading={isWatchRepair ? "lazy" : "eager"}
                   decoding="async"
                   className="h-full w-full object-cover"
                 />

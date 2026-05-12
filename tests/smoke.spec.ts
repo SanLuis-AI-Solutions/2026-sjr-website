@@ -1559,6 +1559,7 @@ test("mobile service detail: secondary content stays restrained", async ({ page 
   await page.goto("/services/watch-repair", { waitUntil: "networkidle" });
 
   await expect(page.getByRole("heading", { level: 1, name: /Watch Repair/i })).toBeVisible();
+  await expect(page.locator('[data-service-section="hero"] picture').first()).toBeHidden();
   await expect(page.locator('[data-service-section="how-it-works"] img').first()).toBeHidden();
   await expect(page.locator('[data-service-section="what-to-expect"] img').first()).toBeHidden();
   await expect(page.getByTestId("service-market-snapshot-item").first()).toBeHidden();
