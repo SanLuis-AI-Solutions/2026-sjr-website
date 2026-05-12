@@ -186,9 +186,28 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   );
   expect(servicesHeight).toBeLessThan(1900);
 
-  const pricingGuides = page.locator("section", { hasText: "Pricing and repair guides" });
+  const localRepairPaths = page.locator("section", { hasText: "Local repair paths" });
+  const nearbyCitySummary = localRepairPaths.locator("summary").filter({ hasText: /^Nearby city pages$/ });
+  const decisionGuidesSummary = localRepairPaths.locator("summary").filter({ hasText: /^Decision guides$/ });
+  await localRepairPaths.scrollIntoViewIfNeeded();
+  await expect(nearbyCitySummary).toBeVisible();
+  await expect(decisionGuidesSummary).toBeVisible();
+  await expect(localRepairPaths.getByRole("link", { name: /Jewelry repair near Pasadena/i }))
+    .toBeHidden();
+  await nearbyCitySummary.click();
+  await expect(localRepairPaths.getByRole("link", { name: /Jewelry repair near Pasadena/i }))
+    .toBeVisible();
+
+  const pricingGuides = page.locator("section", { hasText: "Pricing help" });
+  const topGuidesSummary = pricingGuides.locator("summary").filter({ hasText: /^Show top repair guides$/ });
   await pricingGuides.scrollIntoViewIfNeeded();
-  await expect(pricingGuides.getByRole("link")).toHaveCount(4);
+  await expect(pricingGuides.getByRole("heading", { name: /Need price or timing guidance/i }))
+    .toBeVisible();
+  await expect(pricingGuides.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(topGuidesSummary).toBeVisible();
+  await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeHidden();
+  await topGuidesSummary.click();
+  await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeHidden();
 
   guard.assertNoErrors("mobile home flow");
@@ -693,6 +712,8 @@ test("stone security guide exposes bench-check differentiation", async ({ page }
     }),
   ).toBeVisible();
   await expect(page.getByText(/worn prong tips, a bent prong, a shallow seat/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The stone clicks or rattles", exact: true }))
+    .toBeVisible();
 
   await page.goto("/blog/can-a-severely-bent-ring-prong-be-fixed", {
     waitUntil: "networkidle",
@@ -718,6 +739,9 @@ test("trustworthy jeweler guide exposes repair-intake differentiation", async ({
   ).toBeVisible();
   await expect(page.getByText(/whether it spins, catches on clothing, has a loose stone/i))
     .toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "The shop cannot say who will do the repair", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: /See Watch Repair Service/i })).toBeVisible();
 
   await page.goto("/blog/heirloom-jewelry-restoration-repair-or-redesign", {
@@ -768,6 +792,12 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
   ).toBeVisible();
   await expect(page.getByText(/one close photo of the worn or dirty area/i)).toBeVisible();
   await expect(
+    page.getByRole("heading", {
+      name: "The piece is vintage, inherited, or stone-heavy",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
     page.getByRole("link", { name: /Check Vintage Ring Cleaning Risk/i }),
   ).toBeVisible();
 
@@ -781,6 +811,12 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
   ).toBeVisible();
   await expect(page.getByText(/A vintage diamond can tolerate more than the mounting around it/i))
     .toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "The ring has filigree, old solder, or a thin shank",
+      exact: true,
+    }),
+  ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /Compare Professional vs Home Cleaning/i }),
   ).toBeVisible();

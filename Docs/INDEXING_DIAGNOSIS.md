@@ -1148,3 +1148,20 @@ Interpretation:
 
 - This reduces mobile CTA friction without adding more buttons.
 - The next GA4 checkpoint should compare `mobile_sticky_cta_click`, quote starts, and quote outcomes on the `quote_shortcut` UTM path.
+
+## Mobile UX Restraint Guardrail (2026-05-12)
+
+Recent crawl-weight work added useful homepage links, but mobile users should not experience the homepage as a directory of SEO cards. Organic conversions currently come from the homepage quote path, so mobile hierarchy should favor quote, service selection, and only then optional research links.
+
+Implemented on 2026-05-12:
+
+1. Converted the homepage local repair path link grid into two mobile disclosure panels: nearby city pages and decision guides.
+2. Converted the homepage commercial guide grid into a compact mobile pricing-help card with primary quote action, blog browse action, and optional top-guide disclosure.
+3. Kept richer guide/card grids on desktop where scanning capacity is higher.
+4. Kept crawlable links in the DOM while lowering mobile visual clutter and decision fatigue.
+5. Added smoke coverage so these SEO-supporting blocks do not expand back into full mobile grids accidentally.
+
+Interpretation:
+
+- Homepage mobile flow now follows a clearer order: hero quote path, proof, repair services, optional local/guide paths, process, trust, FAQ, final CTA.
+- SEO/GEO/AEO content remains available, but it no longer competes as strongly with the proven mobile conversion path.

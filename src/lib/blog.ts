@@ -104,6 +104,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
+    decisionSignals: [
+      {
+        signal: "The shop cannot say who will do the repair",
+        meaning: "Your piece may be handed off or outsourced, which makes approvals and accountability harder.",
+        nextAction: "Ask whether the repair stays in-house and who confirms the final scope.",
+      },
+      {
+        signal: "The estimate sounds final without inspection",
+        meaning: "The quote may be guessing around hidden wear, stone security, prior repairs, or metal condition.",
+        nextAction: "Ask what still needs bench inspection before you approve work.",
+      },
+      {
+        signal: "The piece is sentimental or inherited",
+        meaning: "Preservation goals matter as much as the repair itself.",
+        nextAction: "Ask what can be reinforced without changing the original character.",
+      },
+    ],
     relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing", "watch-repair"],
     discoveryBoosts: {
       blogFeatured: 6,
@@ -382,6 +399,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
+    ],
+    decisionSignals: [
+      {
+        signal: "The stone clicks or rattles",
+        meaning: "The setting is no longer holding the stone consistently.",
+        nextAction: "Stop wearing it and request a stone-setting inspection before cleaning or resizing.",
+      },
+      {
+        signal: "A prong catches on fabric",
+        meaning: "The prong may be lifted, worn flat, or bent away from the stone.",
+        nextAction: "Ask whether the prong needs tightening, retipping, or rebuilding.",
+      },
+      {
+        signal: "The ring took an impact recently",
+        meaning: "The stone can still look centered while the seat or prong structure is stressed.",
+        nextAction: "Bring the piece in before daily wear turns impact damage into a missing-stone repair.",
+      },
     ],
     relatedServiceSlugs: ["stone-setting", "jewelry-cleaning", "heirloom-restoration"],
     discoveryBoosts: {
@@ -792,6 +826,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
+    ],
+    decisionSignals: [
+      {
+        signal: "The jewelry is sturdy, modern, and worn often",
+        meaning: "Gentle home cleaning is usually reasonable between professional visits.",
+        nextAction: "Use mild soap, lukewarm water, and a soft brush; avoid harsh chemicals.",
+      },
+      {
+        signal: "The piece is vintage, inherited, or stone-heavy",
+        meaning: "Cleaning risk depends on hidden structure, not only surface dirt.",
+        nextAction: "Request inspection before stronger cleaning, ultrasonic, steam, or polishing.",
+      },
+      {
+        signal: "A stone feels loose or a prong catches",
+        meaning: "The piece needs a security check before shine.",
+        nextAction: "Treat it as a stone-setting risk before any cleaning appointment.",
+      },
     ],
     relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
     discoveryBoosts: {
@@ -1276,6 +1327,23 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
+    ],
+    decisionSignals: [
+      {
+        signal: "The ring has filigree, old solder, or a thin shank",
+        meaning: "The mounting may be more fragile than the diamond itself.",
+        nextAction: "Skip stronger cleaners until a jeweler checks the structure.",
+      },
+      {
+        signal: "A prong is flat, short, or snagging",
+        meaning: "Cleaning pressure can worsen an already weak stone setting.",
+        nextAction: "Request stone-security review before home cleaning or polishing.",
+      },
+      {
+        signal: "You want to preserve age and character",
+        meaning: "Aggressive polishing may erase details you actually value.",
+        nextAction: "Ask for a preservation-focused cleaning plan instead of a make-it-new polish.",
+      },
     ],
     relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"],
     discoveryBoosts: {
