@@ -52,30 +52,33 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The biggest advantage is direct local access. You are not dropping your ring, watch, or necklace at a counter that ships it somewhere else. You can ask questions, get a realistic assessment, and work with the same Pasadena shop from intake to pickup.",
       "That matters for common Pasadena requests like ring sizing before an event, a watch battery that died during the workweek, a chain that snapped unexpectedly, or a diamond that feels loose and needs to be checked before it is worn again.",
+      "Because the shop is on Fairmont Parkway, many Pasadena visits are quick local stops between work, school pickup, errands, church weekends, or a planned event. The useful intake question is whether the piece is safe for normal wear today or whether it needs immediate bench attention before it leaves the shop.",
       "If the repair is simple, we say so. If the piece needs structural work, restoration, or redesign, we explain that early so the next step is clear before you commit.",
     ],
     commonRepairsHeading: "Common jewelry and watch repairs in Pasadena",
     commonRepairsBody: [
       "The most common Pasadena repair requests are watch battery replacement, ring sizing, prong tightening, chain repair, jewelry cleaning, bracelet repair, and heirloom restoration. These are the repairs where timing and trust matter because the piece is already failing or at risk.",
-      "A loose stone, worn clasp, bent shank, or stopped watch can look minor until it leads to a lost stone, a broken chain, or a missed event. That is why a nearby in-house jeweler is often the better answer than waiting or mailing the piece away.",
+      "A loose stone, worn clasp, bent shank, or stopped watch can look minor until it leads to a lost stone, a broken chain, or a missed event. For Pasadena customers, the first pass is practical: check whether a watch is battery-only or moisture-related, whether a ring needs sizing or stone tightening, and whether a chain failure happened at the clasp, jump ring, hollow link, or solder point.",
+      "Those details decide whether a Same Day/Next Day repair is realistic or whether the safer answer is a slower structural review. That is why a nearby in-house jeweler is often the better answer than waiting or mailing the piece away.",
       "For older or sentimental pieces, Pasadena customers also come in when they need help deciding whether to restore the original design, reinforce the existing structure, or repurpose materials into something stronger for regular wear.",
     ],
     visitHeading: "What to expect when you visit our Pasadena shop",
     visitBody: [
       "If you are already in Pasadena, the fastest path is to request a quote online with a photo or come in with the piece so we can inspect it in person. We will confirm whether the issue is routine, urgent, or better treated as restoration before repair begins.",
+      "For a faster first answer, bring or send one close photo of the problem area, one full-piece photo, and a short note about how the jewelry is worn. If it is a watch, note whether it stopped after water, impact, heat, or sitting unused. If it is a ring, note whether it spins, catches, or has a stone that moves.",
       "Once we review the item, we walk through the likely timing, the starting price, and whether Same Day/Next Day service is realistic for that specific job. That keeps the decision grounded in the actual condition of the piece, not guesswork.",
       "Because the work stays in-house, follow-up is easier too. If you have questions after pickup or need another adjustment, you are still working with the same local team.",
     ],
     localScenarios: [
       {
-        title: "Quick in-town repair stop",
+        title: "Fairmont Parkway repair stop",
         body:
           "Best fit when you are already nearby and need a watch battery, ring fit check, or loose-stone assessment handled without turning the visit into a full-day errand.",
       },
       {
-        title: "Event-driven repair",
+        title: "Same-day versus structural triage",
         body:
-          "Useful when the piece needs to be wearable before a wedding, anniversary, or family gathering and you need a realistic same-day versus next-day answer.",
+          "Useful when the piece needs to be wearable before a wedding, anniversary, workday, or family gathering and you need a realistic same-day versus structural-repair answer.",
       },
       {
         title: "Sentimental-piece review",
@@ -108,6 +111,10 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         label: "How much does pearl restringing cost in Pasadena?",
         href: "/blog/how-much-does-pearl-restringing-cost-pasadena",
+      },
+      {
+        label: "Gold ring resizing cost and timing guide",
+        href: "/blog/cost-to-resize-gold-ring-pasadena",
       },
       {
         label: "Where weak chains usually fail first",

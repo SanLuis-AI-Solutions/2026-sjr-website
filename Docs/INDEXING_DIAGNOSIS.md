@@ -705,3 +705,21 @@ Purpose:
 - increase independent page value for another stalled geo URL
 - reduce location-page template overlap
 - connect La Porte visitors to commercial watch, chain, heirloom, and repair-diagnosis paths
+
+## Pasadena Service-Area Differentiation Pass (2026-05-12)
+
+The unresolved manifest still includes `/services/pasadena` as `Discovered - currently not indexed` with only one referring URL. Because Pasadena is the core storefront city, this page needs to do more than repeat the homepage and generic service-area structure.
+
+Implemented on 2026-05-12:
+
+1. Added Fairmont Parkway-specific local context around work, school pickup, errands, church weekends, and planned events.
+2. Expanded first-pass intake guidance around whether the piece is safe for normal wear today or needs immediate bench attention.
+3. Added more specific triage language for battery-only versus moisture-related watches, ring sizing versus stone tightening, and chain failures at clasps, jump rings, hollow links, or solder points.
+4. Added quote-prep guidance for close/full-piece photos, wear pattern notes, watch stop context, spinning rings, clothing catches, and visible stone movement.
+5. Added a commercial ring-sizing cost/timing helpful read and updated smoke coverage for the Pasadena-specific content.
+
+Purpose:
+
+- increase independent page value for the core local city URL
+- reduce overlap with the homepage and other geo pages
+- connect Pasadena visitors to commercial watch, ring, chain, and repair-diagnosis paths
