@@ -29,19 +29,15 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      14
+      12
     ],
     [
       "indexed",
-      26
-    ],
-    [
-      "pending-gsc-inspection",
-      1
+      27
     ],
     [
       "unknown-to-google",
-      1
+      3
     ]
   ],
   "routes": [
@@ -140,10 +136,10 @@
       "path": "/site-map",
       "label": "/site-map",
       "url": "https://www.susiesjewelryrepair.com/site-map",
-      "observedStatus": "pending-gsc-inspection",
-      "observedOn": null,
-      "nextAction": "inspect-and-request-indexing",
-      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
+      "observedStatus": "unknown-to-google",
+      "observedOn": "2026-05-12",
+      "nextAction": "request-indexing-and-recheck",
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "static",
@@ -261,10 +257,10 @@
       "city": "Clear Lake",
       "path": "/services/clear-lake",
       "url": "https://www.susiesjewelryrepair.com/services/clear-lake",
-      "observedStatus": "unknown-to-google",
+      "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -309,10 +305,10 @@
       "city": "Pasadena",
       "path": "/services/pasadena",
       "url": "https://www.susiesjewelryrepair.com/services/pasadena",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "service-area",
@@ -386,10 +382,10 @@
       "reviewedAt": "2026-05-12",
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "blog",
@@ -412,10 +408,10 @@
       "reviewedAt": "2026-05-12",
       "path": "/blog/heirloom-restoration-planning-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/heirloom-restoration-planning-guide",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "indexed",
       "observedOn": "2026-05-12",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "nextAction": "monitor",
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",

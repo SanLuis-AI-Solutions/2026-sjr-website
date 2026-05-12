@@ -876,3 +876,26 @@ Purpose:
 - create one strong internal discovery path for all stalled commercial URLs
 - increase crawl access to geo pages that GSC still reports as unresolved
 - improve user navigation without removing the XML sitemap used by crawlers
+
+## Post Site-Map GSC Recheck (2026-05-12)
+
+Re-ran `npm run google:indexing-status` after `/site-map` was live and regenerated the manifest with `npm run google:indexing-manifest`.
+
+Result:
+
+1. `/services/clear-lake` improved from `URL is unknown to Google` to `Discovered - currently not indexed`, with 1 sitemap source and 1 referring URL now visible in the URL Inspection API response.
+2. `/blog/heirloom-restoration-planning-guide` improved from `Discovered - currently not indexed` to `Submitted and indexed`.
+3. `/site-map` is live and returns `200`, but is still `URL is unknown to Google`, which is expected immediately after launch.
+4. `/services/pasadena` and `/blog/does-my-watch-need-battery-or-repair-pasadena` currently report `URL is unknown to Google` despite being live, in the sitemap, and internally linked.
+
+Updated manifest counts:
+
+- Indexed: 27
+- Discovered - currently not indexed: 12
+- URL is unknown to Google: 3
+
+Interpretation:
+
+- The Clear Lake improvement validates the crawl-path work: Google now sees sitemap and referring signals for the page that previously showed none.
+- The heirloom planning guide moving to indexed is the first confirmed indexing win from the unresolved queue.
+- The Pasadena and watch diagnostic regressions look like URL Inspection state volatility or processing lag, not production routing failures, but they stay in the immediate monitoring queue.
