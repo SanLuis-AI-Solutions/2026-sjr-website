@@ -192,6 +192,48 @@ export function ServiceAreaLandingPage({ page }: Props) {
               </div>
             </section>
 
+            {page.repairPathGuide ? (
+              <section className="rounded-3xl border border-brand-gold/30 bg-[#fffaf0] p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Local repair triage
+                </p>
+                <h2 className="mt-3 font-serif text-3xl text-stone-900">
+                  {page.repairPathGuide.heading}
+                </h2>
+                <p className="mt-4 text-[15px] leading-8 text-stone-700">
+                  {page.repairPathGuide.intro}
+                </p>
+                <div className="mt-6 divide-y divide-stone-200 overflow-hidden rounded-2xl border border-stone-200 bg-white">
+                  {page.repairPathGuide.items.map((item) => (
+                    <article key={item.situation} className="grid gap-4 p-4 md:grid-cols-[1fr_0.8fr_1fr]">
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
+                          Situation
+                        </p>
+                        <h3 className="mt-2 text-sm font-semibold leading-6 text-stone-900">
+                          {item.situation}
+                        </h3>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
+                          Likely path
+                        </p>
+                        <p className="mt-2 text-sm font-semibold leading-6 text-brand-burgundy">
+                          {item.likelyPath}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
+                          Next step
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-stone-700">{item.nextStep}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
             <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6">
               <h2 className="font-serif text-3xl text-stone-900">{page.visitHeading}</h2>
               <div className="mt-4 space-y-4">

@@ -19,6 +19,15 @@ export type ServiceAreaPage = {
     title: string;
     body: string;
   }>;
+  repairPathGuide?: {
+    heading: string;
+    intro: string;
+    items: Array<{
+      situation: string;
+      likelyPath: string;
+      nextStep: string;
+    }>;
+  };
   faqs: Array<{
     question: string;
     answer: string;
@@ -86,6 +95,37 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "The right path when an heirloom needs a direct conversation about repair, reinforcement, or redesign before anyone starts altering it.",
       },
     ],
+    repairPathGuide: {
+      heading: "How Pasadena customers should choose the right repair path",
+      intro:
+        "The fastest useful answer is not always the fastest repair. These are the local intake patterns we use to separate quick service from work that needs a more careful bench review.",
+      items: [
+        {
+          situation: "Watch stopped recently with no fog, water, impact, or loose crown",
+          likelyPath: "Battery-first assessment",
+          nextStep:
+            "Bring the watch in or send a dial and case-back photo so we can confirm whether Same Day/Next Day battery service is realistic.",
+        },
+        {
+          situation: "Ring spins, catches, feels sharp, or has a stone that moves",
+          likelyPath: "Fit and stone-security check",
+          nextStep:
+            "Start with a ring sizing or prong inspection instead of wearing it until the stone or shank fails further.",
+        },
+        {
+          situation: "Chain, bracelet, or clasp broke near a jump ring, hollow link, or solder point",
+          likelyPath: "Break-point repair review",
+          nextStep:
+            "Send a close photo of the break and one full-piece photo so we can tell whether it looks like a simple reconnect or a weak-area reinforcement.",
+        },
+        {
+          situation: "Inherited piece, older setting, pearls, or jewelry with sentimental value",
+          likelyPath: "Restoration-first conversation",
+          nextStep:
+            "Ask for a condition review before approving cosmetic work so the repair plan protects the original piece instead of only making it look cleaner.",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Do you do jewelry repair in Pasadena or send it somewhere else?",
