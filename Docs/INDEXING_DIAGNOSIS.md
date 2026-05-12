@@ -723,3 +723,21 @@ Purpose:
 - increase independent page value for the core local city URL
 - reduce overlap with the homepage and other geo pages
 - connect Pasadena visitors to commercial watch, ring, chain, and repair-diagnosis paths
+
+## Stone Security Checklist Bench-Check Pass (2026-05-12)
+
+The unresolved manifest still includes `/blog/stone-security-checklist` as `Discovered - currently not indexed` with only one referring URL. This is a high-commercial-intent guide because loose stones and worn prongs map directly to stone setting, ring repair, quote requests, and urgent prevention of a lost diamond.
+
+Implemented on 2026-05-12:
+
+1. Added a stone-security bench-check section that distinguishes worn prong tips, bent prongs, shallow seats, loose side stones, thin shanks, and older heads that no longer support daily wear.
+2. Added quote-prep guidance for top-view photos, side-view prong photos, impact history, recent resizing, snagging, and daily-wear context.
+3. Added targeted discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+4. Added a direct contextual link from `/blog/can-a-severely-bent-ring-prong-be-fixed` to `/blog/stone-security-checklist` with the anchor `Run the Stone Security Checklist`.
+5. Added smoke coverage confirming both the checklist content and the bent-prong article link.
+
+Purpose:
+
+- increase independent page value for a stalled high-intent blog URL
+- reduce overlap with the bent-prong article by making this page the broader inspection checklist
+- strengthen internal relevance between prong repair, stone setting, and quote-intent paths

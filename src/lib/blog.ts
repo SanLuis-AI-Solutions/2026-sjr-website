@@ -316,6 +316,14 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
+        heading: "The stone-security bench check we want before quoting repair",
+        body: [
+          "A useful loose-stone inspection should identify which part of the setting is failing: worn prong tips, a bent prong, a shallow seat, a loose side stone, a thin shank, or an older head that no longer supports daily wear.",
+          "That distinction changes the quote. Tightening one prong is different from retipping several prongs, rebuilding the head, checking side stones after sizing, or recommending a stronger setting because the original mounting is too tired to trust.",
+          "Before you request a quote, include one close photo from above, one side-view photo showing prong height, and a note about whether the ring recently hit something, started snagging, was resized, or is worn every day. Those details make the first recommendation more useful than a generic 'loose stone' estimate.",
+        ],
+      },
+      {
         heading: "The lowest-risk next step for a ring you do not fully trust",
         body: [
           "If a ring already feels questionable, do not wait for a special occasion to test it. Bring it in for a quote-first inspection and let the condition decide whether the piece needs immediate work or simply closer monitoring.",
@@ -353,6 +361,11 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["stone-setting", "jewelry-cleaning", "heirloom-restoration"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 8,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "chain-repair-weak-points",
@@ -1012,6 +1025,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Start with a stone-setting inspection if the ring has a loose or damaged prong. If the setting is beyond repair, the custom design path is the right follow-up conversation.",
     nextSteps: [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "Run the Stone Security Checklist", href: "/blog/stone-security-checklist" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Webster Ring Repair Guidance", href: "/services/webster" },
       { label: "Explore Custom Design", href: "/services/custom-design" },

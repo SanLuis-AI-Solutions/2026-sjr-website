@@ -646,6 +646,30 @@ test("chain repair guide exposes intake triage differentiation", async ({ page }
   guard.assertNoErrors("chain repair intake triage");
 });
 
+test("stone security guide exposes bench-check differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/stone-security-checklist", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The stone-security bench check we want before quoting repair/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/worn prong tips, a bent prong, a shallow seat/i)).toBeVisible();
+
+  await page.goto("/blog/can-a-severely-bent-ring-prong-be-fixed", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("link", { name: /Run the Stone Security Checklist/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("stone security bench-check differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";
