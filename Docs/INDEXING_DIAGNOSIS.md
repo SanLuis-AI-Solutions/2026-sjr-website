@@ -917,3 +917,34 @@ Interpretation:
 - The remaining unresolved pages are not blocked by missing internal links.
 - More blanket internal linking is unlikely to be the best next use of effort.
 - The next indexing pass should focus on GSC state movement, manual URL inspection/request indexing when authenticated browser access is available, and content-quality pruning only if pages stay stuck after Google processes the May 12 crawl-path and freshness changes.
+
+## Full Manifest Recheck And Generator Guard (2026-05-12)
+
+Re-ran the live monitoring stack after the site-map and content-weight passes:
+
+```bash
+npm run google:weekly-seo-health
+npm run google:seo-quick-wins
+npm run google:indexing-status -- --all
+npm run google:indexing-manifest
+```
+
+Result:
+
+1. Full URL Inspection scope checked all 42 canonical URLs.
+2. Current GSC status counts: 27 submitted and indexed, 14 discovered but not indexed, and 1 unknown to Google.
+3. `/services/pasadena` moved from `URL is unknown to Google` to `Discovered - currently not indexed`.
+4. `/blog/does-my-watch-need-battery-or-repair-pasadena` moved from `URL is unknown to Google` to `Discovered - currently not indexed`.
+5. `/blog/heirloom-restoration-planning-guide` remains confirmed as `Submitted and indexed`.
+6. `/site-map` is the only remaining `URL is unknown to Google` item; this is expected because the HTML site map was just launched.
+
+Tooling fix:
+
+1. Fixed `scripts/google/generate-indexing-manifest.mjs` so limited unresolved-queue rechecks do not accidentally overwrite newer manifest evidence with older hardcoded baseline statuses.
+2. The manifest generator now preserves prior manifest status evidence for URLs omitted from the latest recheck and only falls back to the baseline when no newer evidence exists.
+
+Interpretation:
+
+- The crawl-path work is producing the expected early-stage movement: unknown URLs are becoming discovered.
+- The remaining blocker is Google choosing which discovered pages to index, not live routing, robots, sitemap inclusion, or internal-link availability.
+- Keep monitoring; do not add more sitewide links unless a future audit shows a specific unresolved URL has weak indexed-source coverage.

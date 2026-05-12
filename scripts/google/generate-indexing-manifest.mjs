@@ -99,6 +99,39 @@ function readLatestIndexingStatus() {
   return { generatedAt: observedOn, rows };
 }
 
+function readPreviousManifestStatuses() {
+  const manifestPath = path.join(process.cwd(), "Docs", "INDEXING_MANIFEST.json");
+
+  if (!fs.existsSync(manifestPath)) {
+    return new Map();
+  }
+
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  const rows = new Map();
+
+  for (const route of manifest.routes || []) {
+    if (!route.path || !route.observedStatus) continue;
+
+    rows.set(route.path, {
+      status: route.observedStatus,
+      observedOn: route.observedOn || null,
+      note: route.note,
+    });
+  }
+
+  return rows;
+}
+
+function newerObservedState(a, b) {
+  if (!a) return b;
+  if (!b) return a;
+
+  const aDate = a.observedOn || BASE_OBSERVED_ON;
+  const bDate = b.observedOn || BASE_OBSERVED_ON;
+
+  return aDate >= bDate ? a : b;
+}
+
 function readFile(relativePath) {
   return fs.readFileSync(path.join(process.cwd(), relativePath), "utf8");
 }
@@ -190,8 +223,10 @@ function extractStaticRoutes() {
   );
 }
 
-function applyObservedState(route, latestStatus) {
-  const observed = latestStatus?.rows.get(route.path) || OBSERVED_STATUSES[route.path];
+function applyObservedState(route, latestStatus, previousManifestStatuses) {
+  const observed =
+    latestStatus?.rows.get(route.path) ||
+    newerObservedState(previousManifestStatuses.get(route.path), OBSERVED_STATUSES[route.path]);
   const status = observed?.status || "pending-gsc-inspection";
   const nextAction =
     status === "indexed" ? "monitor" : observed ? "request-indexing-and-recheck" : "inspect-and-request-indexing";
@@ -338,13 +373,14 @@ function buildMarkdown(manifest) {
 
 function main() {
   const latestStatus = readLatestIndexingStatus();
+  const previousManifestStatuses = readPreviousManifestStatuses();
   const routes = [
     ...extractStaticRoutes(),
     ...extractServiceDetails(),
     ...extractServiceAreas(),
     ...extractBlogPosts(),
   ]
-    .map((route) => applyObservedState(route, latestStatus))
+    .map((route) => applyObservedState(route, latestStatus, previousManifestStatuses))
     .sort(sortRoutes);
 
   const manifest = {

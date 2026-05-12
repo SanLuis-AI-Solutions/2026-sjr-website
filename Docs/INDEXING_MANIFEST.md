@@ -20,9 +20,9 @@ Generated on 2026-05-12 from canonical repo sources.
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 12
+- Discovered - currently not indexed: 14
 - Indexed: 27
-- URL is unknown to Google: 3
+- URL is unknown to Google: 1
 
 ## Immediate GSC Queue
 
@@ -35,10 +35,10 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/friendswood` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/pasadena` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
+| `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/pearl-restringing-timing-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
@@ -92,13 +92,13 @@ Decision rule:
 | `/services/deer-park` | service-area | Deer Park service area | Indexed |
 | `/services/friendswood` | service-area | Friendswood service area | Discovered - currently not indexed |
 | `/services/la-porte` | service-area | La Porte service area | Discovered - currently not indexed |
-| `/services/pasadena` | service-area | Pasadena service area | URL is unknown to Google |
+| `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
 | `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
 | `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |
 | `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | Discovered - currently not indexed |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |
 | `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Indexed |
-| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | URL is unknown to Google |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | Discovered - currently not indexed |
 | `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Indexed |
 | `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Indexed |
 | `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Indexed |
