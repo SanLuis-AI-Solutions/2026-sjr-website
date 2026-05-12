@@ -85,8 +85,31 @@ export const BLOG_POSTS: BlogPost[] = [
           "The best outcome is not just a finished repair; it is a piece that wears safely. We verify fit, setting security, and overall finish before you ever leave the shop.",
         ],
       },
+      {
+        heading: "The counter-level questions that separate a repair shop from a sales counter",
+        body: [
+          "A strong repair intake should get more specific than 'we can fix that.' For a ring, the jeweler should ask whether it spins, catches on clothing, has a loose stone, was resized before, or needs to keep an engraving intact. For a watch, they should separate a simple battery stop from moisture, corrosion, crown, or movement symptoms before promising timing.",
+          "For inherited jewelry, the conversation should slow down even more. The right shop should ask whether you want to preserve the original look, reuse stones, match missing pieces, or redesign only if the structure is too worn for normal wear.",
+          "If you are comparing jewelers near Pasadena, bring one close photo, one full-piece photo, and the exact moment the problem started. A trustworthy jeweler can use those details to explain the likely repair path, what still needs bench inspection, and what should not be promised from a quick glance.",
+        ],
+      },
+    ],
+    nextStepsHeading: "Best next step if you are choosing who should repair it",
+    nextStepsIntro:
+      "If the piece is sentimental or already showing a specific symptom, start with the service path that matches the risk instead of treating every jeweler comparison like a generic shopping decision.",
+    nextSteps: [
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Get Fast Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing", "watch-repair"],
+    discoveryBoosts: {
+      blogFeatured: 6,
+      serviceHub: 7,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "ring-sizing-guide",
@@ -1282,6 +1305,7 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Plan an Heirloom Restoration Visit", href: "/blog/heirloom-restoration-planning-guide" },
+      { label: "Choose a Trustworthy Jeweler", href: "/blog/how-to-choose-a-jeweler" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },

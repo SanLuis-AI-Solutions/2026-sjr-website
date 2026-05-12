@@ -741,3 +741,23 @@ Purpose:
 - increase independent page value for a stalled high-intent blog URL
 - reduce overlap with the bent-prong article by making this page the broader inspection checklist
 - strengthen internal relevance between prong repair, stone setting, and quote-intent paths
+
+## Trustworthy Jeweler Intake-Differentiation Pass (2026-05-12)
+
+The unresolved manifest still includes `/blog/how-to-choose-a-jeweler` as `Discovered - currently not indexed` with only one referring URL. The page is commercially useful because trust evaluation often happens immediately before a customer chooses where to bring a sentimental repair, ring sizing, stone setting, or watch issue.
+
+Implemented on 2026-05-12:
+
+1. Added a counter-level repair intake section that distinguishes real repair assessment from generic sales-counter promises.
+2. Added specific diagnostic prompts for rings, watches, and inherited jewelry: spinning, clothing catches, loose stones, previous sizing, engraving, moisture, corrosion, crown issues, movement symptoms, preservation, reuse, matching, and redesign decisions.
+3. Added quote-prep guidance around close photos, full-piece photos, and when the symptom started.
+4. Added conversion next steps to heirloom restoration, stone setting, ring sizing, watch repair, and quote submission.
+5. Added discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+6. Added a direct contextual link from `/blog/heirloom-jewelry-restoration-repair-or-redesign` to `/blog/how-to-choose-a-jeweler` with the anchor `Choose a Trustworthy Jeweler`.
+7. Added smoke coverage confirming both the intake-differentiation content and the heirloom article link.
+
+Purpose:
+
+- increase independent page value for a stalled trust-intent blog URL
+- connect trust evaluation to concrete commercial repair paths
+- strengthen internal relevance between heirloom decision content and jeweler-selection content

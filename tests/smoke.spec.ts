@@ -670,6 +670,32 @@ test("stone security guide exposes bench-check differentiation", async ({ page }
   guard.assertNoErrors("stone security bench-check differentiation");
 });
 
+test("trustworthy jeweler guide exposes repair-intake differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/how-to-choose-a-jeweler", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The counter-level questions that separate a repair shop from a sales counter/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/whether it spins, catches on clothing, has a loose stone/i))
+    .toBeVisible();
+  await expect(page.getByRole("link", { name: /See Watch Repair Service/i })).toBeVisible();
+
+  await page.goto("/blog/heirloom-jewelry-restoration-repair-or-redesign", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("link", { name: /Choose a Trustworthy Jeweler/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("trustworthy jeweler intake differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";
