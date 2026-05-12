@@ -405,6 +405,14 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
+        heading: "The chain intake triage we use before recommending a repair",
+        body: [
+          "Before a necklace or bracelet repair is quoted, the useful question is not only where it broke. We also want to know whether the piece failed at a jump ring, clasp, solder joint, pendant connection, hollow link, or a section that already looks stretched or flattened.",
+          "That triage changes the repair plan. A single open jump ring may be a straightforward closure. A clasp that no longer springs shut points to hardware replacement. A hollow or paper-thin link near the break can mean the surrounding area needs reinforcement or the chain may keep failing after a spot repair.",
+          "For daily-wear chains, bring the pendant, charm, or bracelet exactly as you wear it. The weight and movement of the attached piece often explains why one section keeps taking stress. For sentimental chains, it is better to identify the weak pattern before another break risks losing the pendant entirely.",
+        ],
+      },
+      {
         heading: "Timing, local service, and the best next step",
         body: [
           "Most chain repairs still fit our Same Day/Next Day pattern when the issue is straightforward and the needed parts are standard. If a premium clasp, uncommon chain style, or more delicate reconstruction is involved, the scope should be explained before the work starts.",
@@ -458,6 +466,11 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 8,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "pearl-restringing-timing-guide",

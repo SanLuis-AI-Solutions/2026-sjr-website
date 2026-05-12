@@ -599,3 +599,20 @@ Purpose:
 - reduce overlap between the two heirloom articles
 - give the planning guide a distinct pre-visit/search-intent role
 - address the `0` referring URL signal without adding another broad sitewide link block
+
+## Chain Repair Weak-Point Triage Pass (2026-05-11)
+
+The unresolved manifest still includes `/blog/chain-repair-weak-points` as `Discovered - currently not indexed`. The page has commercial intent because it connects directly to necklace repair, bracelet repair, clasp inspection, and quote/book actions.
+
+Implemented on 2026-05-11:
+
+1. Added an intake-triage section focused on how Susie's distinguishes jump-ring, clasp, solder-joint, pendant-connection, hollow-link, and stretched-link failures.
+2. Expanded the customer action guidance around bringing the pendant, charm, or bracelet exactly as worn so the stress pattern can be assessed.
+3. Added targeted discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+4. Added smoke coverage confirming the chain guide renders the triage content.
+
+Purpose:
+
+- make the guide more specific than a generic weak-chain overview
+- reinforce commercial repair intent for necklace and bracelet service paths
+- give Google clearer page-level uniqueness before the next unresolved-queue inspection

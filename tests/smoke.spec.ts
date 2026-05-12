@@ -620,6 +620,25 @@ test("heirloom planning guide exposes bench-intake differentiation", async ({ pa
   guard.assertNoErrors("heirloom planning differentiation");
 });
 
+test("chain repair guide exposes intake triage differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/chain-repair-weak-points", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The chain intake triage we use before recommending a repair/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/failed at a jump ring, clasp, solder joint/i)).toBeVisible();
+  await expect(page.getByText(/bring the pendant, charm, or bracelet exactly as you wear it/i))
+    .toBeVisible();
+
+  guard.assertNoErrors("chain repair intake triage");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";
