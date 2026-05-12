@@ -1043,3 +1043,17 @@ Interpretation:
 - Service pages keep their crawlable and answer-oriented structure without forcing mobile users through every secondary proof/image block.
 - The mobile journey now better matches the commercial intent: identify the repair, understand next step, quote or book.
 - Watch repair now prioritizes a faster mobile answer-and-CTA path over decorative hero imagery, while desktop still keeps the visual treatment.
+
+## Sitewide Priority Repair Footer Links (2026-05-12)
+
+The May 12 manifest still shows 14 canonical URLs in `Discovered - currently not indexed`, including `/services/pearl-restringing` and multiple commercial repair guides. The services hub already links the full priority repair set, but the sitewide footer only exposed a subset.
+
+Implemented on 2026-05-12:
+
+1. Updated the footer repair-guide column to link every item in `PRIORITY_REPAIR_PATHS`.
+2. Added smoke coverage for the two previously omitted priority crawl paths: pearl restringing service and watch battery replacement near Pasadena.
+
+Interpretation:
+
+- This adds sitewide crawl weight without adding another above-the-fold mobile section.
+- The change supports stalled commercial pages while preserving the simpler mobile page flow.

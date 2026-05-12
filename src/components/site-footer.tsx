@@ -75,7 +75,7 @@ export function SiteFooter() {
             <div>
               <p className="mb-6 font-serif text-lg text-white">Repair Guides</p>
               <nav className="flex flex-col gap-4 text-sm font-sans uppercase tracking-widest">
-                {PRIORITY_REPAIR_PATHS.slice(1, 5).map((path) => (
+                {PRIORITY_REPAIR_PATHS.map((path) => (
                   <Link
                     key={path.href}
                     href={path.href}

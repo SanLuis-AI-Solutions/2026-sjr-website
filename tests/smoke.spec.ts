@@ -1685,3 +1685,20 @@ test("footer brand lockup includes full business name", async ({ page }) => {
 
   guard.assertNoErrors("footer brand lockup");
 });
+
+test("footer exposes full priority repair crawl set", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  const footer = page.locator("footer");
+  await footer.scrollIntoViewIfNeeded();
+
+  await expect(
+    footer.getByRole("link", { name: /^Pearl restringing service$/i }),
+  ).toHaveAttribute("href", "/services/pearl-restringing");
+  await expect(
+    footer.getByRole("link", { name: /^Watch battery replacement near Pasadena$/i }),
+  ).toHaveAttribute("href", "/blog/where-to-get-watch-battery-replaced-pasadena");
+
+  guard.assertNoErrors("footer priority crawl set");
+});
