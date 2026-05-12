@@ -687,3 +687,21 @@ Purpose:
 - increase independent page value for another stalled geo URL
 - reduce location-page template overlap
 - connect Friendswood visitors to commercial ring, heirloom, and stone-security paths
+
+## La Porte Service-Area Differentiation Pass (2026-05-12)
+
+The unresolved manifest still includes `/services/la-porte` as `Discovered - currently not indexed` with only one referring URL. La Porte has a distinct local repair context because watch, clasp, ring, and chain issues often intersect with coastal humidity, water exposure, hands-on workdays, and trip planning into Pasadena.
+
+Implemented on 2026-05-12:
+
+1. Added La Porte-specific context around humidity, water exposure, boating weekends, refinery or plant workdays, and commute timing.
+2. Expanded watch guidance around moisture, sweat, heat, loose crowns, gasket risk, and deeper movement concerns.
+3. Expanded workwear ring and chain guidance around recurring stress points, clasp openings, spinning rings, and light stone movement.
+4. Added quote-prep guidance for daily workwear versus event jewelry versus inherited pieces, plus preservation notes for heirlooms.
+5. Updated helpful reads to include battery-vs-repair diagnosis and chain weak-point guidance, with smoke coverage for the new La Porte content.
+
+Purpose:
+
+- increase independent page value for another stalled geo URL
+- reduce location-page template overlap
+- connect La Porte visitors to commercial watch, chain, heirloom, and repair-diagnosis paths

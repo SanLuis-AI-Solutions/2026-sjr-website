@@ -208,35 +208,38 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The appeal is not just distance. It is having a nearby bench jeweler and watch repair team that can inspect a piece, explain the tradeoffs, and tell you whether you need a quick repair, a safer rebuild, or a full redesign path.",
       "That is especially helpful for engagement rings with worn prongs, watches that need a battery and seal review, necklaces or bracelets with repeated break points, and older heirlooms that may not tolerate aggressive repair shortcuts.",
+      "For La Porte customers, the intake often has a coastal-wear angle too. Humidity, water exposure, boating weekends, refinery or plant workdays, and daily commute timing can all affect whether a stopped watch, worn clasp, or loose ring should be treated as routine or risk-sensitive.",
       "For La Porte families bringing in inherited jewelry, the value is often in preserving trust while making the piece wearable again. That is where an in-house workshop offers a better experience than generic intake and off-site handling.",
     ],
     commonRepairsHeading: "Common repairs we see from La Porte customers",
     commonRepairsBody: [
       "Watch battery replacement, ring sizing, stone tightening, cleaning and polishing, chain repair, and heirloom restoration are some of the most common needs from La Porte customers. These are practical repairs tied to daily wear, gift timing, and sentimental preservation.",
-      "A stopped watch may only need a battery, but it can also signal gasket wear or deeper movement issues. A bent prong may look cosmetic, but it can mean the stone is one snag away from falling out. A quick local inspection helps separate minor fixes from urgent repairs.",
+      "A stopped watch may only need a battery, but it can also signal gasket wear or deeper movement issues if it was exposed to moisture, sweat, heat, or a loose crown. A bent prong may look cosmetic, but it can mean the stone is one snag away from falling out.",
+      "For rings and chains worn through hands-on workdays, the useful details are where the piece catches, whether the clasp has opened unexpectedly, whether the ring has started spinning, and whether a stone moves under light pressure. A quick local inspection helps separate minor fixes from urgent repairs.",
       "For custom or heirloom work, La Porte customers also come in when they want to reuse stones or gold in a stronger design instead of repeatedly repairing a fragile setting.",
     ],
     visitHeading: "Planning a visit from La Porte",
     visitBody: [
       "If you are coming from La Porte, start with the service page that matches the problem or send a quote request with one or two photos. That is the fastest way to get pointed toward ring sizing, watch repair, heirloom restoration, or custom work without guessing.",
+      "For the quote note, include whether the piece is daily workwear, weekend/event jewelry, or inherited. For watches, mention water, sweat, heat, or impact history. For heirlooms, mention what you want preserved before any polishing, rebuilding, or redesign is discussed.",
       "When you arrive, we inspect the item, explain the safest path forward, and confirm the starting price and likely timeline before work begins. That makes the trip more efficient and keeps the decision grounded in the actual condition of the piece.",
       "If the repair is simple, it may follow the Same Day/Next Day pattern. If it is more complex, you will still leave with a clearer plan and a real recommendation rather than a vague estimate.",
     ],
     localScenarios: [
       {
-        title: "Battery plus seal concern",
+        title: "Coastal watch concern",
         body:
-          "Especially relevant for La Porte watch owners when a stopped watch may also need gasket or moisture-related attention, not only a quick battery swap.",
+          "Especially relevant for La Porte watch owners when a stopped watch may also need gasket, crown, or moisture-related attention, not only a quick battery swap.",
+      },
+      {
+        title: "Workwear ring or chain",
+        body:
+          "Useful when a daily-wear ring, clasp, chain, or bracelet may need more than a spot repair because the stress pattern keeps repeating.",
       },
       {
         title: "Repair versus redesign",
         body:
           "Useful when inherited jewelry is sentimental but structurally tired and the better answer may be strengthening or redesigning the piece.",
-      },
-      {
-        title: "Trip-efficient visit",
-        body:
-          "Best when you want the service category narrowed before leaving La Porte so the Pasadena visit starts with the right bench conversation.",
       },
     ],
     faqs: [
@@ -262,12 +265,16 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/where-to-get-watch-battery-replaced-pasadena",
       },
       {
+        label: "Does my watch need a battery or deeper repair?",
+        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
+      },
+      {
         label: "Heirloom restoration planning guide",
         href: "/blog/heirloom-restoration-planning-guide",
       },
       {
-        label: "Pearl restringing timing guide",
-        href: "/blog/pearl-restringing-timing-guide",
+        label: "Where weak chains usually fail first",
+        href: "/blog/chain-repair-weak-points",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "heirloom-restoration", "custom-design"],

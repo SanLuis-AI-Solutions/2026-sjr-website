@@ -928,6 +928,23 @@ test("service area: friendswood page exposes heirloom and ring-intake differenti
   guard.assertNoErrors("service area friendswood differentiation");
 });
 
+test("service area: la porte page exposes coastal watch and workwear differentiation", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/la-porte", { waitUntil: "networkidle" });
+
+  await expect(page.getByText(/Humidity, water exposure, boating weekends/i)).toBeVisible();
+  await expect(page.getByText(/daily workwear, weekend\/event jewelry, or inherited/i))
+    .toBeVisible();
+  await expect(page.getByRole("heading", { name: /Coastal watch concern/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Where weak chains usually fail first/i }))
+    .toBeVisible();
+
+  guard.assertNoErrors("service area la porte differentiation");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];
