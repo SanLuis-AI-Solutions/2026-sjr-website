@@ -12,16 +12,17 @@ Generated on 2026-05-12 from canonical repo sources.
 
 ## Inventory Summary
 
-- Total canonical URLs in manifest: 41
+- Total canonical URLs in manifest: 42
 - blog: 16
 - service-area: 6
 - service-detail: 9
-- static: 10
+- static: 11
 
 ## Observed GSC Status Summary
 
 - Discovered - currently not indexed: 14
 - Indexed: 26
+- Pending GSC inspection: 1
 - URL is unknown to Google: 1
 
 ## Immediate GSC Queue
@@ -48,7 +49,11 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 
 ## Remaining Canonical URLs Pending First Inspection
 
-- None.
+- Count: 1
+
+| URL | Category | Label | Recommended Action |
+| --- | --- | --- | --- |
+| `/site-map` | static | /site-map | Inspect in GSC and request indexing |
 
 ## April 26-27 Checkpoint
 
@@ -77,6 +82,7 @@ Decision rule:
 | `/privacy` | static | Privacy | Indexed |
 | `/quote` | static | Quote | Indexed |
 | `/services` | static | Services hub | Indexed |
+| `/site-map` | static | /site-map | Pending GSC inspection |
 | `/terms` | static | Terms | Indexed |
 | `/services/bracelet-repair` | service-detail | Bracelet Repair | Indexed |
 | `/services/custom-design` | service-detail | Custom Design | Indexed |

@@ -791,6 +791,28 @@ test("sitemap excludes legacy Wix URLs and includes current geo routes", async (
   expect(bodyText).not.toContain("/ring-sizing-repair");
 });
 
+test("html site map exposes crawlable commercial and geo paths", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/site-map", { waitUntil: "networkidle" });
+
+  await expect(
+    page.getByRole("heading", { level: 1, name: /Every repair path/i }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^XML Sitemap$/i })).toHaveAttribute(
+    "href",
+    "/sitemap.xml",
+  );
+  await expect(page.getByText("Jewelry repair near Clear Lake")).toBeVisible();
+  await expect(page.locator('main a[href="/services/clear-lake"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/services/pearl-restringing"]')).toHaveCount(1);
+  await expect(
+    page.locator('main a[href="/blog/does-my-watch-need-battery-or-repair-pasadena"]'),
+  ).toHaveCount(1);
+
+  guard.assertNoErrors("html sitemap crawl paths");
+});
+
 test("mobile informational pages: about, faq, and blog hero actions are clear", async ({
   page,
 }) => {

@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/privacy`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/terms`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/blog`, lastModified: STATIC_LAST_MODIFIED },
+    { url: `${baseUrl}/site-map`, lastModified: SERVICE_LAST_MODIFIED },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = (SERVICES || []).map((s) => ({

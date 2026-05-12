@@ -53,7 +53,7 @@ export function SiteFooter() {
                 <Link href="/blog" className="transition-colors hover:text-brand-gold">Blog</Link>
                 <Link href="/contact" className="transition-colors hover:text-brand-gold">Contact</Link>
                 <Link href="/quote" className="transition-colors hover:text-brand-gold">Get Quote</Link>
-                <Link href="/sitemap.xml" className="transition-colors hover:text-brand-gold">Sitemap</Link>
+                <Link href="/site-map" className="transition-colors hover:text-brand-gold">Sitemap</Link>
               </nav>
             </div>
 

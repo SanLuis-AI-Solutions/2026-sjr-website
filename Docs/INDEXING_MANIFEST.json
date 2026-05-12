@@ -23,7 +23,7 @@
     ],
     [
       "static",
-      10
+      11
     ]
   ],
   "countsByObservedStatus": [
@@ -34,6 +34,10 @@
     [
       "indexed",
       26
+    ],
+    [
+      "pending-gsc-inspection",
+      1
     ],
     [
       "unknown-to-google",
@@ -130,6 +134,16 @@
       "observedOn": "2026-05-08",
       "nextAction": "monitor",
       "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+    },
+    {
+      "category": "static",
+      "path": "/site-map",
+      "label": "/site-map",
+      "url": "https://www.susiesjewelryrepair.com/site-map",
+      "observedStatus": "pending-gsc-inspection",
+      "observedOn": null,
+      "nextAction": "inspect-and-request-indexing",
+      "note": "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed."
     },
     {
       "category": "static",

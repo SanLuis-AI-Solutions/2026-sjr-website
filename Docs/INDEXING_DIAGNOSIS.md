@@ -858,3 +858,21 @@ Purpose:
 - reduce structured-data policy noise during indexing recovery
 - avoid self-serving local-business review markup that is not necessary for the current traffic goal
 - keep entity clarity signals without over-marking content
+
+## HTML Site Map Crawl Path Pass (2026-05-12)
+
+The latest GSC URL Inspection API response reported `/services/clear-lake` as `URL is unknown to Google` with 0 sitemap sources and 0 referring URLs, even though live HTML checks showed crawlable Clear Lake links from the homepage, services hub, footer, nearby service-area pages, and related blog posts. This appears to be GSC inspection lag, but the safest crawl-weight improvement is to give Google a single human-readable internal discovery page that lists every canonical commercial URL.
+
+Implemented on 2026-05-12:
+
+1. Added `/site-map` as a crawlable HTML site map page with core pages, service pages, nearby service-area pages, and repair-guide links.
+2. Kept `/sitemap.xml` available and linked it from the HTML site map.
+3. Updated the footer `Sitemap` link from `/sitemap.xml` to `/site-map` so the HTML site map receives sitewide internal links.
+4. Added `/site-map` to the XML sitemap with the May 12 service/content freshness timestamp.
+5. Added smoke coverage confirming `/site-map` exposes `/services/clear-lake`, `/services/pearl-restringing`, and a stalled watch-diagnostic guide as normal crawlable links.
+
+Purpose:
+
+- create one strong internal discovery path for all stalled commercial URLs
+- increase crawl access to geo pages that GSC still reports as unresolved
+- improve user navigation without removing the XML sitemap used by crawlers
