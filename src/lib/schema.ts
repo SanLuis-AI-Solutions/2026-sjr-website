@@ -45,31 +45,6 @@ export function localBusinessSchema() {
     },
     hasMap: BUSINESS.googleMapsUrl,
     areaServed,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.5",
-      reviewCount: "51",
-    },
-    review: [
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Lydia R." },
-        reviewRating: { "@type": "Rating", ratingValue: "5" },
-        reviewBody: "My engagement ring looks brand new. The team explained every step and kept it on-site.",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Carlos M." },
-        reviewRating: { "@type": "Rating", ratingValue: "5" },
-        reviewBody: "Fast turnaround and honest pricing. I appreciated the in-house guarantee.",
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Jasmine K." },
-        reviewRating: { "@type": "Rating", ratingValue: "5" },
-        reviewBody: "They restored my grandmother’s necklace flawlessly. The craftsmanship is unreal.",
-      },
-    ],
     openingHoursSpecification: (BUSINESS.hours || []).flatMap((h) => {
       const hoursStr = h.hours || "";
       if (hoursStr.toLowerCase() === "closed") return [];

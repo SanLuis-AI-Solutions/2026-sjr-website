@@ -842,3 +842,19 @@ Purpose:
 - repair stale freshness signals that could suppress recrawl priority
 - give Clear Lake and the recently updated service/geo pages a current sitemap signal
 - align blog `reviewedAt`/sitemap dates with actual content updates rather than stale February-April timestamps
+
+## LocalBusiness Schema Policy Cleanup (2026-05-12)
+
+The site already had useful LocalBusiness entity markup: name, NAP, map URL, geo coordinates, sameAs links, opening hours, and served cities. The schema audit found one avoidable risk: global `aggregateRating` and `Review` markup on the LocalBusiness entity.
+
+Implemented on 2026-05-12:
+
+1. Removed `aggregateRating` and `review` from `src/lib/schema.ts`.
+2. Preserved the lower-risk LocalBusiness entity fields that help Google and AI systems understand the business, location, map entity, and service area.
+3. Updated smoke coverage so the homepage schema test now asserts the risky review/rating fields stay absent while sameAs, map URL, and closed Sunday handling remain valid.
+
+Purpose:
+
+- reduce structured-data policy noise during indexing recovery
+- avoid self-serving local-business review markup that is not necessary for the current traffic goal
+- keep entity clarity signals without over-marking content
