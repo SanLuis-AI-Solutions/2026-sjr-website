@@ -754,6 +754,31 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
   guard.assertNoErrors("cleaning guide inspection-risk differentiation");
 });
 
+test("same-day watch battery guide exposes local intake differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/where-to-get-watch-battery-replaced-pasadena", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The same-day watch battery intake we want before you drive over/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/send a quick photo of the dial and the back of the case/i))
+    .toBeVisible();
+
+  await page.goto("/blog/does-my-watch-need-battery-or-repair-pasadena", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("link", { name: /Find Same-Day Watch Battery Help/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("same-day watch battery intake differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";

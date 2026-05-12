@@ -1128,6 +1128,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "If a watch recently lost time, fogged under the crystal, or stopped after sitting with an old battery for too long, inspection matters. Replacing the battery without checking the movement can hide the real cause and shorten the life of the watch.",
           "This is especially important for sentimental or higher-end watches. A quick diagnosis now is cheaper than a full movement repair later."
         ]
+      },
+      {
+        heading: "The same-day watch battery intake we want before you drive over",
+        body: [
+          "For a local same-day visit, the fastest intake starts with the watch brand, whether the case back screws down or snaps on, when it stopped, and whether the crystal has ever fogged. Those details help separate a likely while-you-wait battery swap from a watch that needs slower opening, gasket review, or repair diagnosis.",
+          "If you are coming from Deer Park, Pasadena, Clear Lake, or La Porte, send a quick photo of the dial and the back of the case before you leave if the watch is unusual, luxury, vintage, or water-resistant. That gives the bench a better first read and prevents treating a diagnostic watch like a kiosk battery job.",
+          "The goal is still speed, but not careless speed. A good same-day battery service should protect the case, check the seal condition, and tell you when the symptom points beyond a battery before the watch is closed back up.",
+        ],
       }
     ],
     faqHeading: "Quick answers about same-day watch battery service",
@@ -1178,8 +1186,9 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     relatedServiceSlugs: ["watch-repair"],
     discoveryBoosts: {
-      serviceHub: 7,
-      geoHelpfulReads: 7,
+      blogFeatured: 8,
+      serviceHub: 9,
+      geoHelpfulReads: 9,
     },
   },
   {
@@ -1527,6 +1536,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If the watch might only need a battery, or might be something bigger, start with watch repair details or send symptoms through the quote form before you drive over.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Find Same-Day Watch Battery Help", href: "/blog/where-to-get-watch-battery-replaced-pasadena" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],

@@ -800,3 +800,22 @@ Purpose:
 - increase independent page value for two stalled cleaning-intent blog URLs
 - reduce overlap by making one page the general cleaning decision guide and the other the vintage-ring risk guide
 - strengthen internal relevance between cleaning, heirloom restoration, and stone-security quote paths
+
+## Same-Day Watch Battery Local-Intent Pass (2026-05-12)
+
+The unresolved manifest still includes `/blog/where-to-get-watch-battery-replaced-pasadena` as `Discovered - currently not indexed` with only one referring URL. The diagnostic companion page already has strong boosts, but the same-day battery page needed clearer local-visit value and a reciprocal link from the battery-vs-repair guide.
+
+Implemented on 2026-05-12:
+
+1. Added a same-day watch battery intake section that asks for brand, case-back type, stop timing, and fogging/moisture context before the customer drives over.
+2. Added local quote-prep guidance for customers coming from Deer Park, Pasadena, Clear Lake, or La Porte with unusual, luxury, vintage, or water-resistant watches.
+3. Clarified that same-day speed should still include case protection, seal-condition review, and escalation when the symptom points beyond a battery.
+4. Increased discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+5. Added a direct contextual link from `/blog/does-my-watch-need-battery-or-repair-pasadena` to `/blog/where-to-get-watch-battery-replaced-pasadena` with the anchor `Find Same-Day Watch Battery Help`.
+6. Added smoke coverage confirming both the intake-differentiation content and the diagnostic article link.
+
+Purpose:
+
+- increase independent page value for a stalled same-day watch battery URL
+- strengthen local visit intent for Deer Park, Pasadena, Clear Lake, and La Porte customers
+- connect diagnostic watch searchers back to the commercial same-day battery service path
