@@ -482,7 +482,7 @@ Implemented on 2026-05-11:
 
 Result:
 
-- the live site now has verified event evidence for the compact mobile booking CTA
+- the live site now has verified event evidence for the compact mobile quote CTA
 - future GA4 reviews can compare `mobile_sticky_cta_click` volume against `booking_form_start`, `booking_submit_success`, and organic landing pages
 
 ## Mobile CTA Attribution Continuity (2026-05-11)
@@ -550,6 +550,41 @@ Interpretation:
 
 - The reporting path is now in place before the first full post-change measurement window.
 - The next meaningful read is the week ending 2026-05-17, when sticky CTA clicks can be compared against attributed booking starts and submissions.
+
+## Mobile CTA Quote Funnel Reporting Alignment (2026-05-12)
+
+The mobile sticky CTA was simplified to one quote-focused action, so the weekly report now measures the quote path instead of treating the shortcut as booking-only.
+
+Implemented on 2026-05-12:
+
+1. Updated the sticky CTA region label from `Mobile booking shortcut` to `Mobile quote shortcut`.
+2. Updated `scripts/google/weekly-seo-health.mjs` to include `quote_form_start` and `quote_submit_success` on the sticky CTA UTM path.
+3. Renamed the weekly report copy from booking-path language to generic sticky CTA path language.
+4. Updated the smoke test to assert the quote-focused mobile shortcut.
+5. Delayed the sticky CTA until after initial scroll so it does not compete with the hero quote button.
+
+Result:
+
+- future checkpoints will measure whether the single mobile CTA creates quote starts and quote submissions
+- booking events remain in the report for continuity, but the primary path now matches the live mobile UX
+- the sticky CTA now supports mid-scroll conversion recovery instead of adding clutter above the fold
+
+## Mobile Homepage Service Flow Compression (2026-05-12)
+
+The mobile homepage service grid had become the main clutter risk: a viewport audit showed the services section consuming roughly `4,783px` before users could reach local paths, process, guides, and downstream proof.
+
+Implemented on 2026-05-12:
+
+1. Kept the first four priority services as visible mobile cards.
+2. Converted the remaining mobile services into compact, tap-friendly links under `More repair services`.
+3. Preserved the full image-card grid on tablet/desktop.
+4. Added smoke coverage requiring the mobile services section to stay below `1,900px`.
+
+Result:
+
+- mobile users reach the next decision sections faster
+- service links remain available for users and internal crawl paths
+- the homepage keeps one clear bottom sticky quote action without adding competing mobile CTAs
 
 ## May 11 URL Inspection Recheck And Pearl-Service Deepening
 
@@ -1014,7 +1049,7 @@ npm run lint
 
 Interpretation:
 
-- Mobile users now see the proven quote path, compact booking shortcut, service choices, local repair paths, and limited guide options without extra decorative sections competing for attention.
+- Mobile users now see the proven quote path, compact quote shortcut, service choices, local repair paths, and limited guide options without extra decorative sections competing for attention.
 - Crawlable commercial paths remain available through services, local repair paths, guide cards, site navigation, and `/site-map`.
 
 ## Mobile Service-Detail Restraint Pass (2026-05-12)

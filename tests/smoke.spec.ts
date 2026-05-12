@@ -179,6 +179,12 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   const servicesHeading = page.getByRole("heading", { name: /Expert Repair Services/i });
   await servicesHeading.scrollIntoViewIfNeeded();
   await expect(servicesHeading).toBeVisible();
+  await expect(page.locator("#services").getByText(/More repair services/i)).toBeVisible();
+  await expect(page.locator('#services a[href="/services/pearl-restringing"]:visible')).toHaveCount(1);
+  const servicesHeight = await page.locator("#services").evaluate((node) =>
+    Math.round(node.getBoundingClientRect().height),
+  );
+  expect(servicesHeight).toBeLessThan(1900);
 
   const pricingGuides = page.locator("section", { hasText: "Pricing and repair guides" });
   await pricingGuides.scrollIntoViewIfNeeded();
@@ -211,7 +217,9 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
 
-  const stickyShortcut = page.getByRole("region", { name: /^Mobile booking shortcut$/i });
+  const stickyShortcut = page.getByRole("region", { name: /^Mobile quote shortcut$/i });
+  await expect(stickyShortcut).toBeHidden();
+  await page.evaluate(() => window.scrollTo(0, 900));
   await expect(stickyShortcut).toBeVisible();
   await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
 

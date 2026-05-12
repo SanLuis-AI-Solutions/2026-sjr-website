@@ -90,10 +90,11 @@ export function ServicesGrid({
             const timeEstimateRaw = service.time_estimate ?? service.timeEstimate ?? null;
             const timeEstimate = formatTimeEstimate(timeEstimateRaw);
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
-            const cardClass = `reveal-on-scroll ${delayClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_24px_60px_rgba(58,25,16,0.18)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2`;
+            const mobileVisibilityClass = index > 3 ? "hidden sm:block" : "";
+            const cardClass = `reveal-on-scroll ${delayClass} ${mobileVisibilityClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_18px_42px_rgba(58,25,16,0.14)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
             const cardBody = (
               <>
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <div className="relative hidden aspect-[4/3] w-full overflow-hidden sm:block">
                   <Image
                     src={image}
                     alt={name}
@@ -162,6 +163,41 @@ export function ServicesGrid({
             );
           })}
         </div>
+
+        {services.length > 4 ? (
+          <div className="mt-5 rounded-3xl border border-brand-burgundy/15 bg-white/82 p-4 shadow-[0_14px_34px_rgba(58,25,16,0.12)] sm:hidden">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+              More repair services
+            </p>
+            <div className="mt-3 grid gap-2">
+              {services.slice(4).map((service) => {
+                const slug = service.slug || "unavailable";
+                const name = service.name || "Untitled Service";
+                if (!service.slug) return null;
+
+                return (
+                  <TrackedLink
+                    key={slug}
+                    href={`/services/${slug}`}
+                    eventName="service_card_click"
+                    eventParams={{
+                      service_slug: slug,
+                      service_name: name,
+                      placement: `${id}_mobile_compact`,
+                    }}
+                    className="inline-flex min-h-11 items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    aria-label={`Explore details for ${name}`}
+                  >
+                    <span>{name}</span>
+                    <span aria-hidden className="text-brand-burgundy">
+                      →
+                    </span>
+                  </TrackedLink>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
       </div>
     </section>
   );

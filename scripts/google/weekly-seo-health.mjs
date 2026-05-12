@@ -18,8 +18,10 @@ const KEY_EVENTS = [
   "booking_submit_success",
   "booking_submit_pending",
 ];
-const MOBILE_STICKY_CTA_BOOKING_EVENTS = [
+const MOBILE_STICKY_CTA_PATH_EVENTS = [
+  "quote_form_start",
   "booking_form_start",
+  "quote_submit_success",
   "booking_submit_success",
   "booking_submit_pending",
 ];
@@ -78,7 +80,7 @@ async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate
           {
             filter: {
               fieldName: "eventName",
-              inListFilter: { values: MOBILE_STICKY_CTA_BOOKING_EVENTS },
+              inListFilter: { values: MOBILE_STICKY_CTA_PATH_EVENTS },
             },
           },
           {
@@ -299,13 +301,13 @@ async function main() {
     if (!(eventName in organicKeyEvents)) continue;
     organicKeyEvents[eventName] = toNum(row.metricValues?.[0]?.value);
   }
-  const mobileStickyCtaBookingEvents = Object.fromEntries(
-    MOBILE_STICKY_CTA_BOOKING_EVENTS.map((eventName) => [eventName, 0])
+  const mobileStickyCtaPathEvents = Object.fromEntries(
+    MOBILE_STICKY_CTA_PATH_EVENTS.map((eventName) => [eventName, 0])
   );
   for (const row of mobileStickyCtaPathReport.rows) {
     const eventName = row.dimensionValues?.[0]?.value || "";
-    if (!(eventName in mobileStickyCtaBookingEvents)) continue;
-    mobileStickyCtaBookingEvents[eventName] = toNum(row.metricValues?.[0]?.value);
+    if (!(eventName in mobileStickyCtaPathEvents)) continue;
+    mobileStickyCtaPathEvents[eventName] = toNum(row.metricValues?.[0]?.value);
   }
   const hostnameSessions = allHostRows.map((row) => ({
     hostName: row.dimensionValues?.[0]?.value || "(not set)",
@@ -332,7 +334,7 @@ async function main() {
   }
   if (mobileStickyCtaPathReport.error) {
     dataQualityAlerts.push(
-      `Mobile sticky CTA booking-path report could not run: ${mobileStickyCtaPathReport.error}`
+      `Mobile sticky CTA UTM-path report could not run: ${mobileStickyCtaPathReport.error}`
     );
   }
 
@@ -353,8 +355,8 @@ async function main() {
       keyEvents,
       organicKeyEvents,
       mobileStickyCta: {
-        bookingPathDimension: mobileStickyCtaPathReport.pathDimension,
-        bookingPathEvents: mobileStickyCtaBookingEvents,
+        pathDimension: mobileStickyCtaPathReport.pathDimension,
+        pathEvents: mobileStickyCtaPathEvents,
       },
       dataQualityAlerts,
       hostnameSessions,
@@ -406,7 +408,7 @@ async function main() {
         [
           "Mobile sticky CTA clicks",
           formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
-          "Clicks from the compact mobile booking shortcut",
+          "Clicks from the compact mobile quote shortcut",
         ],
         ["Phone call clicks", formatInt(snapshot.ga4.keyEvents.phone_call_click), "Direct call intent from the site"],
         [
@@ -481,21 +483,29 @@ async function main() {
           formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
         ],
         [
+          "quote_form_start on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_start),
+        ],
+        [
           "booking_form_start on sticky CTA UTM path",
-          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_form_start),
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_form_start),
+        ],
+        [
+          "quote_submit_success on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_submit_success),
         ],
         [
           "booking_submit_success on sticky CTA UTM path",
-          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_submit_success),
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_success),
         ],
         [
           "booking_submit_pending on sticky CTA UTM path",
-          formatInt(snapshot.ga4.mobileStickyCta.bookingPathEvents.booking_submit_pending),
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_pending),
         ],
       ]
     ),
     "",
-    `- Booking path filter dimension: ${snapshot.ga4.mobileStickyCta.bookingPathDimension || "unavailable"}`,
+    `- Sticky CTA path filter dimension: ${snapshot.ga4.mobileStickyCta.pathDimension || "unavailable"}`,
     "",
     "## Hostname Coverage",
     "",

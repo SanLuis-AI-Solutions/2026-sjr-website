@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
@@ -53,6 +53,11 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [defaultShareImagePath],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

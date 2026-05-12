@@ -1,20 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 
 export function MobileStickyCta() {
   const pathname = usePathname() || "/";
+  const [isVisible, setIsVisible] = useState(false);
   const hideOnConversionPage = pathname === "/contact" || pathname === "/quote" || pathname === "/book";
   const quoteHref =
     "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut";
 
-  if (hideOnConversionPage) return null;
+  useEffect(() => {
+    const updateVisibility = () => {
+      const revealAfter = Math.min(720, window.innerHeight * 0.9);
+      setIsVisible(window.scrollY > revealAfter);
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, []);
+
+  if (hideOnConversionPage || !isVisible) return null;
 
   return (
     <div
       role="region"
-      aria-label="Mobile booking shortcut"
+      aria-label="Mobile quote shortcut"
       className="pointer-events-none fixed inset-x-0 bottom-0 z-[115] px-4 pb-[calc(env(safe-area-inset-bottom)+0.45rem)] md:hidden"
     >
       <div className="mx-auto flex justify-center">
