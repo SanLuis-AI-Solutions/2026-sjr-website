@@ -340,12 +340,9 @@ export default async function ContactPage({
             <h1 className="lcp-sans mt-2 max-w-2xl text-[1.75rem] font-semibold leading-[1.08] tracking-tight text-white md:mt-3 md:text-6xl">
               Talk to a local expert
             </h1>
-            <p className="lcp-sans mt-3 max-w-lg text-sm leading-6 text-stone-100/90 md:mt-5 md:text-[15px]">
-              <span className="md:hidden">Call, email, or send a quick note for the fastest next step.</span>
-              <span className="hidden md:inline">
-                Call, email, or send a quick note. We reply with the fastest next step and confirm
-                timing before work begins.
-              </span>
+            <p className="lcp-sans mt-5 hidden max-w-lg text-[15px] leading-6 text-stone-100/90 md:block">
+              Call, email, or send a quick note. We reply with the fastest next step and confirm
+              timing before work begins.
             </p>
 
             <ConversionQuickActions
