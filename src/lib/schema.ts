@@ -98,6 +98,14 @@ export function faqSchema() {
     mainEntity: [
       {
         "@type": "Question",
+        name: "Are you a jewelry store or a repair shop?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Susie's Jewelry Repair is a local jewelry repair shop in Pasadena focused on in-house repairs, watch batteries, ring sizing, stone setting, cleaning, and custom design guidance.",
+        },
+      },
+      {
+        "@type": "Question",
         name: "Do you repair jewelry in-house?",
         acceptedAnswer: {
           "@type": "Answer",

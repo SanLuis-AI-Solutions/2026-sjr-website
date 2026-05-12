@@ -284,6 +284,11 @@ export function HomeFaq() {
         <div className="mt-8 space-y-4">
           {[
             {
+              question: "Are you a jewelry store or a repair shop?",
+              answer:
+                "We are a local jewelry repair shop in Pasadena focused on in-house repairs, watch batteries, ring sizing, stone setting, cleaning, and custom design guidance.",
+            },
+            {
               question: "Do repairs stay in-house?",
               answer: "Yes. All repairs are handled on-site by our jeweler.",
             },

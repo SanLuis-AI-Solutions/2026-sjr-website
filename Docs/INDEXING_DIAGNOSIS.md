@@ -586,6 +586,30 @@ Result:
 - service links remain available for users and internal crawl paths
 - the homepage keeps one clear bottom sticky quote action without adding competing mobile CTAs
 
+## Homepage Quick-Win Query Alignment (2026-05-12)
+
+The latest `npm run google:seo-quick-wins` report shows the homepage remains the only aggregate quick-win page: `19` qualifying queries, `566` impressions, and rankings between positions `6` and `20`. The largest no-click query gaps include `jewelry store near me` and `jewelry store pasadena tx`.
+
+Implemented on 2026-05-12:
+
+1. Updated the homepage title to include `Jewelry Repair Shop Near Me` while staying within normal title length.
+2. Updated the meta description to describe Susie's as a local jewelry repair shop in Pasadena without implying broad retail inventory.
+3. Adjusted the hero support copy to reinforce the local repair-shop positioning.
+4. Added a visible homepage FAQ and matching FAQ schema for `Are you a jewelry store or a repair shop?`.
+
+Validation:
+
+```bash
+npm run lint
+npm test -- --grep "mobile home flow keeps conversion path uncluttered"
+npx playwright test --grep "mobile conversion: home CTA reaches quote form"
+```
+
+Interpretation:
+
+- this targets real Search Console demand without adding another homepage section
+- the change supports CTR/relevance for store-adjacent local queries while keeping the business promise focused on repair
+
 ## May 11 URL Inspection Recheck And Pearl-Service Deepening
 
 `npm run google:indexing-status` was rerun on 2026-05-11 against the unresolved manifest queue.

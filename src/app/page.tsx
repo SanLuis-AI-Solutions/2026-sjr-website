@@ -12,9 +12,9 @@ import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
 export const metadata = createPageMetadata({
   title:
-    "Jewelry Repair Near Me in Pasadena, TX | Expert Service",
+    "Jewelry Repair Shop Near Me in Pasadena, TX | Susie's",
   description:
-    "Need jewelry repair near me in Pasadena, TX? Get expert in-house ring sizing, watch repair, stone setting, cleaning, same-day service, and free quotes.",
+    "Visit Susie's Jewelry Repair, a local jewelry repair shop in Pasadena, TX for in-house ring sizing, watch repair, stone setting, cleaning, and fast quotes.",
   canonical: "/",
 });
 

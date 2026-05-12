@@ -57,7 +57,7 @@ export function Hero() {
           </h1>
 
           <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 max-w-[34rem] text-base leading-7 text-white/78 md:text-lg md:leading-8">
-            In-house jewelry and watch repair in Pasadena for pieces that deserve careful hands,
+            A local jewelry repair shop in Pasadena for pieces that deserve in-house care,
             clear quotes, and lasting workmanship.
           </p>
 
