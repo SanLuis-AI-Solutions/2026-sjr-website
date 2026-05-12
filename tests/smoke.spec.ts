@@ -696,6 +696,30 @@ test("trustworthy jeweler guide exposes repair-intake differentiation", async ({
   guard.assertNoErrors("trustworthy jeweler intake differentiation");
 });
 
+test("pearl timing guide exposes event-deadline intake differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/pearl-restringing-timing-guide", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The pearl-strand timing check we want before an event deadline/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/one close photo of the clasp and end knots/i)).toBeVisible();
+
+  await page.goto("/blog/how-much-does-pearl-restringing-cost-pasadena", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("link", { name: /Check Pearl Restringing Timing/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("pearl timing event-deadline differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";

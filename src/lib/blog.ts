@@ -566,6 +566,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "If your pearls matter to you, the safest move is not waiting for failure. Bring the strand in while it is still wearable enough to evaluate calmly, then let the quote and condition check tell you whether service should happen now.",
         ],
       },
+      {
+        heading: "The pearl-strand timing check we want before an event deadline",
+        body: [
+          "If the necklace is needed for a wedding, church service, anniversary, graduation, or trip, the intake question is not only 'can it be restrung?' It is whether the strand is still intact enough for a clean same-day path or whether clasp work, missing pearls, re-sorting, or heavy stretch will make rushing the job risky.",
+          "Before requesting a quote, check three areas: the first few knots beside the clasp, the widest visible gap between pearls, and whether the strand twists or hangs unevenly when clasped. Those details tell us more about timing than a general description like 'old pearls' or 'needs restringing.'",
+          "For a photo quote, send one full-length photo, one close photo of the clasp and end knots, and the date you need the strand back. That lets the first recommendation separate preventive restringing from repair-after-failure before you make plans around the necklace.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about pearl restringing timing",
     faqs: [
@@ -595,6 +603,11 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 8,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "custom-design-timeline-guide",
@@ -1392,6 +1405,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If the strand looks stretched, the clasp feels unreliable, or you need pricing before an event, start with pearl restringing details or send photos for a quote-first recommendation.",
     nextSteps: [
       { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
+      { label: "Check Pearl Restringing Timing", href: "/blog/pearl-restringing-timing-guide" },
       { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },

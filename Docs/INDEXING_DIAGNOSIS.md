@@ -761,3 +761,22 @@ Purpose:
 - increase independent page value for a stalled trust-intent blog URL
 - connect trust evaluation to concrete commercial repair paths
 - strengthen internal relevance between heirloom decision content and jeweler-selection content
+
+## Pearl Restringing Timing Event-Deadline Pass (2026-05-12)
+
+The unresolved manifest still includes `/blog/pearl-restringing-timing-guide` as `Discovered - currently not indexed` with only one referring URL. The page supports commercial pearl restringing intent because customers often search timing before a wedding, church service, anniversary, graduation, or trip.
+
+Implemented on 2026-05-12:
+
+1. Added an event-deadline timing section that separates clean preventive restringing from jobs slowed by clasp work, missing pearls, re-sorting, or heavy stretch.
+2. Added specific intake checks for clasp-end knots, visible pearl gaps, twisting, uneven drape, and required return date.
+3. Added quote-prep guidance for full-length photos, clasp/end-knot closeups, and event deadline context.
+4. Added discovery boosts for blog, service-hub, and geo-helpful-read surfaces.
+5. Added a direct contextual link from `/blog/how-much-does-pearl-restringing-cost-pasadena` to `/blog/pearl-restringing-timing-guide` with the anchor `Check Pearl Restringing Timing`.
+6. Added smoke coverage confirming both the timing-check content and the cost-guide link.
+
+Purpose:
+
+- increase independent page value for a stalled pearl-care blog URL
+- connect timing-intent searchers to pearl restringing quote paths
+- strengthen internal relevance between pearl pricing and pearl timing content
