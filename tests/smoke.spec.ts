@@ -897,6 +897,21 @@ test("service area: webster page exposes Bay Area intake differentiation", async
   guard.assertNoErrors("service area webster differentiation");
 });
 
+test("service area: clear lake page exposes moisture and stone-risk differentiation", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/clear-lake", { waitUntil: "networkidle" });
+
+  await expect(page.getByText(/NASA-area schedules, Bay Area Boulevard errands/i)).toBeVisible();
+  await expect(page.getByText(/water exposure, humidity, fog under the crystal/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Does my watch need a battery or deeper repair/i }))
+    .toBeVisible();
+
+  guard.assertNoErrors("service area clear lake differentiation");
+});
+
 test("mobile service detail: non-watch routes use a varied image set", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = ["/services/ring-sizing", "/services/necklace-repair"];

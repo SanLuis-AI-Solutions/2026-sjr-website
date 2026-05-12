@@ -468,32 +468,34 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     ],
     whyHeading: "Why Clear Lake customers use a Pasadena in-house jeweler",
     whyBody: [
-      "The value is not just proximity. It is being able to get a real recommendation on whether the piece needs a battery, a simple repair, structural reinforcement, or a redesign conversation.",
-      "That is especially useful for Clear Lake customers who are trying to solve a practical problem quickly, like a stopped watch, a ring that no longer fits, or a stone that feels exposed.",
+      "The value is not just proximity. It is being able to get a real recommendation on whether the piece needs a battery, a simple repair, structural reinforcement, or a redesign conversation before you build the trip around it.",
+      "That is especially useful for Clear Lake customers working around NASA-area schedules, Bay Area Boulevard errands, school pickup, or a weekend event near the water. A stopped watch, a ring that no longer fits, or a stone that feels exposed should be sorted by repair risk before the piece goes back into normal wear.",
       "Because the repair stays with one local team, the handoff is cleaner and the advice is easier to trust than a chain intake model.",
     ],
     commonRepairsHeading: "Common repairs from Clear Lake customers",
     commonRepairsBody: [
       "The most common requests from the Clear Lake area are watch battery replacement, ring sizing, prong repair, jewelry cleaning, and heirloom inspection. These are repairs where early action matters because small issues can become expensive losses.",
-      "A loose stone, tired clasp, bent prong, or dead watch may look minor at first. In many cases, a quick local inspection is what prevents a lost diamond, a broken chain, or a more expensive movement issue later.",
+      "A loose stone, tired clasp, bent prong, or dead watch may look minor at first. For Clear Lake watch requests, water exposure, humidity, fog under the crystal, and a weak crown matter because those symptoms can turn a battery request into a seal or movement concern.",
+      "For rings and daily-wear jewelry, the useful intake detail is whether the piece is catching on clothing, spinning more than usual, or showing one prong that looks flatter than the others. In many cases, a quick local inspection is what prevents a lost diamond, a broken chain, or a more expensive repair later.",
       "For sentimental pieces, Clear Lake customers also use the shop when they need help deciding between cleaning, structural repair, restoration, or redesign.",
     ],
     visitHeading: "Planning a repair visit from Clear Lake",
     visitBody: [
       "If you are coming from Clear Lake, start with a fast quote if you can share photos. That helps us tell you whether the issue is likely straightforward or whether the piece needs a deeper in-house assessment.",
+      "For watches, include whether the watch stopped after water, sweat, heat, or sitting unused. For rings, include a close photo of the prongs, side stones, or shank plus one wider photo of the full piece. Those details make the Pasadena visit more focused.",
       "When you arrive, we inspect the item, explain the safest next step, and confirm the likely timing and starting price before any work begins.",
       "That makes the trip more worthwhile, especially when you are trying to solve the repair without guessing which service category applies.",
     ],
     localScenarios: [
       {
-        title: "Stopped watch decision",
+        title: "Water or humidity watch decision",
         body:
-          "Helpful when you need to separate a routine battery issue from the kind of watch problem that deserves deeper diagnosis before more time passes.",
+          "Helpful when you need to separate a routine battery issue from a Clear Lake-area watch problem that may involve moisture, seals, or deeper diagnosis before more time passes.",
       },
       {
-        title: "Preventive stone check",
+        title: "Daily-wear stone check",
         body:
-          "Useful when a prong, clasp, or setting feels questionable and the priority is avoiding a more expensive loss later.",
+          "Useful when a prong, clasp, or setting feels questionable and the priority is avoiding a more expensive loss before the ring goes back into daily wear.",
       },
       {
         title: "Category clarification",
@@ -524,12 +526,16 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/where-to-get-watch-battery-replaced-pasadena",
       },
       {
-        label: "Where weak chains usually fail first",
-        href: "/blog/chain-repair-weak-points",
+        label: "Does my watch need a battery or deeper repair?",
+        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
       },
       {
-        label: "Professional cleaning vs home care",
-        href: "/blog/professional-cleaning-vs-home-care",
+        label: "Gold ring resizing cost and timing guide",
+        href: "/blog/cost-to-resize-gold-ring-pasadena",
+      },
+      {
+        label: "Where weak chains usually fail first",
+        href: "/blog/chain-repair-weak-points",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],

@@ -651,3 +651,21 @@ Purpose:
 - increase independent page value for a stalled geo URL
 - reduce thin-template risk across service-area pages
 - connect Webster traffic to commercial watch, ring, and stone-security paths
+
+## Clear Lake Service-Area Differentiation Pass (2026-05-11)
+
+The unresolved manifest still includes `/services/clear-lake` as `Discovered - currently not indexed` with only one referring URL. After the Webster pass, Clear Lake was the next geo page with clear commercial upside and copy that could be made less template-like.
+
+Implemented on 2026-05-11:
+
+1. Added Clear Lake-specific scheduling context around NASA-area schedules, Bay Area Boulevard errands, school pickup, and weekend timing.
+2. Expanded watch-intake guidance around water exposure, humidity, fog under the crystal, weak crowns, and seal or movement risk.
+3. Expanded ring and stone guidance around clothing catches, spinning rings, flattened prongs, and daily-wear risk.
+4. Updated helpful reads to include battery-vs-repair diagnosis and ring-sizing cost/timing alongside same-day battery and chain repair guides.
+5. Added smoke coverage confirming the Clear Lake page renders the moisture, local-context, and helpful-read changes.
+
+Purpose:
+
+- increase independent page value for another stalled geo URL
+- reduce duplication across service-area pages
+- connect Clear Lake searchers to commercial watch and ring repair paths
