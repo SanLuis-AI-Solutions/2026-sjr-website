@@ -8,6 +8,8 @@ npm run google:reconcile-90d
 npm run google:weekly-seo-health
 npm run google:seo-quick-wins
 npm run google:indexing-status
+npm run google:indexing-manifest
+npm run seo:internal-link-audit
 ```
 
 Automated option:
@@ -54,6 +56,7 @@ Automated option:
 - top landing pages reviewed
 - top landing pages do not show unexpected legacy URLs dominating
 - unresolved indexation queue reviewed with `npm run google:indexing-status`
+- unresolved pages have enough indexed-source internal links in `npm run seo:internal-link-audit`
 - URLs should move from `URL is unknown to Google` to `Discovered - currently not indexed` to indexed search visibility
 
 ## Commercial Intent

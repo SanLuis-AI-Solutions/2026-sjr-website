@@ -15,16 +15,16 @@ export function MobileStickyCta() {
     <div
       role="region"
       aria-label="Mobile booking shortcut"
-      className="fixed inset-x-0 bottom-0 z-[115] px-4 pb-[calc(env(safe-area-inset-bottom)+0.65rem)] md:hidden"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[115] px-4 pb-[calc(env(safe-area-inset-bottom)+0.45rem)] md:hidden"
     >
-      <div className="mx-auto max-w-sm">
+      <div className="mx-auto flex justify-center">
         <TrackedLink
           href={bookingHref}
           eventName="mobile_sticky_cta_click"
           eventParams={{ cta_target: "book", placement: "mobile_sticky_bar" }}
-          className="micro-interaction inline-flex min-h-12 w-full items-center justify-center rounded-full border border-brand-gold/35 bg-[#120d10]/94 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-gold shadow-[0_14px_34px_rgba(0,0,0,0.28)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#120d10]"
+          className="micro-interaction pointer-events-auto inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/35 bg-[#120d10]/94 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-gold shadow-[0_12px_28px_rgba(0,0,0,0.26)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#120d10]"
         >
-          Book a Repair Today
+          Book Repair Today
         </TrackedLink>
       </div>
     </div>

@@ -19,6 +19,7 @@
     "google:indexing-status": "node scripts/google/indexing-status.mjs",
     "google:service-impact-compare": "node scripts/google/service-impact-compare.mjs",
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
+    "seo:internal-link-audit": "node scripts/seo/internal-link-audit.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
     "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs",

@@ -82,6 +82,14 @@ jobs:
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
           "exit_code=$failed" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
+      - name: Run Internal Link Audit
+        id: internal_link_audit
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          npm run seo:internal-link-audit
+          "exit_code=$LASTEXITCODE" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
       - name: Upload Weekly Health Artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -96,6 +104,8 @@ jobs:
             .health/indexing-status-latest.json
             Docs/INDEXING_MANIFEST.md
             Docs/INDEXING_MANIFEST.json
+            .health/internal-link-audit-latest.md
+            .health/internal-link-audit-latest.json
             .health/kpi-weekly-snapshot-latest.md
             .health/kpi-weekly-snapshot-latest.json
             .health/ga4-gsc-reconciliation-90d-latest.md
@@ -112,10 +122,12 @@ jobs:
             const exitCode = Number('${{ steps.verify.outputs.exit_code }}' || '0');
             const seoStepRan = '${{ steps.google_config.outputs.available }}' === 'true';
             const seoExitCode = Number('${{ steps.seo_snapshots.outputs.exit_code }}' || '0');
+            const internalLinkExitCode = Number('${{ steps.internal_link_audit.outputs.exit_code }}' || '0');
             const weeklySeoPath = '.health/weekly-seo-health-latest.md';
             const quickWinsPath = 'Docs/SEO_QUICK_WINS.md';
             const indexingStatusPath = '.health/indexing-status-latest.md';
             const indexingManifestPath = 'Docs/INDEXING_MANIFEST.md';
+            const internalLinkAuditPath = '.health/internal-link-audit-latest.md';
             const kpiPath = '.health/kpi-weekly-snapshot-latest.md';
             const reconcilePath = '.health/ga4-gsc-reconciliation-90d-latest.md';
 
@@ -161,6 +173,10 @@ jobs:
                   `Indexing manifest missing: ${indexingManifestPath}\n\nSEO snapshot exit code: ${seoExitCode}`
                 )
               : 'Indexing manifest refresh was skipped because Google service-account secrets are not configured in GitHub Actions.';
+            const internalLinkAuditBody = readIfExists(
+              internalLinkAuditPath,
+              `Internal link audit missing: ${internalLinkAuditPath}\n\nInternal link audit exit code: ${internalLinkExitCode}`
+            );
             const reconcileBody = seoStepRan
               ? readIfExists(
                   reconcilePath,
@@ -169,12 +185,14 @@ jobs:
               : 'GA4 vs Search Console reconciliation was skipped because Google service-account secrets are not configured in GitHub Actions.';
 
             const seoStatus = !seoStepRan ? 'SKIPPED' : seoExitCode === 0 ? 'PASS' : 'FAIL';
+            const internalLinkStatus = internalLinkExitCode === 0 ? 'PASS' : 'FAIL';
             const workflowRunUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
 
             const body = [
               `Last run: ${new Date().toISOString()}`,
               `Verify status: ${exitCode === 0 ? 'PASS' : 'FAIL'}`,
               `SEO snapshot status: ${seoStatus}`,
+              `Internal link audit status: ${internalLinkStatus}`,
               `Workflow run: ${workflowRunUrl}`,
               '',
               '## Verify Report',
@@ -200,6 +218,10 @@ jobs:
               '## Indexing Manifest',
               '',
               indexingManifestBody,
+              '',
+              '## Internal Link Audit',
+              '',
+              internalLinkAuditBody,
               '',
               '## 90-Day Reconciliation',
               '',

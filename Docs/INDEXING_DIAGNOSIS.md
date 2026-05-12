@@ -899,3 +899,21 @@ Interpretation:
 - The Clear Lake improvement validates the crawl-path work: Google now sees sitemap and referring signals for the page that previously showed none.
 - The heirloom planning guide moving to indexed is the first confirmed indexing win from the unresolved queue.
 - The Pasadena and watch diagnostic regressions look like URL Inspection state volatility or processing lag, not production routing failures, but they stay in the immediate monitoring queue.
+
+## Internal Link Audit Baseline (2026-05-12)
+
+Added and ran `npm run seo:internal-link-audit` against the live production site after the post-site-map GSC recheck.
+
+Result:
+
+1. The audit checked 15 unresolved manifest targets against 28 live source pages.
+2. No unresolved target had fewer than 2 indexed-source links.
+3. `/services/pasadena` and `/blog/does-my-watch-need-battery-or-repair-pasadena` both have strong live internal-link coverage despite currently reporting `URL is unknown to Google` in the URL Inspection API.
+4. The output is written to `.health/internal-link-audit-latest.md` and `.health/internal-link-audit-latest.json`.
+5. The weekly health workflow now runs the internal-link audit and includes it in the weekly GitHub issue and uploaded artifacts.
+
+Interpretation:
+
+- The remaining unresolved pages are not blocked by missing internal links.
+- More blanket internal linking is unlikely to be the best next use of effort.
+- The next indexing pass should focus on GSC state movement, manual URL inspection/request indexing when authenticated browser access is available, and content-quality pruning only if pages stay stuck after Google processes the May 12 crawl-path and freshness changes.

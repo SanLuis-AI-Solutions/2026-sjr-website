@@ -13,7 +13,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         Skip to main content
       </a>
       <SiteHeader />
-      <main id="main-content" className="pb-20 pt-24 md:pb-0 md:pt-28">
+      <main id="main-content" className="pb-16 pt-24 md:pb-0 md:pt-28">
         {children}
       </main>
       <MobileStickyCta />
