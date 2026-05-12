@@ -23,6 +23,14 @@ const MOBILE_STICKY_CTA_BOOKING_EVENTS = [
   "booking_submit_success",
   "booking_submit_pending",
 ];
+const ORGANIC_LANDING_CONVERSION_EVENTS = [
+  "quote_form_start",
+  "booking_form_start",
+  "phone_call_click",
+  "quote_submit_success",
+  "booking_submit_success",
+  "booking_submit_pending",
+];
 
 function toNum(value) {
   const n = Number(value || 0);
@@ -126,6 +134,7 @@ async function main() {
     organicKeyEventRows,
     mobileStickyCtaPathReport,
     landingRows,
+    organicLandingConversionRows,
     allHostRows,
     organicHostRows,
   ] = await Promise.all([
@@ -222,6 +231,37 @@ async function main() {
       },
       orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
       limit: 10,
+    }),
+    runGaReport(analyticsData, targetPropertyId, {
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [{ name: "landingPagePlusQueryString" }, { name: "eventName" }],
+      metrics: [{ name: "eventCount" }],
+      dimensionFilter: {
+        andGroup: {
+          expressions: [
+            {
+              filter: {
+                fieldName: "hostName",
+                stringFilter: { matchType: "EXACT", value: PRODUCTION_HOST },
+              },
+            },
+            {
+              filter: {
+                fieldName: "sessionDefaultChannelGroup",
+                stringFilter: { matchType: "EXACT", value: "Organic Search" },
+              },
+            },
+            {
+              filter: {
+                fieldName: "eventName",
+                inListFilter: { values: ORGANIC_LANDING_CONVERSION_EVENTS },
+              },
+            },
+          ],
+        },
+      },
+      orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
+      limit: 20,
     }),
     runGaReport(analyticsData, targetPropertyId, {
       dateRanges: [{ startDate, endDate }],
@@ -322,6 +362,11 @@ async function main() {
       topLandingPages: landingRows.map((row) => ({
         page: row.dimensionValues?.[0]?.value || "(not set)",
         sessions: toNum(row.metricValues?.[0]?.value),
+      })),
+      organicLandingConversions: organicLandingConversionRows.map((row) => ({
+        landingPage: row.dimensionValues?.[0]?.value || "(not set)",
+        eventName: row.dimensionValues?.[1]?.value || "(not set)",
+        count: toNum(row.metricValues?.[0]?.value),
       })),
     },
   };
@@ -478,6 +523,19 @@ async function main() {
           snapshot.ga4.topLandingPages.map((row) => [row.page, formatInt(row.sessions)])
         )
       : "_No organic landing-page rows were returned._",
+    "",
+    "## Organic Conversions By Landing Page",
+    "",
+    snapshot.ga4.organicLandingConversions.length
+      ? table(
+          ["Landing Page", "Event", "Count"],
+          snapshot.ga4.organicLandingConversions.map((row) => [
+            row.landingPage,
+            row.eventName,
+            formatInt(row.count),
+          ])
+        )
+      : "_No organic conversion events were returned by landing page._",
     "",
   ].join("\n");
 

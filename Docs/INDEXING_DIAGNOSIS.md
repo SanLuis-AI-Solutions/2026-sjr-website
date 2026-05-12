@@ -969,3 +969,26 @@ Interpretation:
 
 - Organic traffic is not only producing visits; it produced a tracked quote start and successful quote outcome in the latest reporting window.
 - Future monitoring can now distinguish SEO traffic quality from total-site conversion activity.
+
+## Organic Landing-Page Conversion Attribution (2026-05-12)
+
+The weekly SEO health report now also joins Organic Search conversion events to `landingPagePlusQueryString`.
+
+Implemented on 2026-05-12:
+
+1. Added an Organic Search-only landing-page conversion query to `scripts/google/weekly-seo-health.mjs`.
+2. Added an `Organic Conversions By Landing Page` table to the generated weekly report.
+3. Scoped the table to high-intent events: quote starts, booking starts, phone clicks, quote successes, booking successes, and booking pending submissions.
+
+Latest result for 2026-05-05 to 2026-05-11:
+
+| Landing page | Event | Count |
+| --- | --- | --- |
+| `/` | `quote_form_start` | `1` |
+| `/` | `quote_submit_success` | `1` |
+
+Interpretation:
+
+- The homepage is currently the only organic landing page with tracked lead conversion in this window.
+- The stalled commercial blog and geo/service pages are still an indexing and visibility opportunity, not yet proven conversion pages.
+- Once those pages index, this report will show whether they produce qualified lead actions or only impressions/sessions.
