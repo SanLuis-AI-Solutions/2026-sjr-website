@@ -2,9 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const BASE_URL = "https://www.susiesjewelryrepair.com";
-const GENERATED_AT = "2026-05-08";
-
-const OBSERVED_ON = "2026-05-08";
+const BASE_OBSERVED_ON = "2026-05-08";
 
 const OBSERVED_STATUSES = {
   "/": { status: "indexed" },
@@ -62,6 +60,44 @@ const OBSERVED_STATUSES = {
   },
   "/services/pasadena": { status: "discovered-currently-not-indexed" },
 };
+
+function dateOnly(value) {
+  return value ? value.slice(0, 10) : null;
+}
+
+function toObservedStatus(coverageState) {
+  return {
+    "Discovered - currently not indexed": "discovered-currently-not-indexed",
+    "URL is unknown to Google": "unknown-to-google",
+    "Submitted and indexed": "indexed",
+    "Indexed, not submitted in sitemap": "indexed",
+  }[coverageState] || null;
+}
+
+function readLatestIndexingStatus() {
+  const latestPath = path.join(process.cwd(), ".health", "indexing-status-latest.json");
+
+  if (!fs.existsSync(latestPath)) {
+    return null;
+  }
+
+  const latest = JSON.parse(fs.readFileSync(latestPath, "utf8"));
+  const observedOn = dateOnly(latest.generatedAt);
+  const rows = new Map();
+
+  for (const row of latest.rows || []) {
+    const status = toObservedStatus(row.coverageState);
+    if (!status) continue;
+
+    rows.set(row.path, {
+      status,
+      observedOn,
+      note: `Latest authenticated URL Inspection API recheck run on ${observedOn}. Coverage: ${row.coverageState}. Sitemap sources: ${row.sitemapCount}. Referring URLs: ${row.referringUrlCount}.`,
+    });
+  }
+
+  return { generatedAt: observedOn, rows };
+}
 
 function readFile(relativePath) {
   return fs.readFileSync(path.join(process.cwd(), relativePath), "utf8");
@@ -154,22 +190,22 @@ function extractStaticRoutes() {
   );
 }
 
-function applyObservedState(route) {
-  const observed = OBSERVED_STATUSES[route.path];
+function applyObservedState(route, latestStatus) {
+  const observed = latestStatus?.rows.get(route.path) || OBSERVED_STATUSES[route.path];
   const status = observed?.status || "pending-gsc-inspection";
   const nextAction =
     status === "indexed" ? "monitor" : observed ? "request-indexing-and-recheck" : "inspect-and-request-indexing";
   const note =
     observed?.note ||
     (observed
-      ? `GSC URL Inspection API recheck run on ${OBSERVED_ON} after the 2026-04-21 indexing submission batch.`
+      ? `GSC URL Inspection API recheck run on ${BASE_OBSERVED_ON} after the 2026-04-21 indexing submission batch.`
       : "Canonical URL from codebase; inspect in GSC and request indexing if not already indexed.");
 
   return {
     ...route,
     url: `${BASE_URL}${route.path}`,
     observedStatus: status,
-    observedOn: observed ? OBSERVED_ON : null,
+    observedOn: observed?.observedOn || (observed ? BASE_OBSERVED_ON : null),
     nextAction,
     note,
   };
@@ -244,7 +280,7 @@ function buildMarkdown(manifest) {
     "",
     "## Immediate GSC Queue",
     "",
-    "These URLs should be prioritized for weighting or follow-up rechecks based on the May 8 URL Inspection API recheck.",
+    "These URLs should be prioritized for weighting or follow-up rechecks based on the latest URL Inspection API evidence.",
     "",
     "| URL | Category | Current Status | Next Action | Notes |",
     "| --- | --- | --- | --- | --- |",
@@ -301,17 +337,18 @@ function buildMarkdown(manifest) {
 }
 
 function main() {
+  const latestStatus = readLatestIndexingStatus();
   const routes = [
     ...extractStaticRoutes(),
     ...extractServiceDetails(),
     ...extractServiceAreas(),
     ...extractBlogPosts(),
   ]
-    .map(applyObservedState)
+    .map((route) => applyObservedState(route, latestStatus))
     .sort(sortRoutes);
 
   const manifest = {
-    generatedAt: GENERATED_AT,
+    generatedAt: latestStatus?.generatedAt || BASE_OBSERVED_ON,
     baseUrl: BASE_URL,
     sources: [
       "src/app/sitemap.ts",

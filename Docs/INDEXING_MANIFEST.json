@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-08",
+  "generatedAt": "2026-05-12",
   "baseUrl": "https://www.susiesjewelryrepair.com",
   "sources": [
     "src/app/sitemap.ts",
@@ -29,11 +29,15 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      15
+      14
     ],
     [
       "indexed",
       26
+    ],
+    [
+      "unknown-to-google",
+      1
     ]
   ],
   "routes": [
@@ -199,9 +203,9 @@
       "path": "/services/pearl-restringing",
       "url": "https://www.susiesjewelryrepair.com/services/pearl-restringing",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2."
     },
     {
       "category": "service-detail",
@@ -243,10 +247,10 @@
       "city": "Clear Lake",
       "path": "/services/clear-lake",
       "url": "https://www.susiesjewelryrepair.com/services/clear-lake",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedStatus": "unknown-to-google",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "service-area",
@@ -268,9 +272,9 @@
       "path": "/services/friendswood",
       "url": "https://www.susiesjewelryrepair.com/services/friendswood",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -280,9 +284,9 @@
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -292,9 +296,9 @@
       "path": "/services/pasadena",
       "url": "https://www.susiesjewelryrepair.com/services/pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -304,16 +308,16 @@
       "path": "/services/webster",
       "url": "https://www.susiesjewelryrepair.com/services/webster",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
       "slug": "can-a-severely-bent-ring-prong-be-fixed",
       "label": "Can a severely bent ring prong be fixed, or do I need a new setting?",
       "publishedAt": "2026-03-01",
-      "reviewedAt": "2026-03-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/can-a-severely-bent-ring-prong-be-fixed",
       "url": "https://www.susiesjewelryrepair.com/blog/can-a-severely-bent-ring-prong-be-fixed",
       "observedStatus": "indexed",
@@ -326,13 +330,13 @@
       "slug": "chain-repair-weak-points",
       "label": "Chain Repair 101: Necklace and Bracelet Weak Points",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/chain-repair-weak-points",
       "url": "https://www.susiesjewelryrepair.com/blog/chain-repair-weak-points",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -365,20 +369,20 @@
       "slug": "does-my-watch-need-battery-or-repair-pasadena",
       "label": "Does my watch need a battery replacement or full watch repair in Pasadena?",
       "publishedAt": "2026-04-01",
-      "reviewedAt": "2026-04-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Commercial blog sample still waiting on index selection."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
       "slug": "heirloom-jewelry-restoration-repair-or-redesign",
       "label": "Heirloom Jewelry Restoration: Should I Repair It or Redesign It?",
       "publishedAt": "2026-03-01",
-      "reviewedAt": "2026-03-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/heirloom-jewelry-restoration-repair-or-redesign",
       "url": "https://www.susiesjewelryrepair.com/blog/heirloom-jewelry-restoration-repair-or-redesign",
       "observedStatus": "indexed",
@@ -391,20 +395,20 @@
       "slug": "heirloom-restoration-planning-guide",
       "label": "Heirloom Restoration Planning: What to Bring and Ask",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/heirloom-restoration-planning-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/heirloom-restoration-planning-guide",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
       "slug": "how-much-does-pearl-restringing-cost-pasadena",
       "label": "How much does pearl restringing cost in Pasadena?",
       "publishedAt": "2026-04-01",
-      "reviewedAt": "2026-04-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/how-much-does-pearl-restringing-cost-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/how-much-does-pearl-restringing-cost-pasadena",
       "observedStatus": "indexed",
@@ -417,39 +421,39 @@
       "slug": "how-to-choose-a-jeweler",
       "label": "How to Choose a Trustworthy Jeweler",
       "publishedAt": "2026-02-17",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/how-to-choose-a-jeweler",
       "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
       "slug": "pearl-restringing-timing-guide",
       "label": "Pearl Restringing Timing: When to Restring and Why",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/pearl-restringing-timing-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/pearl-restringing-timing-guide",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
       "slug": "professional-cleaning-vs-home-care",
       "label": "Professional Jewelry Cleaning vs. At-Home Cleaning",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/professional-cleaning-vs-home-care",
       "url": "https://www.susiesjewelryrepair.com/blog/professional-cleaning-vs-home-care",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -469,26 +473,26 @@
       "slug": "safe-to-clean-vintage-diamond-ring-at-home",
       "label": "Is it safe to clean my vintage diamond ring with household products?",
       "publishedAt": "2026-03-01",
-      "reviewedAt": "2026-03-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/safe-to-clean-vintage-diamond-ring-at-home",
       "url": "https://www.susiesjewelryrepair.com/blog/safe-to-clean-vintage-diamond-ring-at-home",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2."
     },
     {
       "category": "blog",
       "slug": "stone-security-checklist",
       "label": "Stone Security Checklist: Preventing Loose Diamonds",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/stone-security-checklist",
       "url": "https://www.susiesjewelryrepair.com/blog/stone-security-checklist",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -508,13 +512,13 @@
       "slug": "where-to-get-watch-battery-replaced-pasadena",
       "label": "Where to get a watch battery replaced today near Deer Park / Pasadena?",
       "publishedAt": "2026-03-01",
-      "reviewedAt": "2026-03-01",
+      "reviewedAt": "2026-05-12",
       "path": "/blog/where-to-get-watch-battery-replaced-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/where-to-get-watch-battery-replaced-pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-08",
+      "observedOn": "2026-05-12",
       "nextAction": "request-indexing-and-recheck",
-      "note": "GSC URL Inspection API recheck run on 2026-05-08 after the 2026-04-21 indexing submission batch."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-12. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     }
   ]
 }
