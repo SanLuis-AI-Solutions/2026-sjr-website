@@ -780,3 +780,23 @@ Purpose:
 - increase independent page value for a stalled pearl-care blog URL
 - connect timing-intent searchers to pearl restringing quote paths
 - strengthen internal relevance between pearl pricing and pearl timing content
+
+## Cleaning And Vintage Ring Risk-Differentiation Pass (2026-05-12)
+
+The unresolved manifest still includes `/blog/professional-cleaning-vs-home-care` and `/blog/safe-to-clean-vintage-diamond-ring-at-home` as `Discovered - currently not indexed` with only one referring URL each. These pages support jewelry cleaning, stone-security, and heirloom restoration intent, but needed clearer separation between general cleaning decisions and vintage household-product risk.
+
+Implemented on 2026-05-12:
+
+1. Added a cleaning-intake section to `/blog/professional-cleaning-vs-home-care` that distinguishes routine cleaning from structural inspection, stone-security review, and preservation-sensitive polishing.
+2. Added quote-prep guidance for close photos, full-piece photos, vintage/inherited status, recent sizing, and clothing catches.
+3. Added a contextual link from the professional cleaning guide to `/blog/safe-to-clean-vintage-diamond-ring-at-home` with the anchor `Check Vintage Ring Cleaning Risk`.
+4. Added a vintage-ring red-flag section to `/blog/safe-to-clean-vintage-diamond-ring-at-home` covering blackened seams, clicking stones, flat prongs, thin shanks, missing side stones, previous solder work, and residue-trapping filigree.
+5. Added direct links from the vintage cleaning guide to `/blog/professional-cleaning-vs-home-care` and `/blog/stone-security-checklist`.
+6. Added discovery boosts for both stalled cleaning URLs across blog, service-hub, and geo-helpful-read surfaces.
+7. Added smoke coverage confirming the differentiated content and cross-links.
+
+Purpose:
+
+- increase independent page value for two stalled cleaning-intent blog URLs
+- reduce overlap by making one page the general cleaning decision guide and the other the vintage-ring risk guide
+- strengthen internal relevance between cleaning, heirloom restoration, and stone-security quote paths

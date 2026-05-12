@@ -755,6 +755,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "The safest next step is to choose based on the piece itself, not on a one-size-fits-all cleaning rule.",
         ],
       },
+      {
+        heading: "The cleaning-intake check we want before polishing anything sentimental",
+        body: [
+          "Before a sentimental piece is cleaned or polished, the first question should be whether the jewelry is structurally safe enough to handle normally. We want to know if the ring has a loose stone, a bent prong, a thin shank, old solder, a worn clasp, pearl or opal accents, or finish details the customer wants preserved.",
+          "That intake changes the cleaning path. A sturdy modern ring may only need a professional clean and polish. A vintage diamond ring with worn prongs may need stone-security review before shine. An heirloom with hand engraving or patina may need a lighter preservation approach instead of aggressive polishing.",
+          "For a quote-first recommendation, send one close photo of the worn or dirty area, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about home cleaning versus professional cleaning",
     faqs: [
@@ -780,11 +788,17 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "Check Vintage Ring Cleaning Risk", href: "/blog/safe-to-clean-vintage-diamond-ring-at-home" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 8,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "heirloom-restoration-planning-guide",
@@ -1215,6 +1229,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "If the ring has sentimental value, the safer strategy is usually to clean it less aggressively at home and use professional cleaning as part of a regular inspection routine."
         ]
       },
+      {
+        heading: "The vintage-ring red flags we want checked before any stronger cleaner",
+        body: [
+          "Do not escalate beyond mild soap if the ring has blackened seams, a stone that clicks, prongs that feel flat on top, a thin lower shank, missing side stones, previous solder work, or filigree that traps residue. Those details can turn cleaning pressure into a repair problem.",
+          "A vintage diamond can tolerate more than the mounting around it. The diamond may be durable, but old gold, solder joints, accent stones, and under-gallery details may not be ready for ultrasonic vibration, steam, ammonia, or abrasive scrubbing.",
+          "For a quote-first check, send a top photo, a side photo of the prongs, and a note about whether the ring is inherited, worn daily, recently resized, or already snagging. That gives the jeweler enough context to recommend cleaning, stone-security inspection, or heirloom restoration before damage gets worse.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about cleaning vintage rings safely",
     faqs: [
@@ -1239,12 +1261,19 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you are not fully confident in the ring's condition, start with professional cleaning or an heirloom-focused inspection before trying a stronger home-cleaning routine.",
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "Compare Professional vs Home Cleaning", href: "/blog/professional-cleaning-vs-home-care" },
+      { label: "Run the Stone Security Checklist", href: "/blog/stone-security-checklist" },
       { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
       { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Get Fast Quote", href: "/quote" },
     ],
-    relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"]
+    relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"],
+    discoveryBoosts: {
+      blogFeatured: 7,
+      serviceHub: 8,
+      geoHelpfulReads: 8,
+    },
   },
   {
     slug: "heirloom-jewelry-restoration-repair-or-redesign",

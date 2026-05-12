@@ -720,6 +720,40 @@ test("pearl timing guide exposes event-deadline intake differentiation", async (
   guard.assertNoErrors("pearl timing event-deadline differentiation");
 });
 
+test("cleaning guides expose inspection-risk differentiation", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/professional-cleaning-vs-home-care", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The cleaning-intake check we want before polishing anything sentimental/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/one close photo of the worn or dirty area/i)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Check Vintage Ring Cleaning Risk/i }),
+  ).toBeVisible();
+
+  await page.goto("/blog/safe-to-clean-vintage-diamond-ring-at-home", {
+    waitUntil: "networkidle",
+  });
+  await expect(
+    page.getByRole("heading", {
+      name: /The vintage-ring red flags we want checked before any stronger cleaner/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/A vintage diamond can tolerate more than the mounting around it/i))
+    .toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Compare Professional vs Home Cleaning/i }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("cleaning guide inspection-risk differentiation");
+});
+
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {
   await page.goto("/sitemap.xml", { waitUntil: "networkidle" });
   const bodyText = (await page.textContent("body")) || "";
