@@ -23,6 +23,7 @@ export function MobileStickyCta() {
           data-mobile-sticky-cta="quote"
           eventName="mobile_sticky_cta_click"
           eventParams={{ cta_target: "quote", placement: "mobile_sticky_bar" }}
+          aria-label="Get Fast Quote from mobile shortcut"
           className="micro-interaction pointer-events-auto inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/35 bg-[#120d10]/94 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-gold shadow-[0_12px_28px_rgba(0,0,0,0.26)] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#120d10]"
         >
           Get Fast Quote

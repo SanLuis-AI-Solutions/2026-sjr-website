@@ -1067,7 +1067,8 @@ Implemented on 2026-05-12:
 1. Changed the mobile sticky shortcut from `Book Repair Today` to `Get Fast Quote`.
 2. Pointed the shortcut to `/quote` with `utm_campaign=quote_shortcut`.
 3. Kept a single compact mobile button and continued hiding it on quote, book, and contact pages.
-4. Updated smoke coverage for the new destination, tracking payload, and attribution fields.
+4. Added a distinct accessible label for the sticky shortcut so it does not conflict with primary page-level `Get Fast Quote` links.
+5. Updated smoke coverage for the new destination, tracking payload, and attribution fields.
 
 Interpretation:
 

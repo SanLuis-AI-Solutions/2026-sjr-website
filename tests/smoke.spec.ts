@@ -215,7 +215,9 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await expect(stickyShortcut).toBeVisible();
   await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
 
-  const fastQuote = stickyShortcut.getByRole("link", { name: /^Get Fast Quote$/i });
+  const fastQuote = stickyShortcut.getByRole("link", {
+    name: /^Get Fast Quote from mobile shortcut$/i,
+  });
   await expect(fastQuote).toBeVisible();
   await expect(fastQuote).toHaveAttribute(
     "href",
