@@ -1837,7 +1837,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <Suspense fallback={null}>
         <DeferredServiceSections>
-          <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -1880,7 +1880,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm">
+            <div className="reveal-on-scroll relative hidden overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm md:block">
               <div className="relative h-64">
                 <Image
                   src={heroSupportImage}
@@ -1929,7 +1929,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
             {processGallery.map((img, index) => {
               const delayClass = `reveal-delay-${(index % 3) + 1}`;
               return (
@@ -1964,7 +1964,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section data-service-section="what-to-expect" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="what-to-expect" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-12 md:py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -1981,7 +1981,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <article
                       key={block.title}
-                      className={`reveal-on-scroll ${delayClass} ${spanClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
+                      className={`reveal-on-scroll ${delayClass} ${spanClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
                     >
                       <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                         {block.eyebrow}
@@ -2005,7 +2005,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <div className="mt-10 hidden gap-5 md:grid md:grid-cols-2">
                 {expectImages.map((img) => (
                   <div
                     key={img.url}
@@ -2032,7 +2032,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="pricing-timing" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="pricing-timing" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2071,7 +2071,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
 
               <div
-                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-6 shadow-sm"
+                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-5 shadow-sm md:p-6"
                 data-testid="service-market-snapshot"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
@@ -2085,7 +2085,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
                   {marketSnapshot.summary}
                 </p>
-                <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-5 hidden gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
                   {marketSnapshot.scenarios.map((scenario) => (
                     <article
                       key={scenario.title}
@@ -2160,7 +2160,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="before-you-visit" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
+          <section data-service-section="before-you-visit" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-12 md:py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2171,7 +2171,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </h2>
 
               <div className="mt-10 grid gap-5 md:grid-cols-2">
-                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     What to bring
                   </div>
@@ -2186,7 +2186,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
 
                 <div
-                  className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm"
+                  className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-5 shadow-sm md:p-6"
                   data-testid="service-decision-module"
                 >
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
@@ -2224,7 +2224,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="why-customers-choose-us" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
+          <section data-service-section="why-customers-choose-us" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
@@ -2247,7 +2247,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <div
                       key={item.title}
-                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
                     >
                       <div className="font-serif text-xl text-stone-900">{item.title}</div>
                       <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
@@ -2256,8 +2256,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-12 grid gap-5 md:grid-cols-[1fr_1.2fr]">
-                <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-6 shadow-sm">
+              <div className="mt-8 grid gap-5 md:mt-12 md:grid-cols-[1fr_1.2fr]">
+                <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-5 shadow-sm md:p-6">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     Trust note
                   </div>
@@ -2275,7 +2275,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <div className="reveal-on-scroll reveal-delay-2 relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+                <div className="reveal-on-scroll reveal-delay-2 relative hidden overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm md:block">
                   <div className="relative h-56 md:h-full">
                     <Image
                       src={whyImageSrc}
@@ -2299,7 +2299,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     return (
                       <figure
                         key={`${item.quote}-${item.byline}`}
-                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm`}
+                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm ${
+                          index > 0 ? "hidden md:block" : ""
+                        }`}
                       >
                         <blockquote className="text-sm leading-7 text-stone-700">
                           &ldquo;{item.quote}&rdquo;
@@ -2434,7 +2436,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       ) : null}
 
-      <section data-service-section="faqs" className="cv-section bg-white py-16">
+      <section data-service-section="faqs" className="cv-section bg-white py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             FAQs
@@ -2465,7 +2467,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="related-services" className="cv-section bg-stone-100 py-16">
+      <section data-service-section="related-services" className="cv-section bg-stone-100 py-12 md:py-16">
         <div className="mx-auto max-w-6xl px-6">
           {helpfulReads.length > 0 ? (
             <div className="mb-10">
@@ -2487,18 +2489,22 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </Link>
               </div>
               <div className="mt-6 grid gap-4 md:grid-cols-3">
-                {helpfulReads.map((item) => (
+                {helpfulReads.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     prefetch={false}
-                    className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    className={`rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+                      index > 1 ? "hidden md:block" : ""
+                    }`}
                   >
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
                       Blog guide
                     </p>
                     <h3 className="mt-3 text-base font-semibold text-stone-900">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-stone-600">{item.excerpt}</p>
+                    <p className="mt-2 hidden text-sm leading-7 text-stone-600 md:block">
+                      {item.excerpt}
+                    </p>
                   </Link>
                 ))}
               </div>

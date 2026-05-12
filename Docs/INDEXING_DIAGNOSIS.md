@@ -1016,3 +1016,28 @@ Interpretation:
 
 - Mobile users now see the proven quote path, compact booking shortcut, service choices, local repair paths, and limited guide options without extra decorative sections competing for attention.
 - Crawlable commercial paths remain available through services, local repair paths, guide cards, site navigation, and `/site-map`.
+
+## Mobile Service-Detail Restraint Pass (2026-05-12)
+
+The service-detail pages carry a lot of SEO/AEO value, but on mobile the stack had become too heavy: hero, direct answer, process cards, support imagery, gallery cards, option cards, market pricing, intake checklist, trust cards, proof quotes, FAQs, guide links, related services, and final CTA.
+
+Implemented on 2026-05-12:
+
+1. Kept the core mobile decision flow: hero CTAs, direct answer, how it works, what to expect, pricing/timing, before-you-visit checklist, FAQs, guides, related services, and final CTA.
+2. Hid repeated support imagery and process/gallery images on mobile while preserving richer visuals on desktop.
+3. Collapsed mobile market detail by hiding scenario cards until desktop; the pricing section still keeps the summary, timing, and next action visible.
+4. Limited customer proof to one visible quote on mobile while keeping the full proof set on desktop.
+5. Limited lower-page guide cards to two visible items on mobile while keeping all guide links available on desktop.
+6. Added smoke coverage to prevent secondary service-detail content from becoming cluttered again on mobile.
+
+Validation:
+
+```bash
+npm test -- --grep "mobile service detail: secondary content stays restrained|mobile service detail: decision module and proof blocks render|mobile service detail: commercial pages expose direct answer blocks"
+npm run lint
+```
+
+Interpretation:
+
+- Service pages keep their crawlable and answer-oriented structure without forcing mobile users through every secondary proof/image block.
+- The mobile journey now better matches the commercial intent: identify the repair, understand next step, quote or book.

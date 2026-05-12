@@ -1553,6 +1553,33 @@ test("mobile service detail: decision module and proof blocks render", async ({ 
   guard.assertNoErrors("service decision/proof modules");
 });
 
+test("mobile service detail: secondary content stays restrained", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/watch-repair", { waitUntil: "networkidle" });
+
+  await expect(page.getByRole("heading", { level: 1, name: /Watch Repair/i })).toBeVisible();
+  await expect(page.locator('[data-service-section="how-it-works"] img').first()).toBeHidden();
+  await expect(page.locator('[data-service-section="what-to-expect"] img').first()).toBeHidden();
+  await expect(page.getByTestId("service-market-snapshot-item").first()).toBeHidden();
+
+  const proofCards = page.getByTestId("service-proof-blocks").locator("figure");
+  await expect(proofCards).toHaveCount(3);
+  await expect(proofCards.nth(0)).toBeVisible();
+  await expect(proofCards.nth(1)).toBeHidden();
+  await expect(proofCards.nth(2)).toBeHidden();
+
+  const guideLinks = page
+    .locator('[data-service-section="related-services"]')
+    .getByRole("link")
+    .filter({ hasText: /Blog guide/i });
+  await expect(guideLinks).toHaveCount(2);
+  await expect(guideLinks.nth(0)).toBeVisible();
+  await expect(guideLinks.nth(1)).toBeVisible();
+
+  guard.assertNoErrors("mobile service detail restrained secondary content");
+});
+
 test("mobile service detail: commercial pages expose direct answer blocks", async ({
   page,
 }) => {
