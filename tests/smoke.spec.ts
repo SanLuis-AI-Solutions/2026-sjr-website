@@ -591,6 +591,13 @@ test("commercial blog guides expose repair decision signals", async ({ page }) =
   await expect(
     page.getByRole("heading", { name: "Second hand jumps every few seconds", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /The intake details that separate battery service from repair/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/when the watch stopped, whether it was exposed to water/i))
+    .toBeVisible();
   await expect(page.getByText(/Best next action:/i).first()).toBeVisible();
 
   guard.assertNoErrors("commercial blog decision signals");
@@ -818,6 +825,7 @@ test("mobile blog detail: watch battery article links into deer park geo guidanc
   await expect(
     page.getByRole("link", { name: /Get Clear Lake Watch Repair Help/i })
   ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Decide Battery vs Repair/i })).toBeVisible();
 
   guard.assertNoErrors("blog detail watch battery geo link");
 });

@@ -1089,6 +1089,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If it is likely a battery issue, start with watch repair service details or request a quick quote before you drive over.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Decide Battery vs Repair", href: "/blog/does-my-watch-need-battery-or-repair-pasadena" },
       { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
       { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "Get Fast Quote", href: "/quote" },
@@ -1403,6 +1404,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "A useful assessment should tell you whether the watch is a clean battery candidate, whether the case and seal condition look stable, and whether there are signs that point toward deeper repair. That is the real value of bringing the piece to an in-house bench instead of treating every stopped watch like the same kiosk-level service.",
           "At Susie's, that means looking at the obvious symptoms and the context around them: how the watch stopped, whether moisture is visible, whether the crown and stem feel right, and whether the watch category suggests a simple swap or a more careful path. The goal is clarity before approval, not surprises after the back is opened.",
           "That conversation is also where we set timing honestly. Some watches are same-day battery work. Others need slower handling for the right reasons.",
+        ],
+      },
+      {
+        heading: "The intake details that separate battery service from repair",
+        body: [
+          "The most useful watch intake starts with four details: when the watch stopped, whether it was exposed to water or humidity, whether the second hand jumped before stopping, and whether the crown, stem, or date setting felt different before it died.",
+          "Those answers change the bench path. A clean quartz watch that stopped suddenly may be a straightforward battery service. A watch that fogged under the crystal, sat dead for months, or arrived with a loose crown should be treated as a diagnostic job first because moisture, leakage, or handling damage can look like a dead battery from the outside.",
+          "If you request a quote, include the brand, whether the back is screw-down or snap-back if you know, and a clear photo of the case and crown side. That gives the team a better first read before the watch is opened and helps avoid quoting a battery-only job when the symptoms point to repair.",
         ],
       },
       {

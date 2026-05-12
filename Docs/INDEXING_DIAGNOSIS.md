@@ -616,3 +616,20 @@ Purpose:
 - make the guide more specific than a generic weak-chain overview
 - reinforce commercial repair intent for necklace and bracelet service paths
 - give Google clearer page-level uniqueness before the next unresolved-queue inspection
+
+## Watch Battery Diagnostic Intake Pass (2026-05-11)
+
+The unresolved manifest still includes `/blog/does-my-watch-need-battery-or-repair-pasadena` as `Discovered - currently not indexed`. The page is a commercial diagnostic guide that should support watch repair and quote intent, but it needs to stay clearly differentiated from the same-day battery replacement article.
+
+Implemented on 2026-05-11:
+
+1. Added a watch-intake section focused on the details that separate battery service from deeper repair: stop timing, water or humidity exposure, low-battery second-hand behavior, and crown/stem/date-setting symptoms.
+2. Added quote-prep guidance for brand, case-back type, and crown-side photos so the page gives more actionable pre-visit value.
+3. Added a direct contextual link from `/blog/where-to-get-watch-battery-replaced-pasadena` to the diagnostic article with the anchor `Decide Battery vs Repair`.
+4. Updated smoke coverage for both the diagnostic content and the same-day battery article link.
+
+Purpose:
+
+- reduce overlap between same-day battery intent and repair-diagnosis intent
+- strengthen the unresolved diagnostic article with practical intake evidence
+- increase relevant internal referring weight from a closely related watch battery guide
