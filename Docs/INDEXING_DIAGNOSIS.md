@@ -1341,3 +1341,27 @@ Interpretation:
 - The indexing issue is no longer discovery or internal-link scarcity for the unresolved commercial pages.
 - The next SEO remediation, if pages remain stuck after the next GSC run, should be targeted quality differentiation or consolidation, not more sitewide link weight.
 - The conversion response should stay restraint-first: reduce mobile decision friction while preserving crawlable content and desktop booking paths.
+
+## Service-Area H1 Differentiation Pass (2026-05-13)
+
+The unresolved service-area pages already have strong internal-link coverage and sitemap inclusion, so another link-weight pass would add noise. The remaining weakness is page-level distinctiveness: the service-area H1 pattern was effectively the same for each city, with only the city name swapped.
+
+Implemented:
+
+1. Added optional `heroHeading` copy to the service-area content model.
+2. Replaced the repeated `Jewelry repair near {city}, handled in-house` H1 fallback with city-specific H1s.
+3. Kept the change inside the existing hero instead of adding another mobile section.
+4. Preserved the quote-first mobile CTA hierarchy already applied to service-area pages.
+
+Examples:
+
+- Pasadena: same-day decisions and sentimental pieces.
+- La Porte: coastal watches, workwear, and heirlooms.
+- Webster: watch, ring, and before-you-drive triage.
+- Friendswood: heirlooms and engagement-ring confidence.
+- Clear Lake: watch moisture, ring fit, and stone-risk questions.
+
+Interpretation:
+
+- This improves local page uniqueness and AEO extraction without increasing mobile clutter.
+- If these pages remain `Discovered - currently not indexed` after the next full URL Inspection pass, the next step should be deeper first-party proof or consolidation analysis, not more templated local copy.

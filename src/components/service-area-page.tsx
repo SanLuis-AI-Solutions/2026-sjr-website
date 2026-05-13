@@ -104,7 +104,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
               Service area
             </p>
             <h1 className="lcp-heading mt-4 font-serif text-5xl leading-[1.05] text-stone-900 md:text-6xl">
-              Jewelry repair near {page.city}, handled in-house.
+              {page.heroHeading ?? `Jewelry repair near ${page.city}, handled in-house.`}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-stone-700 md:text-lg">
               {page.intro}

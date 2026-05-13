@@ -5,6 +5,7 @@ export type ServiceAreaPage = {
   title: string;
   description: string;
   cardDescription: string;
+  heroHeading?: string;
   heroImage: string;
   heroAlt: string;
   intro: string;
@@ -48,6 +49,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Looking for jewelry repair in Pasadena, TX? Work directly with our in-house workshop for ring sizing, watch batteries, prong repair, chain repair, heirloom restoration, and clear quote-first service.",
     cardDescription:
       "Start here for Pasadena jewelry repair, watch service, heirloom work, and quote-first guidance from the local in-house workshop.",
+    heroHeading: "Jewelry repair near Pasadena for same-day decisions and sentimental pieces.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "Susie's Jewelry Repair storefront in Pasadena, Texas",
     intro:
@@ -171,6 +173,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Need jewelry, watch, or heirloom repair near Deer Park? Work with our in-house Pasadena workshop for ring sizing, stone security, watch batteries, cleanings, and clear quote-first service.",
     cardDescription:
       "Start with local guidance for ring sizing, watch batteries, prong repair, and quote-first service from our Pasadena workshop.",
+    heroHeading: "Jewelry repair near Deer Park for fast quote-first service.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "Susie's Jewelry Repair storefront near Deer Park and Pasadena clients",
     intro:
@@ -242,6 +245,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Looking for jewelry or watch repair near La Porte? Visit our Pasadena in-house workshop for ring sizing, watch batteries, heirloom restoration, cleanings, and custom guidance with clear approvals.",
     cardDescription:
       "Get the fastest path for watch service, heirloom restoration, and quote-first repair planning before making the trip.",
+    heroHeading: "Jewelry repair near La Porte for coastal watches, workwear, and heirlooms.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "In-house watch and jewelry repair service for La Porte clients",
     intro:
@@ -334,6 +338,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Need jewelry or watch repair near Webster? Work with our Pasadena in-house workshop for ring sizing, watch batteries, prong repair, cleanings, and heirloom restoration with clear approvals.",
     cardDescription:
       "Use this route if you are coming from Webster for watch service, ring sizing, or quote-first repair planning.",
+    heroHeading: "Jewelry repair near Webster for watch, ring, and before-you-drive triage.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "Watch and jewelry repair guidance for Webster clients",
     intro:
@@ -425,6 +430,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Looking for jewelry repair near Friendswood? Visit our Pasadena in-house workshop for ring sizing, prong repair, heirloom restoration, jewelry cleaning, and custom guidance with clear approvals.",
     cardDescription:
       "Friendswood customers can start here for heirloom repair, ring work, and safer quote-first guidance before visiting the shop.",
+    heroHeading: "Jewelry repair near Friendswood for heirlooms and engagement-ring confidence.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "In-house jewelry repair guidance for Friendswood clients",
     intro:
@@ -518,6 +524,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       "Need jewelry or watch repair near Clear Lake? Our Pasadena in-house workshop handles ring sizing, watch batteries, prong repair, jewelry cleaning, and heirloom restoration with clear quote-first guidance.",
     cardDescription:
       "Clear Lake customers can start here for nearby watch repair, ring work, and quote-first service from the Pasadena workshop.",
+    heroHeading: "Jewelry repair near Clear Lake for watch moisture, ring fit, and stone-risk questions.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "Jewelry and watch repair guidance for Clear Lake clients",
     intro:

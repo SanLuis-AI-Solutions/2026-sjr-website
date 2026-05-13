@@ -1148,27 +1148,27 @@ test("mobile service-area pages: nearby city pages render local guidance and her
   const routes = [
     {
       path: "/services/deer-park",
-      heading: /Jewelry repair near Deer Park, handled in-house/i,
+      heading: /Jewelry repair near Deer Park for fast quote-first service/i,
       serviceLink: /Jewelry repair near Deer Park/i,
     },
     {
       path: "/services/la-porte",
-      heading: /Jewelry repair near La Porte, handled in-house/i,
+      heading: /Jewelry repair near La Porte for coastal watches/i,
       serviceLink: /Jewelry repair near La Porte/i,
     },
     {
       path: "/services/webster",
-      heading: /Jewelry repair near Webster, handled in-house/i,
+      heading: /Jewelry repair near Webster for watch, ring, and before-you-drive triage/i,
       serviceLink: /Jewelry repair near Webster/i,
     },
     {
       path: "/services/friendswood",
-      heading: /Jewelry repair near Friendswood, handled in-house/i,
+      heading: /Jewelry repair near Friendswood for heirlooms and engagement-ring confidence/i,
       serviceLink: /Jewelry repair near Friendswood/i,
     },
     {
       path: "/services/clear-lake",
-      heading: /Jewelry repair near Clear Lake, handled in-house/i,
+      heading: /Jewelry repair near Clear Lake for watch moisture/i,
       serviceLink: /Jewelry repair near Clear Lake/i,
     },
   ];
