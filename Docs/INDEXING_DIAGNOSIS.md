@@ -1281,3 +1281,22 @@ Interpretation:
 
 - This reduces mobile form friction without removing useful optional lead data.
 - The next GA4 checkpoint should compare sticky CTA clicks against `quote_form_start` and `quote_submit_success` again before making larger quote-page layout changes.
+
+## Professional Cleaning Intent Refresh (2026-05-13)
+
+The 2026-05-13 URL Inspection recheck showed `/blog/professional-cleaning-vs-home-care` regressing from `Discovered - currently not indexed` to `URL is unknown to Google`, even though live checks showed the URL returns `200`, has a self-canonical, is in the sitemap, and receives strong indexed-source internal links.
+
+Implemented:
+
+1. Retitled the guide from the broader `Professional Jewelry Cleaning vs. At-Home Cleaning` angle to `Home Jewelry Cleaning: When to Stop and Get an Inspection`.
+2. Added a direct-answer section that defines when home cleaning is safe and when inspection should come first.
+3. Added more specific stop-cleaning cues: stone clicking, prong catching, thin shank, old solder, unreliable clasp, pearls/opals, inherited pieces, and unknown repair history.
+4. Expanded the quote-first photo guidance to request a full-piece photo, a close worn/dirty-area photo, and a side photo showing prong height, clasp condition, or setting profile.
+5. Added a FAQ for cleaning/inspection quote photos.
+6. Updated the article `reviewedAt` to `2026-05-13` so the sitemap emits a fresh lastmod for this watch-list page.
+
+Interpretation:
+
+- This is a content-intent and AEO specificity refresh, not another link-weight pass.
+- The internal-link audit already shows `/blog/professional-cleaning-vs-home-care` has broad source coverage, so more sitewide links are unlikely to be the highest-value next fix.
+- If the page remains unknown after the next GSC inspection, the next move should be either deeper first-party proof from the shop or consolidation with the indexed vintage-cleaning guide, not more generic cleaning copy.

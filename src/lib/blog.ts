@@ -739,22 +739,30 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "professional-cleaning-vs-home-care",
-    title: "Professional Jewelry Cleaning vs. At-Home Cleaning",
+    title: "Home Jewelry Cleaning: When to Stop and Get an Inspection",
     excerpt:
-      "When gentle home cleaning is enough, when a piece should be professionally cleaned instead, and how to avoid accidental damage to stones, settings, and vintage jewelry.",
+      "How to tell when mild home cleaning is safe, when to stop before damage, and what photos help Susie's separate cleaning from stone-security or heirloom repair risk.",
     image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
     topics: ["Cleaning & Polish", "Preventive Care"],
     publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-05-13",
     readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
-      "Home cleaning works best for sturdy jewelry and only with mild, low-risk methods.",
-      "Professional cleaning is about structure and safety, not just making a piece look brighter.",
-      "Vintage jewelry, fragile settings, and white gold often benefit from in-house care instead of stronger home methods.",
+      "Home cleaning is only the right first step when the jewelry is sturdy, modern, and free from movement, snagging, or visible wear.",
+      "Stop home cleaning before using stronger products if a stone clicks, a prong catches, the clasp feels unreliable, or the piece is inherited.",
+      "A professional cleaning visit should answer the safety question first: is this piece cleanable as-is, or does it need repair before shine?",
     ],
     sections: [
+      {
+        heading: "Direct answer: clean only if the structure is boring",
+        body: [
+          "Home cleaning is reasonable when the jewelry has a simple structure, secure stones, no snagging, no visible thinning, and no sentimental or vintage risk. In that case, mild soap, lukewarm water, and a soft brush are usually enough between professional visits.",
+          "Stop and request an inspection first if anything about the piece is not boring: a stone shifts or clicks, a prong catches fabric, the shank looks thin, the clasp opens too easily, old solder is visible, pearls or opals are present, or the piece is inherited and you do not know its repair history.",
+          "That is the decision we want Pasadena-area customers to make before polishing. The question is not simply whether the jewelry is dirty. It is whether cleaning pressure could turn an existing weak point into a repair problem.",
+        ],
+      },
       {
         heading: "When home cleaning is enough",
         body: [
@@ -768,7 +776,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "The biggest problems usually come from harsh products or from cleaning a piece that already has a structural issue. Bleach, strong ammonia, abrasive compounds, and aggressive scrubbing can all create damage that customers do not notice until prongs weaken, finishes dull, or older metal starts showing stress.",
           "Vintage and heirloom pieces deserve extra caution because they often have thinner prongs, older solder seams, and more fragile details than modern jewelry. The wrong cleaner or too much force can turn a piece that only needed safe cleaning into a restoration problem.",
-          "If a ring already has a loose-feeling stone, an open-looking prong, or delicate gallery work, stop trying to clean it at home until it is inspected. Shine is never more important than security.",
+          "If a ring already has a loose-feeling stone, an open-looking prong, a thin lower shank, old solder, or delicate gallery work, stop trying to clean it at home until it is inspected. Shine is never more important than security.",
         ],
       },
       {
@@ -800,7 +808,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "Before a sentimental piece is cleaned or polished, the first question should be whether the jewelry is structurally safe enough to handle normally. We want to know if the ring has a loose stone, a bent prong, a thin shank, old solder, a worn clasp, pearl or opal accents, or finish details the customer wants preserved.",
           "That intake changes the cleaning path. A sturdy modern ring may only need a professional clean and polish. A vintage diamond ring with worn prongs may need stone-security review before shine. An heirloom with hand engraving or patina may need a lighter preservation approach instead of aggressive polishing.",
-          "For a quote-first recommendation, send one close photo of the worn or dirty area, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
+          "For a quote-first recommendation, send one close photo of the worn or dirty area, one side photo that shows prong height or clasp condition, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, clicking, loose, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
         ],
       },
     ],
@@ -814,12 +822,17 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         question: "When should I stop cleaning jewelry at home and bring it in?",
         answer:
-          "Bring it in if the piece is vintage, has a loose-feeling stone, delicate details, or a finish issue that home care will not solve safely.",
+          "Bring it in before stronger cleaning if the piece is vintage, inherited, has a loose-feeling stone, catches on fabric, shows old solder, or has pearl, opal, or delicate detail work.",
       },
       {
         question: "Does professional cleaning include more than polishing?",
         answer:
           "Yes. Professional cleaning also gives the jeweler a chance to inspect settings, seams, and wear so small structural issues can be caught before they become bigger repairs.",
+      },
+      {
+        question: "What photos help with a cleaning or inspection quote?",
+        answer:
+          "Send one full-piece photo, one close photo of the dirty or worn area, and one side photo that shows prong height, clasp condition, or the setting profile.",
       },
     ],
     nextStepsHeading: "Best next step if the piece matters too much to guess",

@@ -833,15 +833,31 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
 
   await expect(
     page.getByRole("heading", {
+      level: 1,
+      name: /Home Jewelry Cleaning: When to Stop and Get an Inspection/i,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /Direct answer: clean only if the structure is boring/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/a stone shifts or clicks/i)).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
       name: /The cleaning-intake check we want before polishing anything sentimental/i,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/one close photo of the worn or dirty area/i)).toBeVisible();
+  await expect(page.getByText(/one side photo that shows prong height or clasp condition/i))
+    .toBeVisible();
   await expect(
     page.getByRole("heading", {
       name: "The piece is vintage, inherited, or stone-heavy",
       exact: true,
     }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/What photos help with a cleaning or inspection quote/i),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /Check Vintage Ring Cleaning Risk/i }),
