@@ -181,15 +181,14 @@ export default async function QuotePage({
               action="/api/quote"
               method="post"
               encType="multipart/form-data"
-              className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
+              className="reveal-on-scroll scroll-mt-24 rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm md:p-6"
             >
-            <div className="mb-5 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
+            <div className="mb-4 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
                 Takes about 60 seconds
               </p>
               <p className="mt-2 leading-6">
-                Send your name, email, and one sentence about the repair. Photos are optional,
-                but close-ups usually help us give a better starting range.
+                Name, email, and one sentence are enough. Photos are optional, but close-ups help us quote faster.
               </p>
             </div>
             <input

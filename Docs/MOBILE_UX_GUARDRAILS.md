@@ -29,6 +29,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 
 ## Forms
 
+- Mobile conversion pages should show one primary form jump before the form. Keep secondary quote/book/contact choices for desktop or navigation, not as equal mobile buttons above the form.
 - Required fields should come before optional fields.
 - Optional phone/photos/details should not block the first meaningful form start.
 - Touch targets should stay at least 44px tall.

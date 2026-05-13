@@ -294,11 +294,11 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   guard.assertNoErrors("mobile sticky shortcut");
 });
 
-test("mobile conversion pages: quote and book quick actions are clear", async ({ page }) => {
+test("mobile conversion pages keep quick actions focused on one primary path", async ({ page }) => {
   const guard = attachConsoleGuards(page);
   const routes = [
-    { path: "/quote", heading: /Get a transparent starting/i, altAction: /^Book Repair$/i },
-    { path: "/book", heading: /Reserve a free 15/i, altAction: /^Get Fast Quote$/i },
+    { path: "/quote", heading: /Get a transparent starting/i, primary: /^Start Quote$/i, altAction: /^Book Repair$/i },
+    { path: "/book", heading: /Reserve a free 15/i, primary: /^Start Booking$/i, altAction: /^Get Fast Quote$/i },
   ];
 
   for (const route of routes) {
@@ -308,13 +308,14 @@ test("mobile conversion pages: quote and book quick actions are clear", async ({
     const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
     await expect(quickActions).toBeVisible();
 
+    const primary = quickActions.getByRole("link", { name: route.primary });
     const contact = quickActions.getByRole("link", { name: /^Contact Us$/i });
     const alt = quickActions.getByRole("link", { name: route.altAction });
-    await expect(contact).toBeVisible();
-    await expect(alt).toBeVisible();
+    await expect(primary).toBeVisible();
+    await expect(contact).toBeHidden();
+    await expect(alt).toBeHidden();
 
-    await expectTapTarget(contact, `Contact tap target on ${route.path}`);
-    await expectTapTarget(alt, `Secondary tap target on ${route.path}`);
+    await expectTapTarget(primary, `Primary tap target on ${route.path}`);
   }
 
   guard.assertNoErrors("quote/book quick actions");

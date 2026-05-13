@@ -82,24 +82,24 @@ export function ConversionQuickActions({
     if (tone === "dark") {
       if (variant === "primary_focus") {
         return secondaryTone === "default"
-          ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
-          : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
+          ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
+          : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
       }
 
       return secondaryTone === "default"
-        ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
-        : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
+        ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
+        : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
     }
 
     if (variant === "primary_focus") {
       return secondaryTone === "default"
-        ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 ${baseFocus}`
-        : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 ${baseFocus}`;
+        ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 md:inline-flex ${baseFocus}`
+        : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 md:inline-flex ${baseFocus}`;
     }
 
     return secondaryTone === "default"
-      ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 ${baseFocus}`
-      : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 ${baseFocus}`;
+      ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 md:inline-flex ${baseFocus}`
+      : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 md:inline-flex ${baseFocus}`;
   };
 
   const onTrack = (target: string) => {
