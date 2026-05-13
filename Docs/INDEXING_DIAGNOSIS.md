@@ -1184,6 +1184,8 @@ Implemented on 2026-05-13:
 3. Kept the mobile homepage restrained because the expanded list is not rendered as another above-the-fold grid.
 4. Added smoke coverage so the footer continues exposing the newly weighted guide links.
 
-Next verification:
+Post-deploy verification:
 
-- After deployment, rerun `npm run seo:internal-link-audit` against production and confirm these four URLs moved from partial indexed-source coverage toward the sitewide priority set.
+- Reran `npm run seo:internal-link-audit` against production on 2026-05-13.
+- All four weak-coverage stalled guides now show `28` all-source links and `27` indexed-source links.
+- Production homepage HTML also contains the new footer links for `/blog/how-to-choose-a-jeweler`, `/blog/professional-cleaning-vs-home-care`, and `/blog/safe-to-clean-vintage-diamond-ring-at-home`.
