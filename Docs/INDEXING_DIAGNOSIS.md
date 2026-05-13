@@ -1489,3 +1489,23 @@ Interpretation:
 
 - This is a targeted quality-differentiation response for the only stalled service-detail page.
 - If the page remains discovered-but-not-indexed after the next crawl window, the next step should be real repair photo/case proof or consolidation analysis, not broader sitewide links.
+
+## Clear Lake Repair Triage Differentiation (2026-05-13)
+
+Current evidence:
+
+- `/services/clear-lake` remains `Discovered - currently not indexed`.
+- Live routing, canonical, sitemap inclusion, and internal-link coverage are healthy.
+- Internal-link audit shows broad indexed-source coverage, so more footer/sitewide links would add noise rather than solve the likely quality-selection issue.
+
+Implemented:
+
+1. Added a compact `Local repair triage` module to the existing Clear Lake service-area flow.
+2. Focused the module on Clear Lake-specific situations: watch moisture/fog/sweat exposure, daily-wear stone or stress-point risk, and inherited-piece preservation decisions.
+3. Kept the change inside the existing service-area page structure with no new CTA, no new mobile link hub, and no extra above-fold content.
+4. Added smoke coverage for the new Clear Lake triage copy.
+
+Interpretation:
+
+- This is a targeted quality-differentiation response for a stalled local commercial page.
+- If `/services/clear-lake` remains discovered-but-not-indexed after another crawl window, the next move should be real shop proof assets or consolidation analysis, not more templated city copy or broader link expansion.

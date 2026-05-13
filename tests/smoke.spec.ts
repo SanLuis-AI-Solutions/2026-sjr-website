@@ -1461,6 +1461,13 @@ test("service area: clear lake page exposes moisture and stone-risk differentiat
 
   await expect(page.getByText(/NASA-area schedules, Bay Area Boulevard errands/i)).toBeVisible();
   await expect(page.getByText(/water exposure, humidity, fog under the crystal/i)).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /How Clear Lake customers can triage the repair before making the trip/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/Watch stopped after boating, humidity, sweat/i)).toBeVisible();
+  await expect(page.getByText(/Preservation-first condition review/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Does my watch need a battery or deeper repair/i }))
     .toBeVisible();
 

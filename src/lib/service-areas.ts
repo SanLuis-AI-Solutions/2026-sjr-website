@@ -596,6 +596,31 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Best when the issue is real but not obvious yet and you want the Pasadena visit to start with the right service path.",
       },
     ],
+    repairPathGuide: {
+      heading: "How Clear Lake customers can triage the repair before making the trip",
+      intro:
+        "Clear Lake repair questions often start with uncertainty: is the watch only dead, is the ring still safe to wear, or is the piece too sentimental for a quick cosmetic answer? These details help us sort the first recommendation before you drive over.",
+      items: [
+        {
+          situation: "Watch stopped after boating, humidity, sweat, or fog under the crystal",
+          likelyPath: "Battery plus moisture and seal review",
+          nextStep:
+            "Send a dial photo, case-back photo, and crown-side photo, and mention any water, steam, sweat, or fog history before assuming it is battery-only.",
+        },
+        {
+          situation: "Ring, prong, clasp, or chain feels questionable during daily wear",
+          likelyPath: "Stone-security or stress-point inspection",
+          nextStep:
+            "Include one close photo of the worn area and one full-piece photo so we can tell whether the piece looks safe to wear or needs bench attention first.",
+        },
+        {
+          situation: "Inherited or older piece needs cleaning, repair, or redesign direction",
+          likelyPath: "Preservation-first condition review",
+          nextStep:
+            "Tell us what should stay original before polishing, resetting, soldering, or redesign options are discussed.",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Do you serve Clear Lake customers even though the shop is in Pasadena?",
