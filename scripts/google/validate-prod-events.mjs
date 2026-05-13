@@ -399,7 +399,7 @@ async function main() {
         await pause(500);
         const cta = page
           .getByRole("region", { name: /^Mobile quote shortcut$/i })
-          .getByRole("link", { name: /^Get Fast Quote from mobile shortcut$/i });
+          .getByRole("link", { name: /^Start Quote from mobile shortcut$/i });
         await cta.waitFor({ state: "visible", timeout: 8000 });
         await clickTrackedTarget(cta);
       },

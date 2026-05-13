@@ -350,6 +350,22 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue(
     "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
   );
+  await page.locator("#quote-form input[name='name']").focus();
+  const formStartEvents = await page.evaluate(() =>
+    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
+  );
+  expect(
+    formStartEvents.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "quote_form_start" &&
+        params.page_path === "/quote" &&
+        params.page_path_with_query ===
+          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut" &&
+        params.page_location ===
+          "http://127.0.0.1:3000/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
+    ),
+  ).toBe(true);
 
   guard.assertNoErrors("mobile sticky shortcut");
 });

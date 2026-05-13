@@ -231,3 +231,32 @@ Measurement expectation: compare the next 7-day sticky path funnel for `mobile_s
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.
+
+## Sticky Quote Measurement Integrity Pass (2026-05-13)
+
+Friction observed: the weekly report showed `3` mobile sticky CTA clicks but `0` quote starts on the sticky UTM path.
+
+Finding:
+
+- The sticky shortcut destination and attribution fields preserved `utm_source=mobile_sticky_cta`.
+- The smoke test verified the sticky click event and hidden attribution fields, but did not verify the follow-up `quote_form_start` event on the UTM landing path.
+- The production event validator still targeted the previous accessible label, `Get Fast Quote from mobile shortcut`, even though the live shortcut now uses `Start Quote from mobile shortcut`.
+
+Implemented:
+
+1. Added query-aware context to lead-form analytics events: `page_path_with_query` and `page_location`.
+2. Kept the clean `page_path` value so existing reports and event names do not break.
+3. Extended the mobile sticky CTA smoke test to click the shortcut, focus the quote name field, and verify `quote_form_start` carries the sticky UTM path.
+4. Updated the production event validator to target the current `Start Quote from mobile shortcut` accessible label.
+
+Validation:
+
+- `npm run lint`
+- `npm run build`
+- `npx playwright test tests/smoke.spec.ts -g "mobile sticky CTA uses one compact quote action" --workers=1`
+- `npm run google:validate-prod-events`
+
+Measurement expectation:
+
+- The next 7-day GA4 checkpoint should be more reliable for the sticky funnel: `mobile_sticky_cta_click` -> `quote_form_start` on `utm_source=mobile_sticky_cta`.
+- Do not change sticky CTA copy or destination again until one clean measurement window confirms whether the issue is real behavior or previous attribution loss.

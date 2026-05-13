@@ -19,9 +19,11 @@ type LeadFormTrackerProps = {
 export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const searchKey = searchParams.toString();
   const sentKeysRef = useRef<Set<string>>(new Set());
   const finderContext = resolveServicesFinderLeadContext(searchParams);
   const finderAnalyticsParams = getServicesFinderAnalyticsParams(finderContext);
+  const pagePath = searchKey ? `${pathname || "/"}?${searchKey}` : pathname || "/";
 
   useEffect(() => {
     if (!hasError) return;
@@ -30,12 +32,13 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
 
     trackGaEvent("lead_form_error", {
       page_path: pathname || "/",
+      page_path_with_query: pagePath,
       form_id: formId,
       lead_type: leadType,
       ...finderAnalyticsParams,
     });
     sentKeysRef.current.add(key);
-  }, [finderAnalyticsParams, formId, hasError, leadType, pathname]);
+  }, [finderAnalyticsParams, formId, hasError, leadType, pagePath, pathname]);
 
   useEffect(() => {
     const form = document.getElementById(formId) as HTMLFormElement | null;
@@ -49,6 +52,9 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       started = true;
       const sharedParams = {
         page_path: pathname || "/",
+        page_path_with_query: pagePath,
+        page_location:
+          typeof window !== "undefined" ? `${window.location.origin}${pagePath}` : pagePath,
         form_id: formId,
         lead_type: leadType,
         source,
@@ -70,6 +76,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
 
       trackGaEvent("lead_form_step", {
         page_path: pathname || "/",
+        page_path_with_query: pagePath,
         form_id: formId,
         lead_type: leadType,
         field_name: fieldName,
@@ -84,6 +91,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
     const onSubmit = () => {
       trackGaEvent("lead_form_submit_attempt", {
         page_path: pathname || "/",
+        page_path_with_query: pagePath,
         form_id: formId,
         lead_type: leadType,
         ...finderAnalyticsParams,
@@ -99,7 +107,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       form.removeEventListener("input", onInput);
       form.removeEventListener("submit", onSubmit);
     };
-  }, [finderAnalyticsParams, formId, leadType, pathname]);
+  }, [finderAnalyticsParams, formId, leadType, pagePath, pathname]);
 
   return null;
 }
