@@ -94,7 +94,7 @@ Decision rule:
 | `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
 | `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
 | `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |
-| `/blog/chain-repair-weak-points` | blog | Chain Repair 101: Necklace and Bracelet Weak Points | URL is unknown to Google |
+| `/blog/chain-repair-weak-points` | blog | Necklace & Bracelet Chain Repair: Weak Points to Check | URL is unknown to Google |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |
 | `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Indexed |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | Discovered - currently not indexed |

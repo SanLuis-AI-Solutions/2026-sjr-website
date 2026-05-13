@@ -689,12 +689,22 @@ test("chain repair guide exposes intake triage differentiation", async ({ page }
 
   await expect(
     page.getByRole("heading", {
+      name: /Necklace & Bracelet Chain Repair: Weak Points to Check/i,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
       name: /The chain intake triage we use before recommending a repair/i,
     }),
   ).toBeVisible();
   await expect(page.getByText(/failed at a jump ring, clasp, solder joint/i)).toBeVisible();
   await expect(page.getByText(/bring the pendant, charm, or bracelet exactly as you wear it/i))
     .toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /Can I get a necklace or bracelet chain repair quote from photos/i,
+    }),
+  ).toBeVisible();
 
   guard.assertNoErrors("chain repair intake triage");
 });

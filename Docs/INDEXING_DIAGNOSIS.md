@@ -1227,3 +1227,19 @@ Immediate recommendation:
 - Do not prune yet. The newest weighting/freshness changes are only beginning to show movement, and one previously stalled guide is now indexed.
 - Watch `/blog/chain-repair-weak-points` specifically. Since live accessibility and sitemap inclusion are healthy, a repeated unknown state should be treated as an index-priority/content-quality signal rather than a routing blocker.
 - Keep the unresolved queue under observation for the next checkpoint. If the same service-area pages and commercial guides remain unchanged after the next full inspection, move to a targeted quality/pruning pass instead of adding more sitewide link blocks.
+
+## Chain Repair Intent Refresh (2026-05-13)
+
+After the 2026-05-13 GSC follow-up, `/blog/chain-repair-weak-points` was the only commercial guide to return `URL is unknown to Google` despite healthy live accessibility, canonical markup, sitemap inclusion, and strong internal-link coverage.
+
+Implemented:
+
+1. Retitled the guide from the more generic `Chain Repair 101` framing to `Necklace & Bracelet Chain Repair: Weak Points to Check`.
+2. Rewrote the excerpt around necklace/bracelet repair quote intent and clasp/jump-ring diagnosis.
+3. Added a key takeaway and FAQ that explain exactly which photos help with a chain repair quote.
+4. Updated the guide `reviewedAt` date to 2026-05-13 so the sitemap emits a fresh lastmod for this specific watch-list page.
+
+Interpretation:
+
+- This is a content-intent and freshness pass, not another link-weight pass. The internal-link audit already shows `/blog/chain-repair-weak-points` has 29 source links, 28 indexed-source links, and a sitemap link.
+- If the page remains unknown after the next GSC inspection, the next move should be content consolidation or deeper first-party proof, not more sitewide footer links.

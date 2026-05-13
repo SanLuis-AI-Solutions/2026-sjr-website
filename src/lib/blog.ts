@@ -426,19 +426,20 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "chain-repair-weak-points",
-    title: "Chain Repair 101: Necklace and Bracelet Weak Points",
+    title: "Necklace & Bracelet Chain Repair: Weak Points to Check",
     excerpt:
-      "Where chains usually fail, how clasps and jump rings wear out, and what makes one repair last longer than a quick temporary fix.",
+      "How to spot necklace and bracelet chain weak points, what photos help with a repair quote, and when clasp or jump-ring work may be part of the fix.",
     image: "/images/blog/chain-repair-weak-points-cover.jpg",
     topics: ["Chain Repair", "Preventive Care"],
     publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-05-13",
     readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Jump rings, clasp connections, and thin chain segments are the most common weak points.",
       "A lasting repair depends on matching the chain style, the solder work, and the clasp condition instead of only closing the broken spot.",
+      "For a photo quote, send the break point, clasp, and any pendant or charm that adds daily pull.",
       "It is usually smarter to fix a weak chain before it fails again and risks losing the piece altogether.",
     ],
     sections: [
@@ -507,6 +508,11 @@ export const BLOG_POSTS: BlogPost[] = [
         question: "How long does chain repair usually take?",
         answer:
           "Most straightforward chain repairs follow our Same Day/Next Day pattern, but timing can stretch if the chain is delicate, needs an uncommon clasp, or requires broader reinforcement.",
+      },
+      {
+        question: "Can I get a necklace or bracelet chain repair quote from photos?",
+        answer:
+          "Yes. Send one close photo of the break, one photo of the clasp and jump ring area, and one full-piece photo showing any pendant or charm. Those details help separate a simple link repair from clasp replacement or reinforcement.",
       },
     ],
     nextStepsHeading: "Best next step if your chain already feels unreliable",
