@@ -51,6 +51,8 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Do not show `Get Fast Quote` and `Book Repair` as equal full-width mobile buttons in the same decision block.
 - Apply the same quote-first rule to service-area pages because they are local commercial landing pages, not appointment-confirmation pages.
 - Keep booking available in navigation, desktop/tablet layouts, and dedicated `/book` flows.
+- On the services hub, show the featured service and service finder before nearby city-link hubs. City links are important for local SEO, but they should not appear before the user can choose a repair path.
+- Avoid repeated “Request quote” language inside every service card. If pricing depends on inspection, use calmer decision copy such as `After inspection` and let the primary quote CTA carry the conversion action.
 - On service pages, hide secondary proof/media/market cards on mobile when they repeat the same decision already made by the hero and “what to expect” sections.
 - Keep long service-page H1s compact enough that they remain readable on mobile without becoming a dense hero block.
 - On article pages, keep related-reading blocks below the article answer and quote CTA; do not interrupt the answer with multiple outbound choices.

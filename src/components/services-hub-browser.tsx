@@ -422,7 +422,7 @@ export function ServicesHubBrowser({
                           <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
                             Starting at{" "}
                             <span className="font-semibold text-brand-burgundy">
-                              {service.startingAt ?? "Request quote"}
+                              {service.startingAt ?? "After inspection"}
                             </span>
                           </span>
                           <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">

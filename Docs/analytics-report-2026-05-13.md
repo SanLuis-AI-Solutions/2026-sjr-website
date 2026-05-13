@@ -268,3 +268,11 @@ Friction observed: SEO/GEO/AEO link hubs are useful for crawlability, but if the
 Change made: moved the homepage local repair paths and commercial guide hub below the primary `Start Today` CTA. The links remain crawlable and available, but mobile users now move through the simpler path first: hero -> proof -> services -> process -> trust -> FAQ -> quote CTA -> deeper local/guide links.
 
 Guardrail added: the mobile smoke test now fails if the homepage SEO link hubs move back above the primary homepage CTA.
+
+## Mobile Services Hub Flow Pass (2026-05-13)
+
+Friction observed: the mobile `/services` page placed nearby city-link cards before the featured service and service finder. That helped crawlability, but it forced users through local SEO cards before they could choose the actual repair they needed.
+
+Change made: moved the nearby service-area hub below the featured service and service finder. Also changed repeated service-card pricing fallback copy from `Request quote` to `After inspection`, so the page does not repeat quote language inside every card while the primary quote CTA remains clear.
+
+Guardrail added: the mobile services smoke test now fails if city-link hubs move back above the featured service or service finder, or if `Starting at Request quote` returns in the service cards.

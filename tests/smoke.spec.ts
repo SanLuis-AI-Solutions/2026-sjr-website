@@ -1626,6 +1626,36 @@ test("services hub: intent finder narrows results and resets cleanly", async ({ 
   guard.assertNoErrors("services hub intent finder");
 });
 
+test("mobile services hub keeps city links below service selection", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services", { waitUntil: "networkidle" });
+
+  const featured = page.locator("section").filter({
+    has: page.getByRole("heading", { name: /Watch Repair & Battery Replacement/i }),
+  }).first();
+  const finder = page.getByTestId("services-finder-region");
+  const nearbyAreas = page.locator("section").filter({
+    has: page.getByRole("heading", { name: /Repair guidance for nearby cities/i }),
+  }).first();
+
+  await expect(featured.getByRole("link", { name: /^View details$/i })).toBeVisible();
+  await expect(finder.getByRole("heading", { name: /What do you need fixed/i })).toBeVisible();
+  await expect(nearbyAreas.getByRole("link", { name: /Jewelry repair near Pasadena/i })).toBeVisible();
+  await expect(page.getByText(/Starting at Request quote/i)).toHaveCount(0);
+  await expect(page.getByText(/Starting at After inspection/i).first()).toBeVisible();
+
+  const [featuredTop, finderTop, nearbyTop] = await Promise.all([
+    featured.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+    finder.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+    nearbyAreas.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+  ]);
+  expect(featuredTop, "Featured service should come before city-link hub").toBeLessThan(nearbyTop);
+  expect(finderTop, "Service finder should come before city-link hub").toBeLessThan(nearbyTop);
+
+  guard.assertNoErrors("mobile services hub city link order");
+});
+
 test("services hub: finder quote CTA carries context into quote form", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
