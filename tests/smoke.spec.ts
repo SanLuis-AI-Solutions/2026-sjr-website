@@ -1735,10 +1735,6 @@ test("service area: pasadena page ships local schema and nearby city links", asy
   await expect(
     page.getByRole("heading", { level: 1, name: /Jewelry repair near Pasadena/i }),
   ).toBeVisible();
-  await expect(page.getByText(/Nearby cities we also serve/i)).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: /Jewelry repair near Deer Park/i }),
-  ).toBeVisible();
   await expect(page.getByText(/Best starting points for Pasadena/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: /Fairmont Parkway repair stop/i })).toBeVisible();
   await expect(page.getByText(/safe for normal wear today/i)).toBeVisible();
@@ -1748,8 +1744,21 @@ test("service area: pasadena page ships local schema and nearby city links", asy
   ).toBeVisible();
   await expect(page.getByText(/Battery-first assessment/i)).toBeVisible();
   await expect(page.getByText(/Restoration-first conversation/i)).toBeVisible();
+
+  const helpfulReads = page.locator("[data-mobile-sidebar-section]", { hasText: /Helpful repair guides/i });
+  await expect(helpfulReads.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
+    .toBeHidden();
+  await helpfulReads.locator("summary").click();
   await expect(page.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
     .toBeVisible();
+
+  const nearbyCities = page.locator("[data-mobile-sidebar-section]", { hasText: /Nearby cities/i });
+  await expect(nearbyCities.getByRole("link", { name: /Jewelry repair near Deer Park/i }))
+    .toBeHidden();
+  await nearbyCities.locator("summary").click();
+  await expect(
+    page.getByRole("link", { name: /Jewelry repair near Deer Park/i }),
+  ).toBeVisible();
 
   const schemaScripts = await page.locator('script[type="application/ld+json"]').allTextContents();
   expect(

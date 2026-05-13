@@ -280,77 +280,109 @@ export function ServiceAreaLandingPage({ page }: Props) {
             </section>
           </div>
 
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                Popular with {page.city} customers
-              </p>
-              <p className="mt-3 text-sm leading-7 text-stone-700">
-                These are the repair categories and quote-first topics we most often point {page.city} customers to before they make the drive to Pasadena.
-              </p>
-              <div className="mt-4 space-y-2">
-                {highlightedServices.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
+          <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start lg:space-y-6">
+            <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
+              <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
+                <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
+                  Popular repair paths
+                  <span className="text-brand-burgundy" aria-hidden="true">+</span>
+                </summary>
+                <div className="pt-4 lg:pt-0">
+                  <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
+                    Popular with {page.city} customers
+                  </p>
+                  <p className="text-sm leading-7 text-stone-700 lg:mt-3">
+                    These are the repair categories and quote-first topics we most often point {page.city} customers to before they make the drive to Pasadena.
+                  </p>
+                  <div className="mt-4 space-y-2">
+                    {highlightedServices.map((service) => (
+                      <Link
+                        key={service.slug}
+                        href={`/services/${service.slug}`}
+                        className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </details>
             </section>
 
             {helpfulReads.length ? (
-              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Helpful reads
-                </p>
-                <div className="mt-4 space-y-2">
-                  {helpfulReads.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
+                <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
+                  <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
+                    Helpful repair guides
+                    <span className="text-brand-burgundy" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="pt-4 lg:pt-0">
+                    <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
+                      Helpful reads
+                    </p>
+                    <div className="space-y-2 lg:mt-4">
+                      {helpfulReads.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </details>
               </section>
             ) : null}
 
             {nearbyAreas.length ? (
-              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Nearby cities we also serve
-                </p>
-                <div className="mt-4 space-y-2">
-                  {nearbyAreas.map((area) => (
-                    <Link
-                      key={area.slug}
-                      href={`/services/${area.slug}`}
-                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    >
-                      Jewelry repair near {area.city}
-                    </Link>
-                  ))}
-                </div>
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
+                <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
+                  <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
+                    Nearby cities
+                    <span className="text-brand-burgundy" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="pt-4 lg:pt-0">
+                    <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
+                      Nearby cities we also serve
+                    </p>
+                    <div className="space-y-2 lg:mt-4">
+                      {nearbyAreas.map((area) => (
+                        <Link
+                          key={area.slug}
+                          href={`/services/${area.slug}`}
+                          className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                        >
+                          Jewelry repair near {area.city}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </details>
               </section>
             ) : null}
 
-            <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                Quick answers
-              </p>
-              <div className="mt-4 space-y-4">
-                {page.faqs.map((faq) => (
-                  <div key={faq.question} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                    <h2 className="text-sm font-semibold text-stone-900">{faq.question}</h2>
-                    <p className="mt-2 text-sm leading-7 text-stone-700">{faq.answer}</p>
+            <section className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm lg:p-6">
+              <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
+                <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
+                  Quick answers
+                  <span className="text-brand-burgundy" aria-hidden="true">+</span>
+                </summary>
+                <div className="pt-4 lg:pt-0">
+                  <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
+                    Quick answers
+                  </p>
+                  <div className="space-y-4 lg:mt-4">
+                    {page.faqs.map((faq) => (
+                      <div key={faq.question} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                        <h2 className="text-sm font-semibold text-stone-900">{faq.question}</h2>
+                        <p className="mt-2 text-sm leading-7 text-stone-700">{faq.answer}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              </details>
             </section>
           </aside>
         </div>

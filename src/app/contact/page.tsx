@@ -16,9 +16,9 @@ export const metadata = createPageMetadata({
   canonical: "/contact",
 });
 
-async function DeferredContactSection() {
+function ContactSection() {
   return (
-    <section className="cv-section relative overflow-hidden bg-stone-100 py-14 md:py-18">
+    <section className="cv-section relative overflow-hidden bg-stone-100 py-10 md:py-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.2),_transparent_44%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.11),_transparent_46%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
@@ -35,7 +35,7 @@ async function DeferredContactSection() {
           </p>
         </div>
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="space-y-4 reveal-on-scroll">
+          <div className="order-2 space-y-4 reveal-on-scroll lg:order-1">
             <section className="relative overflow-hidden rounded-[2rem] border border-brand-burgundy/20 bg-brand-burgundy p-6 text-white shadow-[0_20px_55px_rgba(30,20,22,0.3)]">
               <div className="absolute right-[-5rem] top-[-3rem] h-40 w-40 rounded-full bg-brand-gold/20 blur-2xl" />
               <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
@@ -104,7 +104,7 @@ async function DeferredContactSection() {
             id="contact-form"
             action="/api/contact"
             method="post"
-            className="reveal-on-scroll relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7"
+            className="order-1 relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7 lg:order-2"
           >
             <div className="absolute left-0 right-0 top-0 h-1.5 bg-gradient-to-r from-brand-burgundy via-brand-gold to-brand-burgundy" />
             <div className="mb-4">
@@ -114,12 +114,12 @@ async function DeferredContactSection() {
               <h2 className="mt-3 font-serif text-[1.9rem] leading-tight text-stone-900">
                 Send us a message
               </h2>
-              <p className="mt-2 text-[15px] leading-7 text-stone-600">
+              <p className="mt-2 hidden text-[15px] leading-7 text-stone-600 md:block">
                 Tell us what needs attention and your preferred reply method.
               </p>
             </div>
 
-            <div className="mb-5 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-600">
+            <div className="mb-5 hidden flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-600 md:flex">
               <span className="rounded-full border border-stone-300 px-3 py-1">Secure form</span>
               <span className="rounded-full border border-stone-300 px-3 py-1">Local team</span>
               <span className="rounded-full border border-stone-300 px-3 py-1">Fast response</span>
@@ -289,7 +289,7 @@ export default async function ContactPage({
       <section className="relative overflow-hidden bg-brand-burgundy-deep py-8 text-white md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)] md:block" />
-        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.22)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.28)_100%)]" />
+        <div className="absolute inset-0 hidden bg-[linear-gradient(110deg,rgba(30,20,22,0.22)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.28)_100%)] md:block" />
 
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div>
@@ -423,9 +423,7 @@ export default async function ContactPage({
         </div>
       </section>
 
-      <Suspense fallback={null}>
-        <DeferredContactSection />
-      </Suspense>
+      <ContactSection />
       <Suspense fallback={null}>
         <GaConversionTracker
           active={submitted}

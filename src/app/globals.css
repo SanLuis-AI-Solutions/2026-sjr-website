@@ -243,6 +243,12 @@ html.reveal-disabled .reveal-on-scroll {
   }
 }
 
+@media (min-width: 1024px) {
+  details.mobile-flow-disclosure:not([open]) > :not(summary) {
+    display: block;
+  }
+}
+
 @media (min-width: 768px) {
   .parallax-hero {
     background-attachment: fixed;

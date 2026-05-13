@@ -114,6 +114,44 @@ async function auditRoute(context, route) {
     findings.push("Footer crawl link groups are expanded by default on mobile.");
   }
 
+  const mobileDisclosures = await page.locator("[data-mobile-sidebar-section]").evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const details = node;
+      const summary = details.querySelector("summary");
+      const rect = summary?.getBoundingClientRect();
+      const style = summary ? window.getComputedStyle(summary) : null;
+      return {
+        open: details.hasAttribute("open"),
+        label: (summary?.textContent || "").trim().replace(/\s+/g, " "),
+        height: rect ? Math.round(rect.height) : 0,
+        visible:
+          Boolean(rect) &&
+          rect.width > 0 &&
+          rect.height > 0 &&
+          style?.display !== "none" &&
+          style?.visibility !== "hidden",
+      };
+    })
+  );
+
+  const openDisclosures = mobileDisclosures.filter((item) => item.visible && item.open);
+  if (openDisclosures.length > 0) {
+    findings.push(
+      `Mobile sidebar disclosures are expanded by default: ${openDisclosures
+        .map((item) => item.label)
+        .join(", ")}.`
+    );
+  }
+
+  const smallDisclosures = mobileDisclosures.filter((item) => item.visible && item.height > 0 && item.height < 44);
+  if (smallDisclosures.length > 0) {
+    findings.push(
+      `Mobile disclosure tap targets under 44px: ${smallDisclosures
+        .map((item) => `${item.label} (${item.height}px)`)
+        .join(", ")}.`
+    );
+  }
+
   await page.close();
 
   return {
