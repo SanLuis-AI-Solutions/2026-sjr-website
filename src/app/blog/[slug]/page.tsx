@@ -33,6 +33,10 @@ function formatPublishedDate(value: string) {
   }).format(date);
 }
 
+function isGenericConversionStep(href: string) {
+  return href === "/quote" || href === "/book";
+}
+
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
 }
@@ -71,6 +75,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
   ).slice(0, 3);
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
   const commercialGuides = getCommercialIntentRelatedPosts(post.slug, 2);
+  const contextualNextSteps = (post.nextSteps ?? []).filter(
+    (item) => !isGenericConversionStep(item.href)
+  );
   const breadcrumbItems = [
     { name: "Home", href: "/" },
     { name: "Blog", href: "/blog" },
@@ -353,7 +360,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   </section>
                 ) : null}
 
-                {post.nextSteps && post.nextSteps.length > 0 ? (
+                {contextualNextSteps.length > 0 ? (
                   <section className="rounded-3xl border border-brand-gold/40 bg-white p-6 shadow-[0_18px_48px_rgba(58,25,16,0.08)]">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                       Next step
@@ -365,7 +372,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                       <p className="mt-3 text-sm leading-7 text-stone-700">{post.nextStepsIntro}</p>
                     ) : null}
                     <div className="mt-5 flex flex-wrap gap-3">
-                      {post.nextSteps.map((item) => (
+                      {contextualNextSteps.map((item) => (
                         <TrackedLink
                           key={item.href}
                           href={item.href}
@@ -455,7 +462,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 <div className="mt-4 flex flex-wrap gap-3">
                   <Link
                     href="/quote"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    className="micro-interaction hidden items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
                   >
                     Get Fast Quote
                   </Link>

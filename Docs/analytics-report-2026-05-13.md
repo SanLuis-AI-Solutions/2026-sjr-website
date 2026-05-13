@@ -276,3 +276,11 @@ Friction observed: the mobile `/services` page placed nearby city-link cards bef
 Change made: moved the nearby service-area hub below the featured service and service finder. Also changed repeated service-card pricing fallback copy from `Request quote` to `After inspection`, so the page does not repeat quote language inside every card while the primary quote CTA remains clear.
 
 Guardrail added: the mobile services smoke test now fails if city-link hubs move back above the featured service or service finder, or if `Starting at Request quote` returns in the service cards.
+
+## Mobile Article CTA Restraint Pass (2026-05-13)
+
+Friction observed: commercial blog articles had a useful early quote CTA, but generic quote/book links also appeared again inside next-step chips and related-service sidebars. That made articles feel more conversion-heavy than answer-focused on mobile.
+
+Change made: article next-step chips now keep contextual service, geo, and related guide links while removing generic `/quote` and `/book` chips. The related-services quote button is hidden on mobile, leaving the early article quote CTA and final CTA band as the primary conversion routes.
+
+Guardrail added: the commercial article smoke test now fails if generic quote/book chips return inside contextual next-step sections.

@@ -56,6 +56,8 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - On service pages, hide secondary proof/media/market cards on mobile when they repeat the same decision already made by the hero and “what to expect” sections.
 - Keep long service-page H1s compact enough that they remain readable on mobile without becoming a dense hero block.
 - On article pages, keep related-reading blocks below the article answer and quote CTA; do not interrupt the answer with multiple outbound choices.
+- Article next-step chips should point to contextual service, geo, or related guide pages. Do not repeat generic `/quote` or `/book` chips there when the article already has an early quote CTA and final CTA band.
+- Hide secondary article/sidebar quote buttons on mobile when they repeat the same action already offered earlier in the article.
 
 ## Performance Baselines
 

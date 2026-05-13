@@ -1309,6 +1309,14 @@ test("mobile blog detail: commercial-intent article renders in-body faq and next
   await expect(
     page.getByRole("heading", { level: 2, name: /Best next step if your ring feels too loose or too tight/i })
   ).toBeVisible();
+  const nextStepSection = page.locator("section").filter({
+    has: page.getByRole("heading", {
+      level: 2,
+      name: /Best next step if your ring feels too loose or too tight/i,
+    }),
+  }).first();
+  await expect(nextStepSection.getByRole("link", { name: /^Get Fast Quote$/i })).toHaveCount(0);
+  await expect(nextStepSection.getByRole("link", { name: /^Book Repair$/i })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /See Ring Sizing Service/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Get Deer Park Repair Guidance/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /See Friendswood Ring Repair Guidance/i })).toBeVisible();
