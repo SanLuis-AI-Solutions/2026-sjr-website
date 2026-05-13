@@ -1240,6 +1240,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   const isWatchRepair = slug === "watch-repair";
   const isRingSizing = slug === "ring-sizing";
+  const hasLongMobileHeroHeading = isWatchRepair || isRingSizing;
   const isPearlRestringing = slug === "pearl-restringing";
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
@@ -1672,10 +1673,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               className="lcp-sans"
               style={{
                 marginTop: "0.65rem",
-                fontSize: "2.35rem",
+                fontSize: hasLongMobileHeroHeading ? "2.12rem" : "2.35rem",
                 fontWeight: 600,
                 letterSpacing: "-0.02em",
-                lineHeight: "2.35rem",
+                lineHeight: hasLongMobileHeroHeading ? "2.18rem" : "2.35rem",
                 color: "#1c1917",
               }}
             >
