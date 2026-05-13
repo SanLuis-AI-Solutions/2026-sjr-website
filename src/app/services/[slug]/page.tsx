@@ -1324,6 +1324,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
+  const isMobileHeroImageHidden = isWatchRepair || isRingSizing;
   const heroImageSizes =
     "(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc((100vw - 6rem) / 2), 528px";
   const mobileHeroImageSizes = isCustomDesign
@@ -1751,7 +1752,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
           <div
             className={`relative order-2 ${
-              isWatchRepair || isRingSizing || isCustomDesign ? "hidden md:block" : ""
+              isMobileHeroImageHidden || isCustomDesign ? "hidden md:block" : ""
             }`}
           >
             <div
@@ -1770,8 +1771,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <img
                   {...desktopHeroImageProps}
                   alt={`${service.name} at Susie's Jewelry Repair`}
-                  fetchPriority={isWatchRepair ? "low" : "high"}
-                  loading={isWatchRepair ? "lazy" : "eager"}
+                  fetchPriority={isMobileHeroImageHidden ? "low" : "high"}
+                  loading={isMobileHeroImageHidden ? "lazy" : "eager"}
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
