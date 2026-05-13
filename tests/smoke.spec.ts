@@ -602,7 +602,7 @@ test("analytics: contact business-action links emit generic lead events", async 
       ([type, eventName, params]: [string, string, Record<string, string>]) =>
         type === "event" &&
         eventName === "phone_call_click" &&
-        params.placement === "contact_direct_panel",
+        params.placement === "contact_hero",
     ),
   ).toBe(true);
   expect(
@@ -978,19 +978,17 @@ test("mobile contact page: direct actions remain clear", async ({ page }) => {
   await page.goto("/contact", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1, name: /Talk to a local expert/i })).toBeVisible();
 
-  const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
+  const quickActions = page.getByRole("region", { name: /^Contact actions$/i });
   await expect(quickActions).toBeVisible();
 
   const message = quickActions.getByRole("link", { name: /^Send Message$/i });
-  const quote = quickActions.getByRole("link", { name: /^Get Fast Quote$/i });
-  const book = quickActions.getByRole("link", { name: /^Book Repair$/i });
+  const call = quickActions.getByRole("link", { name: /^Call Now$/i });
   await expect(message).toBeVisible();
-  await expect(quote).toBeVisible();
-  await expect(book).toBeVisible();
+  await expect(call).toBeVisible();
+  await expect(quickActions.getByRole("link")).toHaveCount(2);
 
   await expectTapTarget(message, "Message tap target on /contact");
-  await expectTapTarget(quote, "Quote tap target on /contact");
-  await expectTapTarget(book, "Book tap target on /contact");
+  await expectTapTarget(call, "Call tap target on /contact");
 
   guard.assertNoErrors("contact direct actions");
 });

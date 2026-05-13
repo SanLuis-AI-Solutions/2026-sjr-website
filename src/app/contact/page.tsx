@@ -2,7 +2,6 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
-import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
@@ -345,16 +344,22 @@ export default async function ContactPage({
               timing before work begins.
             </p>
 
-            <ConversionQuickActions
-              page="contact"
-              tone="dark"
-              className="mt-5 flex flex-wrap gap-3 md:mt-7"
-              primary={{ href: "#contact-form", label: "Send Message" }}
-              secondary={[
-                { href: "/quote", label: "Get Fast Quote" },
-                { href: "/book", label: "Book Repair", tone: "muted" },
-              ]}
-            />
+            <div className="mt-5 flex flex-wrap gap-3 md:mt-7" role="region" aria-label="Contact actions">
+              <a
+                href="#contact-form"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-lg hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
+              >
+                Send Message
+              </a>
+              <BusinessActionLink
+                href={`tel:${BUSINESS.phone}`}
+                action="phone_call"
+                placement="contact_hero"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
+              >
+                Call Now
+              </BusinessActionLink>
+            </div>
 
             <div className="mt-8 hidden gap-3 sm:grid-cols-3 md:grid">
               <article className="rounded-2xl border border-white/20 bg-white/10 p-4">
