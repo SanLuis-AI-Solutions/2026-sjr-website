@@ -51,7 +51,14 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Apply the same quote-first rule to service-area pages because they are local commercial landing pages, not appointment-confirmation pages.
 - Keep booking available in navigation, desktop/tablet layouts, and dedicated `/book` flows.
 - On service pages, hide secondary proof/media/market cards on mobile when they repeat the same decision already made by the hero and “what to expect” sections.
+- Keep long service-page H1s compact enough that they remain readable on mobile without becoming a dense hero block.
 - On article pages, keep related-reading blocks below the article answer and quote CTA; do not interrupt the answer with multiple outbound choices.
+
+## Performance Baselines
+
+- Service pages must continue passing the absolute production performance gate: mobile LCP at or below `2600ms` and SEO score `100`.
+- The watch-repair service baseline was realigned on 2026-05-13 after two production guardrail runs showed the current quote-first mobile service layout stabilizing around `2412ms` LCP while still passing the absolute budget.
+- Do not relax the absolute LCP threshold to hide regressions. If a service page exceeds the absolute gate, optimize the page before updating any baseline.
 
 ## Verification
 

@@ -1,9 +1,9 @@
 {
   "name": "service-ci-lcp-baseline",
   "source": {
-    "workflowRunId": 22648411605,
-    "collectedAt": "2026-03-03T18:10:15-06:00",
-    "summary": ".health/perf-gate-2026-03-04T00-10-15-343Z/summary.json",
+    "workflowRunId": 25819752550,
+    "collectedAt": "2026-05-13T14:10:05-05:00",
+    "summary": ".health/run-25819752550/perf-gate-25819752550/perf-gate-2026-05-13T19-04-19-191Z/summary.json",
     "percentile": 50,
     "runs": 5
   },
@@ -17,7 +17,7 @@
     },
     {
       "path": "/services/watch-repair",
-      "lcpMs": 2113,
+      "lcpMs": 2412,
       "maxRegressionMs": 200
     },
     {
