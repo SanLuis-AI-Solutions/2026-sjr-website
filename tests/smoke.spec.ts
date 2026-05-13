@@ -264,7 +264,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
 
   const fastQuote = stickyShortcut.getByRole("link", {
-    name: /^Get Fast Quote from mobile shortcut$/i,
+    name: /^Start Quote from mobile shortcut$/i,
   });
   await expect(fastQuote).toBeVisible();
   await expect(fastQuote).toHaveAttribute(
@@ -285,7 +285,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   });
   expect(stickyMetrics.backdropFilter).toBe("none");
   expect(stickyMetrics.height).toBeLessThanOrEqual(48);
-  expect(stickyMetrics.width).toBeLessThanOrEqual(180);
+  expect(stickyMetrics.width).toBeLessThanOrEqual(170);
   await fastQuote.click();
   await expect(page).toHaveURL(
     /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form$/,

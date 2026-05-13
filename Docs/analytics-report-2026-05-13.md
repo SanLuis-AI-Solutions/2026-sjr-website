@@ -218,6 +218,16 @@ Findings:
 
 Decision: do not add more visible links or mobile sections right now. The current bottleneck is Google processing/index selection, not missing internal crawl paths. Keep the site uncluttered and recheck URL Inspection movement after the next crawl window.
 
+## Sticky Quote Start Copy Pass (2026-05-13)
+
+Friction observed: the weekly report showed `3` mobile sticky CTA clicks but `0` quote starts on the sticky UTM path.
+
+Form CRO check: the mobile sticky destination lands with the quote form, required fields, and submit button visible in the viewport. The form is structurally healthy enough for incremental optimization: required fields are name, email, and repair details; phone and photos remain optional.
+
+Change made: changed the mobile sticky shortcut label from `Get Fast Quote` to `Start Quote`. This better matches the action after click, reduces expectation mismatch, and keeps the existing single compact CTA, UTM destination, and `mobile_sticky_cta_click` event intact.
+
+Measurement expectation: compare the next 7-day sticky path funnel for `mobile_sticky_cta_click` -> `quote_form_start` before considering larger form changes.
+
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.
