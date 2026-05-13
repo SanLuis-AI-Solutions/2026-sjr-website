@@ -110,6 +110,12 @@ async function expectTapTarget(locator: Locator, label: string, minHeight = 44) 
   );
 }
 
+async function openMobileSidebarSection(page: Page, label: RegExp) {
+  const section = page.locator("[data-mobile-sidebar-section]", { hasText: label });
+  await section.locator("summary").click();
+  return section;
+}
+
 async function getJsonLdSchemas(page: Page) {
   return page.evaluate(() =>
     Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
@@ -1445,6 +1451,7 @@ test("service area: webster page exposes Bay Area intake differentiation", async
   await expect(page.getByText(/Baybrook errands, or a NASA\/Clear Lake-area appointment/i))
     .toBeVisible();
   await expect(page.getByText(/Include one close photo of the problem area/i)).toBeVisible();
+  await openMobileSidebarSection(page, /Helpful repair guides/i);
   await expect(
     page.getByRole("link", { name: /Watch intake details before you make the drive/i }),
   ).toBeVisible();
@@ -1468,6 +1475,7 @@ test("service area: clear lake page exposes moisture and stone-risk differentiat
   ).toBeVisible();
   await expect(page.getByText(/Watch stopped after boating, humidity, sweat/i)).toBeVisible();
   await expect(page.getByText(/Preservation-first condition review/i)).toBeVisible();
+  await openMobileSidebarSection(page, /Helpful repair guides/i);
   await expect(page.getByRole("link", { name: /Does my watch need a battery or deeper repair/i }))
     .toBeVisible();
 
@@ -1484,6 +1492,7 @@ test("service area: friendswood page exposes heirloom and ring-intake differenti
   await expect(page.getByText(/family schedules, school events, church weekends/i)).toBeVisible();
   await expect(page.getByText(/whether the ring spins, feels tight by the end of the day/i))
     .toBeVisible();
+  await openMobileSidebarSection(page, /Helpful repair guides/i);
   await expect(page.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
     .toBeVisible();
 
@@ -1508,6 +1517,7 @@ test("service area: la porte page exposes coastal watch and workwear differentia
   await expect(page.getByText(/plant, refinery, or hands-on work/i)).toBeVisible();
   await expect(page.getByText(/what must be preserved before polishing/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: /Coastal watch concern/i })).toBeVisible();
+  await openMobileSidebarSection(page, /Helpful repair guides/i);
   await expect(page.getByRole("link", { name: /Where weak chains usually fail first/i }))
     .toBeVisible();
 
@@ -1748,7 +1758,7 @@ test("service area: pasadena page ships local schema and nearby city links", asy
   const helpfulReads = page.locator("[data-mobile-sidebar-section]", { hasText: /Helpful repair guides/i });
   await expect(helpfulReads.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
     .toBeHidden();
-  await helpfulReads.locator("summary").click();
+  await openMobileSidebarSection(page, /Helpful repair guides/i);
   await expect(page.getByRole("link", { name: /Gold ring resizing cost and timing guide/i }))
     .toBeVisible();
 
