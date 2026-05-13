@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      12
+      13
     ],
     [
       "indexed",
@@ -37,7 +37,7 @@
     ],
     [
       "unknown-to-google",
-      2
+      1
     ]
   ],
   "routes": [
@@ -119,7 +119,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "static",
@@ -333,7 +333,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -411,7 +411,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -455,15 +455,15 @@
     {
       "category": "blog",
       "slug": "professional-cleaning-vs-home-care",
-      "label": "Professional Jewelry Cleaning vs. At-Home Cleaning",
+      "label": "Home Jewelry Cleaning: When to Stop and Get an Inspection",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-05-12",
+      "reviewedAt": "2026-05-13",
       "path": "/blog/professional-cleaning-vs-home-care",
       "url": "https://www.susiesjewelryrepair.com/blog/professional-cleaning-vs-home-care",
-      "observedStatus": "unknown-to-google",
+      "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -476,7 +476,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",

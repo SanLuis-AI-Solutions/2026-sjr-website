@@ -134,7 +134,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 href={bookingHref}
                 eventName="service_area_cta_click"
                 eventParams={{ area_slug: page.slug, cta_target: "book" }}
-                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
               >
                 Book Repair
               </TrackedLink>

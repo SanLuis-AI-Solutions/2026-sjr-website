@@ -20,9 +20,9 @@ Generated on 2026-05-13 from canonical repo sources.
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 12
+- Discovered - currently not indexed: 13
 - Indexed: 28
-- URL is unknown to Google: 2
+- URL is unknown to Google: 1
 
 ## Immediate GSC Queue
 
@@ -41,7 +41,7 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/pearl-restringing-timing-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/professional-cleaning-vs-home-care` | blog | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
+| `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 
@@ -103,7 +103,7 @@ Decision rule:
 | `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Indexed |
 | `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Discovered - currently not indexed |
 | `/blog/pearl-restringing-timing-guide` | blog | Pearl Restringing Timing: When to Restring and Why | Discovered - currently not indexed |
-| `/blog/professional-cleaning-vs-home-care` | blog | Professional Jewelry Cleaning vs. At-Home Cleaning | URL is unknown to Google |
+| `/blog/professional-cleaning-vs-home-care` | blog | Home Jewelry Cleaning: When to Stop and Get an Inspection | Discovered - currently not indexed |
 | `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Indexed |
 | `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Indexed |
 | `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Discovered - currently not indexed |

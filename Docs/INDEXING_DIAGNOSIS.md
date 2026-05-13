@@ -1300,3 +1300,44 @@ Interpretation:
 - This is a content-intent and AEO specificity refresh, not another link-weight pass.
 - The internal-link audit already shows `/blog/professional-cleaning-vs-home-care` has broad source coverage, so more sitewide links are unlikely to be the highest-value next fix.
 - If the page remains unknown after the next GSC inspection, the next move should be either deeper first-party proof from the shop or consolidation with the indexed vintage-cleaning guide, not more generic cleaning copy.
+
+## Full URL Inspection Refresh And Geo CTA Restraint (2026-05-13)
+
+Ran `npm run google:weekly-seo-health`, `npm run google:seo-quick-wins`, `npm run google:indexing-status -- --all`, `npm run google:indexing-manifest`, and `npm run seo:internal-link-audit` on 2026-05-13.
+
+Current 7-day performance:
+
+- Google Search clicks: 8
+- Google Search impressions: 899
+- Production organic sessions: 16
+- Quote + booking starts: 2
+- Organic quote + booking starts: 1
+- Mobile sticky CTA clicks: 3
+- Quote + booking outcomes: 2
+- Organic quote + booking outcomes: 1
+
+Current GSC status after full URL Inspection:
+
+- Indexed: 28
+- Discovered - currently not indexed: 13
+- URL is unknown to Google: 1
+- Improved: `/blog/professional-cleaning-vs-home-care` moved from `URL is unknown to Google` to `Discovered - currently not indexed`.
+- Remaining unknown: `/site-map`.
+
+Internal-link audit:
+
+- All 14 unresolved targets now have `29` all-source links and `28` indexed-source links.
+- Every unresolved target is linked from the HTML site map.
+- Because link coverage is already broad, additional footer/sitewide link expansion is no longer the right next default move.
+
+Implemented mobile conversion restraint:
+
+1. Service-area hero CTAs now follow the same quote-first mobile hierarchy as service detail and article decision blocks.
+2. `Book Repair` remains available on tablet/desktop, in navigation, and on the dedicated `/book` flow, but no longer competes with `Get Fast Quote` as an equal mobile hero action on local landing pages.
+3. Updated `Docs/MOBILE_UX_GUARDRAILS.md` and smoke coverage so local landing pages do not drift back into a two-primary-button mobile layout.
+
+Interpretation:
+
+- The indexing issue is no longer discovery or internal-link scarcity for the unresolved commercial pages.
+- The next SEO remediation, if pages remain stuck after the next GSC run, should be targeted quality differentiation or consolidation, not more sitewide link weight.
+- The conversion response should stay restraint-first: reduce mobile decision friction while preserving crawlable content and desktop booking paths.

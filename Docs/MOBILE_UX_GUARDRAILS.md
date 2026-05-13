@@ -31,6 +31,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 
 - Keep `Get Fast Quote` as the only dominant service/article repair CTA on narrow mobile screens.
 - Do not show `Get Fast Quote` and `Book Repair` as equal full-width mobile buttons in the same decision block.
+- Apply the same quote-first rule to service-area pages because they are local commercial landing pages, not appointment-confirmation pages.
 - Keep booking available in navigation, desktop/tablet layouts, and dedicated `/book` flows.
 
 ## Verification

@@ -1150,31 +1150,26 @@ test("mobile service-area pages: nearby city pages render local guidance and her
       path: "/services/deer-park",
       heading: /Jewelry repair near Deer Park, handled in-house/i,
       serviceLink: /Jewelry repair near Deer Park/i,
-      quickLink: /Get Fast Quote/i,
     },
     {
       path: "/services/la-porte",
       heading: /Jewelry repair near La Porte, handled in-house/i,
       serviceLink: /Jewelry repair near La Porte/i,
-      quickLink: /Book Repair/i,
     },
     {
       path: "/services/webster",
       heading: /Jewelry repair near Webster, handled in-house/i,
       serviceLink: /Jewelry repair near Webster/i,
-      quickLink: /Get Fast Quote/i,
     },
     {
       path: "/services/friendswood",
       heading: /Jewelry repair near Friendswood, handled in-house/i,
       serviceLink: /Jewelry repair near Friendswood/i,
-      quickLink: /Book Repair/i,
     },
     {
       path: "/services/clear-lake",
       heading: /Jewelry repair near Clear Lake, handled in-house/i,
       serviceLink: /Jewelry repair near Clear Lake/i,
-      quickLink: /Get Fast Quote/i,
     },
   ];
 
@@ -1185,7 +1180,10 @@ test("mobile service-area pages: nearby city pages render local guidance and her
     await expect(areaBreadcrumb).toBeVisible();
     await expect(areaBreadcrumb.getByRole("link", { name: /^Services$/i })).toBeVisible();
     const heroSection = page.locator("main section").first();
-    await expect(heroSection.getByRole("link", { name: route.quickLink }).first()).toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Get Fast Quote$/i }).first())
+      .toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Book Repair$/i }).first())
+      .toBeHidden();
     await expect(page.getByText(route.serviceLink).first()).toBeVisible();
     await assertNoBrokenImages(page);
   }
