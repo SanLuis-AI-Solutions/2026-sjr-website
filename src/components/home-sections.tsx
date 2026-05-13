@@ -410,13 +410,13 @@ export function HomeCta() {
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/quote"
-            className="micro-interaction rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+            className="micro-interaction inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy sm:w-auto"
           >
             Get Fast Quote
           </Link>
           <Link
             href="/book"
-            className="micro-interaction rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white"
+            className="micro-interaction hidden rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white sm:inline-flex"
           >
             Book a Repair
           </Link>

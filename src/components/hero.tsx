@@ -76,7 +76,7 @@ export function Hero() {
             </Link>
             <Link
               href="/book"
-              className="micro-interaction inline-flex min-h-[54px] items-center justify-center rounded-full border border-white/24 bg-white/8 px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-brand-gold/70 hover:bg-white/14 sm:w-auto"
+              className="micro-interaction hidden min-h-[54px] items-center justify-center rounded-full border border-white/24 bg-white/8 px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-brand-gold/70 hover:bg-white/14 sm:inline-flex sm:w-auto"
             >
               Book a Repair
             </Link>

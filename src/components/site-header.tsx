@@ -114,6 +114,15 @@ export function SiteHeader() {
               Quick help
             </p>
             <div className="mt-3 grid gap-2">
+              <TrackedLink
+                href="/quote"
+                eventName="header_cta_click"
+                eventParams={{ target: "quote", placement: "mobile_menu_quick_help" }}
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white"
+                onClick={() => setMobileMenuPath(null)}
+              >
+                Get Fast Quote
+              </TrackedLink>
               <BusinessActionLink
                 href={`tel:${BUSINESS.phone}`}
                 action="phone_call"
@@ -122,16 +131,6 @@ export function SiteHeader() {
                 onClick={() => setMobileMenuPath(null)}
               >
                 Call {BUSINESS.phone}
-              </BusinessActionLink>
-              <BusinessActionLink
-                href={BUSINESS.googleMapsUrl}
-                action="reviews"
-                placement="mobile_menu"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
-              >
-                Read Google Reviews
               </BusinessActionLink>
             </div>
           </div>
@@ -147,26 +146,13 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="mt-6 grid gap-3">
-            <TrackedLink
-              href="/quote"
-              eventName="header_cta_click"
-              eventParams={{ target: "quote", placement: "mobile_menu" }}
-              className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white"
-              onClick={() => setMobileMenuPath(null)}
-            >
-              Get Fast Quote
-            </TrackedLink>
-            <TrackedLink
-              href="/book"
-              eventName="header_cta_click"
-              eventParams={{ target: "book", placement: "mobile_menu" }}
-              className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold bg-white/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
-              onClick={() => setMobileMenuPath(null)}
-            >
-              Book a Repair
-            </TrackedLink>
-          </div>
+          <Link
+            href="/book"
+            className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full text-xs font-semibold uppercase tracking-[0.24em] text-brand-burgundy underline-offset-4 hover:underline"
+            onClick={() => setMobileMenuPath(null)}
+          >
+            Prefer an appointment? Book repair
+          </Link>
         </div>
       ) : null}
     </header>

@@ -175,6 +175,9 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: /Beauty restored\. Elegance preserved\./i })
   ).toBeVisible();
+  const heroSection = page.locator("main section").first();
+  await expect(heroSection.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(heroSection.getByRole("link", { name: /^Book a Repair$/i })).toBeHidden();
 
   const servicesHeading = page.getByRole("heading", { name: /Expert Repair Services/i });
   await servicesHeading.scrollIntoViewIfNeeded();
@@ -209,6 +212,11 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   await topGuidesSummary.click();
   await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeHidden();
+
+  const finalCta = page.locator("section", { hasText: "Start Today" });
+  await finalCta.scrollIntoViewIfNeeded();
+  await expect(finalCta.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(finalCta.getByRole("link", { name: /^Book a Repair$/i })).toBeHidden();
 
   guard.assertNoErrors("mobile home flow");
 });
