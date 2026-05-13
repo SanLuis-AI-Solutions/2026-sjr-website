@@ -234,6 +234,39 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   guard.assertNoErrors("mobile home flow");
 });
 
+test("mobile layout avoids blank deferred sections and dense footer link walls", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/watch-repair", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Watch Repair/i })).toBeVisible();
+
+  const cvVisibility = await page.locator(".cv-section").first().evaluate((node) => {
+    const style = window.getComputedStyle(node as HTMLElement);
+    return style.contentVisibility;
+  });
+  expect(cvVisibility).toBe("visible");
+
+  const footer = page.getByRole("contentinfo");
+  await footer.scrollIntoViewIfNeeded();
+  await expect(footer.getByText(/In-house watch and jewelry repair/i)).toBeVisible();
+  await expect(footer.locator("summary").filter({ hasText: /Our Services/ })).toBeVisible();
+  await expect(footer.locator("summary").filter({ hasText: /Repair Guides/ })).toBeVisible();
+  await expect(footer.getByRole("link", { name: /^Watch Repair & Battery Replacement$/i }))
+    .toBeHidden();
+  await expect(footer.getByRole("link", { name: /^Watch Battery or Repair\?$/i }))
+    .toBeHidden();
+
+  await footer.locator("summary").filter({ hasText: /Our Services/ }).click();
+  await expect(footer.getByRole("link", { name: /^Watch Repair & Battery Replacement$/i }))
+    .toBeVisible();
+
+  await footer.locator("summary").filter({ hasText: /Repair Guides/ }).click();
+  await expect(footer.getByRole("link", { name: /^Watch Battery or Repair\?$/i }))
+    .toBeVisible();
+
+  guard.assertNoErrors("mobile layout clutter controls");
+});
+
 test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 

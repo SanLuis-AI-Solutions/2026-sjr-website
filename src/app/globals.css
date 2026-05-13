@@ -236,6 +236,11 @@ html.reveal-disabled .reveal-on-scroll {
     opacity: 1;
     transform: none;
   }
+
+  .cv-section {
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+  }
 }
 
 @media (min-width: 768px) {
