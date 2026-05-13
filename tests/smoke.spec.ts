@@ -396,6 +396,28 @@ test("mobile service and article pages keep quote CTA dominant", async ({ page }
   guard.assertNoErrors("mobile quote-first cta hierarchy");
 });
 
+test("mobile non-conversion pages avoid competing hero quote and booking CTAs", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+  const routes = [
+    { path: "/blog", heading: /Repair tips and local guidance/i },
+    { path: "/about", heading: /Family craftsmanship/i },
+    { path: "/faq", heading: /Answers before you hand over/i },
+  ];
+
+  for (const route of routes) {
+    await page.goto(route.path, { waitUntil: "networkidle" });
+    await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+
+    const heroSection = page.locator("main section").first();
+    await expect(heroSection.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Book Repair$/i })).toBeHidden();
+  }
+
+  guard.assertNoErrors("mobile non-conversion quote-first pages");
+});
+
 test("legal pages: privacy + terms exist", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -992,10 +1014,9 @@ test("mobile informational pages: about, faq, and blog hero actions are clear", 
     const quote = heroSection.getByRole("link", { name: /^Get Fast Quote$/i }).first();
     const book = heroSection.getByRole("link", { name: /^Book Repair$/i }).first();
     await expect(quote).toBeVisible();
-    await expect(book).toBeVisible();
+    await expect(book).toBeHidden();
 
     await expectTapTarget(quote, `Quote tap target on ${route.path}`);
-    await expectTapTarget(book, `Book tap target on ${route.path}`);
 
     await assertNoBrokenImages(page);
   }
@@ -1404,6 +1425,7 @@ test("services hub: finder quote CTA carries context into quote form", async ({ 
 test("services hub: finder booking CTA carries context into booking form", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
+  await page.setViewportSize({ width: 900, height: 900 });
   await page.goto("/services", { waitUntil: "networkidle" });
   const finder = page.getByTestId("services-finder-region");
   await finder.getByRole("button", { name: /Redesign or heirloom help/i }).click();
@@ -1616,7 +1638,7 @@ test("mobile service detail: ring sizing follows flagship section order", async 
   await expect(page.getByText(/Related services/i).first()).toBeVisible();
 
   await expect(page.getByRole("link", { name: /Get Fast Quote/i }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeHidden();
 
   guard.assertNoErrors("service detail: ring-sizing flagship sections");
 });
@@ -1648,7 +1670,7 @@ test("mobile service detail: all services follow flagship section sequence", asy
     await expect(page.getByText(/Related services/i).first()).toBeVisible();
 
     await expect(page.getByRole("link", { name: /Get Fast Quote/i }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /Book Repair/i }).first()).toBeHidden();
 
     if (slug === "custom-design") {
       await expect(page.getByText(/7 business days/i).first()).toBeVisible();

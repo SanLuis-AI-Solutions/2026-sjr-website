@@ -21,6 +21,12 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Do not duplicate quote/book button pairs in the same mobile menu.
 - Reviews and proof should be visible on-page, but not crowd the primary menu action.
 
+## Non-Conversion Content Pages
+
+- Blog hub, FAQ, About, service detail, and article pages should not show `Get Fast Quote` and `Book Repair` as equal mobile hero or decision-band actions.
+- Keep booking reachable on desktop/tablet, from the mobile menu secondary link, and from the dedicated `/book` flow.
+- If a mobile page is informational or comparison-oriented, prefer a single quote action because it matches lower-commitment repair triage.
+
 ## Forms
 
 - Required fields should come before optional fields.
@@ -43,6 +49,7 @@ The smoke suite includes mobile checks for:
 - quote form required field order
 - mobile navigation reachability
 - service/article mobile CTAs remain quote-first
+- non-conversion mobile page heroes remain quote-first
 
 Run focused checks after CTA/layout changes:
 

@@ -15,16 +15,16 @@ export function CtaBand() {
             Tell us what you need and we’ll confirm options and timing.
           </p>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex w-full flex-wrap gap-3 md:w-auto md:gap-4">
           <Link
             href="/quote"
-            className="rounded-lg bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-burgundy-deep"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
           >
             Get Fast Quote
           </Link>
           <Link
             href="/book"
-            className="rounded-lg border border-brand-gold px-6 py-3 text-sm font-semibold text-brand-burgundy transition hover:bg-brand-gold/10"
+            className="hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-sm font-semibold text-brand-burgundy transition hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
           >
             Book a Repair
           </Link>
