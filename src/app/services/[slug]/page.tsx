@@ -1751,7 +1751,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
           <div
             className={`relative order-2 ${
-              isWatchRepair || isCustomDesign ? "hidden md:block" : ""
+              isWatchRepair || isRingSizing || isCustomDesign ? "hidden md:block" : ""
             }`}
           >
             <div
