@@ -81,3 +81,11 @@ Run focused checks after CTA/layout changes:
 ```powershell
 npx playwright test tests/smoke.spec.ts --grep "mobile nav: menu opens and can reach Services|mobile conversion: home CTA reaches quote form|mobile home flow keeps conversion path uncluttered|mobile sticky CTA uses one compact quote action"
 ```
+
+Run the production-capable flow audit when SEO/content changes add visible links, filters, or CTAs:
+
+```powershell
+npm run ux:mobile-flow
+```
+
+Use `MOBILE_UX_AUDIT_ORIGIN=http://127.0.0.1:3000` to validate a local production build before deployment. The audit writes `.health/mobile-ux-flow-latest.md` and fails on mobile quote/book competition, sub-44px audited tap targets, expanded footer crawl groups, or sticky CTA drift.

@@ -77,7 +77,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 data-track-event="blog_topic_click"
                 data-track-topic="all"
                 data-track-placement="topic_filter"
-                className="rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="inline-flex min-h-11 items-center rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 All topics
               </Link>
@@ -89,7 +89,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 data-track-event="blog_topic_click"
                 data-track-topic={topic}
                 data-track-placement="topic_filter"
-                className={`rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+                className={`inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
                   selectedTopic === topic
                     ? "border-brand-burgundy bg-brand-burgundy text-white"
                     : "border-stone-200 bg-white/85 text-stone-700"
@@ -113,7 +113,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  className="inline-flex min-h-11 items-center rounded-full border border-stone-200 bg-stone-50 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   {service.name}
                 </Link>

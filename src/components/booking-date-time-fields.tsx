@@ -188,7 +188,7 @@ export function BookingDateTimeFields() {
             type="button"
             onClick={() => setCalendarOpen((open) => !open)}
             aria-label="Toggle calendar"
-            className="absolute inset-y-1 right-1 rounded-lg px-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-burgundy hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-1"
+            className="absolute inset-y-0 right-0 min-h-11 rounded-xl px-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-burgundy hover:bg-brand-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-1"
           >
             Pick
           </button>

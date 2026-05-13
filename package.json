@@ -20,6 +20,7 @@
     "google:service-impact-compare": "node scripts/google/service-impact-compare.mjs",
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "seo:internal-link-audit": "node scripts/seo/internal-link-audit.mjs",
+    "ux:mobile-flow": "node scripts/audit/mobile-ux-flow.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",
     "airtable:sync": "node scripts/airtable/sync-to-supabase.mjs",
