@@ -8,12 +8,20 @@ These rules protect the site from SEO/content growth turning into mobile clutter
 
 Mobile pages should make the next action obvious within a few seconds. For most repair traffic, the primary action is `/quote` because it is lower commitment than booking and supports photo-first triage.
 
+## Content Density Rule
+
+- SEO, GEO, and AEO sections must earn their place in the mobile flow; do not add a section only because it adds internal links.
+- Above the first conversion action, avoid stacked link lists, duplicate proof cards, and equal-weight quote/book choices.
+- If a section exists primarily for crawlability, collapse it behind `details` on mobile or move it below the primary service/process content.
+- Prefer one high-confidence answer, one next step, and one tap target over multiple competing education paths.
+
 ## Homepage
 
 - Keep one dominant mobile CTA in the hero: `Get Fast Quote`.
 - Keep `Book a Repair` available on desktop and in lower-commitment contexts, but do not pair it as an equal mobile hero button.
 - Keep SEO guide links discoverable, but collapse secondary link sets on mobile when they are not the next conversion step.
 - Do not add decorative desktop sections to mobile unless they directly improve trust or conversion.
+- Keep the mobile flow ordered around user confidence: hero, proof, core services, local/service path help, process, then deeper guides.
 
 ## Mobile Navigation
 
@@ -42,6 +50,8 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Do not show `Get Fast Quote` and `Book Repair` as equal full-width mobile buttons in the same decision block.
 - Apply the same quote-first rule to service-area pages because they are local commercial landing pages, not appointment-confirmation pages.
 - Keep booking available in navigation, desktop/tablet layouts, and dedicated `/book` flows.
+- On service pages, hide secondary proof/media/market cards on mobile when they repeat the same decision already made by the hero and “what to expect” sections.
+- On article pages, keep related-reading blocks below the article answer and quote CTA; do not interrupt the answer with multiple outbound choices.
 
 ## Verification
 

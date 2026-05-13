@@ -12,11 +12,13 @@ const PRODUCTION_HOST = "www.susiesjewelryrepair.com";
 const KEY_EVENTS = [
   "quote_form_start",
   "booking_form_start",
+  "contact_form_start",
   "mobile_sticky_cta_click",
   "phone_call_click",
   "quote_submit_success",
   "booking_submit_success",
   "booking_submit_pending",
+  "contact_submit_success",
 ];
 const MOBILE_STICKY_CTA_PATH_EVENTS = [
   "quote_form_start",
@@ -28,11 +30,30 @@ const MOBILE_STICKY_CTA_PATH_EVENTS = [
 const ORGANIC_LANDING_CONVERSION_EVENTS = [
   "quote_form_start",
   "booking_form_start",
+  "contact_form_start",
   "phone_call_click",
   "quote_submit_success",
   "booking_submit_success",
   "booking_submit_pending",
+  "contact_submit_success",
 ];
+
+function leadStarts(events) {
+  return (
+    toNum(events.quote_form_start) +
+    toNum(events.booking_form_start) +
+    toNum(events.contact_form_start)
+  );
+}
+
+function leadOutcomes(events) {
+  return (
+    toNum(events.quote_submit_success) +
+    toNum(events.booking_submit_success) +
+    toNum(events.booking_submit_pending) +
+    toNum(events.contact_submit_success)
+  );
+}
 
 function toNum(value) {
   const n = Number(value || 0);
@@ -393,17 +414,14 @@ async function main() {
         ["All-host organic sessions", formatInt(snapshot.ga4.organicSessionsAllHosts), "Organic sessions before canonical-host filtering"],
         ["All-host total sessions", formatInt(snapshot.ga4.totalSessionsAllHosts), "All GA4 sessions regardless of channel or host"],
         [
-          "Quote + booking starts",
-          formatInt(snapshot.ga4.keyEvents.quote_form_start + snapshot.ga4.keyEvents.booking_form_start),
-          "Commercial-intent starts before form completion",
+          "Lead form starts",
+          formatInt(leadStarts(snapshot.ga4.keyEvents)),
+          "Quote, booking, and contact starts before form completion",
         ],
         [
-          "Organic quote + booking starts",
-          formatInt(
-            snapshot.ga4.organicKeyEvents.quote_form_start +
-              snapshot.ga4.organicKeyEvents.booking_form_start
-          ),
-          "Commercial starts attributed to Organic Search",
+          "Organic lead form starts",
+          formatInt(leadStarts(snapshot.ga4.organicKeyEvents)),
+          "Quote, booking, and contact starts attributed to Organic Search",
         ],
         [
           "Mobile sticky CTA clicks",
@@ -412,21 +430,13 @@ async function main() {
         ],
         ["Phone call clicks", formatInt(snapshot.ga4.keyEvents.phone_call_click), "Direct call intent from the site"],
         [
-          "Quote + booking outcomes",
-          formatInt(
-            snapshot.ga4.keyEvents.quote_submit_success +
-              snapshot.ga4.keyEvents.booking_submit_success +
-              snapshot.ga4.keyEvents.booking_submit_pending
-          ),
-          "Submitted or pending lead outcomes from the high-intent flows",
+          "Lead outcomes",
+          formatInt(leadOutcomes(snapshot.ga4.keyEvents)),
+          "Submitted or pending outcomes from quote, booking, and contact flows",
         ],
         [
-          "Organic quote + booking outcomes",
-          formatInt(
-            snapshot.ga4.organicKeyEvents.quote_submit_success +
-              snapshot.ga4.organicKeyEvents.booking_submit_success +
-              snapshot.ga4.organicKeyEvents.booking_submit_pending
-          ),
+          "Organic lead outcomes",
+          formatInt(leadOutcomes(snapshot.ga4.organicKeyEvents)),
           "Submitted or pending lead outcomes attributed to Organic Search",
         ],
       ]
@@ -450,11 +460,13 @@ async function main() {
       [
         ["quote_form_start", formatInt(snapshot.ga4.keyEvents.quote_form_start)],
         ["booking_form_start", formatInt(snapshot.ga4.keyEvents.booking_form_start)],
+        ["contact_form_start", formatInt(snapshot.ga4.keyEvents.contact_form_start)],
         ["mobile_sticky_cta_click", formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click)],
         ["phone_call_click", formatInt(snapshot.ga4.keyEvents.phone_call_click)],
         ["quote_submit_success", formatInt(snapshot.ga4.keyEvents.quote_submit_success)],
         ["booking_submit_success", formatInt(snapshot.ga4.keyEvents.booking_submit_success)],
         ["booking_submit_pending", formatInt(snapshot.ga4.keyEvents.booking_submit_pending)],
+        ["contact_submit_success", formatInt(snapshot.ga4.keyEvents.contact_submit_success)],
       ]
     ),
     "",
@@ -465,11 +477,13 @@ async function main() {
       [
         ["quote_form_start", formatInt(snapshot.ga4.organicKeyEvents.quote_form_start)],
         ["booking_form_start", formatInt(snapshot.ga4.organicKeyEvents.booking_form_start)],
+        ["contact_form_start", formatInt(snapshot.ga4.organicKeyEvents.contact_form_start)],
         ["mobile_sticky_cta_click", formatInt(snapshot.ga4.organicKeyEvents.mobile_sticky_cta_click)],
         ["phone_call_click", formatInt(snapshot.ga4.organicKeyEvents.phone_call_click)],
         ["quote_submit_success", formatInt(snapshot.ga4.organicKeyEvents.quote_submit_success)],
         ["booking_submit_success", formatInt(snapshot.ga4.organicKeyEvents.booking_submit_success)],
         ["booking_submit_pending", formatInt(snapshot.ga4.organicKeyEvents.booking_submit_pending)],
+        ["contact_submit_success", formatInt(snapshot.ga4.organicKeyEvents.contact_submit_success)],
       ]
     ),
     "",

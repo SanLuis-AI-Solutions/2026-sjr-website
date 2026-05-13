@@ -41,11 +41,14 @@ Automated option:
 - no new localhost or preview hostnames show up in GA4 hostname reports
 - Search Console is linked to the correct GA4 stream
 - GA4 key events still include:
+  - `quote_form_start`
+  - `booking_form_start`
+  - `contact_form_start`
   - `quote_submit_success`
   - `booking_submit_success`
   - `booking_submit_pending`
   - `contact_submit_success`
-- quote and booking starts are still being captured
+- weekly health reports `Lead form starts` and `Lead outcomes` across quote, booking, and contact flows
 
 ## Search Visibility
 
@@ -61,10 +64,8 @@ Automated option:
 
 ## Commercial Intent
 
-- quote starts reviewed
-- booking starts reviewed
-- quote outcomes reviewed
-- booking outcomes reviewed
+- lead form starts reviewed across `/quote`, `/book`, and `/contact`
+- lead outcomes reviewed across `/quote`, `/book`, and `/contact`
 - start -> attempt rate reviewed
 - attempt -> outcome rate reviewed
 - route conversion reviewed for `/quote`, `/book`, and `/contact`
@@ -79,4 +80,4 @@ Escalate immediately if any of these happen:
 - redirected legacy URLs stop resolving
 - Search Console starts surfacing new Wix-era `404` patterns
 - Google clicks rise but the landing pages are mismatched to intent
-- quote/booking starts or outcomes drop sharply without a known cause
+- lead form starts or outcomes drop sharply without a known cause
