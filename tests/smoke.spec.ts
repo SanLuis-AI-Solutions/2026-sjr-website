@@ -1301,6 +1301,13 @@ test("service area: la porte page exposes coastal watch and workwear differentia
   await expect(page.getByText(/Humidity, water exposure, boating weekends/i)).toBeVisible();
   await expect(page.getByText(/daily workwear, weekend\/event jewelry, or inherited/i))
     .toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /How La Porte customers can triage the repair before driving over/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/plant, refinery, or hands-on work/i)).toBeVisible();
+  await expect(page.getByText(/what must be preserved before polishing/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: /Coastal watch concern/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Where weak chains usually fail first/i }))
     .toBeVisible();

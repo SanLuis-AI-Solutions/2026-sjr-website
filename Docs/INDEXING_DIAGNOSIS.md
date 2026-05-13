@@ -1418,3 +1418,19 @@ Next checkpoint:
 
 - Re-run full URL Inspection after Google has had a crawl window.
 - If the same pages remain unknown/discovered after this deeper first-party pass, evaluate consolidation or add actual shop proof assets such as real repair photos, named case notes, or review-backed examples before creating more pages.
+
+## La Porte Repair Triage Differentiation (2026-05-13)
+
+The latest full URL Inspection API refresh showed `/services/la-porte` regressing to `URL is unknown to Google` even though live technical checks found no crawl blocker. The page already had broad internal-link coverage and sitemap inclusion, so adding more sitewide links was not the right next move.
+
+Implemented:
+
+1. Added a La Porte-specific repair triage block to `/services/la-porte`.
+2. Focused the block on real local repair situations: watches exposed to water, sweat, heat, or loose crowns; workwear rings/bracelets from plant, refinery, or hands-on work; and inherited pieces that need preservation-first guidance.
+3. Kept the addition inside the existing service-area page structure so mobile users do not get another competing CTA or decorative section.
+4. Added smoke coverage for the new La Porte triage copy.
+
+Interpretation:
+
+- This is a quality-differentiation response for a regressed local commercial page.
+- If `/services/la-porte` remains unknown or discovered-but-not-indexed after the next crawl window, the next move should be actual shop proof assets or consolidation analysis, not more templated city copy or more footer links.

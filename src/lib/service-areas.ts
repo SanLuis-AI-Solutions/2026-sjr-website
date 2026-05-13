@@ -293,6 +293,31 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Useful when inherited jewelry is sentimental but structurally tired and the better answer may be strengthening or redesigning the piece.",
       },
     ],
+    repairPathGuide: {
+      heading: "How La Porte customers can triage the repair before driving over",
+      intro:
+        "A short photo quote helps us separate quick work from risk-sensitive repairs before a La Porte customer makes the Pasadena trip. These are the details that change the recommendation most often.",
+      items: [
+        {
+          situation: "Stopped watch after water, sweat, heat, or a loose crown",
+          likelyPath: "Battery plus seal or diagnostic review",
+          nextStep:
+            "Send a dial photo, a case-back photo, and a note about water or heat exposure so we do not treat a moisture-risk watch like a routine kiosk battery job.",
+        },
+        {
+          situation: "Ring or bracelet worn during plant, refinery, or hands-on work",
+          likelyPath: "Structural check before a spot repair",
+          nextStep:
+            "Include a close photo of the worn area and say whether the piece catches, spins, opens, or feels thinner than it used to.",
+        },
+        {
+          situation: "Inherited piece that needs to stay recognizable",
+          likelyPath: "Preservation-first restoration or redesign plan",
+          nextStep:
+            "Tell us what must be preserved before polishing, stone resetting, soldering, or redesign options are discussed.",
+        },
+      ],
+    },
     faqs: [
       {
         question: "Do you offer watch battery replacement for La Porte customers?",
