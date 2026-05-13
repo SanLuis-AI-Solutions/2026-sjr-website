@@ -20,6 +20,11 @@ export const PRIORITY_REPAIR_PATHS = [
     description: "How clasps, jump rings, solder joints, and thin links usually fail.",
   },
   {
+    label: "Stone security checklist",
+    href: "/blog/stone-security-checklist",
+    description: "Use this if a stone clicks, prongs catch, or a ring took an impact.",
+  },
+  {
     label: "Pearl restringing timing",
     href: "/blog/pearl-restringing-timing-guide",
     description: "When stretched strands should be restrung before they fail.",
@@ -28,5 +33,20 @@ export const PRIORITY_REPAIR_PATHS = [
     label: "Watch battery replacement near Pasadena",
     href: "/blog/where-to-get-watch-battery-replaced-pasadena",
     description: "What local watch owners should compare before choosing battery service.",
+  },
+  {
+    label: "Choose a repair jeweler",
+    href: "/blog/how-to-choose-a-jeweler",
+    description: "Questions that separate an in-house repair shop from a sales counter.",
+  },
+  {
+    label: "Professional cleaning vs home care",
+    href: "/blog/professional-cleaning-vs-home-care",
+    description: "When home cleaning is fine and when inspection should come first.",
+  },
+  {
+    label: "Vintage diamond cleaning risk",
+    href: "/blog/safe-to-clean-vintage-diamond-ring-at-home",
+    description: "Red flags to check before cleaning antique or sentimental rings at home.",
   },
 ] as const;

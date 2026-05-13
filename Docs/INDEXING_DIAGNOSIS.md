@@ -1165,3 +1165,25 @@ Interpretation:
 
 - Homepage mobile flow now follows a clearer order: hero quote path, proof, repair services, optional local/guide paths, process, trust, FAQ, final CTA.
 - SEO/GEO/AEO content remains available, but it no longer competes as strongly with the proven mobile conversion path.
+
+## Priority Repair Path Expansion (2026-05-13)
+
+The latest indexing manifest still shows 15 unresolved URLs. The internal link audit shows most unresolved pages already receive broad indexed-source coverage, but four stalled guide pages remain weaker than the sitewide priority set:
+
+| URL | Indexed-source links before expansion |
+| --- | --- |
+| `/blog/how-to-choose-a-jeweler` | 3 |
+| `/blog/professional-cleaning-vs-home-care` | 3 |
+| `/blog/safe-to-clean-vintage-diamond-ring-at-home` | 4 |
+| `/blog/stone-security-checklist` | 6 |
+
+Implemented on 2026-05-13:
+
+1. Added the four weak-coverage stalled guides to `PRIORITY_REPAIR_PATHS`.
+2. This gives them additional crawl weight through the footer and services-hub repair planning paths without adding another homepage section.
+3. Kept the mobile homepage restrained because the expanded list is not rendered as another above-the-fold grid.
+4. Added smoke coverage so the footer continues exposing the newly weighted guide links.
+
+Next verification:
+
+- After deployment, rerun `npm run seo:internal-link-audit` against production and confirm these four URLs moved from partial indexed-source coverage toward the sitewide priority set.

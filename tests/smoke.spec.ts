@@ -1746,6 +1746,15 @@ test("footer exposes full priority repair crawl set", async ({ page }) => {
   await expect(
     footer.getByRole("link", { name: /^Watch battery replacement near Pasadena$/i }),
   ).toHaveAttribute("href", "/blog/where-to-get-watch-battery-replaced-pasadena");
+  await expect(
+    footer.getByRole("link", { name: /^Choose a repair jeweler$/i }),
+  ).toHaveAttribute("href", "/blog/how-to-choose-a-jeweler");
+  await expect(
+    footer.getByRole("link", { name: /^Professional cleaning vs home care$/i }),
+  ).toHaveAttribute("href", "/blog/professional-cleaning-vs-home-care");
+  await expect(
+    footer.getByRole("link", { name: /^Vintage diamond cleaning risk$/i }),
+  ).toHaveAttribute("href", "/blog/safe-to-clean-vintage-diamond-ring-at-home");
 
   guard.assertNoErrors("footer priority crawl set");
 });
