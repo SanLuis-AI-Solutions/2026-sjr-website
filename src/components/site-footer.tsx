@@ -40,14 +40,17 @@ function MobileFooterGroup({
 }) {
   return (
     <details
-      className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
+      className="group rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
       open={defaultOpen}
     >
       <summary className="cursor-pointer list-none font-serif text-lg text-white marker:hidden">
         <span className="flex min-h-8 items-center justify-between gap-4">
           {title}
-          <span aria-hidden className="font-sans text-xs text-brand-gold">
+          <span aria-hidden className="font-sans text-xs text-brand-gold group-open:hidden">
             +
+          </span>
+          <span aria-hidden className="hidden font-sans text-xs text-brand-gold group-open:inline">
+            -
           </span>
         </span>
       </summary>
