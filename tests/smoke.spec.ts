@@ -1164,6 +1164,24 @@ test("commercial page structured data exposes entity relationships without visib
   expect(article?.image?.[0]).toBe(
     "https://www.susiesjewelryrepair.com/images/blog/watch-battery-replacement-cover.jpg"
   );
+  const decisionSignals = articleSchemas.find(
+    (schema) =>
+      schema?.["@type"] === "ItemList" &&
+      schema?.["@id"] ===
+        "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena#decision-signals"
+  );
+  expect(decisionSignals?.itemListElement).toHaveLength(3);
+  expect(decisionSignals?.itemListElement?.[0]).toMatchObject({
+    "@type": "ListItem",
+    position: 1,
+    name: "Second hand jumps every few seconds",
+  });
+  expect(decisionSignals?.itemListElement?.[0]?.description).toContain(
+    "Best next action:"
+  );
+  expect(decisionSignals?.itemListElement?.[0]?.url).toBe(
+    "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena#decision-signal-1"
+  );
 
   guard.assertNoErrors("commercial structured data entity relationships");
 });

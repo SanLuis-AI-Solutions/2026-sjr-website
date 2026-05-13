@@ -160,7 +160,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-detail",
@@ -359,7 +359,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -382,10 +382,10 @@
       "reviewedAt": "2026-05-13",
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "blog",
@@ -499,10 +499,10 @@
       "reviewedAt": "2026-05-12",
       "path": "/blog/stone-security-checklist",
       "url": "https://www.susiesjewelryrepair.com/blog/stone-security-checklist",
-      "observedStatus": "unknown-to-google",
+      "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",

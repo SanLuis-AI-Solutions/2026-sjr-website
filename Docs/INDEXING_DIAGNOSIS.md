@@ -1434,3 +1434,38 @@ Interpretation:
 
 - This is a quality-differentiation response for a regressed local commercial page.
 - If `/services/la-porte` remains unknown or discovered-but-not-indexed after the next crawl window, the next move should be actual shop proof assets or consolidation analysis, not more templated city copy or more footer links.
+
+## Decision-Signal Schema Pass (2026-05-13)
+
+Fresh monitoring was rerun on 2026-05-13 after the mobile footer and CTA restraint work:
+
+- `npm run google:weekly-seo-health`
+- `npm run google:seo-quick-wins`
+- `npm run google:indexing-status -- --all`
+- `npm run google:indexing-manifest`
+- `npm run seo:internal-link-audit`
+
+Current GSC status:
+
+- Indexed: 28
+- Discovered - currently not indexed: 12
+- URL is unknown to Google: 2
+
+Movement:
+
+- `/blog/stone-security-checklist` improved from `URL is unknown to Google` to `Discovered - currently not indexed`.
+- `/blog/does-my-watch-need-battery-or-repair-pasadena` regressed from `Discovered - currently not indexed` to `URL is unknown to Google`.
+
+Internal-link audit still shows every unresolved target has `29` all-source links, `28` indexed-source links, and an HTML site-map link. That means the next useful action is not another visible mobile link block.
+
+Implemented:
+
+1. Added JSON-LD `ItemList` markup for article decision-signal blocks that already appear visibly on the page.
+2. Anchored each visible decision signal so the structured data points to real on-page content.
+3. Added smoke coverage for the watch battery-vs-repair guide's decision-signal schema.
+
+Interpretation:
+
+- This improves AEO/GEO extraction for diagnostic commercial guides without adding visible mobile clutter.
+- The schema is intentionally limited to visible decision signals and does not claim a new rich-result type.
+- If the watch battery-vs-repair guide remains unknown after another crawl window, the next move should be deeper first-party proof or consolidation with the indexed same-day watch battery guide, not more sitewide link weight.

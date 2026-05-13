@@ -38,11 +38,11 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
 | `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/pearl-restringing-timing-guide` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/stone-security-checklist` | blog | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
+| `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 
 ## Remaining Canonical URLs Pending First Inspection
@@ -97,7 +97,7 @@ Decision rule:
 | `/blog/chain-repair-weak-points` | blog | Necklace & Bracelet Chain Repair: Weak Points to Check | Discovered - currently not indexed |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |
 | `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Indexed |
-| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | Discovered - currently not indexed |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | URL is unknown to Google |
 | `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Indexed |
 | `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Indexed |
 | `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Indexed |
@@ -106,7 +106,7 @@ Decision rule:
 | `/blog/professional-cleaning-vs-home-care` | blog | Home Jewelry Cleaning: When to Stop and Get an Inspection | Discovered - currently not indexed |
 | `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Indexed |
 | `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Indexed |
-| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | URL is unknown to Google |
+| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Discovered - currently not indexed |
 | `/blog/watch-battery-replacement` | blog | Watch Battery Replacement: Timing and Care Tips | Indexed |
 | `/blog/where-to-get-watch-battery-replaced-pasadena` | blog | Where to get a watch battery replaced today near Deer Park / Pasadena? | Discovered - currently not indexed |
 

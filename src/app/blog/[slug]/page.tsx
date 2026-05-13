@@ -156,6 +156,23 @@ export default async function BlogDetailPage({ params }: PageProps) {
           })),
         }
       : null;
+  const decisionSignalSchema =
+    post.decisionSignals && post.decisionSignals.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "@id": `${articleUrl}#decision-signals`,
+          name: `${post.title} decision signals`,
+          itemListOrder: "https://schema.org/ItemListOrderAscending",
+          itemListElement: post.decisionSignals.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.signal,
+            description: `Likely meaning: ${item.meaning} Best next action: ${item.nextAction}`,
+            url: `${articleUrl}#decision-signal-${index + 1}`,
+          })),
+        }
+      : null;
 
   return (
     <SiteShell>
@@ -167,6 +184,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      ) : null}
+      {decisionSignalSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(decisionSignalSchema) }}
         />
       ) : null}
       <article className="relative overflow-hidden bg-white pb-16 pt-14">
@@ -309,8 +332,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
                       What the symptom usually means
                     </h2>
                     <div className="mt-5 grid gap-4">
-                      {post.decisionSignals.map((item) => (
+                      {post.decisionSignals.map((item, index) => (
                         <article
+                          id={`decision-signal-${index + 1}`}
                           key={item.signal}
                           className="rounded-2xl border border-stone-200 bg-stone-50 p-5"
                         >
