@@ -101,7 +101,17 @@ export default async function BookPage({
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
               Repair time request
             </p>
-            <h1 className="lcp-sans mt-3 text-4xl font-semibold tracking-tight text-stone-900">
+            <h1
+              className="lcp-sans"
+              style={{
+                marginTop: "0.75rem",
+                fontSize: "2.25rem",
+                fontWeight: 600,
+                letterSpacing: "-0.025em",
+                lineHeight: "2.5rem",
+                color: "#1c1917",
+              }}
+            >
               Request a preferred repair time
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
