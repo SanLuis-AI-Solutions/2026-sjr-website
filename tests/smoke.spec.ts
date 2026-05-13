@@ -633,12 +633,12 @@ test("analytics: contact business-action links emit generic lead events", async 
     window.sessionStorage.removeItem("sjr_test_ga_events");
   });
 
-  await page.getByRole("link", { name: /Call now/i }).first().click();
+  await page.getByRole("link", { name: /Need urgent help\? Call now\./i }).first().click();
   await page
     .getByRole("link", { name: /contact@susiesjewelryrepair\.com/i })
     .first()
     .click();
-  await page.getByRole("link", { name: /^Open in Google Maps$/i }).first().click();
+  await page.getByRole("link", { name: /Open Susie's Jewelry and Watch Repair on Google Maps/i }).first().click();
 
   const events = await page.evaluate(() =>
     JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
@@ -649,7 +649,7 @@ test("analytics: contact business-action links emit generic lead events", async 
       ([type, eventName, params]: [string, string, Record<string, string>]) =>
         type === "event" &&
         eventName === "phone_call_click" &&
-        params.placement === "contact_hero",
+        params.placement === "contact_form_notice",
     ),
   ).toBe(true);
   expect(
@@ -657,7 +657,7 @@ test("analytics: contact business-action links emit generic lead events", async 
       ([type, eventName, params]: [string, string, Record<string, string>]) =>
         type === "event" &&
         eventName === "email_contact_click" &&
-        params.placement === "contact_direct_panel",
+        params.placement === "contact_form_notice",
     ),
   ).toBe(true);
   expect(
@@ -665,7 +665,7 @@ test("analytics: contact business-action links emit generic lead events", async 
       ([type, eventName, params]: [string, string, Record<string, string>]) =>
         type === "event" &&
         eventName === "directions_click" &&
-        params.placement === "contact_visit_panel",
+        params.placement === "contact_map_card",
     ),
   ).toBe(true);
 
@@ -1079,11 +1079,10 @@ test("mobile contact page: direct actions remain clear", async ({ page }) => {
   const message = quickActions.getByRole("link", { name: /^Send Message$/i });
   const call = quickActions.getByRole("link", { name: /^Call Now$/i });
   await expect(message).toBeVisible();
-  await expect(call).toBeVisible();
-  await expect(quickActions.getByRole("link")).toHaveCount(2);
+  await expect(call).toBeHidden();
+  await expect(quickActions.getByRole("link")).toHaveCount(1);
 
   await expectTapTarget(message, "Message tap target on /contact");
-  await expectTapTarget(call, "Call tap target on /contact");
 
   guard.assertNoErrors("contact direct actions");
 });

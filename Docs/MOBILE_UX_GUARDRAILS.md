@@ -20,6 +20,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Keep the menu focused on quick help, navigation, and one dominant quote action.
 - Do not duplicate quote/book button pairs in the same mobile menu.
 - Reviews and proof should be visible on-page, but not crowd the primary menu action.
+- The site header already provides a mobile call shortcut; do not repeat full-width call buttons above mobile forms unless the page has no clearer primary action.
 
 ## Non-Conversion Content Pages
 
@@ -30,6 +31,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 ## Forms
 
 - Mobile conversion pages should show one primary form jump before the form. Keep secondary quote/book/contact choices for desktop or navigation, not as equal mobile buttons above the form.
+- Contact form pages should not stack message, call, email, and directions buttons in the first mobile viewport.
 - Required fields should come before optional fields.
 - Optional phone/photos/details should not block the first meaningful form start.
 - Touch targets should stay at least 44px tall.

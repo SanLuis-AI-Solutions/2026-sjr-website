@@ -34,35 +34,6 @@ async function DeferredContactSection() {
             begins.
           </p>
         </div>
-        <div className="mb-7 grid gap-3 md:hidden">
-          <BusinessActionLink
-            href={`tel:${BUSINESS.phone}`}
-            action="phone_call"
-            placement="contact_direct_panel"
-            className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-brand-burgundy shadow-[0_10px_26px_rgba(58,25,16,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-          >
-            Call now
-          </BusinessActionLink>
-          <BusinessActionLink
-            href={`mailto:${BUSINESS.email}`}
-            action="email_contact"
-            placement="contact_direct_panel"
-            className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-brand-burgundy shadow-[0_10px_26px_rgba(58,25,16,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-          >
-            {BUSINESS.email}
-          </BusinessActionLink>
-          <BusinessActionLink
-            href={GOOGLE_MAPS_PRIMARY_URL}
-            action="directions"
-            placement="contact_visit_panel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-brand-burgundy shadow-[0_10px_26px_rgba(58,25,16,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-          >
-            Open in Google Maps
-          </BusinessActionLink>
-        </div>
-
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="space-y-4 reveal-on-scroll">
             <section className="relative overflow-hidden rounded-[2rem] border border-brand-burgundy/20 bg-brand-burgundy p-6 text-white shadow-[0_20px_55px_rgba(30,20,22,0.3)]">
@@ -241,6 +212,15 @@ async function DeferredContactSection() {
               >
                 Need urgent help? Call now.
               </BusinessActionLink>
+              <span className="mx-1 text-stone-400">·</span>
+              <BusinessActionLink
+                href={`mailto:${BUSINESS.email}`}
+                action="email_contact"
+                placement="contact_form_notice"
+                className="inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                {BUSINESS.email}
+              </BusinessActionLink>
             </div>
           </form>
         </div>
@@ -355,7 +335,7 @@ export default async function ContactPage({
                 href={`tel:${BUSINESS.phone}`}
                 action="phone_call"
                 placement="contact_hero"
-                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
+                className="micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
               >
                 Call Now
               </BusinessActionLink>
