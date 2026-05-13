@@ -188,6 +188,17 @@ Change made: improve machine-readable quality signals without adding visible mob
 
 Measurement expectation: these changes will not create immediate traffic by themselves, but they give Google and AI answer engines clearer entity relationships for the unresolved commercial pages before the next GSC recheck.
 
+## Mobile CTA Friction Pass (2026-05-13)
+
+Change made: reduced the mobile sticky quote shortcut's visual weight without changing the conversion path.
+
+- kept the mobile shortcut to one action: `Get Fast Quote`
+- preserved the quote attribution URL and `mobile_sticky_cta_click` event
+- removed the heavy backdrop blur and reduced shadow, padding, and letter spacing
+- added a regression check that the sticky CTA stays one link, remains tappable, and stays compact
+
+Measurement expectation: this should reduce perceived mobile clutter while preserving the lowest-friction quote path. Watch `mobile_sticky_cta_click`, `quote_form_start`, and quote submissions over the next 7-day window.
+
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.

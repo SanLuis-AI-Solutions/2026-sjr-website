@@ -272,6 +272,19 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
     "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form",
   );
   await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
+  const stickyMetrics = await fastQuote.evaluate((node) => {
+    const element = node as HTMLElement;
+    const style = window.getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return {
+      backdropFilter: style.backdropFilter,
+      height: Math.round(rect.height),
+      width: Math.round(rect.width),
+    };
+  });
+  expect(stickyMetrics.backdropFilter).toBe("none");
+  expect(stickyMetrics.height).toBeLessThanOrEqual(48);
+  expect(stickyMetrics.width).toBeLessThanOrEqual(180);
   await fastQuote.click();
   await expect(page).toHaveURL(
     /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form$/,
