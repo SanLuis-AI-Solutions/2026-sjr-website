@@ -199,6 +199,25 @@ Change made: reduced the mobile sticky quote shortcut's visual weight without ch
 
 Measurement expectation: this should reduce perceived mobile clutter while preserving the lowest-friction quote path. Watch `mobile_sticky_cta_click`, `quote_form_start`, and quote submissions over the next 7-day window.
 
+## Indexing Recheck (2026-05-13)
+
+Commands run:
+
+- `npm run google:weekly-seo-health`
+- `npm run google:seo-quick-wins`
+- `npm run google:indexing-status`
+- `npm run google:indexing-manifest`
+- `npm run seo:internal-link-audit`
+
+Findings:
+
+- GSC movement improved for `/services/la-porte`, `/blog/does-my-watch-need-battery-or-repair-pasadena`, and `/blog/how-to-choose-a-jeweler`: all moved from unknown to discovered.
+- `/blog/stone-security-checklist` regressed from discovered to unknown in URL Inspection API output.
+- Repo and live-site evidence do not show a crawl-path defect for `/blog/stone-security-checklist`: it is in `src/lib/blog.ts`, generated into `sitemap.xml`, reachable at 200, and the internal-link audit reports 28 indexed-source links plus `/site-map`.
+- The internal-link audit recommendation for all unresolved URLs is `Monitor GSC`; no unresolved target has fewer than two indexed-source links.
+
+Decision: do not add more visible links or mobile sections right now. The current bottleneck is Google processing/index selection, not missing internal crawl paths. Keep the site uncluttered and recheck URL Inspection movement after the next crawl window.
+
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.
