@@ -75,12 +75,32 @@ export function ServiceAreaLandingPage({ page }: Props) {
     url: canonicalUrl,
     name: `Jewelry Repair Near ${page.city}, TX`,
     serviceType: "Jewelry repair and watch repair",
+    description: page.description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
     areaServed: {
       "@type": page.areaSchemaType ?? "City",
       name: page.city,
     },
     provider: {
       "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Common repair paths for ${page.city}`,
+      itemListElement: highlightedServices.map((service, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          "@id": `https://www.susiesjewelryrepair.com/services/${service.slug}#service`,
+          url: `https://www.susiesjewelryrepair.com/services/${service.slug}`,
+          name: service.name,
+          description: service.summary,
+        },
+      })),
     },
   };
 

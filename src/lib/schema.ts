@@ -1,7 +1,9 @@
 import { BUSINESS, SERVICES } from "./constants";
 import { SERVICE_AREA_PAGES } from "./service-areas";
+import { getSiteUrl } from "./site-url";
 
 type Service = (typeof SERVICES)[number] & {
+  image_url?: string | null;
   short_summary?: string;
 };
 type ServiceFaq = {
@@ -75,6 +77,8 @@ export function localBusinessSchema() {
 }
 
 export function servicesSchema() {
+  const siteUrl = getSiteUrl();
+
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -84,6 +88,8 @@ export function servicesSchema() {
       position: index + 1,
       item: {
         "@type": "Service",
+        "@id": `${siteUrl}/services/${service.slug}#service`,
+        url: `${siteUrl}/services/${service.slug}`,
         name: service.name,
         description: service.summary,
       },
@@ -117,6 +123,7 @@ export function faqSchema() {
 }
 export function serviceSchema(service: Service | undefined) {
   if (!service) return {};
+  const siteUrl = getSiteUrl();
   const areaServed = Array.from(
     new Set([BUSINESS.address.city, ...SERVICE_AREA_PAGES.map((page) => page.city)]),
   ).map((area) => ({
@@ -124,16 +131,45 @@ export function serviceSchema(service: Service | undefined) {
     name: area,
   }));
   const summary = service.summary || service.short_summary || "";
+  const serviceUrl = `${siteUrl}/services/${service.slug}`;
+  const serviceImage = service.image || service.image_url || "";
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `https://www.susiesjewelryrepair.com/services/${service.slug}#service`,
+    "@id": `${serviceUrl}#service`,
+    url: serviceUrl,
     name: service.name,
+    serviceType: service.name,
+    category: "Jewelry repair and watch repair",
     description: summary,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": serviceUrl,
+    },
+    ...(serviceImage
+      ? {
+          image: serviceImage.startsWith("http") ? serviceImage : `${siteUrl}${serviceImage}`,
+        }
+      : {}),
     provider: {
       "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
     },
     areaServed,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${service.name} repair options`,
+      itemListElement: (service.includes || []).map((item, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: item,
+          provider: {
+            "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
+          },
+        },
+      })),
+    },
   };
 }
 

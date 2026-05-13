@@ -15,6 +15,7 @@ import { SERVICES } from "@/lib/constants";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { createPageMetadata } from "@/lib/metadata";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
+import { getSiteUrl } from "@/lib/site-url";
 
 type PageProps = {
   params: Promise<{
@@ -75,6 +76,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
     { name: "Blog", href: "/blog" },
     { name: post.title, href: `/blog/${post.slug}` },
   ];
+  const siteUrl = getSiteUrl();
+  const articleUrl = `${siteUrl}/blog/${post.slug}`;
+  const articleImage = post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`;
   const mobileHeroImageSrc = BLOG_MOBILE_HERO_IMAGE_BY_SLUG[post.slug] || null;
   const heroImageSizes = "(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(100vw - 3rem), 1200px";
   const desktopHeroImageProps = getImageProps({
@@ -104,16 +108,37 @@ export default async function BlogDetailPage({ params }: PageProps) {
     author: {
       "@type": "Person",
       name: post.authorName,
+      jobTitle: post.authorRole,
+    },
+    reviewedBy: {
+      "@type": "Organization",
+      name: post.authorName,
+      description: post.authorRole,
     },
     publisher: {
       "@type": "Organization",
       name: "Susie’s Jewelry Repair",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/brand/sjr-logo.png`,
+      },
     },
+    about: post.topics.map((topic) => ({
+      "@type": "Thing",
+      name: topic,
+    })),
+    mentions: relatedServices.map((service) => ({
+      "@type": "Service",
+      "@id": `${siteUrl}/services/${service.slug}#service`,
+      url: `${siteUrl}/services/${service.slug}`,
+      name: service.name,
+    })),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
+      "@id": articleUrl,
     },
-    image: [post.image],
+    image: [articleImage],
   };
 
   const faqSchema =

@@ -176,6 +176,18 @@ Change made: keep required operational fields, but reposition the page as a pref
 
 Measurement expectation: if commitment language was suppressing booking starts or outcomes, `/book` should show more `booking_form_start` and at least one `booking_submit_success` or `booking_submit_pending` in the next 7-day window.
 
+## Indexing Quality Pass (2026-05-13)
+
+Primary targets: `/services/pearl-restringing`, `/services/la-porte`, and `/blog/does-my-watch-need-battery-or-repair-pasadena`.
+
+Change made: improve machine-readable quality signals without adding visible mobile clutter:
+
+- service detail schema now exposes canonical URL, page entity, service type, image, and included repair options
+- service-area schema now exposes page entity, description, and a focused offer catalog for the area’s highlighted repair paths
+- article schema now exposes reviewed-by, author role, publisher URL/logo, topic entities, related service mentions, and absolute article image URL
+
+Measurement expectation: these changes will not create immediate traffic by themselves, but they give Google and AI answer engines clearer entity relationships for the unresolved commercial pages before the next GSC recheck.
+
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.

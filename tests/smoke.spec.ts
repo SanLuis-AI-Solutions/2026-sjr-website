@@ -110,6 +110,19 @@ async function expectTapTarget(locator: Locator, label: string, minHeight = 44) 
   );
 }
 
+async function getJsonLdSchemas(page: Page) {
+  return page.evaluate(() =>
+    Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+      .flatMap((script) => {
+        try {
+          return [JSON.parse(script.textContent || "")];
+        } catch {
+          return [];
+        }
+      })
+  );
+}
+
 test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -1023,6 +1036,89 @@ test("html site map exposes crawlable commercial and geo paths", async ({ page }
   ).toHaveCount(1);
 
   guard.assertNoErrors("html sitemap crawl paths");
+});
+
+test("commercial page structured data exposes entity relationships without visible clutter", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/pearl-restringing", { waitUntil: "networkidle" });
+  const pearlSchemas = await getJsonLdSchemas(page);
+  const pearlService = pearlSchemas.find(
+    (schema) =>
+      schema?.["@type"] === "Service" &&
+      schema?.["@id"] ===
+        "https://www.susiesjewelryrepair.com/services/pearl-restringing#service"
+  );
+  expect(pearlService).toMatchObject({
+    url: "https://www.susiesjewelryrepair.com/services/pearl-restringing",
+    serviceType: "Pearl Restringing",
+    mainEntityOfPage: {
+      "@id": "https://www.susiesjewelryrepair.com/services/pearl-restringing",
+    },
+  });
+  expect(pearlService?.image).toContain("/images/services/pearl-restringing");
+  expect(pearlService?.hasOfferCatalog?.itemListElement?.length).toBeGreaterThan(0);
+
+  await page.goto("/services/la-porte", { waitUntil: "networkidle" });
+  const laPorteSchemas = await getJsonLdSchemas(page);
+  const laPorteServiceArea = laPorteSchemas.find(
+    (schema) =>
+      schema?.["@type"] === "Service" &&
+      schema?.["@id"] ===
+        "https://www.susiesjewelryrepair.com/services/la-porte#service-area"
+  );
+  expect(laPorteServiceArea).toMatchObject({
+    url: "https://www.susiesjewelryrepair.com/services/la-porte",
+    mainEntityOfPage: {
+      "@id": "https://www.susiesjewelryrepair.com/services/la-porte",
+    },
+  });
+  expect(
+    laPorteServiceArea?.hasOfferCatalog?.itemListElement?.some(
+      (offer: { itemOffered?: { url?: string } }) =>
+        offer.itemOffered?.url ===
+        "https://www.susiesjewelryrepair.com/services/watch-repair"
+    )
+  ).toBe(true);
+
+  await page.goto("/blog/does-my-watch-need-battery-or-repair-pasadena", {
+    waitUntil: "networkidle",
+  });
+  const articleSchemas = await getJsonLdSchemas(page);
+  const article = articleSchemas.find((schema) => schema?.["@type"] === "Article");
+  expect(article).toMatchObject({
+    mainEntityOfPage: {
+      "@id":
+        "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
+    },
+    reviewedBy: {
+      name: "Susie’s In-House Team",
+    },
+    publisher: {
+      url: "https://www.susiesjewelryrepair.com",
+      logo: {
+        url: "https://www.susiesjewelryrepair.com/images/brand/sjr-logo.png",
+      },
+    },
+  });
+  expect(article?.author?.jobTitle).toBe("Master Craftsmanship Team");
+  expect(article?.about?.some((topic: { name?: string }) => topic.name === "Diagnostics")).toBe(
+    true
+  );
+  expect(
+    article?.mentions?.some(
+      (service: { "@id"?: string }) =>
+        service["@id"] ===
+        "https://www.susiesjewelryrepair.com/services/watch-repair#service"
+    )
+  ).toBe(true);
+  expect(article?.image?.[0]).toBe(
+    "https://www.susiesjewelryrepair.com/images/blog/watch-battery-replacement-cover.jpg"
+  );
+
+  guard.assertNoErrors("commercial structured data entity relationships");
 });
 
 test("mobile informational pages: about, faq, and blog hero actions are clear", async ({
