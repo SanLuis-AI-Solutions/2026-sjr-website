@@ -855,6 +855,8 @@ test("sitemap excludes legacy Wix URLs and includes current geo routes", async (
 
   expect(bodyText).toContain("https://www.susiesjewelryrepair.com/services/deer-park");
   expect(bodyText).toContain("https://www.susiesjewelryrepair.com/services/clear-lake");
+  expect(bodyText).toContain("https://www.susiesjewelryrepair.com/site-map");
+  expect(bodyText).toContain("<lastmod>2026-05-13T17:00:00.000Z</lastmod>");
   expect(bodyText).not.toContain("/book-online");
   expect(bodyText).not.toContain("/ring-sizing-repair");
 });

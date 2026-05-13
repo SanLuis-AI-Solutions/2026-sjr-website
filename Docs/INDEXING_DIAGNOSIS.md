@@ -1189,3 +1189,18 @@ Post-deploy verification:
 - Reran `npm run seo:internal-link-audit` against production on 2026-05-13.
 - All four weak-coverage stalled guides now show `28` all-source links and `27` indexed-source links.
 - Production homepage HTML also contains the new footer links for `/blog/how-to-choose-a-jeweler`, `/blog/professional-cleaning-vs-home-care`, and `/blog/safe-to-clean-vintage-diamond-ring-at-home`.
+
+## Sitemap Freshness Alignment (2026-05-13)
+
+The site shell and footer crawl paths changed on 2026-05-13, but static/service sitemap freshness still reflected older timestamps. The manifest also showed `/site-map` as unknown to Google even though the HTML sitemap is a useful crawl-discovery page.
+
+Implemented on 2026-05-13:
+
+1. Updated static and service sitemap `lastModified` values to `2026-05-13T12:00:00-05:00`.
+2. Kept blog article timestamps tied to each article's `reviewedAt`, which already reflects the 2026-05-12 content refresh on stalled guides.
+3. Added smoke coverage to confirm `/site-map` is present in `/sitemap.xml` and the refreshed `<lastmod>` is emitted.
+
+Expected effect:
+
+- Google receives a cleaner freshness signal for the updated static/service shell and the HTML sitemap route.
+- The next GSC indexing manifest should show whether `/site-map` moves from `URL is unknown to Google` to discovered or indexed.
