@@ -66,6 +66,10 @@ function dedupeRequests(requests) {
   });
 }
 
+function markdownCell(value) {
+  return String(value ?? "").replaceAll("|", "\\|");
+}
+
 async function countEvent(page, eventName) {
   const events = await readCapturedEvents(page);
   return countByName(events, eventName);
@@ -391,12 +395,15 @@ async function main() {
       page,
       "mobile_sticky_cta_click",
       async () => {
+        await page.evaluate(() => window.scrollTo(0, Math.max(900, window.innerHeight)));
+        await pause(500);
         const cta = page
-          .getByRole("region", { name: /^Mobile booking shortcut$/i })
-          .getByRole("link", { name: /^Book a Repair Today$/i });
+          .getByRole("region", { name: /^Mobile quote shortcut$/i })
+          .getByRole("link", { name: /^Get Fast Quote from mobile shortcut$/i });
+        await cta.waitFor({ state: "visible", timeout: 8000 });
         await clickTrackedTarget(cta);
       },
-      /\/book(?:\?|$)/,
+      /\/quote(?:\?|$)/,
       report
     );
 
@@ -529,31 +536,29 @@ async function main() {
       report
     );
 
-    await runNavigationEventCheck(
+    await runEventCheck(
       page,
       "conversion_quick_action_click",
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Contact Us$/i });
+          .getByRole("link", { name: /^Start Booking$/i });
         await clickTrackedTarget(quickAction);
       },
-      /\/contact(?:\?|$)/,
       report
     );
 
-    await goto(page, "/contact");
+    await goto(page, "/book");
     await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
-    await runNavigationAnyEventCheck(
+    await runAnyEventCheck(
       page,
       ["conversion_quick_action_click_control", "conversion_quick_action_click_primary_focus"],
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Get Fast Quote$/i });
+          .getByRole("link", { name: /^Start Booking$/i });
         await clickTrackedTarget(quickAction);
       },
-      /\/quote(?:\?|$)/,
       report
     );
 
@@ -624,7 +629,7 @@ async function main() {
       "| --- | --- | --- | --- |",
       ...report.map(
         (row) =>
-          `| ${row.eventName} | ${row.status} | ${row.beforeCount} | ${row.afterCount} |`
+          `| ${markdownCell(row.eventName)} | ${row.status} | ${row.beforeCount} | ${row.afterCount} |`
       ),
       "",
       "## Aggregate Counts (Captured in Session)",
