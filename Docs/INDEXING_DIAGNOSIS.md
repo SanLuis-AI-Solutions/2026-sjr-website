@@ -1204,3 +1204,26 @@ Expected effect:
 
 - Google receives a cleaner freshness signal for the updated static/service shell and the HTML sitemap route.
 - The next GSC indexing manifest should show whether `/site-map` moves from `URL is unknown to Google` to discovered or indexed.
+
+## GSC Movement Checkpoint (2026-05-13)
+
+Ran the authenticated URL Inspection API against all 42 canonical manifest URLs on 2026-05-13, then reran the unresolved queue to confirm the monitoring script's movement classification. Regenerated `Docs/INDEXING_MANIFEST.md` from the latest inspection evidence.
+
+Current GSC status:
+
+- Indexed: 28
+- Discovered - currently not indexed: 12
+- URL is unknown to Google: 2
+
+Movement since the prior manifest:
+
+- Improved: `/blog/safe-to-clean-vintage-diamond-ring-at-home` moved from `Discovered - currently not indexed` to `Submitted and indexed` in the all-URL inspection pass.
+- Regressed: `/blog/chain-repair-weak-points` returned `URL is unknown to Google` in the follow-up unresolved-queue inspection.
+- Stable unresolved queue: service-area URLs returned to `Discovered - currently not indexed` on the follow-up check after a transient unknown response.
+- Live accessibility for `/blog/chain-repair-weak-points` is healthy: production returns `200`, the canonical tag is correct, and the URL is present in `/sitemap.xml`.
+
+Immediate recommendation:
+
+- Do not prune yet. The newest weighting/freshness changes are only beginning to show movement, and one previously stalled guide is now indexed.
+- Watch `/blog/chain-repair-weak-points` specifically. Since live accessibility and sitemap inclusion are healthy, a repeated unknown state should be treated as an index-priority/content-quality signal rather than a routing blocker.
+- Keep the unresolved queue under observation for the next checkpoint. If the same service-area pages and commercial guides remain unchanged after the next full inspection, move to a targeted quality/pruning pass instead of adding more sitewide link blocks.

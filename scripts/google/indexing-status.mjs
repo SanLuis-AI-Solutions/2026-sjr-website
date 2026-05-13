@@ -21,6 +21,37 @@ function normalizeObservedStatus(status) {
   }[status] || status || "";
 }
 
+function toObservedStatus(coverageState) {
+  return {
+    "Submitted and indexed": "indexed",
+    "Indexed, not submitted in sitemap": "indexed",
+    "Discovered - currently not indexed": "discovered-currently-not-indexed",
+    "URL is unknown to Google": "unknown-to-google",
+  }[coverageState] || null;
+}
+
+function statusRank(status) {
+  return {
+    "unknown-to-google": 0,
+    "discovered-currently-not-indexed": 1,
+    indexed: 2,
+  }[status] ?? -1;
+}
+
+function classifyMovement(previousStatus, coverageState, error) {
+  if (error) return "inspection-error";
+
+  const currentStatus = toObservedStatus(coverageState);
+  if (!previousStatus || !currentStatus) return "unknown";
+
+  const previousRank = statusRank(previousStatus);
+  const currentRank = statusRank(currentStatus);
+
+  if (currentRank > previousRank) return "improved";
+  if (currentRank < previousRank) return "regressed";
+  return "unchanged";
+}
+
 function formatStatusCounts(rows) {
   return Object.entries(
     rows.reduce((acc, row) => {
@@ -31,7 +62,30 @@ function formatStatusCounts(rows) {
   ).sort((a, b) => a[0].localeCompare(b[0]));
 }
 
+function formatMovementCounts(rows) {
+  return Object.entries(
+    rows.reduce((acc, row) => {
+      const key = row.movement || "unknown";
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {}),
+  ).sort((a, b) => a[0].localeCompare(b[0]));
+}
+
+function toMovementLabel(movement) {
+  return {
+    improved: "Improved",
+    unchanged: "Unchanged",
+    regressed: "Regressed",
+    unknown: "Unknown",
+    "inspection-error": "Inspection error",
+  }[movement] || movement || "Unknown";
+}
+
 function buildMarkdown(snapshot) {
+  const improvedRows = snapshot.rows.filter((row) => row.movement === "improved");
+  const regressedRows = snapshot.rows.filter((row) => row.movement === "regressed");
+
   return [
     "# GSC Indexing Status",
     "",
@@ -44,16 +98,36 @@ function buildMarkdown(snapshot) {
     "",
     ...snapshot.counts.map(([status, count]) => `- ${status}: ${count}`),
     "",
+    "## Movement Since Manifest",
+    "",
+    ...snapshot.movementCounts.map(([movement, count]) => `- ${toMovementLabel(movement)}: ${count}`),
+    "",
+    improvedRows.length > 0 ? "### Improved URLs" : null,
+    improvedRows.length > 0 ? "" : null,
+    ...improvedRows.map(
+      (row) =>
+        `- \`${row.path}\`: ${row.previousStatusLabel} -> ${row.coverageState || "Unknown"}`,
+    ),
+    improvedRows.length > 0 ? "" : null,
+    regressedRows.length > 0 ? "### Regressed URLs" : null,
+    regressedRows.length > 0 ? "" : null,
+    ...regressedRows.map(
+      (row) =>
+        `- \`${row.path}\`: ${row.previousStatusLabel} -> ${row.coverageState || "Unknown"}`,
+    ),
+    regressedRows.length > 0 ? "" : null,
     "## URL Inspection Results",
     "",
-    "| URL | Previous Manifest Status | Current Coverage State | Sitemap Sources | Referring URLs |",
-    "| --- | --- | --- | --- | --- |",
+    "| URL | Previous Manifest Status | Current Coverage State | Movement | Sitemap Sources | Referring URLs |",
+    "| --- | --- | --- | --- | --- | --- |",
     ...snapshot.rows.map(
       (row) =>
-        `| \`${row.path}\` | ${row.previousStatusLabel} | ${row.coverageState || row.error || "Unknown"} | ${row.sitemapCount} | ${row.referringUrlCount} |`,
+        `| \`${row.path}\` | ${row.previousStatusLabel} | ${row.coverageState || row.error || "Unknown"} | ${toMovementLabel(row.movement)} | ${row.sitemapCount} | ${row.referringUrlCount} |`,
     ),
     "",
-  ].join("\n");
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
 }
 
 async function main() {
@@ -88,6 +162,8 @@ async function main() {
         url: inspectionUrl,
         previousStatus: route.observedStatus,
         previousStatusLabel: normalizeObservedStatus(route.observedStatus),
+        currentStatus: toObservedStatus(indexStatus.coverageState || ""),
+        movement: classifyMovement(route.observedStatus, indexStatus.coverageState || ""),
         verdict: indexStatus.verdict || "",
         coverageState: indexStatus.coverageState || "",
         pageFetchState: indexStatus.pageFetchState || "",
@@ -101,6 +177,8 @@ async function main() {
         url: inspectionUrl,
         previousStatus: route.observedStatus,
         previousStatusLabel: normalizeObservedStatus(route.observedStatus),
+        currentStatus: null,
+        movement: classifyMovement(route.observedStatus, "", error),
         sitemapCount: 0,
         referringUrlCount: 0,
         error: error?.message || String(error),
@@ -114,6 +192,7 @@ async function main() {
     searchConsoleProperty: targetSite,
     scope: includeAll ? "all manifest URLs" : "unresolved manifest URLs",
     counts: formatStatusCounts(rows),
+    movementCounts: formatMovementCounts(rows),
     rows,
   };
 
