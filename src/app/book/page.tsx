@@ -59,7 +59,7 @@ export default async function BookPage({
   return (
     <SiteShell>
       <FormSubmitInitializer />
-      <section className="relative overflow-hidden bg-stone-100 py-16">
+      <section className="relative overflow-hidden bg-stone-100 py-10 md:py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
           <Suspense fallback={null}>
@@ -127,7 +127,7 @@ export default async function BookPage({
               ]}
             />
 
-            <div className="mt-8 rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600">
+            <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
               <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know
               </div>
