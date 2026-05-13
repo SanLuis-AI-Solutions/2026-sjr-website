@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      13
+      10
     ],
     [
       "indexed",
@@ -37,7 +37,7 @@
     ],
     [
       "unknown-to-google",
-      1
+      4
     ]
   ],
   "routes": [
@@ -79,7 +79,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "static",
@@ -119,7 +119,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "static",
@@ -160,7 +160,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "service-detail",
@@ -293,10 +293,10 @@
       "city": "La Porte",
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "service-area",
@@ -379,13 +379,13 @@
       "slug": "does-my-watch-need-battery-or-repair-pasadena",
       "label": "Does my watch need a battery replacement or full watch repair in Pasadena?",
       "publishedAt": "2026-04-01",
-      "reviewedAt": "2026-05-12",
+      "reviewedAt": "2026-05-13",
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "blog",
@@ -411,7 +411,7 @@
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -431,20 +431,20 @@
       "slug": "how-to-choose-a-jeweler",
       "label": "How to Choose a Trustworthy Jeweler",
       "publishedAt": "2026-02-17",
-      "reviewedAt": "2026-05-12",
+      "reviewedAt": "2026-05-13",
       "path": "/blog/how-to-choose-a-jeweler",
       "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "blog",
       "slug": "pearl-restringing-timing-guide",
       "label": "Pearl Restringing Timing: When to Restring and Why",
       "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-05-12",
+      "reviewedAt": "2026-05-13",
       "path": "/blog/pearl-restringing-timing-guide",
       "url": "https://www.susiesjewelryrepair.com/blog/pearl-restringing-timing-guide",
       "observedStatus": "discovered-currently-not-indexed",

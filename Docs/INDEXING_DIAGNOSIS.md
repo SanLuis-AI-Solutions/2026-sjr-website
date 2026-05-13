@@ -1365,3 +1365,56 @@ Interpretation:
 
 - This improves local page uniqueness and AEO extraction without increasing mobile clutter.
 - If these pages remain `Discovered - currently not indexed` after the next full URL Inspection pass, the next step should be deeper first-party proof or consolidation analysis, not more templated local copy.
+
+## May 13 Measurement Refresh And Regression Response (2026-05-13)
+
+Ran `npm run google:weekly-seo-health`, `npm run google:seo-quick-wins`, `npm run google:indexing-status -- --all`, `npm run google:indexing-manifest`, and `npm run seo:internal-link-audit` on 2026-05-13 after the latest mobile CTA simplification deploy.
+
+Current 7-day performance for 2026-05-06 to 2026-05-12:
+
+- Google Search clicks: 12
+- Google Search impressions: 1,071
+- Search CTR: 1.12%
+- Average position: 22.50
+- Production organic sessions: 16
+- Quote + booking starts: 2
+- Organic quote + booking starts: 1
+- Mobile sticky CTA clicks: 3
+- Quote + booking outcomes: 2
+- Organic quote + booking outcomes: 1
+
+Current full URL Inspection API status:
+
+- Indexed: 28
+- Discovered - currently not indexed: 10
+- URL is unknown to Google: 4
+- Regressed to unknown in the API: `/services/la-porte`, `/blog/does-my-watch-need-battery-or-repair-pasadena`, and `/blog/how-to-choose-a-jeweler`.
+- Still unknown: `/site-map`.
+
+Live technical checks on the four unknown URLs found no hard crawl blocker:
+
+- all four returned `200`
+- all four are present in production `/sitemap.xml`
+- all four have self-canonical tags
+- no `noindex` signal was found
+- internal-link audit shows all 14 unresolved targets have `29` all-source links, `28` indexed-source links, and an HTML site-map link
+
+Interpretation:
+
+- The unresolved queue is not suffering from missing internal links or a simple production routing issue.
+- The GSC unknown/discovered labels remain unstable on some URLs, but live access and sitemap evidence are healthy.
+- The right next SEO response is targeted quality differentiation and first-party proof on regressed commercial pages, not more footer/sitewide link expansion.
+
+Implemented content-quality response:
+
+1. Deepened `/blog/how-to-choose-a-jeweler` with a Pasadena repair-intake checklist for rings, chains, bracelets, watches, and heirlooms.
+2. Added quote-photo evidence guidance to `/blog/how-to-choose-a-jeweler`.
+3. Added AEO FAQs to `/blog/how-to-choose-a-jeweler` around in-house repair accountability, quote photos, and when to avoid quick promises.
+4. Deepened `/blog/does-my-watch-need-battery-or-repair-pasadena` with a pre-open watch triage section covering fog, corrosion, crown/stem symptoms, forced casebacks, and battery-vs-diagnostic decisions.
+5. Added a watch quote-photo FAQ to the battery-vs-repair guide.
+6. Updated both articles' `reviewedAt` values to 2026-05-13 so the sitemap emits fresh `<lastmod>` values for the regressed pages.
+
+Next checkpoint:
+
+- Re-run full URL Inspection after Google has had a crawl window.
+- If the same pages remain unknown/discovered after this deeper first-party pass, evaluate consolidation or add actual shop proof assets such as real repair photos, named case notes, or review-backed examples before creating more pages.

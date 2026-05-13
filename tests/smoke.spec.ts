@@ -832,6 +832,16 @@ test("trustworthy jeweler guide exposes repair-intake differentiation", async ({
   await expect(page.getByText(/whether it spins, catches on clothing, has a loose stone/i))
     .toBeVisible();
   await expect(
+    page.getByRole("heading", { name: /Our Pasadena repair-intake checklist before we quote/i }),
+  ).toBeVisible();
+  await expect(page.getByText(/clasp tongue, spring ring, jump ring, hollow link/i))
+    .toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Photo evidence that helps us give a better first answer/i }),
+  ).toBeVisible();
+  await expect(page.getByText(/one full-piece photo for scale, one close photo of the failing area/i))
+    .toBeVisible();
+  await expect(
     page.getByRole("heading", { name: "The shop cannot say who will do the repair", exact: true }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /See Watch Repair Service/i })).toBeVisible();
@@ -955,6 +965,29 @@ test("same-day watch battery guide exposes local intake differentiation", async 
   ).toBeVisible();
 
   guard.assertNoErrors("same-day watch battery intake differentiation");
+});
+
+test("battery-vs-repair guide exposes pre-open watch triage", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/does-my-watch-need-battery-or-repair-pasadena", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(
+    page.getByRole("heading", {
+      name: /The five-minute Pasadena watch triage we want before opening the case/i,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/fog under the crystal, green or white residue around the crown/i))
+    .toBeVisible();
+  await expect(page.getByText(/dial photo, a caseback photo, and a crown-side photo/i))
+    .toBeVisible();
+  await expect(
+    page.getByText(/What watch photos should I send before asking for a battery quote/i),
+  ).toBeVisible();
+
+  guard.assertNoErrors("battery vs repair pre-open triage");
 });
 
 test("sitemap excludes legacy Wix URLs and includes current geo routes", async ({ page }) => {

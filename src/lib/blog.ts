@@ -55,7 +55,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/how-to-choose-a-jeweler-cover.jpg",
     topics: ["Trust & Buying", "Heirloom Care"],
     publishedAt: "2026-02-17",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-05-13",
     readTime: "4 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -92,6 +92,39 @@ export const BLOG_POSTS: BlogPost[] = [
           "For inherited jewelry, the conversation should slow down even more. The right shop should ask whether you want to preserve the original look, reuse stones, match missing pieces, or redesign only if the structure is too worn for normal wear.",
           "If you are comparing jewelers near Pasadena, bring one close photo, one full-piece photo, and the exact moment the problem started. A trustworthy jeweler can use those details to explain the likely repair path, what still needs bench inspection, and what should not be promised from a quick glance.",
         ],
+      },
+      {
+        heading: "Our Pasadena repair-intake checklist before we quote",
+        body: [
+          "For a ring repair, we want to know whether the shank is thin at the palm side, whether any prong catches hair or clothing, whether a stone turns under light pressure, and whether the ring was resized or soldered before. Those details change whether the safer path is sizing, prong work, stone setting, or a broader rebuild.",
+          "For a chain or bracelet, we look for the exact failure point: clasp tongue, spring ring, jump ring, hollow link, solder seam, or a repeated break near an old repair. A shop that treats every broken chain as the same reconnect is skipping the part that prevents the next failure.",
+          "For heirlooms, the first decision is preservation. We ask what cannot change: original stones, engraving, patina, family metal, profile height, or the overall look. That question matters before cleaning, polishing, resetting, or redesign is discussed.",
+        ],
+      },
+      {
+        heading: "Photo evidence that helps us give a better first answer",
+        body: [
+          "The fastest useful quote usually needs three photos: one full-piece photo for scale, one close photo of the failing area, and one side-angle photo that shows height, bend, clasp condition, crown position, or stone setting depth. Those views tell us far more than a single straight-on glamour shot.",
+          "If you are choosing between repair shops, ask whether the team can explain what those photos do and do not prove. A trustworthy jeweler should be clear about what can be estimated from photos and what still requires bench inspection before final approval.",
+        ],
+      },
+    ],
+    faqHeading: "Questions to ask before choosing a repair jeweler",
+    faqs: [
+      {
+        question: "What is the first question I should ask a jewelry repair shop?",
+        answer:
+          "Ask whether the repair is handled in-house and who approves the final scope before work starts. That answer tells you whether your piece stays accountable to one local team or moves through a third-party handoff.",
+      },
+      {
+        question: "What photos help a jeweler give a better quote?",
+        answer:
+          "Send one full-piece photo, one close photo of the damage, and one side-angle photo that shows prong height, clasp condition, shank thickness, crown position, or the part that failed.",
+      },
+      {
+        question: "When should I avoid a quick repair promise?",
+        answer:
+          "Be cautious if the piece has loose stones, prior repairs, old solder, moisture exposure, a thin shank, or sentimental value and the shop promises a final answer without inspection.",
       },
     ],
     nextStepsHeading: "Best next step if you are choosing who should repair it",
@@ -556,7 +589,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
     topics: ["Pearl Care", "Preventive Care"],
     publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-05-13",
     readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -1549,7 +1582,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Diagnostics"],
     publishedAt: "2026-04-01",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-05-13",
     readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -1592,6 +1625,14 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
+        heading: "The five-minute Pasadena watch triage we want before opening the case",
+        body: [
+          "Before the back is opened, the most useful check is external: look for fog under the crystal, green or white residue around the crown or caseback, a crown that pulls too far out, hands that drag or do not set cleanly, and a caseback that looks dented, cross-threaded, or previously forced.",
+          "Those signs do not prove the movement is damaged, but they change the first conversation. A clean stopped quartz watch can usually start battery-first. A watch with moisture, corrosion, crown trouble, or evidence of forced opening should start as a diagnostic repair so the owner does not approve the wrong job.",
+          "For photo quotes, the best set is a dial photo, a caseback photo, and a crown-side photo. If the watch stopped after boating, swimming, steam, heavy sweat, or sitting dead in a drawer, say that directly because it changes the risk profile.",
+        ],
+      },
+      {
         heading: "Timing, pricing direction, and the best next step",
         body: [
           "If the watch really is a basic battery job, service often fits the Same Day/Next Day pattern. If the watch shows moisture, stripped screws, crown issues, or signs of corrosion, timing depends on what the inspection finds after intake.",
@@ -1616,6 +1657,11 @@ export const BLOG_POSTS: BlogPost[] = [
         question: "Can you usually tell the difference the same day?",
         answer:
           "In many cases, yes. A same-day intake assessment usually tells you whether the watch fits a straightforward battery path or needs broader repair attention.",
+      },
+      {
+        question: "What watch photos should I send before asking for a battery quote?",
+        answer:
+          "Send the dial, the caseback, and the crown side. Also mention water, steam, sweat, impact, sitting unused, jumping seconds, or crown trouble because those details separate battery-only work from repair diagnosis.",
       },
     ],
     nextStepsHeading: "Best next step if your watch stopped and you do not want to guess",
