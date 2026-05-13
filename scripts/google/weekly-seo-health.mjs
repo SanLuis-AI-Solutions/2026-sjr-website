@@ -87,7 +87,7 @@ async function runGaReport(analyticsData, propertyId, requestBody) {
 async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate, endDate) {
   const buildRequestBody = (pathDimension) => ({
     dateRanges: [{ startDate, endDate }],
-    dimensions: [{ name: "eventName" }],
+    dimensions: [{ name: "eventName" }, { name: pathDimension }],
     metrics: [{ name: "eventCount" }],
     dimensionFilter: {
       andGroup: {
@@ -116,25 +116,30 @@ async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate
     limit: 20,
   });
 
+  const attempts = [];
   for (const pathDimension of ["pagePathPlusQueryString", "pageLocation"]) {
     try {
-      return {
-        pathDimension,
-        rows: await runGaReport(analyticsData, propertyId, buildRequestBody(pathDimension)),
-        error: null,
-      };
-    } catch (error) {
-      if (pathDimension === "pageLocation") {
-        return {
-          pathDimension,
-          rows: [],
-          error: error?.message || String(error),
-        };
+      const rows = await runGaReport(analyticsData, propertyId, buildRequestBody(pathDimension));
+      attempts.push({ pathDimension, rows, error: null });
+      if (rows.length > 0) {
+        return { pathDimension, rows, attempts, error: null };
       }
+    } catch (error) {
+      attempts.push({ pathDimension, rows: [], error: error?.message || String(error) });
     }
   }
 
-  return { pathDimension: null, rows: [], error: "No supported page URL dimension found." };
+  const firstSuccessfulAttempt = attempts.find((attempt) => !attempt.error);
+  if (firstSuccessfulAttempt) {
+    return {
+      pathDimension: firstSuccessfulAttempt.pathDimension,
+      rows: [],
+      attempts,
+      error: null,
+    };
+  }
+
+  return { pathDimension: null, rows: [], attempts, error: "No supported page URL dimension found." };
 }
 
 async function main() {
@@ -330,6 +335,11 @@ async function main() {
     if (!(eventName in mobileStickyCtaPathEvents)) continue;
     mobileStickyCtaPathEvents[eventName] = toNum(row.metricValues?.[0]?.value);
   }
+  const mobileStickyCtaPathRows = mobileStickyCtaPathReport.rows.map((row) => ({
+    eventName: row.dimensionValues?.[0]?.value || "(not set)",
+    path: row.dimensionValues?.[1]?.value || "(not set)",
+    count: toNum(row.metricValues?.[0]?.value),
+  }));
   const hostnameSessions = allHostRows.map((row) => ({
     hostName: row.dimensionValues?.[0]?.value || "(not set)",
     sessions: toNum(row.metricValues?.[0]?.value),
@@ -358,6 +368,14 @@ async function main() {
       `Mobile sticky CTA UTM-path report could not run: ${mobileStickyCtaPathReport.error}`
     );
   }
+  if (
+    toNum(keyEvents.mobile_sticky_cta_click) > 0 &&
+    Object.values(mobileStickyCtaPathEvents).every((value) => toNum(value) === 0)
+  ) {
+    dataQualityAlerts.push(
+      "Mobile sticky CTA clicks exist, but no downstream quote/booking events were found on the sticky UTM path for this window."
+    );
+  }
 
   const snapshot = {
     generatedAt: new Date().toISOString(),
@@ -378,6 +396,12 @@ async function main() {
       mobileStickyCta: {
         pathDimension: mobileStickyCtaPathReport.pathDimension,
         pathEvents: mobileStickyCtaPathEvents,
+        pathRows: mobileStickyCtaPathRows,
+        attemptedPathDimensions: mobileStickyCtaPathReport.attempts.map((attempt) => ({
+          pathDimension: attempt.pathDimension,
+          rows: attempt.rows.length,
+          error: attempt.error,
+        })),
       },
       dataQualityAlerts,
       hostnameSessions,
@@ -520,6 +544,24 @@ async function main() {
     ),
     "",
     `- Sticky CTA path filter dimension: ${snapshot.ga4.mobileStickyCta.pathDimension || "unavailable"}`,
+    `- Sticky CTA attempted path dimensions: ${snapshot.ga4.mobileStickyCta.attemptedPathDimensions
+      .map((attempt) =>
+        `${attempt.pathDimension}: ${attempt.error ? `error (${attempt.error})` : `${attempt.rows} rows`}`
+      )
+      .join("; ")}`,
+    "",
+    "### Sticky CTA UTM Source Rows",
+    "",
+    snapshot.ga4.mobileStickyCta.pathRows.length
+      ? table(
+          ["Event", "Path", "Count"],
+          snapshot.ga4.mobileStickyCta.pathRows.map((row) => [
+            row.eventName,
+            row.path,
+            formatInt(row.count),
+          ])
+        )
+      : "_No downstream quote or booking events were returned on the sticky UTM path._",
     "",
     "## Hostname Coverage",
     "",

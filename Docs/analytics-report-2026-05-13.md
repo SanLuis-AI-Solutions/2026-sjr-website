@@ -260,3 +260,11 @@ Measurement expectation:
 
 - The next 7-day GA4 checkpoint should be more reliable for the sticky funnel: `mobile_sticky_cta_click` -> `quote_form_start` on `utm_source=mobile_sticky_cta`.
 - Do not change sticky CTA copy or destination again until one clean measurement window confirms whether the issue is real behavior or previous attribution loss.
+
+## Mobile Homepage Flow Pass (2026-05-13)
+
+Friction observed: SEO/GEO/AEO link hubs are useful for crawlability, but if they appear too early on mobile they make the page feel like a directory instead of a repair conversion flow.
+
+Change made: moved the homepage local repair paths and commercial guide hub below the primary `Start Today` CTA. The links remain crawlable and available, but mobile users now move through the simpler path first: hero -> proof -> services -> process -> trust -> FAQ -> quote CTA -> deeper local/guide links.
+
+Guardrail added: the mobile smoke test now fails if the homepage SEO link hubs move back above the primary homepage CTA.

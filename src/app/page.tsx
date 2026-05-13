@@ -30,15 +30,15 @@ async function HomeDeferredContent() {
     <>
       <ProofBand />
       <ServicesGridSection />
-      <HomeLocalRepairPaths />
       <ProcessSteps />
       <InHouseBadge />
-      <HomeCommercialGuides />
       <CraftStory />
       <ShowcaseBand />
       <Testimonials />
       <HomeFaq />
       <HomeCta />
+      <HomeLocalRepairPaths />
+      <HomeCommercialGuides />
     </>
   );
 }

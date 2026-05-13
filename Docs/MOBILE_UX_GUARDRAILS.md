@@ -21,7 +21,8 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Keep `Book a Repair` available on desktop and in lower-commitment contexts, but do not pair it as an equal mobile hero button.
 - Keep SEO guide links discoverable, but collapse secondary link sets on mobile when they are not the next conversion step.
 - Do not add decorative desktop sections to mobile unless they directly improve trust or conversion.
-- Keep the mobile flow ordered around user confidence: hero, proof, core services, local/service path help, process, then deeper guides.
+- Keep the mobile flow ordered around user confidence: hero, proof, core services, process, trust proof, FAQ, primary CTA, then SEO/GEO/AEO link hubs.
+- Do not place city-link or guide-link hubs above the primary homepage CTA on mobile. They can remain crawlable lower on the page, but they should not interrupt the main repair decision path.
 
 ## Mobile Navigation
 

@@ -230,6 +230,13 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   await finalCta.scrollIntoViewIfNeeded();
   await expect(finalCta.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
   await expect(finalCta.getByRole("link", { name: /^Book a Repair$/i })).toBeHidden();
+  const [finalTop, localTop, pricingTop] = await Promise.all([
+    finalCta.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+    localRepairPaths.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+    pricingGuides.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
+  ]);
+  expect(finalTop, "Primary home CTA should appear before SEO link hubs on mobile").toBeLessThan(localTop);
+  expect(finalTop, "Primary home CTA should appear before pricing guide links on mobile").toBeLessThan(pricingTop);
 
   guard.assertNoErrors("mobile home flow");
 });
