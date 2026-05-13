@@ -271,6 +271,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
     "href",
     "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form",
   );
+  await expect(fastQuote).toHaveAttribute("data-mobile-sticky-cta", "quote");
   await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
   const stickyMetrics = await fastQuote.evaluate((node) => {
     const element = node as HTMLElement;
