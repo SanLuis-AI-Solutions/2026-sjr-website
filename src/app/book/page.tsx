@@ -17,9 +17,9 @@ import {
 } from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
-  title: "Book a Repair | Susie’s Jewelry Repair",
+  title: "Request a Repair Time | Susie’s Jewelry Repair",
   description:
-    "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch team, and get booking confirmation by email within 1 business day.",
+    "Request a preferred repair assessment time with our in-house Pasadena jewelry and watch team. No payment required; we confirm availability by email.",
   canonical: "/book",
 });
 
@@ -83,7 +83,7 @@ export default async function BookPage({
                   {pending ? "Booking request received." : "Booking requested."}
                 </p>
                 <p className="mt-1 text-emerald-800">
-                  We will confirm availability and send details to your email.
+                  We will confirm availability or send the closest option to your email.
                 </p>
               </div>
             ) : null}
@@ -99,17 +99,18 @@ export default async function BookPage({
               </div>
             ) : null}
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-              Book a Repair
+              Repair time request
             </p>
             <h1 className="lcp-sans mt-3 text-4xl font-semibold tracking-tight text-stone-900">
-              Reserve a free 15‑minute assessment
+              Request a preferred repair time
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Request a time that works for you. We confirm availability within 1 business day.
+              Choose when you would like to come in. There is no payment today, and we confirm
+              availability within 1 business day.
             </p>
             <ConversionQuickActions
               page="book"
-              primary={{ href: "#booking-form", label: "Start Booking" }}
+              primary={{ href: "#booking-form", label: "Request Time" }}
               secondary={[
                 { href: quoteHref, label: "Get Fast Quote" },
                 { href: "/contact", label: "Contact Us", tone: "muted" },
@@ -122,7 +123,7 @@ export default async function BookPage({
               </div>
               <ul className="mt-3 space-y-2">
                 <li>• Most services are Same Day/Next Day service</li>
-                <li>• Your appointment confirms intake timing and next steps</li>
+                <li>• This is a time request; the shop confirms the final appointment by email</li>
                 <li>
                   • Need help fast? Call{" "}
                   <BusinessActionLink
@@ -191,7 +192,7 @@ export default async function BookPage({
                 No payment required
               </p>
               <p className="mt-2 leading-6">
-                Pick a preferred assessment time. We confirm by email or send the closest available option.
+                Pick the time you prefer. We confirm by email or send the closest available option.
               </p>
             </div>
             <input
@@ -271,10 +272,10 @@ export default async function BookPage({
               disabled={false}
               id="booking-submit"
             >
-              <span id="booking-submit-text">Request My Time</span>
+              <span id="booking-submit-text">Request Preferred Time</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · No payment required to request a time · Confirmation within 1 business day.
+              Secure form · No payment required · Final appointment confirmed by email.
             </p>
             </form>
           </div>

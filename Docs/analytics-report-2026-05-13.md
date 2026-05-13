@@ -160,6 +160,22 @@ Interpretation: do not add a second sticky button. The next test should reduce f
 2. Sticky CTA path test: keep one mobile button, but test whether `Book a Repair Today` or a direct phone-oriented destination outperforms `Get Fast Quote` for sticky users only. Do not change hero CTAs at the same time.
 3. Indexing quality pass: choose 3 unresolved URLs with commercial value (`/services/pearl-restringing`, `/services/la-porte`, `/blog/does-my-watch-need-battery-or-repair-pasadena`) and improve unique proof, direct answers, and source authority before another GSC recheck.
 
+## Booking CRO Pass (2026-05-13)
+
+Form Health & Friction Index before copy change: 74/100, usable with friction.
+
+Primary bottleneck: value-effort balance. The form asked for an exact date/time while copy framed the page as booking/reserving, even though the business still confirms availability later. That can make the step feel higher-commitment than quote/contact for mobile users.
+
+Change made: keep required operational fields, but reposition the page as a preferred-time request:
+
+- `Reserve a free 15-minute assessment` -> `Request a preferred repair time`
+- `Start Booking` -> `Request Time`
+- `Request My Time` -> `Request Preferred Time`
+- added clearer no-payment/final-confirmation copy around the form
+- clarified date/time fields as preferred intake times, not guaranteed appointments
+
+Measurement expectation: if commitment language was suppressing booking starts or outcomes, `/book` should show more `booking_form_start` and at least one `booking_submit_success` or `booking_submit_pending` in the next 7-day window.
+
 ## Guardrail
 
 Avoid adding more visible mobile sections unless they remove uncertainty or improve conversion. SEO/GEO/AEO content should be useful, extractable, and crawlable, but it must not create a cluttered mobile decision path.

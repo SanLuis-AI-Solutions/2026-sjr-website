@@ -165,7 +165,7 @@ export function BookingDateTimeFields() {
   return (
     <div className="mt-4 grid gap-4 sm:grid-cols-2">
       <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-        Preferred date
+        Preferred date <span className="text-brand-burgundy">*</span>
         <div ref={wrapperRef} className="relative mt-2">
           <input type="hidden" name="date" value={date} />
           <input
@@ -181,7 +181,7 @@ export function BookingDateTimeFields() {
             }}
             onInput={(event) => event.currentTarget.setCustomValidity("")}
             aria-describedby="booking-hours-note booking-date-format-note"
-            placeholder="Select a date"
+            placeholder="Choose a preferred date"
             className="w-full rounded-xl border border-stone-200 bg-white px-4 py-3 pr-12 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
           />
           <button
@@ -275,7 +275,7 @@ export function BookingDateTimeFields() {
         </div>
       </label>
       <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-        Preferred time
+        Preferred time <span className="text-brand-burgundy">*</span>
         <select
           name="time"
           value={selectedTime}
@@ -291,8 +291,8 @@ export function BookingDateTimeFields() {
                 ? "Closed on selected holiday"
                 : "Closed on Sunday"
               : date
-                ? "Select a time"
-                : "Select a date first"}
+                ? "Choose a preferred time"
+                : "Choose a date first"}
           </option>
           {timeSlots.map((slot) => (
             <option key={slot.value} value={slot.value}>
@@ -302,8 +302,8 @@ export function BookingDateTimeFields() {
         </select>
       </label>
       <p id="booking-hours-note" className="sm:col-span-2 text-xs text-stone-600">
-        Last booking start: Monday-Friday 10:00 AM-5:00 PM, Saturday 10:00 AM-3:00 PM, Sunday closed.
-        Holidays can be blocked when configured.
+        These are preferred intake times, not guaranteed appointments. Last request start:
+        Monday-Friday 10:00 AM-5:00 PM, Saturday 10:00 AM-3:00 PM, Sunday closed.
       </p>
       <p id="booking-date-format-note" className="sr-only">
         Selected date is submitted in year-month-day format.
