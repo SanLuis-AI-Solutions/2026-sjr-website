@@ -243,7 +243,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             href="/book"
                             eventName="article_mid_cta_click"
                             eventParams={{ blog_slug: post.slug, cta_target: "book" }}
-                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                            className="micro-interaction hidden min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
                           >
                             Book Repair
                           </TrackedLink>

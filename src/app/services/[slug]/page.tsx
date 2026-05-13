@@ -1718,7 +1718,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="book"
-                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+                className="micro-interaction hidden min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex sm:w-auto"
               >
                 Book Repair
               </Link>

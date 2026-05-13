@@ -372,6 +372,30 @@ test("mobile service detail: what-to-expect content + faqs render", async ({ pag
   guard.assertNoErrors("service detail: jewelry-cleaning");
 });
 
+test("mobile service and article pages keep quote CTA dominant", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/services/watch-repair", { waitUntil: "networkidle" });
+  const serviceHero = page.locator('[data-service-section="hero"]');
+  await expect(serviceHero.getByRole("heading", { level: 1, name: /Watch Repair/i }))
+    .toBeVisible();
+  await expect(serviceHero.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(serviceHero.getByRole("link", { name: /^Book Repair$/i })).toBeHidden();
+
+  await page.goto("/blog/professional-cleaning-vs-home-care", { waitUntil: "networkidle" });
+  const firstDecisionBlock = page.locator("section").filter({ hasText: "Need a repair estimate?" }).first();
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /Home Jewelry Cleaning: When to Stop and Get an Inspection/i,
+    }),
+  ).toBeVisible();
+  await expect(firstDecisionBlock.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(firstDecisionBlock.getByRole("link", { name: /^Book Repair$/i })).toBeHidden();
+
+  guard.assertNoErrors("mobile quote-first cta hierarchy");
+});
+
 test("legal pages: privacy + terms exist", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -1771,10 +1795,9 @@ test("mobile services pages: hero actions are clear and image assets load", asyn
     const quote = heroSection.getByRole("link", { name: /^Get Fast Quote$/i }).first();
     const book = heroSection.getByRole("link", { name: /^Book Repair$/i }).first();
     await expect(quote).toBeVisible();
-    await expect(book).toBeVisible();
+    await expect(book).toBeHidden();
 
     await expectTapTarget(quote, `Quote tap target on ${route}`);
-    await expectTapTarget(book, `Book tap target on ${route}`);
 
     await assertNoBrokenImages(page);
   }

@@ -27,6 +27,12 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Optional phone/photos/details should not block the first meaningful form start.
 - Touch targets should stay at least 44px tall.
 
+## Service And Article Pages
+
+- Keep `Get Fast Quote` as the only dominant service/article repair CTA on narrow mobile screens.
+- Do not show `Get Fast Quote` and `Book Repair` as equal full-width mobile buttons in the same decision block.
+- Keep booking available in navigation, desktop/tablet layouts, and dedicated `/book` flows.
+
 ## Verification
 
 The smoke suite includes mobile checks for:
@@ -35,6 +41,7 @@ The smoke suite includes mobile checks for:
 - single compact sticky CTA
 - quote form required field order
 - mobile navigation reachability
+- service/article mobile CTAs remain quote-first
 
 Run focused checks after CTA/layout changes:
 
