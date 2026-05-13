@@ -343,10 +343,10 @@
       "reviewedAt": "2026-05-13",
       "path": "/blog/chain-repair-weak-points",
       "url": "https://www.susiesjewelryrepair.com/blog/chain-repair-weak-points",
-      "observedStatus": "unknown-to-google",
+      "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -460,10 +460,10 @@
       "reviewedAt": "2026-05-12",
       "path": "/blog/professional-cleaning-vs-home-care",
       "url": "https://www.susiesjewelryrepair.com/blog/professional-cleaning-vs-home-care",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-13",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "blog",

@@ -236,18 +236,6 @@ export default async function QuotePage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Phone (optional)
-              <input
-                type="tel"
-                name="phone"
-                autoComplete="tel"
-                inputMode="tel"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                placeholder="(281) 555-1234"
-              />
-            </label>
-
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
               What needs repair? <span className="text-brand-burgundy">*</span>
               <textarea
                 name="details"
@@ -261,6 +249,18 @@ export default async function QuotePage({
             <p id="quote-details-help" className="mt-2 text-xs leading-5 text-stone-600">
               Not sure what it is? Say what you can see. “Not sure” is acceptable.
             </p>
+
+            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Phone (optional)
+              <input
+                type="tel"
+                name="phone"
+                autoComplete="tel"
+                inputMode="tel"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                placeholder="(281) 555-1234"
+              />
+            </label>
 
             <details className="mt-5 group">
               <summary className="cursor-pointer text-xs uppercase tracking-[0.2em] text-stone-600 hover:text-stone-800">

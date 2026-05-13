@@ -1243,3 +1243,41 @@ Interpretation:
 
 - This is a content-intent and freshness pass, not another link-weight pass. The internal-link audit already shows `/blog/chain-repair-weak-points` has 29 source links, 28 indexed-source links, and a sitemap link.
 - If the page remains unknown after the next GSC inspection, the next move should be content consolidation or deeper first-party proof, not more sitewide footer links.
+
+## May 6-12 SEO and Conversion Checkpoint (2026-05-13)
+
+Ran `npm run google:weekly-seo-health`, `npm run google:seo-quick-wins`, `npm run google:indexing-status`, and `npm run google:indexing-manifest` on 2026-05-13.
+
+Current 7-day performance:
+
+- Google Search clicks: 8
+- Google Search impressions: 899
+- Production organic sessions: 16
+- Quote + booking starts: 2
+- Organic quote + booking starts: 1
+- Mobile sticky CTA clicks: 2
+- Quote + booking outcomes: 2
+- Organic quote + booking outcomes: 1
+
+Search and indexing observations:
+
+- Homepage still carries most quick-win demand: 18 quick-win keywords and 542 impressions.
+- `/blog/chain-repair-weak-points` moved from `URL is unknown to Google` back to `Discovered - currently not indexed` after the intent refresh and sitemap freshness update.
+- `/blog/professional-cleaning-vs-home-care` returned `URL is unknown to Google`, but live accessibility is healthy: production returns `200`, the canonical tag is correct, and the URL is present in `/sitemap.xml`.
+- `/services/ring-sizing` now appears as a quick-win page for `jewelry repair pasadena tx`, which supports keeping service pages commercially focused rather than shifting all local intent back to the homepage.
+
+Conversion observation:
+
+- The compact mobile sticky quote CTA is now receiving clicks, including 1 organic click, but the sticky-CTA UTM path did not produce tracked form starts in this reporting window.
+
+Implemented conversion response:
+
+1. Kept the mobile sticky CTA as one compact quote button.
+2. Reordered the quote form so the required path is `name -> email -> repair details`.
+3. Moved optional phone below repair details so the first decision after contact info is the actual repair description, not an optional field.
+4. Added smoke coverage for required-field order on the mobile quote form.
+
+Interpretation:
+
+- This reduces mobile form friction without removing useful optional lead data.
+- The next GA4 checkpoint should compare sticky CTA clicks against `quote_form_start` and `quote_submit_success` again before making larger quote-page layout changes.

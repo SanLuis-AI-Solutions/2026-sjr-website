@@ -312,6 +312,34 @@ test("mobile conversion pages: quote and book quick actions are clear", async ({
   guard.assertNoErrors("quote/book quick actions");
 });
 
+test("mobile quote form keeps required fields before optional phone", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/quote#quote-form", { waitUntil: "networkidle" });
+
+  const fieldPositions = await page.locator("#quote-form").evaluate((form) => {
+    const topFor = (name: string) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      return field ? Math.round(field.getBoundingClientRect().top) : null;
+    };
+
+    return {
+      name: topFor("name"),
+      email: topFor("email"),
+      details: topFor("details"),
+      phone: topFor("phone"),
+    };
+  });
+
+  expect(fieldPositions.name).toBeLessThan(fieldPositions.email ?? Infinity);
+  expect(fieldPositions.email).toBeLessThan(fieldPositions.details ?? Infinity);
+  expect(fieldPositions.details).toBeLessThan(fieldPositions.phone ?? Infinity);
+  await expect(page.getByLabel(/What needs repair/i)).toBeVisible();
+  await expect(page.getByLabel(/Phone \(optional\)/i)).toBeVisible();
+
+  guard.assertNoErrors("quote form required field order");
+});
+
 test("mobile service detail: what-to-expect content + faqs render", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
