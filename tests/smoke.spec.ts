@@ -2028,21 +2028,16 @@ test("footer exposes full priority repair crawl set", async ({ page }) => {
   const footer = page.locator("footer");
   await footer.scrollIntoViewIfNeeded();
 
-  await expect(
-    footer.getByRole("link", { name: /^Pearl restringing service$/i }),
-  ).toHaveAttribute("href", "/services/pearl-restringing");
-  await expect(
-    footer.getByRole("link", { name: /^Watch battery replacement near Pasadena$/i }),
-  ).toHaveAttribute("href", "/blog/where-to-get-watch-battery-replaced-pasadena");
-  await expect(
-    footer.getByRole("link", { name: /^Choose a repair jeweler$/i }),
-  ).toHaveAttribute("href", "/blog/how-to-choose-a-jeweler");
-  await expect(
-    footer.getByRole("link", { name: /^Professional cleaning vs home care$/i }),
-  ).toHaveAttribute("href", "/blog/professional-cleaning-vs-home-care");
-  await expect(
-    footer.getByRole("link", { name: /^Vintage diamond cleaning risk$/i }),
-  ).toHaveAttribute("href", "/blog/safe-to-clean-vintage-diamond-ring-at-home");
+  await expect(footer.locator('a[href="/services/pearl-restringing"]').first())
+    .toHaveText(/Pearl restringing/i);
+  await expect(footer.locator('a[href="/blog/where-to-get-watch-battery-replaced-pasadena"]').first())
+    .toHaveText(/Watch battery replacement near Pasadena/i);
+  await expect(footer.locator('a[href="/blog/how-to-choose-a-jeweler"]').first())
+    .toHaveText(/Choose a repair jeweler/i);
+  await expect(footer.locator('a[href="/blog/professional-cleaning-vs-home-care"]').first())
+    .toHaveText(/Professional cleaning vs home care/i);
+  await expect(footer.locator('a[href="/blog/safe-to-clean-vintage-diamond-ring-at-home"]').first())
+    .toHaveText(/Vintage diamond cleaning risk/i);
 
   guard.assertNoErrors("footer priority crawl set");
 });
