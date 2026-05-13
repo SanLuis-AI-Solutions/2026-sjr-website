@@ -2033,6 +2033,10 @@ test("mobile service detail: pearl restringing exposes strand-specific decisions
   await expect(page.getByRole("heading", { name: /Clasp decisions/i })).toBeVisible();
   await expect(page.getByText("Fraying near the clasp", { exact: true })).toBeVisible();
   await expect(page.getByText(/The full pearl strand, including any loose pearls/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /The three checks that shape a restringing quote/i }))
+    .toBeVisible();
+  await expect(page.getByText(/first knots beside the clasp/i)).toBeVisible();
+  await expect(page.getByText(/reuse, clean, adjust, or replace it/i)).toBeVisible();
 
   guard.assertNoErrors("pearl restringing strand-specific decisions");
 });

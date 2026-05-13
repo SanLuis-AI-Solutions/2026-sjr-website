@@ -1548,6 +1548,25 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           "Any missing parts, notes, or prior service info (if available)",
           "Your preferred timing and any wear concerns to address",
         ];
+  const pearlIntakeChecks = isPearlRestringing
+    ? [
+        {
+          title: "Clasp-end stress",
+          detail:
+            "We look closely at the first knots beside the clasp because fraying usually starts where the strand is opened, closed, and pulled most often.",
+        },
+        {
+          title: "Drape and spacing",
+          detail:
+            "Uneven gaps tell us whether the silk has stretched across the whole strand or whether one section is carrying more tension than the rest.",
+        },
+        {
+          title: "Clasp reuse decision",
+          detail:
+            "A worn clasp can make a newly restrung strand feel unsafe, so we confirm whether to reuse, clean, adjust, or replace it before final approval.",
+        },
+      ]
+    : [];
   const whyHeading = isWatchRepair
     ? "In-house service, clear approval, careful finishing."
     : isRingSizing
@@ -2227,6 +2246,28 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </details>
                 </div>
               </div>
+
+              {pearlIntakeChecks.length > 0 ? (
+                <div className="mt-6 rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    Pearl intake proof
+                  </div>
+                  <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                    The three checks that shape a restringing quote.
+                  </h3>
+                  <div className="mt-5 grid gap-4 md:grid-cols-3">
+                    {pearlIntakeChecks.map((item) => (
+                      <article
+                        key={item.title}
+                        className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
+                      >
+                        <h4 className="font-serif text-lg text-stone-900">{item.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-stone-700">{item.detail}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </div>
           </section>
 

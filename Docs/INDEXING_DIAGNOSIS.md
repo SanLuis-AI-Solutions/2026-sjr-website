@@ -1469,3 +1469,23 @@ Interpretation:
 - This improves AEO/GEO extraction for diagnostic commercial guides without adding visible mobile clutter.
 - The schema is intentionally limited to visible decision signals and does not claim a new rich-result type.
 - If the watch battery-vs-repair guide remains unknown after another crawl window, the next move should be deeper first-party proof or consolidation with the indexed same-day watch battery guide, not more sitewide link weight.
+
+## Pearl Restringing Intake Proof Pass (2026-05-13)
+
+Current evidence:
+
+- `/services/pearl-restringing` remains `Discovered - currently not indexed`.
+- Live routing, canonical, sitemap inclusion, and internal-link coverage are healthy.
+- Internal-link audit shows the page has broad indexed-source coverage, so another link-weight pass would add noise.
+
+Implemented:
+
+1. Added a compact `Pearl intake proof` module inside the existing `Before you visit` section.
+2. Focused the proof on three first-party intake checks that shape a restringing quote: clasp-end stress, drape/spacing, and clasp reuse decision.
+3. Kept the change inside the existing service flow with no new CTA, no new mobile link hub, and no additional conversion pressure.
+4. Added smoke coverage for the new pearl-specific intake copy.
+
+Interpretation:
+
+- This is a targeted quality-differentiation response for the only stalled service-detail page.
+- If the page remains discovered-but-not-indexed after the next crawl window, the next step should be real repair photo/case proof or consolidation analysis, not broader sitewide links.
