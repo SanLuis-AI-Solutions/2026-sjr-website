@@ -226,6 +226,22 @@ type SnapshotMeta = {
   ageDays: number | null;
 };
 
+const HEALTH_SNAPSHOT_FILES = {
+  weekly: "weekly-seo-health-latest.json",
+  reconcile: "ga4-gsc-reconciliation-90d-latest.json",
+} as const;
+
+type HealthSnapshotFile = (typeof HEALTH_SNAPSHOT_FILES)[keyof typeof HEALTH_SNAPSHOT_FILES];
+
+function resolveHealthSnapshotPath(fileName: HealthSnapshotFile) {
+  switch (fileName) {
+    case HEALTH_SNAPSHOT_FILES.weekly:
+      return path.join(process.cwd(), ".health", "weekly-seo-health-latest.json");
+    case HEALTH_SNAPSHOT_FILES.reconcile:
+      return path.join(process.cwd(), ".health", "ga4-gsc-reconciliation-90d-latest.json");
+  }
+}
+
 function asArray<T>(value: unknown): T[] {
   return Array.isArray(value) ? (value as T[]) : [];
 }
@@ -282,9 +298,9 @@ function buildApiHealth(configRows: NexusConfigRow[]): ApiHealthSummary[] {
   });
 }
 
-function readJsonSnapshot<T>(fileName: string): T | null {
+function readJsonSnapshot<T>(fileName: HealthSnapshotFile): T | null {
   try {
-    const target = path.join(process.cwd(), ".health", fileName);
+    const target = resolveHealthSnapshotPath(fileName);
     if (!fs.existsSync(target)) return null;
     return JSON.parse(fs.readFileSync(target, "utf8")) as T;
   } catch {
@@ -298,9 +314,9 @@ function parseDate(value: string | null | undefined) {
   return Number.isNaN(parsed) ? null : new Date(parsed);
 }
 
-function readSnapshotMeta(fileName: string, generatedAt?: string | null): SnapshotMeta {
+function readSnapshotMeta(fileName: HealthSnapshotFile, generatedAt?: string | null): SnapshotMeta {
   try {
-    const target = path.join(process.cwd(), ".health", fileName);
+    const target = resolveHealthSnapshotPath(fileName);
     if (!fs.existsSync(target)) {
       return {
         exists: false,
@@ -357,11 +373,11 @@ function buildStackHealth(
   ).length;
   const briefReadyCount = contentQueueRows.filter((row) => row.status === "brief_ready").length;
   const weeklyMeta = readSnapshotMeta(
-    "weekly-seo-health-latest.json",
+    HEALTH_SNAPSHOT_FILES.weekly,
     weeklySnapshot?.generatedAt
   );
   const reconcileMeta = readSnapshotMeta(
-    "ga4-gsc-reconciliation-90d-latest.json",
+    HEALTH_SNAPSHOT_FILES.reconcile,
     reconcileSnapshot?.generatedAt
   );
   const healthAgeValues = [weeklyMeta.ageDays, reconcileMeta.ageDays].filter(
@@ -724,8 +740,8 @@ export async function getNexusDashboardData(): Promise<NexusDashboardData> {
 
   const apiHealth = buildApiHealth(configRows);
   const syncRows = buildSyncRows(sharedRows, queueRows);
-  const weeklySnapshot = readJsonSnapshot<WeeklyHealthSnapshot>("weekly-seo-health-latest.json");
-  const reconcileSnapshot = readJsonSnapshot<ReconcileSnapshot>("ga4-gsc-reconciliation-90d-latest.json");
+  const weeklySnapshot = readJsonSnapshot<WeeklyHealthSnapshot>(HEALTH_SNAPSHOT_FILES.weekly);
+  const reconcileSnapshot = readJsonSnapshot<ReconcileSnapshot>(HEALTH_SNAPSHOT_FILES.reconcile);
   const stackHealth = buildStackHealth(
     contentResearchRows,
     contentQueueRows,
