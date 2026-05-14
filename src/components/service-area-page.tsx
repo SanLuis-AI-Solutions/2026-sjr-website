@@ -52,6 +52,9 @@ export function ServiceAreaLandingPage({ page }: Props) {
     })
     .slice(0, 5);
   const canonicalUrl = `https://www.susiesjewelryrepair.com/services/${page.slug}`;
+  const imageUrl = page.heroImage.startsWith("http")
+    ? page.heroImage
+    : `https://www.susiesjewelryrepair.com${page.heroImage}`;
   const quoteHref = buildServicesFinderLeadContextHref("/quote", { areaSlug: page.slug });
   const bookingHref = buildServicesFinderLeadContextHref("/book", { areaSlug: page.slug });
 
@@ -76,9 +79,14 @@ export function ServiceAreaLandingPage({ page }: Props) {
     name: `Jewelry Repair Near ${page.city}, TX`,
     serviceType: "Jewelry repair and watch repair",
     description: page.description,
+    image: imageUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": canonicalUrl,
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: `${page.city} jewelry and watch repair customers`,
     },
     areaServed: {
       "@type": page.areaSchemaType ?? "City",

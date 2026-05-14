@@ -1147,8 +1147,12 @@ test("commercial page structured data exposes entity relationships without visib
   );
   expect(laPorteServiceArea).toMatchObject({
     url: "https://www.susiesjewelryrepair.com/services/la-porte",
+    image: "https://www.susiesjewelryrepair.com/images/services/watch-repair-hero.jpg",
     mainEntityOfPage: {
       "@id": "https://www.susiesjewelryrepair.com/services/la-porte",
+    },
+    audience: {
+      audienceType: "La Porte jewelry and watch repair customers",
     },
   });
   expect(
