@@ -269,11 +269,14 @@ export const SERVICES = [
     longDescription: [
       "Pearl strands should be restrung before the thread fails, especially when the strand looks stretched, fuzzy, discolored, or uneven near the clasp.",
       "We inspect the clasp, pearl spacing, and strand length before restringing so the final result protects the pearls and hangs correctly when you wear it.",
-      "Hand-knotting between pearls is available for classic pearl strands because the knots reduce rubbing and help limit pearl loss if a strand ever breaks."
+      "Hand-knotting between pearls is available for classic pearl strands because the knots reduce rubbing and help limit pearl loss if a strand ever breaks.",
+      "The highest-risk area is usually the clasp end, where daily opening, closing, and pulling can weaken the first few knots before the rest of the strand looks urgent."
     ],
     includes: [
       "Silk restringing",
       "Hand-knotting between pearls",
+      "Clasp-end stress inspection",
+      "Drape and knot-spacing check",
       "Clasp inspection and cleaning",
       "Length adjustment if needed",
       "Pearl spacing and drape check"
