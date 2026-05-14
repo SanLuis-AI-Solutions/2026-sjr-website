@@ -17,9 +17,9 @@ import {
 } from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
-  title: "Request a Repair Time | Susie’s Jewelry Repair",
+  title: "Book a Repair Visit | Susie’s Jewelry Repair",
   description:
-    "Request a preferred repair assessment time with our in-house Pasadena jewelry and watch team. No payment required; we confirm availability by email.",
+    "Book a preferred repair visit with our in-house Pasadena jewelry and watch team. No payment required; we confirm availability by email.",
   canonical: "/book",
 });
 
@@ -112,15 +112,15 @@ export default async function BookPage({
                 color: "#1c1917",
               }}
             >
-              Request a preferred repair time
+              Book a repair visit
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Choose when you would like to come in. There is no payment today, and we confirm
-              availability within 1 business day.
+              Choose when you would like to bring the piece in. There is no payment today, and we
+              confirm availability within 1 business day.
             </p>
             <ConversionQuickActions
               page="book"
-              primary={{ href: "#booking-form", label: "Request Time" }}
+              primary={{ href: "#booking-form", label: "Choose Time" }}
               secondary={[
                 { href: quoteHref, label: "Get Fast Quote" },
                 { href: "/contact", label: "Contact Us", tone: "muted" },
@@ -282,7 +282,7 @@ export default async function BookPage({
               disabled={false}
               id="booking-submit"
             >
-              <span id="booking-submit-text">Request Preferred Time</span>
+              <span id="booking-submit-text">Request Repair Visit</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · No payment required · Final appointment confirmed by email.

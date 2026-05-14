@@ -387,7 +387,7 @@ test("mobile conversion pages keep quick actions focused on one primary path", a
   const guard = attachConsoleGuards(page);
   const routes = [
     { path: "/quote", heading: /Get a transparent starting/i, primary: /^Start Quote$/i, altAction: /^Book Repair$/i },
-    { path: "/book", heading: /Request a preferred repair time/i, primary: /^Request Time$/i, altAction: /^Get Fast Quote$/i },
+    { path: "/book", heading: /Book a repair visit/i, primary: /^Choose Time$/i, altAction: /^Get Fast Quote$/i },
   ];
 
   for (const route of routes) {
@@ -772,7 +772,7 @@ test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ pag
     {
       path: "/book-online?utm_source=google&utm_medium=book_button",
       url: /\/book\?utm_source=google&utm_medium=book_button$/,
-      heading: /Request a preferred repair time/i,
+      heading: /Book a repair visit/i,
     },
     {
       path: "/watch-repair-battery",

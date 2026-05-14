@@ -542,7 +542,7 @@ async function main() {
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Request Time$/i });
+          .getByRole("link", { name: /^Choose Time$/i });
         await clickTrackedTarget(quickAction);
       },
       report
@@ -556,7 +556,7 @@ async function main() {
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Request Time$/i });
+          .getByRole("link", { name: /^Choose Time$/i });
         await clickTrackedTarget(quickAction);
       },
       report
