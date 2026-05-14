@@ -1509,3 +1509,25 @@ Interpretation:
 
 - This is a targeted quality-differentiation response for a stalled local commercial page.
 - If `/services/clear-lake` remains discovered-but-not-indexed after another crawl window, the next move should be real shop proof assets or consolidation analysis, not more templated city copy or broader link expansion.
+
+## Index Quality Audit Guardrail (2026-05-14)
+
+Implemented:
+
+1. Added `npm run seo:index-quality-audit`.
+2. The audit fetches live production HTML for unresolved and commercial canonical pages.
+3. It checks HTTP status, self-canonical state, robots noindex, title/description presence, H1/H2 structure, visible word count, JSON-LD schema types, schema parse errors, same-category similarity, and existing indexed-source internal-link support.
+4. It writes `.health/index-quality-audit-latest.json` and `.health/index-quality-audit-latest.md`.
+
+Latest result:
+
+- Checked `32` pages, including all `14` unresolved URLs from `Docs/INDEXING_MANIFEST.json`.
+- `14/14` unresolved URLs returned `pass-monitor`.
+- `0` unresolved URLs showed a clear technical, content-depth, schema, duplication, or internal-link blocker.
+- Indexed pages with minor content-depth watch flags do not explain the unresolved queue and should not drive visible mobile clutter.
+
+Interpretation:
+
+- The remaining unresolved queue is now best treated as a Google crawl/index selection delay unless fresh GSC inspection shows a new blocker.
+- Do not add more visible homepage, footer, or mobile link hubs for these URLs based only on their unresolved status.
+- Next useful actions are GSC re-request/recheck, real first-party proof assets, or consolidation analysis if a page remains stalled through another crawl window.
