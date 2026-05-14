@@ -142,6 +142,65 @@ async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate
   return { pathDimension: null, rows: [], attempts, error: "No supported page URL dimension found." };
 }
 
+async function runMobileStickyCtaSourceReport(analyticsData, propertyId, startDate, endDate) {
+  const events = ["mobile_sticky_cta_click", ...MOBILE_STICKY_CTA_PATH_EVENTS];
+  const buildRequestBody = (sourceDimension) => ({
+    dateRanges: [{ startDate, endDate }],
+    dimensions: [{ name: "eventName" }, { name: sourceDimension }],
+    metrics: [{ name: "eventCount" }],
+    dimensionFilter: {
+      andGroup: {
+        expressions: [
+          {
+            filter: {
+              fieldName: "hostName",
+              stringFilter: { matchType: "EXACT", value: PRODUCTION_HOST },
+            },
+          },
+          {
+            filter: {
+              fieldName: "eventName",
+              inListFilter: { values: events },
+            },
+          },
+          {
+            filter: {
+              fieldName: sourceDimension,
+              stringFilter: { matchType: "EXACT", value: "mobile_sticky_cta" },
+            },
+          },
+        ],
+      },
+    },
+    limit: 20,
+  });
+
+  const attempts = [];
+  for (const sourceDimension of ["sessionManualSource", "sessionSource"]) {
+    try {
+      const rows = await runGaReport(analyticsData, propertyId, buildRequestBody(sourceDimension));
+      attempts.push({ sourceDimension, rows, error: null });
+      if (rows.length > 0) {
+        return { sourceDimension, rows, attempts, error: null };
+      }
+    } catch (error) {
+      attempts.push({ sourceDimension, rows: [], error: error?.message || String(error) });
+    }
+  }
+
+  const firstSuccessfulAttempt = attempts.find((attempt) => !attempt.error);
+  if (firstSuccessfulAttempt) {
+    return {
+      sourceDimension: firstSuccessfulAttempt.sourceDimension,
+      rows: [],
+      attempts,
+      error: null,
+    };
+  }
+
+  return { sourceDimension: null, rows: [], attempts, error: "No supported source dimension found." };
+}
+
 async function main() {
   const localEnv = loadLocalEnv();
   const { analyticsAdmin, analyticsData, webmasters } = await createGoogleClients(localEnv);
@@ -161,6 +220,7 @@ async function main() {
     keyEventRows,
     organicKeyEventRows,
     mobileStickyCtaPathReport,
+    mobileStickyCtaSourceReport,
     landingRows,
     organicLandingConversionRows,
     allHostRows,
@@ -235,6 +295,7 @@ async function main() {
       limit: 20,
     }),
     runMobileStickyCtaPathReport(analyticsData, targetPropertyId, startDate, endDate),
+    runMobileStickyCtaSourceReport(analyticsData, targetPropertyId, startDate, endDate),
     runGaReport(analyticsData, targetPropertyId, {
       dateRanges: [{ startDate, endDate }],
       dimensions: [{ name: "landingPagePlusQueryString" }],
@@ -340,6 +401,19 @@ async function main() {
     path: row.dimensionValues?.[1]?.value || "(not set)",
     count: toNum(row.metricValues?.[0]?.value),
   }));
+  const mobileStickyCtaSourceEvents = Object.fromEntries(
+    ["mobile_sticky_cta_click", ...MOBILE_STICKY_CTA_PATH_EVENTS].map((eventName) => [eventName, 0])
+  );
+  for (const row of mobileStickyCtaSourceReport.rows) {
+    const eventName = row.dimensionValues?.[0]?.value || "";
+    if (!(eventName in mobileStickyCtaSourceEvents)) continue;
+    mobileStickyCtaSourceEvents[eventName] = toNum(row.metricValues?.[0]?.value);
+  }
+  const mobileStickyCtaSourceRows = mobileStickyCtaSourceReport.rows.map((row) => ({
+    eventName: row.dimensionValues?.[0]?.value || "(not set)",
+    source: row.dimensionValues?.[1]?.value || "(not set)",
+    count: toNum(row.metricValues?.[0]?.value),
+  }));
   const hostnameSessions = allHostRows.map((row) => ({
     hostName: row.dimensionValues?.[0]?.value || "(not set)",
     sessions: toNum(row.metricValues?.[0]?.value),
@@ -368,12 +442,18 @@ async function main() {
       `Mobile sticky CTA UTM-path report could not run: ${mobileStickyCtaPathReport.error}`
     );
   }
+  if (mobileStickyCtaSourceReport.error) {
+    dataQualityAlerts.push(
+      `Mobile sticky CTA source report could not run: ${mobileStickyCtaSourceReport.error}`
+    );
+  }
   if (
     toNum(keyEvents.mobile_sticky_cta_click) > 0 &&
-    Object.values(mobileStickyCtaPathEvents).every((value) => toNum(value) === 0)
+    Object.values(mobileStickyCtaPathEvents).every((value) => toNum(value) === 0) &&
+    MOBILE_STICKY_CTA_PATH_EVENTS.every((eventName) => toNum(mobileStickyCtaSourceEvents[eventName]) === 0)
   ) {
     dataQualityAlerts.push(
-      "Mobile sticky CTA clicks exist, but no downstream quote/booking events were found on the sticky UTM path for this window."
+      "Mobile sticky CTA clicks exist, but no downstream quote/booking events were found by sticky UTM path or sticky session source for this window."
     );
   }
 
@@ -399,6 +479,14 @@ async function main() {
         pathRows: mobileStickyCtaPathRows,
         attemptedPathDimensions: mobileStickyCtaPathReport.attempts.map((attempt) => ({
           pathDimension: attempt.pathDimension,
+          rows: attempt.rows.length,
+          error: attempt.error,
+        })),
+        sourceDimension: mobileStickyCtaSourceReport.sourceDimension,
+        sourceEvents: mobileStickyCtaSourceEvents,
+        sourceRows: mobileStickyCtaSourceRows,
+        attemptedSourceDimensions: mobileStickyCtaSourceReport.attempts.map((attempt) => ({
+          sourceDimension: attempt.sourceDimension,
           rows: attempt.rows.length,
           error: attempt.error,
         })),
@@ -525,20 +613,40 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_start),
         ],
         [
+          "quote_form_start on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_form_start),
+        ],
+        [
           "booking_form_start on sticky CTA UTM path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_form_start),
+        ],
+        [
+          "booking_form_start on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_form_start),
         ],
         [
           "quote_submit_success on sticky CTA UTM path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_submit_success),
         ],
         [
+          "quote_submit_success on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_submit_success),
+        ],
+        [
           "booking_submit_success on sticky CTA UTM path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_success),
         ],
         [
+          "booking_submit_success on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_submit_success),
+        ],
+        [
           "booking_submit_pending on sticky CTA UTM path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_pending),
+        ],
+        [
+          "booking_submit_pending on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_submit_pending),
         ],
       ]
     ),
@@ -549,8 +657,14 @@ async function main() {
         `${attempt.pathDimension}: ${attempt.error ? `error (${attempt.error})` : `${attempt.rows} rows`}`
       )
       .join("; ")}`,
+    `- Sticky CTA source filter dimension: ${snapshot.ga4.mobileStickyCta.sourceDimension || "unavailable"}`,
+    `- Sticky CTA attempted source dimensions: ${snapshot.ga4.mobileStickyCta.attemptedSourceDimensions
+      .map((attempt) =>
+        `${attempt.sourceDimension}: ${attempt.error ? `error (${attempt.error})` : `${attempt.rows} rows`}`
+      )
+      .join("; ")}`,
     "",
-    "### Sticky CTA UTM Source Rows",
+    "### Sticky CTA UTM Path Rows",
     "",
     snapshot.ga4.mobileStickyCta.pathRows.length
       ? table(
@@ -562,6 +676,19 @@ async function main() {
           ])
         )
       : "_No downstream quote or booking events were returned on the sticky UTM path._",
+    "",
+    "### Sticky CTA Session Source Rows",
+    "",
+    snapshot.ga4.mobileStickyCta.sourceRows.length
+      ? table(
+          ["Event", "Source", "Count"],
+          snapshot.ga4.mobileStickyCta.sourceRows.map((row) => [
+            row.eventName,
+            row.source,
+            formatInt(row.count),
+          ])
+        )
+      : "_No sticky source-attributed quote or booking rows were returned._",
     "",
     "## Hostname Coverage",
     "",
