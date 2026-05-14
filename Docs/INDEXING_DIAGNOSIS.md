@@ -1531,3 +1531,33 @@ Interpretation:
 - The remaining unresolved queue is now best treated as a Google crawl/index selection delay unless fresh GSC inspection shows a new blocker.
 - Do not add more visible homepage, footer, or mobile link hubs for these URLs based only on their unresolved status.
 - Next useful actions are GSC re-request/recheck, real first-party proof assets, or consolidation analysis if a page remains stalled through another crawl window.
+
+## Internal Link Weighting Decision (2026-05-14)
+
+Fresh checks run:
+
+```bash
+npm run seo:internal-link-audit
+npm run seo:index-quality-audit
+```
+
+Current evidence:
+
+- `Docs/INDEXING_MANIFEST.md` now shows `28` indexed URLs, `13` discovered-currently-not-indexed URLs, and `1` URL unknown to Google (`/site-map`).
+- `/services/friendswood` improved from unknown to discovered-currently-not-indexed.
+- `/blog/pearl-restringing-timing-guide` improved from unknown to discovered-currently-not-indexed.
+- The only unknown URL is now the non-commercial `/site-map` utility page.
+- Internal-link audit shows every unresolved commercial URL has at least `3` non-footer links from indexed pages.
+- Index-quality audit shows `14/14` unresolved URLs have no clear technical, content-depth, schema, duplication, or internal-link blocker.
+
+Decision:
+
+- Do not add more visible contextual link blocks, homepage hubs, footer expansions, or mobile CTAs for the unresolved commercial queue right now.
+- The commercial pages already have enough indexed-source internal links for the current stage.
+- Treat remaining discovered-currently-not-indexed URLs as Google index-selection lag unless URL Inspection shows a new error.
+
+Next escalation threshold:
+
+- If a commercial URL remains discovered-currently-not-indexed after the next full GSC reinspection window, do not add more generic copy or sitewide links.
+- Escalate only to one of these higher-signal moves: real repair photos, named first-party case notes, review-backed proof, Google Business Profile/service-area corroboration, or consolidation with an already indexed page serving the same intent.
+- Keep `/site-map` out of visible link-weighting decisions unless it becomes commercially important.
