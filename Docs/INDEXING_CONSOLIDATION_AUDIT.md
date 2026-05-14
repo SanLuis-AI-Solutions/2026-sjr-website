@@ -17,11 +17,11 @@
 | Cluster | Unresolved URLs | Indexed alternatives | Recommendation | Action |
 | --- | --- | --- | --- | --- |
 | Utility pages | /site-map (unknown-to-google) | / (indexed) | ignore-for-growth | Do not weight visibly. |
-| Pearl restringing | /services/pearl-restringing (discovered-currently-not-indexed)<br>/blog/pearl-restringing-timing-guide (discovered-currently-not-indexed) | /blog/how-much-does-pearl-restringing-cost-pasadena (indexed)<br>/services/necklace-repair (indexed) | proof-first-then-merge-guide-if-stalled | Prepare proof or consolidation decision. |
+| Pearl restringing | /services/pearl-restringing (discovered-currently-not-indexed) | /blog/how-much-does-pearl-restringing-cost-pasadena (indexed)<br>/services/necklace-repair (indexed) | service-proof-first-if-stalled | Prepare proof or consolidation decision. |
 | Watch battery diagnosis | /blog/does-my-watch-need-battery-or-repair-pasadena (discovered-currently-not-indexed) | /blog/watch-battery-replacement (indexed)<br>/services/watch-repair (indexed) | proof-first-or-merge-diagnostic-if-stalled | Prepare proof or consolidation decision. |
 | Stone, chain, and cleaning risk | /blog/chain-repair-weak-points (discovered-currently-not-indexed)<br>/blog/professional-cleaning-vs-home-care (discovered-currently-not-indexed)<br>/blog/stone-security-checklist (discovered-currently-not-indexed) | /services/necklace-repair (indexed)<br>/blog/safe-to-clean-vintage-diamond-ring-at-home (indexed)<br>/blog/can-a-severely-bent-ring-prong-be-fixed (indexed) | proof-first-then-merge-overlapping-guides | Prepare proof or consolidation decision. |
 | Jeweler trust guide | /blog/how-to-choose-a-jeweler (discovered-currently-not-indexed) | /about (indexed)<br>/services/heirloom-restoration (indexed)<br>/blog/heirloom-restoration-planning-guide (indexed) | proof-first-or-fold-into-about | Prepare proof or consolidation decision. |
-| Service-area pages | /services/clear-lake (discovered-currently-not-indexed)<br>/services/friendswood (discovered-currently-not-indexed)<br>/services/la-porte (discovered-currently-not-indexed)<br>/services/pasadena (discovered-currently-not-indexed)<br>/services/webster (discovered-currently-not-indexed) | /services/deer-park (indexed)<br>/services (indexed) | city-proof-first-then-service-area-hub | Prepare proof or consolidation decision. |
+| Service-area pages | /services/clear-lake (discovered-currently-not-indexed)<br>/services/friendswood (discovered-currently-not-indexed)<br>/services/la-porte (unknown-to-google)<br>/services/pasadena (discovered-currently-not-indexed)<br>/services/webster (discovered-currently-not-indexed) | /services/deer-park (indexed)<br>/services (indexed) | city-proof-first-then-service-area-hub | Prepare proof or consolidation decision. |
 
 ## Cluster Notes
 
@@ -33,9 +33,9 @@ Recommendation: `ignore-for-growth`
 
 ### Pearl restringing
 
-The service page is commercially important and should be held for real pearl proof. The timing guide overlaps the indexed pearl-cost article and is the cleaner merge candidate if no proof assets arrive.
+The timing guide was consolidated into the indexed pearl-cost article. Keep the service page separate because it is the commercial conversion page; improve it only with real pearl proof if it remains stalled.
 
-Recommendation: `proof-first-then-merge-guide-if-stalled`
+Recommendation: `service-proof-first-if-stalled`
 
 ### Watch battery diagnosis
 
@@ -65,5 +65,4 @@ Recommendation: `city-proof-first-then-service-area-hub`
 
 If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, start with the lowest-risk consolidation candidates:
 
-- `/blog/pearl-restringing-timing-guide` into `/blog/how-much-does-pearl-restringing-cost-pasadena` or `/services/pearl-restringing`.
 - `/blog/professional-cleaning-vs-home-care` into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.

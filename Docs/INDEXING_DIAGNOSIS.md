@@ -1627,3 +1627,19 @@ Interpretation:
 
 - This reduces overlapping watch-battery URLs while keeping the visitor path simpler.
 - Future watch-battery work should add first-party proof to the indexed article, not recreate a second same-intent location guide.
+
+## Pearl Timing Guide Consolidation (2026-05-14)
+
+Authenticated GSC recheck on 2026-05-14 showed `/blog/pearl-restringing-timing-guide` unchanged as `Discovered - currently not indexed`.
+
+Decision:
+
+- Consolidated pearl timing, warning-sign, and event-deadline guidance into the already indexed `/blog/how-much-does-pearl-restringing-cost-pasadena` article.
+- Removed the stalled timing URL from canonical blog, sitemap, commercial-guide, and helpful-read inventories.
+- Added a permanent redirect from `/blog/pearl-restringing-timing-guide` to `/blog/how-much-does-pearl-restringing-cost-pasadena`.
+- Kept the user journey simpler by avoiding another visible homepage block, footer hub, or mobile CTA path.
+
+Interpretation:
+
+- This leaves `/services/pearl-restringing` as the separate commercial conversion page and the indexed pearl-cost article as the combined informational answer.
+- Future pearl work should add real proof to the service page or indexed cost article, not recreate a second timing-only article.

@@ -19,11 +19,11 @@ const clusters = [
   },
   {
     name: "Pearl restringing",
-    unresolved: ["/services/pearl-restringing", "/blog/pearl-restringing-timing-guide"],
+    unresolved: ["/services/pearl-restringing"],
     indexedAlternatives: ["/blog/how-much-does-pearl-restringing-cost-pasadena", "/services/necklace-repair"],
-    recommendation: "proof-first-then-merge-guide-if-stalled",
+    recommendation: "service-proof-first-if-stalled",
     rationale:
-      "The service page is commercially important and should be held for real pearl proof. The timing guide overlaps the indexed pearl-cost article and is the cleaner merge candidate if no proof assets arrive.",
+      "The timing guide was consolidated into the indexed pearl-cost article. Keep the service page separate because it is the commercial conversion page; improve it only with real pearl proof if it remains stalled.",
   },
   {
     name: "Watch battery diagnosis",
@@ -193,7 +193,6 @@ function renderMarkdown(audit) {
     "If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, start with the lowest-risk consolidation candidates:",
     "",
     mdList([
-      "`/blog/pearl-restringing-timing-guide` into `/blog/how-much-does-pearl-restringing-cost-pasadena` or `/services/pearl-restringing`.",
       "`/blog/professional-cleaning-vs-home-care` into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.",
     ]),
     "",

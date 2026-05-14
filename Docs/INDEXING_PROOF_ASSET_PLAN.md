@@ -6,11 +6,11 @@ This plan protects the mobile experience while the remaining commercial pages wo
 
 ## Current Evidence
 
-- `npm run google:indexing-status` checked 14 unresolved manifest URLs: 13 remain `Discovered - currently not indexed`, and `/site-map` remains `URL is unknown to Google`.
+- `npm run google:indexing-status` checked 13 unresolved manifest URLs: 11 remain `Discovered - currently not indexed`, `/site-map` remains `URL is unknown to Google`, and `/services/la-porte` regressed to `URL is unknown to Google`.
 - `npm run seo:internal-link-audit` passed: every unresolved commercial URL already has indexed-source internal links and non-footer links.
 - `npm run seo:index-quality-audit` passed: unresolved URLs show no clear status, canonical, noindex, schema, duplication, content-depth, or internal-link blocker.
 - `npm run seo:consolidation-audit` maps each unresolved commercial cluster to indexed alternatives so consolidation decisions can happen without adding generic link blocks.
-- `npm run ux:mobile-flow` passed on 38 production routes: mobile quote/book competition, expanded footer link walls, expanded crawl hubs, and sticky CTA drift were not detected.
+- `npm run ux:mobile-flow` passed on 37 production routes: mobile quote/book competition, expanded footer link walls, expanded crawl hubs, and sticky CTA drift were not detected.
 - The latest quick-win report is still homepage-heavy, so unresolved pages are not yet carrying meaningful organic traffic.
 
 ## Asset Provenance Guardrail
@@ -33,7 +33,6 @@ Freeze generic SEO expansion that adds visible density. Future indexing work sho
 URLs:
 
 - `/services/pearl-restringing`
-- `/blog/pearl-restringing-timing-guide`
 
 Needed proof:
 
@@ -44,15 +43,15 @@ Needed proof:
 
 Action:
 
-- If proof assets are available, add a compact proof module to the service page and enrich the timing guide.
-- If no proof assets are available after the next checkpoint, evaluate consolidating the timing guide into the indexed pearl-cost article or the service page.
+- The timing guide has been consolidated into `/blog/how-much-does-pearl-restringing-cost-pasadena`.
+- If proof assets are available, add a compact proof module to the service page without creating new mobile link hubs.
+- If no proof assets are available after the next checkpoint, hold the service page and avoid adding generic pearl copy.
 
 ### Watch Diagnosis
 
 URLs:
 
 - `/blog/does-my-watch-need-battery-or-repair-pasadena`
-- `/blog/where-to-get-watch-battery-replaced-pasadena`
 
 Needed proof:
 
@@ -63,7 +62,8 @@ Needed proof:
 Action:
 
 - If proof assets are available, add a decision-proof block that helps customers decide whether to request a quote or bring the watch in.
-- If no proof assets are available after the next checkpoint, evaluate consolidation into `/blog/watch-battery-replacement` or `/services/watch-repair`.
+- The same-day location guide has been consolidated into `/blog/watch-battery-replacement`.
+- If no proof assets are available after the next checkpoint, evaluate whether the remaining diagnostic guide should be folded into `/blog/watch-battery-replacement` or `/services/watch-repair`.
 
 ### Stone, Chain, And Cleaning Risk
 

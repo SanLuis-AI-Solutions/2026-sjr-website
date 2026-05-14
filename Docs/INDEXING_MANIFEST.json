@@ -11,7 +11,7 @@
   "countsByCategory": [
     [
       "blog",
-      15
+      14
     ],
     [
       "service-area",
@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      12
+      10
     ],
     [
       "indexed",
@@ -37,7 +37,7 @@
     ],
     [
       "unknown-to-google",
-      1
+      2
     ]
   ],
   "routes": [
@@ -293,10 +293,10 @@
       "city": "La Porte",
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
-      "observedStatus": "discovered-currently-not-indexed",
+      "observedStatus": "unknown-to-google",
       "observedOn": "2026-05-14",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
     },
     {
       "category": "service-area",
@@ -418,7 +418,7 @@
       "slug": "how-much-does-pearl-restringing-cost-pasadena",
       "label": "How much does pearl restringing cost in Pasadena?",
       "publishedAt": "2026-04-01",
-      "reviewedAt": "2026-05-12",
+      "reviewedAt": "2026-05-14",
       "path": "/blog/how-much-does-pearl-restringing-cost-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/how-much-does-pearl-restringing-cost-pasadena",
       "observedStatus": "indexed",
@@ -434,19 +434,6 @@
       "reviewedAt": "2026-05-13",
       "path": "/blog/how-to-choose-a-jeweler",
       "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
-    },
-    {
-      "category": "blog",
-      "slug": "pearl-restringing-timing-guide",
-      "label": "Pearl Restringing Timing: When to Restring and Why",
-      "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-05-13",
-      "path": "/blog/pearl-restringing-timing-guide",
-      "url": "https://www.susiesjewelryrepair.com/blog/pearl-restringing-timing-guide",
       "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-14",
       "nextAction": "request-indexing-and-recheck",

@@ -598,107 +598,6 @@ export const BLOG_POSTS: BlogPost[] = [
     },
   },
   {
-    slug: "pearl-restringing-timing-guide",
-    title: "Pearl Restringing Timing: When to Restring and Why",
-    excerpt:
-      "A practical guide to when pearls should be restrung, what warning signs matter, and how to avoid strand failure before an important event.",
-    image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
-    topics: ["Pearl Care", "Preventive Care"],
-    publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-13",
-    readTime: "6 min read",
-    authorName: "Susie’s In-House Team",
-    authorRole: "Master Craftsmanship Team",
-    keyTakeaways: [
-      "Many frequently worn strands benefit from restringing every 1-2 years.",
-      "Visible gaps, fuzzy string, discoloration, and fraying near the clasp are early warning signs.",
-      "Hand-knotting and clasp inspection are part of what makes professional restringing safer than waiting for failure.",
-    ],
-    sections: [
-      {
-        heading: "Why timely restringing matters",
-        body: [
-          "Pearls and beads usually do not fail without warning. The string stretches, knots loosen, or the clasp area starts to fray long before the whole strand breaks. The problem is that many owners notice the issue only after the necklace already feels risky to wear.",
-          "In our Pasadena workshop, pearl restringing is treated as preventive care rather than emergency cleanup. A strand that still looks mostly intact is often the best candidate for service because the pearls can be restrung, cleaned, and returned to a comfortable drape before anything is lost.",
-          "That matters even more if you wear the strand for church, work, weddings, anniversaries, or family gatherings. Waiting until the necklace snaps usually creates a more stressful repair and can mean searching for missing pearls or dealing with a damaged clasp at the same time.",
-        ],
-      },
-      {
-        heading: "How often should pearls be restrung?",
-        body: [
-          "A practical baseline for many pearl strands is every 1-2 years if they are worn often. That recommendation changes based on how the strand is stored, how frequently it is worn, and how much strain the clasp area sees when it is put on and taken off.",
-          "A special-occasion strand that comes out only a few times a year may last longer. A favorite strand worn weekly usually needs closer attention. The important thing is not chasing a calendar date; it is noticing whether the string still looks clean, firm, and evenly spaced.",
-          "If you are unsure whether your pearls are still safe, bring them in before an event rather than after. An in-house assessment is more useful than guessing from one small section of string at home.",
-        ],
-      },
-      {
-        heading: "Signs it is time to restring now",
-        body: [
-          "The clearest warning signs are visible gaps between pearls, string discoloration, fuzzy or frayed silk, uneven knot spacing, and wear near the clasp. If the strand no longer sits evenly, that usually means the string has already stretched beyond its ideal tension.",
-          "Another overlooked warning sign is when the necklace feels different against the neck. If the drape looks looser than it used to or the clasp area feels twisted, the strand may not be distributing tension evenly anymore.",
-          "These are the kinds of details we look for during pearl restringing quotes in Pasadena. Catching them early is usually the difference between a simple preventive restring and a higher-stress situation after a break.",
-        ],
-      },
-      {
-        heading: "What professional restringing includes",
-        body: [
-          "At Susie's, restringing is more than sliding pearls onto fresh thread. The service typically includes fresh silk stringing, hand-knotting between pearls, clasp inspection, and length adjustment if needed. Hand-knotting helps protect pearls from rubbing against each other and keeps spacing more consistent along the strand.",
-          "The clasp is worth paying attention to as well. A strand can be perfectly restrung and still feel unreliable if the clasp is worn, dirty, or difficult to close. That is why clasp cleaning, inspection, and possible replacement are part of the same conversation.",
-          "If the strand is part of a bigger refresh, this is also the right moment to ask about cleaning, length changes, or a clasp upgrade. Combining those decisions into one visit keeps the repair plan clearer and prevents repeat handling of the same piece.",
-        ],
-      },
-      {
-        heading: "What to expect on timing and cost",
-        body: [
-          "Most pearl restringing work follows our Same Day/Next Day pattern when the strand is straightforward and does not need unusual clasp work. More complex strands, very long pieces, or projects that need extra matching or adjustments can take longer, but timing is confirmed before work starts.",
-          "Pricing is usually shaped by strand length, knot count, and clasp condition rather than one flat number for every necklace. That is why the best quote happens after we see the actual strand, not from a vague description alone.",
-          "If your pearls matter to you, the safest move is not waiting for failure. Bring the strand in while it is still wearable enough to evaluate calmly, then let the quote and condition check tell you whether service should happen now.",
-        ],
-      },
-      {
-        heading: "The pearl-strand timing check we want before an event deadline",
-        body: [
-          "If the necklace is needed for a wedding, church service, anniversary, graduation, or trip, the intake question is not only 'can it be restrung?' It is whether the strand is still intact enough for a clean same-day path or whether clasp work, missing pearls, re-sorting, or heavy stretch will make rushing the job risky.",
-          "Before requesting a quote, check three areas: the first few knots beside the clasp, the widest visible gap between pearls, and whether the strand twists or hangs unevenly when clasped. Those details tell us more about timing than a general description like 'old pearls' or 'needs restringing.'",
-          "For a photo quote, send one full-length photo, one close photo of the clasp and end knots, and the date you need the strand back. That lets the first recommendation separate preventive restringing from repair-after-failure before you make plans around the necklace.",
-        ],
-      },
-    ],
-    faqHeading: "Quick answers about pearl restringing timing",
-    faqs: [
-      {
-        question: "How often should pearls be restrung if I wear them regularly?",
-        answer:
-          "Many frequently worn strands benefit from restringing every 1-2 years, but the real trigger is condition. If the string looks stretched, frayed, discolored, or uneven, it is time to bring the strand in.",
-      },
-      {
-        question: "Do you knot between each pearl?",
-        answer:
-          "Yes. Hand-knotting helps reduce rubbing between pearls, keeps spacing cleaner, and adds protection if part of the strand is stressed.",
-      },
-      {
-        question: "Can you replace or upgrade the clasp during restringing?",
-        answer:
-          "Often, yes. We can inspect, clean, replace, or upgrade the clasp during the same service so the whole strand feels secure when it goes back into rotation.",
-      },
-    ],
-    nextStepsHeading: "Best next step if your strand already looks stretched or uneven",
-    nextStepsIntro:
-      "If you want a real assessment before the strand fails, start with the pearl restringing service or send photos for a quote-first recommendation.",
-    nextSteps: [
-      { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
-      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
-    ],
-    relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
-    discoveryBoosts: {
-      blogFeatured: 7,
-      serviceHub: 8,
-      geoHelpfulReads: 8,
-    },
-  },
-  {
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
@@ -1405,14 +1304,14 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
     topics: ["Pearl Care", "Pricing & Timing"],
     publishedAt: "2026-04-01",
-    reviewedAt: "2026-05-12",
-    readTime: "6 min read",
+    reviewedAt: "2026-05-14",
+    readTime: "8 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Pearl restringing cost usually depends on strand length, knot count, clasp condition, and whether the strand needs cleanup or matching work.",
       "A straight restring is different from a restring plus clasp replacement, length change, or rebuilding a strand after breakage.",
-      "The clearest quote comes after an in-house look or clear photos, not from guessing at strand length over the phone.",
+      "Timing should be judged from strand condition and event deadline, not from a generic same-day promise.",
     ],
     sections: [
       {
@@ -1447,6 +1346,22 @@ export const BLOG_POSTS: BlogPost[] = [
           "For most customers, the best next step is either a fast photo quote or bringing the strand in before it fails completely. That is what gives you the clearest pricing conversation and the safest recommendation on whether to restring now or wait.",
         ],
       },
+      {
+        heading: "When to restring before the strand fails",
+        body: [
+          "The clearest timing signals are visible gaps between pearls, string discoloration, fuzzy or frayed silk, uneven knot spacing, and wear near the clasp. If the strand no longer sits evenly, that usually means the string has already stretched beyond its ideal tension.",
+          "A practical baseline for frequently worn pearl strands is every 1-2 years, but condition matters more than the calendar. A strand worn weekly usually needs closer attention than one saved for occasional events.",
+          "Catching those signs early is usually the difference between a calm preventive restring and a more stressful repair after breakage, missing pearls, or clasp failure.",
+        ],
+      },
+      {
+        heading: "The pearl-strand timing check we want before an event deadline",
+        body: [
+          "If the necklace is needed for a wedding, church service, anniversary, graduation, or trip, the intake question is not only whether it can be restrung. It is whether the strand is still intact enough for a clean same-day path or whether clasp work, missing pearls, re-sorting, or heavy stretch will make rushing the job risky.",
+          "Before requesting a quote, check three areas: the first few knots beside the clasp, the widest visible gap between pearls, and whether the strand twists or hangs unevenly when clasped. Those details tell us more about timing than a general description like 'old pearls' or 'needs restringing.'",
+          "For a photo quote, send one full-length photo, one close photo of the clasp and end knots, and the date you need the strand back. That lets the first recommendation separate preventive restringing from repair-after-failure before you make plans around the necklace.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about pearl restringing cost",
     faqs: [
@@ -1465,13 +1380,17 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Usually, yes. Clear photos often let us give a strong starting recommendation, then we confirm the final scope once we inspect the strand in person.",
       },
+      {
+        question: "How often should pearls be restrung if I wear them regularly?",
+        answer:
+          "Many frequently worn strands benefit from restringing every 1-2 years, but the real trigger is condition. If the string looks stretched, frayed, discolored, or uneven, it is time to bring the strand in.",
+      },
     ],
     nextStepsHeading: "Best next step if you want a real pearl restringing quote",
     nextStepsIntro:
       "If the strand looks stretched, the clasp feels unreliable, or you need pricing before an event, start with pearl restringing details or send photos for a quote-first recommendation.",
     nextSteps: [
       { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
-      { label: "Check Pearl Restringing Timing", href: "/blog/pearl-restringing-timing-guide" },
       { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
@@ -1642,7 +1561,6 @@ const COMMERCIAL_GUIDE_SLUGS = [
   "chain-repair-weak-points",
   "stone-security-checklist",
   "heirloom-restoration-planning-guide",
-  "pearl-restringing-timing-guide",
 ] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
@@ -1672,7 +1590,6 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   ],
   "pearl-restringing": [
     "how-much-does-pearl-restringing-cost-pasadena",
-    "pearl-restringing-timing-guide",
     "professional-cleaning-vs-home-care",
   ],
 };

@@ -37,11 +37,9 @@ Until the remaining URLs are indexed, prioritize links to pages in the unresolve
 - `/blog/does-my-watch-need-battery-or-repair-pasadena`
 - `/blog/heirloom-restoration-planning-guide`
 - `/blog/how-to-choose-a-jeweler`
-- `/blog/pearl-restringing-timing-guide`
 - `/blog/professional-cleaning-vs-home-care`
 - `/blog/safe-to-clean-vintage-diamond-ring-at-home`
 - `/blog/stone-security-checklist`
-- `/blog/where-to-get-watch-battery-replaced-pasadena`
 
 ## Rewrite Standard
 
@@ -50,4 +48,3 @@ Before marking a page done, ask:
 > Could another AI generate this exact page without Susie's local workflow, repair judgment, or customer scenario data?
 
 If yes, the page is still too generic. Add local proof, a clearer shop point of view, and stronger decision guidance before publishing.
-

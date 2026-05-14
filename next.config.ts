@@ -120,6 +120,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/pearl-restringing-timing-guide",
+        destination: "/blog/how-much-does-pearl-restringing-cost-pasadena",
+        permanent: true,
+      },
+      {
         source: "/necklace-bracelet-repair",
         destination: "/services/necklace-repair",
         permanent: true,

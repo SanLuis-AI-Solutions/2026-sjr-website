@@ -26,8 +26,8 @@ export const PRIORITY_REPAIR_PATHS = [
   },
   {
     label: "Pearl restringing timing",
-    href: "/blog/pearl-restringing-timing-guide",
-    description: "When stretched strands should be restrung before they fail.",
+    href: "/blog/how-much-does-pearl-restringing-cost-pasadena",
+    description: "When stretched strands should be restrung and what changes the quote.",
   },
   {
     label: "Watch battery replacement near Pasadena",
