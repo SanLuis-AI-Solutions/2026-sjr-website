@@ -28,7 +28,11 @@ function hasQuote(text, href) {
 }
 
 function hasBook(text, href) {
-  return /^\/book(?:[?#]|$)/.test(href) || /^(book repair|request time|request preferred time)$/i.test(text);
+  return (
+    /^\/book(?:[?#]|$)/.test(href) ||
+    href === "#booking-form" ||
+    /^(book repair|choose time|request repair visit|request time|request preferred time)$/i.test(text)
+  );
 }
 
 function table(headers, rows) {
