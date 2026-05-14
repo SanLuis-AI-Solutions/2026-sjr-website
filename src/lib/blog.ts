@@ -474,130 +474,6 @@ export const BLOG_POSTS: BlogPost[] = [
     },
   },
   {
-    slug: "chain-repair-weak-points",
-    title: "Necklace & Bracelet Chain Repair: Weak Points to Check",
-    excerpt:
-      "How to spot necklace and bracelet chain weak points, what photos help with a repair quote, and when clasp or jump-ring work may be part of the fix.",
-    image: "/images/blog/chain-repair-weak-points-cover.jpg",
-    topics: ["Chain Repair", "Preventive Care"],
-    publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-13",
-    readTime: "6 min read",
-    authorName: "Susie’s In-House Team",
-    authorRole: "Master Craftsmanship Team",
-    keyTakeaways: [
-      "Jump rings, clasp connections, and thin chain segments are the most common weak points.",
-      "A lasting repair depends on matching the chain style, the solder work, and the clasp condition instead of only closing the broken spot.",
-      "For a photo quote, send the break point, clasp, and any pendant or charm that adds daily pull.",
-      "It is usually smarter to fix a weak chain before it fails again and risks losing the piece altogether.",
-    ],
-    sections: [
-      {
-        heading: "Where chains usually break first",
-        body: [
-          "Most chain failures happen at predictable stress points: the jump ring near the clasp, the clasp itself, and the thinnest links in the area that takes the most daily pull. That pattern holds for both necklaces and bracelets because those are the points where tension, twisting, and repeated opening-and-closing tend to collect.",
-          "Humidity, sweat, lotions, and everyday movement do not destroy a chain on their own, but over time they can contribute to wear on small joints that are already taking repeated stress. The result is usually a chain that looks fine from a distance until one weak link finally opens or snaps.",
-          "Catching those weak points early is one of the easiest ways to prevent a bigger loss, especially if the chain carries a sentimental pendant or is part of your everyday routine.",
-        ],
-      },
-      {
-        heading: "Necklace weak points and bracelet weak points are not always the same",
-        body: [
-          "Necklaces often fail at the clasp connection, the jump ring, or in a fine segment that kinks repeatedly near the front or side. Bracelets can face the same issues, but they also tend to take more abrupt impact during typing, lifting, carrying bags, and normal wrist movement.",
-          "That difference matters because a bracelet that catches on counters or desks may need a stronger clasp or a more durable repair strategy than a necklace that mainly suffers from fine-link fatigue.",
-          "At Susie's, we treat both categories as in-house repair work, but the most durable fix depends on how the piece is actually worn and where the stress is occurring.",
-        ],
-      },
-      {
-        heading: "Why clasps deserve more attention than most customers give them",
-        body: [
-          "A chain can be professionally repaired and still feel unreliable if the clasp is worn, bent, or difficult to close. In many cases the clasp is not just an accessory part. It is one of the core structural weak points in the entire piece.",
-          "That is why clasp replacement or an upgrade is often part of the repair conversation, especially on pieces that have already failed once. If the clasp feels weak in your fingers, pops open too easily, or no longer lines up well, it is worth addressing before the chain comes back into rotation.",
-          "For a customer, that can feel like an extra step. In reality, it is what helps turn a quick repair into a repair that actually lasts.",
-        ],
-      },
-      {
-        heading: "What makes one chain repair last longer than another",
-        body: [
-          "A durable repair is not just about reconnecting a broken point. It depends on using the right method for the chain style, applying controlled heat where appropriate, keeping the repair clean in appearance, and checking whether nearby links or the clasp are also becoming weak.",
-          "If only the obvious break is closed while the surrounding links stay thin or distorted, the chain often fails again close to the original repair. That is why reinforcement and inspection matter as much as the actual solder point.",
-          "At Susie's, the goal is a clean finish that looks natural and feels comfortable to wear, not a bulky or mismatched spot that solves today's break and creates tomorrow's failure.",
-        ],
-      },
-      {
-        heading: "The chain intake triage we use before recommending a repair",
-        body: [
-          "Before a necklace or bracelet repair is quoted, the useful question is not only where it broke. We also want to know whether the piece failed at a jump ring, clasp, solder joint, pendant connection, hollow link, or a section that already looks stretched or flattened.",
-          "That triage changes the repair plan. A single open jump ring may be a straightforward closure. A clasp that no longer springs shut points to hardware replacement. A hollow or paper-thin link near the break can mean the surrounding area needs reinforcement or the chain may keep failing after a spot repair.",
-          "For daily-wear chains, bring the pendant, charm, or bracelet exactly as you wear it. The weight and movement of the attached piece often explains why one section keeps taking stress. For sentimental chains, it is better to identify the weak pattern before another break risks losing the pendant entirely.",
-        ],
-      },
-      {
-        heading: "Timing, local service, and the best next step",
-        body: [
-          "Most chain repairs still fit our Same Day/Next Day pattern when the issue is straightforward and the needed parts are standard. If a premium clasp, uncommon chain style, or more delicate reconstruction is involved, the scope should be explained before the work starts.",
-          "For Pasadena customers, the easiest next step is to use the fast quote path or bring the piece in for a direct in-house assessment. That is the fastest way to learn whether the chain needs a simple link repair, a clasp replacement, or a broader reinforcement plan.",
-          "If the chain already broke once, do not assume the weak point is gone. Ask whether the clasp and nearby links should be addressed too so the repair actually lasts.",
-        ],
-      },
-    ],
-    faqHeading: "Quick answers about weak chains and clasp issues",
-    faqs: [
-      {
-        question: "What part of a chain usually breaks first?",
-        answer:
-          "The most common weak points are the jump ring near the clasp, the clasp itself, and the thinnest links in the section that takes the most daily stress.",
-      },
-      {
-        question: "Should I replace the clasp if the chain already broke once?",
-        answer:
-          "Often yes. If the clasp feels weak, misaligned, or unreliable, replacing or upgrading it can be part of making the repair last longer.",
-      },
-      {
-        question: "How long does chain repair usually take?",
-        answer:
-          "Most straightforward chain repairs follow our Same Day/Next Day pattern, but timing can stretch if the chain is delicate, needs an uncommon clasp, or requires broader reinforcement.",
-      },
-      {
-        question: "Can I get a necklace or bracelet chain repair quote from photos?",
-        answer:
-          "Yes. Send one close photo of the break, one photo of the clasp and jump ring area, and one full-piece photo showing any pendant or charm. Those details help separate a simple link repair from clasp replacement or reinforcement.",
-      },
-    ],
-    nextStepsHeading: "Best next step if your chain already feels unreliable",
-    nextStepsIntro:
-      "If the chain has a broken link, weak clasp, or repeat failure point, start with the repair service that matches the piece and request a quote-first assessment.",
-    nextSteps: [
-      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
-      { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "The clasp feels loose or opens too easily",
-        meaning: "The weak point may be the hardware, not only the broken chain link.",
-        nextAction: "Ask for clasp inspection during the chain repair quote.",
-      },
-      {
-        signal: "The chain broke near a jump ring",
-        meaning: "Stress is collecting at a connection point that may need reinforcement.",
-        nextAction: "Request necklace or bracelet repair with nearby-link inspection.",
-      },
-      {
-        signal: "The chain has failed more than once",
-        meaning: "A spot repair may not be enough if surrounding links are thin or distorted.",
-        nextAction: "Bring the chain in for an in-house durability check before wearing it again.",
-      },
-    ],
-    relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
-    discoveryBoosts: {
-      blogFeatured: 7,
-      serviceHub: 8,
-      geoHelpfulReads: 8,
-    },
-  },
-  {
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
@@ -1450,7 +1326,6 @@ const COMMERCIAL_GUIDE_SLUGS = [
   "cost-to-resize-gold-ring-pasadena",
   "how-much-does-pearl-restringing-cost-pasadena",
   "does-my-watch-need-battery-or-repair-pasadena",
-  "chain-repair-weak-points",
   "stone-security-checklist",
   "heirloom-restoration-planning-guide",
 ] as const;
@@ -1471,9 +1346,9 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
     "cost-to-resize-gold-ring-pasadena",
   ],
   "necklace-repair": [
-    "chain-repair-weak-points",
     "safe-to-clean-vintage-diamond-ring-at-home",
     "heirloom-jewelry-restoration-repair-or-redesign",
+    "heirloom-restoration-planning-guide",
   ],
   "heirloom-restoration": [
     "heirloom-jewelry-restoration-repair-or-redesign",

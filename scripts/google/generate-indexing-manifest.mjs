@@ -42,7 +42,6 @@ const OBSERVED_STATUSES = {
   "/services/la-porte": { status: "discovered-currently-not-indexed" },
   "/services/pearl-restringing": { status: "discovered-currently-not-indexed" },
   "/services/webster": { status: "discovered-currently-not-indexed" },
-  "/blog/chain-repair-weak-points": { status: "discovered-currently-not-indexed" },
   "/blog/does-my-watch-need-battery-or-repair-pasadena": {
     status: "discovered-currently-not-indexed",
     note: "Commercial blog sample still waiting on index selection.",

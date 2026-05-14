@@ -15,9 +15,9 @@ export const PRIORITY_REPAIR_PATHS = [
     description: "What to bring, photograph, and ask before restoring sentimental jewelry.",
   },
   {
-    label: "Chain weak points",
-    href: "/blog/chain-repair-weak-points",
-    description: "How clasps, jump rings, solder joints, and thin links usually fail.",
+    label: "Necklace chain repair",
+    href: "/services/necklace-repair",
+    description: "Repair clasp, jump-ring, solder-joint, and thin-link weak points before full loss.",
   },
   {
     label: "Stone security checklist",

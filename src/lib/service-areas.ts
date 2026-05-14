@@ -159,8 +159,8 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/cost-to-resize-gold-ring-pasadena",
       },
       {
-        label: "Where weak chains usually fail first",
-        href: "/blog/chain-repair-weak-points",
+        label: "Necklace chain repair weak-point service",
+        href: "/services/necklace-repair",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],
@@ -349,8 +349,8 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/heirloom-restoration-planning-guide",
       },
       {
-        label: "Where weak chains usually fail first",
-        href: "/blog/chain-repair-weak-points",
+        label: "Necklace chain repair weak-point service",
+        href: "/services/necklace-repair",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "heirloom-restoration", "custom-design"],
@@ -652,8 +652,8 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
         href: "/blog/cost-to-resize-gold-ring-pasadena",
       },
       {
-        label: "Where weak chains usually fail first",
-        href: "/blog/chain-repair-weak-points",
+        label: "Necklace chain repair weak-point service",
+        href: "/services/necklace-repair",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],

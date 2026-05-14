@@ -1242,6 +1242,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const isRingSizing = slug === "ring-sizing";
   const hasLongMobileHeroHeading = isWatchRepair || isRingSizing;
   const isPearlRestringing = slug === "pearl-restringing";
+  const isNecklaceRepair = slug === "necklace-repair";
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
   const localServiceConfig = SERVICES.find((item) => item.slug === slug);
@@ -1537,6 +1538,12 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           "The clasp you want reused, replaced, cleaned, or adjusted",
           "Your preferred finished length if the strand currently feels too long or short",
         ]
+      : isNecklaceRepair
+        ? [
+          "The necklace or chain exactly as you wear it",
+          "Any pendant, charm, clasp, jump ring, or broken link still with the piece",
+          "A note on where it failed: clasp, solder joint, pendant connection, or thin link",
+        ]
       : isCustomDesign
         ? [
           "Reference photos or style ideas",
@@ -1564,6 +1571,25 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           title: "Clasp reuse decision",
           detail:
             "A worn clasp can make a newly restrung strand feel unsafe, so we confirm whether to reuse, clean, adjust, or replace it before final approval.",
+        },
+      ]
+    : [];
+  const chainIntakeChecks = isNecklaceRepair
+    ? [
+        {
+          title: "Break location",
+          detail:
+            "We separate a simple open jump ring from a solder joint, hollow link, pendant connection, or section that already looks stretched or flattened.",
+        },
+        {
+          title: "Clasp strength",
+          detail:
+            "A chain can break again if the clasp no longer springs shut or if the jump ring beside it is carrying most of the daily pull.",
+        },
+        {
+          title: "Wear pattern",
+          detail:
+            "Bring the pendant or charm exactly as worn. Its weight often explains why one section keeps taking stress and whether reinforcement is smarter than a spot repair.",
         },
       ]
     : [];
@@ -2257,6 +2283,27 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </h3>
                   <div className="mt-5 grid gap-4 md:grid-cols-3">
                     {pearlIntakeChecks.map((item) => (
+                      <article
+                        key={item.title}
+                        className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
+                      >
+                        <h4 className="font-serif text-lg text-stone-900">{item.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-stone-700">{item.detail}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {chainIntakeChecks.length > 0 ? (
+                <div className="mt-6 rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                    Chain intake proof
+                  </div>
+                  <h3 className="mt-3 font-serif text-2xl text-stone-900">
+                    The chain intake triage we use before recommending a repair.
+                  </h3>
+                  <div className="mt-5 grid gap-4 md:grid-cols-3">
+                    {chainIntakeChecks.map((item) => (
                       <article
                         key={item.title}
                         className="rounded-2xl border border-stone-200 bg-stone-50 p-4"

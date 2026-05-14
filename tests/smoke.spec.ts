@@ -893,16 +893,18 @@ test("heirloom planning guide exposes bench-intake differentiation", async ({ pa
   guard.assertNoErrors("heirloom planning differentiation");
 });
 
-test("chain repair guide exposes intake triage differentiation", async ({ page }) => {
+test("chain repair guide redirects into indexed necklace service with triage guidance", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
   await page.goto("/blog/chain-repair-weak-points", {
     waitUntil: "networkidle",
   });
 
+  await expect(page).toHaveURL(/\/services\/necklace-repair$/);
   await expect(
     page.getByRole("heading", {
-      name: /Necklace & Bracelet Chain Repair: Weak Points to Check/i,
+      level: 1,
+      name: /Necklace Repair/i,
     }),
   ).toBeVisible();
   await expect(
@@ -910,14 +912,10 @@ test("chain repair guide exposes intake triage differentiation", async ({ page }
       name: /The chain intake triage we use before recommending a repair/i,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/failed at a jump ring, clasp, solder joint/i)).toBeVisible();
-  await expect(page.getByText(/bring the pendant, charm, or bracelet exactly as you wear it/i))
+  await expect(page.getByText(/simple open jump ring from a solder joint/i)).toBeVisible();
+  await expect(page.getByText(/Bring the pendant or charm exactly as worn/i)).toBeVisible();
+  await expect(page.getByText(/A chain can break again if the clasp no longer springs shut/i))
     .toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      name: /Can I get a necklace or bracelet chain repair quote from photos/i,
-    }),
-  ).toBeVisible();
 
   guard.assertNoErrors("chain repair intake triage");
 });
@@ -1565,7 +1563,7 @@ test("service area: la porte page exposes coastal watch and workwear differentia
   await expect(page.getByText(/what must be preserved before polishing/i)).toBeVisible();
   await expect(page.getByRole("heading", { name: /Coastal watch concern/i })).toBeVisible();
   await openMobileSidebarSection(page, /Helpful repair guides/i);
-  await expect(page.getByRole("link", { name: /Where weak chains usually fail first/i }))
+  await expect(page.getByRole("link", { name: /Necklace chain repair weak-point service/i }))
     .toBeVisible();
 
   guard.assertNoErrors("service area la porte differentiation");

@@ -11,7 +11,7 @@
   "countsByCategory": [
     [
       "blog",
-      13
+      12
     ],
     [
       "service-area",
@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      9
+      8
     ],
     [
       "indexed",
@@ -334,19 +334,6 @@
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
       "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
-    },
-    {
-      "category": "blog",
-      "slug": "chain-repair-weak-points",
-      "label": "Necklace & Bracelet Chain Repair: Weak Points to Check",
-      "publishedAt": "2026-02-18",
-      "reviewedAt": "2026-05-13",
-      "path": "/blog/chain-repair-weak-points",
-      "url": "https://www.susiesjewelryrepair.com/blog/chain-repair-weak-points",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",

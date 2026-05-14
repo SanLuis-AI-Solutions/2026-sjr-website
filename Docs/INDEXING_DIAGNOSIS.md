@@ -1659,3 +1659,21 @@ Interpretation:
 
 - This leaves one stronger indexed cleaning-risk article instead of two overlapping cleaning guides.
 - Future cleaning content should use real first-party inspection proof, not recreate another home-care comparison page.
+
+## Chain Repair Guide Consolidation (2026-05-14)
+
+The 2026-05-14 manifest still showed `/blog/chain-repair-weak-points` as `Discovered - currently not indexed`, while `/services/necklace-repair` is indexed and serves the same commercial chain-repair intent. No chain-specific first-party proof asset was available, so the weak article was consolidated instead of adding more visible link weight.
+
+Decision:
+
+- Added a permanent redirect from `/blog/chain-repair-weak-points` to `/services/necklace-repair`.
+- Removed the chain guide from canonical blog inventory, commercial guide selection, helpful-read mappings, and observed-status seed data.
+- Moved the useful chain-intake triage guidance into `/services/necklace-repair` as a compact "Chain intake proof" module.
+- Updated city helpful links and priority repair paths to point at the indexed necklace repair service page.
+- Regenerated `Docs/INDEXING_MANIFEST.md` and `Docs/INDEXING_CONSOLIDATION_AUDIT.md`; canonical inventory is now 38 URLs with 10 unresolved.
+
+Interpretation:
+
+- The page had already received an intent refresh and strong internal link coverage but remained unselected by Google.
+- The indexed service page is more commercially valuable and closer to conversion.
+- Consolidation reduces low-performing canonical surface area without adding homepage hubs, footer expansions, or mobile CTA clutter.

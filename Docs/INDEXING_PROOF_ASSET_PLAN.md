@@ -6,11 +6,11 @@ This plan protects the mobile experience while the remaining commercial pages wo
 
 ## Current Evidence
 
-- `npm run google:indexing-status` checked 13 unresolved manifest URLs: 11 remain `Discovered - currently not indexed`, `/site-map` remains `URL is unknown to Google`, and `/services/la-porte` regressed to `URL is unknown to Google`.
+- `npm run google:indexing-manifest` now tracks 38 canonical URLs after consolidating the stalled chain guide into `/services/necklace-repair`: 8 remain `Discovered - currently not indexed`, `/site-map` remains `URL is unknown to Google`, and `/services/la-porte` remains `URL is unknown to Google`.
 - `npm run seo:internal-link-audit` passed: every unresolved commercial URL already has indexed-source internal links and non-footer links.
 - `npm run seo:index-quality-audit` passed: unresolved URLs show no clear status, canonical, noindex, schema, duplication, content-depth, or internal-link blocker.
 - `npm run seo:consolidation-audit` maps each unresolved commercial cluster to indexed alternatives so consolidation decisions can happen without adding generic link blocks.
-- `npm run ux:mobile-flow` passed on 37 production routes: mobile quote/book competition, expanded footer link walls, expanded crawl hubs, and sticky CTA drift were not detected.
+- `npm run ux:mobile-flow` passed on the latest production mobile audit: mobile quote/book competition, expanded footer link walls, expanded crawl hubs, and sticky CTA drift were not detected.
 - The latest quick-win report is still homepage-heavy, so unresolved pages are not yet carrying meaningful organic traffic.
 
 ## Asset Provenance Guardrail
@@ -65,12 +65,11 @@ Action:
 - The same-day location guide has been consolidated into `/blog/watch-battery-replacement`.
 - If no proof assets are available after the next checkpoint, evaluate whether the remaining diagnostic guide should be folded into `/blog/watch-battery-replacement` or `/services/watch-repair`.
 
-### Stone, Chain, And Cleaning Risk
+### Stone And Cleaning Risk
 
 URLs:
 
 - `/blog/stone-security-checklist`
-- `/blog/chain-repair-weak-points`
 - `/blog/safe-to-clean-vintage-diamond-ring-at-home`
 
 Needed proof:
@@ -82,6 +81,7 @@ Needed proof:
 Action:
 
 - The professional-cleaning guide has been consolidated into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.
+- The chain weak-points guide has been consolidated into `/services/necklace-repair`, with its useful intake triage moved onto the indexed service page.
 - Use proof only where it answers a real pre-repair question.
 - Do not publish placeholder proof blocks or generic AI-written risk paragraphs.
 

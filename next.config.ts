@@ -130,6 +130,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/chain-repair-weak-points",
+        destination: "/services/necklace-repair",
+        permanent: true,
+      },
+      {
         source: "/necklace-bracelet-repair",
         destination: "/services/necklace-repair",
         permanent: true,

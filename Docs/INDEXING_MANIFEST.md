@@ -12,15 +12,15 @@ Generated on 2026-05-14 from canonical repo sources.
 
 ## Inventory Summary
 
-- Total canonical URLs in manifest: 39
-- blog: 13
+- Total canonical URLs in manifest: 38
+- blog: 12
 - service-area: 6
 - service-detail: 9
 - static: 11
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 9
+- Discovered - currently not indexed: 8
 - Indexed: 28
 - URL is unknown to Google: 2
 
@@ -37,7 +37,6 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/services/la-porte` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
 | `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
@@ -98,7 +97,6 @@ Decision rule:
 | `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
 | `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
 | `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |
-| `/blog/chain-repair-weak-points` | blog | Necklace & Bracelet Chain Repair: Weak Points to Check | Discovered - currently not indexed |
 | `/blog/cost-to-resize-gold-ring-pasadena` | blog | How much does it cost to resize a gold ring in Pasadena? | Indexed |
 | `/blog/custom-design-timeline-guide` | blog | Custom Jewelry Design Timeline: From Idea to Finished Piece | Indexed |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Does my watch need a battery replacement or full watch repair in Pasadena? | Discovered - currently not indexed |

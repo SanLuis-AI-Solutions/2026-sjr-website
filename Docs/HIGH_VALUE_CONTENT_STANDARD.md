@@ -33,11 +33,8 @@ Until the remaining URLs are indexed, prioritize links to pages in the unresolve
 - `/services/friendswood`
 - `/services/la-porte`
 - `/services/pearl-restringing`
-- `/blog/chain-repair-weak-points`
 - `/blog/does-my-watch-need-battery-or-repair-pasadena`
-- `/blog/heirloom-restoration-planning-guide`
 - `/blog/how-to-choose-a-jeweler`
-- `/blog/safe-to-clean-vintage-diamond-ring-at-home`
 - `/blog/stone-security-checklist`
 
 ## Rewrite Standard
