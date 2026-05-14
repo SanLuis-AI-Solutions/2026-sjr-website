@@ -403,27 +403,24 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
 
 test("mobile conversion pages keep quick actions focused on one primary path", async ({ page }) => {
   const guard = attachConsoleGuards(page);
-  const routes = [
-    { path: "/quote", heading: /Get a transparent starting/i, primary: /^Start Quote$/i, altAction: /^Book Repair$/i },
-    { path: "/book", heading: /Book a repair visit/i, primary: /^Choose Time$/i, altAction: /^Get Fast Quote$/i },
-  ];
 
-  for (const route of routes) {
-    await page.goto(route.path, { waitUntil: "networkidle" });
-    await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
+  await page.goto("/quote", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Get a transparent starting/i })).toBeVisible();
 
-    const quickActions = page.getByRole("region", { name: /^Quick actions$/i });
-    await expect(quickActions).toBeVisible();
+  const quoteQuickActions = page.getByRole("region", { name: /^Quick actions$/i });
+  await expect(quoteQuickActions).toBeVisible();
 
-    const primary = quickActions.getByRole("link", { name: route.primary });
-    const contact = quickActions.getByRole("link", { name: /^Contact Us$/i });
-    const alt = quickActions.getByRole("link", { name: route.altAction });
-    await expect(primary).toBeVisible();
-    await expect(contact).toBeHidden();
-    await expect(alt).toBeHidden();
+  const quotePrimary = quoteQuickActions.getByRole("link", { name: /^Start Quote$/i });
+  await expect(quotePrimary).toBeVisible();
+  await expect(quoteQuickActions.getByRole("link", { name: /^Contact Us$/i })).toBeHidden();
+  await expect(quoteQuickActions.getByRole("link", { name: /^Book Repair$/i })).toBeHidden();
+  await expectTapTarget(quotePrimary, "Primary tap target on /quote");
 
-    await expectTapTarget(primary, `Primary tap target on ${route.path}`);
-  }
+  await page.goto("/book", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: /Book a repair visit/i })).toBeVisible();
+  await expect(page.getByRole("region", { name: /^Quick actions$/i })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Start with a fast quote/i })).toBeHidden();
+  await expect(page.getByRole("button", { name: /^Request Repair Visit$/i })).toBeVisible();
 
   guard.assertNoErrors("quote/book quick actions");
 });

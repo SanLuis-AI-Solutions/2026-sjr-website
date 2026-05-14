@@ -2,7 +2,6 @@ import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
-import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { FormSubmitInitializer } from "@/components/form-submit-initializer";
@@ -114,18 +113,20 @@ export default async function BookPage({
             >
               Book a repair visit
             </h1>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
-              Choose when you would like to bring the piece in. There is no payment today, and we
-              confirm availability within 1 business day.
+            <p className="mt-4 max-w-xl text-sm leading-6 text-stone-600">
+              Pick a preferred drop-off time. No payment today; we confirm by email within 1
+              business day.
             </p>
-            <ConversionQuickActions
-              page="book"
-              primary={{ href: "#booking-form", label: "Choose Time" }}
-              secondary={[
-                { href: quoteHref, label: "Get Fast Quote" },
-                { href: "/contact", label: "Contact Us", tone: "muted" },
-              ]}
-            />
+            <p className="mt-5 hidden max-w-xl text-sm leading-6 text-stone-600 md:block">
+              Need a price range before choosing a time?{" "}
+              <a
+                href={quoteHref}
+                className="font-semibold text-brand-burgundy underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Start with a fast quote
+              </a>
+              .
+            </p>
 
             <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
               <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
