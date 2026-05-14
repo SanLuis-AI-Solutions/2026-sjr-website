@@ -1582,7 +1582,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Diagnostics"],
     publishedAt: "2026-04-01",
-    reviewedAt: "2026-05-13",
+    reviewedAt: "2026-05-14",
     readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -1606,6 +1606,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "If the crystal fogged, the watch took a hit, the crown feels loose, or the hands stopped after water exposure, the problem may go beyond a dead cell. Moisture, battery leakage, corrosion, and stem damage can all leave the watch looking 'dead' when the real issue is deeper inside the case.",
           "A watch that sat too long with an old battery can also move out of the quick-fix category. Once leakage starts, the risk shifts from simple battery service to whether the movement already picked up avoidable damage.",
           "For sentimental or higher-end watches, that distinction matters a lot. The wrong assumption can turn a quick local fix into a larger repair later if the real cause is missed at intake.",
+        ],
+      },
+      {
+        heading: "Battery-first or repair-first? The quick decision matrix",
+        body: [
+          "Battery-first is usually reasonable when the watch is quartz, stopped recently, has no fog under the crystal, the crown feels normal, and the caseback does not show corrosion or forced-opening marks. That is the lower-risk path because the visible story matches a normal dead-cell pattern.",
+          "Repair-first is safer when the watch stopped after water, steam, heavy sweat, impact, a hard drop, or months of sitting dead in a drawer. Those details move the job out of battery-only territory because moisture, leakage, stripped screws, and crown or stem damage can hide behind the same 'it stopped' symptom.",
+          "The gray zone is a watch that runs briefly after a new battery, loses time immediately, or stops again within days. That pattern should not be priced like a routine battery swap. It needs diagnosis because the battery may be exposing a movement, contact, or consumption problem rather than solving it.",
         ],
       },
       {
