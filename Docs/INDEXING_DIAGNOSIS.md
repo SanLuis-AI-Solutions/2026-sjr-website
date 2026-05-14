@@ -1590,3 +1590,24 @@ Decision:
 - Do not add more visible homepage sections, footer expansions, city-link hubs, or mobile CTA variants to force indexing.
 - Move the next escalation to approved first-party proof assets or consolidation analysis.
 - Use `Docs/INDEXING_PROOF_ASSET_PLAN.md` as the working plan before editing any stalled commercial page.
+
+## Consolidation Audit Added (2026-05-14)
+
+Implemented `npm run seo:consolidation-audit` to keep the next indexing escalation decision evidence-based.
+
+Outputs:
+
+- `Docs/INDEXING_CONSOLIDATION_AUDIT.md`
+- `.health/indexing-consolidation-audit-latest.md`
+- `.health/indexing-consolidation-audit-latest.json`
+
+Current result:
+
+- `5` unresolved commercial clusters remain.
+- `6` clusters have indexed alternatives that could absorb overlapping unresolved content if approved first-party proof is unavailable.
+- Lowest-risk consolidation candidates are the watch location guide, pearl timing guide, and generic home-cleaning guide.
+
+Decision:
+
+- Do not consolidate immediately without a fresh GSC checkpoint or owner-provided proof decision.
+- Use the audit after the next URL Inspection run to choose between proof enrichment and consolidation.

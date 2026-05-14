@@ -21,6 +21,7 @@
     "google:validate-prod-events": "node scripts/google/validate-prod-events.mjs",
     "seo:internal-link-audit": "node scripts/seo/internal-link-audit.mjs",
     "seo:index-quality-audit": "node scripts/seo/index-quality-audit.mjs",
+    "seo:consolidation-audit": "node scripts/seo/consolidation-audit.mjs",
     "ux:mobile-flow": "node scripts/audit/mobile-ux-flow.mjs",
     "airtable:validate": "node scripts/airtable/validate-schema.mjs",
     "supabase:apply": "node scripts/supabase/apply-schema.mjs",

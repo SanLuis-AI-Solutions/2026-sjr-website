@@ -76,6 +76,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
           npm run google:indexing-manifest
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
+          npm run seo:consolidation-audit
+          if ($LASTEXITCODE -ne 0) { $failed = 1 }
           npm run google:kpi-weekly-snapshot
           if ($LASTEXITCODE -ne 0) { $failed = 1 }
           npm run google:reconcile-90d
@@ -104,6 +106,9 @@ jobs:
             .health/indexing-status-latest.json
             Docs/INDEXING_MANIFEST.md
             Docs/INDEXING_MANIFEST.json
+            Docs/INDEXING_CONSOLIDATION_AUDIT.md
+            .health/indexing-consolidation-audit-latest.md
+            .health/indexing-consolidation-audit-latest.json
             .health/internal-link-audit-latest.md
             .health/internal-link-audit-latest.json
             .health/kpi-weekly-snapshot-latest.md
@@ -127,6 +132,7 @@ jobs:
             const quickWinsPath = 'Docs/SEO_QUICK_WINS.md';
             const indexingStatusPath = '.health/indexing-status-latest.md';
             const indexingManifestPath = 'Docs/INDEXING_MANIFEST.md';
+            const consolidationAuditPath = 'Docs/INDEXING_CONSOLIDATION_AUDIT.md';
             const internalLinkAuditPath = '.health/internal-link-audit-latest.md';
             const kpiPath = '.health/kpi-weekly-snapshot-latest.md';
             const reconcilePath = '.health/ga4-gsc-reconciliation-90d-latest.md';
@@ -173,6 +179,12 @@ jobs:
                   `Indexing manifest missing: ${indexingManifestPath}\n\nSEO snapshot exit code: ${seoExitCode}`
                 )
               : 'Indexing manifest refresh was skipped because Google service-account secrets are not configured in GitHub Actions.';
+            const consolidationAuditBody = seoStepRan
+              ? readIfExists(
+                  consolidationAuditPath,
+                  `Indexing consolidation audit missing: ${consolidationAuditPath}\n\nSEO snapshot exit code: ${seoExitCode}`
+                )
+              : 'Indexing consolidation audit was skipped because Google service-account secrets are not configured in GitHub Actions.';
             const internalLinkAuditBody = readIfExists(
               internalLinkAuditPath,
               `Internal link audit missing: ${internalLinkAuditPath}\n\nInternal link audit exit code: ${internalLinkExitCode}`
@@ -218,6 +230,10 @@ jobs:
               '## Indexing Manifest',
               '',
               indexingManifestBody,
+              '',
+              '## Indexing Consolidation Audit',
+              '',
+              consolidationAuditBody,
               '',
               '## Internal Link Audit',
               '',

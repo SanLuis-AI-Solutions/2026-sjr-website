@@ -9,8 +9,15 @@ This plan protects the mobile experience while the remaining commercial pages wo
 - `npm run google:indexing-status` checked 14 unresolved manifest URLs: 13 remain `Discovered - currently not indexed`, and `/site-map` remains `URL is unknown to Google`.
 - `npm run seo:internal-link-audit` passed: every unresolved commercial URL already has indexed-source internal links and non-footer links.
 - `npm run seo:index-quality-audit` passed: unresolved URLs show no clear status, canonical, noindex, schema, duplication, content-depth, or internal-link blocker.
+- `npm run seo:consolidation-audit` maps each unresolved commercial cluster to indexed alternatives so consolidation decisions can happen without adding generic link blocks.
 - `npm run ux:mobile-flow` passed on 38 production routes: mobile quote/book competition, expanded footer link walls, expanded crawl hubs, and sticky CTA drift were not detected.
 - The latest quick-win report is still homepage-heavy, so unresolved pages are not yet carrying meaningful organic traffic.
+
+## Asset Provenance Guardrail
+
+The current generated service-image inventory is not enough for proof-based indexing work. Many service images trace to Wikimedia or Wix/static sources, which can support page design but cannot prove Susie's-specific repair judgment.
+
+The old upload script references `C:\Users\ninef\Downloads\before broken ring.jpg` and `C:\Users\ninef\Downloads\after repaired ring.png`, but those files were not present during the 2026-05-14 asset check. Do not publish before/after proof from those paths unless the files are restored, reviewed, and approved for the target page context.
 
 ## Decision
 
@@ -129,6 +136,7 @@ npm run google:indexing-status
 npm run google:indexing-manifest
 npm run seo:internal-link-audit
 npm run seo:index-quality-audit
+npm run seo:consolidation-audit
 npm run ux:mobile-flow
 ```
 

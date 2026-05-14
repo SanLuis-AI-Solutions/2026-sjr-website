@@ -58,6 +58,7 @@ npm run google:indexing-status
 npm run google:indexing-manifest
 npm run seo:internal-link-audit
 npm run seo:index-quality-audit
+npm run seo:consolidation-audit
 npm run google:weekly-seo-health
 npm run google:seo-quick-wins
 ```
