@@ -186,7 +186,7 @@ const DECISION_MODULES: Record<string, DecisionModule> = {
     goodCandidate: "Good candidate for restringing: stretched string, visible gaps, fraying near clasp.",
     caution: "Usually not urgent: recently restrung strand with tight knots and clean spacing.",
     checklist: [
-      "First knots beside the clasp look loose, fuzzy, or darkened",
+      "Clasp-end knots look loose, fuzzy, or darkened",
       "The strand twists, sags, or hangs unevenly when clasped",
       "Visible gaps between pearls are wider in one section than the rest",
     ],
