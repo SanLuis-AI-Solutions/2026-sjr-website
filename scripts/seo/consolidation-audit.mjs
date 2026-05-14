@@ -37,7 +37,6 @@ const clusters = [
     name: "Stone, chain, and cleaning risk",
     unresolved: [
       "/blog/chain-repair-weak-points",
-      "/blog/professional-cleaning-vs-home-care",
       "/blog/stone-security-checklist",
     ],
     indexedAlternatives: [
@@ -47,7 +46,7 @@ const clusters = [
     ],
     recommendation: "proof-first-then-merge-overlapping-guides",
     rationale:
-      "These pages answer useful repair-risk questions but need real inspection photos or case notes to justify remaining separate from indexed sibling pages.",
+      "The cleaning guide was consolidated into the indexed vintage-cleaning article. Keep the remaining chain and stone guides separate only if real inspection proof supports their specific risk decisions.",
   },
   {
     name: "Jeweler trust guide",
@@ -193,7 +192,7 @@ function renderMarkdown(audit) {
     "If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, start with the lowest-risk consolidation candidates:",
     "",
     mdList([
-      "`/blog/professional-cleaning-vs-home-care` into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.",
+      "`/blog/chain-repair-weak-points` into `/services/necklace-repair` if no chain-specific proof is available.",
     ]),
     "",
   ].join("\n");

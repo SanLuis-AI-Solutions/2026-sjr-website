@@ -37,7 +37,6 @@ Until the remaining URLs are indexed, prioritize links to pages in the unresolve
 - `/blog/does-my-watch-need-battery-or-repair-pasadena`
 - `/blog/heirloom-restoration-planning-guide`
 - `/blog/how-to-choose-a-jeweler`
-- `/blog/professional-cleaning-vs-home-care`
 - `/blog/safe-to-clean-vintage-diamond-ring-at-home`
 - `/blog/stone-security-checklist`
 

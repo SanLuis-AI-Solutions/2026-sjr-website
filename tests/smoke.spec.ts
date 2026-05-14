@@ -492,10 +492,11 @@ test("mobile service and article pages keep quote CTA dominant", async ({ page }
 
   await page.goto("/blog/professional-cleaning-vs-home-care", { waitUntil: "networkidle" });
   const firstDecisionBlock = page.locator("section").filter({ hasText: "Need a repair estimate?" }).first();
+  await expect(page).toHaveURL(/\/blog\/safe-to-clean-vintage-diamond-ring-at-home$/);
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /Home Jewelry Cleaning: When to Stop and Get an Inspection/i,
+      name: /Is it safe to clean my vintage diamond ring with household products/i,
     }),
   ).toBeVisible();
   await expect(firstDecisionBlock.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
@@ -1018,10 +1019,11 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
     waitUntil: "networkidle",
   });
 
+  await expect(page).toHaveURL(/\/blog\/safe-to-clean-vintage-diamond-ring-at-home$/);
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /Home Jewelry Cleaning: When to Stop and Get an Inspection/i,
+      name: /Is it safe to clean my vintage diamond ring with household products/i,
     }),
   ).toBeVisible();
   await expect(
@@ -1046,13 +1048,8 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
   await expect(
     page.getByText(/What photos help with a cleaning or inspection quote/i),
   ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: /Check Vintage Ring Cleaning Risk/i }),
-  ).toBeVisible();
-
-  await page.goto("/blog/safe-to-clean-vintage-diamond-ring-at-home", {
-    waitUntil: "networkidle",
-  });
+  await expect(page.getByRole("link", { name: /Check Vintage Ring Cleaning Risk/i }))
+    .toHaveCount(0);
   await expect(
     page.getByRole("heading", {
       name: /The vintage-ring red flags we want checked before any stronger cleaner/i,
@@ -1068,7 +1065,7 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /Compare Professional vs Home Cleaning/i }),
-  ).toBeVisible();
+  ).toHaveCount(0);
 
   guard.assertNoErrors("cleaning guide inspection-risk differentiation");
 });
@@ -2196,8 +2193,6 @@ test("footer exposes full priority repair crawl set", async ({ page }) => {
     .toHaveText(/Watch battery replacement near Pasadena/i);
   await expect(footer.locator('a[href="/blog/how-to-choose-a-jeweler"]').first())
     .toHaveText(/Choose a repair jeweler/i);
-  await expect(footer.locator('a[href="/blog/professional-cleaning-vs-home-care"]').first())
-    .toHaveText(/Professional cleaning vs home care/i);
   await expect(footer.locator('a[href="/blog/safe-to-clean-vintage-diamond-ring-at-home"]').first())
     .toHaveText(/Vintage diamond cleaning risk/i);
 

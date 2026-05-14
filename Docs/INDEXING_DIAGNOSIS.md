@@ -1643,3 +1643,19 @@ Interpretation:
 
 - This leaves `/services/pearl-restringing` as the separate commercial conversion page and the indexed pearl-cost article as the combined informational answer.
 - Future pearl work should add real proof to the service page or indexed cost article, not recreate a second timing-only article.
+
+## Professional Cleaning Guide Consolidation (2026-05-14)
+
+Authenticated GSC recheck on 2026-05-14 showed `/blog/professional-cleaning-vs-home-care` unchanged as `Discovered - currently not indexed`.
+
+Decision:
+
+- Consolidated home-cleaning, professional inspection, and quote-photo guidance into the already indexed `/blog/safe-to-clean-vintage-diamond-ring-at-home` article.
+- Removed the stalled professional-cleaning URL from canonical blog, sitemap, commercial-guide, helpful-read, and footer-priority inventories.
+- Added a permanent redirect from `/blog/professional-cleaning-vs-home-care` to `/blog/safe-to-clean-vintage-diamond-ring-at-home`.
+- Preserved the broader cleaning decision guidance without adding homepage blocks, mobile CTA variants, or another visible crawl hub.
+
+Interpretation:
+
+- This leaves one stronger indexed cleaning-risk article instead of two overlapping cleaning guides.
+- Future cleaning content should use real first-party inspection proof, not recreate another home-care comparison page.

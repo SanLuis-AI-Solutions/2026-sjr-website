@@ -125,6 +125,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/professional-cleaning-vs-home-care",
+        destination: "/blog/safe-to-clean-vintage-diamond-ring-at-home",
+        permanent: true,
+      },
+      {
         source: "/necklace-bracelet-repair",
         destination: "/services/necklace-repair",
         permanent: true,

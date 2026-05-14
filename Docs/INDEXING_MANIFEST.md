@@ -12,15 +12,15 @@ Generated on 2026-05-14 from canonical repo sources.
 
 ## Inventory Summary
 
-- Total canonical URLs in manifest: 40
-- blog: 14
+- Total canonical URLs in manifest: 39
+- blog: 13
 - service-area: 6
 - service-detail: 9
 - static: 11
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 10
+- Discovered - currently not indexed: 9
 - Indexed: 28
 - URL is unknown to Google: 2
 
@@ -40,7 +40,6 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/blog/chain-repair-weak-points` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/professional-cleaning-vs-home-care` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 
 ## Remaining Canonical URLs Pending First Inspection
@@ -107,7 +106,6 @@ Decision rule:
 | `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Indexed |
 | `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Indexed |
 | `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Discovered - currently not indexed |
-| `/blog/professional-cleaning-vs-home-care` | blog | Home Jewelry Cleaning: When to Stop and Get an Inspection | Discovered - currently not indexed |
 | `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Indexed |
 | `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Indexed |
 | `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Discovered - currently not indexed |

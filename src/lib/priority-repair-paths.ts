@@ -40,13 +40,8 @@ export const PRIORITY_REPAIR_PATHS = [
     description: "Questions that separate an in-house repair shop from a sales counter.",
   },
   {
-    label: "Professional cleaning vs home care",
-    href: "/blog/professional-cleaning-vs-home-care",
-    description: "When home cleaning is fine and when inspection should come first.",
-  },
-  {
     label: "Vintage diamond cleaning risk",
     href: "/blog/safe-to-clean-vintage-diamond-ring-at-home",
-    description: "Red flags to check before cleaning antique or sentimental rings at home.",
+    description: "When home cleaning is fine and when antique or sentimental jewelry needs inspection first.",
   },
 ] as const;

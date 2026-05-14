@@ -71,7 +71,6 @@ URLs:
 
 - `/blog/stone-security-checklist`
 - `/blog/chain-repair-weak-points`
-- `/blog/professional-cleaning-vs-home-care`
 - `/blog/safe-to-clean-vintage-diamond-ring-at-home`
 
 Needed proof:
@@ -82,6 +81,7 @@ Needed proof:
 
 Action:
 
+- The professional-cleaning guide has been consolidated into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.
 - Use proof only where it answers a real pre-repair question.
 - Do not publish placeholder proof blocks or generic AI-written risk paragraphs.
 

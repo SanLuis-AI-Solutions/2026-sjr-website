@@ -49,7 +49,6 @@ const OBSERVED_STATUSES = {
   },
   "/blog/heirloom-restoration-planning-guide": { status: "discovered-currently-not-indexed" },
   "/blog/how-to-choose-a-jeweler": { status: "discovered-currently-not-indexed" },
-  "/blog/professional-cleaning-vs-home-care": { status: "discovered-currently-not-indexed" },
   "/blog/safe-to-clean-vintage-diamond-ring-at-home": {
     status: "discovered-currently-not-indexed",
   },

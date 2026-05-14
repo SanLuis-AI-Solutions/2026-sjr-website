@@ -686,139 +686,6 @@ export const BLOG_POSTS: BlogPost[] = [
     relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
   },
   {
-    slug: "professional-cleaning-vs-home-care",
-    title: "Home Jewelry Cleaning: When to Stop and Get an Inspection",
-    excerpt:
-      "How to tell when mild home cleaning is safe, when to stop before damage, and what photos help Susie's separate cleaning from stone-security or heirloom repair risk.",
-    image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
-    topics: ["Cleaning & Polish", "Preventive Care"],
-    publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-13",
-    readTime: "7 min read",
-    authorName: "Susie’s In-House Team",
-    authorRole: "Master Craftsmanship Team",
-    keyTakeaways: [
-      "Home cleaning is only the right first step when the jewelry is sturdy, modern, and free from movement, snagging, or visible wear.",
-      "Stop home cleaning before using stronger products if a stone clicks, a prong catches, the clasp feels unreliable, or the piece is inherited.",
-      "A professional cleaning visit should answer the safety question first: is this piece cleanable as-is, or does it need repair before shine?",
-    ],
-    sections: [
-      {
-        heading: "Direct answer: clean only if the structure is boring",
-        body: [
-          "Home cleaning is reasonable when the jewelry has a simple structure, secure stones, no snagging, no visible thinning, and no sentimental or vintage risk. In that case, mild soap, lukewarm water, and a soft brush are usually enough between professional visits.",
-          "Stop and request an inspection first if anything about the piece is not boring: a stone shifts or clicks, a prong catches fabric, the shank looks thin, the clasp opens too easily, old solder is visible, pearls or opals are present, or the piece is inherited and you do not know its repair history.",
-          "That is the decision we want Pasadena-area customers to make before polishing. The question is not simply whether the jewelry is dirty. It is whether cleaning pressure could turn an existing weak point into a repair problem.",
-        ],
-      },
-      {
-        heading: "When home cleaning is enough",
-        body: [
-          "For many standard everyday pieces, a simple at-home routine is enough. Mild dish soap, lukewarm water, a short soak, and a very soft brush are usually the safest baseline for removing normal buildup without introducing unnecessary risk.",
-          "The important part is knowing what home cleaning can and cannot do. It can remove surface residue and restore some sparkle, but it cannot tell you whether a prong is thinning, whether a seat is opening up, or whether a white gold ring needs more than soap and water to look finished again.",
-          "At-home care is best treated as maintenance for sturdy jewelry, not as a replacement for inspection. If the piece is valuable, delicate, sentimental, or already showing signs of wear, home cleaning should stay conservative.",
-        ],
-      },
-      {
-        heading: "When home cleaning becomes risky",
-        body: [
-          "The biggest problems usually come from harsh products or from cleaning a piece that already has a structural issue. Bleach, strong ammonia, abrasive compounds, and aggressive scrubbing can all create damage that customers do not notice until prongs weaken, finishes dull, or older metal starts showing stress.",
-          "Vintage and heirloom pieces deserve extra caution because they often have thinner prongs, older solder seams, and more fragile details than modern jewelry. The wrong cleaner or too much force can turn a piece that only needed safe cleaning into a restoration problem.",
-          "If a ring already has a loose-feeling stone, an open-looking prong, a thin lower shank, old solder, or delicate gallery work, stop trying to clean it at home until it is inspected. Shine is never more important than security.",
-        ],
-      },
-      {
-        heading: "What professional cleaning adds that home cleaning cannot",
-        body: [
-          "Professional cleaning at Susie's is not just about brightness. It is also a chance to inspect prongs, settings, seams, and overall wear so hidden issues can be caught early. That matters because customers often think a piece only needs polishing when it actually needs a security check first.",
-          "Professional service also gives better control over finish decisions. Some customers want a piece polished to a ready-to-wear shine, while others want to preserve more of the vintage character rather than strip everything back to a newer look.",
-          "In-house cleaning is especially valuable for white gold, heirlooms, and pieces that have not been inspected in a while. It keeps the conversation local and lets the same team evaluate whether the jewelry only needs cleaning or whether it is time to address a structural concern too.",
-        ],
-      },
-      {
-        heading: "Special cases: white gold, heirlooms, and stone security",
-        body: [
-          "White gold often needs more than basic home cleaning because the ring's color and finish can look uneven after years of wear or after bench work like sizing. A professional clean and polish can be the moment to decide whether rhodium refinishing is the better next step.",
-          "Heirloom jewelry should be treated more like preservation work than routine maintenance. The question is not only how to make it shine. It is how to clean it without erasing the character or stressing the structure that makes it sentimental in the first place.",
-          "Stone security is another reason professional cleaning matters. A cleaning appointment is one of the easiest opportunities to catch loose settings early, before the customer experiences the much worse version of the problem: a missing stone.",
-        ],
-      },
-      {
-        heading: "How to decide which path is right for your piece",
-        body: [
-          "If the jewelry is sturdy, modern, and free from visible wear, a gentle home routine may be enough between visits. If the piece is vintage, white gold, stone-heavy, or simply too important to gamble with, professional cleaning is usually the better decision.",
-          "At Susie's, the advantage is not just that the piece gets cleaned. It is that the same in-house team can tell you whether the jewelry should stay on a cleaning track, move into repair, or be handled more carefully because of age or structural wear.",
-          "The safest next step is to choose based on the piece itself, not on a one-size-fits-all cleaning rule.",
-        ],
-      },
-      {
-        heading: "The cleaning-intake check we want before polishing anything sentimental",
-        body: [
-          "Before a sentimental piece is cleaned or polished, the first question should be whether the jewelry is structurally safe enough to handle normally. We want to know if the ring has a loose stone, a bent prong, a thin shank, old solder, a worn clasp, pearl or opal accents, or finish details the customer wants preserved.",
-          "That intake changes the cleaning path. A sturdy modern ring may only need a professional clean and polish. A vintage diamond ring with worn prongs may need stone-security review before shine. An heirloom with hand engraving or patina may need a lighter preservation approach instead of aggressive polishing.",
-          "For a quote-first recommendation, send one close photo of the worn or dirty area, one side photo that shows prong height or clasp condition, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, clicking, loose, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
-        ],
-      },
-    ],
-    faqHeading: "Quick answers about home cleaning versus professional cleaning",
-    faqs: [
-      {
-        question: "What is the safest way to clean jewelry at home?",
-        answer:
-          "For many sturdy pieces, the safest method is mild dish soap, lukewarm water, and a very soft brush. Skip harsh chemicals and aggressive scrubbing.",
-      },
-      {
-        question: "When should I stop cleaning jewelry at home and bring it in?",
-        answer:
-          "Bring it in before stronger cleaning if the piece is vintage, inherited, has a loose-feeling stone, catches on fabric, shows old solder, or has pearl, opal, or delicate detail work.",
-      },
-      {
-        question: "Does professional cleaning include more than polishing?",
-        answer:
-          "Yes. Professional cleaning also gives the jeweler a chance to inspect settings, seams, and wear so small structural issues can be caught before they become bigger repairs.",
-      },
-      {
-        question: "What photos help with a cleaning or inspection quote?",
-        answer:
-          "Send one full-piece photo, one close photo of the dirty or worn area, and one side photo that shows prong height, clasp condition, or the setting profile.",
-      },
-    ],
-    nextStepsHeading: "Best next step if the piece matters too much to guess",
-    nextStepsIntro:
-      "If you want to know whether a piece only needs safe cleaning or also needs a security check, start with professional cleaning or an heirloom-focused inspection.",
-    nextSteps: [
-      { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
-      { label: "See Stone Setting Service", href: "/services/stone-setting" },
-      { label: "Check Vintage Ring Cleaning Risk", href: "/blog/safe-to-clean-vintage-diamond-ring-at-home" },
-      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "The jewelry is sturdy, modern, and worn often",
-        meaning: "Gentle home cleaning is usually reasonable between professional visits.",
-        nextAction: "Use mild soap, lukewarm water, and a soft brush; avoid harsh chemicals.",
-      },
-      {
-        signal: "The piece is vintage, inherited, or stone-heavy",
-        meaning: "Cleaning risk depends on hidden structure, not only surface dirt.",
-        nextAction: "Request inspection before stronger cleaning, ultrasonic, steam, or polishing.",
-      },
-      {
-        signal: "A stone feels loose or a prong catches",
-        meaning: "The piece needs a security check before shine.",
-        nextAction: "Treat it as a stone-setting risk before any cleaning appointment.",
-      },
-    ],
-    relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
-    discoveryBoosts: {
-      blogFeatured: 7,
-      serviceHub: 8,
-      geoHelpfulReads: 8,
-    },
-  },
-  {
     slug: "heirloom-restoration-planning-guide",
     title: "Heirloom Restoration Planning: What to Bring and Ask",
     excerpt:
@@ -1104,18 +971,18 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "safe-to-clean-vintage-diamond-ring-at-home",
     title: "Is it safe to clean my vintage diamond ring with household products?",
-    excerpt: "Vintage rings are delicate. Learn which household cleaners are safe, which will destroy your metals, and how to safely restore the sparkle.",
+    excerpt: "How to clean vintage jewelry safely, when home care should stop, and when a sentimental ring needs inspection before shine.",
     image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
     topics: ["Cleaning & Polish", "Heirloom Care"],
     publishedAt: "2026-03-01",
-    reviewedAt: "2026-05-12",
-    readTime: "6 min read",
+    reviewedAt: "2026-05-14",
+    readTime: "8 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Mild dish soap and warm water are the only consistently safe household cleaners for vintage jewelry.",
       "Harsh chemicals like bleach and ammonia can cause gold alloys to stress-crack and break.",
-      "Vintage settings often have hidden wear, making aggressive scrubbing risky."
+      "Stop home cleaning when a stone clicks, a prong catches, old solder is visible, or the piece is sentimental enough that inspection matters first."
     ],
     sections: [
       {
@@ -1131,6 +998,14 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "If your vintage ring features intricate filigree, foil-backed stones, or soft gemstones like pearls and opals, skip the home cleaning entirely. Bring it into our Pasadena workshop. We use specialized, non-destructive cleaning techniques that remove decades of grime without putting weak structural points at risk."
         ]
+      },
+      {
+        heading: "Direct answer: clean only if the structure is boring",
+        body: [
+          "Home cleaning is reasonable when the jewelry has a simple structure, secure stones, no snagging, no visible thinning, and no sentimental or vintage risk. In that case, mild soap, lukewarm water, and a soft brush are usually enough between professional visits.",
+          "Stop and request an inspection first if anything about the piece is not boring: a stone shifts or clicks, a prong catches fabric, the shank looks thin, the clasp opens too easily, old solder is visible, pearls or opals are present, or the piece is inherited and you do not know its repair history.",
+          "That is the decision we want Pasadena-area customers to make before polishing. The question is not simply whether the jewelry is dirty. It is whether cleaning pressure could turn an existing weak point into a repair problem.",
+        ],
       },
       {
         heading: "Which at-home methods are safest for older rings?",
@@ -1156,6 +1031,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "For a quote-first check, send a top photo, a side photo of the prongs, and a note about whether the ring is inherited, worn daily, recently resized, or already snagging. That gives the jeweler enough context to recommend cleaning, stone-security inspection, or heirloom restoration before damage gets worse.",
         ],
       },
+      {
+        heading: "The cleaning-intake check we want before polishing anything sentimental",
+        body: [
+          "Before a sentimental piece is cleaned or polished, the first question should be whether the jewelry is structurally safe enough to handle normally. We want to know if the ring has a loose stone, a bent prong, a thin shank, old solder, a worn clasp, pearl or opal accents, or finish details the customer wants preserved.",
+          "That intake changes the cleaning path. A sturdy modern ring may only need a professional clean and polish. A vintage diamond ring with worn prongs may need stone-security review before shine. An heirloom with hand engraving or patina may need a lighter preservation approach instead of aggressive polishing.",
+          "For a quote-first recommendation, send one close photo of the worn or dirty area, one side photo that shows prong height or clasp condition, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, clicking, loose, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about cleaning vintage rings safely",
     faqs: [
@@ -1174,13 +1057,17 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Skip home cleaning if the ring is antique, has filigree, foil-backed stones, pearls, opals, loose prongs, or any sign of wear. Those rings are safer with a professional inspection and non-destructive cleaning.",
       },
+      {
+        question: "What photos help with a cleaning or inspection quote?",
+        answer:
+          "Send one full-piece photo, one close photo of the dirty or worn area, and one side photo that shows prong height, clasp condition, or the setting profile.",
+      },
     ],
     nextStepsHeading: "Best next step for a fragile or sentimental ring",
     nextStepsIntro:
       "If you are not fully confident in the ring's condition, start with professional cleaning or an heirloom-focused inspection before trying a stronger home-cleaning routine.",
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
-      { label: "Compare Professional vs Home Cleaning", href: "/blog/professional-cleaning-vs-home-care" },
       { label: "Run the Stone Security Checklist", href: "/blog/stone-security-checklist" },
       { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
       { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
@@ -1188,6 +1075,11 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Fast Quote", href: "/quote" },
     ],
     decisionSignals: [
+      {
+        signal: "The piece is vintage, inherited, or stone-heavy",
+        meaning: "Cleaning risk depends on hidden structure, not only surface dirt.",
+        nextAction: "Request inspection before stronger cleaning, ultrasonic, steam, or polishing.",
+      },
       {
         signal: "The ring has filigree, old solder, or a thin shank",
         meaning: "The mounting may be more fragile than the diamond itself.",
@@ -1580,7 +1472,7 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   ],
   "necklace-repair": [
     "chain-repair-weak-points",
-    "professional-cleaning-vs-home-care",
+    "safe-to-clean-vintage-diamond-ring-at-home",
     "heirloom-jewelry-restoration-repair-or-redesign",
   ],
   "heirloom-restoration": [
@@ -1590,7 +1482,7 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   ],
   "pearl-restringing": [
     "how-much-does-pearl-restringing-cost-pasadena",
-    "professional-cleaning-vs-home-care",
+    "safe-to-clean-vintage-diamond-ring-at-home",
   ],
 };
 
