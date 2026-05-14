@@ -35,11 +35,11 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <section className="relative overflow-hidden bg-stone-100 py-16">
+      <section className="relative overflow-hidden bg-stone-100 py-14 md:py-16" aria-labelledby="faq-hero-title">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <p className="reveal-on-scroll text-xs uppercase tracking-[0.3em] text-brand-burgundy">FAQ</p>
-          <h1 className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-900 md:text-5xl">
+          <h1 id="faq-hero-title" className="reveal-on-scroll mt-3 max-w-3xl text-balance font-serif text-[2.15rem] leading-[1.12] text-stone-900 md:text-5xl">
             Answers before you hand over a meaningful piece.
           </h1>
           <p className="reveal-on-scroll mt-4 max-w-3xl text-[15px] leading-7 text-stone-600">
@@ -60,6 +60,11 @@ export default function FaqPage() {
               Book Repair
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-stone-100 pb-16" aria-label="FAQ library">
+        <div className="mx-auto max-w-6xl px-6">
           <FaqContent />
 
           <div className="reveal-on-scroll mt-10 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">

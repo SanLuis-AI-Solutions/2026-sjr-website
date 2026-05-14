@@ -85,6 +85,10 @@ async function auditRoute(context, route) {
     findings.push("Hero shows quote and booking actions as competing visible mobile choices.");
   }
 
+  if (heroActions.length > 6) {
+    findings.push(`Hero exposes ${heroActions.length} visible actions on mobile; keep above-fold choices focused.`);
+  }
+
   if (smallTargets.length > 0) {
     findings.push(
       `Hero has tap targets under 44px: ${smallTargets
@@ -245,6 +249,7 @@ async function main() {
     "## Guardrails",
     "",
     "- Mobile hero sections must not show quote and booking as equal visible choices.",
+    "- Mobile hero sections should expose no more than 6 visible actions above the fold.",
     "- Hero tap targets must be at least 44px tall.",
     "- The mobile sticky CTA must remain one compact attributed quote action.",
     "- Footer crawl groups must remain collapsed by default on mobile.",

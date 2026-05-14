@@ -1,6 +1,6 @@
 # Mobile UX Guardrails
 
-Last updated: 2026-05-13
+Last updated: 2026-05-14
 
 These rules protect the site from SEO/content growth turning into mobile clutter.
 
@@ -12,6 +12,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 
 - SEO, GEO, and AEO sections must earn their place in the mobile flow; do not add a section only because it adds internal links.
 - Above the first conversion action, avoid stacked link lists, duplicate proof cards, and equal-weight quote/book choices.
+- Mobile hero sections should expose no more than 6 visible actions. If a page needs more discovery links, split the library into a separate section or collapse the extra choices behind mobile disclosures.
 - If a section exists primarily for crawlability, collapse it behind `details` on mobile or move it below the primary service/process content.
 - Prefer one high-confidence answer, one next step, and one tap target over multiple competing education paths.
 
@@ -34,6 +35,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 ## Non-Conversion Content Pages
 
 - Blog hub, FAQ, About, service detail, and article pages should not show `Get Fast Quote` and `Book Repair` as equal mobile hero or decision-band actions.
+- Blog and FAQ hubs should keep filters, topic chips, service shortcuts, and answer libraries out of the hero section on mobile.
 - Keep booking reachable on desktop/tablet, from the mobile menu secondary link, and from the dedicated `/book` flow.
 - If a mobile page is informational or comparison-oriented, prefer a single quote action because it matches lower-commitment repair triage.
 
@@ -88,4 +90,4 @@ Run the production-capable flow audit when SEO/content changes add visible links
 npm run ux:mobile-flow
 ```
 
-Use `MOBILE_UX_AUDIT_ORIGIN=http://127.0.0.1:3000` to validate a local production build before deployment. The audit writes `.health/mobile-ux-flow-latest.md` and fails on mobile quote/book competition, sub-44px audited tap targets, expanded footer crawl groups, or sticky CTA drift.
+Use `MOBILE_UX_AUDIT_ORIGIN=http://127.0.0.1:3000` to validate a local production build before deployment. The audit writes `.health/mobile-ux-flow-latest.md` and fails on mobile quote/book competition, mobile hero action counts above 6, sub-44px audited tap targets, expanded footer crawl groups, or sticky CTA drift.
