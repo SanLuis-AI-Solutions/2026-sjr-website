@@ -44,25 +44,54 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
     const form = document.getElementById(formId) as HTMLFormElement | null;
     if (!form) return;
 
+    const sharedParams = {
+      page_path: pathname || "/",
+      page_path_with_query: pagePath,
+      page_location:
+        typeof window !== "undefined" ? `${window.location.origin}${pagePath}` : pagePath,
+      form_id: formId,
+      lead_type: leadType,
+      ...finderAnalyticsParams,
+    };
+    let viewed = false;
     const seenFields = new Set<string>();
     let started = false;
+
+    const markViewed = (source: string) => {
+      if (viewed) return;
+      viewed = true;
+      trackGaEvent("lead_form_view", { ...sharedParams, source });
+      trackGaEvent(`${leadType}_form_view`, { ...sharedParams, source });
+    };
 
     const markStarted = (source: string) => {
       if (started) return;
       started = true;
-      const sharedParams = {
-        page_path: pathname || "/",
-        page_path_with_query: pagePath,
-        page_location:
-          typeof window !== "undefined" ? `${window.location.origin}${pagePath}` : pagePath,
-        form_id: formId,
-        lead_type: leadType,
-        source,
-        ...finderAnalyticsParams,
-      };
-      trackGaEvent("lead_form_start", sharedParams);
-      trackGaEvent(`${leadType}_form_start`, sharedParams);
+      trackGaEvent("lead_form_start", { ...sharedParams, source });
+      trackGaEvent(`${leadType}_form_start`, { ...sharedParams, source });
     };
+
+    const isFormVisible = () => {
+      const rect = form.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top < viewportHeight * 0.85 && rect.bottom > viewportHeight * 0.15;
+    };
+
+    let observer: IntersectionObserver | null = null;
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            markViewed("viewport");
+            observer?.disconnect();
+          }
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(form);
+    } else if (isFormVisible()) {
+      markViewed("viewport_fallback");
+    }
 
     const onFocusIn = (event: Event) => {
       const target = event.target;
@@ -70,6 +99,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       const fieldName = (target.getAttribute("name") || target.id || target.tagName).toLowerCase();
       if (!fieldName) return;
 
+      markViewed("focus");
       markStarted("focus");
       if (seenFields.has(fieldName)) return;
       seenFields.add(fieldName);
@@ -85,6 +115,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
     };
 
     const onInput = () => {
+      markViewed("input");
       markStarted("input");
     };
 
@@ -103,6 +134,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
     form.addEventListener("submit", onSubmit);
 
     return () => {
+      observer?.disconnect();
       form.removeEventListener("focusin", onFocusIn);
       form.removeEventListener("input", onInput);
       form.removeEventListener("submit", onSubmit);

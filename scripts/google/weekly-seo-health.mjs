@@ -10,6 +10,9 @@ import {
 
 const PRODUCTION_HOST = "www.susiesjewelryrepair.com";
 const KEY_EVENTS = [
+  "quote_form_view",
+  "booking_form_view",
+  "contact_form_view",
   "quote_form_start",
   "booking_form_start",
   "contact_form_start",
@@ -21,6 +24,8 @@ const KEY_EVENTS = [
   "contact_submit_success",
 ];
 const MOBILE_STICKY_CTA_PATH_EVENTS = [
+  "quote_form_view",
+  "booking_form_view",
   "quote_form_start",
   "booking_form_start",
   "quote_submit_success",
@@ -28,6 +33,9 @@ const MOBILE_STICKY_CTA_PATH_EVENTS = [
   "booking_submit_pending",
 ];
 const ORGANIC_LANDING_CONVERSION_EVENTS = [
+  "quote_form_view",
+  "booking_form_view",
+  "contact_form_view",
   "quote_form_start",
   "booking_form_start",
   "contact_form_start",
@@ -37,6 +45,14 @@ const ORGANIC_LANDING_CONVERSION_EVENTS = [
   "booking_submit_pending",
   "contact_submit_success",
 ];
+
+function leadViews(events) {
+  return (
+    toNum(events.quote_form_view) +
+    toNum(events.booking_form_view) +
+    toNum(events.contact_form_view)
+  );
+}
 
 function leadStarts(events) {
   return (
@@ -526,6 +542,16 @@ async function main() {
         ["All-host organic sessions", formatInt(snapshot.ga4.organicSessionsAllHosts), "Organic sessions before canonical-host filtering"],
         ["All-host total sessions", formatInt(snapshot.ga4.totalSessionsAllHosts), "All GA4 sessions regardless of channel or host"],
         [
+          "Lead form views",
+          formatInt(leadViews(snapshot.ga4.keyEvents)),
+          "Quote, booking, and contact forms that entered the viewport",
+        ],
+        [
+          "Organic lead form views",
+          formatInt(leadViews(snapshot.ga4.organicKeyEvents)),
+          "Form-view arrivals attributed to Organic Search",
+        ],
+        [
           "Lead form starts",
           formatInt(leadStarts(snapshot.ga4.keyEvents)),
           "Quote, booking, and contact starts before form completion",
@@ -570,6 +596,9 @@ async function main() {
     table(
       ["Event", "Count"],
       [
+        ["quote_form_view", formatInt(snapshot.ga4.keyEvents.quote_form_view)],
+        ["booking_form_view", formatInt(snapshot.ga4.keyEvents.booking_form_view)],
+        ["contact_form_view", formatInt(snapshot.ga4.keyEvents.contact_form_view)],
         ["quote_form_start", formatInt(snapshot.ga4.keyEvents.quote_form_start)],
         ["booking_form_start", formatInt(snapshot.ga4.keyEvents.booking_form_start)],
         ["contact_form_start", formatInt(snapshot.ga4.keyEvents.contact_form_start)],
@@ -587,6 +616,9 @@ async function main() {
     table(
       ["Event", "Organic Count"],
       [
+        ["quote_form_view", formatInt(snapshot.ga4.organicKeyEvents.quote_form_view)],
+        ["booking_form_view", formatInt(snapshot.ga4.organicKeyEvents.booking_form_view)],
+        ["contact_form_view", formatInt(snapshot.ga4.organicKeyEvents.contact_form_view)],
         ["quote_form_start", formatInt(snapshot.ga4.organicKeyEvents.quote_form_start)],
         ["booking_form_start", formatInt(snapshot.ga4.organicKeyEvents.booking_form_start)],
         ["contact_form_start", formatInt(snapshot.ga4.organicKeyEvents.contact_form_start)],
@@ -609,12 +641,28 @@ async function main() {
           formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
         ],
         [
+          "quote_form_view on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_view),
+        ],
+        [
+          "quote_form_view on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_form_view),
+        ],
+        [
           "quote_form_start on sticky CTA UTM path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_start),
         ],
         [
           "quote_form_start on sticky CTA session source",
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_form_start),
+        ],
+        [
+          "booking_form_view on sticky CTA UTM path",
+          formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_form_view),
+        ],
+        [
+          "booking_form_view on sticky CTA session source",
+          formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_form_view),
         ],
         [
           "booking_form_start on sticky CTA UTM path",

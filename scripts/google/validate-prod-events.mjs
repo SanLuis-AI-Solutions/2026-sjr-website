@@ -18,6 +18,9 @@ const REQUIRED_EVENTS = [
   "conversion_quick_action_click",
   "conversion_quick_action_click_control",
   "conversion_quick_action_click_primary_focus",
+  "lead_form_view",
+  "quote_form_view",
+  "booking_form_view",
   "lead_form_start",
   "quote_form_start",
   "booking_form_start",
@@ -513,6 +516,8 @@ async function main() {
     );
 
     await runPresenceCheck(page, "quote_form_start", report);
+    await runPresenceCheck(page, "lead_form_view", report);
+    await runPresenceCheck(page, "quote_form_view", report);
 
     await runEventCheck(
       page,
@@ -535,6 +540,7 @@ async function main() {
       },
       report
     );
+    await runPresenceCheck(page, "booking_form_view", report);
 
     await runEventCheck(
       page,

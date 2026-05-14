@@ -36,6 +36,8 @@ Spam checks and customer-facing booking details intentionally use customer-enter
 
 Current high-value GA4 events:
 
+- `lead_form_view`
+- `{lead_type}_form_view`
 - `lead_form_start`
 - `{lead_type}_form_start`
 - `lead_form_step`
@@ -65,6 +67,7 @@ Remaining gaps:
 - Confirm GA4 admin has the recommended conversion events marked as key events.
 - Confirm Supabase reporting dashboards include source segmentation from the stored notes or future structured columns.
 - Add a post-indexing report that compares lead source by landing page after Google has had time to process the sitemap/internal-link improvements.
+- Use form-view events as diagnostic funnel steps only. They show whether visitors reached a form, but they are not lead conversions and should not be marked as GA4 key events.
 
 ## Next Phase
 
