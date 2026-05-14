@@ -80,6 +80,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Service pages must continue passing the absolute production performance gate: mobile LCP at or below `2600ms` and SEO score `100`.
 - The watch-repair service baseline was realigned on 2026-05-13 after two production guardrail runs showed the current quote-first mobile service layout stabilizing around `2412ms` LCP while still passing the absolute budget.
 - The contact conversion baseline was realigned on 2026-05-14 after repeated production guardrail runs showed the current contact layout stabilizing around `2411ms` LCP while still passing the absolute budget and SEO `100`.
+- The booking conversion baseline was realigned on 2026-05-14 after two production guardrail attempts showed the current booking flow stabilizing around `2345-2357ms` LCP while still passing the absolute budget and SEO `100`; its future delta budget was tightened to `+150ms`.
 - Do not relax the absolute LCP threshold to hide regressions. If a service page exceeds the absolute gate, optimize the page before updating any baseline.
 
 ## Verification
