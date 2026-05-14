@@ -316,7 +316,18 @@ export default async function ContactPage({
             ) : null}
 
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Contact desk</p>
-            <h1 className="lcp-sans mt-2 max-w-2xl text-[1.75rem] font-semibold leading-[1.08] tracking-tight text-white md:mt-3 md:text-6xl">
+            <h1
+              className="lcp-sans"
+              style={{
+                marginTop: "0.5rem",
+                maxWidth: "42rem",
+                fontSize: "clamp(1.75rem, 5vw, 3.75rem)",
+                fontWeight: 600,
+                letterSpacing: "-0.025em",
+                lineHeight: "1.08",
+                color: "#fff",
+              }}
+            >
               Talk to a local expert
             </h1>
             <p className="lcp-sans mt-5 hidden max-w-lg text-[15px] leading-6 text-stone-100/90 md:block">
