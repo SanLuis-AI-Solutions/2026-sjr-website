@@ -1251,6 +1251,12 @@ test("mobile informational pages: about, faq, and blog hero actions are clear", 
 
   await page.goto("/blog", { waitUntil: "networkidle" });
   const blogHeroSection = page.locator("main section").first();
+  await expect(blogHeroSection.getByRole("link")).toHaveCount(1);
+  const repairPageDisclosure = blogHeroSection.locator("summary").filter({
+    hasText: /Start with a repair page/i,
+  });
+  await expect(repairPageDisclosure).toBeVisible();
+  await repairPageDisclosure.click();
   await expect(
     blogHeroSection.getByRole("link", { name: /Watch Repair & Battery Replacement/i }).first()
   ).toBeVisible();

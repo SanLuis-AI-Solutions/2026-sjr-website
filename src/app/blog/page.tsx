@@ -70,7 +70,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Book Repair
             </Link>
           </div>
-          <details className="mt-6 rounded-2xl border border-stone-200 bg-white/80 px-4 py-3 md:hidden">
+          <details
+            className="mt-6 rounded-2xl border border-stone-200 bg-white/80 px-4 py-3 md:hidden"
+            aria-label="Blog topic filters"
+          >
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-stone-900 marker:hidden">
               Filter repair guides
               <span aria-hidden="true" className="text-brand-burgundy">
@@ -141,7 +144,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Showing topic: {selectedTopic}
             </p>
           ) : null}
-          <details className="mt-5 rounded-2xl border border-stone-200 bg-white/85 px-4 py-3 shadow-sm md:hidden">
+          <details
+            className="mt-5 rounded-2xl border border-stone-200 bg-white/85 px-4 py-3 shadow-sm md:hidden"
+            aria-label="Popular repair pages"
+          >
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-stone-900 marker:hidden">
               Start with a repair page
               <span aria-hidden="true" className="text-brand-burgundy">
