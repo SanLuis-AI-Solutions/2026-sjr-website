@@ -34,6 +34,14 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Reviews and proof should be visible on-page, but not crowd the primary menu action.
 - The site header already provides a mobile call shortcut; do not repeat full-width call buttons above mobile forms unless the page has no clearer primary action.
 
+## Mobile Sticky CTA
+
+- Keep the sticky shortcut as one compact quote action, not a quote/book pair.
+- Current label: `60-sec Quote`. This is meant to reduce the effort objection after the May 7-13 report showed sticky CTA clicks but no downstream quote or booking starts.
+- Do not change the sticky CTA again until a full post-deploy GA4 window can compare `mobile_sticky_cta_click` against sticky-attributed `quote_form_start`, `booking_form_start`, and submit events.
+- Use `npm run google:weekly-seo-health` for that check. The report now evaluates both sticky UTM path attribution and sticky session-source attribution.
+- If sticky clicks still produce zero sticky-attributed form starts after the next full window, improve the quote-form arrival experience before adding another sticky button.
+
 ## Non-Conversion Content Pages
 
 - Blog hub, FAQ, About, service detail, and article pages should not show `Get Fast Quote` and `Book Repair` as equal mobile hero or decision-band actions.
