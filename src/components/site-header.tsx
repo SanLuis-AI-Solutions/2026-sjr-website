@@ -41,7 +41,8 @@ export function SiteHeader() {
               Susie’s <span className="text-brand-burgundy">Jewelry Repair</span>
             </span>
             <span className="text-[9px] uppercase tracking-[0.34em] text-stone-600 transition-colors group-hover:text-brand-gold sm:text-[10px]">
-              Master Craftsmanship Est. 1984
+              <span className="sm:hidden">Est. 1984</span>
+              <span className="hidden sm:inline">Master Craftsmanship Est. 1984</span>
             </span>
           </span>
         </Link>
