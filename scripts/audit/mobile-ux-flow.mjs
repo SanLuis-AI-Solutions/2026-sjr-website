@@ -207,6 +207,35 @@ async function auditRoute(context, route) {
     );
   }
 
+  if (route === "/") {
+    const finalSection = page.locator("main section").last();
+    const finalSectionSummary = await finalSection.evaluate((node) => {
+      const links = Array.from(node.querySelectorAll("a")).filter((link) => {
+        const rect = link.getBoundingClientRect();
+        const style = window.getComputedStyle(link);
+        return rect.width > 0 && rect.height > 0 && style.display !== "none" && style.visibility !== "hidden";
+      });
+      return {
+        hasCrawlHub: Boolean(node.querySelector("[data-mobile-crawl-hub]")),
+        conversionLinks: links
+          .filter((link) => {
+            const text = (link.textContent || "").trim().replace(/\s+/g, " ");
+            const href = link.getAttribute("href") || "";
+            return /^\/quote(?:[?#]|$)/.test(href) || /^\/book(?:[?#]|$)/.test(href) || /quote|book/i.test(text);
+          })
+          .map((link) => (link.textContent || link.getAttribute("href") || "").trim().replace(/\s+/g, " ")),
+      };
+    });
+
+    if (finalSectionSummary.hasCrawlHub) {
+      findings.push("Homepage ends with a mobile crawl hub; final mobile section should reinforce the conversion path.");
+    }
+
+    if (finalSectionSummary.conversionLinks.length === 0) {
+      findings.push("Homepage final mobile section has no visible quote or booking action.");
+    }
+  }
+
   await page.close();
 
   return {
@@ -386,6 +415,7 @@ async function main() {
     "- The mobile sticky CTA must remain one compact attributed quote action.",
     "- Footer crawl groups must remain collapsed by default on mobile.",
     "- Mobile crawl hubs must not expose visible quote/book CTAs.",
+    "- The homepage must end with a conversion section, not a crawl/link hub.",
     "",
     "## Route Summary",
     "",

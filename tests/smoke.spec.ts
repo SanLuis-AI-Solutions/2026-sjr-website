@@ -243,8 +243,8 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
     localRepairPaths.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
     pricingGuides.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
   ]);
-  expect(finalTop, "Primary home CTA should appear before SEO link hubs on mobile").toBeLessThan(localTop);
-  expect(finalTop, "Primary home CTA should appear before pricing guide links on mobile").toBeLessThan(pricingTop);
+  expect(finalTop, "Primary home CTA should close the mobile home flow after SEO link hubs").toBeGreaterThan(localTop);
+  expect(finalTop, "Primary home CTA should close the mobile home flow after pricing guide links").toBeGreaterThan(pricingTop);
 
   guard.assertNoErrors("mobile home flow");
 });

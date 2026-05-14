@@ -35,10 +35,10 @@ async function HomeDeferredContent() {
       <CraftStory />
       <ShowcaseBand />
       <Testimonials />
-      <HomeFaq />
-      <HomeCta />
       <HomeLocalRepairPaths />
       <HomeCommercialGuides />
+      <HomeFaq />
+      <HomeCta />
     </>
   );
 }
