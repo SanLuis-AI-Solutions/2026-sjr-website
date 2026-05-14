@@ -1561,3 +1561,32 @@ Next escalation threshold:
 - If a commercial URL remains discovered-currently-not-indexed after the next full GSC reinspection window, do not add more generic copy or sitewide links.
 - Escalate only to one of these higher-signal moves: real repair photos, named first-party case notes, review-backed proof, Google Business Profile/service-area corroboration, or consolidation with an already indexed page serving the same intent.
 - Keep `/site-map` out of visible link-weighting decisions unless it becomes commercially important.
+
+## Full Reinspection And Mobile UX Checkpoint (2026-05-14 06:03 UTC)
+
+Fresh checks run:
+
+```bash
+npm run google:indexing-status
+npm run google:indexing-manifest
+npm run seo:internal-link-audit
+npm run seo:index-quality-audit
+npm run google:weekly-seo-health
+npm run google:seo-quick-wins
+npm run ux:mobile-flow
+```
+
+Current evidence:
+
+- `14/14` unresolved manifest URLs were unchanged in URL Inspection output.
+- `13` unresolved URLs remain `Discovered - currently not indexed`.
+- The only `URL is unknown to Google` entry is `/site-map`, a utility page that should not receive visible link-weighting.
+- Internal-link and index-quality audits passed; no technical, content-depth, duplication, schema, or link-weight blocker was found.
+- The weekly quick-win report remains homepage-heavy, so unresolved commercial pages are not yet producing meaningful organic search traffic.
+- The production mobile UX audit passed across `38` routes: mobile heroes avoid quote/book competition, footer crawl groups remain collapsed, crawl hubs do not expose conversion CTAs, and the sticky shortcut remains one compact attributed quote action.
+
+Decision:
+
+- Do not add more visible homepage sections, footer expansions, city-link hubs, or mobile CTA variants to force indexing.
+- Move the next escalation to approved first-party proof assets or consolidation analysis.
+- Use `Docs/INDEXING_PROOF_ASSET_PLAN.md` as the working plan before editing any stalled commercial page.

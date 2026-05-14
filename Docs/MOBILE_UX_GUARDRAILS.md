@@ -11,6 +11,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 ## Content Density Rule
 
 - SEO, GEO, and AEO sections must earn their place in the mobile flow; do not add a section only because it adds internal links.
+- For unresolved indexing pages, follow `Docs/INDEXING_PROOF_ASSET_PLAN.md` before adding visible copy or links. If the page needs help, use first-party proof or consolidation, not another mobile section.
 - Above the first conversion action, avoid stacked link lists, duplicate proof cards, and equal-weight quote/book choices.
 - Mobile hero sections should expose no more than 6 visible actions. If a page needs more discovery links, split the library into a separate section or collapse the extra choices behind mobile disclosures.
 - If a section exists primarily for crawlability, collapse it behind `details` on mobile or move it below the primary service/process content.
