@@ -1677,3 +1677,23 @@ Interpretation:
 - The page had already received an intent refresh and strong internal link coverage but remained unselected by Google.
 - The indexed service page is more commercially valuable and closer to conversion.
 - Consolidation reduces low-performing canonical surface area without adding homepage hubs, footer expansions, or mobile CTA clutter.
+
+## Mobile Sticky CTA Attribution Cleanup (2026-05-14)
+
+The 2026-05-07 to 2026-05-13 GA4 window showed `4` mobile sticky CTA clicks, but no downstream quote or booking events were returned on the sticky path. The prior shortcut used internal UTM parameters (`utm_source=mobile_sticky_cta`), which made click attribution measurable but risked polluting session acquisition reporting and still produced brittle funnel matching.
+
+Decision:
+
+- Kept the sticky shortcut as one compact quote action.
+- Changed the sticky destination from internal UTM parameters to first-party CTA parameters:
+  `/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form`
+- Added CTA attribution hidden fields to lead forms while keeping true acquisition UTMs separate.
+- Added `cta_source`, `cta_medium`, and `cta_campaign` to quote/booking/contact form-view and form-start GA events when present.
+- Updated `npm run google:weekly-seo-health` to match the new `cta_source=mobile_sticky_cta` path while still supporting the legacy UTM path during the transition.
+- Updated the production event validator to use the current quote quick-action labels instead of stale booking quick-action copy.
+
+Interpretation:
+
+- Future sticky CTA analysis should compare `mobile_sticky_cta_click` against sticky-attributed `quote_form_view`, `quote_form_start`, and `quote_submit_success` on the `cta_source=mobile_sticky_cta` path.
+- Internal UTM links should not be reintroduced for site navigation because they can distort organic/source reporting.
+- If the next full GA4 window still shows sticky clicks but no CTA-attributed starts, optimize the quote form arrival experience before adding another mobile button.

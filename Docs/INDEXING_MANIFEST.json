@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      8
+      9
     ],
     [
       "indexed",
@@ -37,7 +37,7 @@
     ],
     [
       "unknown-to-google",
-      2
+      1
     ]
   ],
   "routes": [
@@ -293,10 +293,10 @@
       "city": "La Porte",
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
-      "observedStatus": "unknown-to-google",
+      "observedStatus": "discovered-currently-not-indexed",
       "observedOn": "2026-05-14",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",

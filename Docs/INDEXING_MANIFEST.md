@@ -20,9 +20,9 @@ Generated on 2026-05-14 from canonical repo sources.
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 8
+- Discovered - currently not indexed: 9
 - Indexed: 28
-- URL is unknown to Google: 2
+- URL is unknown to Google: 1
 
 ## Immediate GSC Queue
 
@@ -34,7 +34,7 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 | `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2. |
 | `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/friendswood` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/la-porte` | service-area | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
+| `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 | `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
@@ -93,7 +93,7 @@ Decision rule:
 | `/services/clear-lake` | service-area | Clear Lake service area | Discovered - currently not indexed |
 | `/services/deer-park` | service-area | Deer Park service area | Indexed |
 | `/services/friendswood` | service-area | Friendswood service area | Discovered - currently not indexed |
-| `/services/la-porte` | service-area | La Porte service area | URL is unknown to Google |
+| `/services/la-porte` | service-area | La Porte service area | Discovered - currently not indexed |
 | `/services/pasadena` | service-area | Pasadena service area | Discovered - currently not indexed |
 | `/services/webster` | service-area | Webster service area | Discovered - currently not indexed |
 | `/blog/can-a-severely-bent-ring-prong-be-fixed` | blog | Can a severely bent ring prong be fixed, or do I need a new setting? | Indexed |

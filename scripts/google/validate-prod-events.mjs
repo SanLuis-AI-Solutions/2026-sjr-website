@@ -542,19 +542,21 @@ async function main() {
     );
     await runPresenceCheck(page, "booking_form_view", report);
 
+    await goto(page, "/quote");
+    await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
     await runEventCheck(
       page,
       "conversion_quick_action_click",
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Choose Time$/i });
+          .getByRole("link", { name: /^Start Quote$/i });
         await clickTrackedTarget(quickAction);
       },
       report
     );
 
-    await goto(page, "/book");
+    await goto(page, "/quote");
     await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
     await runAnyEventCheck(
       page,
@@ -562,7 +564,7 @@ async function main() {
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Choose Time$/i });
+          .getByRole("link", { name: /^Start Quote$/i });
         await clickTrackedTarget(quickAction);
       },
       report

@@ -17,6 +17,9 @@ type LeadAttributionFields = {
   gbraid: string;
   wbraid: string;
   msclkid: string;
+  cta_source: string;
+  cta_medium: string;
+  cta_campaign: string;
   first_touch_at: string;
   submit_path: string;
 };
@@ -35,6 +38,9 @@ const FIELD_KEYS = [
   "gbraid",
   "wbraid",
   "msclkid",
+  "cta_source",
+  "cta_medium",
+  "cta_campaign",
   "first_touch_at",
   "submit_path",
 ] as const;
@@ -64,6 +70,9 @@ export function LeadAttributionFields() {
       gbraid: paramValue("gbraid"),
       wbraid: paramValue("wbraid"),
       msclkid: paramValue("msclkid"),
+      cta_source: currentParams.get("cta_source") || "",
+      cta_medium: currentParams.get("cta_medium") || "",
+      cta_campaign: currentParams.get("cta_campaign") || "",
       first_touch_at: value(firstTouch, "first_touch_at"),
       submit_path: `${window.location.pathname}${window.location.search}`,
     };

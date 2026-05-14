@@ -121,9 +121,21 @@ async function runMobileStickyCtaPathReport(analyticsData, propertyId, startDate
             },
           },
           {
-            filter: {
-              fieldName: pathDimension,
-              stringFilter: { matchType: "CONTAINS", value: "utm_source=mobile_sticky_cta" },
+            orGroup: {
+              expressions: [
+                {
+                  filter: {
+                    fieldName: pathDimension,
+                    stringFilter: { matchType: "CONTAINS", value: "cta_source=mobile_sticky_cta" },
+                  },
+                },
+                {
+                  filter: {
+                    fieldName: pathDimension,
+                    stringFilter: { matchType: "CONTAINS", value: "utm_source=mobile_sticky_cta" },
+                  },
+                },
+              ],
             },
           },
         ],
@@ -641,7 +653,7 @@ async function main() {
           formatInt(snapshot.ga4.keyEvents.mobile_sticky_cta_click),
         ],
         [
-          "quote_form_view on sticky CTA UTM path",
+          "quote_form_view on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_view),
         ],
         [
@@ -649,7 +661,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_form_view),
         ],
         [
-          "quote_form_start on sticky CTA UTM path",
+          "quote_form_start on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_form_start),
         ],
         [
@@ -657,7 +669,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_form_start),
         ],
         [
-          "booking_form_view on sticky CTA UTM path",
+          "booking_form_view on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_form_view),
         ],
         [
@@ -665,7 +677,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_form_view),
         ],
         [
-          "booking_form_start on sticky CTA UTM path",
+          "booking_form_start on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_form_start),
         ],
         [
@@ -673,7 +685,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_form_start),
         ],
         [
-          "quote_submit_success on sticky CTA UTM path",
+          "quote_submit_success on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.quote_submit_success),
         ],
         [
@@ -681,7 +693,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.quote_submit_success),
         ],
         [
-          "booking_submit_success on sticky CTA UTM path",
+          "booking_submit_success on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_success),
         ],
         [
@@ -689,7 +701,7 @@ async function main() {
           formatInt(snapshot.ga4.mobileStickyCta.sourceEvents.booking_submit_success),
         ],
         [
-          "booking_submit_pending on sticky CTA UTM path",
+          "booking_submit_pending on sticky CTA path",
           formatInt(snapshot.ga4.mobileStickyCta.pathEvents.booking_submit_pending),
         ],
         [
@@ -712,7 +724,7 @@ async function main() {
       )
       .join("; ")}`,
     "",
-    "### Sticky CTA UTM Path Rows",
+    "### Sticky CTA Path Rows",
     "",
     snapshot.ga4.mobileStickyCta.pathRows.length
       ? table(
@@ -723,7 +735,7 @@ async function main() {
             formatInt(row.count),
           ])
         )
-      : "_No downstream quote or booking events were returned on the sticky UTM path._",
+      : "_No downstream quote or booking events were returned on the sticky CTA path._",
     "",
     "### Sticky CTA Session Source Rows",
     "",

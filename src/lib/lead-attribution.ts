@@ -12,6 +12,9 @@ export type LeadAttribution = {
   gbraid: string | null;
   wbraid: string | null;
   msclkid: string | null;
+  ctaSource: string | null;
+  ctaMedium: string | null;
+  ctaCampaign: string | null;
   firstTouchAt: string | null;
   submitPath: string | null;
 };
@@ -53,6 +56,9 @@ export function resolveLeadAttributionFromFormData(
     gbraid: normalize(formData.get("attribution_gbraid"), 180),
     wbraid: normalize(formData.get("attribution_wbraid"), 180),
     msclkid: normalize(formData.get("attribution_msclkid"), 180),
+    ctaSource: normalize(formData.get("attribution_cta_source"), 120),
+    ctaMedium: normalize(formData.get("attribution_cta_medium"), 120),
+    ctaCampaign: normalize(formData.get("attribution_cta_campaign"), 180),
     firstTouchAt: normalize(formData.get("attribution_first_touch_at"), 80),
     submitPath:
       normalize(formData.get("attribution_submit_path")) || parseRefererPath(request),
@@ -79,11 +85,17 @@ export function buildLeadAttributionLines(attribution: LeadAttribution) {
     attribution.wbraid ? `wbraid=${attribution.wbraid}` : null,
     attribution.msclkid ? `msclkid=${attribution.msclkid}` : null,
   ].filter(Boolean);
+  const ctaParts = [
+    attribution.ctaSource ? `source=${attribution.ctaSource}` : null,
+    attribution.ctaMedium ? `medium=${attribution.ctaMedium}` : null,
+    attribution.ctaCampaign ? `campaign=${attribution.ctaCampaign}` : null,
+  ].filter(Boolean);
 
   if (landing) lines.push(`Landing page: ${landing}`);
   if (attribution.submitPath) lines.push(`Submit page: ${attribution.submitPath}`);
   if (attribution.referrer) lines.push(`Referrer: ${attribution.referrer}`);
   if (utmParts.length > 0) lines.push(`UTM: ${utmParts.join(", ")}`);
+  if (ctaParts.length > 0) lines.push(`CTA: ${ctaParts.join(", ")}`);
   if (clickIds.length > 0) lines.push(`Ad click IDs: ${clickIds.join(", ")}`);
   if (attribution.firstTouchAt) lines.push(`First touch at: ${attribution.firstTouchAt}`);
 

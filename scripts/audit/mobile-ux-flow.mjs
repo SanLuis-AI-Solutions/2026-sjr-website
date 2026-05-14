@@ -301,8 +301,8 @@ async function auditStickyShortcut(context) {
   if (cta) {
     if (cta.height > 48) findings.push(`Sticky CTA is taller than compact target: ${cta.height}px.`);
     if (cta.width > 170) findings.push(`Sticky CTA is wider than compact target: ${cta.width}px.`);
-    if (!cta.href.includes("utm_source=mobile_sticky_cta")) {
-      findings.push("Sticky CTA does not preserve mobile attribution.");
+    if (!cta.href.includes("cta_source=mobile_sticky_cta")) {
+      findings.push("Sticky CTA does not preserve mobile CTA attribution.");
     }
   }
 

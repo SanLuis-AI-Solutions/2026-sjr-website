@@ -41,7 +41,8 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Keep the sticky shortcut as one compact quote action, not a quote/book pair.
 - Current label: `60-sec Quote`. This is meant to reduce the effort objection after the May 7-13 report showed sticky CTA clicks but no downstream quote or booking starts.
 - Do not change the sticky CTA again until a full post-deploy GA4 window can compare `mobile_sticky_cta_click` against sticky-attributed `quote_form_start`, `booking_form_start`, and submit events.
-- Use `npm run google:weekly-seo-health` for that check. The report now evaluates both sticky UTM path attribution and sticky session-source attribution.
+- Use `npm run google:weekly-seo-health` for that check. The report now evaluates sticky CTA path attribution and the legacy sticky session-source fallback.
+- Do not use internal UTM parameters for the sticky shortcut going forward. Use `cta_source=mobile_sticky_cta`, `cta_medium=site_cta`, and `cta_campaign=quote_shortcut` so CTA measurement does not overwrite true traffic-source attribution.
 - The sticky funnel includes form-view events as diagnostic arrival signals. Treat them as evidence that users reached the form, not as conversions.
 - If sticky clicks still produce zero sticky-attributed form starts after the next full window, improve the quote-form arrival experience before adding another sticky button.
 

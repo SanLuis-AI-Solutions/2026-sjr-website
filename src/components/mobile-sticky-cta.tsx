@@ -9,7 +9,7 @@ export function MobileStickyCta() {
   const [isVisible, setIsVisible] = useState(false);
   const hideOnConversionPage = pathname === "/contact" || pathname === "/quote" || pathname === "/book";
   const quoteHref =
-    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form";
+    "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form";
 
   useEffect(() => {
     const updateVisibility = () => {

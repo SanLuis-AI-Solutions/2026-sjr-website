@@ -317,7 +317,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   await expect(fastQuote).toBeVisible();
   await expect(fastQuote).toHaveAttribute(
     "href",
-    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form",
+    "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form",
   );
   await expect(fastQuote).toHaveAttribute("data-mobile-sticky-cta", "quote");
   await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
@@ -336,7 +336,7 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
   expect(stickyMetrics.width).toBeLessThanOrEqual(170);
   await fastQuote.click();
   await expect(page).toHaveURL(
-    /\/quote\?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form$/,
+    /\/quote\?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form$/,
   );
   await expect(page.locator("#quote-form")).toBeInViewport();
 
@@ -350,20 +350,23 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
         eventName === "mobile_sticky_cta_click" &&
         params.page_path === "/" &&
         params.destination ===
-          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut#quote-form" &&
+          "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form" &&
         params.placement === "mobile_sticky_bar" &&
         params.cta_target === "quote",
     ),
   ).toBe(true);
-  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue(
+  await expect(page.locator('input[name="attribution_cta_source"]')).toHaveValue(
     "mobile_sticky_cta",
   );
-  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("site_cta");
-  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue(
+  await expect(page.locator('input[name="attribution_cta_medium"]')).toHaveValue("site_cta");
+  await expect(page.locator('input[name="attribution_cta_campaign"]')).toHaveValue(
     "quote_shortcut",
   );
+  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue("");
+  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("");
+  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue("");
   await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue(
-    "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
+    "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut",
   );
   await expect
     .poll(async () => {
@@ -376,7 +379,8 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
           eventName === "quote_form_view" &&
           params.page_path === "/quote" &&
           params.page_path_with_query ===
-            "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut" &&
+            "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
+          params.cta_source === "mobile_sticky_cta" &&
           params.source === "viewport",
       );
     })
@@ -392,9 +396,10 @@ test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
         eventName === "quote_form_start" &&
         params.page_path === "/quote" &&
         params.page_path_with_query ===
-          "/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut" &&
+          "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
         params.page_location ===
-          "http://127.0.0.1:3000/quote?utm_source=mobile_sticky_cta&utm_medium=site_cta&utm_campaign=quote_shortcut",
+          "http://127.0.0.1:3000/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
+        params.cta_source === "mobile_sticky_cta",
     ),
   ).toBe(true);
 

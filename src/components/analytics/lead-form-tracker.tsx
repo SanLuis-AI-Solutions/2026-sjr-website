@@ -23,6 +23,9 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
   const sentKeysRef = useRef<Set<string>>(new Set());
   const finderContext = resolveServicesFinderLeadContext(searchParams);
   const finderAnalyticsParams = getServicesFinderAnalyticsParams(finderContext);
+  const ctaSource = searchParams.get("cta_source") || undefined;
+  const ctaMedium = searchParams.get("cta_medium") || undefined;
+  const ctaCampaign = searchParams.get("cta_campaign") || undefined;
   const pagePath = searchKey ? `${pathname || "/"}?${searchKey}` : pathname || "/";
 
   useEffect(() => {
@@ -49,6 +52,9 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       page_path_with_query: pagePath,
       page_location:
         typeof window !== "undefined" ? `${window.location.origin}${pagePath}` : pagePath,
+      cta_source: ctaSource,
+      cta_medium: ctaMedium,
+      cta_campaign: ctaCampaign,
       form_id: formId,
       lead_type: leadType,
       ...finderAnalyticsParams,
@@ -139,7 +145,7 @@ export function LeadFormTracker({ formId, leadType, hasError }: LeadFormTrackerP
       form.removeEventListener("input", onInput);
       form.removeEventListener("submit", onSubmit);
     };
-  }, [finderAnalyticsParams, formId, leadType, pagePath, pathname]);
+  }, [ctaCampaign, ctaMedium, ctaSource, finderAnalyticsParams, formId, leadType, pagePath, pathname]);
 
   return null;
 }
