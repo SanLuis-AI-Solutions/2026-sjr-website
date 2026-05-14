@@ -22,9 +22,12 @@ export function HomeLocalRepairPaths() {
               </p>
             </div>
 
-            <div className="grid gap-3 md:hidden">
-              <details className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3">
-                <summary className="cursor-pointer text-sm font-semibold text-stone-900">
+            <div data-mobile-crawl-hub className="grid gap-3 md:hidden">
+              <details
+                data-mobile-sidebar-section
+                className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2"
+              >
+                <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-stone-900">
                   Nearby city pages
                 </summary>
                 <div className="mt-3 grid gap-2">
@@ -40,8 +43,11 @@ export function HomeLocalRepairPaths() {
                 </div>
               </details>
 
-              <details className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3">
-                <summary className="cursor-pointer text-sm font-semibold text-stone-900">
+              <details
+                data-mobile-sidebar-section
+                className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2"
+              >
+                <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-stone-900">
                   Decision guides
                 </summary>
                 <div className="mt-3 grid gap-2">

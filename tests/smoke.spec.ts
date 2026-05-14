@@ -223,13 +223,15 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   const pricingGuides = page.locator("section", { hasText: "Pricing help" });
   const topGuidesSummary = pricingGuides.locator("summary").filter({ hasText: /^Show top repair guides$/ });
   await pricingGuides.scrollIntoViewIfNeeded();
-  await expect(pricingGuides.getByRole("heading", { name: /Need price or timing guidance/i }))
+  await expect(pricingGuides.getByRole("heading", { name: /Price and timing guides/i }))
     .toBeVisible();
-  await expect(pricingGuides.getByRole("link", { name: /^Get Fast Quote$/i })).toBeVisible();
+  await expect(pricingGuides.getByRole("link", { name: /^Get Fast Quote$/i })).toHaveCount(0);
+  await expect(pricingGuides.getByRole("link", { name: /^Browse all repair guides$/i })).toBeHidden();
   await expect(topGuidesSummary).toBeVisible();
   await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeHidden();
   await topGuidesSummary.click();
   await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeVisible();
+  await expect(pricingGuides.getByRole("link", { name: /^Browse all repair guides$/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeHidden();
 
   const finalCta = page.locator("section", { hasText: "Start Today" });

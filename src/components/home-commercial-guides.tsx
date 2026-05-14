@@ -12,33 +12,25 @@ export function HomeCommercialGuides() {
   return (
     <section className="bg-white py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-[0_14px_34px_rgba(58,25,16,0.08)] md:hidden">
+        <div
+          data-mobile-crawl-hub
+          className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-[0_14px_34px_rgba(58,25,16,0.08)] md:hidden"
+        >
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
             Pricing help
           </p>
           <h2 className="mt-2 font-serif text-2xl leading-tight text-stone-900">
-            Need price or timing guidance?
+            Price and timing guides, when you need them.
           </h2>
           <p className="mt-3 text-sm leading-6 text-stone-700">
-            Start with a quote if you are ready. Open the guides only if you want to compare
-            common repair questions first.
+            The quote button above is the fastest path. Open these only if you want to compare
+            common repair questions before contacting the shop.
           </p>
-          <div className="mt-4 grid gap-2">
-            <Link
-              href="/quote"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Get Fast Quote
-            </Link>
-            <Link
-              href="/blog"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold bg-white px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-            >
-              Browse Guides
-            </Link>
-          </div>
-          <details className="mt-4 rounded-2xl border border-stone-200 bg-white px-4 py-3">
-            <summary className="cursor-pointer text-sm font-semibold text-stone-900">
+          <details
+            data-mobile-sidebar-section
+            className="mt-4 rounded-2xl border border-stone-200 bg-white px-4 py-2"
+          >
+            <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-stone-900">
               Show top repair guides
             </summary>
             <div className="mt-3 grid gap-2">
@@ -51,6 +43,12 @@ export function HomeCommercialGuides() {
                   {post.title}
                 </Link>
               ))}
+              <Link
+                href="/blog"
+                className="rounded-xl border border-brand-gold/45 bg-white px-4 py-3 text-sm font-semibold text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Browse all repair guides
+              </Link>
             </div>
           </details>
         </div>

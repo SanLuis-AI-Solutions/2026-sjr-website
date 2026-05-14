@@ -160,6 +160,37 @@ async function auditRoute(context, route) {
     );
   }
 
+  const mobileCrawlHubActions = await page.locator("[data-mobile-crawl-hub]").evaluateAll((nodes) =>
+    nodes.flatMap((node) =>
+      Array.from(node.querySelectorAll("a, button")).flatMap((action) => {
+        const closedDetails = action.closest("details:not([open])");
+        if (closedDetails) return [];
+        const rect = action.getBoundingClientRect();
+        const style = window.getComputedStyle(action);
+        if (rect.width <= 0 || rect.height <= 0 || style.visibility === "hidden" || style.display === "none") {
+          return [];
+        }
+        return [
+          {
+            text: (action.textContent || action.getAttribute("aria-label") || "").trim().replace(/\s+/g, " "),
+            href: action.getAttribute("href") || "",
+          },
+        ];
+      })
+    )
+  );
+
+  const crawlHubConversionActions = mobileCrawlHubActions.filter((action) =>
+    hasQuote(action.text, action.href) || hasBook(action.text, action.href)
+  );
+  if (crawlHubConversionActions.length > 0) {
+    findings.push(
+      `Mobile crawl hubs expose conversion CTAs instead of staying informational: ${crawlHubConversionActions
+        .map((action) => action.text || action.href)
+        .join(", ")}.`
+    );
+  }
+
   await page.close();
 
   return {
@@ -253,6 +284,7 @@ async function main() {
     "- Hero tap targets must be at least 44px tall.",
     "- The mobile sticky CTA must remain one compact attributed quote action.",
     "- Footer crawl groups must remain collapsed by default on mobile.",
+    "- Mobile crawl hubs must not expose visible quote/book CTAs.",
     "",
     "## Route Summary",
     "",
