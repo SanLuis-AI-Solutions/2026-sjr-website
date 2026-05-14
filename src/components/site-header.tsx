@@ -34,7 +34,7 @@ export function SiteHeader() {
         />
       ) : null}
       <div className="relative z-[120] mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" prefetch={false} className="group flex items-center gap-3">
+        <Link href="/" prefetch={false} className="group flex min-h-11 items-center gap-3 py-1.5 sm:py-0">
           <BrandMark className="hidden h-11 w-11 flex-none drop-shadow-[0_6px_18px_rgba(122,46,58,0.16)] sm:block" />
           <span className="flex flex-col">
             <span className="font-serif text-lg leading-none tracking-tight text-neutral-900 sm:text-xl xl:text-2xl">

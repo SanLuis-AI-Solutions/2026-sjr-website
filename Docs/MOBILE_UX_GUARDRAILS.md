@@ -34,7 +34,7 @@ Mobile pages should make the next action obvious within a few seconds. For most 
 - Do not duplicate quote/book button pairs in the same mobile menu.
 - Reviews and proof should be visible on-page, but not crowd the primary menu action.
 - The site header already provides a mobile call shortcut; do not repeat full-width call buttons above mobile forms unless the page has no clearer primary action.
-- Keep persistent mobile header copy compact. Long brand subtitles should not wrap into extra chrome above the hero CTA.
+- Keep persistent mobile header copy compact. Long brand subtitles should not wrap into extra chrome above the hero CTA, and visible header tap targets should stay at least 44px tall.
 
 ## Mobile Sticky CTA
 
@@ -98,7 +98,7 @@ Run focused checks after CTA/layout changes:
 npx playwright test tests/smoke.spec.ts --grep "mobile nav: menu opens and can reach Services|mobile conversion: home CTA reaches quote form|mobile home flow keeps conversion path uncluttered|mobile sticky CTA uses one compact quote action"
 ```
 
-Run the production-capable flow audit when SEO/content changes add visible links, filters, or CTAs:
+Run the production-capable flow audit when SEO/content changes add visible links, filters, CTAs, or persistent header chrome:
 
 ```powershell
 npm run ux:mobile-flow

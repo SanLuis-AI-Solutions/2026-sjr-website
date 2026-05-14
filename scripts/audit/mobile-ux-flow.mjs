@@ -62,9 +62,14 @@ async function auditRoute(context, route) {
   await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
 
   const firstSection = page.locator("main section").first();
-  await firstSection.scrollIntoViewIfNeeded();
+  if ((await firstSection.count()) === 0) {
+    findings.push("Page has no main section for above-fold mobile action audit.");
+  }
+  const heroScope = (await firstSection.count()) > 0 ? firstSection : page.locator("main").first();
+  await heroScope.waitFor({ state: "visible", timeout: 10000 });
+  await heroScope.scrollIntoViewIfNeeded();
 
-  const heroActions = await firstSection.locator("a:visible, button:visible").evaluateAll((nodes) =>
+  const heroActions = await heroScope.locator("a:visible, button:visible").evaluateAll((nodes) =>
     nodes.map((node) => {
       const element = node;
       const rect = element.getBoundingClientRect();
@@ -222,21 +227,46 @@ async function auditStickyShortcut(context) {
 
   const sticky = page.getByRole("region", { name: /^Mobile quote shortcut$/i });
   const initiallyVisible = await sticky.isVisible().catch(() => false);
-  await page.evaluate(() => window.scrollTo(0, 900));
-  await sticky.waitFor({ state: "visible", timeout: 10000 });
-  const metrics = await sticky.locator("a").evaluateAll((nodes) =>
-    nodes.map((node) => {
-      const rect = node.getBoundingClientRect();
-      return {
-        text: (node.textContent || node.getAttribute("aria-label") || "").trim().replace(/\s+/g, " "),
-        href: node.getAttribute("href") || "",
-        height: Math.round(rect.height),
-        width: Math.round(rect.width),
-      };
-    })
-  );
+  const scrollTargets = await page.evaluate(() => {
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    return [
+      900,
+      Math.round(window.innerHeight * 1.25),
+      Math.round(window.innerHeight * 1.75),
+      Math.round(maxScroll * 0.5),
+      maxScroll,
+    ].filter((value, index, values) => value > 0 && values.indexOf(value) === index);
+  });
+
+  let revealed = false;
+  for (const target of scrollTargets) {
+    await page.evaluate((scrollY) => {
+      window.scrollTo(0, scrollY);
+      window.dispatchEvent(new Event("scroll"));
+    }, target);
+    await page.waitForTimeout(500);
+    if (await sticky.isVisible().catch(() => false)) {
+      revealed = true;
+      break;
+    }
+  }
+
+  const metrics = revealed
+    ? await sticky.locator("a").evaluateAll((nodes) =>
+        nodes.map((node) => {
+          const rect = node.getBoundingClientRect();
+          return {
+            text: (node.textContent || node.getAttribute("aria-label") || "").trim().replace(/\s+/g, " "),
+            href: node.getAttribute("href") || "",
+            height: Math.round(rect.height),
+            width: Math.round(rect.width),
+          };
+        })
+      )
+    : [];
 
   if (initiallyVisible) findings.push("Sticky CTA is visible before scroll.");
+  if (!revealed) findings.push("Sticky CTA did not become visible after scroll.");
   if (metrics.length !== 1) findings.push(`Sticky CTA has ${metrics.length} visible links instead of 1.`);
   const [cta] = metrics;
   if (cta) {
@@ -251,11 +281,66 @@ async function auditStickyShortcut(context) {
   return { metrics, findings };
 }
 
+async function auditMobileHeader(context) {
+  const page = await context.newPage();
+  const findings = [];
+
+  await page.goto(`${origin}/`, { waitUntil: "networkidle", timeout: 60000 });
+
+  const metrics = await page.getByRole("banner").evaluate((node) => {
+    const header = node;
+    const headerRect = header.getBoundingClientRect();
+    const visibleText = header.innerText.trim().replace(/\s+/g, " ");
+    const targets = Array.from(header.querySelectorAll("a, button")).flatMap((target) => {
+      const rect = target.getBoundingClientRect();
+      const style = window.getComputedStyle(target);
+      if (rect.width <= 0 || rect.height <= 0 || style.visibility === "hidden" || style.display === "none") {
+        return [];
+      }
+
+      return [
+        {
+          text: (target.innerText || target.getAttribute("aria-label") || "").trim().replace(/\s+/g, " "),
+          height: Math.round(rect.height),
+          width: Math.round(rect.width),
+        },
+      ];
+    });
+
+    return {
+      height: Math.round(headerRect.height),
+      visibleText,
+      targets,
+    };
+  });
+
+  if (metrics.height > 96) {
+    findings.push(`Mobile header is taller than the compact chrome budget: ${metrics.height}px.`);
+  }
+
+  if (/Master Craftsmanship/i.test(metrics.visibleText)) {
+    findings.push("Mobile header exposes the long brand subtitle instead of compact brand copy.");
+  }
+
+  const smallTargets = metrics.targets.filter((target) => target.height < 44);
+  if (smallTargets.length > 0) {
+    findings.push(
+      `Mobile header tap targets under 44px: ${smallTargets
+        .map((target) => `${target.text || "unlabeled"} (${target.height}px)`)
+        .join(", ")}.`
+    );
+  }
+
+  await page.close();
+  return { metrics, findings };
+}
+
 async function main() {
   fs.mkdirSync(outDir, { recursive: true });
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ ...devices["iPhone 13"] });
 
+  const header = await auditMobileHeader(context);
   const routes = routesToAudit();
   const routeResults = [];
   for (const route of routes) {
@@ -268,6 +353,7 @@ async function main() {
     ...routeResults.flatMap((result) =>
       result.findings.map((finding) => ({ route: result.route, finding }))
     ),
+    ...header.findings.map((finding) => ({ route: "/", finding })),
     ...sticky.findings.map((finding) => ({ route: "/", finding })),
   ];
 
@@ -276,6 +362,7 @@ async function main() {
     origin,
     status: failures.length === 0 ? "pass" : "fail",
     failures,
+    header,
     sticky,
     routes: routeResults,
   };
@@ -295,6 +382,7 @@ async function main() {
     "- Mobile hero sections must not show quote and booking as equal visible choices.",
     "- Mobile hero sections should expose no more than 6 visible actions above the fold.",
     "- Hero tap targets must be at least 44px tall.",
+    "- The persistent mobile header must stay compact and keep visible tap targets at least 44px tall.",
     "- The mobile sticky CTA must remain one compact attributed quote action.",
     "- Footer crawl groups must remain collapsed by default on mobile.",
     "- Mobile crawl hubs must not expose visible quote/book CTAs.",
@@ -311,6 +399,21 @@ async function main() {
         String(result.footerVisibleLinkCount),
         result.findings.length ? result.findings.join("<br>") : "Pass",
       ])
+    ),
+    "",
+    "## Mobile Header",
+    "",
+    table(
+      ["Metric", "Value"],
+      [
+        ["Height", `${header.metrics.height}px`],
+        ["Visible text", header.metrics.visibleText],
+        [
+          "Visible targets",
+          header.metrics.targets.map((target) => `${target.text || "unlabeled"} (${target.height}px)`).join("<br>"),
+        ],
+        ["Findings", header.findings.length ? header.findings.join("<br>") : "Pass"],
+      ]
     ),
     "",
     "## Sticky CTA",
