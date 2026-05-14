@@ -1482,13 +1482,15 @@ test("mobile service-area pages: nearby city pages render local guidance and her
     await page.goto(route.path, { waitUntil: "networkidle" });
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
     const areaBreadcrumb = page.getByRole("navigation", { name: /breadcrumb/i });
-    await expect(areaBreadcrumb).toBeVisible();
-    await expect(areaBreadcrumb.getByRole("link", { name: /^Services$/i })).toBeVisible();
+    await expect(areaBreadcrumb).toBeHidden();
     const heroSection = page.locator("main section").first();
+    await expect(heroSection.getByRole("link")).toHaveCount(1);
     await expect(heroSection.getByRole("link", { name: /^Get Fast Quote$/i }).first())
       .toBeVisible();
     await expect(heroSection.getByRole("link", { name: /^Book Repair$/i }).first())
       .toBeHidden();
+    const schemas = await getJsonLdSchemas(page);
+    expect(schemas.some((schema) => schema["@type"] === "BreadcrumbList")).toBe(true);
     await expect(page.getByText(route.serviceLink).first()).toBeVisible();
     await assertNoBrokenImages(page);
   }

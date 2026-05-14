@@ -127,7 +127,9 @@ export function ServiceAreaLandingPage({ page }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
           <div>
-            <BreadcrumbTrail items={breadcrumbItems} className="mb-5" />
+            <div className="hidden sm:block">
+              <BreadcrumbTrail items={breadcrumbItems} className="mb-5" />
+            </div>
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
               Service area
             </p>
