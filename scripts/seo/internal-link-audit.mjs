@@ -123,7 +123,7 @@ function buildMarkdown(report) {
   ]);
 
   const weakRows = report.targets
-    .filter((target) => target.nonFooterIndexedSourceCount < 2)
+    .filter((target) => target.category !== "static" && target.nonFooterIndexedSourceCount < 2)
     .map((target) => [
       `\`${target.path}\``,
       target.statusLabel,
@@ -179,6 +179,9 @@ function buildMarkdown(report) {
 }
 
 function mainRecommendation(target) {
+  if (target.category === "static") {
+    return "Utility URL; do not add visible weight unless it becomes commercially important";
+  }
   if (target.indexedSourceCount === 0) {
     return "Add links from indexed pages";
   }
@@ -238,6 +241,7 @@ async function main() {
     const hasSiteMapLink = sources.some((source) => source.path === "/site-map");
     const target = {
       path: route.path,
+      category: route.category,
       statusLabel:
         route.observedStatus === "discovered-currently-not-indexed"
           ? "Discovered - currently not indexed"
