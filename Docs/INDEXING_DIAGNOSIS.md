@@ -1611,3 +1611,19 @@ Decision:
 
 - Do not consolidate immediately without a fresh GSC checkpoint or owner-provided proof decision.
 - Use the audit after the next URL Inspection run to choose between proof enrichment and consolidation.
+
+## Watch Battery Location Guide Consolidation (2026-05-14)
+
+Authenticated GSC recheck on 2026-05-14 showed `/blog/where-to-get-watch-battery-replaced-pasadena` unchanged as `Discovered - currently not indexed`.
+
+Decision:
+
+- Consolidated the same-day/local watch battery guidance into the already indexed `/blog/watch-battery-replacement` article.
+- Removed the stalled URL from canonical blog, sitemap, helpful-read, and commercial-guide inventories.
+- Added a permanent redirect from `/blog/where-to-get-watch-battery-replaced-pasadena` to `/blog/watch-battery-replacement`.
+- Preserved useful local intake guidance without adding another homepage block, footer hub, mobile CTA, or duplicate blog path.
+
+Interpretation:
+
+- This reduces overlapping watch-battery URLs while keeping the visitor path simpler.
+- Future watch-battery work should add first-party proof to the indexed article, not recreate a second same-intent location guide.

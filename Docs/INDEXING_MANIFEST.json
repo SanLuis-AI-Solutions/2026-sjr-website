@@ -11,7 +11,7 @@
   "countsByCategory": [
     [
       "blog",
-      16
+      15
     ],
     [
       "service-area",
@@ -29,7 +29,7 @@
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      13
+      12
     ],
     [
       "indexed",
@@ -509,26 +509,13 @@
       "slug": "watch-battery-replacement",
       "label": "Watch Battery Replacement: Timing and Care Tips",
       "publishedAt": "2026-02-17",
-      "reviewedAt": "2026-02-18",
+      "reviewedAt": "2026-05-14",
       "path": "/blog/watch-battery-replacement",
       "url": "https://www.susiesjewelryrepair.com/blog/watch-battery-replacement",
       "observedStatus": "indexed",
       "observedOn": "2026-05-13",
       "nextAction": "monitor",
       "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
-    },
-    {
-      "category": "blog",
-      "slug": "where-to-get-watch-battery-replaced-pasadena",
-      "label": "Where to get a watch battery replaced today near Deer Park / Pasadena?",
-      "publishedAt": "2026-03-01",
-      "reviewedAt": "2026-05-12",
-      "path": "/blog/where-to-get-watch-battery-replaced-pasadena",
-      "url": "https://www.susiesjewelryrepair.com/blog/where-to-get-watch-battery-replaced-pasadena",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     }
   ]
 }

@@ -115,6 +115,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/where-to-get-watch-battery-replaced-pasadena",
+        destination: "/blog/watch-battery-replacement",
+        permanent: true,
+      },
+      {
         source: "/necklace-bracelet-repair",
         destination: "/services/necklace-repair",
         permanent: true,

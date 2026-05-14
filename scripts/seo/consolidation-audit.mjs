@@ -27,14 +27,11 @@ const clusters = [
   },
   {
     name: "Watch battery diagnosis",
-    unresolved: [
-      "/blog/does-my-watch-need-battery-or-repair-pasadena",
-      "/blog/where-to-get-watch-battery-replaced-pasadena",
-    ],
+    unresolved: ["/blog/does-my-watch-need-battery-or-repair-pasadena"],
     indexedAlternatives: ["/blog/watch-battery-replacement", "/services/watch-repair"],
-    recommendation: "merge-location-guide-if-stalled",
+    recommendation: "proof-first-or-merge-diagnostic-if-stalled",
     rationale:
-      "Both unresolved guides overlap an indexed watch battery article and indexed service page. Keep only if real diagnostic proof is available; otherwise consolidate the location/same-day guide first.",
+      "The same-day location guide was consolidated into the indexed watch battery article. Keep the remaining diagnostic guide only if it can earn index selection with differentiated battery-vs-repair proof.",
   },
   {
     name: "Stone, chain, and cleaning risk",
@@ -196,7 +193,6 @@ function renderMarkdown(audit) {
     "If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, start with the lowest-risk consolidation candidates:",
     "",
     mdList([
-      "`/blog/where-to-get-watch-battery-replaced-pasadena` into `/blog/watch-battery-replacement` or `/services/watch-repair`.",
       "`/blog/pearl-restringing-timing-guide` into `/blog/how-much-does-pearl-restringing-cost-pasadena` or `/services/pearl-restringing`.",
       "`/blog/professional-cleaning-vs-home-care` into `/blog/safe-to-clean-vintage-diamond-ring-at-home`.",
     ]),

@@ -258,8 +258,8 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Preventive Care"],
     publishedAt: "2026-02-17",
-    reviewedAt: "2026-02-18",
-    readTime: "7 min read",
+    reviewedAt: "2026-05-14",
+    readTime: "8 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -308,6 +308,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "If the watch matters to you, do not wait until it has sat too long with an aging battery. Early service usually protects both the movement and the long-term cost of ownership.",
         ],
       },
+      {
+        heading: "The same-day watch battery intake before you drive over",
+        body: [
+          "For a local same-day visit, the fastest intake starts with the watch brand, whether the case back screws down or snaps on, when it stopped, and whether the crystal has ever fogged. Those details help separate a likely while-you-wait battery swap from a watch that needs slower opening, gasket review, or repair diagnosis.",
+          "If you are coming from Deer Park, Pasadena, Clear Lake, or La Porte, send a quick photo of the dial and the back of the case before you leave if the watch is unusual, luxury, vintage, or water-resistant. That gives the bench a better first read and prevents treating a diagnostic watch like a kiosk battery job.",
+          "The goal is still speed, but not careless speed. A good same-day battery service should protect the case, check the seal condition, and tell you when the symptom points beyond a battery before the watch is closed back up.",
+        ],
+      },
     ],
     faqHeading: "Quick answers about watch battery service",
     faqs: [
@@ -326,12 +334,20 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Yes. Moisture, corrosion, stem issues, or other movement problems can look like a battery issue, so the watch may need a deeper check than a battery swap alone.",
       },
+      {
+        question: "Do you offer same-day watch battery replacement near Deer Park and Pasadena?",
+        answer:
+          "Yes. Most straightforward quartz watch battery replacements are same-day, and many can be completed while you wait depending on the watch style, case condition, and bench load.",
+      },
     ],
     nextStepsHeading: "Best next step if your watch just stopped",
     nextStepsIntro:
       "If you want a local answer before the problem gets bigger, start with the watch repair page or request a fast quote for battery service and condition review.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Decide Battery vs Repair", href: "/blog/does-my-watch-need-battery-or-repair-pasadena" },
+      { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
+      { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
@@ -1187,114 +1203,6 @@ export const BLOG_POSTS: BlogPost[] = [
     relatedServiceSlugs: ["stone-setting", "custom-design"]
   },
   {
-    slug: "where-to-get-watch-battery-replaced-pasadena",
-    title: "Where to get a watch battery replaced today near Deer Park / Pasadena?",
-    excerpt: "Looking for same-day watch battery replacement in Pasadena? Here is what you need to know about our fast, in-house service.",
-    image: "/images/blog/watch-battery-replacement-cover.jpg",
-    topics: ["Watch Service", "Pricing & Timing"],
-    publishedAt: "2026-03-01",
-    reviewedAt: "2026-05-12",
-    readTime: "6 min read",
-    authorName: "Susie’s In-House Team",
-    authorRole: "Master Craftsmanship Team",
-    keyTakeaways: [
-      "Susie's Jewelry Repair offers same-day and while-you-wait watch battery replacements.",
-      "We stock batteries for 99% of quartz watches, from everyday brands to luxury timepieces.",
-      "Our service always includes a seal check to protect against moisture damage."
-    ],
-    sections: [
-      {
-        heading: "Where can I get a watch battery replaced today in Pasadena?",
-        body: [
-          "If your quartz watch has stopped ticking, you can get a same-day battery replacement at Susie's Jewelry Repair, conveniently located near the Deer Park and Pasadena border on Fairmont Pkwy. We handle everything from basic fashion watches to high-end Swiss quartz models.",
-          "Unlike mall kiosks, our master craftsmen carefully open the case back to prevent scratching, swap in a fresh, high-quality battery, and ensure the internal gaskets are properly seated before closing.",
-          "That matters for local customers who need the watch back today for work, school, travel, or everyday wear. The goal is not just to make the hands move again. It is to return the watch clean, protected, and ready to wear."
-        ]
-      },
-      {
-        heading: "Do you pressure test water-resistant watches?",
-        body: [
-          "For standard everyday wear, our visual seal check ensures basic splash resistance. If your watch is a professional dive watch and you plan on submerging it, we recommend discussing a full pressure test and reseal with our team to guarantee its original depth rating."
-        ]
-      },
-      {
-        heading: "How long does a watch battery replacement take?",
-        body: [
-          "Most battery replacements are same-day and many are completed while you wait, depending on the watch style and how busy the bench is. Straightforward quartz watches are usually fast. Specialty backs, luxury cases, and watches with stripped screws can take longer because they need more careful handling.",
-          "If you are coming from Deer Park, La Porte, or southeast Houston, call or start a quick quote first if you have a brand-specific concern. That helps us tell you whether your model needs a standard battery swap, gasket replacement, or a deeper diagnostic."
-        ]
-      },
-      {
-        heading: "When a dead watch may be more than a battery",
-        body: [
-          "Not every stopped watch only needs a fresh cell. Battery leakage, coil issues, damaged stems, and moisture intrusion can all mimic a simple dead-battery symptom.",
-          "If a watch recently lost time, fogged under the crystal, or stopped after sitting with an old battery for too long, inspection matters. Replacing the battery without checking the movement can hide the real cause and shorten the life of the watch.",
-          "This is especially important for sentimental or higher-end watches. A quick diagnosis now is cheaper than a full movement repair later."
-        ]
-      },
-      {
-        heading: "The same-day watch battery intake we want before you drive over",
-        body: [
-          "For a local same-day visit, the fastest intake starts with the watch brand, whether the case back screws down or snaps on, when it stopped, and whether the crystal has ever fogged. Those details help separate a likely while-you-wait battery swap from a watch that needs slower opening, gasket review, or repair diagnosis.",
-          "If you are coming from Deer Park, Pasadena, Clear Lake, or La Porte, send a quick photo of the dial and the back of the case before you leave if the watch is unusual, luxury, vintage, or water-resistant. That gives the bench a better first read and prevents treating a diagnostic watch like a kiosk battery job.",
-          "The goal is still speed, but not careless speed. A good same-day battery service should protect the case, check the seal condition, and tell you when the symptom points beyond a battery before the watch is closed back up.",
-        ],
-      }
-    ],
-    faqHeading: "Quick answers about same-day watch battery service",
-    faqs: [
-      {
-        question: "Do you offer same-day watch battery replacement in Pasadena?",
-        answer:
-          "Yes. Most quartz watch battery replacements are same-day, and many can be completed while you wait depending on the watch style and bench load.",
-      },
-      {
-        question: "Do you replace batteries in luxury or Swiss watches?",
-        answer:
-          "Yes. We handle everyday watches and many higher-end models, but some luxury cases require slower opening, seal work, or additional diagnostics.",
-      },
-      {
-        question: "Do you check the seal after replacing the battery?",
-        answer:
-          "Yes. We visually inspect seals and gasket condition during service. If the watch needs a deeper reseal or pressure test, we will tell you before the work is finalized.",
-      },
-    ],
-    nextStepsHeading: "Best next step if your watch stopped today",
-    nextStepsIntro:
-      "If it is likely a battery issue, start with watch repair service details or request a quick quote before you drive over.",
-    nextSteps: [
-      { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Decide Battery vs Repair", href: "/blog/does-my-watch-need-battery-or-repair-pasadena" },
-      { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
-      { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "The watch stopped without moisture or impact",
-        meaning: "A same-day battery replacement may be the likely starting point.",
-        nextAction: "Start with watch repair or a quick quote if the model is unusual.",
-      },
-      {
-        signal: "The crystal fogged or the watch saw water",
-        meaning: "Moisture changes the risk; a battery swap alone may hide movement damage.",
-        nextAction: "Ask for seal and moisture review before approving battery-only service.",
-      },
-      {
-        signal: "The watch sat dead for a long time",
-        meaning: "Battery leakage or corrosion is more likely than with a recently stopped watch.",
-        nextAction: "Plan for diagnosis first, then battery service if the movement checks out.",
-      },
-    ],
-    relatedServiceSlugs: ["watch-repair"],
-    discoveryBoosts: {
-      blogFeatured: 8,
-      serviceHub: 9,
-      geoHelpfulReads: 9,
-    },
-  },
-  {
     slug: "safe-to-clean-vintage-diamond-ring-at-home",
     title: "Is it safe to clean my vintage diamond ring with household products?",
     excerpt: "Vintage rings are delicate. Learn which household cleaners are safe, which will destroy your metals, and how to safely restore the sparkle.",
@@ -1677,7 +1585,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "If the watch might only need a battery, or might be something bigger, start with watch repair details or send symptoms through the quote form before you drive over.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Find Same-Day Watch Battery Help", href: "/blog/where-to-get-watch-battery-replaced-pasadena" },
+      { label: "Plan Same-Day Battery Service", href: "/blog/watch-battery-replacement" },
       { label: "Get Fast Quote", href: "/quote" },
       { label: "Book Repair", href: "/book" },
     ],
@@ -1714,7 +1622,6 @@ export const BLOG_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
   "can-a-severely-bent-ring-prong-be-fixed": "/images/blog/stone-security-checklist-cover-mobile.avif",
   "custom-design-timeline-guide": "/images/blog/custom-design-timeline-guide-cover-mobile.avif",
   "watch-battery-replacement": "/images/blog/watch-battery-replacement-cover-mobile.avif",
-  "where-to-get-watch-battery-replaced-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
   "how-much-does-pearl-restringing-cost-pasadena": "/images/blog/pearl-restringing-timing-guide-cover-mobile.avif",
   "does-my-watch-need-battery-or-repair-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
 };
@@ -1732,7 +1639,6 @@ const COMMERCIAL_GUIDE_SLUGS = [
   "cost-to-resize-gold-ring-pasadena",
   "how-much-does-pearl-restringing-cost-pasadena",
   "does-my-watch-need-battery-or-repair-pasadena",
-  "where-to-get-watch-battery-replaced-pasadena",
   "chain-repair-weak-points",
   "stone-security-checklist",
   "heirloom-restoration-planning-guide",
@@ -1743,7 +1649,6 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "watch-repair": [
     "watch-battery-replacement",
     "does-my-watch-need-battery-or-repair-pasadena",
-    "where-to-get-watch-battery-replaced-pasadena",
   ],
   "ring-sizing": [
     "cost-to-resize-gold-ring-pasadena",

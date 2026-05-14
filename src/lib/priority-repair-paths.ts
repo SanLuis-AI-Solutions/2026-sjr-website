@@ -31,7 +31,7 @@ export const PRIORITY_REPAIR_PATHS = [
   },
   {
     label: "Watch battery replacement near Pasadena",
-    href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+    href: "/blog/watch-battery-replacement",
     description: "What local watch owners should compare before choosing battery service.",
   },
   {

@@ -55,9 +55,6 @@ const OBSERVED_STATUSES = {
     status: "discovered-currently-not-indexed",
   },
   "/blog/stone-security-checklist": { status: "discovered-currently-not-indexed" },
-  "/blog/where-to-get-watch-battery-replaced-pasadena": {
-    status: "discovered-currently-not-indexed",
-  },
   "/services/pasadena": { status: "discovered-currently-not-indexed" },
 };
 

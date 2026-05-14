@@ -338,7 +338,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     helpfulReads: [
       {
         label: "Where to get a watch battery replaced near Pasadena",
-        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+        href: "/blog/watch-battery-replacement",
       },
       {
         label: "Does my watch need a battery or deeper repair?",
@@ -434,7 +434,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       },
       {
         label: "Watch intake details before you make the drive",
-        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+        href: "/blog/watch-battery-replacement",
       },
       {
         label: "Gold ring resizing cost and timing guide",
@@ -641,7 +641,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     helpfulReads: [
       {
         label: "Where to get a watch battery replaced near Pasadena",
-        href: "/blog/where-to-get-watch-battery-replaced-pasadena",
+        href: "/blog/watch-battery-replacement",
       },
       {
         label: "Does my watch need a battery or deeper repair?",

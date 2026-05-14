@@ -823,6 +823,31 @@ test("legacy Wix routes: best-fit redirects resolve to live pages", async ({ pag
   guard.assertNoErrors("legacy Wix redirects");
 });
 
+test("consolidated watch battery location guide redirects to indexed battery article", async ({
+  page,
+}) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/blog/where-to-get-watch-battery-replaced-pasadena", {
+    waitUntil: "networkidle",
+  });
+
+  await expect(page).toHaveURL(/\/blog\/watch-battery-replacement$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: /Watch Battery Replacement: Timing and Care Tips/i,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: /Same-day watch battery intake before you drive over/i,
+    }),
+  ).toBeVisible();
+
+  guard.assertNoErrors("watch battery guide consolidation redirect");
+});
+
 test("commercial blog guides expose repair decision signals", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
@@ -1053,13 +1078,13 @@ test("cleaning guides expose inspection-risk differentiation", async ({ page }) 
 test("same-day watch battery guide exposes local intake differentiation", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
-  await page.goto("/blog/where-to-get-watch-battery-replaced-pasadena", {
+  await page.goto("/blog/watch-battery-replacement", {
     waitUntil: "networkidle",
   });
 
   await expect(
     page.getByRole("heading", {
-      name: /The same-day watch battery intake we want before you drive over/i,
+      name: /The same-day watch battery intake before you drive over/i,
     }),
   ).toBeVisible();
   await expect(page.getByText(/send a quick photo of the dial and the back of the case/i))
@@ -1069,7 +1094,7 @@ test("same-day watch battery guide exposes local intake differentiation", async 
     waitUntil: "networkidle",
   });
   await expect(
-    page.getByRole("link", { name: /Find Same-Day Watch Battery Help/i }),
+    page.getByRole("link", { name: /Plan Same-Day Battery Service/i }),
   ).toBeVisible();
 
   guard.assertNoErrors("same-day watch battery intake differentiation");
@@ -1401,13 +1426,13 @@ test("mobile blog detail: watch battery article links into deer park geo guidanc
 }) => {
   const guard = attachConsoleGuards(page);
 
-  await page.goto("/blog/where-to-get-watch-battery-replaced-pasadena", {
+  await page.goto("/blog/watch-battery-replacement", {
     waitUntil: "networkidle",
   });
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /Where to get a watch battery replaced today near Deer Park \/ Pasadena/i,
+      name: /Watch Battery Replacement: Timing and Care Tips/i,
     })
   ).toBeVisible();
   await expect(
@@ -2167,7 +2192,7 @@ test("footer exposes full priority repair crawl set", async ({ page }) => {
 
   await expect(footer.locator('a[href="/services/pearl-restringing"]').first())
     .toHaveText(/Pearl restringing/i);
-  await expect(footer.locator('a[href="/blog/where-to-get-watch-battery-replaced-pasadena"]').first())
+  await expect(footer.locator('a[href="/blog/watch-battery-replacement"]').first())
     .toHaveText(/Watch battery replacement near Pasadena/i);
   await expect(footer.locator('a[href="/blog/how-to-choose-a-jeweler"]').first())
     .toHaveText(/Choose a repair jeweler/i);
