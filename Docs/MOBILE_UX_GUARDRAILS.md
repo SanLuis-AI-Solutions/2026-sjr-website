@@ -94,3 +94,5 @@ npm run ux:mobile-flow
 ```
 
 Use `MOBILE_UX_AUDIT_ORIGIN=http://127.0.0.1:3000` to validate a local production build before deployment. The audit writes `.health/mobile-ux-flow-latest.md` and fails on mobile quote/book competition, mobile hero action counts above 6, sub-44px audited tap targets, expanded footer crawl groups, mobile crawl hubs that expose conversion CTAs, or sticky CTA drift.
+
+As of 2026-05-14, `npm run ux:mobile-flow` audits the core static/conversion pages plus every blog, service detail, and service-area URL listed in `Docs/INDEXING_MANIFEST.json`. This keeps SEO expansion tied to mobile flow quality instead of relying on a hand-picked page sample.

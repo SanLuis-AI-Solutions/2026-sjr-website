@@ -7,21 +7,32 @@ const origin = (process.env.MOBILE_UX_AUDIT_ORIGIN || DEFAULT_ORIGIN).replace(/\
 const outDir = path.join(process.cwd(), ".health");
 const latestJson = path.join(outDir, "mobile-ux-flow-latest.json");
 const latestMd = path.join(outDir, "mobile-ux-flow-latest.md");
+const manifestPath = path.join(process.cwd(), "Docs", "INDEXING_MANIFEST.json");
 
-const routes = [
+const coreRoutes = [
   "/",
   "/services",
-  "/services/ring-sizing",
-  "/services/watch-repair",
-  "/services/pearl-restringing",
-  "/services/pasadena",
   "/blog",
-  "/blog/cost-to-resize-gold-ring-pasadena",
   "/faq",
   "/about",
   "/quote",
   "/book",
 ];
+
+function readManifestRoutes() {
+  if (!fs.existsSync(manifestPath)) return [];
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  if (!Array.isArray(manifest.routes)) return [];
+
+  return manifest.routes
+    .filter((route) => ["blog", "service-area", "service-detail"].includes(route.category))
+    .map((route) => route.path)
+    .filter(Boolean);
+}
+
+function routesToAudit() {
+  return [...new Set([...coreRoutes, ...readManifestRoutes()])];
+}
 
 function hasQuote(text, href) {
   return /^\/quote(?:[?#]|$)/.test(href) || /^(get fast quote|start quote|get my quote range)$/i.test(text);
@@ -245,6 +256,7 @@ async function main() {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ ...devices["iPhone 13"] });
 
+  const routes = routesToAudit();
   const routeResults = [];
   for (const route of routes) {
     routeResults.push(await auditRoute(context, route));
@@ -275,6 +287,7 @@ async function main() {
     "",
     `- Generated: ${payload.generatedAt}`,
     `- Origin: ${origin}`,
+    `- Routes checked: ${routeResults.length}`,
     `- Status: ${payload.status.toUpperCase()}`,
     "",
     "## Guardrails",
