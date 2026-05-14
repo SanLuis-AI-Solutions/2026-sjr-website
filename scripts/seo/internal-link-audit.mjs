@@ -35,6 +35,42 @@ function extractLinks(html) {
   return links;
 }
 
+function isInsideTag(html, index, tagName) {
+  const lower = html.toLowerCase();
+  const openIndex = lower.lastIndexOf(`<${tagName}`, index);
+  if (openIndex === -1) return false;
+
+  const closeIndex = lower.lastIndexOf(`</${tagName}>`, index);
+  return closeIndex < openIndex;
+}
+
+function extractLinkContexts(html) {
+  const contexts = new Map();
+  const matches = html.matchAll(/<a\b[^>]*\bhref=(["'])(.*?)\1/gi);
+
+  for (const match of matches) {
+    const href = match[2];
+    const index = match.index || 0;
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+      continue;
+    }
+
+    const normalized = toPath(href);
+    if (!normalized) continue;
+
+    const current = contexts.get(normalized) || { total: 0, footer: 0, nonFooter: 0 };
+    current.total += 1;
+    if (isInsideTag(html, index, "footer")) {
+      current.footer += 1;
+    } else {
+      current.nonFooter += 1;
+    }
+    contexts.set(normalized, current);
+  }
+
+  return contexts;
+}
+
 async function fetchHtml(route) {
   const url = new URL(route.path, BASE_URL).toString();
   const response = await fetch(url, {
@@ -62,6 +98,8 @@ function linkEvidenceFor(targetPath, sourceResults) {
       path: source.path,
       status: source.status,
       exactHref: exactPattern.test(source.html),
+      nonFooterLinks: source.linkContexts.get(targetPath)?.nonFooter || 0,
+      footerLinks: source.linkContexts.get(targetPath)?.footer || 0,
     }));
 }
 
@@ -79,17 +117,22 @@ function buildMarkdown(report) {
     target.statusLabel,
     String(target.sourceCount),
     target.indexedSourceCount ? String(target.indexedSourceCount) : "0",
+    target.nonFooterIndexedSourceCount ? String(target.nonFooterIndexedSourceCount) : "0",
     target.hasSiteMapLink ? "Yes" : "No",
     target.recommendation,
   ]);
 
   const weakRows = report.targets
-    .filter((target) => target.indexedSourceCount < 2)
+    .filter((target) => target.nonFooterIndexedSourceCount < 2)
     .map((target) => [
       `\`${target.path}\``,
       target.statusLabel,
-      String(target.indexedSourceCount),
-      target.sources.slice(0, 4).map((source) => `\`${source.path}\``).join(", ") || "None",
+      String(target.nonFooterIndexedSourceCount),
+      target.sources
+        .filter((source) => source.nonFooterLinks > 0)
+        .slice(0, 4)
+        .map((source) => `\`${source.path}\``)
+        .join(", ") || "None",
     ]);
 
   return [
@@ -103,15 +146,23 @@ function buildMarkdown(report) {
     "## Summary",
     "",
     table(
-      ["Target", "GSC Status", "All Source Links", "Indexed Source Links", "Site Map Link", "Recommendation"],
+      [
+        "Target",
+        "GSC Status",
+        "All Source Links",
+        "Indexed Source Links",
+        "Non-Footer Indexed Links",
+        "Site Map Link",
+        "Recommendation",
+      ],
       rows,
     ),
     "",
     "## Weak Indexed-Source Coverage",
     "",
     weakRows.length
-      ? table(["Target", "GSC Status", "Indexed Source Links", "Visible Sources"], weakRows)
-      : "No unresolved targets have fewer than 2 indexed-source links.",
+      ? table(["Target", "GSC Status", "Non-Footer Indexed Links", "Non-Footer Sources"], weakRows)
+      : "No unresolved targets have fewer than 2 non-footer indexed-source links.",
     "",
     "## Source Pages",
     "",
@@ -130,6 +181,9 @@ function buildMarkdown(report) {
 function mainRecommendation(target) {
   if (target.indexedSourceCount === 0) {
     return "Add links from indexed pages";
+  }
+  if (target.nonFooterIndexedSourceCount < 2) {
+    return "Add contextual indexed-source links";
   }
   if (!target.hasSiteMapLink) {
     return "Add to HTML site map";
@@ -165,6 +219,7 @@ async function main() {
       ok: result.ok,
       html: result.html,
       links: extractLinks(result.html),
+      linkContexts: extractLinkContexts(result.html),
     });
   }
 
@@ -177,6 +232,9 @@ async function main() {
   const targets = unresolvedRoutes.map((route) => {
     const sources = linkEvidenceFor(route.path, sourceResults);
     const indexedSourceCount = sources.filter((source) => indexedSourcePaths.has(source.path)).length;
+    const nonFooterIndexedSourceCount = sources.filter(
+      (source) => indexedSourcePaths.has(source.path) && source.nonFooterLinks > 0,
+    ).length;
     const hasSiteMapLink = sources.some((source) => source.path === "/site-map");
     const target = {
       path: route.path,
@@ -188,6 +246,7 @@ async function main() {
             : route.observedStatus,
       sourceCount: sources.length,
       indexedSourceCount,
+      nonFooterIndexedSourceCount,
       hasSiteMapLink,
       sources,
       recommendation: "",
