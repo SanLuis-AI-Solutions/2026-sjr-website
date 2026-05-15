@@ -207,8 +207,7 @@ export function CraftStory() {
           <div className="relative h-60 overflow-hidden rounded-3xl border border-stone-200 shadow-md">
             <Image
               src="https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-main.jpeg"
-              alt=""
-              aria-hidden
+              alt="Susie's Jewelry Repair workshop with jeweler's bench and tools"
               fill
               loading="lazy"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -217,17 +216,16 @@ export function CraftStory() {
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {[
-              "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg",
-              "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg",
-            ].map((url) => (
+              { url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-sketches.jpg", alt: "Custom jewelry design sketches and planning notes" },
+              { url: "https://lrzrltjlfvvrdvxqqklm.supabase.co/storage/v1/object/public/site-assets/home/workshop-pocket-watch.jpg", alt: "Pocket watch restoration work in progress" },
+            ].map(({ url, alt }) => (
               <div
                 key={url}
                 className="relative h-32 overflow-hidden rounded-2xl border border-stone-200 shadow-sm"
               >
                 <Image
                   src={url}
-                  alt=""
-                  aria-hidden
+                  alt={alt}
                   fill
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, 25vw"

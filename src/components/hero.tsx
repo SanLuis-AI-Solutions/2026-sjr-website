@@ -33,9 +33,9 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#120d10] to-transparent" />
       </div>
 
-      <div className="pointer-events-none absolute right-6 top-28 hidden opacity-[0.09] md:block">
+      <div className="pointer-events-none absolute right-6 top-28 hidden opacity-[0.09] md:block" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element -- Decorative brand watermark */}
-        <img src={logoSrc} alt="" width={389} height={474} className="h-56 w-auto object-contain" />
+        <img src={logoSrc} alt="Susie's Jewelry Repair logo" width={389} height={474} className="h-56 w-auto object-contain" />
       </div>
 
       <div className="relative mx-auto flex min-h-[680px] max-w-7xl items-end px-5 pb-10 pt-28 md:min-h-[760px] md:items-center md:px-8 md:py-28">
@@ -43,7 +43,7 @@ export function Hero() {
           <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3">
             <span className="grid h-12 w-12 place-items-center rounded-full border border-brand-gold/35 bg-white/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md">
               {/* eslint-disable-next-line @next/next/no-img-element -- Small brand seal from provided logo */}
-              <img src={logoSrc} alt="" width={389} height={474} className="h-9 w-9 object-contain" />
+              <img src={logoSrc} alt="Susie's Jewelry Repair" width={389} height={474} className="h-9 w-9 object-contain" />
             </span>
             <span className="text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold">
               Pasadena

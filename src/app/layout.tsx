@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
+  manifest: "/manifest.json",
   openGraph: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
@@ -53,6 +54,10 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [defaultShareImagePath],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {
@@ -69,7 +74,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>{gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}</head>
+      <head>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}
+      </head>
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
         {children}
         <ScrollRevealManager />

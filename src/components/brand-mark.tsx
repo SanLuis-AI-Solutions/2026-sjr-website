@@ -8,8 +8,7 @@ export function BrandMark({ className }: BrandMarkProps) {
   return (
     <Image
       src="/images/brand/sjr-logo.png"
-      alt=""
-      aria-hidden="true"
+      alt="Susie's Jewelry Repair logo"
       className={className}
       width={389}
       height={474}
