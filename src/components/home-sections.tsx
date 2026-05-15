@@ -170,7 +170,7 @@ export function ProcessSteps() {
 
 export function CraftStory() {
   return (
-    <section className="relative hidden overflow-hidden bg-[#f5ede2] py-16 md:block">
+    <section className="relative overflow-hidden bg-[#f5ede2] py-16">
       <div className="pointer-events-none absolute -left-28 bottom-10 h-52 w-52 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.16),_transparent_70%)]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
         <div className="space-y-4 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/80 p-8 shadow-[0_16px_40px_rgba(58,25,16,0.12)]">
@@ -403,20 +403,20 @@ export function HomeCta() {
           Start Today
         </p>
         <h2 className="font-serif text-3xl text-white md:text-4xl">
-          Get a fast, transparent quote and keep your jewelry in trusted hands.
+          Book your repair and keep your jewelry in trusted hands.
         </h2>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
-            href="/quote"
+            href="/book"
             className="micro-interaction inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy sm:w-auto"
           >
-            Get Fast Quote
+            Book a Repair
           </Link>
           <Link
-            href="/book"
-            className="micro-interaction hidden rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white sm:inline-flex"
+            href="/quote"
+            className="micro-interaction inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white sm:w-auto"
           >
-            Book a Repair
+            Get a Quote
           </Link>
         </div>
       </div>

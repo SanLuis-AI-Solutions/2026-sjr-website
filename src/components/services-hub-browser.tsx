@@ -160,12 +160,12 @@ export function ServicesHubBrowser({
               Send one photo and we will recommend the right next step.
             </p>
             <TrackedLink
-              href="/quote"
+              href="/book"
               eventName="services_hub_cta_click"
-              eventParams={{ placement: "directory_aside", cta_target: "quote" }}
+              eventParams={{ placement: "directory_aside", cta_target: "book" }}
               className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Get Fast Quote
+              Book a Repair
             </TrackedLink>
           </div>
         </div>
@@ -317,10 +317,10 @@ export function ServicesHubBrowser({
                     </p>
                   </div>
                   <TrackedLink
-                    href={zeroStateQuoteHref}
+                    href="/book"
                     eventName="services_finder_cta_click"
                     eventParams={{
-                      cta_target: "quote",
+                      cta_target: "book",
                       service_slug: "",
                       chip_id: activeChip?.id || "",
                       chip_label: activeChip?.label || "",
@@ -330,7 +330,7 @@ export function ServicesHubBrowser({
                     }}
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Get Fast Quote
+                    Book a Repair
                   </TrackedLink>
                 </div>
               )}

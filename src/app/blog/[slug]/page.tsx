@@ -287,20 +287,20 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         </p>
                         <div className="mt-4 flex flex-wrap gap-3">
                           <TrackedLink
-                            href="/quote"
-                            eventName="article_mid_cta_click"
-                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
-                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                          >
-                            Get Fast Quote
-                          </TrackedLink>
-                          <TrackedLink
                             href="/book"
                             eventName="article_mid_cta_click"
                             eventParams={{ blog_slug: post.slug, cta_target: "book" }}
-                            className="micro-interaction hidden min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                           >
-                            Book Repair
+                            Book a Repair
+                          </TrackedLink>
+                          <TrackedLink
+                            href="/quote"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
+                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Get a Quote
                           </TrackedLink>
                         </div>
                       </div>
@@ -461,10 +461,10 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 </div>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <Link
-                    href="/quote"
-                    className="micro-interaction hidden items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
+                    href="/book"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Get Fast Quote
+                    Book a Repair
                   </Link>
                   <Link
                     href="/services"

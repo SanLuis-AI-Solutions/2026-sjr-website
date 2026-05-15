@@ -19,7 +19,7 @@ export function BreadcrumbTrail({ items, className = "" }: BreadcrumbTrailProps)
       <BreadcrumbSchema items={items} />
       <nav
         aria-label="Breadcrumb"
-        className={`flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-500 ${className}`.trim()}
+        className={`flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.18em] text-stone-500 ${className}`.trim()}
       >
         {items.map((item, index) => {
           const isCurrent = index === items.length - 1;

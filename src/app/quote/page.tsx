@@ -102,10 +102,7 @@ export default async function QuotePage({
             <ConversionQuickActions
               page="quote"
               primary={{ href: "#quote-form", label: "Start Quote" }}
-              secondary={[
-                { href: bookingHref, label: "Book Repair" },
-                { href: "/contact", label: "Contact Us", tone: "muted" },
-              ]}
+              secondary={[{ href: bookingHref, label: "Book Repair" }]}
             />
 
             <div className="mt-8 space-y-3 text-sm text-stone-600">
@@ -210,7 +207,7 @@ export default async function QuotePage({
               </>
             ) : null}
 
-            <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="block text-sm font-medium text-stone-700">
               Full name
               <input
                 type="text"
@@ -222,7 +219,7 @@ export default async function QuotePage({
               />
             </label>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-4 block text-sm font-medium text-stone-700">
               Email
               <input
                 type="email"
@@ -234,7 +231,7 @@ export default async function QuotePage({
               />
             </label>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-4 block text-sm font-medium text-stone-700">
               What needs repair? <span className="text-brand-burgundy">*</span>
               <textarea
                 name="details"
@@ -249,7 +246,7 @@ export default async function QuotePage({
               Not sure what it is? Say what you can see. “Not sure” is acceptable.
             </p>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-4 block text-sm font-medium text-stone-700">
               Phone (optional)
               <input
                 type="tel"
@@ -262,7 +259,7 @@ export default async function QuotePage({
             </label>
 
             <details className="mt-5 group">
-              <summary className="cursor-pointer text-xs uppercase tracking-[0.2em] text-stone-600 hover:text-stone-800">
+              <summary className="cursor-pointer text-sm font-medium text-stone-700 hover:text-stone-800">
                 + Add photos (optional — helps us quote faster)
               </summary>
               <div className="mt-4 grid gap-2">
@@ -282,11 +279,11 @@ export default async function QuotePage({
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
               disabled={false}
               id="quote-submit"
             >
-              <span id="quote-submit-text">Get My Quote Range</span>
+              <span id="quote-submit-text">Send my quote request</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · No obligation to approve work · 1 business day response.

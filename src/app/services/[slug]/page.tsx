@@ -1748,26 +1748,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
-                href="/quote"
-                prefetch={false}
-                data-track-event="service_cta_click"
-                data-track-slug={slug}
-                data-track-placement="hero"
-                data-track-target="quote"
-                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_18px_38px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
-              >
-                Get Fast Quote
-              </Link>
-              <Link
                 href="/book"
                 prefetch={false}
                 data-track-event="service_cta_click"
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="book"
-                className="micro-interaction hidden min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex sm:w-auto"
+                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_18px_38px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
-                Book Repair
+                Book a Repair
+              </Link>
+              <Link
+                href="/quote"
+                prefetch={false}
+                data-track-event="service_cta_click"
+                data-track-slug={slug}
+                data-track-placement="hero"
+                data-track-target="quote"
+                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+              >
+                Get a Quote
               </Link>
             </div>
             <div className="mt-5 hidden rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25 md:block">
@@ -1817,8 +1817,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <img
                   {...desktopHeroImageProps}
                   alt={`${service.name} at Susie's Jewelry Repair`}
-                  fetchPriority={isMobileHeroImageHidden ? "low" : "high"}
-                  loading={isMobileHeroImageHidden ? "lazy" : "eager"}
+                  fetchPriority="high"
+                  loading="eager"
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
@@ -1954,26 +1954,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href="/quote"
-                    prefetch={false}
-                    data-track-event="service_cta_click"
-                    data-track-slug={slug}
-                    data-track-placement="how_it_works"
-                    data-track-target="quote"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    Get Fast Quote
-                  </Link>
-                  <Link
                     href="/book"
                     prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
                     data-track-placement="how_it_works"
                     data-track-target="book"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Book a Repair
+                  </Link>
+                  <Link
+                    href="/quote"
+                    prefetch={false}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="how_it_works"
+                    data-track-target="quote"
                     className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Book Repair
+                    Get a Quote
                   </Link>
                 </div>
               </div>
@@ -2181,20 +2181,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Choose a quick action.
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-700">
-                  Quote if you want pricing first. Book if you are ready for in-shop assessment.
+                  Book for in-shop assessment with transparent pricing before work begins. Prefer a written range first? Get a quote.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link
-                    href="/quote"
-                    prefetch={false}
-                    data-track-event="service_cta_click"
-                    data-track-slug={slug}
-                    data-track-placement="pricing_timing"
-                    data-track-target="quote"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    Get Fast Quote
-                  </Link>
                   <Link
                     href="/book"
                     prefetch={false}
@@ -2202,9 +2191,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     data-track-slug={slug}
                     data-track-placement="pricing_timing"
                     data-track-target="book"
-                    className="micro-interaction hidden items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Book Repair
+                    Book a Repair
+                  </Link>
+                  <Link
+                    href="/quote"
+                    prefetch={false}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="pricing_timing"
+                    data-track-target="quote"
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Get a Quote
                   </Link>
                 </div>
               </div>

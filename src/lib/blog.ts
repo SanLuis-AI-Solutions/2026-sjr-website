@@ -135,7 +135,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     decisionSignals: [
       {
@@ -245,8 +245,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting", "jewelry-cleaning"],
   },
@@ -349,8 +349,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
       { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["watch-repair", "bracelet-repair", "heirloom-restoration"],
   },
@@ -446,8 +446,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     decisionSignals: [
       {
@@ -556,8 +556,8 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
   },
@@ -652,8 +652,8 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     decisionSignals: [
       {
@@ -754,8 +754,8 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Get Deer Park Repair Guidance", href: "/services/deer-park" },
       { label: "See Friendswood Ring Repair Guidance", href: "/services/friendswood" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting"],
     discoveryBoosts: {
@@ -840,7 +840,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Webster Ring Repair Guidance", href: "/services/webster" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["stone-setting", "custom-design"]
   },
@@ -948,7 +948,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
       { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Get Fast Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     decisionSignals: [
       {
@@ -1055,7 +1055,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["custom-design", "heirloom-restoration"],
     discoveryBoosts: {
@@ -1160,8 +1160,8 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
       { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
     discoveryBoosts: {
@@ -1273,8 +1273,8 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
       { label: "Plan Same-Day Battery Service", href: "/blog/watch-battery-replacement" },
-      { label: "Get Fast Quote", href: "/quote" },
-      { label: "Book Repair", href: "/book" },
+      { label: "Book a Repair", href: "/book" },
+      { label: "Get a Quote", href: "/quote" },
     ],
     decisionSignals: [
       {

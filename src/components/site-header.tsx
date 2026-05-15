@@ -72,21 +72,21 @@ export function SiteHeader() {
           </BusinessActionLink>
 
           <TrackedLink
-            href="/book"
-            eventName="header_cta_click"
-            eventParams={{ target: "book", placement: "header" }}
-            className="micro-interaction hidden min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.28em] text-brand-burgundy transition hover:bg-brand-gold/10 lg:inline-flex"
-          >
-            Book Repair
-          </TrackedLink>
-
-          <TrackedLink
             href="/quote"
             eventName="header_cta_click"
             eventParams={{ target: "quote", placement: "header" }}
-            className="micro-interaction group relative hidden overflow-hidden rounded-full bg-brand-burgundy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white shadow-[0_14px_30px_rgba(58,18,28,0.16)] sm:inline-flex sm:min-h-11 sm:items-center sm:justify-center"
+            className="micro-interaction hidden min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.28em] text-brand-burgundy transition hover:bg-brand-gold/10 lg:inline-flex"
           >
-            <span className="relative z-10 font-sans">Get Fast Quote</span>
+            Get a Quote
+          </TrackedLink>
+
+          <TrackedLink
+            href="/book"
+            eventName="header_cta_click"
+            eventParams={{ target: "book", placement: "header" }}
+            className="micro-interaction group relative overflow-hidden rounded-full bg-brand-burgundy px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white shadow-[0_14px_30px_rgba(58,18,28,0.16)] sm:min-h-11 sm:items-center sm:justify-center inline-flex min-h-11 items-center justify-center"
+          >
+            <span className="relative z-10 font-sans">Book a Repair</span>
             <span className="absolute inset-0 z-0 translate-y-full bg-brand-burgundy-deep transition-transform duration-300 group-hover:translate-y-0" />
           </TrackedLink>
 
@@ -116,23 +116,23 @@ export function SiteHeader() {
             </p>
             <div className="mt-3 grid gap-2">
               <TrackedLink
-                href="/quote"
+                href="/book"
                 eventName="header_cta_click"
-                eventParams={{ target: "quote", placement: "mobile_menu_quick_help" }}
+                eventParams={{ target: "book", placement: "mobile_menu_quick_help" }}
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white"
                 onClick={() => setMobileMenuPath(null)}
               >
-                Get Fast Quote
+                Book a Repair
               </TrackedLink>
-              <BusinessActionLink
-                href={`tel:${BUSINESS.phone}`}
-                action="phone_call"
-                placement="mobile_menu"
-                className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy"
+              <TrackedLink
+                href="/quote"
+                eventName="header_cta_click"
+                eventParams={{ target: "quote", placement: "mobile_menu_quick_help" }}
+                className="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm transition hover:border-brand-gold/50 hover:text-brand-burgundy text-center"
                 onClick={() => setMobileMenuPath(null)}
               >
-                Call {BUSINESS.phone}
-              </BusinessActionLink>
+                Get a Quote
+              </TrackedLink>
             </div>
           </div>
           <nav className="grid gap-2">
@@ -148,11 +148,11 @@ export function SiteHeader() {
             ))}
           </nav>
           <Link
-            href="/book"
+            href="/quote"
             className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full text-xs font-semibold uppercase tracking-[0.24em] text-brand-burgundy underline-offset-4 hover:underline"
             onClick={() => setMobileMenuPath(null)}
           >
-            Prefer an appointment? Book repair
+            Need a quote first?
           </Link>
         </div>
       ) : null}

@@ -15,8 +15,8 @@ export const metadata = createPageMetadata({
 const corePages = [
   { href: "/", label: "Home", description: "Jewelry and watch repair overview." },
   { href: "/services", label: "Services", description: "In-house repair service directory." },
-  { href: "/quote", label: "Get Fast Quote", description: "Start a quote request with photos." },
-  { href: "/book", label: "Book Repair", description: "Reserve a repair assessment." },
+  { href: "/book", label: "Book a Repair", description: "Reserve a repair assessment." },
+  { href: "/quote", label: "Get a Quote", description: "Start a quote request with photos." },
   { href: "/blog", label: "Repair Guides", description: "Pricing, timing, and care articles." },
   { href: "/contact", label: "Contact", description: "Shop address, phone, and contact form." },
   { href: "/about", label: "About", description: "Local shop story and trust signals." },

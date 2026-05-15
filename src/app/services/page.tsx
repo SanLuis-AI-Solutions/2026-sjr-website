@@ -135,20 +135,20 @@ export default async function ServicesPage() {
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <TrackedLink
-                href="/quote"
-                eventName="services_hub_cta_click"
-                eventParams={{ placement: "hero", cta_target: "quote" }}
-                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
-              >
-                Get Fast Quote
-              </TrackedLink>
-              <TrackedLink
                 href="/book"
                 eventName="services_hub_cta_click"
                 eventParams={{ placement: "hero", cta_target: "book" }}
-                className="micro-interaction hidden w-full items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex sm:w-auto"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
-                Book Repair
+                Book a Repair
+              </TrackedLink>
+              <TrackedLink
+                href="/quote"
+                eventName="services_hub_cta_click"
+                eventParams={{ placement: "hero", cta_target: "quote" }}
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+              >
+                Get a Quote
               </TrackedLink>
             </div>
           </div>
