@@ -147,7 +147,6 @@ export function ServicesGrid({
                   }}
                   className={cardClass}
                   id={`service-${slug}`}
-                  aria-label={`Explore details for ${name}`}
                 >
                   {cardBody}
                 </TrackedLink>

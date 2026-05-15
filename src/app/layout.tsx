@@ -76,7 +76,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        {gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}
       </head>
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
         {children}
@@ -88,6 +87,7 @@ export default function RootLayout({
             <GaPageViewTracker />
           </Suspense>
         ) : null}
+        {gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}
       </body>
     </html>
   );

@@ -47,12 +47,12 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
+        <nav className="hidden items-center gap-1 lg:flex xl:gap-1">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-medium uppercase tracking-[0.2em] text-stone-900 transition-colors hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="inline-flex min-h-11 items-center px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500 transition-colors hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               {item.label}
             </Link>
@@ -64,11 +64,10 @@ export function SiteHeader() {
             href={`tel:${BUSINESS.phone}`}
             action="phone_call"
             placement="header"
-            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/55 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-sm transition hover:border-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:px-4"
+            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold/55 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-sm transition hover:border-brand-gold hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 lg:hidden"
             aria-label={`Call ${BUSINESS.phone}`}
           >
-            <span className="lg:hidden">Call</span>
-            <span className="hidden lg:inline">Call {BUSINESS.phone}</span>
+            Call
           </BusinessActionLink>
 
           <TrackedLink

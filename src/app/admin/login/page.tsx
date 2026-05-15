@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-export const dynamic = "force-dynamic";
-
 /*
  * Date: 2026-02-26
  * Time: 18:14:40 -06:00 (CST)
@@ -12,23 +10,27 @@ export const dynamic = "force-dynamic";
  * Agent Name: Codex
  */
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
+    const [supabase, setSupabase] = useState<any>(null);
 
     useEffect(() => {
-        setSupabase(createClient());
+        try {
+            setSupabase(createClient());
+        } catch (e) {
+            console.error("Failed to initialize Supabase:", e);
+        }
     }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
+        if (!supabase) return;
         e.preventDefault();
-        if (!supabase) {
-            setError("Initializing login...");
-            return;
-        }
         setLoading(true);
         setError(null);
 

@@ -9,10 +9,10 @@ export function BrandMark({ className }: BrandMarkProps) {
     <Image
       src="/images/brand/sjr-logo.png"
       alt="Susie's Jewelry Repair logo"
-      className={className}
+      className={`${className} object-contain`}
       width={389}
       height={474}
-      sizes="44px"
+      sizes="(max-width: 640px) 44px, 48px"
       priority
       fetchPriority="high"
       decoding="async"
