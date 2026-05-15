@@ -185,7 +185,7 @@ export function ServicesGrid({
                       service_name: name,
                       placement: `${id}_mobile_compact`,
                     }}
-                    className="inline-flex min-h-11 items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                     aria-label={`Explore details for ${name}`}
                   >
                     <span>{name}</span>

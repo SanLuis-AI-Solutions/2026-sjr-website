@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+
+export const dynamic = "force-dynamic";
 
 /*
  * Date: 2026-02-26
@@ -15,11 +17,18 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
 
-    const supabase = createClient();
+    useEffect(() => {
+        setSupabase(createClient());
+    }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!supabase) {
+            setError("Initializing login...");
+            return;
+        }
         setLoading(true);
         setError(null);
 

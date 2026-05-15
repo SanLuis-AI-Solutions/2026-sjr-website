@@ -20,7 +20,7 @@ function FooterNavLinks({ links }: { links: FooterLink[] }) {
         <Link
           key={link.href}
           href={link.href}
-          className="transition-colors hover:text-brand-gold"
+          className="inline-flex min-h-12 items-center rounded-lg px-2 py-1 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
         >
           {link.label}
         </Link>
@@ -154,7 +154,7 @@ export function SiteFooter() {
                   placement="footer"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                  className="mt-4 inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   Get Directions
                 </BusinessActionLink>
@@ -164,12 +164,12 @@ export function SiteFooter() {
                   placement="footer"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                  className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   Read Google Reviews
                 </BusinessActionLink>
               </address>
-              <div className="mt-4 flex flex-wrap gap-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-200">
+              <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold uppercase tracking-[0.24em] text-stone-200">
                 {facebookUrl ? (
                   <TrackedAnchor
                     href={facebookUrl}
@@ -177,7 +177,7 @@ export function SiteFooter() {
                     eventParams={{ network: "facebook", placement: "footer" }}
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-colors hover:text-brand-gold"
+                    className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Facebook
                   </TrackedAnchor>
@@ -189,7 +189,7 @@ export function SiteFooter() {
                     eventParams={{ network: "yelp", placement: "footer" }}
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-colors hover:text-brand-gold"
+                    className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Yelp
                   </TrackedAnchor>
@@ -223,7 +223,7 @@ export function SiteFooter() {
                   placement="footer"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                  className="mt-4 inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   Get Directions
                 </BusinessActionLink>
@@ -233,12 +233,12 @@ export function SiteFooter() {
                   placement="footer"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold"
+                  className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-semibold uppercase tracking-[0.28em] text-stone-200 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   Read Google Reviews
                 </BusinessActionLink>
               </address>
-              <div className="mt-4 flex flex-wrap gap-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-200">
+              <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold uppercase tracking-[0.24em] text-stone-200">
                 {facebookUrl ? (
                   <TrackedAnchor
                     href={facebookUrl}
@@ -246,7 +246,7 @@ export function SiteFooter() {
                     eventParams={{ network: "facebook", placement: "footer" }}
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-colors hover:text-brand-gold"
+                    className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Facebook
                   </TrackedAnchor>
@@ -258,7 +258,7 @@ export function SiteFooter() {
                     eventParams={{ network: "yelp", placement: "footer" }}
                     target="_blank"
                     rel="noreferrer"
-                    className="transition-colors hover:text-brand-gold"
+                    className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Yelp
                   </TrackedAnchor>
@@ -271,8 +271,8 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col items-center justify-between border-t border-white/10 pt-8 text-center text-xs font-sans uppercase tracking-[0.3em] md:mt-20 md:flex-row md:pt-10 md:text-left">
           <p>© {COPYRIGHT_YEAR} Susie’s Jewelry Repair. All Rights Reserved.</p>
           <div className="mt-4 flex gap-8 md:mt-0">
-            <Link href="/privacy" className="hover:text-white">Privacy</Link>
-            <Link href="/terms" className="hover:text-white">Terms</Link>
+            <Link href="/privacy" className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">Privacy</Link>
+            <Link href="/terms" className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2">Terms</Link>
           </div>
         </div>
       </div>

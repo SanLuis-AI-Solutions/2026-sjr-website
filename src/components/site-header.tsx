@@ -52,7 +52,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="min-h-11 flex items-center py-2 px-1 text-sm uppercase tracking-[0.2em] text-stone-900 transition-colors hover:text-brand-burgundy"
+              className="inline-flex min-h-11 items-center rounded-lg px-2 py-1 text-sm font-medium uppercase tracking-[0.2em] text-stone-900 transition-colors hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               {item.label}
             </Link>
