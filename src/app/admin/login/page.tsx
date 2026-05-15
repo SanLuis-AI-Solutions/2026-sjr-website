@@ -10,9 +10,6 @@ import { createClient } from "@/lib/supabase/client";
  * Agent Name: Codex
  */
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
