@@ -552,8 +552,8 @@ test("custom 404 page routes visitors back to key actions", async ({ page }) => 
   await expect(
     page.getByRole("heading", { level: 1, name: /That page is not here anymore/i })
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /^Get a Quote$/i }).first()).toBeVisible();
+  await expect(page.locator("main").getByRole("link", { name: /^Book a Repair$/i }).first()).toBeVisible();
+  await expect(page.locator("main").getByRole("link", { name: /^Get a Quote$/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /^Watch Repair$/i })).toBeVisible();
 
   guard.assertNoErrors("custom 404 page");
