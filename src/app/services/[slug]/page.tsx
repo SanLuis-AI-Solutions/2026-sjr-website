@@ -20,6 +20,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 import { createPageMetadata } from "@/lib/metadata";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
+import { getRelatedServiceSlugs } from "@/lib/service-taxonomy";
 
 type PageProps = {
   params: Promise<{
@@ -1217,9 +1218,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? embeddedFaqs
       : buildFallbackFaqs(service.name);
   const resolvedFaqs = ensureMinFaqs(resolvedFaqsRaw, slug, service.name);
-  const relatedServices = SERVICES
-    .filter((item) => item.slug !== service.slug)
-    .slice(0, 4);
+  const relatedServiceSlugs = getRelatedServiceSlugs(slug);
+  const relatedServicesMap = new Map(SERVICES.map((s) => [s.slug, s]));
+  const relatedServices = relatedServiceSlugs.length > 0
+    ? relatedServiceSlugs.map((s) => relatedServicesMap.get(s)).filter(Boolean) as typeof SERVICES
+    : SERVICES.filter((item) => item.slug !== service.slug).slice(0, 4);
   const helpfulReadPosts = getHelpfulBlogPostsForServiceSlug(slug, 3);
   const helpfulReads: HelpfulReadLink[] = helpfulReadPosts.map((post) => ({
     href: `/blog/${post.slug}`,
