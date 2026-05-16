@@ -12,11 +12,40 @@ import { createPageMetadata } from "@/lib/metadata";
 import { SERVICES } from "@/lib/constants";
 
 export const metadata = createPageMetadata({
-  title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
+  title: "Jewelry & Watch Repair Guides | Pasadena, TX | Susie’s Blog",
   description:
-    "Practical repair guidance from our Pasadena in-house team: ring sizing, watch care, stone setting safety, and maintenance tips.",
+    "In-house repair advice from our Pasadena team: watch battery vs. service, ring sizing costs, stone security checks, heirloom restoration, and more.",
   canonical: "/blog",
 });
+
+const blogListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Jewelry & Watch Repair Guides",
+  description: "In-house repair advice from Susie’s Jewelry Repair in Pasadena, TX",
+  url: "https://www.susiesjewelryrepair.com/blog",
+  itemListElement: BLOG_POSTS.map((post, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "BlogPosting",
+      "@id": `https://www.susiesjewelryrepair.com/blog/${post.slug}#article`,
+      url: `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
+      headline: post.title,
+      description: post.excerpt,
+      image: post.image.startsWith("http")
+        ? post.image
+        : `https://www.susiesjewelryrepair.com${post.image}`,
+      datePublished: post.publishedAt,
+      dateModified: post.reviewedAt || post.publishedAt,
+      author: {
+        "@type": "Organization",
+        name: "Susie’s Jewelry Repair",
+        url: "https://www.susiesjewelryrepair.com",
+      },
+    },
+  })),
+};
 
 type BlogPageProps = {
   searchParams?: Promise<{
@@ -43,6 +72,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <SiteShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }}
+      />
       <section className="relative overflow-hidden bg-stone-100 py-14 md:py-16" aria-labelledby="blog-hero-title">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">

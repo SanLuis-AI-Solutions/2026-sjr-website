@@ -16,9 +16,9 @@ import {
 } from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
-  title: "Book a Repair Visit | Susie’s Jewelry Repair",
+  title: "Book a Jewelry Repair | Pasadena, TX | Susie’s Jewelry Repair",
   description:
-    "Book a preferred repair visit with our in-house Pasadena jewelry and watch team. No payment required; we confirm availability by email.",
+    "Schedule your ring, watch, or heirloom repair with our in-house Pasadena team. No payment required to book — we confirm availability by email within 1 business day.",
   canonical: "/book",
 });
 

@@ -7,9 +7,9 @@ import { BUSINESS } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "About Susie’s Jewelry Repair | In-House Family Craftsmanship",
+  title: "About Susie’s Jewelry Repair | Pasadena, TX Family Jeweler Since 1984",
   description:
-    "Meet the family behind Susie’s Jewelry Repair in Pasadena, TX. Three generations, in-house service, and clear approvals on every repair.",
+    "Three generations of in-house jewelry and watch repair in Pasadena, TX. Every piece stays on-site, every approval is yours before work begins.",
   canonical: "/about",
 });
 
