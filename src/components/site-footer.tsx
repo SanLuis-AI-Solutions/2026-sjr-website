@@ -44,7 +44,7 @@ function MobileFooterGroup({
       open={defaultOpen}
     >
       <summary className="cursor-pointer list-none font-serif text-lg text-white marker:hidden">
-        <span className="flex min-h-8 items-center justify-between gap-4">
+        <span className="flex min-h-11 items-center justify-between gap-4">
           {title}
           <span aria-hidden className="font-sans text-xs text-brand-gold group-open:hidden">
             +

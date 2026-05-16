@@ -6,69 +6,48 @@ import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
 
 export function ProofBand() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#faf7f2_0%,#f4ecdf_100%)]">
-      <div className="mx-auto grid max-w-6xl gap-3 px-6 py-7 md:grid-cols-4">
-        {[
-          {
-            title: "Since 1984",
-            description: "Local, family-owned craftsmanship.",
-          },
-          {
-            title: "4.5 ★ on Google",
-            description: "51 verified reviews you can verify in one tap.",
-            href: BUSINESS.googleMapsUrl,
-            eventName: "home_reviews_click",
-          },
-          {
-            title: "90-day workmanship warranty",
-            description: "Coverage on repair workmanship.",
-          },
-          {
-            title: "Serving Pasadena",
-            description: "Deer Park • La Porte • Houston Area",
-          },
-        ].map((item, index) => {
-          const delayClass = `reveal-delay-${(index % 4) + 1}`;
-          const cardClass = `reveal-on-scroll ${delayClass} rounded-xl bg-white/72 px-4 py-4 shadow-[0_10px_30px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/20`;
-          const cardContent = (
-            <>
-              <div className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-                {item.title}
-              </div>
-              <p className="mt-2 text-sm text-stone-600">{item.description}</p>
-              {"href" in item && item.href ? (
-                <span className="mt-4 inline-flex text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-burgundy">
-                  Read reviews →
-                </span>
-              ) : null}
-            </>
-          );
+    <section className="relative overflow-hidden bg-[#181112]">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-1 divide-y divide-white/8 md:grid-cols-[minmax(0,_2fr)_minmax(0,_1fr)_minmax(0,_1fr)_minmax(0,_1fr)] md:divide-x md:divide-y-0">
 
-          if ("href" in item && item.href) {
-            return (
-              <TrackedAnchor
-                key={item.title}
-                href={item.href}
-                eventName="review_click"
-                eventParams={{ business_action: "reviews", placement: "proof_band" }}
-                target="_blank"
-                rel="noreferrer"
-                className={`${cardClass} transition hover:-translate-y-0.5 hover:ring-brand-gold/55`}
-              >
-                {cardContent}
-              </TrackedAnchor>
-            );
-          }
+          {/* Dominant anchor stat */}
+          <div className="reveal-on-scroll reveal-delay-1 flex flex-col justify-center gap-2 py-6 md:py-9 md:pr-8">
+            <p className="font-serif text-[2.75rem] leading-none text-white md:text-5xl">Since 1984</p>
+            <p className="text-[10px] uppercase tracking-[0.32em] text-white/45">
+              Local, family-owned craftsmanship
+            </p>
+          </div>
 
-          return (
-            <div
-              key={item.title}
-              className={cardClass}
-            >
-              {cardContent}
-            </div>
-          );
-        })}
+          {/* Google rating — clickable */}
+          <TrackedAnchor
+            href={BUSINESS.googleMapsUrl}
+            eventName="review_click"
+            eventParams={{ business_action: "reviews", placement: "proof_band" }}
+            target="_blank"
+            rel="noreferrer"
+            className="reveal-on-scroll reveal-delay-2 group flex flex-col gap-1.5 py-6 transition md:px-7 md:py-9"
+          >
+            <p className="text-2xl font-semibold text-white transition-colors group-hover:text-brand-gold">4.5 ★</p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45 transition-colors group-hover:text-white/65">
+              51 Google reviews
+            </p>
+          </TrackedAnchor>
+
+          {/* Warranty */}
+          <div className="reveal-on-scroll reveal-delay-3 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
+            <p className="text-2xl font-semibold text-white">90 Days</p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45">Workmanship warranty</p>
+          </div>
+
+          {/* Service area */}
+          <div className="reveal-on-scroll reveal-delay-4 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
+            <p className="text-2xl font-semibold text-white">Pasadena</p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45">
+              Deer Park · La Porte · Houston
+            </p>
+          </div>
+
+        </div>
       </div>
     </section>
   );
@@ -78,16 +57,18 @@ export function InHouseBadge() {
   return (
     <section className="relative overflow-hidden bg-[#faf7f2] py-10 md:py-14">
       <div className="pointer-events-none absolute -left-24 top-8 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.18),_transparent_70%)]" />
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 text-center reveal-on-scroll">
-        <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-          In-House Repairs
-        </p>
-        <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
-          100% in-house repairs. Handled on-site from drop-off to pickup.
-        </h2>
-        <p className="mt-2 max-w-3xl text-sm text-stone-600">
-          Every repair is handled by one local team, with clear approvals before work starts.
-        </p>
+      <div className="mx-auto max-w-2xl px-6">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-10">
+          <div className="reveal-on-scroll text-center">
+            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">100%</p>
+            <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-stone-500">In-house repairs</p>
+          </div>
+          <div className="h-14 w-px bg-brand-gold/40 md:h-20" />
+          <div className="reveal-on-scroll reveal-delay-2 text-center">
+            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">90 Days</p>
+            <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-stone-500">Workmanship warranty</p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -379,11 +360,12 @@ export function Testimonials() {
                 key={item.name}
                 className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-burgundy/15 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)]`}
               >
-                <p className="text-sm text-stone-600">“{item.quote}”</p>
-                <div className="mt-4 text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+                <p className=”text-[11px] tracking-[0.2em] text-brand-gold”>★★★★★</p>
+                <p className=”mt-3 text-sm text-stone-600”>”{item.quote}”</p>
+                <div className=”mt-4 text-sm font-semibold text-stone-900”>
                   {item.name}
                 </div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.35em] text-stone-500">
+                <div className=”mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-burgundy/70”>
                   {item.service}
                 </div>
               </div>
