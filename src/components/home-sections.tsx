@@ -106,6 +106,7 @@ export function ProcessSteps() {
 
           <div className="relative space-y-5 pl-8 md:space-y-10">
             <div className="absolute left-3 top-0 h-full w-px bg-brand-gold/40" />
+
             {[
               {
                 step: "1",
@@ -139,6 +140,14 @@ export function ProcessSteps() {
                 </div>
               );
             })}
+            <div className="reveal-on-scroll reveal-delay-4 mt-8 pl-2">
+              <Link
+                href="/book"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-white shadow-[0_14px_32px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Book a Repair
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -179,6 +188,14 @@ export function CraftStory() {
                 </div>
               );
             })}
+          </div>
+          <div className="mt-6 pt-2">
+            <Link
+              href="/book"
+              className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-white shadow-[0_14px_32px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Book a Repair
+            </Link>
           </div>
         </div>
         <div className="grid gap-4 reveal-on-scroll">
