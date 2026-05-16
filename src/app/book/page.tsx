@@ -226,7 +226,7 @@ export default async function BookPage({
             ) : null}
 
             <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Full name <span className="text-brand-burgundy">*</span>
+              Your name <span className="text-brand-burgundy">*</span>
               <input
                 type="text"
                 name="name"
@@ -238,7 +238,7 @@ export default async function BookPage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Email <span className="text-brand-burgundy">*</span>
+              Your email <span className="text-brand-burgundy">*</span>
               <input
                 type="email"
                 name="email"
@@ -250,7 +250,7 @@ export default async function BookPage({
             </label>
 
             <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Phone (optional)
+              Phone — optional
               <input
                 type="tel"
                 name="phone"
@@ -263,8 +263,33 @@ export default async function BookPage({
 
             <BookingDateTimeFields />
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
-              Details (optional)
+            <fieldset className="mt-6 border-t border-stone-200 pt-5">
+              <legend className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-600">
+                What repair do you need? <span className="text-brand-burgundy">*</span>
+              </legend>
+              <div className="mt-3 flex flex-col gap-2">
+                {[
+                  { value: "ring_repair", label: "Ring repair" },
+                  { value: "watch_repair", label: "Watch repair" },
+                  { value: "ring_sizing", label: "Ring sizing" },
+                  { value: "other", label: "Not sure yet" },
+                ].map(({ value, label }) => (
+                  <label key={value} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm text-stone-800 hover:border-brand-gold/50 has-[:checked]:border-brand-gold/70 has-[:checked]:bg-brand-gold/5">
+                    <input
+                      type="radio"
+                      name="repair_type"
+                      value={value}
+                      required
+                      className="h-4 w-4 flex-none border-stone-300 text-brand-burgundy focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <label className="mt-5 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Details — optional
               <textarea
                 name="details"
                 className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[140px]"
@@ -283,7 +308,7 @@ export default async function BookPage({
               disabled={false}
               id="booking-submit"
             >
-              <span id="booking-submit-text">Request Repair Visit</span>
+              <span id="booking-submit-text">Book My Repair</span>
             </button>
             <p className="mt-3 text-center text-xs text-stone-600">
               Secure form · No payment required · Final appointment confirmed by email.

@@ -61,7 +61,7 @@ export function Hero() {
             clear quotes, and lasting workmanship.
           </p>
 
-          <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 grid gap-3 sm:flex sm:items-center">
+          <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 flex">
             <Link
               href="/book"
               className="micro-interaction group relative inline-flex min-h-[54px] items-center justify-center overflow-hidden rounded-full bg-brand-gold px-7 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-[#181112] shadow-[0_24px_54px_rgba(0,0,0,0.34)] ring-1 ring-inset ring-white/25 transition-all hover:bg-[#e3cc92] sm:w-auto"
@@ -73,12 +73,6 @@ export function Hero() {
               >
                 →
               </span>
-            </Link>
-            <Link
-              href="/quote"
-              className="micro-interaction hidden min-h-[54px] items-center justify-center rounded-full border border-white/24 bg-white/8 px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition-colors hover:border-brand-gold/70 hover:bg-white/14 sm:inline-flex sm:w-auto"
-            >
-              Get a Quote
             </Link>
           </div>
 
