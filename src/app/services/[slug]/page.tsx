@@ -1758,17 +1758,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               >
                 Book a Repair
               </Link>
-              <Link
-                href="/quote"
-                prefetch={false}
-                data-track-event="service_cta_click"
-                data-track-slug={slug}
-                data-track-placement="hero"
-                data-track-target="quote"
-                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-brand-gold bg-white px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
-              >
-                Get a Quote
-              </Link>
             </div>
             <div className="mt-5 hidden rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25 md:block">
               <p className="text-sm font-semibold text-stone-900">
@@ -1963,17 +1952,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book a Repair
-                  </Link>
-                  <Link
-                    href="/quote"
-                    prefetch={false}
-                    data-track-event="service_cta_click"
-                    data-track-slug={slug}
-                    data-track-placement="how_it_works"
-                    data-track-target="quote"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    Get a Quote
                   </Link>
                 </div>
               </div>
@@ -2194,17 +2172,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book a Repair
-                  </Link>
-                  <Link
-                    href="/quote"
-                    prefetch={false}
-                    data-track-event="service_cta_click"
-                    data-track-slug={slug}
-                    data-track-placement="pricing_timing"
-                    data-track-target="quote"
-                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                  >
-                    Get a Quote
                   </Link>
                 </div>
               </div>

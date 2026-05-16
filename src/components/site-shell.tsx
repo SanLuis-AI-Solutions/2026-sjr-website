@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
-import { MobileStickyCta } from "./mobile-sticky-cta";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -16,7 +15,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <main id="main-content" className="pb-16 pt-24 md:pb-0 md:pt-28">
         {children}
       </main>
-      <MobileStickyCta />
       <SiteFooter />
     </>
   );

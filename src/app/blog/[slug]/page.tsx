@@ -294,14 +294,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
                           >
                             Book a Repair
                           </TrackedLink>
-                          <TrackedLink
-                            href="/quote"
-                            eventName="article_mid_cta_click"
-                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
-                            className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                          >
-                            Get a Quote
-                          </TrackedLink>
                         </div>
                       </div>
                     ) : null}

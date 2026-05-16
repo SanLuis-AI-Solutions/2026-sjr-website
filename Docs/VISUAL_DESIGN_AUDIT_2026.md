@@ -27,16 +27,15 @@
 - CTA row: `grid gap-3` on mobile. "Get Fast Quote" full-width gold pill at `min-h-[54px]`. "Book a Repair" is `hidden` on mobile — correct per MOBILE_UX_GUARDRAILS.
 - Trust row: "4.5 Google rating · 90-day workmanship warranty · Family owned" in `text-[10px] uppercase tracking-[0.2em] text-white/72`. Renders below CTA. All three items on one wrapping line at 390px.
 - **Total above-fold actions: 4** (Call, Get Fast Quote, Menu, logo-as-home). Within the ≤6 guardrail.
-- **Sticky CTA:** Hidden until `scrollY > 720` (or `90% of window height`). At 390px screen height (844px device), threshold = min(720, 759) = 720px. Fires after ~85% of hero scroll. Text: "60-sec Quote" in `text-[10px] uppercase tracking-[0.14em] text-brand-gold`. Tap target: `min-h-11 = 44px`. Passes.
+- **Sticky mobile CTA:** Removed 2026-05-15. Previous implementation was a `bg-[#120d10]/92` dark pill with "60-sec Quote" text that appeared after ~85% of hero scroll. The component `src/components/mobile-sticky-cta.tsx` has been deleted per brand direction to prioritize clean, professional aesthetic over conversion mechanics overlay. This aligns with luxury positioning vs. e-commerce aggressive CTA patterns.
 
 **Below fold (mobile):**
 - ProofBand: 4-column grid collapses to 1-column. Cards stack vertically. Full width at `px-6`. White/72 with gold ring border.
 - ServicesGrid: `sm:grid-cols-2` — renders as 1 column. First 4 visible, rest in compact list below. Images are `hidden sm:block` — all service cards on mobile show text only. No visual hook.
-- CraftStory: `hidden md:block` — **not rendered**.
+- CraftStory: `hidden md:block` — **not rendered** (marked for removal of `hidden` class to show on mobile).
 - ShowcaseBand: `hidden md:block` — **not rendered**.
-- MobileStickyCta: Renders after scroll threshold.
 
-**Critical mobile gap:** Between the hero and testimonials (section 7 of 12), mobile users receive zero artisan photography. The ProofBand cards render as stacked white rectangles with uppercase text. The service cards show text only. No imagery conveys craft, workshop, or human touch until testimonials — which are also text-only.
+**Critical mobile gap (CLOSING):** Between the hero and testimonials, mobile users currently receive zero artisan photography. The ProofBand cards render as stacked white rectangles with uppercase text. The service cards show text only. No imagery conveys craft, workshop, or human touch until testimonials — which are also text-only. **Priority fix:** Remove `hidden md:block` from CraftStory to expose workshop photography to mobile users.
 
 ### Tablet (768px) — Layout Shifts
 
@@ -176,7 +175,6 @@
 - No `prefers-reduced-motion` media query detected in the class list. The `reveal-on-scroll` intersection observer pattern also lacks reduced-motion handling. **FLAG — add `@media (prefers-reduced-motion: reduce)` to disable scroll reveals.**
 
 **Aria:**
-- `role="region" aria-label="Mobile quote shortcut"` on sticky CTA wrapper — correct.
 - `role="dialog" aria-label="Mobile navigation"` on mobile nav panel — correct.
 - `role="alert"` on error banner, `role="status" aria-live="polite"` on success banner — correct.
 - `aria-expanded` on mobile menu button — correct.
@@ -554,7 +552,7 @@ The DESIGN.md specifies `surface: #FFFFFF` and `neutral/ivory: #FAF7F2` as the t
 ### PASS — What's Working (preserve these)
 
 - **Hero composition.** The asymmetric ring image, clamp-based h1, gold radial glow, `hidden sm:inline-flex` Book button, trust row structure, and dark luxury ground are reference-quality. Do not redesign without a specific data-driven reason.
-- **Sticky mobile CTA.** "60-sec Quote" pill — correct label, correct behavior (hides on conversion pages), correct scroll threshold, 44px tap target, `focus-visible` ring present. Exact compliance with MOBILE_UX_GUARDRAILS.
+- **Mobile sticky CTA removed (2026-05-15).** The scroll-triggered "60-sec Quote" pill component (`src/components/mobile-sticky-cta.tsx`) was deleted to align with premium positioning. Sticky CTAs are not observed on luxury e-commerce or professional service sites (Mejuri, The RealReal, local boutique jewelers $500+ tier). Removal improves visual cleanliness and supports the "calm, expensive local workshop" brand perception. Form remains discoverable via primary CTA in hero and navigation menu.
 - **ServicesGrid hover interaction.** `-translate-y-1 hover:shadow-[0_32px_70px_...]` + `group-hover:scale-110 duration-500` on card image. Sophisticated, not decorative. The mobile compact list fallback (slug links with `→`) is the right pattern.
 - **Quote form trust footer.** "Secure form · No obligation to approve work · 1 business day response." — Addresses the three biggest objections at the exact moment of submission hesitation. Keep verbatim.
 - **ProcessSteps gold vertical rule.** `absolute left-3 top-0 h-full w-px bg-brand-gold/40` connecting the burgundy step number chips is an editorial detail that earns the "artisan workshop" perception. Preserve.

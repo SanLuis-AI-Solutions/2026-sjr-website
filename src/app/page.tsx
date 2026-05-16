@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { MobileStickyCta } from "@/components/mobile-sticky-cta";
 import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowcaseBand, Testimonials } from "@/components/home-sections";
 import { HomeCommercialGuides } from "@/components/home-commercial-guides";
@@ -59,7 +58,6 @@ export default async function Home() {
           <HomeDeferredContent />
         </Suspense>
       </main>
-      <MobileStickyCta />
       <SiteFooter />
       <script
         type="application/ld+json"

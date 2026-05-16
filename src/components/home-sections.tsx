@@ -400,25 +400,17 @@ export function HomeCta() {
     <section className="cv-section bg-brand-burgundy py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
         <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
-          Start Today
+          Book Today
         </p>
         <h2 className="font-serif text-3xl text-white md:text-4xl">
-          Book your repair and keep your jewelry in trusted hands.
+          Schedule your repair appointment. Same-day service available.
         </h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/book"
-            className="micro-interaction inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy sm:w-auto"
-          >
-            Book a Repair
-          </Link>
-          <Link
-            href="/quote"
-            className="micro-interaction inline-flex min-h-12 w-full max-w-sm items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white sm:w-auto"
-          >
-            Get a Quote
-          </Link>
-        </div>
+        <Link
+          href="/book"
+          className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+        >
+          Book a Repair
+        </Link>
       </div>
     </section>
   );
