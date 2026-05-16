@@ -4,8 +4,8 @@ import { SERVICES } from "@/lib/constants";
 import { SERVICE_AREA_PAGES } from "@/lib/service-areas";
 import { getSiteUrl } from "@/lib/site-url";
 
-const STATIC_LAST_MODIFIED = new Date("2026-05-13T12:00:00-05:00");
-const SERVICE_LAST_MODIFIED = new Date("2026-05-14T12:00:00-05:00");
+const STATIC_LAST_MODIFIED = new Date("2026-05-16T12:00:00-05:00");
+const SERVICE_LAST_MODIFIED = new Date("2026-05-16T12:00:00-05:00");
 
 function getBlogLastModified(dateValue: string) {
   const parsed = new Date(`${dateValue}T12:00:00-05:00`);
