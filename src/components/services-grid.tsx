@@ -89,6 +89,10 @@ export function ServicesGrid({
             const image = service.image || service.image_url || svgDataUri(name);
             const timeEstimateRaw = service.time_estimate ?? service.timeEstimate ?? null;
             const timeEstimate = formatTimeEstimate(timeEstimateRaw);
+            const startingPriceRaw = service.starting_price ?? service.startingPrice ?? null;
+            const startingPrice = startingPriceRaw != null
+              ? (String(startingPriceRaw).startsWith("$") ? String(startingPriceRaw) : `$${startingPriceRaw}`)
+              : null;
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
             const mobileVisibilityClass = index > 3 ? "hidden sm:block" : "";
             const cardClass = `reveal-on-scroll ${delayClass} ${mobileVisibilityClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_18px_42px_rgba(58,25,16,0.14)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
@@ -99,7 +103,7 @@ export function ServicesGrid({
                     src={image}
                     alt={name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />
@@ -116,7 +120,7 @@ export function ServicesGrid({
                   {timeEstimate ? (
                     <div className="mt-4 flex flex-wrap gap-4 border-t border-stone-200 pt-4 md:mt-6 md:pt-6">
                       <div className="flex flex-col">
-                        <span className="text-[10px] uppercase tracking-widest text-stone-600">Turnaround</span>
+                        <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600">Turnaround</span>
                         <span className="font-sans text-sm font-semibold text-neutral-900">
                           {timeEstimate}
                         </span>
@@ -124,7 +128,14 @@ export function ServicesGrid({
                     </div>
                   ) : null}
 
-                  <div className="mt-5 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep md:mt-8">
+                  {startingPrice ? (
+                    <div className="mt-4 md:mt-6">
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600">Starting at</span>
+                      <p className="font-sans text-sm font-semibold text-neutral-900">{startingPrice}</p>
+                    </div>
+                  ) : null}
+
+                  <div className="mt-5 flex items-center text-xs font-bold uppercase tracking-[0.3em] text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep md:mt-8">
                     Explore Details
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -165,7 +176,7 @@ export function ServicesGrid({
 
         {services.length > 4 ? (
           <div className="mt-5 rounded-3xl border border-brand-burgundy/15 bg-white/82 p-4 shadow-[0_14px_34px_rgba(58,25,16,0.12)] sm:hidden">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
               More repair services
             </p>
             <div className="mt-3 grid gap-2">
