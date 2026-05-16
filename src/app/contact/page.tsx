@@ -3,6 +3,7 @@ import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
 import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
+import { FormSubmitInitializer } from "@/components/form-submit-initializer";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -198,9 +199,10 @@ function ContactSection() {
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              id="contact-submit"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Send my message
+              <span id="contact-submit-text">Send my message</span>
             </button>
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
               Secure form · Local in-house team support.
@@ -286,6 +288,7 @@ export default async function ContactPage({
 
   return (
     <SiteShell>
+      <FormSubmitInitializer />
       <section className="relative overflow-hidden bg-brand-burgundy-deep py-8 text-white md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)] md:block" />

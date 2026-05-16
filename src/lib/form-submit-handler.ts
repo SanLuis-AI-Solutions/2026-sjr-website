@@ -136,4 +136,15 @@ export function setupFormHandlers() {
       loadingText: "Checking availability...",
     });
   }
+
+  // Contact form
+  const contactForm = document.getElementById("contact-form") as HTMLFormElement | null;
+  if (contactForm) {
+    initializeFormSubmitHandler({
+      formId: "contact-form",
+      submitButtonId: "contact-submit",
+      submitTextId: "contact-submit-text",
+      loadingText: "Sending...",
+    });
+  }
 }
