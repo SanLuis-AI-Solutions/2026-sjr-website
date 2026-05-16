@@ -6,7 +6,7 @@ import { ServicesGrid } from "@/components/services-grid";
 import { CraftStory, HomeCta, HomeFaq, InHouseBadge, ProcessSteps, ProofBand, ShowcaseBand, Testimonials } from "@/components/home-sections";
 import { HomeCommercialGuides } from "@/components/home-commercial-guides";
 import { HomeLocalRepairPaths } from "@/components/home-local-repair-paths";
-import { servicesSchema, faqSchema } from "@/lib/schema";
+import { localBusinessSchema, servicesSchema, faqSchema } from "@/lib/schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
 export const metadata = createPageMetadata({
@@ -59,6 +59,10 @@ export default async function Home() {
         </Suspense>
       </main>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema()) }}
