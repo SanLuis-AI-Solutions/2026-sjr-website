@@ -52,7 +52,7 @@ export default async function Home() {
         Skip to main content
       </a>
       <SiteHeader />
-      <main id="main-content" className="overflow-hidden pb-16 pt-24 md:pb-0 md:pt-28">
+      <main id="main-content" className="overflow-hidden pb-16 md:pb-0">
         <Hero />
         <Suspense fallback={null}>
           <HomeDeferredContent />

@@ -25,7 +25,7 @@ export function Hero() {
           loading="eager"
           width={1920}
           height={897}
-          className="h-full w-full scale-[1.03] object-cover object-[36%_center] md:object-[82%_center] md:[transform:scaleX(-1)_scale(1.03)]"
+          className="h-full w-full scale-[1.03] object-cover object-[44%_38%] md:object-[82%_center] md:[transform:scaleX(-1)_scale(1.03)]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(18,13,16,0.18)_0%,_rgba(18,13,16,0.52)_38%,_rgba(18,13,16,0.94)_74%,_rgba(18,13,16,0.98)_100%)] md:hidden" />
         <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,_rgba(18,13,16,0.03)_0%,_rgba(18,13,16,0.08)_34%,_rgba(18,13,16,0.72)_66%,_rgba(18,13,16,0.97)_100%)] md:block" />
