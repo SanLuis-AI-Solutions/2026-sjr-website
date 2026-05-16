@@ -477,7 +477,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
-      "What the custom design timeline actually looks like, where approvals happen, and how to plan around proposals, anniversaries, and other important deadlines.",
+      "How long does custom jewelry take near Pasadena? See the real timeline — consultations, approvals, and benchmarks — so your piece is ready for proposals, anniversaries, or gifts.",
     image: "/images/blog/custom-design-timeline-guide-cover.jpg",
     topics: ["Custom Design", "Pricing & Timing"],
     publishedAt: "2026-02-18",
@@ -767,7 +767,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "can-a-severely-bent-ring-prong-be-fixed",
     title: "Can a severely bent ring prong be fixed, or do I need a new setting?",
-    excerpt: "Discover when a bent prong can be safely repaired and when replacing the entire setting is the only way to save your diamond.",
+    excerpt: "Bent prong on your engagement ring? Learn when re-tipping fixes it vs. when a full new setting is the only safe option — before your diamond is at risk.",
     image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Ring Care"],
     publishedAt: "2026-03-01",

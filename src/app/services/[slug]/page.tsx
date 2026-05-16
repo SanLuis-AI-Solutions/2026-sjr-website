@@ -1182,7 +1182,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
-  const nearMeSlugs = new Set(["watch-repair", "ring-sizing", "ring-repair", "necklace-repair", "bracelet-repair", "stone-setting"]);
+  const nearMeSlugs = new Set(["watch-repair", "ring-sizing", "necklace-repair", "bracelet-repair", "stone-setting", "pearl-restringing"]);
   const titleSuffix = nearMeSlugs.has(slug)
     ? `Near Me in Pasadena, TX | ${BUSINESS.name}`
     : `| Jewelry Repair Pasadena, TX | ${BUSINESS.name}`;
