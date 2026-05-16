@@ -1,6 +1,7 @@
 import { BUSINESS, SERVICES } from "./constants";
 import { SERVICE_AREA_PAGES } from "./service-areas";
 import { getSiteUrl } from "./site-url";
+import { FAQS } from "./faq";
 
 type Service = (typeof SERVICES)[number] & {
   image_url?: string | null;
@@ -31,6 +32,14 @@ export function localBusinessSchema() {
     ],
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
+    foundingDate: "1984",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.5",
+      reviewCount: "51",
+      bestRating: "5",
+      worstRating: "1",
+    },
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
@@ -101,24 +110,14 @@ export function faqSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Are you a jewelry store or a repair shop?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Susie's Jewelry Repair is a local jewelry repair shop in Pasadena focused on in-house repairs, watch batteries, ring sizing, stone setting, cleaning, and custom design guidance.",
-        },
+    mainEntity: FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
       },
-      {
-        "@type": "Question",
-        name: "Do you repair jewelry in-house?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, all repairs are performed on-site.",
-        },
-      },
-    ],
+    })),
   };
 }
 export function serviceSchema(service: Service | undefined) {

@@ -246,7 +246,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting", "jewelry-cleaning"],
   },
@@ -350,7 +350,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair", "bracelet-repair", "heirloom-restoration"],
   },
@@ -447,7 +447,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     decisionSignals: [
       {
@@ -477,7 +477,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
-      "What the custom design timeline actually looks like, where approvals happen, and how to plan around proposals, anniversaries, and other important deadlines.",
+      "How long does custom jewelry take near Pasadena? See the real timeline — consultations, approvals, and benchmarks — so your piece is ready for proposals, anniversaries, or gifts.",
     image: "/images/blog/custom-design-timeline-guide-cover.jpg",
     topics: ["Custom Design", "Pricing & Timing"],
     publishedAt: "2026-02-18",
@@ -557,7 +557,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
   },
@@ -653,7 +653,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     decisionSignals: [
       {
@@ -755,7 +755,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "Get Deer Park Repair Guidance", href: "/services/deer-park" },
       { label: "See Friendswood Ring Repair Guidance", href: "/services/friendswood" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting"],
     discoveryBoosts: {
@@ -767,7 +767,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "can-a-severely-bent-ring-prong-be-fixed",
     title: "Can a severely bent ring prong be fixed, or do I need a new setting?",
-    excerpt: "Discover when a bent prong can be safely repaired and when replacing the entire setting is the only way to save your diamond.",
+    excerpt: "Bent prong on your engagement ring? Learn when re-tipping fixes it vs. when a full new setting is the only safe option — before your diamond is at risk.",
     image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Ring Care"],
     publishedAt: "2026-03-01",
@@ -1055,7 +1055,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "heirloom-restoration"],
     discoveryBoosts: {
@@ -1161,7 +1161,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
       { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
     discoveryBoosts: {
@@ -1274,7 +1274,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
       { label: "Plan Same-Day Battery Service", href: "/blog/watch-battery-replacement" },
       { label: "Book a Repair", href: "/book" },
-      { label: "Get a Quote", href: "/quote" },
+      { label: "Book a Repair", href: "/book" },
     ],
     decisionSignals: [
       {

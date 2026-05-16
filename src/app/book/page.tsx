@@ -16,9 +16,9 @@ import {
 } from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
-  title: "Book a Repair Visit | Susie’s Jewelry Repair",
+  title: "Book a Jewelry Repair | Pasadena, TX | Susie’s Jewelry Repair",
   description:
-    "Book a preferred repair visit with our in-house Pasadena jewelry and watch team. No payment required; we confirm availability by email.",
+    "Schedule your ring, watch, or heirloom repair with our in-house Pasadena team. No payment required to book — we confirm availability by email within 1 business day.",
   canonical: "/book",
 });
 
@@ -45,13 +45,6 @@ export default async function BookPage({
     resolvedSearchParams?.from === "services_finder" ? await getServices() : [];
   const finderContext = resolveServicesFinderLeadContext(resolvedSearchParams || {}, services);
   const hiddenFields = getServicesFinderHiddenFields(finderContext);
-  const quoteHref = finderContext
-    ? buildServicesFinderLeadContextHref("/quote", {
-        serviceSlug: finderContext.serviceSlug,
-        intentLabel: finderContext.intentLabel,
-        query: finderContext.query,
-      })
-    : "/quote";
   const bookingEventName = pending
     ? "booking_submit_pending"
     : "booking_submit_success";
@@ -117,17 +110,6 @@ export default async function BookPage({
               Pick a preferred drop-off time. No payment today; we confirm by email within 1
               business day.
             </p>
-            <p className="mt-5 hidden max-w-xl text-sm leading-6 text-stone-600 md:block">
-              Need a price range before choosing a time?{" "}
-              <a
-                href={quoteHref}
-                className="font-semibold text-brand-burgundy underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Start with a fast quote
-              </a>
-              .
-            </p>
-
             <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
               <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know
@@ -278,6 +260,7 @@ export default async function BookPage({
                   { value: "ring_repair", label: "Ring repair" },
                   { value: "watch_repair", label: "Watch repair" },
                   { value: "ring_sizing", label: "Ring sizing" },
+                  { value: "necklace_chain_repair", label: "Necklace / chain repair" },
                   { value: "other", label: "Not sure yet" },
                 ].map(({ value, label }) => (
                   <label key={value} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm text-stone-800 hover:border-brand-gold/50 has-[:checked]:border-brand-gold/70 has-[:checked]:bg-brand-gold/5">
@@ -316,8 +299,22 @@ export default async function BookPage({
             >
               <span id="booking-submit-text">Book My Repair</span>
             </button>
-            <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · No payment required · Final appointment confirmed by email.
+            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">4.5 ★</div>
+                <div className="mt-0.5">Google</div>
+              </div>
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">90 Days</div>
+                <div className="mt-0.5">Warranty</div>
+              </div>
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">No Pay</div>
+                <div className="mt-0.5">To Book</div>
+              </div>
+            </div>
+            <p className="mt-3 text-center text-[11px] text-stone-500">
+              We confirm by email within 1 business day.
             </p>
             </form>
           </div>

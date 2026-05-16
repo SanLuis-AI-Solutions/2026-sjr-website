@@ -8,9 +8,9 @@ import { FaqContent } from "./faq-content";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Jewelry Repair FAQ | Susie’s Jewelry Repair",
+  title: "Jewelry Repair FAQ | Pasadena, TX | Susie’s Jewelry Repair",
   description:
-    "Read frequently asked questions about in-house jewelry and watch repair in Pasadena, including timing, pricing, approvals, and appointment guidance.",
+    "Answers about in-house jewelry and watch repair in Pasadena, TX — timing, pricing, same-day availability, approvals, and what to bring for your first visit.",
   canonical: "/faq",
 });
 

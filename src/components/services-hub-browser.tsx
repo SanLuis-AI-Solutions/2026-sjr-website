@@ -73,14 +73,6 @@ export function ServicesHubBrowser({
   const primaryMatchSlug =
     activeChip?.serviceSlugs[0] ?? filteredGroups[0]?.items[0]?.slug ?? null;
   const trimmedQuery = query.trim() || null;
-  const quoteHref =
-    hasActiveFinder && visibleServiceCount > 0
-      ? buildServicesFinderLeadContextHref("/quote", {
-          serviceSlug: primaryMatchSlug,
-          intentLabel: activeChip?.label ?? null,
-          query: trimmedQuery,
-        })
-      : null;
   const bookingHref =
     hasActiveFinder && visibleServiceCount > 0
       ? buildServicesFinderLeadContextHref("/book", {
@@ -89,7 +81,7 @@ export function ServicesHubBrowser({
           query: trimmedQuery,
         })
       : null;
-  const zeroStateQuoteHref = buildServicesFinderLeadContextHref("/quote", {
+  const zeroStateBookHref = buildServicesFinderLeadContextHref("/book", {
     query: trimmedQuery,
   });
 
@@ -267,25 +259,6 @@ export function ServicesHubBrowser({
                     .
                   </p>
                   <div className="flex flex-wrap gap-3">
-                    {quoteHref ? (
-                      <TrackedLink
-                        href={quoteHref}
-                        eventName="services_finder_cta_click"
-                        eventParams={{
-                          page_path: pagePath,
-                          cta_target: "quote",
-                          service_slug: primaryMatchSlug || "",
-                          chip_id: activeChip?.id || "",
-                          chip_label: activeChip?.label || "",
-                          finder_intent: activeChip?.label || "",
-                          finder_query: trimmedQuery || "",
-                          match_count: visibleServiceCount,
-                        }}
-                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                      >
-                        Use this for a quote
-                      </TrackedLink>
-                    ) : null}
                     {bookingHref ? (
                       <TrackedLink
                         href={bookingHref}
@@ -300,9 +273,9 @@ export function ServicesHubBrowser({
                           finder_query: trimmedQuery || "",
                           match_count: visibleServiceCount,
                         }}
-                        className="hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:inline-flex"
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                       >
-                        Use this for booking
+                        Book this repair
                       </TrackedLink>
                     ) : null}
                   </div>

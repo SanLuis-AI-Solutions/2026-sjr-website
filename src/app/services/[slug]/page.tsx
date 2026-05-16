@@ -20,6 +20,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 import { createPageMetadata } from "@/lib/metadata";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
+import { getRelatedServiceSlugs } from "@/lib/service-taxonomy";
 
 type PageProps = {
   params: Promise<{
@@ -1182,9 +1183,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
-  const title = `${service.name} | Jewelry Repair Pasadena, TX`;
+  const nearMeSlugs = new Set(["watch-repair", "ring-sizing", "necklace-repair", "bracelet-repair", "stone-setting", "pearl-restringing"]);
+  const titleSuffix = nearMeSlugs.has(slug)
+    ? `Near Me in Pasadena, TX | ${BUSINESS.name}`
+    : `| Jewelry Repair Pasadena, TX | ${BUSINESS.name}`;
+  const title = `${service.name} ${titleSuffix}`;
   const summary = service.summary || service.short_summary || "";
-  const description = `${summary} Local in-house repair in Pasadena with clear approvals, transparent pricing, and Same Day/Next Day service when applicable.`;
+  const description = `${summary} In-house ${service.name.toLowerCase()} in Pasadena, TX — same-day or next-day service, transparent pricing, no surprises.`;
 
   return createPageMetadata({
     title,
@@ -1213,9 +1218,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? embeddedFaqs
       : buildFallbackFaqs(service.name);
   const resolvedFaqs = ensureMinFaqs(resolvedFaqsRaw, slug, service.name);
-  const relatedServices = SERVICES
-    .filter((item) => item.slug !== service.slug)
-    .slice(0, 4);
+  const relatedServiceSlugs = getRelatedServiceSlugs(slug);
+  const relatedServicesMap = new Map(SERVICES.map((s) => [s.slug, s]));
+  const relatedServices = relatedServiceSlugs.length > 0
+    ? relatedServiceSlugs.map((s) => relatedServicesMap.get(s)).filter(Boolean) as typeof SERVICES
+    : SERVICES.filter((item) => item.slug !== service.slug).slice(0, 4);
   const helpfulReadPosts = getHelpfulBlogPostsForServiceSlug(slug, 3);
   const helpfulReads: HelpfulReadLink[] = helpfulReadPosts.map((post) => ({
     href: `/blog/${post.slug}`,
@@ -2604,7 +2611,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand serviceName={service.name} />
 
           <ServiceInteractionTracker serviceSlug={slug} />
         </DeferredServiceSections>

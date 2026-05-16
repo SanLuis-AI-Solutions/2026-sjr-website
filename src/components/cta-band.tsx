@@ -1,6 +1,17 @@
 import Link from "next/link";
 
-export function CtaBand() {
+type CtaBandProps = {
+  serviceName?: string;
+};
+
+export function CtaBand({ serviceName }: CtaBandProps = {}) {
+  const headline = serviceName
+    ? `Ready to book your ${serviceName.toLowerCase()}?`
+    : "Schedule your repair today.";
+  const subtext = serviceName
+    ? `Drop off or book online. We confirm ${serviceName.toLowerCase()} options and pricing before any work begins.`
+    : "Book online or walk in. Our team will assess your piece and discuss options before any work begins.";
+
   return (
     <section className="bg-stone-100 py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 rounded-2xl border border-stone-200 bg-white px-8 py-12 shadow-sm md:flex-row md:items-center">
@@ -9,10 +20,10 @@ export function CtaBand() {
             In-house · Pasadena · Same-day available
           </p>
           <h3 className="mt-3 font-serif text-3xl text-stone-900">
-            Schedule your repair today.
+            {headline}
           </h3>
           <p className="mt-3 text-sm text-stone-600">
-            Book online or walk in. Our team will assess your piece and discuss options before any work begins.
+            {subtext}
           </p>
         </div>
         <Link

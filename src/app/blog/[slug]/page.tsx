@@ -34,7 +34,7 @@ function formatPublishedDate(value: string) {
 }
 
 function isGenericConversionStep(href: string) {
-  return href === "/quote" || href === "/book";
+  return href === "/book";
 }
 
 export function generateStaticParams() {

@@ -11,9 +11,9 @@ import { createPageMetadata } from "@/lib/metadata";
 const GOOGLE_MAPS_PRIMARY_URL = "https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8";
 
 export const metadata = createPageMetadata({
-  title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
+  title: "Contact Susie’s Jewelry Repair | Pasadena, TX | (281) 991-6500",
   description:
-    "Talk to our Pasadena in-house repair team by phone, email, or message for jewelry and watch service guidance, next steps, and appointment support.",
+    "Call, email, or message our in-house Pasadena jewelry and watch repair team. We reply within 1 business day and confirm all options before work begins.",
   canonical: "/contact",
 });
 

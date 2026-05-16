@@ -37,9 +37,9 @@ type ServiceListItem = {
 };
 
 export const metadata = createPageMetadata({
-  title: "Jewelry & Watch Repair Services | Susie’s Jewelry Repair",
+  title: "Jewelry & Watch Repair Services in Pasadena, TX | Susie’s",
   description:
-    "Browse in-house jewelry and watch repair services with transparent pricing, Same Day/Next Day service on most work, and a fast path to quote or booking.",
+    "Ring sizing, watch repair, stone setting, pearl restringing, and heirloom restoration — all in-house in Pasadena, TX with Same Day/Next Day service on most work.",
   canonical: "/services",
 });
 
