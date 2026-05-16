@@ -4,7 +4,7 @@ import { PRIORITY_REPAIR_PATHS } from "@/lib/priority-repair-paths";
 
 export function HomeLocalRepairPaths() {
   return (
-    <section className="bg-[#faf7f2] py-8 md:py-12">
+    <section className="bg-background py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="rounded-3xl border border-stone-200 bg-white/82 p-5 shadow-[0_18px_44px_rgba(58,25,16,0.10)] md:p-8">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">

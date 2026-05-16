@@ -55,7 +55,7 @@ export function ProofBand() {
 
 export function InHouseBadge() {
   return (
-    <section className="relative overflow-hidden bg-[#faf7f2] py-10 md:py-14">
+    <section className="relative overflow-hidden bg-background py-10 md:py-14">
       <div className="pointer-events-none absolute -left-24 top-8 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.18),_transparent_70%)]" />
       <div className="mx-auto max-w-2xl px-6">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-10">
@@ -151,7 +151,7 @@ export function ProcessSteps() {
 
 export function CraftStory() {
   return (
-    <section className="relative overflow-hidden bg-[#f5ede2] py-16">
+    <section className="relative overflow-hidden bg-warm-surface py-16">
       <div className="pointer-events-none absolute -left-28 bottom-10 h-52 w-52 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.16),_transparent_70%)]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
         <div className="space-y-4 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/80 p-8 shadow-[0_16px_40px_rgba(58,25,16,0.12)]">
@@ -251,10 +251,10 @@ export function ShowcaseBand() {
 
 export function HomeFaq() {
   return (
-    <section className="cv-section bg-[#f7efe6] py-16">
+    <section className="cv-section bg-warm-surface py-16">
       <div className="mx-auto max-w-4xl px-6">
         <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy reveal-on-scroll">
-          FAQs
+          Common questions
         </p>
         <h2 className="mt-3 font-serif text-3xl text-stone-900 reveal-on-scroll">
           Common questions about repairs.
@@ -310,7 +310,7 @@ export function HomeFaq() {
 
 export function Testimonials() {
   return (
-    <section className="cv-section bg-[#f1e4d7] py-10 md:py-16">
+    <section className="cv-section bg-warm-deep py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-end justify-between reveal-on-scroll">
           <div>
@@ -393,6 +393,9 @@ export function HomeCta() {
         >
           Book a Repair
         </Link>
+        <p className="text-[11px] uppercase tracking-[0.25em] text-white/50">
+          Free assessment · 90-day warranty · No payment to book
+        </p>
       </div>
     </section>
   );

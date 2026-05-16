@@ -17,6 +17,12 @@
   --stone-600: #4a3a3c;
   /* Neutrals - Subtext */
 
+  /* Section Background Scale */
+  --warm-surface: #f5ede2;
+  /* Mid-warm section backgrounds */
+  --warm-deep: #f1e4d7;
+  /* Deeper warm section backgrounds */
+
   /* Glass-morphism Defaults */
   --glass-bg: rgba(250, 247, 242, 0.7);
   --glass-border: rgba(209, 184, 130, 0.2);
@@ -30,6 +36,8 @@
   --color-brand-gold: var(--brand-gold);
   --color-stone-200: var(--stone-200);
   --color-stone-600: var(--stone-600);
+  --color-warm-surface: var(--warm-surface);
+  --color-warm-deep: var(--warm-deep);
 
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
