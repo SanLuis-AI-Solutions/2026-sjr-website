@@ -360,12 +360,12 @@ export function Testimonials() {
                 key={item.name}
                 className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-burgundy/15 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)]`}
               >
-                <p className=”text-[11px] tracking-[0.2em] text-brand-gold”>★★★★★</p>
-                <p className=”mt-3 text-sm text-stone-600”>”{item.quote}”</p>
-                <div className=”mt-4 text-sm font-semibold text-stone-900”>
+                <p className="text-[11px] tracking-[0.2em] text-brand-gold" aria-hidden="true">{"★★★★★"}</p>
+                <p className="mt-3 text-sm text-stone-600">&ldquo;{item.quote}&rdquo;</p>
+                <div className="mt-4 text-sm font-semibold text-stone-900">
                   {item.name}
                 </div>
-                <div className=”mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-burgundy/70”>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-burgundy/70">
                   {item.service}
                 </div>
               </div>
