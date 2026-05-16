@@ -225,28 +225,34 @@ export default async function BookPage({
               </>
             ) : null}
 
-            <label className="block text-sm font-medium text-stone-700">
+            <label className="group block text-sm font-medium text-stone-700">
               Your name <span className="text-brand-burgundy">*</span>
               <input
                 type="text"
                 name="name"
                 autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
                 placeholder="Your name"
                 required
               />
+              <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=name]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
+                Please enter your name.
+              </p>
             </label>
 
-            <label className="mt-4 block text-sm font-medium text-stone-700">
+            <label className="group mt-4 block text-sm font-medium text-stone-700">
               Your email <span className="text-brand-burgundy">*</span>
               <input
                 type="email"
                 name="email"
                 autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
                 placeholder="you@email.com"
                 required
               />
+              <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=email]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
+                Please enter a valid email address.
+              </p>
             </label>
 
             <label className="mt-4 block text-sm font-medium text-stone-700">
