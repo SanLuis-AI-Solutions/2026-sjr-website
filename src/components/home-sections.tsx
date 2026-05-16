@@ -386,6 +386,20 @@ export function Testimonials() {
             );
           })}
         </div>
+        <div className="mt-8 flex flex-wrap items-center gap-4 reveal-on-scroll">
+          <Link
+            href="/book"
+            className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-white shadow-[0_14px_32px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+          >
+            Book a Repair
+          </Link>
+          <Link
+            href="/faq"
+            className="inline-flex min-h-12 items-center text-sm font-semibold text-brand-burgundy underline decoration-brand-gold/50 decoration-2 underline-offset-4 hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+          >
+            See all questions →
+          </Link>
+        </div>
       </div>
     </section>
   );
