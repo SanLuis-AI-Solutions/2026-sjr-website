@@ -2608,7 +2608,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand serviceName={service.name} />
 
           <ServiceInteractionTracker serviceSlug={slug} />
         </DeferredServiceSections>
