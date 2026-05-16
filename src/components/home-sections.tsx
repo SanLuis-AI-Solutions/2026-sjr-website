@@ -76,7 +76,7 @@ export function InHouseBadge() {
 
 export function ProcessSteps() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffdfa_0%,#f2e7d7_100%)] py-12 md:py-20">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-background)_0%,var(--color-warm-deep)_100%)] py-12 md:py-20">
       <div className="pointer-events-none absolute -right-32 top-10 h-60 w-60 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.25),_transparent_70%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
@@ -220,7 +220,7 @@ export function CraftStory() {
 
 export function ShowcaseBand() {
   return (
-    <section className="relative hidden overflow-hidden bg-stone-900 py-24 text-[#faf7f2] md:block">
+    <section className="relative overflow-hidden bg-stone-900 py-20 text-[#faf7f2] md:py-24">
       <div className="pointer-events-none absolute -left-32 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.15),_transparent_70%)]" />
       <div className="pointer-events-none absolute -right-20 bottom-0 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_center,_rgba(122,46,58,0.2),_transparent_70%)]" />
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
