@@ -298,8 +298,22 @@ export default async function BookPage({
             >
               <span id="booking-submit-text">Book My Repair</span>
             </button>
-            <p className="mt-3 text-center text-xs text-stone-600">
-              Secure form · No payment required · Final appointment confirmed by email.
+            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">4.5 ★</div>
+                <div className="mt-0.5">Google</div>
+              </div>
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">90 Days</div>
+                <div className="mt-0.5">Warranty</div>
+              </div>
+              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
+                <div className="text-brand-burgundy">No Pay</div>
+                <div className="mt-0.5">To Book</div>
+              </div>
+            </div>
+            <p className="mt-3 text-center text-[11px] text-stone-500">
+              We confirm by email within 1 business day.
             </p>
             </form>
           </div>

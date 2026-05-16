@@ -1182,9 +1182,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
-  const title = `${service.name} | Jewelry Repair Pasadena, TX`;
+  const nearMeSlugs = new Set(["watch-repair", "ring-sizing", "ring-repair", "necklace-repair", "bracelet-repair", "stone-setting"]);
+  const titleSuffix = nearMeSlugs.has(slug)
+    ? `Near Me in Pasadena, TX | ${BUSINESS.name}`
+    : `| Jewelry Repair Pasadena, TX | ${BUSINESS.name}`;
+  const title = `${service.name} ${titleSuffix}`;
   const summary = service.summary || service.short_summary || "";
-  const description = `${summary} Local in-house repair in Pasadena with clear approvals, transparent pricing, and Same Day/Next Day service when applicable.`;
+  const description = `${summary} In-house ${service.name.toLowerCase()} in Pasadena, TX — same-day or next-day service, transparent pricing, no surprises.`;
 
   return createPageMetadata({
     title,
