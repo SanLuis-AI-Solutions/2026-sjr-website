@@ -32,6 +32,14 @@ export function localBusinessSchema() {
     ],
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
+    foundingDate: "1984",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.5",
+      reviewCount: "51",
+      bestRating: "5",
+      worstRating: "1",
+    },
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
