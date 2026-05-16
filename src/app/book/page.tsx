@@ -45,13 +45,6 @@ export default async function BookPage({
     resolvedSearchParams?.from === "services_finder" ? await getServices() : [];
   const finderContext = resolveServicesFinderLeadContext(resolvedSearchParams || {}, services);
   const hiddenFields = getServicesFinderHiddenFields(finderContext);
-  const quoteHref = finderContext
-    ? buildServicesFinderLeadContextHref("/quote", {
-        serviceSlug: finderContext.serviceSlug,
-        intentLabel: finderContext.intentLabel,
-        query: finderContext.query,
-      })
-    : "/quote";
   const bookingEventName = pending
     ? "booking_submit_pending"
     : "booking_submit_success";
@@ -117,17 +110,6 @@ export default async function BookPage({
               Pick a preferred drop-off time. No payment today; we confirm by email within 1
               business day.
             </p>
-            <p className="mt-5 hidden max-w-xl text-sm leading-6 text-stone-600 md:block">
-              Need a price range before choosing a time?{" "}
-              <a
-                href={quoteHref}
-                className="font-semibold text-brand-burgundy underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Start with a fast quote
-              </a>
-              .
-            </p>
-
             <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
               <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know

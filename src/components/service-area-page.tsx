@@ -55,7 +55,6 @@ export function ServiceAreaLandingPage({ page }: Props) {
   const imageUrl = page.heroImage.startsWith("http")
     ? page.heroImage
     : `https://www.susiesjewelryrepair.com${page.heroImage}`;
-  const quoteHref = buildServicesFinderLeadContextHref("/quote", { areaSlug: page.slug });
   const bookingHref = buildServicesFinderLeadContextHref("/book", { areaSlug: page.slug });
 
   const faqSchema = {
@@ -159,14 +158,6 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book a Repair
-              </TrackedLink>
-              <TrackedLink
-                href={quoteHref}
-                eventName="service_area_cta_click"
-                eventParams={{ area_slug: page.slug, cta_target: "quote" }}
-                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Get a Quote
               </TrackedLink>
             </div>
           </div>
