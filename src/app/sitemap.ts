@@ -20,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/services`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/about`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/faq`, lastModified: STATIC_LAST_MODIFIED },
-    { url: `${baseUrl}/quote`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/book`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/contact`, lastModified: STATIC_LAST_MODIFIED },
     { url: `${baseUrl}/privacy`, lastModified: STATIC_LAST_MODIFIED },

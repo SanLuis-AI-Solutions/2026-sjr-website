@@ -74,7 +74,7 @@ export function SiteFooter() {
     { href: "/showroom", label: "Showcase" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
-    { href: "/quote", label: "Get Quote" },
+    { href: "/book", label: "Book a Repair" },
     { href: "/site-map", label: "Sitemap" },
   ];
   const areaLinks = SERVICE_AREA_PAGES.map((page) => ({

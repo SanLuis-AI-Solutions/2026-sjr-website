@@ -223,7 +223,7 @@ export function ServiceAreaLandingPage({ page }: Props) {
             </section>
 
             {page.repairPathGuide ? (
-              <section className="rounded-3xl border border-brand-gold/30 bg-[#fffaf0] p-6 shadow-sm">
+              <section className="rounded-3xl border border-brand-gold/30 bg-background p-6 shadow-sm">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                   Local repair triage
                 </p>

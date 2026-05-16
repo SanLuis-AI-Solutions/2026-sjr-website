@@ -12,7 +12,7 @@ export function ShowroomPageClient() {
 
   return (
     <SiteShell>
-      <div className="min-h-screen bg-[#faf7f2]">
+      <div className="min-h-screen bg-background">
         <div className="relative overflow-hidden bg-stone-900 py-24 text-center">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.15),_transparent_70%)]" />
           <div className="relative z-10 mx-auto max-w-4xl px-6">

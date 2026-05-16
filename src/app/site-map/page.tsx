@@ -15,8 +15,7 @@ export const metadata = createPageMetadata({
 const corePages = [
   { href: "/", label: "Home", description: "Jewelry and watch repair overview." },
   { href: "/services", label: "Services", description: "In-house repair service directory." },
-  { href: "/book", label: "Book a Repair", description: "Reserve a repair assessment." },
-  { href: "/quote", label: "Get a Quote", description: "Start a quote request with photos." },
+  { href: "/book", label: "Book a Repair", description: "Reserve a repair assessment or get a starting price." },
   { href: "/blog", label: "Repair Guides", description: "Pricing, timing, and care articles." },
   { href: "/contact", label: "Contact", description: "Shop address, phone, and contact form." },
   { href: "/about", label: "About", description: "Local shop story and trust signals." },
@@ -93,7 +92,7 @@ export default function HtmlSitemapPage() {
         </div>
       </section>
 
-      <div className="bg-[#faf7f2] py-12">
+      <div className="bg-background py-12">
         <div className="mx-auto max-w-6xl space-y-8 px-6">
           <SitemapSection
             title="Core pages"

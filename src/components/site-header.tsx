@@ -24,7 +24,7 @@ export function SiteHeader() {
   const isMobileNavOpen = mobileMenuPath === currentPath;
 
   return (
-    <header className="fixed top-0 z-[120] w-full border-b border-stone-200/70 bg-[#faf7f2]/95 py-4 backdrop-blur">
+    <header className="fixed top-0 z-[120] w-full border-b border-stone-200/70 bg-background/95 py-4 backdrop-blur">
       {isMobileNavOpen ? (
         <button
           type="button"
@@ -88,7 +88,7 @@ export function SiteHeader() {
           id="mobile-nav"
           role="dialog"
           aria-label="Mobile navigation"
-          className="absolute inset-x-4 top-[calc(100%+0.75rem)] z-[130] rounded-3xl border border-stone-200 bg-[#faf7f2] p-5 shadow-2xl lg:hidden"
+          className="absolute inset-x-4 top-[calc(100%+0.75rem)] z-[130] rounded-3xl border border-stone-200 bg-background p-5 shadow-2xl lg:hidden"
         >
           <div className="mb-4 rounded-2xl border border-brand-gold/30 bg-white/90 p-4">
             <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-burgundy">
