@@ -260,6 +260,7 @@ export default async function BookPage({
                   { value: "ring_repair", label: "Ring repair" },
                   { value: "watch_repair", label: "Watch repair" },
                   { value: "ring_sizing", label: "Ring sizing" },
+                  { value: "necklace_chain_repair", label: "Necklace / chain repair" },
                   { value: "other", label: "Not sure yet" },
                 ].map(({ value, label }) => (
                   <label key={value} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm text-stone-800 hover:border-brand-gold/50 has-[:checked]:border-brand-gold/70 has-[:checked]:bg-brand-gold/5">
