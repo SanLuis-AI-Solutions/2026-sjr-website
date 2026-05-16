@@ -57,7 +57,7 @@ export function BookingDateTimeFields() {
 
   return (
     <div className="mt-4 grid gap-4 sm:grid-cols-2">
-      <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+      <label className="block text-sm font-medium text-stone-700">
         Preferred date <span className="text-brand-burgundy">*</span>
         <input
           ref={dateRef}
@@ -78,7 +78,7 @@ export function BookingDateTimeFields() {
           className="mt-2 min-h-12 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
         />
       </label>
-      <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+      <label className="block text-sm font-medium text-stone-700">
         Preferred time <span className="text-brand-burgundy">*</span>
         <select
           name="time"
