@@ -225,7 +225,7 @@ export default async function BookPage({
               </>
             ) : null}
 
-            <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="block text-sm font-medium text-stone-700">
               Your name <span className="text-brand-burgundy">*</span>
               <input
                 type="text"
@@ -237,7 +237,7 @@ export default async function BookPage({
               />
             </label>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-4 block text-sm font-medium text-stone-700">
               Your email <span className="text-brand-burgundy">*</span>
               <input
                 type="email"
@@ -249,7 +249,7 @@ export default async function BookPage({
               />
             </label>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-4 block text-sm font-medium text-stone-700">
               Phone — optional
               <input
                 type="tel"
@@ -264,7 +264,7 @@ export default async function BookPage({
             <BookingDateTimeFields />
 
             <fieldset className="mt-6 border-t border-stone-200 pt-5">
-              <legend className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-600">
+              <legend className="text-sm font-semibold text-stone-700">
                 What repair do you need? <span className="text-brand-burgundy">*</span>
               </legend>
               <div className="mt-3 flex flex-col gap-2">
@@ -288,7 +288,7 @@ export default async function BookPage({
               </div>
             </fieldset>
 
-            <label className="mt-5 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label className="mt-5 block text-sm font-medium text-stone-700">
               Details — optional
               <textarea
                 name="details"
@@ -304,7 +304,7 @@ export default async function BookPage({
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
               disabled={false}
               id="booking-submit"
             >

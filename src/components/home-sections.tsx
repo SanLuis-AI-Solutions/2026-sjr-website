@@ -132,10 +132,7 @@ export function ProcessSteps() {
                   <span className="absolute -left-10 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-brand-burgundy text-xs font-semibold text-white shadow-lg">
                     {item.step}
                   </span>
-                  <div className="text-xs uppercase tracking-[0.4em] text-brand-burgundy">
-                    Step {item.step}
-                  </div>
-                  <h3 className="mt-4 font-serif text-2xl text-stone-900">
+                  <h3 className="font-serif text-2xl text-stone-900">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-sm text-stone-600">{item.detail}</p>
