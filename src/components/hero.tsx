@@ -45,7 +45,7 @@ export function Hero() {
               {/* eslint-disable-next-line @next/next/no-img-element -- Small brand seal from provided logo */}
               <img src={logoSrc} alt="Susie's Jewelry Repair" width={389} height={474} className="h-9 w-9 object-contain" />
             </span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.34em] text-brand-gold">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.34em] text-brand-gold">
               Pasadena
               <span className="mx-2 text-white/35">/</span>
               Since 1984
@@ -57,8 +57,8 @@ export function Hero() {
           </h1>
 
           <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 max-w-[34rem] text-base leading-7 text-white/78 md:text-lg md:leading-8">
-            A local jewelry repair shop in Pasadena for pieces that deserve in-house care,
-            clear quotes, and lasting workmanship.
+            We repair rings, watches, and heirlooms in our Pasadena workshop — clear pricing,
+            no surprises, same-day service available.
           </p>
 
           <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 flex">
@@ -76,7 +76,7 @@ export function Hero() {
             </Link>
           </div>
 
-          <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 flex max-w-[35rem] flex-wrap gap-x-5 gap-y-2 border-t border-white/14 pt-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/72">
+          <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 flex max-w-[35rem] flex-wrap gap-x-5 gap-y-2 border-t border-white/14 pt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/72">
             <BusinessActionLink
               href={BUSINESS.googleMapsUrl}
               action="reviews"

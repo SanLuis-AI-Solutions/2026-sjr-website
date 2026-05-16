@@ -129,7 +129,7 @@ export default async function BookPage({
             </p>
 
             <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
-              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+              <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know
               </div>
               <ul className="mt-3 space-y-2">
@@ -153,7 +153,7 @@ export default async function BookPage({
           <div className="space-y-4">
             {finderContext ? (
               <div className="reveal-on-scroll rounded-3xl border border-brand-gold/40 bg-brand-gold/10 p-5 text-sm text-stone-700">
-                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Repair focus
                 </div>
                 <div className="mt-3 space-y-2">
@@ -199,7 +199,7 @@ export default async function BookPage({
               className="reveal-on-scroll scroll-mt-24 rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm md:p-6"
             >
             <div className="mb-4 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
                 No payment required
               </p>
               <p className="mt-2 leading-6">

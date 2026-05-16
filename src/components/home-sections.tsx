@@ -13,7 +13,7 @@ export function ProofBand() {
           {/* Dominant anchor stat */}
           <div className="reveal-on-scroll reveal-delay-1 flex flex-col justify-center gap-2 py-6 md:py-9 md:pr-8">
             <p className="font-serif text-[2.75rem] leading-none text-white md:text-5xl">Since 1984</p>
-            <p className="text-[10px] uppercase tracking-[0.32em] text-white/45">
+            <p className="text-[11px] uppercase tracking-[0.32em] text-white/45">
               Local, family-owned craftsmanship
             </p>
           </div>
@@ -28,7 +28,7 @@ export function ProofBand() {
             className="reveal-on-scroll reveal-delay-2 group flex flex-col gap-1.5 py-6 transition md:px-7 md:py-9"
           >
             <p className="text-2xl font-semibold text-white transition-colors group-hover:text-brand-gold">4.5 ★</p>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45 transition-colors group-hover:text-white/65">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-white/45 transition-colors group-hover:text-white/65">
               51 Google reviews
             </p>
           </TrackedAnchor>
@@ -36,13 +36,13 @@ export function ProofBand() {
           {/* Warranty */}
           <div className="reveal-on-scroll reveal-delay-3 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
             <p className="text-2xl font-semibold text-white">90 Days</p>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45">Workmanship warranty</p>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-white/45">Workmanship warranty</p>
           </div>
 
           {/* Service area */}
           <div className="reveal-on-scroll reveal-delay-4 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
             <p className="text-2xl font-semibold text-white">Pasadena</p>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-white/45">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-white/45">
               Deer Park · La Porte · Houston
             </p>
           </div>
@@ -61,12 +61,12 @@ export function InHouseBadge() {
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-10">
           <div className="reveal-on-scroll text-center">
             <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">100%</p>
-            <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-stone-500">In-house repairs</p>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.35em] text-stone-500">In-house repairs</p>
           </div>
           <div className="h-14 w-px bg-brand-gold/40 md:h-20" />
           <div className="reveal-on-scroll reveal-delay-2 text-center">
             <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">90 Days</p>
-            <p className="mt-3 text-[10px] uppercase tracking-[0.35em] text-stone-500">Workmanship warranty</p>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.35em] text-stone-500">Workmanship warranty</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export function ProcessSteps() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="reveal-on-scroll space-y-4 lg:sticky lg:top-24 lg:self-start">
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-              How it works
+              Your repair, step by step
             </p>
             <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
               A simple, transparent repair process.
@@ -95,7 +95,7 @@ export function ProcessSteps() {
                 (label) => (
                   <span
                     key={label}
-                    className="rounded-full border border-brand-gold/30 bg-white/80 px-4 py-2 text-[10px] uppercase tracking-[0.35em] text-stone-600"
+                    className="rounded-full border border-brand-gold/30 bg-white/80 px-4 py-2 text-[11px] uppercase tracking-[0.35em] text-stone-600"
                   >
                     {label}
                   </span>
@@ -365,7 +365,7 @@ export function Testimonials() {
                 <div className="mt-4 text-sm font-semibold text-stone-900">
                   {item.name}
                 </div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-brand-burgundy/70">
+                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-brand-burgundy/70">
                   {item.service}
                 </div>
               </div>
