@@ -74,6 +74,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/quote",
+        destination: "/book",
+        permanent: true,
+      },
+      {
+        source: "/quote/:path*",
+        destination: "/book",
+        permanent: true,
+      },
+      {
         source: "/book-online",
         destination: "/book",
         permanent: true,

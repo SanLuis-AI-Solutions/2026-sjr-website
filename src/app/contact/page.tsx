@@ -136,7 +136,7 @@ function ContactSection() {
             <LeadAttributionFields />
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              <label className="block text-sm font-medium text-stone-700">
                 Name
                 <input
                   type="text"
@@ -147,7 +147,7 @@ function ContactSection() {
                   required
                 />
               </label>
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              <label className="block text-sm font-medium text-stone-700">
                 Email
                 <input
                   type="email"
@@ -161,7 +161,7 @@ function ContactSection() {
             </div>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              <label className="block text-sm font-medium text-stone-700">
                 Phone (optional)
                 <input
                   type="tel"
@@ -172,7 +172,7 @@ function ContactSection() {
                   placeholder="(281) 555-1234"
                 />
               </label>
-              <label className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              <label className="block text-sm font-medium text-stone-700">
                 Preferred contact method
                 <select
                   name="preferredContact"
@@ -198,9 +198,9 @@ function ContactSection() {
 
             <button
               type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              Send Message
+              Send my message
             </button>
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
               Secure form · Local in-house team support.
