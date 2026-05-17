@@ -115,7 +115,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
           No payment required
         </p>
         <p className="mt-1.5 leading-6">
-          We confirm your time by phone or email — usually same day.
+          We confirm by email or text — usually within a few hours.
         </p>
       </div>
 
@@ -206,7 +206,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
               <p className="mt-1 text-xs text-rose-600" role="alert">Please enter a valid 10-digit phone number.</p>
             ) : null}
             {!touched.phone || phoneValid ? (
-              <p className="mt-1 text-xs text-stone-500">We call to confirm your time — usually same day.</p>
+              <p className="mt-1 text-xs text-stone-500">We confirm by email and text — usually within a few hours.</p>
             ) : null}
           </div>
 
@@ -329,7 +329,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
             </div>
           </div>
           <p className="mt-3 text-center text-[11px] text-stone-500">
-            We confirm by phone or email — usually same day.
+            We confirm by email and text — usually within a few hours.
           </p>
         </>
       )}
