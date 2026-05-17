@@ -50,8 +50,9 @@ export default async function BookPage({
   return (
     <SiteShell>
       <FormSubmitInitializer />
-      <section className="relative overflow-hidden bg-stone-100 py-10 md:py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
+      <section className="relative overflow-hidden bg-[#faf7f2] py-10 md:py-16">
+        <div className="grain-layer absolute inset-0" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
           <Suspense fallback={null}>
             <GaConversionTracker
@@ -109,7 +110,21 @@ export default async function BookPage({
               Pick a preferred drop-off time. No payment today; we confirm by email within 1
               business day.
             </p>
-            <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 md:block">
+
+            {/* Trust signal chips */}
+            <div className="mt-5 flex flex-wrap gap-2">
+              <span className="inline-flex items-center rounded-full border border-brand-gold/40 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
+                4.5 ★ Google
+              </span>
+              <span className="inline-flex items-center rounded-full border border-stone-300/70 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-500">
+                90-Day Warranty
+              </span>
+              <span className="inline-flex items-center rounded-full border border-stone-300/70 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-500">
+                In-House Only
+              </span>
+            </div>
+
+            <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 [border-top:3px_solid_rgba(209,184,130,0.45)] md:block">
               <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know
               </div>
@@ -128,6 +143,28 @@ export default async function BookPage({
                   </BusinessActionLink>
                 </li>
               </ul>
+            </div>
+
+            {/* How it works — desktop only */}
+            <div className="mt-6 hidden md:block">
+              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">How it works</p>
+              <div className="mt-4 space-y-4">
+                {[
+                  { n: "1", title: "Drop off your piece", body: "Bring it to our Pasadena workshop — no appointment needed to drop off." },
+                  { n: "2", title: "Free in-person assessment", body: "We confirm pricing before any work begins. No surprises." },
+                  { n: "3", title: "Pick up, good as new", body: "Most repairs done same day or next. 90-day warranty on all work." },
+                ].map(({ n, title, body }) => (
+                  <div key={n} className="flex gap-4">
+                    <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-brand-gold/40 bg-white text-[11px] font-bold text-brand-burgundy shadow-sm">
+                      {n}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-stone-800">{title}</p>
+                      <p className="mt-0.5 text-xs leading-5 text-stone-500">{body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

@@ -74,7 +74,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
       id="booking-form"
       action="/api/book"
       method="post"
-      className="reveal-on-scroll scroll-mt-24 rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm md:p-6"
+      className="reveal-on-scroll scroll-mt-24 rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm [border-top:3px_solid_rgba(209,184,130,0.50)] md:p-6"
     >
       {/* Progress indicator */}
       <div className="mb-5 flex items-center gap-2">
@@ -317,15 +317,15 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
 
           <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
             <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-              <div className="text-brand-burgundy">4.5 ★</div>
+              <div className="text-brand-gold">4.5 ★</div>
               <div className="mt-0.5">Google</div>
             </div>
             <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-              <div className="text-brand-burgundy">90 Days</div>
+              <div className="text-brand-gold">90 Days</div>
               <div className="mt-0.5">Warranty</div>
             </div>
             <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-              <div className="text-brand-burgundy">No Pay</div>
+              <div className="text-brand-gold">No Pay</div>
               <div className="mt-0.5">To Book</div>
             </div>
           </div>
