@@ -3,7 +3,6 @@ import Image from "next/image";
 import { BUSINESS } from "@/lib/constants";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedAnchor } from "@/components/analytics/tracked-anchor";
-import { CountUp } from "@/components/count-up";
 
 export function ProofBand() {
   return (
@@ -29,7 +28,7 @@ export function ProofBand() {
             rel="noreferrer"
             className="reveal-on-scroll reveal-delay-2 group flex flex-col gap-1.5 py-6 transition md:px-7 md:py-9"
           >
-            <p className="text-2xl font-semibold text-white transition-colors group-hover:text-brand-gold"><CountUp to={4.5} decimals={1} suffix=" ★" /></p>
+            <p className="text-2xl font-semibold text-white transition-colors group-hover:text-brand-gold">4.5 ★</p>
             <p className="text-[11px] uppercase tracking-[0.28em] text-white/45 transition-colors group-hover:text-white/65">
               51 Google reviews
             </p>
@@ -37,7 +36,7 @@ export function ProofBand() {
 
           {/* Warranty */}
           <div className="reveal-on-scroll reveal-delay-3 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
-            <p className="text-2xl font-semibold text-white"><CountUp to={90} suffix=" Days" /></p>
+            <p className="text-2xl font-semibold text-white">90 Days</p>
             <p className="text-[11px] uppercase tracking-[0.28em] text-white/45">Workmanship warranty</p>
           </div>
 
@@ -62,12 +61,12 @@ export function InHouseBadge() {
       <div className="mx-auto max-w-2xl px-6">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-10">
           <div className="reveal-on-scroll text-center">
-            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl"><CountUp to={100} suffix="%" /></p>
+            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">100%</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.35em] text-stone-500">In-house repairs</p>
           </div>
           <div className="h-14 w-px bg-brand-gold/40 md:h-20" />
           <div className="reveal-on-scroll reveal-delay-2 text-center">
-            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl"><CountUp to={90} suffix=" Days" /></p>
+            <p className="font-serif text-5xl leading-none text-brand-burgundy md:text-6xl">90 Days</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.35em] text-stone-500">Workmanship warranty</p>
           </div>
         </div>
