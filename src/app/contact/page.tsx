@@ -167,7 +167,7 @@ function ContactSection() {
               </label>
             </div>
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="mt-4">
               <label className="block text-sm font-medium text-stone-700">
                 Phone (optional)
                 <input
@@ -178,18 +178,7 @@ function ContactSection() {
                   className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   placeholder="(281) 555-1234"
                 />
-              </label>
-              <label className="block text-sm font-medium text-stone-700">
-                Preferred contact method
-                <select
-                  name="preferredContact"
-                  defaultValue=""
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  <option value="">No preference</option>
-                  <option value="phone">Phone</option>
-                  <option value="email">Email</option>
-                </select>
+                <p className="mt-1 text-xs text-stone-500">We reply by email or text — never by phone call.</p>
               </label>
             </div>
 
