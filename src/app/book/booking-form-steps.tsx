@@ -139,6 +139,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
         </>
       ) : null}
 
+      <div key={step} className="animate-fade-up">
       {/* ── STEP 1 ── */}
       {step === 1 ? (
         <>
@@ -333,6 +334,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
           </p>
         </>
       )}
+      </div>
     </form>
   );
 }

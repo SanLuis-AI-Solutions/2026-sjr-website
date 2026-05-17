@@ -107,6 +107,7 @@ export function ServicesGrid({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.12] to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" aria-hidden="true" />
                 </div>
 
                 <div className="p-5 md:p-8">
