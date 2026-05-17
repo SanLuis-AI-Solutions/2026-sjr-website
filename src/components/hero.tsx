@@ -8,6 +8,7 @@ const logoSrc = "/images/brand/sjr-logo.png";
 export function Hero() {
   return (
     <section className="relative isolate min-h-[680px] overflow-hidden bg-[#120d10] text-white md:min-h-[760px]">
+      {/* Background image + gradients */}
       <div className="absolute inset-0 -z-10">
         {/* eslint-disable-next-line @next/next/no-img-element -- Intentional eager hero image for fastest above-the-fold paint */}
         <img
@@ -26,17 +27,35 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#120d10] to-transparent" />
       </div>
 
-      <div className="pointer-events-none absolute right-6 top-28 hidden opacity-[0.09] md:block" aria-hidden="true">
+      {/* Grain texture — consistent with other dark sections */}
+      <div className="grain-layer absolute inset-0" aria-hidden="true" />
+
+      {/* Decorative brand watermark — white ghost at low opacity */}
+      <div className="pointer-events-none absolute right-6 top-28 hidden opacity-[0.07] md:block" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element -- Decorative brand watermark */}
-        <img src={logoSrc} alt="Susie's Jewelry Repair logo" width={389} height={474} className="h-56 w-auto object-contain" />
+        <img
+          src={logoSrc}
+          alt=""
+          width={389}
+          height={474}
+          className="h-56 w-auto object-contain [filter:brightness(0)_invert(1)]"
+        />
       </div>
 
       <div className="relative mx-auto flex min-h-[680px] max-w-7xl items-end px-5 pb-10 pt-28 md:min-h-[760px] md:items-center md:px-8 md:py-28">
         <div className="ml-auto w-full max-w-[35rem] md:pr-2 lg:pr-10">
+
+          {/* Eyebrow badge */}
           <div className="animate-fade-up reveal-delay-1 home-hero-mobile-static inline-flex items-center gap-3">
-            <span className="grid h-12 w-12 place-items-center rounded-full border border-brand-gold/35 bg-white/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md">
-              {/* eslint-disable-next-line @next/next/no-img-element -- Small brand seal from provided logo */}
-              <img src={logoSrc} alt="Susie's Jewelry Repair" width={389} height={474} className="h-9 w-9 object-contain" />
+            <span className="grid h-12 w-12 place-items-center rounded-full border border-brand-gold/40 bg-white/[0.08] shadow-[0_0_20px_rgba(209,184,130,0.18),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md">
+              {/* eslint-disable-next-line @next/next/no-img-element -- Small brand seal */}
+              <img
+                src={logoSrc}
+                alt="Susie's Jewelry Repair"
+                width={389}
+                height={474}
+                className="h-9 w-9 object-contain [filter:brightness(0)_invert(1)]"
+              />
             </span>
             <span className="text-[11px] font-semibold uppercase tracking-[0.34em] text-brand-gold">
               Pasadena
@@ -45,16 +64,19 @@ export function Hero() {
             </span>
           </div>
 
+          {/* Headline */}
           <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[13ch] text-[clamp(2.9rem,12vw,4.35rem)] leading-[0.86] tracking-[-0.025em] text-white [text-wrap:balance] md:max-w-[12ch] md:text-[clamp(4rem,6.5vw,5.9rem)]">
             Jewelry &amp; watch repair done in&#8209;house. Since 1984.
           </h1>
 
+          {/* Subheading */}
           <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 max-w-[34rem] text-base leading-7 text-white/78 md:text-lg md:leading-8">
             Your ring, watch, or heirloom stays in our Pasadena workshop — we
             confirm pricing before any work begins.
           </p>
 
-          <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 flex">
+          {/* CTAs */}
+          <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 flex flex-wrap items-center gap-4">
             <Link
               href="/book"
               className="micro-interaction group relative inline-flex min-h-[54px] items-center justify-center overflow-hidden rounded-full bg-brand-gold px-7 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-[#181112] shadow-[0_24px_54px_rgba(0,0,0,0.34)] ring-1 ring-inset ring-white/25 transition-all duration-300 hover:bg-[#e3cc92] sm:w-auto"
@@ -67,21 +89,33 @@ export function Hero() {
                 →
               </span>
             </Link>
+
+            <Link
+              href="#services"
+              className="inline-flex min-h-[54px] items-center text-[11px] font-semibold uppercase tracking-[0.24em] text-white/60 transition-colors hover:text-white"
+            >
+              Explore services ↓
+            </Link>
           </div>
 
-          <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 flex max-w-[35rem] flex-wrap gap-x-5 gap-y-2 border-t border-white/14 pt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/72">
+          {/* Trust signal chips */}
+          <div className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 flex max-w-[35rem] flex-wrap gap-2 border-t border-white/14 pt-5">
             <BusinessActionLink
               href={BUSINESS.googleMapsUrl}
               action="reviews"
               placement="home_hero"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:text-brand-gold"
+              className="inline-flex items-center rounded-full border border-brand-gold/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-gold transition-colors hover:border-brand-gold"
             >
-              4.5 Google rating
+              4.5 ★ Google
             </BusinessActionLink>
-            <span>90-day warranty</span>
-            <span>In-house repairs only</span>
+            <span className="inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
+              90-Day Warranty
+            </span>
+            <span className="inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
+              In-House Only
+            </span>
           </div>
         </div>
       </div>
