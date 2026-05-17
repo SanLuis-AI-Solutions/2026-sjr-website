@@ -10,7 +10,7 @@ export function CtaBand({ serviceName }: CtaBandProps = {}) {
     : "Schedule your repair today.";
   const subtext = serviceName
     ? `Drop off or book online. We confirm ${serviceName.toLowerCase()} options and pricing before any work begins.`
-    : "Book online or walk in. Our team will assess your piece and discuss options before any work begins.";
+    : "Drop off, walk in, or book online — we discuss options and confirm pricing before any work begins.";
 
   return (
     <section className="bg-stone-100 py-16">

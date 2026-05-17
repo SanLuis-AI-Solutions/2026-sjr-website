@@ -95,7 +95,7 @@ export function ServicesGrid({
               : null;
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
             const mobileVisibilityClass = index > 3 ? "hidden sm:block" : "";
-            const cardClass = `reveal-on-scroll ${delayClass} ${mobileVisibilityClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_18px_42px_rgba(58,25,16,0.14)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
+            const cardClass = `reveal-on-scroll ${delayClass} ${mobileVisibilityClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_18px_42px_rgba(58,25,16,0.14)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] hover:border-brand-gold/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
             const cardBody = (
               <>
                 <div className="relative hidden aspect-[4/3] w-full overflow-hidden sm:block">
@@ -103,7 +103,7 @@ export function ServicesGrid({
                     src={image}
                     alt={name}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />

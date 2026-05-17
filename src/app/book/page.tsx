@@ -1,10 +1,9 @@
 import { SiteShell } from "@/components/site-shell";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
-import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
-import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { FormSubmitInitializer } from "@/components/form-submit-initializer";
+import { BookingFormSteps } from "@/app/book/booking-form-steps";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -174,149 +173,7 @@ export default async function BookPage({
                 </div>
               </div>
             ) : null}
-            <form
-              id="booking-form"
-              action="/api/book"
-              method="post"
-              className="reveal-on-scroll scroll-mt-24 rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm md:p-6"
-            >
-            <div className="mb-4 rounded-2xl border border-brand-gold/35 bg-brand-gold/10 px-4 py-3 text-sm text-stone-700">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-burgundy">
-                No payment required
-              </p>
-              <p className="mt-2 leading-6">
-                Pick the time you prefer. We confirm by email or send the closest available option.
-              </p>
-            </div>
-            <input
-              type="text"
-              name="company"
-              className="hidden"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-            />
-            <LeadAttributionFields />
-            {hiddenFields ? (
-              <>
-                <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />
-                <input type="hidden" name="area_slug" value={hiddenFields.area_slug} />
-                <input type="hidden" name="service_slug" value={hiddenFields.service_slug} />
-                <input type="hidden" name="intent_label" value={hiddenFields.intent_label} />
-                <input type="hidden" name="intent_query" value={hiddenFields.intent_query} />
-              </>
-            ) : null}
-
-            <label className="group block text-sm font-medium text-stone-700">
-              Your name <span className="text-brand-burgundy">*</span>
-              <input
-                type="text"
-                name="name"
-                autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
-                placeholder="Your name"
-                required
-              />
-              <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=name]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
-                Please enter your name.
-              </p>
-            </label>
-
-            <label className="group mt-4 block text-sm font-medium text-stone-700">
-              Your email <span className="text-brand-burgundy">*</span>
-              <input
-                type="email"
-                name="email"
-                autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
-                placeholder="you@email.com"
-                required
-              />
-              <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=email]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
-                Please enter a valid email address.
-              </p>
-            </label>
-
-            <label className="mt-4 block text-sm font-medium text-stone-700">
-              Phone — optional
-              <input
-                type="tel"
-                name="phone"
-                autoComplete="tel"
-                inputMode="tel"
-                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                placeholder="(281) 555-1234"
-              />
-            </label>
-
-            <BookingDateTimeFields />
-
-            <fieldset className="mt-6 border-t border-stone-200 pt-5">
-              <legend className="text-sm font-semibold text-stone-700">
-                What repair do you need? <span className="text-brand-burgundy">*</span>
-              </legend>
-              <div className="mt-3 flex flex-col gap-2">
-                {[
-                  { value: "ring_repair", label: "Ring repair" },
-                  { value: "watch_repair", label: "Watch repair" },
-                  { value: "ring_sizing", label: "Ring sizing" },
-                  { value: "necklace_chain_repair", label: "Necklace / chain repair" },
-                  { value: "other", label: "Not sure yet" },
-                ].map(({ value, label }) => (
-                  <label key={value} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm text-stone-800 hover:border-brand-gold/50 has-[:checked]:border-brand-gold/70 has-[:checked]:bg-brand-gold/5">
-                    <input
-                      type="radio"
-                      name="repair_type"
-                      value={value}
-                      required
-                      className="h-4 w-4 flex-none border-stone-300 text-brand-burgundy focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    />
-                    {label}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            <label className="mt-5 block text-sm font-medium text-stone-700">
-              Details — optional
-              <textarea
-                name="details"
-                className="mt-2 min-h-[100px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[140px]"
-                defaultValue={finderContext?.detailsSeed || undefined}
-                aria-describedby="booking-details-help"
-                placeholder="Example: Ring sizing, watch battery, loose stone, or not sure yet."
-              />
-            </label>
-            <p id="booking-details-help" className="mt-2 text-xs leading-5 text-stone-600">
-              A short note helps us prepare, but you can leave this blank if you only need an assessment.
-            </p>
-
-            <button
-              type="submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed"
-              disabled={false}
-              id="booking-submit"
-            >
-              <span id="booking-submit-text">Book My Repair</span>
-            </button>
-            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
-              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-                <div className="text-brand-burgundy">4.5 ★</div>
-                <div className="mt-0.5">Google</div>
-              </div>
-              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-                <div className="text-brand-burgundy">90 Days</div>
-                <div className="mt-0.5">Warranty</div>
-              </div>
-              <div className="rounded-xl border border-stone-200 bg-stone-50 px-2 py-2.5">
-                <div className="text-brand-burgundy">No Pay</div>
-                <div className="mt-0.5">To Book</div>
-              </div>
-            </div>
-            <p className="mt-3 text-center text-[11px] text-stone-500">
-              We confirm by email within 1 business day.
-            </p>
-            </form>
+            <BookingFormSteps finderContext={finderContext} hiddenFields={hiddenFields} />
           </div>
         </div>
       </section>
