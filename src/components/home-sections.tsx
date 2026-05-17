@@ -13,7 +13,7 @@ export function ProofBand() {
 
           {/* Dominant anchor stat */}
           <div className="reveal-on-scroll reveal-delay-1 flex flex-col justify-center gap-2 py-6 md:py-9 md:pr-8">
-            <p className="font-serif text-[2.75rem] leading-none text-white md:text-5xl">Since 1984</p>
+            <p className="font-serif text-[2.75rem] leading-none text-brand-gold md:text-5xl">Since 1984</p>
             <p className="text-[11px] uppercase tracking-[0.32em] text-white/45">
               Local, family-owned craftsmanship
             </p>
@@ -28,7 +28,7 @@ export function ProofBand() {
             rel="noreferrer"
             className="reveal-on-scroll reveal-delay-2 group flex flex-col gap-1.5 py-6 transition md:px-7 md:py-9"
           >
-            <p className="text-2xl font-semibold text-white transition-colors group-hover:text-brand-gold">4.5 ★</p>
+            <p className="text-2xl font-semibold text-brand-gold transition-colors group-hover:text-white">4.5 ★</p>
             <p className="text-[11px] uppercase tracking-[0.28em] text-white/45 transition-colors group-hover:text-white/65">
               51 Google reviews
             </p>
@@ -36,7 +36,7 @@ export function ProofBand() {
 
           {/* Warranty */}
           <div className="reveal-on-scroll reveal-delay-3 flex flex-col gap-1.5 py-6 md:px-7 md:py-9">
-            <p className="text-2xl font-semibold text-white">90 Days</p>
+            <p className="text-2xl font-semibold text-brand-gold">90 Days</p>
             <p className="text-[11px] uppercase tracking-[0.28em] text-white/45">Workmanship warranty</p>
           </div>
 
@@ -374,15 +374,17 @@ export function Testimonials() {
             return (
               <div
                 key={item.name}
-                className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-burgundy/15 border-t-2 border-t-brand-gold/60 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)]`}
+                className={`reveal-on-scroll ${delayClass} group relative rounded-2xl border border-brand-burgundy/15 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_32px_64px_rgba(65,35,22,0.26)] [border-top:3px_solid_rgba(209,184,130,0.55)]`}
               >
+                {/* Decorative quote mark */}
+                <span className="pointer-events-none absolute right-5 top-3 select-none font-serif text-[3.5rem] leading-none text-brand-gold/[0.10]" aria-hidden="true">&rdquo;</span>
                 <div className="flex items-center justify-between">
                   <div className="text-[11px] uppercase tracking-[0.2em] text-brand-burgundy/70">
                     {item.service}
                   </div>
-                  <p className="text-[11px] tracking-[0.2em] text-brand-gold" aria-hidden="true">{"★★★★★"}</p>
+                  <p className="text-sm text-brand-gold" aria-hidden="true">{"★★★★★"}</p>
                 </div>
-                <p className="mt-3 text-sm text-stone-600">&ldquo;{item.quote}&rdquo;</p>
+                <p className="mt-3 text-sm leading-relaxed text-stone-600">&ldquo;{item.quote}&rdquo;</p>
                 <div className="mt-4 text-sm font-semibold text-stone-900">
                   {item.name}
                 </div>
@@ -411,21 +413,26 @@ export function Testimonials() {
 
 export function HomeCta() {
   return (
-    <section className="cv-section bg-brand-burgundy py-16">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
-        <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">
+    <section className="cv-section relative overflow-hidden bg-brand-burgundy py-20 md:py-28">
+      <div className="grain-layer absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.16),_transparent_62%)]" />
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 text-center reveal-on-scroll">
+        <p className="text-[10px] uppercase tracking-[0.4em] text-brand-gold">
           Book Today
         </p>
-        <h2 className="font-serif text-3xl text-white md:text-4xl">
-          Most repairs are same day or next. No payment to book.
+        <h2 className="font-serif text-4xl text-white md:text-5xl [text-wrap:balance]">
+          Most repairs done same day or next. No payment to book.
         </h2>
         <Link
           href="/book"
-          className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy"
+          className="micro-interaction group mt-2 inline-flex min-h-[52px] items-center justify-center overflow-hidden rounded-full bg-brand-gold px-8 py-4 text-[11px] font-bold uppercase tracking-[0.26em] text-[#3a1218] shadow-[0_20px_50px_rgba(0,0,0,0.28)] ring-1 ring-inset ring-white/20 transition-all hover:bg-[#e3cc92]"
         >
           Book a Repair
+          <span aria-hidden="true" className="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#3a1218]/10 transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
         </Link>
-        <p className="text-[11px] uppercase tracking-[0.25em] text-white/50">
+        <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">
           Free assessment · 90-day warranty · No payment to book
         </p>
       </div>
