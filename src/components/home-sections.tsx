@@ -85,10 +85,10 @@ export function ProcessSteps() {
               Your repair, step by step
             </p>
             <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
-              A simple, transparent repair process.
+              What happens from drop&#8209;off to pickup.
             </h2>
             <p className="text-sm text-stone-600">
-              You stay in control at every step, with clear updates and no surprises.
+              Every step is explained and priced before work begins. No surprises.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {["Same Day/Next Day service", "In-house only", "Clear estimates"].map(
@@ -165,7 +165,7 @@ export function CraftStory() {
             The Workshop
           </p>
           <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
-            A boutique workshop built for precision and trust.
+            Every repair stays in our workshop. Not sent out.
           </h2>
           <p className="text-sm text-stone-600">
             From prong repairs to heirloom restorations, we combine legacy
@@ -174,8 +174,8 @@ export function CraftStory() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               "Master jeweler on-site",
-              "Transparent starting prices",
-              "Detailed service notes",
+              "Clear pricing before we start",
+              "Written estimate before work begins",
               "Careful inspection & cleaning",
             ].map((item, index) => {
               const delayClass = `reveal-delay-${(index % 4) + 1}`;
@@ -271,7 +271,7 @@ export function HomeFaq() {
           Common questions
         </p>
         <h2 className="mt-3 font-serif text-3xl text-stone-900 reveal-on-scroll">
-          Common questions about repairs.
+          Questions people ask before their first visit.
         </h2>
         <div className="mt-4 h-1 w-16 bg-brand-gold/60 reveal-on-scroll" />
         <div className="mt-8 space-y-4">
@@ -372,15 +372,17 @@ export function Testimonials() {
             return (
               <div
                 key={item.name}
-                className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-burgundy/15 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)]`}
+                className={`reveal-on-scroll ${delayClass} rounded-2xl border border-brand-burgundy/15 border-t-2 border-t-brand-gold/60 bg-white p-6 shadow-[0_20px_45px_rgba(65,35,22,0.18)]`}
               >
-                <p className="text-[11px] tracking-[0.2em] text-brand-gold" aria-hidden="true">{"★★★★★"}</p>
+                <div className="flex items-center justify-between">
+                  <div className="text-[11px] uppercase tracking-[0.2em] text-brand-burgundy/70">
+                    {item.service}
+                  </div>
+                  <p className="text-[11px] tracking-[0.2em] text-brand-gold" aria-hidden="true">{"★★★★★"}</p>
+                </div>
                 <p className="mt-3 text-sm text-stone-600">&ldquo;{item.quote}&rdquo;</p>
                 <div className="mt-4 text-sm font-semibold text-stone-900">
                   {item.name}
-                </div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-brand-burgundy/70">
-                  {item.service}
                 </div>
               </div>
             );
@@ -413,7 +415,7 @@ export function HomeCta() {
           Book Today
         </p>
         <h2 className="font-serif text-3xl text-white md:text-4xl">
-          Schedule your repair appointment. Same-day service available.
+          Most repairs are same day or next. No payment to book.
         </h2>
         <Link
           href="/book"

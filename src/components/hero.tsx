@@ -2,13 +2,6 @@ import Link from "next/link";
 import { BUSINESS } from "@/lib/constants";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 
-/*
- * Date: 2026-04-29
- * Context/Notes: High-end hero composition inspired by luxury jewelry campaign art:
- * asymmetric image-left framing, copy-right conversion path, original readable fonts.
- * Agent Name: Codex
- */
-
 const heroImageSrc = "/images/home/home-hero-ring.jpg";
 const logoSrc = "/images/brand/sjr-logo.png";
 
@@ -52,24 +45,24 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[11ch] text-[clamp(3rem,13vw,4.4rem)] leading-[0.88] text-white [text-wrap:balance] md:max-w-[10.5ch] md:text-[clamp(4.25rem,7vw,6.25rem)]">
-            Beauty restored. Elegance preserved.
+          <h1 className="lcp-heading animate-fade-up reveal-delay-2 home-hero-mobile-static mt-6 max-w-[13ch] text-[clamp(2.9rem,12vw,4.35rem)] leading-[0.86] tracking-[-0.025em] text-white [text-wrap:balance] md:max-w-[12ch] md:text-[clamp(4rem,6.5vw,5.9rem)]">
+            Jewelry &amp; watch repair done in&#8209;house. Since 1984.
           </h1>
 
           <p className="animate-fade-up reveal-delay-3 home-hero-mobile-static mt-6 max-w-[34rem] text-base leading-7 text-white/78 md:text-lg md:leading-8">
-            We repair rings, watches, and heirlooms in our Pasadena workshop — clear pricing,
-            no surprises, same-day service available.
+            Your ring, watch, or heirloom stays in our Pasadena workshop — we
+            confirm pricing before any work begins.
           </p>
 
           <div className="animate-fade-up reveal-delay-4 home-hero-mobile-static mt-7 flex">
             <Link
               href="/book"
-              className="micro-interaction group relative inline-flex min-h-[54px] items-center justify-center overflow-hidden rounded-full bg-brand-gold px-7 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-[#181112] shadow-[0_24px_54px_rgba(0,0,0,0.34)] ring-1 ring-inset ring-white/25 transition-all hover:bg-[#e3cc92] sm:w-auto"
+              className="micro-interaction group relative inline-flex min-h-[54px] items-center justify-center overflow-hidden rounded-full bg-brand-gold px-7 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-[#181112] shadow-[0_24px_54px_rgba(0,0,0,0.34)] ring-1 ring-inset ring-white/25 transition-all duration-300 hover:bg-[#e3cc92] sm:w-auto"
             >
               <span className="relative z-10">Book a Repair</span>
               <span
                 aria-hidden="true"
-                className="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#181112]/10 transition-transform group-hover:translate-x-0.5"
+                className="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#181112]/10 transition-transform duration-300 group-hover:translate-x-1"
               >
                 →
               </span>
@@ -87,8 +80,8 @@ export function Hero() {
             >
               4.5 Google rating
             </BusinessActionLink>
-            <span>90-day workmanship warranty</span>
-            <span>Family owned</span>
+            <span>90-day warranty</span>
+            <span>In-house repairs only</span>
           </div>
         </div>
       </div>
