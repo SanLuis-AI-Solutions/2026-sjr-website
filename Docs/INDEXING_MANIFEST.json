@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14",
+  "generatedAt": "2026-05-19",
   "baseUrl": "https://www.susiesjewelryrepair.com",
   "sources": [
     "src/app/sitemap.ts",
@@ -23,21 +23,17 @@
     ],
     [
       "static",
-      11
+      10
     ]
   ],
   "countsByObservedStatus": [
     [
       "discovered-currently-not-indexed",
-      9
+      8
     ],
     [
       "indexed",
-      28
-    ],
-    [
-      "unknown-to-google",
-      1
+      29
     ]
   ],
   "routes": [
@@ -113,16 +109,6 @@
     },
     {
       "category": "static",
-      "path": "/quote",
-      "label": "Quote",
-      "url": "https://www.susiesjewelryrepair.com/quote",
-      "observedStatus": "indexed",
-      "observedOn": "2026-05-13",
-      "nextAction": "monitor",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-13. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
-    },
-    {
-      "category": "static",
       "path": "/services",
       "label": "Services hub",
       "url": "https://www.susiesjewelryrepair.com/services",
@@ -136,10 +122,10 @@
       "path": "/site-map",
       "label": "/site-map",
       "url": "https://www.susiesjewelryrepair.com/site-map",
-      "observedStatus": "unknown-to-google",
-      "observedOn": "2026-05-14",
+      "observedStatus": "discovered-currently-not-indexed",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "static",
@@ -213,9 +199,9 @@
       "path": "/services/pearl-restringing",
       "url": "https://www.susiesjewelryrepair.com/services/pearl-restringing",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2."
     },
     {
       "category": "service-detail",
@@ -258,9 +244,9 @@
       "path": "/services/clear-lake",
       "url": "https://www.susiesjewelryrepair.com/services/clear-lake",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -282,9 +268,9 @@
       "path": "/services/friendswood",
       "url": "https://www.susiesjewelryrepair.com/services/friendswood",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -294,9 +280,9 @@
       "path": "/services/la-porte",
       "url": "https://www.susiesjewelryrepair.com/services/la-porte",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -306,9 +292,9 @@
       "path": "/services/pasadena",
       "url": "https://www.susiesjewelryrepair.com/services/pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "service-area",
@@ -318,9 +304,9 @@
       "path": "/services/webster",
       "url": "https://www.susiesjewelryrepair.com/services/webster",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -370,9 +356,9 @@
       "path": "/blog/does-my-watch-need-battery-or-repair-pasadena",
       "url": "https://www.susiesjewelryrepair.com/blog/does-my-watch-need-battery-or-repair-pasadena",
       "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
+      "observedOn": "2026-05-19",
       "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -421,10 +407,10 @@
       "reviewedAt": "2026-05-13",
       "path": "/blog/how-to-choose-a-jeweler",
       "url": "https://www.susiesjewelryrepair.com/blog/how-to-choose-a-jeweler",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "observedStatus": "indexed",
+      "observedOn": "2026-05-19",
+      "nextAction": "monitor",
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Submitted and indexed. Sitemap sources: 0. Referring URLs: 1."
     },
     {
       "category": "blog",
@@ -460,10 +446,10 @@
       "reviewedAt": "2026-05-12",
       "path": "/blog/stone-security-checklist",
       "url": "https://www.susiesjewelryrepair.com/blog/stone-security-checklist",
-      "observedStatus": "discovered-currently-not-indexed",
-      "observedOn": "2026-05-14",
-      "nextAction": "request-indexing-and-recheck",
-      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1."
+      "observedStatus": "indexed",
+      "observedOn": "2026-05-19",
+      "nextAction": "monitor",
+      "note": "Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Submitted and indexed. Sitemap sources: 1. Referring URLs: 1."
     },
     {
       "category": "blog",

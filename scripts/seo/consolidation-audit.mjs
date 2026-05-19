@@ -146,6 +146,21 @@ function table(headers, rows) {
 }
 
 function renderMarkdown(audit) {
+  const actionableRows = audit.rows.filter(
+    (row) => row.recommendation !== "ignore-for-growth" && row.unresolvedCount > 0,
+  );
+  const nextActions = actionableRows.length
+    ? actionableRows.map((row) => {
+        const unresolved = row.unresolvedStatuses
+          .filter((entry) => isUnresolved(entry.status))
+          .map((entry) => `\`${entry.path}\``)
+          .join(", ");
+        const verb = row.unresolvedCount === 1 ? "remains" : "remain";
+
+        return `${row.name}: ${unresolved} ${verb} unresolved. ${row.action}`;
+      })
+    : ["No unresolved commercial clusters remain; monitor indexed pages for impressions and conversions."];
+
   return [
     "# Indexing Consolidation Audit",
     "",
@@ -188,11 +203,9 @@ function renderMarkdown(audit) {
     ]),
     "## Next Action",
     "",
-    "If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, start with the lowest-risk consolidation candidates:",
+    "If the next authenticated GSC recheck shows the same unresolved commercial URLs and no proof assets are available, choose proof enrichment or consolidation by active unresolved cluster:",
     "",
-    mdList([
-      "`/blog/stone-security-checklist` into `/blog/can-a-severely-bent-ring-prong-be-fixed` if no stone-check proof is available.",
-    ]),
+    mdList(nextActions),
     "",
   ].join("\n");
 }

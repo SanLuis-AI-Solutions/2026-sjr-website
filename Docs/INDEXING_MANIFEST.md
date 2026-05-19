@@ -1,6 +1,6 @@
 # Indexing Manifest
 
-Generated on 2026-05-14 from canonical repo sources.
+Generated on 2026-05-19 from canonical repo sources.
 
 ## Sources
 
@@ -12,17 +12,16 @@ Generated on 2026-05-14 from canonical repo sources.
 
 ## Inventory Summary
 
-- Total canonical URLs in manifest: 38
+- Total canonical URLs in manifest: 37
 - blog: 12
 - service-area: 6
 - service-detail: 9
-- static: 11
+- static: 10
 
 ## Observed GSC Status Summary
 
-- Discovered - currently not indexed: 9
-- Indexed: 28
-- URL is unknown to Google: 1
+- Discovered - currently not indexed: 8
+- Indexed: 29
 
 ## Immediate GSC Queue
 
@@ -30,16 +29,14 @@ These URLs should be prioritized for weighting or follow-up rechecks based on th
 
 | URL | Category | Current Status | Next Action | Notes |
 | --- | --- | --- | --- | --- |
-| `/site-map` | static | URL is unknown to Google | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: URL is unknown to Google. Sitemap sources: 0. Referring URLs: 0. |
-| `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2. |
-| `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/friendswood` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/how-to-choose-a-jeweler` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
-| `/blog/stone-security-checklist` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-14. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/site-map` | static | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/services/pearl-restringing` | service-detail | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 2. |
+| `/services/clear-lake` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/services/friendswood` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/services/la-porte` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/services/pasadena` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/services/webster` | service-area | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
+| `/blog/does-my-watch-need-battery-or-repair-pasadena` | blog | Discovered - currently not indexed | Recheck and weight at next monitoring pass | Latest authenticated URL Inspection API recheck run on 2026-05-19. Coverage: Discovered - currently not indexed. Sitemap sources: 1. Referring URLs: 1. |
 
 ## Remaining Canonical URLs Pending First Inspection
 
@@ -77,9 +74,8 @@ Decision rule:
 | `/contact` | static | Contact | Indexed |
 | `/faq` | static | FAQ | Indexed |
 | `/privacy` | static | Privacy | Indexed |
-| `/quote` | static | Quote | Indexed |
 | `/services` | static | Services hub | Indexed |
-| `/site-map` | static | /site-map | URL is unknown to Google |
+| `/site-map` | static | /site-map | Discovered - currently not indexed |
 | `/terms` | static | Terms | Indexed |
 | `/services/bracelet-repair` | service-detail | Bracelet Repair | Indexed |
 | `/services/custom-design` | service-detail | Custom Design | Indexed |
@@ -103,10 +99,10 @@ Decision rule:
 | `/blog/heirloom-jewelry-restoration-repair-or-redesign` | blog | Heirloom Jewelry Restoration: Should I Repair It or Redesign It? | Indexed |
 | `/blog/heirloom-restoration-planning-guide` | blog | Heirloom Restoration Planning: What to Bring and Ask | Indexed |
 | `/blog/how-much-does-pearl-restringing-cost-pasadena` | blog | How much does pearl restringing cost in Pasadena? | Indexed |
-| `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Discovered - currently not indexed |
+| `/blog/how-to-choose-a-jeweler` | blog | How to Choose a Trustworthy Jeweler | Indexed |
 | `/blog/ring-sizing-guide` | blog | Ring Sizing: What to Know Before You Resize | Indexed |
 | `/blog/safe-to-clean-vintage-diamond-ring-at-home` | blog | Is it safe to clean my vintage diamond ring with household products? | Indexed |
-| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Discovered - currently not indexed |
+| `/blog/stone-security-checklist` | blog | Stone Security Checklist: Preventing Loose Diamonds | Indexed |
 | `/blog/watch-battery-replacement` | blog | Watch Battery Replacement: Timing and Care Tips | Indexed |
 
 Generated by `npm run google:indexing-manifest`.
