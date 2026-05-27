@@ -181,9 +181,24 @@ test("mobile conversion: home CTA reaches booking form", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: /Book a repair visit/i })
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: /Request Repair Visit/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Continue/i })).toBeVisible();
 
   guard.assertNoErrors("home -> book");
+});
+
+test("booking form lets users continue with email when phone is omitted", async ({ page }) => {
+  const guard = attachConsoleGuards(page);
+
+  await page.goto("/book", { waitUntil: "networkidle" });
+  await page.getByLabel(/Ring repair/i).check();
+  await page.getByLabel(/Your name/i).fill("Test Customer");
+  await page.getByLabel(/Email address/i).fill("customer@example.com");
+  await page.getByRole("button", { name: /^Continue/i }).click();
+
+  await expect(page.getByLabel(/Preferred date/i)).toBeVisible();
+  await expect(page.locator('input[name="phone"]')).toHaveValue("");
+
+  guard.assertNoErrors("booking phone optional");
 });
 
 test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
@@ -425,7 +440,7 @@ test("mobile conversion pages keep quick actions focused on one primary path", a
   await expect(page.getByRole("heading", { level: 1, name: /Book a repair visit/i })).toBeVisible();
   await expect(page.getByRole("region", { name: /^Quick actions$/i })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Start with a fast quote/i })).toBeHidden();
-  await expect(page.getByRole("button", { name: /^Request Repair Visit$/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Continue/i })).toBeVisible();
 
   guard.assertNoErrors("quote/book quick actions");
 });
@@ -1758,13 +1773,17 @@ test("services hub: finder booking CTA carries context into booking form", async
   await page.goto("/services", { waitUntil: "networkidle" });
   const finder = page.getByTestId("services-finder-region");
   await finder.getByRole("button", { name: /Redesign or heirloom help/i }).click();
-  await finder.getByRole("link", { name: /Use this for booking/i }).click();
+  await finder.getByRole("link", { name: /Book this repair/i }).click();
 
   await expect(page).toHaveURL(
     /\/book\?from=services_finder&service=custom-design&intent=Redesign\+or\+heirloom\+help$/,
   );
   await expect(page.getByText(/Repair focus/i).first()).toBeVisible();
   await expect(page.getByText(/Suggested service:/i)).toContainText(/Custom Design/i);
+  await page.getByLabel(/Not sure yet/i).check();
+  await page.getByLabel(/Your name/i).fill("Test Customer");
+  await page.getByLabel(/Email address/i).fill("customer@example.com");
+  await page.getByRole("button", { name: /^Continue/i }).click();
   await expect(page.locator('textarea[name="details"]')).toHaveValue(
     /Repair focus: Custom Design[\s\S]*Issue: Redesign or heirloom help/i,
   );
@@ -1781,7 +1800,7 @@ test("services hub: zero-result CTA routes to booking", async ({ page }) => {
   await expect(finder.getByText(/No direct service match yet/i)).toBeVisible();
   await finder.getByRole("link", { name: /^Book a Repair$/i }).click();
 
-  await expect(page).toHaveURL(/\/book$/);
+  await expect(page).toHaveURL(/\/book\?from=services_finder&query=broken\+toaster$/);
   await expect(page.getByRole("heading", { name: /Book a repair visit/i })).toBeVisible();
 
   guard.assertNoErrors("services finder zero-result book");

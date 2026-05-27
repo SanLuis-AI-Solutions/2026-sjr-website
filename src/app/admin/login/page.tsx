@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 /*
@@ -15,13 +15,12 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [supabase, setSupabase] = useState<any>(null);
-
-    useEffect(() => {
+    const supabase = useMemo<ReturnType<typeof createClient> | null>(() => {
         try {
-            setSupabase(createClient());
+            return createClient();
         } catch (e) {
             console.error("Failed to initialize Supabase:", e);
+            return null;
         }
     }, []);
 

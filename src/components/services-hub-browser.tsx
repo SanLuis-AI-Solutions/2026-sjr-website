@@ -290,7 +290,7 @@ export function ServicesHubBrowser({
                     </p>
                   </div>
                   <TrackedLink
-                    href="/book"
+                    href={zeroStateBookHref}
                     eventName="services_finder_cta_click"
                     eventParams={{
                       cta_target: "book",

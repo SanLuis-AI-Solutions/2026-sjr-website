@@ -3,9 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BUSINESS } from "@/lib/constants";
 import { BrandMark } from "@/components/brand-mark";
-import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 
 const navItems = [

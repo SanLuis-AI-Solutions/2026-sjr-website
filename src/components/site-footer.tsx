@@ -148,7 +148,7 @@ export function SiteFooter() {
                 <BrandMark className="h-12 w-12 flex-none" />
               </span>
               <span>
-                Susie's <span className="text-brand-gold">Jewelry Repair</span>
+                Susie&apos;s <span className="text-brand-gold">Jewelry Repair</span>
               </span>
             </Link>
 
@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-12 md:mt-20">
           <div className="h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
           <div className="flex flex-col items-center justify-between pt-8 text-center text-xs font-sans uppercase tracking-[0.25em] text-stone-400 md:flex-row md:text-left">
-            <p>© {COPYRIGHT_YEAR} Susie's Jewelry Repair. All Rights Reserved.</p>
+            <p>© {COPYRIGHT_YEAR} Susie&apos;s Jewelry Repair. All Rights Reserved.</p>
             <div className="mt-4 flex gap-8 md:mt-0">
               <Link
                 href="/privacy"

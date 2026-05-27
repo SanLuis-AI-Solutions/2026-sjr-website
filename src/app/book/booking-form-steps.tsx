@@ -56,7 +56,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
 
   const nameValid = name.trim().length > 0;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const phoneValid = phone.replace(/\D/g, '').length >= 10;
+  const phoneValid = phone.trim().length === 0 || phone.replace(/\D/g, '').length >= 10;
   const canProceed = nameValid && emailValid && phoneValid && repairType !== '';
 
   const touch = (field: keyof typeof touched) =>
@@ -115,7 +115,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
           No payment required
         </p>
         <p className="mt-1.5 leading-6">
-          We confirm by email or text — usually within a few hours.
+          We confirm by email, or by text if you add a phone number — usually within a few hours.
         </p>
       </div>
 
@@ -190,7 +190,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
           {/* Phone */}
           <div className="mt-4">
             <label htmlFor="field-phone" className="block text-sm font-medium text-stone-700">
-              Phone number <span className="text-brand-burgundy">*</span>
+              Phone number <span className="text-stone-500">(optional)</span>
             </label>
             <input
               id="field-phone"
@@ -207,7 +207,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
               <p className="mt-1 text-xs text-rose-600" role="alert">Please enter a valid 10-digit phone number.</p>
             ) : null}
             {!touched.phone || phoneValid ? (
-              <p className="mt-1 text-xs text-stone-500">We confirm by email and text — usually within a few hours.</p>
+              <p className="mt-1 text-xs text-stone-500">Add a phone number if you want same-day text updates.</p>
             ) : null}
           </div>
 
@@ -244,7 +244,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
               {[
                 !repairType && 'repair type',
                 touched.name && !nameValid && 'name',
-                touched.phone && !phoneValid && 'phone',
+                touched.phone && !phoneValid && 'valid phone',
                 touched.email && !emailValid && 'email',
               ]
                 .filter(Boolean)
@@ -330,7 +330,7 @@ export function BookingFormSteps({ finderContext, hiddenFields }: BookingFormSte
             </div>
           </div>
           <p className="mt-3 text-center text-[11px] text-stone-500">
-            We confirm by email and text — usually within a few hours.
+            We confirm by email, or by text if you added a phone number.
           </p>
         </>
       )}
