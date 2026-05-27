@@ -11,7 +11,7 @@ import { getServicesWithImages } from "@/lib/content-images";
 import { createPageMetadata } from "@/lib/metadata";
 export const metadata = createPageMetadata({
   title:
-    "Jewelry & Watch Repair Near Pasadena, TX | Book Today",
+    "Jewelry & Watch Repair Near Me in Pasadena, TX | Book Today",
   description:
     "Book trusted jewelry repair near you in Pasadena, TX. In-house watch batteries, ring sizing, stone setting, and heirloom repairs with no payment to book.",
   canonical: "/",
