@@ -51,7 +51,7 @@ function attachConsoleGuards(
 
 async function assertHomeRenders(page: Page) {
   await expect(
-    page.getByRole("heading", { name: /Beauty restored\. Elegance preserved\./i })
+    page.getByRole("heading", { name: /Jewelry & watch repair done in.house\. Since 1984\./i })
   ).toBeVisible();
 
   // Ensure reveal-on-scroll content becomes visible after scrolling.
@@ -132,7 +132,7 @@ async function getJsonLdSchemas(page: Page) {
 test("mobile smoke: repeated nav to Home is stable", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
-  const routes = ["/services", "/quote", "/services/watch-repair", "/contact"];
+  const routes = ["/services", "/book", "/services/watch-repair", "/contact"];
 
   // The reported issue: Home sometimes fails to render correctly after coming from another page.
   // We stress client-side nav back to Home multiple times, and assert reveal-on-scroll sections show.
@@ -156,7 +156,7 @@ test("mobile nav: menu opens and can reach Services", async ({ page }) => {
 
   await page.goto("/", { waitUntil: "networkidle" });
   await expect(
-    page.getByRole("heading", { name: /Beauty restored\. Elegance preserved\./i })
+    page.getByRole("heading", { name: /Jewelry & watch repair done in.house\. Since 1984\./i })
   ).toBeVisible();
 
   const banner = page.getByRole("banner");
@@ -207,7 +207,7 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 
   await expect(
-    page.getByRole("heading", { name: /Beauty restored\. Elegance preserved\./i })
+    page.getByRole("heading", { name: /Jewelry & watch repair done in.house\. Since 1984\./i })
   ).toBeVisible();
   const heroSection = page.locator("main section").first();
   await expect(heroSection.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
@@ -247,12 +247,12 @@ test("mobile home flow keeps conversion path uncluttered", async ({ page }) => {
   await topGuidesSummary.click();
   await expect(pricingGuides.getByRole("link", { name: /resize a gold ring/i })).toBeVisible();
   await expect(pricingGuides.getByRole("link", { name: /^Browse all repair guides$/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeHidden();
+  await expect(page.getByRole("link", { name: /Explore the Showcase/i })).toBeVisible();
 
-  const finalCta = page.locator("section", { hasText: "Start Today" });
+  const finalCta = page.locator("section", { hasText: "Book Today" });
   await finalCta.scrollIntoViewIfNeeded();
   await expect(finalCta.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
-  await expect(finalCta.getByRole("link", { name: /^Get a Quote$/i })).toBeVisible();
+  await expect(finalCta.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
   const [finalTop, localTop, pricingTop] = await Promise.all([
     finalCta.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
     localRepairPaths.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
@@ -297,144 +297,21 @@ test("mobile layout avoids blank deferred sections and dense footer link walls",
   guard.assertNoErrors("mobile layout clutter controls");
 });
 
-test("mobile sticky CTA uses one compact quote action", async ({ page }) => {
+test("mobile sticky CTA does not compete with the booking path", async ({ page }) => {
   const guard = attachConsoleGuards(page);
-
-  await page.addInitScript(() => {
-    const storageKey = "sjr_test_ga_events";
-    Object.defineProperty(window, "__sjrGaHostAllowed", {
-      configurable: true,
-      get: () => true,
-      set: () => undefined,
-    });
-    window.dataLayer = [];
-    window.gtag = (...args: unknown[]) => {
-      const existing = JSON.parse(window.sessionStorage.getItem(storageKey) || "[]");
-      existing.push(args);
-      window.sessionStorage.setItem(storageKey, JSON.stringify(existing));
-      window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
-      window.dataLayer.push(args);
-    };
-  });
 
   await page.goto("/", { waitUntil: "networkidle" });
-  await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
-
-  const stickyShortcut = page.getByRole("region", { name: /^Mobile quote shortcut$/i });
-  await expect(stickyShortcut).toBeHidden();
   await page.evaluate(() => window.scrollTo(0, 900));
-  await expect(stickyShortcut).toBeVisible();
-  await expect(stickyShortcut.getByRole("link")).toHaveCount(1);
 
-  const fastQuote = stickyShortcut.getByRole("link", {
-    name: /^Start Quote from mobile shortcut$/i,
-  });
-  await expect(fastQuote).toBeVisible();
-  await expect(fastQuote).toHaveAttribute(
-    "href",
-    "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form",
-  );
-  await expect(fastQuote).toHaveAttribute("data-mobile-sticky-cta", "quote");
-  await expectTapTarget(fastQuote, "Mobile sticky quote shortcut");
-  const stickyMetrics = await fastQuote.evaluate((node) => {
-    const element = node as HTMLElement;
-    const style = window.getComputedStyle(element);
-    const rect = element.getBoundingClientRect();
-    return {
-      backdropFilter: style.backdropFilter,
-      height: Math.round(rect.height),
-      width: Math.round(rect.width),
-    };
-  });
-  expect(stickyMetrics.backdropFilter).toBe("none");
-  expect(stickyMetrics.height).toBeLessThanOrEqual(48);
-  expect(stickyMetrics.width).toBeLessThanOrEqual(170);
-  await fastQuote.click();
-  await expect(page).toHaveURL(
-    /\/quote\?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form$/,
-  );
-  await expect(page.locator("#quote-form")).toBeInViewport();
+  await expect(page.getByRole("region", { name: /^Mobile quote shortcut$/i })).toHaveCount(0);
+  await expect(page.getByRole("main").getByRole("link", { name: /^Book a Repair$/i }).first())
+    .toBeVisible();
 
-  const events = await page.evaluate(() =>
-    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
-  );
-  expect(
-    events.some(
-      ([type, eventName, params]: [string, string, Record<string, string>]) =>
-        type === "event" &&
-        eventName === "mobile_sticky_cta_click" &&
-        params.page_path === "/" &&
-        params.destination ===
-          "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut#quote-form" &&
-        params.placement === "mobile_sticky_bar" &&
-        params.cta_target === "quote",
-    ),
-  ).toBe(true);
-  await expect(page.locator('input[name="attribution_cta_source"]')).toHaveValue(
-    "mobile_sticky_cta",
-  );
-  await expect(page.locator('input[name="attribution_cta_medium"]')).toHaveValue("site_cta");
-  await expect(page.locator('input[name="attribution_cta_campaign"]')).toHaveValue(
-    "quote_shortcut",
-  );
-  await expect(page.locator('input[name="attribution_utm_source"]')).toHaveValue("");
-  await expect(page.locator('input[name="attribution_utm_medium"]')).toHaveValue("");
-  await expect(page.locator('input[name="attribution_utm_campaign"]')).toHaveValue("");
-  await expect(page.locator('input[name="attribution_submit_path"]')).toHaveValue(
-    "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut",
-  );
-  await expect
-    .poll(async () => {
-      const formViewEvents = await page.evaluate(() =>
-        JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
-      );
-      return formViewEvents.some(
-        ([type, eventName, params]: [string, string, Record<string, string>]) =>
-          type === "event" &&
-          eventName === "quote_form_view" &&
-          params.page_path === "/quote" &&
-          params.page_path_with_query ===
-            "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
-          params.cta_source === "mobile_sticky_cta" &&
-          params.source === "viewport",
-      );
-    })
-    .toBe(true);
-  await page.locator("#quote-form input[name='name']").focus();
-  const formStartEvents = await page.evaluate(() =>
-    JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
-  );
-  expect(
-    formStartEvents.some(
-      ([type, eventName, params]: [string, string, Record<string, string>]) =>
-        type === "event" &&
-        eventName === "quote_form_start" &&
-        params.page_path === "/quote" &&
-        params.page_path_with_query ===
-          "/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
-        params.page_location ===
-          "http://127.0.0.1:3000/quote?cta_source=mobile_sticky_cta&cta_medium=site_cta&cta_campaign=quote_shortcut" &&
-        params.cta_source === "mobile_sticky_cta",
-    ),
-  ).toBe(true);
-
-  guard.assertNoErrors("mobile sticky shortcut");
+  guard.assertNoErrors("mobile sticky shortcut removed");
 });
 
-test("mobile conversion pages keep quick actions focused on one primary path", async ({ page }) => {
+test("mobile booking page keeps quick actions focused on one primary path", async ({ page }) => {
   const guard = attachConsoleGuards(page);
-
-  await page.goto("/quote", { waitUntil: "networkidle" });
-  await expect(page.getByRole("heading", { level: 1, name: /Get a transparent starting/i })).toBeVisible();
-
-  const quoteQuickActions = page.getByRole("region", { name: /^Quick actions$/i });
-  await expect(quoteQuickActions).toBeVisible();
-
-  const quotePrimary = quoteQuickActions.getByRole("link", { name: /^Start Quote$/i });
-  await expect(quotePrimary).toBeVisible();
-  await expect(quoteQuickActions.getByRole("link", { name: /^Contact Us$/i })).toBeHidden();
-  await expect(quoteQuickActions.getByRole("link", { name: /^Book Repair$/i })).toBeHidden();
-  await expectTapTarget(quotePrimary, "Primary tap target on /quote");
 
   await page.goto("/book", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1, name: /Book a repair visit/i })).toBeVisible();
@@ -442,35 +319,32 @@ test("mobile conversion pages keep quick actions focused on one primary path", a
   await expect(page.getByRole("link", { name: /Start with a fast quote/i })).toBeHidden();
   await expect(page.getByRole("button", { name: /^Continue/i })).toBeVisible();
 
-  guard.assertNoErrors("quote/book quick actions");
+  guard.assertNoErrors("book quick actions");
 });
 
-test("mobile quote form keeps required fields before optional phone", async ({ page }) => {
+test("mobile booking form keeps required fields before optional phone", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
-  await page.goto("/quote#quote-form", { waitUntil: "networkidle" });
+  await page.goto("/book", { waitUntil: "networkidle" });
 
-  const fieldPositions = await page.locator("#quote-form").evaluate((form) => {
-    const topFor = (name: string) => {
-      const field = form.querySelector(`[name="${name}"]`);
-      return field ? Math.round(field.getBoundingClientRect().top) : null;
-    };
+  const fieldPositions = await page.locator("#booking-form").evaluate((form) => {
+    const topFor = (selector: string) =>
+      Math.round((form.querySelector(selector) as HTMLElement).getBoundingClientRect().top);
 
     return {
-      name: topFor("name"),
-      email: topFor("email"),
-      details: topFor("details"),
-      phone: topFor("phone"),
+      repairType: topFor('[name="repair_type_s1"]'),
+      name: topFor("#field-name"),
+      phone: topFor("#field-phone"),
+      email: topFor("#field-email"),
     };
   });
 
-  expect(fieldPositions.name).toBeLessThan(fieldPositions.email ?? Infinity);
-  expect(fieldPositions.email).toBeLessThan(fieldPositions.details ?? Infinity);
-  expect(fieldPositions.details).toBeLessThan(fieldPositions.phone ?? Infinity);
-  await expect(page.getByLabel(/What needs repair/i)).toBeVisible();
-  await expect(page.getByLabel(/Phone \(optional\)/i)).toBeVisible();
+  expect(fieldPositions.repairType).toBeLessThan(fieldPositions.name);
+  expect(fieldPositions.name).toBeLessThan(fieldPositions.phone);
+  expect(fieldPositions.phone).toBeLessThan(fieldPositions.email);
+  await expect(page.getByLabel(/Phone number/i)).toBeVisible();
 
-  guard.assertNoErrors("quote form required field order");
+  guard.assertNoErrors("booking form required field order");
 });
 
 test("mobile service detail: what-to-expect content + faqs render", async ({ page }) => {
@@ -505,7 +379,7 @@ test("mobile service and article pages keep book CTA dominant", async ({ page })
   await expect(serviceHero.getByRole("heading", { level: 1, name: /Watch Repair/i }))
     .toBeVisible();
   await expect(serviceHero.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
-  await expect(serviceHero.getByRole("link", { name: /^Get a Quote$/i })).toBeVisible();
+  await expect(serviceHero.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
 
   await page.goto("/blog/professional-cleaning-vs-home-care", { waitUntil: "networkidle" });
   const firstDecisionBlock = page.locator("section").filter({ hasText: "Need a repair estimate?" }).first();
@@ -517,7 +391,7 @@ test("mobile service and article pages keep book CTA dominant", async ({ page })
     }),
   ).toBeVisible();
   await expect(firstDecisionBlock.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
-  await expect(firstDecisionBlock.getByRole("link", { name: /^Get a Quote$/i })).toBeVisible();
+  await expect(firstDecisionBlock.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
 
   guard.assertNoErrors("mobile book-first cta hierarchy");
 });
@@ -538,7 +412,7 @@ test("mobile non-conversion pages show book CTA as primary with quote secondary"
 
     const heroSection = page.locator("main section").first();
     await expect(heroSection.getByRole("link", { name: /^Book a Repair$/i })).toBeVisible();
-    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i })).toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
   }
 
   guard.assertNoErrors("mobile non-conversion book-first pages");
@@ -568,7 +442,7 @@ test("custom 404 page routes visitors back to key actions", async ({ page }) => 
     page.getByRole("heading", { level: 1, name: /That page is not here anymore/i })
   ).toBeVisible();
   await expect(page.locator("main").getByRole("link", { name: /^Book a Repair$/i }).first()).toBeVisible();
-  await expect(page.locator("main").getByRole("link", { name: /^Get a Quote$/i }).first()).toBeVisible();
+  await expect(page.locator("main").getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /^Watch Repair$/i })).toBeVisible();
 
   guard.assertNoErrors("custom 404 page");
@@ -620,7 +494,11 @@ test("home schema: local business hours and external entity links are valid", as
     ])
   );
   expect(localBusinessSchema.hasMap).toContain("google.com/maps/place/");
-  expect(localBusinessSchema.aggregateRating).toBeUndefined();
+  expect(localBusinessSchema.aggregateRating).toMatchObject({
+    "@type": "AggregateRating",
+    ratingValue: "4.5",
+    reviewCount: "51",
+  });
   expect(localBusinessSchema.review).toBeUndefined();
 
   const sundayHours = Array.isArray(localBusinessSchema.openingHoursSpecification)
@@ -685,11 +563,11 @@ test("analytics: services finder lead context reaches CTA, form start, and conve
 
   const finder = page.getByTestId("services-finder-region");
   await finder.getByLabel(/Describe the repair you need/i).fill("watch battery");
-  await finder.getByRole("link", { name: /Use this for a quote/i }).click();
+  await finder.getByRole("link", { name: /Book this repair/i }).click();
   await expect(page).toHaveURL(
-    /\/quote\?from=services_finder&service=watch-repair&query=watch\+battery$/,
+    /\/book\?from=services_finder&service=watch-repair&query=watch\+battery$/,
   );
-  await page.getByLabel(/Full name/i).focus();
+  await page.getByLabel(/Your name/i).focus();
 
   let events = await page.evaluate(() =>
     JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
@@ -704,9 +582,19 @@ test("analytics: services finder lead context reaches CTA, form start, and conve
         params.finder_query === "watch battery",
     ),
   ).toBe(true);
+  expect(
+    events.some(
+      ([type, eventName, params]: [string, string, Record<string, string>]) =>
+        type === "event" &&
+        eventName === "booking_form_start" &&
+        params.prefill_source === "services_finder" &&
+        params.service_slug === "watch-repair" &&
+        params.finder_query === "watch battery",
+    ),
+  ).toBe(true);
 
   await page.goto(
-    "/quote?submitted=1&id=smoke-context-quote&from=services_finder&service=watch-repair&query=watch%20battery",
+    "/book?submitted=1&id=smoke-context-booking&from=services_finder&service=watch-repair&query=watch%20battery",
     { waitUntil: "networkidle" },
   );
   events = await page.evaluate(() =>
@@ -716,7 +604,7 @@ test("analytics: services finder lead context reaches CTA, form start, and conve
     events.some(
       ([type, eventName, params]: [string, string, Record<string, string>]) =>
         type === "event" &&
-        eventName === "quote_submit_success" &&
+        eventName === "booking_submit_success" &&
         params.prefill_source === "services_finder" &&
         params.service_slug === "watch-repair" &&
         params.finder_query === "watch battery",
@@ -1293,9 +1181,8 @@ test("mobile informational pages: about, faq, and blog hero actions are clear", 
 
     const heroSection = page.locator("main section").first();
     const book = heroSection.getByRole("link", { name: /^Book a Repair$/i }).first();
-    const quote = heroSection.getByRole("link", { name: /^Get a Quote$/i }).first();
     await expect(book).toBeVisible();
-    await expect(quote).toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
 
     await expectTapTarget(book, `Book tap target on ${route.path}`);
 
@@ -1304,7 +1191,7 @@ test("mobile informational pages: about, faq, and blog hero actions are clear", 
 
   await page.goto("/blog", { waitUntil: "networkidle" });
   const blogHeroSection = page.locator("main section").first();
-  await expect(blogHeroSection.getByRole("link")).toHaveCount(2);
+  await expect(blogHeroSection.getByRole("link")).toHaveCount(1);
   const repairPageDisclosure = blogHeroSection.locator("summary").filter({
     hasText: /Start with a repair page/i,
   });
@@ -1494,11 +1381,10 @@ test("mobile service-area pages: nearby city pages render local guidance and her
     const areaBreadcrumb = page.getByRole("navigation", { name: /breadcrumb/i });
     await expect(areaBreadcrumb).toBeHidden();
     const heroSection = page.locator("main section").first();
-    await expect(heroSection.getByRole("link")).toHaveCount(2);
+    await expect(heroSection.getByRole("link")).toHaveCount(1);
     await expect(heroSection.getByRole("link", { name: /^Book a Repair$/i }).first())
       .toBeVisible();
-    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i }).first())
-      .toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
     const schemas = await getJsonLdSchemas(page);
     expect(schemas.some((schema) => schema["@type"] === "BreadcrumbList")).toBe(true);
     await expect(page.getByText(route.serviceLink).first()).toBeVisible();
@@ -1746,24 +1632,28 @@ test("mobile services hub keeps city links below service selection", async ({ pa
   guard.assertNoErrors("mobile services hub city link order");
 });
 
-test("services hub: finder quote CTA carries context into quote form", async ({ page }) => {
+test("services hub: finder booking CTA carries query context into booking form", async ({ page }) => {
   const guard = attachConsoleGuards(page);
 
   await page.goto("/services", { waitUntil: "networkidle" });
   const finder = page.getByTestId("services-finder-region");
   await finder.getByLabel(/Describe the repair you need/i).fill("watch battery");
-  await finder.getByRole("link", { name: /Use this for a quote/i }).click();
+  await finder.getByRole("link", { name: /Book this repair/i }).click();
 
   await expect(page).toHaveURL(
-    /\/quote\?from=services_finder&service=watch-repair&query=watch\+battery$/,
+    /\/book\?from=services_finder&service=watch-repair&query=watch\+battery$/,
   );
   await expect(page.getByText(/Repair focus/i).first()).toBeVisible();
   await expect(page.getByText(/Suggested service:/i)).toContainText(/Watch Repair/i);
+  await page.getByLabel(/Watch repair/i).check();
+  await page.getByLabel(/Your name/i).fill("Test Customer");
+  await page.getByLabel(/Email address/i).fill("customer@example.com");
+  await page.getByRole("button", { name: /^Continue/i }).click();
   await expect(page.locator('textarea[name="details"]')).toHaveValue(
     /Repair focus: Watch Repair & Battery Replacement[\s\S]*Issue: watch battery/i,
   );
 
-  guard.assertNoErrors("services finder quote context");
+  guard.assertNoErrors("services finder booking query context");
 });
 
 test("services hub: finder booking CTA carries context into booking form", async ({ page }) => {
@@ -1850,7 +1740,7 @@ test("service area: pasadena page ships local schema and nearby city links", asy
   guard.assertNoErrors("service area pasadena schema");
 });
 
-test("service area: quote CTA carries city context into quote form and analytics", async ({
+test("service area: booking CTA carries city context into booking form and analytics", async ({
   page,
 }) => {
   const guard = attachConsoleGuards(page);
@@ -1874,13 +1764,17 @@ test("service area: quote CTA carries city context into quote form and analytics
 
   await page.goto("/services/pasadena", { waitUntil: "networkidle" });
   await page.evaluate(() => window.sessionStorage.removeItem("sjr_test_ga_events"));
-  await page.getByRole("link", { name: /^Get a Quote$/i }).click();
+  await page.locator("main").getByRole("link", { name: /^Book a Repair$/i }).first().click();
 
-  await expect(page).toHaveURL(/\/quote\?from=service_area&area=pasadena$/);
+  await expect(page).toHaveURL(/\/book\?from=service_area&area=pasadena$/);
   await expect(page.getByText(/Customer area: Pasadena/i).first()).toBeVisible();
+  await page.getByLabel(/Not sure yet/i).check();
+  await page.getByLabel(/Your name/i).fill("Test Customer");
+  await page.getByLabel(/Email address/i).fill("customer@example.com");
+  await page.getByRole("button", { name: /^Continue/i }).click();
   await expect(page.locator('textarea[name="details"]')).toHaveValue(/Customer area: Pasadena/i);
 
-  await page.getByLabel(/Full name/i).focus();
+  await page.getByLabel(/Details/i).focus();
   const events = await page.evaluate(() =>
     JSON.parse(window.sessionStorage.getItem("sjr_test_ga_events") || "[]"),
   );
@@ -1894,7 +1788,7 @@ test("service area: quote CTA carries city context into quote form and analytics
     ),
   ).toBe(true);
 
-  guard.assertNoErrors("service area quote context");
+  guard.assertNoErrors("service area booking context");
 });
 
 test("lead forms preserve first-touch attribution fields", async ({ page }) => {
@@ -1994,7 +1888,7 @@ test("mobile service detail: ring sizing follows flagship section order", async 
   await expect(page.getByText(/Related services/i).first()).toBeVisible();
 
   await expect(page.getByRole("link", { name: /Book a Repair/i }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Get a Quote/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Get a Quote/i })).toHaveCount(0);
 
   guard.assertNoErrors("service detail: ring-sizing flagship sections");
 });
@@ -2026,7 +1920,7 @@ test("mobile service detail: all services follow flagship section sequence", asy
     await expect(page.getByText(/Related services/i).first()).toBeVisible();
 
     await expect(page.getByRole("link", { name: /Book a Repair/i }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Get a Quote/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /Get a Quote/i })).toHaveCount(0);
 
     if (slug === "custom-design") {
       await expect(page.getByText(/7 business days/i).first()).toBeVisible();
@@ -2173,9 +2067,8 @@ test("mobile services pages: hero actions are clear and image assets load", asyn
 
     const heroSection = page.locator("main section").first();
     const book = heroSection.getByRole("link", { name: /^Book a Repair$/i }).first();
-    const quote = heroSection.getByRole("link", { name: /^Get a Quote$/i }).first();
     await expect(book).toBeVisible();
-    await expect(quote).toBeVisible();
+    await expect(heroSection.getByRole("link", { name: /^Get a Quote$/i })).toHaveCount(0);
 
     await expectTapTarget(book, `Book tap target on ${route}`);
 
