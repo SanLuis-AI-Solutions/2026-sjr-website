@@ -5,8 +5,9 @@
 - Initial SJR homepage and core pages
 
 ## Deployment (Do This Every Time)
-Vercel Git integration can fail silently (no deploys on push). To prevent that, we keep a deterministic
-deploy path that does not depend on Vercel's Git hooks.
+GitHub `master` is the source of record. Production deploys should come from a push to `master`,
+which triggers `.github/workflows/deploy-production.yml` and deploys to Vercel with the repo's
+stored token.
 
 1. Run verification:
 
@@ -14,13 +15,21 @@ deploy path that does not depend on Vercel's Git hooks.
 pwsh -File scripts/verify.ps1
 ```
 
-2. Deploy to production (refuses dirty/unpushed work):
+2. Push the verified change to `master`.
+
+3. Confirm these GitHub Actions run for that commit:
+- `build-and-smoke`
+- `Deploy Production (Vercel)`
+
+4. Confirm production is serving the new commit.
+
+## Emergency Fallback Only
+Use the local production deploy script only if GitHub Actions is unavailable and production must be fixed immediately.
+If you use it, sync the exact deployed commit back to GitHub right after.
 
 ```powershell
 pwsh -File scripts/deploy-prod.ps1
 ```
-
-3. Confirm the latest Vercel deployment SHA matches `git rev-parse HEAD`.
 
 ## CI Deploy (Recommended)
 There is a GitHub Action at `.github/workflows/deploy-production.yml` that deploys on pushes to `master`.
