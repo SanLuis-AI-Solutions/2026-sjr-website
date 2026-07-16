@@ -1,9 +1,10 @@
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
+import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
+import { BookingDateTimeFields } from "@/components/booking-date-time-fields";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
-import { FormSubmitInitializer } from "@/components/form-submit-initializer";
-import { BookingFormSteps } from "@/app/book/booking-form-steps";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -14,9 +15,9 @@ import {
 } from "@/lib/service-lead-context";
 
 export const metadata = createPageMetadata({
-  title: "Book a Jewelry Repair | Pasadena, TX | Susie’s Jewelry Repair",
+  title: "Book a Repair | Susie’s Jewelry Repair",
   description:
-    "Schedule your ring, watch, or heirloom repair with our in-house Pasadena team. No payment required to book — we confirm availability by email within 1 business day.",
+    "Request a free 15-minute repair assessment with our in-house Pasadena jewelry and watch team, and get booking confirmation by email within 1 business day.",
   canonical: "/book",
 });
 
@@ -48,10 +49,14 @@ export default async function BookPage({
     : "booking_submit_success";
   return (
     <SiteShell>
-      <FormSubmitInitializer />
-      <section className="relative overflow-hidden bg-[#faf7f2] py-10 md:py-16">
-        <div className="grain-layer absolute inset-0" aria-hidden="true" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Book a Repair", href: "/book" },
+        ]}
+      />
+      <section className="relative overflow-hidden bg-stone-100 py-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-start">
           <Suspense fallback={null}>
             <GaConversionTracker
@@ -63,7 +68,7 @@ export default async function BookPage({
             />
             <LeadFormTracker formId="booking-form" leadType="booking" hasError={error} />
           </Suspense>
-          <div>
+          <div className="reveal-on-scroll">
             {submitted ? (
               <div
                 role="status"
@@ -74,7 +79,7 @@ export default async function BookPage({
                   {pending ? "Booking request received." : "Booking requested."}
                 </p>
                 <p className="mt-1 text-emerald-800">
-                  We will confirm availability or send the closest option to your email.
+                  We will confirm availability and send details to your email.
                 </p>
               </div>
             ) : null}
@@ -90,46 +95,32 @@ export default async function BookPage({
               </div>
             ) : null}
             <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-              Repair time request
+              Book a Repair
             </p>
-            <h1
-              className="lcp-sans"
-              style={{
-                marginTop: "0.75rem",
-                fontSize: "2.25rem",
-                fontWeight: 600,
-                letterSpacing: "-0.025em",
-                lineHeight: "2.5rem",
-                color: "#1c1917",
-              }}
-            >
-              Book a repair visit
+            <h1 className="mt-3 font-serif text-4xl text-stone-900">
+              {finderContext?.serviceName
+                ? `Reserve a free 15-minute ${finderContext.serviceName.toLowerCase()} assessment`
+                : "Reserve a free 15‑minute assessment"}
             </h1>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-stone-600">
-              Pick a preferred drop-off time. No payment today; we confirm by email within 1
-              business day.
+            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">
+              Request a time that works for you. We confirm availability within 1 business day.
             </p>
+            <ConversionQuickActions
+              page="book"
+              primary={{ href: "#booking-form", label: "Start Booking" }}
+              secondary={[
+                { href: "/contact", label: "Contact Us", tone: "muted" },
+              ]}
+            />
 
-            {/* Trust signal chips */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              <span className="inline-flex items-center rounded-full border border-brand-gold/40 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-gold">
-                4.5 ★ Google
-              </span>
-              <span className="inline-flex items-center rounded-full border border-stone-300/70 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-500">
-                90-Day Warranty
-              </span>
-              <span className="inline-flex items-center rounded-full border border-stone-300/70 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-500">
-                In-House Only
-              </span>
-            </div>
-
-            <div className="mt-8 hidden rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600 [border-top:3px_solid_rgba(209,184,130,0.45)] md:block">
-              <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+            <div className="mt-8 rounded-2xl border border-stone-200 bg-white/70 px-5 py-4 text-sm text-stone-600">
+              <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                 Good to know
               </div>
               <ul className="mt-3 space-y-2">
                 <li>• Most services are Same Day/Next Day service</li>
-                <li>• This is a time request; the shop confirms the final appointment by email</li>
+                <li>• Your appointment confirms intake timing and next steps</li>
+                <li>• Most-booked requests: ring sizing, watch battery, chain repair</li>
                 <li>
                   • Need help fast? Call{" "}
                   <BusinessActionLink
@@ -143,34 +134,12 @@ export default async function BookPage({
                 </li>
               </ul>
             </div>
-
-            {/* How it works — desktop only */}
-            <div className="mt-6 hidden md:block">
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">How it works</p>
-              <div className="mt-4 space-y-4">
-                {[
-                  { n: "1", title: "Drop off your piece", body: "Bring it to our Pasadena workshop — no appointment needed to drop off." },
-                  { n: "2", title: "Free in-person assessment", body: "We confirm pricing before any work begins. No surprises." },
-                  { n: "3", title: "Pick up, good as new", body: "Most repairs done same day or next. 90-day warranty on all work." },
-                ].map(({ n, title, body }) => (
-                  <div key={n} className="flex gap-4">
-                    <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-brand-gold/40 bg-white text-[11px] font-bold text-brand-burgundy shadow-sm">
-                      {n}
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-stone-800">{title}</p>
-                      <p className="mt-0.5 text-xs leading-5 text-stone-500">{body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="space-y-4">
             {finderContext ? (
               <div className="reveal-on-scroll rounded-3xl border border-brand-gold/40 bg-brand-gold/10 p-5 text-sm text-stone-700">
-                <div className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
+                <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                   Repair focus
                 </div>
                 <div className="mt-3 space-y-2">
@@ -209,7 +178,116 @@ export default async function BookPage({
                 </div>
               </div>
             ) : null}
-            <BookingFormSteps finderContext={finderContext} hiddenFields={hiddenFields} />
+            <form
+              id="booking-form"
+              action="/api/book"
+              method="post"
+              aria-label="Book a repair appointment"
+              aria-describedby="booking-form-help"
+              className="reveal-on-scroll scroll-mt-32 rounded-3xl border border-stone-200 bg-white/80 p-6 shadow-[0_18px_45px_rgba(58,25,16,0.14)] backdrop-blur-sm"
+            >
+            <p id="booking-form-help" className="sr-only">
+              Complete your contact details, choose a preferred date and time, and add any repair notes.
+            </p>
+            <div className="mb-5 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-4 text-sm text-stone-700">
+              <p className="font-semibold text-stone-900">Best results come from a specific request.</p>
+              <p className="mt-1 leading-7">
+                Tell us what you need fixed, choose the closest date that works, and we will confirm the right intake timing before you come in.
+              </p>
+            </div>
+            <input
+              type="text"
+              name="company"
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+            {hiddenFields ? (
+              <>
+                <input type="hidden" name="lead_source_context" value={hiddenFields.lead_source_context} />
+                <input type="hidden" name="area_slug" value={hiddenFields.area_slug} />
+                <input type="hidden" name="service_slug" value={hiddenFields.service_slug} />
+                <input type="hidden" name="intent_label" value={hiddenFields.intent_label} />
+                <input type="hidden" name="intent_query" value={hiddenFields.intent_query} />
+              </>
+            ) : null}
+
+            <fieldset className="space-y-4">
+            <legend className="sr-only">Booking contact details</legend>
+            <label htmlFor="booking-name" className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Full name
+              <input
+                id="booking-name"
+                type="text"
+                name="name"
+                autoComplete="name"
+                aria-label="Full name"
+                aria-required="true"
+                title="Full name"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                placeholder="Your name"
+                required
+              />
+            </label>
+
+            <label htmlFor="booking-email" className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Email
+              <input
+                id="booking-email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                aria-label="Email"
+                aria-required="true"
+                title="Email"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                placeholder="you@email.com"
+                required
+              />
+            </label>
+
+            <label htmlFor="booking-phone" className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Phone (optional)
+              <input
+                id="booking-phone"
+                type="tel"
+                name="phone"
+                autoComplete="tel"
+                inputMode="tel"
+                aria-label="Phone"
+                title="Phone"
+                className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                placeholder="(281) 555-1234"
+              />
+            </label>
+            </fieldset>
+
+            <BookingDateTimeFields />
+
+            <label htmlFor="booking-details" className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+              Details (optional)
+              <textarea
+                id="booking-details"
+                name="details"
+                aria-label="Repair details"
+                title="Repair details"
+                className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                defaultValue={finderContext?.detailsSeed || undefined}
+                placeholder="What should we know before you arrive?"
+              />
+            </label>
+
+            <button
+              type="submit"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep"
+            >
+              Reserve My Assessment
+            </button>
+            <p className="mt-3 text-center text-xs text-stone-600">
+              Secure form · Most customers finish in under 2 minutes · Confirmation within 1 business day.
+            </p>
+            </form>
           </div>
         </div>
       </section>

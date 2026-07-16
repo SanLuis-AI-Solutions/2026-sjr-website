@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { SyncMatrixRow } from "@/lib/admin/nexus-dashboard";
 
 type PublishingMatrixProps = {
@@ -46,11 +45,9 @@ export function PublishingMatrix({ rows }: PublishingMatrixProps) {
           >
             <div className="flex min-w-0 items-center gap-4">
               <div className="h-14 w-16 shrink-0 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100">
-                <Image
+                <img
                   src={row.image}
                   alt=""
-                  width={64}
-                  height={56}
                   className="h-full w-full object-cover"
                 />
               </div>

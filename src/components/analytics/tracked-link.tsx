@@ -14,7 +14,6 @@ type TrackedLinkProps = {
   id?: string;
   "aria-label"?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
-  [dataAttribute: `data-${string}`]: string | undefined;
 };
 
 export function TrackedLink({
@@ -26,7 +25,6 @@ export function TrackedLink({
   id,
   "aria-label": ariaLabel,
   onClick,
-  ...dataAttributes
 }: TrackedLinkProps) {
   const pathname = usePathname();
 
@@ -36,7 +34,6 @@ export function TrackedLink({
       href={href}
       className={className}
       aria-label={ariaLabel}
-      {...dataAttributes}
       onClick={(event) => {
         trackGaEvent(eventName, {
           page_path: pathname || "/",

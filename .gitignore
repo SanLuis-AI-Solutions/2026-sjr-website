@@ -63,6 +63,5 @@ next-env.d.ts
 
 # local agent/browser artifacts
 .claude/
-.playwright-mcp/
+.codex/
 Docs/cookies.txt
-.vercel

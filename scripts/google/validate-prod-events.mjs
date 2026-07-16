@@ -14,13 +14,9 @@ const REQUIRED_EVENTS = [
   "service_market_expand",
   "service_faq_open",
   "service_cta_click",
-  "mobile_sticky_cta_click",
   "conversion_quick_action_click",
   "conversion_quick_action_click_control",
   "conversion_quick_action_click_primary_focus",
-  "lead_form_view",
-  "quote_form_view",
-  "booking_form_view",
   "lead_form_start",
   "quote_form_start",
   "booking_form_start",
@@ -67,10 +63,6 @@ function dedupeRequests(requests) {
     seen.add(key);
     return true;
   });
-}
-
-function markdownCell(value) {
-  return String(value ?? "").replaceAll("|", "\\|");
 }
 
 async function countEvent(page, eventName) {
@@ -394,24 +386,6 @@ async function main() {
   try {
     await goto(page, "/");
 
-    await runNavigationEventCheck(
-      page,
-      "mobile_sticky_cta_click",
-      async () => {
-        await page.evaluate(() => window.scrollTo(0, Math.max(900, window.innerHeight)));
-        await pause(500);
-        const cta = page
-          .getByRole("region", { name: /^Mobile quote shortcut$/i })
-          .getByRole("link", { name: /^Start Quote from mobile shortcut$/i });
-        await cta.waitFor({ state: "visible", timeout: 8000 });
-        await clickTrackedTarget(cta);
-      },
-      /\/quote(?:\?|$)/,
-      report
-    );
-
-    await goto(page, "/");
-
     await runEventCheck(
       page,
       "service_card_click",
@@ -516,8 +490,6 @@ async function main() {
     );
 
     await runPresenceCheck(page, "quote_form_start", report);
-    await runPresenceCheck(page, "lead_form_view", report);
-    await runPresenceCheck(page, "quote_form_view", report);
 
     await runEventCheck(
       page,
@@ -540,33 +512,32 @@ async function main() {
       },
       report
     );
-    await runPresenceCheck(page, "booking_form_view", report);
 
-    await goto(page, "/quote");
-    await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
-    await runEventCheck(
+    await runNavigationEventCheck(
       page,
       "conversion_quick_action_click",
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Start Quote$/i });
+          .getByRole("link", { name: /^Contact Us$/i });
         await clickTrackedTarget(quickAction);
       },
+      /\/contact(?:\?|$)/,
       report
     );
 
-    await goto(page, "/quote");
+    await goto(page, "/contact");
     await waitForDocumentDataset(page, "sjrCtaVariant", ["control", "primary_focus"]);
-    await runAnyEventCheck(
+    await runNavigationAnyEventCheck(
       page,
       ["conversion_quick_action_click_control", "conversion_quick_action_click_primary_focus"],
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Start Quote$/i });
+          .getByRole("link", { name: /^Get Fast Quote$/i });
         await clickTrackedTarget(quickAction);
       },
+      /\/quote(?:\?|$)/,
       report
     );
 
@@ -637,7 +608,7 @@ async function main() {
       "| --- | --- | --- | --- |",
       ...report.map(
         (row) =>
-          `| ${markdownCell(row.eventName)} | ${row.status} | ${row.beforeCount} | ${row.afterCount} |`
+          `| ${row.eventName} | ${row.status} | ${row.beforeCount} | ${row.afterCount} |`
       ),
       "",
       "## Aggregate Counts (Captured in Session)",

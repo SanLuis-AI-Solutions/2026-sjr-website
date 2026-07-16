@@ -3,13 +3,15 @@ import Link from "next/link";
 import { CtaBand } from "@/components/cta-band";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { BUSINESS } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/metadata";
+import { aboutPageSchema, organizationSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "About Susie’s Jewelry Repair | Pasadena, TX Family Jeweler Since 1984",
+  title: "About Susie’s Jewelry Repair | In-House Family Craftsmanship",
   description:
-    "Three generations of in-house jewelry and watch repair in Pasadena, TX. Every piece stays on-site, every approval is yours before work begins.",
+    "Meet the family behind Susie’s Jewelry Repair in Pasadena, TX. Three generations, in-house service, and clear approvals on every repair.",
   canonical: "/about",
 });
 
@@ -85,6 +87,12 @@ const STANDARDS = [
 export default function AboutPage() {
   return (
     <SiteShell>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+        ]}
+      />
       <section className="relative overflow-hidden bg-white pt-16 pb-18">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,_rgba(122,46,58,0.09),_transparent_48%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_12%,_rgba(209,184,130,0.18),_transparent_52%)]" />
@@ -99,13 +107,22 @@ export default function AboutPage() {
               Susie’s Jewelry Repair is built for people who expect premium work without guesswork.
               Your piece stays local, your approvals stay clear, and your finish is checked before pickup.
             </p>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-600">
+              Family-run in Pasadena since 1984, with in-house jewelry and watch service handled by one local bench team.
+            </p>
 
-            <div className="mt-7">
+            <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/book"
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book a Repair
+              </Link>
+              <Link
+                href="/services"
+                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                View Services
               </Link>
             </div>
 
@@ -389,6 +406,14 @@ export default function AboutPage() {
       </section>
 
       <CtaBand />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema()) }}
+      />
     </SiteShell>
   );
 }

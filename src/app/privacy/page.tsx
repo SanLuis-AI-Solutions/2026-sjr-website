@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { BUSINESS } from "@/lib/constants";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
 import { createPageMetadata } from "@/lib/metadata";
@@ -15,6 +16,12 @@ export const metadata = createPageMetadata({
 export default function PrivacyPage() {
   return (
     <SiteShell>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Privacy Policy", href: "/privacy" },
+        ]}
+      />
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto max-w-4xl px-6">

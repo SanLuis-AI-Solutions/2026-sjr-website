@@ -44,9 +44,12 @@ export const FAQS: FaqItem[] = [
     id: "pricing",
     category: "pricing-and-timing",
     q: "Can I get pricing before I visit?",
-    a: "Yes. Use Fast Quote to get a transparent starting range, then we confirm final scope and pricing after inspection.",
+    a: "Yes. Booking a repair is the best path if you are ready to bring the piece in. If you only need pricing first, request a quote and we will confirm final scope after inspection.",
     pinned: true,
-    links: [{ href: "/book", label: "Book a Repair" }],
+    links: [
+      { href: "/book", label: "Book Assessment" },
+      { href: "/quote", label: "Request Quote" },
+    ],
   },
   {
     id: "appointment",

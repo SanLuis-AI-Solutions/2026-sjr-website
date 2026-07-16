@@ -49,66 +49,67 @@ export const SERVICES = [
   {
     slug: "watch-repair",
     name: "Watch Repair & Battery Replacement",
-    summary: "Precision servicing for modern and vintage watches.",
+    summary: "In-house watch battery replacement and repair near Pasadena, TX.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "From battery replacements to full mechanical service, we repair modern and vintage watches in-house with careful handling and clean finishing.",
-      "Most quick services follow Same Day/Next Day service. If your watch needs parts or a full movement overhaul, we confirm timing and starting-at pricing before any work begins."
+      "From watch battery replacement to crystal, crown, stem, band, and movement repair, we service modern and vintage watches in-house with careful handling and clear communication.",
+      "Most battery and quick watch services follow Same Day/Next Day service. If your watch needs sealing work, parts, pressure testing, or a fuller movement repair, we confirm timing and starting-at pricing before any work begins."
     ],
     includes: [
-      "Complete movement ultrasonic cleaning",
-      "Authentic replacement parts",
-      "Gasket lubrication and pressure testing",
-      "One-year service warranty"
+      "Battery replacement and function check",
+      "Band sizing, links, and strap help",
+      "Crystal, crown, and stem repair assessment",
+      "Seal inspection and pressure testing when applicable"
     ],
     commonRequests: [
+      "Watch battery replacement",
+      "Watch band sizing",
       "Crystal replacement",
-      "Stem and crown repair",
-      "Dial restoration",
-      "Band sizing and replacement"
+      "Stem and crown repair"
     ],
     image: "/images/services/watch-repair-hero.jpg",
     faqs: [
       {
         question: "How fast can you replace a watch battery?",
-        answer: "Most battery replacements are completed within the hour while you wait or shop nearby.",
+        answer: "Many watch battery replacements can be handled with Same Day/Next Day service. We confirm fit, function, and timing before work begins.",
       },
       {
         question: "Can you pressure test after a battery replacement?",
-        answer: "Yes. When applicable, we can inspect seals and perform pressure testing to help confirm water resistance.",
+        answer: "When applicable, we can inspect seals and perform pressure testing to help confirm sealing at the time of service. Water resistance depends on the watch condition and cannot be guaranteed for every model.",
       },
       {
         question: "Do you service mechanical watches?",
-        answer: "Yes, we specialize in both manual wind and automatic mechanical movements from vintage to modern luxury brands."
+        answer: "Yes. We assess manual wind, automatic, vintage, and modern watches, then confirm the safest repair path, parts needs, and timing before service."
       }
     ],
   },
   {
     slug: "ring-sizing",
     name: "Ring Sizing & Repair",
-    summary: "Comfortable, precise sizing with clean finishes.",
+    summary: "Same Day/Next Day ring sizing and resizing near Pasadena, TX.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "Ensure your rings fit perfectly with our professional sizing services. A ring that's too loose risks being lost, while one that's too tight causes discomfort and can damage the band over time.",
-      "We use laser-precision welding and professional finishing techniques to ensure the sizing seam is invisible and the structural integrity of your ring is maintained."
+      "Book in-house ring sizing for rings that feel too loose, too tight, or uncomfortable over the knuckle. We assess fit, metal type, stone security, and finish before any sizing work begins.",
+      "Most straightforward gold, silver, and platinum ring resizing follows Same Day/Next Day service. If your ring has side stones, an eternity pattern, white gold rhodium needs, or prior repair work, we confirm pricing and timing before service."
     ],
     includes: [
-      "Complimentary professional cleaning",
-      "Prong and setting inspection",
-      "Invisible seam finishing",
-      "Rhodium plating for white gold"
+      "Fit and size assessment",
+      "Prong and stone security inspection",
+      "Sizing up or sizing down when the design allows",
+      "Clean finishing and rhodium guidance for white gold"
     ],
     commonRequests: [
+      "Same day ring resizing",
       "Sizing up with metal addition",
       "Sizing down with precise removal",
-      "Arthritic shank installations",
-      "Shank thinning and tapering"
+      "White gold ring sizing",
+      "Ring fit assessment"
     ],
     image: "/images/services/ring-sizing-hero-wide.jpg",
     faqs: [
       {
         question: "Can any ring be resized?",
-        answer: "Most gold, silver, and platinum rings can be resized. Some metals like tungsten, titanium, or rings with continuous patterns or pave may have limitations."
+        answer: "Most gold, silver, and platinum rings can be resized. Tungsten, titanium, full eternity bands, continuous patterns, and some pave designs can have limits, so we inspect the ring before recommending a sizing path."
       }
     ],
   },
@@ -184,23 +185,23 @@ export const SERVICES = [
   {
     slug: "necklace-repair",
     name: "Necklace Repair",
-    summary: "Repair broken necklaces, clasps, and delicate chains.",
+    summary: "Broken chain, clasp, and necklace repair near Pasadena, TX.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "We repair broken necklaces and restore their strength and finish.",
-      "From delicate chains to heavier pieces, every repair is reinforced and polished."
+      "Book in-house necklace repair for broken chains, weak clasps, jump rings, charm reattachment, and delicate soldering needs.",
+      "Most straightforward chain and clasp repairs follow Same Day/Next Day service. We inspect metal type, chain style, break location, and nearby weak points before confirming pricing and timing."
     ],
     includes: [
       "Chain soldering and link repair",
       "Clasp replacement or adjustment",
-      "Safety inspection",
-      "Cleaning after repair"
+      "Jump ring and pendant connection checks",
+      "Cleaning and finish touch-up after repair"
     ],
     commonRequests: [
       "Broken chain repair",
+      "Clasp repair near me",
       "Lobster clasp replacement",
-      "Charm reattachment",
-      "Safety chain install"
+      "Charm reattachment"
     ],
     image: "/images/services/necklace-repair-hero.jpg",
     faqs: [
@@ -224,22 +225,23 @@ export const SERVICES = [
   {
     slug: "bracelet-repair",
     name: "Bracelet Repair",
-    summary: "Fix broken links and clasps for a secure, comfortable fit.",
+    summary: "Bracelet repair for broken links, clasps, and safety chains near Pasadena.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "We restore bracelets so they wear safely and comfortably again.",
-      "Every repair is finished to look seamless and last."
+      "Book in-house bracelet repair for broken links, clasp problems, tennis bracelet issues, charm reattachment, fit adjustments, and safety chain upgrades.",
+      "Most straightforward bracelet repairs follow Same Day/Next Day service. We check clasp reliability, link movement, stone security, and fit before confirming the repair path."
     ],
     includes: [
       "Link repair and reinforcement",
       "Clasp replacement or adjustment",
-      "Safety inspection",
-      "Cleaning after repair"
+      "Safety chain installation when appropriate",
+      "Stone, link, and closure inspection"
     ],
     commonRequests: [
+      "Bracelet repair near me",
       "Broken link repair",
       "Clasp replacement",
-      "Charm reattachment",
+      "Tennis bracelet repair",
       "Safety chain install"
     ],
     image: "/images/services/bracelet-repair-hero.jpg",
@@ -264,30 +266,24 @@ export const SERVICES = [
   {
     slug: "pearl-restringing",
     name: "Pearl Restringing",
-    summary: "Fresh silk restringing, hand-knot spacing, and clasp checks for pearl strands.",
+    summary: "Pearl restringing, knotting, and clasp repair near Pasadena, TX.",
     time_estimate: "Same Day/Next Day service",
     longDescription: [
-      "Pearl strands should be restrung before the thread fails, especially when the strand looks stretched, fuzzy, discolored, or uneven near the clasp.",
-      "We inspect the clasp, pearl spacing, and strand length before restringing so the final result protects the pearls and hangs correctly when you wear it.",
-      "Hand-knotting between pearls is available for classic pearl strands because the knots reduce rubbing and help limit pearl loss if a strand ever breaks.",
-      "The highest-risk area is usually the clasp end, where daily opening, closing, and pulling can weaken the first few knots before the rest of the strand looks urgent."
+      "Book in-house pearl restringing for stretched strands, frayed silk, uneven spacing, broken pearl necklaces, and weak clasps.",
+      "Most straightforward pearl restringing follows Same Day/Next Day service. We inspect strand length, pearl count, knotting style, clasp condition, and cleanup needs before confirming price and timing."
     ],
     includes: [
       "Silk restringing",
       "Hand-knotting between pearls",
-      "Clasp-end stress inspection",
-      "Drape and knot-spacing check",
-      "Clasp inspection and cleaning",
-      "Length adjustment if needed",
-      "Pearl spacing and drape check"
+      "Clasp inspection, cleaning, or replacement",
+      "Length adjustment and strand layout review"
     ],
     commonRequests: [
+      "Pearl restringing cost",
       "Loose or stretched strings",
       "Broken pearl strand",
-      "Bead necklace repair",
-      "Clasp upgrade",
-      "Uneven knot spacing",
-      "Inherited pearl strand refresh"
+      "Pearl clasp replacement",
+      "Bead necklace repair"
     ],
     image: "/images/services/pearl-restringing-hero.jpg",
     faqs: [

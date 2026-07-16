@@ -5,7 +5,6 @@ export type ServiceAreaPage = {
   title: string;
   description: string;
   cardDescription: string;
-  heroHeading?: string;
   heroImage: string;
   heroAlt: string;
   intro: string;
@@ -16,19 +15,6 @@ export type ServiceAreaPage = {
   commonRepairsBody: string[];
   visitHeading: string;
   visitBody: string[];
-  localScenarios: Array<{
-    title: string;
-    body: string;
-  }>;
-  repairPathGuide?: {
-    heading: string;
-    intro: string;
-    items: Array<{
-      situation: string;
-      likelyPath: string;
-      nextStep: string;
-    }>;
-  };
   faqs: Array<{
     question: string;
     answer: string;
@@ -46,10 +32,9 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     city: "Pasadena",
     title: "Jewelry Repair in Pasadena, TX | In-House Jewelry & Watch Repair",
     description:
-      "Looking for jewelry repair in Pasadena, TX? Work directly with our in-house workshop for ring sizing, watch batteries, prong repair, chain repair, heirloom restoration, and clear quote-first service.",
+      "Looking for jewelry repair in Pasadena, TX? Work directly with our in-house workshop for ring sizing, watch batteries, prong repair, chain repair, heirloom restoration, and clear booking-first service.",
     cardDescription:
-      "Start here for Pasadena jewelry repair, watch service, heirloom work, and quote-first guidance from the local in-house workshop.",
-    heroHeading: "Jewelry repair near Pasadena for same-day decisions and sentimental pieces.",
+      "Start here for Pasadena jewelry repair, watch service, heirloom work, and direct booking guidance from the local in-house workshop.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "Susie's Jewelry Repair storefront in Pasadena, Texas",
     intro:
@@ -63,71 +48,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The biggest advantage is direct local access. You are not dropping your ring, watch, or necklace at a counter that ships it somewhere else. You can ask questions, get a realistic assessment, and work with the same Pasadena shop from intake to pickup.",
       "That matters for common Pasadena requests like ring sizing before an event, a watch battery that died during the workweek, a chain that snapped unexpectedly, or a diamond that feels loose and needs to be checked before it is worn again.",
-      "Because the shop is on Fairmont Parkway, many Pasadena visits are quick local stops between work, school pickup, errands, church weekends, or a planned event. The useful intake question is whether the piece is safe for normal wear today or whether it needs immediate bench attention before it leaves the shop.",
       "If the repair is simple, we say so. If the piece needs structural work, restoration, or redesign, we explain that early so the next step is clear before you commit.",
     ],
     commonRepairsHeading: "Common jewelry and watch repairs in Pasadena",
     commonRepairsBody: [
       "The most common Pasadena repair requests are watch battery replacement, ring sizing, prong tightening, chain repair, jewelry cleaning, bracelet repair, and heirloom restoration. These are the repairs where timing and trust matter because the piece is already failing or at risk.",
-      "A loose stone, worn clasp, bent shank, or stopped watch can look minor until it leads to a lost stone, a broken chain, or a missed event. For Pasadena customers, the first pass is practical: check whether a watch is battery-only or moisture-related, whether a ring needs sizing or stone tightening, and whether a chain failure happened at the clasp, jump ring, hollow link, or solder point.",
-      "Those details decide whether a Same Day/Next Day repair is realistic or whether the safer answer is a slower structural review. That is why a nearby in-house jeweler is often the better answer than waiting or mailing the piece away.",
+      "A loose stone, worn clasp, bent shank, or stopped watch can look minor until it leads to a lost stone, a broken chain, or a missed event. That is why a nearby in-house jeweler is often the better answer than waiting or mailing the piece away.",
       "For older or sentimental pieces, Pasadena customers also come in when they need help deciding whether to restore the original design, reinforce the existing structure, or repurpose materials into something stronger for regular wear.",
     ],
     visitHeading: "What to expect when you visit our Pasadena shop",
     visitBody: [
-      "If you are already in Pasadena, the fastest path is to request a quote online with a photo or come in with the piece so we can inspect it in person. We will confirm whether the issue is routine, urgent, or better treated as restoration before repair begins.",
-      "For a faster first answer, bring or send one close photo of the problem area, one full-piece photo, and a short note about how the jewelry is worn. If it is a watch, note whether it stopped after water, impact, heat, or sitting unused. If it is a ring, note whether it spins, catches, or has a stone that moves.",
+      "If you are already in Pasadena, the fastest path is to book a repair or come in with the piece so we can inspect it in person. If you only need pricing first, a photo-based quote is still available. We will confirm whether the issue is routine, urgent, or better treated as restoration before repair begins.",
       "Once we review the item, we walk through the likely timing, the starting price, and whether Same Day/Next Day service is realistic for that specific job. That keeps the decision grounded in the actual condition of the piece, not guesswork.",
       "Because the work stays in-house, follow-up is easier too. If you have questions after pickup or need another adjustment, you are still working with the same local team.",
     ],
-    localScenarios: [
-      {
-        title: "Fairmont Parkway repair stop",
-        body:
-          "Best fit when you are already nearby and need a watch battery, ring fit check, or loose-stone assessment handled without turning the visit into a full-day errand.",
-      },
-      {
-        title: "Same-day versus structural triage",
-        body:
-          "Useful when the piece needs to be wearable before a wedding, anniversary, workday, or family gathering and you need a realistic same-day versus structural-repair answer.",
-      },
-      {
-        title: "Sentimental-piece review",
-        body:
-          "The right path when an heirloom needs a direct conversation about repair, reinforcement, or redesign before anyone starts altering it.",
-      },
-    ],
-    repairPathGuide: {
-      heading: "How Pasadena customers should choose the right repair path",
-      intro:
-        "The fastest useful answer is not always the fastest repair. These are the local intake patterns we use to separate quick service from work that needs a more careful bench review.",
-      items: [
-        {
-          situation: "Watch stopped recently with no fog, water, impact, or loose crown",
-          likelyPath: "Battery-first assessment",
-          nextStep:
-            "Bring the watch in or send a dial and case-back photo so we can confirm whether Same Day/Next Day battery service is realistic.",
-        },
-        {
-          situation: "Ring spins, catches, feels sharp, or has a stone that moves",
-          likelyPath: "Fit and stone-security check",
-          nextStep:
-            "Start with a ring sizing or prong inspection instead of wearing it until the stone or shank fails further.",
-        },
-        {
-          situation: "Chain, bracelet, or clasp broke near a jump ring, hollow link, or solder point",
-          likelyPath: "Break-point repair review",
-          nextStep:
-            "Send a close photo of the break and one full-piece photo so we can tell whether it looks like a simple reconnect or a weak-area reinforcement.",
-        },
-        {
-          situation: "Inherited piece, older setting, pearls, or jewelry with sentimental value",
-          likelyPath: "Restoration-first conversation",
-          nextStep:
-            "Ask for a condition review before approving cosmetic work so the repair plan protects the original piece instead of only making it look cleaner.",
-        },
-      ],
-    },
     faqs: [
       {
         question: "Do you do jewelry repair in Pasadena or send it somewhere else?",
@@ -142,25 +76,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         question: "Should I request a quote before visiting the Pasadena shop?",
         answer:
-          "Yes, especially if you have photos. A quote request helps us guide you toward the right service and set expectations before you arrive.",
-      },
-    ],
-    helpfulReads: [
-      {
-        label: "Does my watch need a battery or deeper repair?",
-        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
-      },
-      {
-        label: "How much does pearl restringing cost in Pasadena?",
-        href: "/blog/how-much-does-pearl-restringing-cost-pasadena",
-      },
-      {
-        label: "Gold ring resizing cost and timing guide",
-        href: "/blog/cost-to-resize-gold-ring-pasadena",
-      },
-      {
-        label: "Necklace chain repair weak-point service",
-        href: "/services/necklace-repair",
+          "If you are ready to come in, booking is the best path. If you only need pricing first, photos help us guide you toward the right service and set expectations before you arrive.",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],
@@ -170,10 +86,9 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     city: "Deer Park",
     title: "Jewelry Repair Near Deer Park, TX | In-House Pasadena Workshop",
     description:
-      "Need jewelry, watch, or heirloom repair near Deer Park? Work with our in-house Pasadena workshop for ring sizing, stone security, watch batteries, cleanings, and clear quote-first service.",
+      "Need jewelry, watch, or heirloom repair near Deer Park? Work with our in-house Pasadena workshop for ring sizing, stone security, watch batteries, cleanings, and clear booking-first service.",
     cardDescription:
-      "Start with local guidance for ring sizing, watch batteries, prong repair, and quote-first service from our Pasadena workshop.",
-    heroHeading: "Jewelry repair near Deer Park for fast quote-first service.",
+      "Start with local guidance for ring sizing, watch batteries, prong repair, and direct booking from our Pasadena workshop.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "Susie's Jewelry Repair storefront near Deer Park and Pasadena clients",
     intro:
@@ -187,36 +102,19 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The biggest advantage is control. Your ring, necklace, watch, or heirloom does not disappear into a shipping queue or third-party bench. You can speak directly with the local team handling the work, ask questions about timing, and get a realistic sense of what is worth repairing before committing.",
       "That matters for common Deer Park requests like ring sizing before an event, watch battery replacement on a workday, prong tightening before a trip, or heirloom cleanup before a family gathering. The job is not treated like anonymous intake. It is assessed by a shop that sees these repair patterns every day.",
-      "If a repair needs more than a quick fix, we explain that up front. If it can be handled fast, we say that too. That quote-first approach helps customers avoid unnecessary trips and keeps expectations clear.",
+      "If a repair needs more than a quick fix, we explain that up front. If it can be handled fast, we say that too. That booking-first approach helps customers avoid unnecessary trips and keeps expectations clear.",
     ],
     commonRepairsHeading: "Common jewelry and watch repairs from the Deer Park area",
     commonRepairsBody: [
       "The most common jobs from Deer Park customers are ring sizing, prong repair, chain repair, watch battery service, jewelry cleaning, and heirloom restoration. Those are high-need, high-trust repairs because they affect whether a piece is wearable, secure, and worth preserving.",
-      "A ring that suddenly feels loose, a diamond that snags, a bracelet clasp that opens too easily, or a watch that stopped before work all fit the kind of problem where a nearby in-house shop is the better answer than a vague drop-off counter. In many of those cases, the fastest path is to request a quote online first, then bring the item in with a clear plan.",
+      "A ring that suddenly feels loose, a diamond that snags, a bracelet clasp that opens too easily, or a watch that stopped before work all fit the kind of problem where a nearby in-house shop is the better answer than a vague drop-off counter. In many of those cases, the fastest path is to book first, or send photos if pricing is the only question before you come in.",
       "If the piece is sentimental or structurally worn, the right next step may be restoration or redesign rather than a tiny spot repair. We help make that distinction before the work starts.",
     ],
     visitHeading: "What to expect if you are visiting from Deer Park",
     visitBody: [
-      "If you are coming from Deer Park, the simplest workflow is to start with a fast quote, especially if you have a photo of the damage. That helps us guide you toward the right service before you leave home.",
+      "If you are coming from Deer Park, the simplest workflow is to book a repair. If you have a photo of the damage and only need pricing first, a quote request can still point you toward the right service before you leave home.",
       "Once you arrive, we inspect the piece, confirm whether the issue is straightforward or structural, and walk through timing and pricing before any repair begins. That is useful for busy customers fitting a repair into lunch breaks, school pickup windows, or weekend errands.",
       "Because the workshop is local and on-site, follow-up is simpler too. If you have a question after pickup, you are talking to the same business that handled the work, not a disconnected support line.",
-    ],
-    localScenarios: [
-      {
-        title: "Fast weekday repair",
-        body:
-          "A good match for Deer Park customers fitting in ring sizing, battery service, or a prong check around work and family schedules.",
-      },
-      {
-        title: "Quote before the drive",
-        body:
-          "Helpful when photos can clarify whether the visit is likely to be a routine repair, a structural issue, or something that can wait.",
-      },
-      {
-        title: "Heirloom before a gathering",
-        body:
-          "Best when older jewelry needs to look right and wear safely before a family event rather than just receive a quick cosmetic touch-up.",
-      },
     ],
     faqs: [
       {
@@ -227,7 +125,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         question: "What is the fastest repair option if I am coming from Deer Park?",
         answer:
-          "Start with a fast quote online for ring sizing, prong repair, watch batteries, or chain issues. That helps us guide you to the right next step before you drive over.",
+          "Start by booking a repair for ring sizing, prong repair, watch batteries, or chain issues. If you only need pricing first, a quote request can still help guide the next step before you drive over.",
       },
       {
         question: "Can I get same-day jewelry repair near Deer Park?",
@@ -244,8 +142,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     description:
       "Looking for jewelry or watch repair near La Porte? Visit our Pasadena in-house workshop for ring sizing, watch batteries, heirloom restoration, cleanings, and custom guidance with clear approvals.",
     cardDescription:
-      "Get the fastest path for watch service, heirloom restoration, and quote-first repair planning before making the trip.",
-    heroHeading: "Jewelry repair near La Porte for coastal watches, workwear, and heirlooms.",
+      "Get the fastest path for watch service, heirloom restoration, and booking-first repair planning before making the trip.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "In-house watch and jewelry repair service for La Porte clients",
     intro:
@@ -259,65 +156,20 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The appeal is not just distance. It is having a nearby bench jeweler and watch repair team that can inspect a piece, explain the tradeoffs, and tell you whether you need a quick repair, a safer rebuild, or a full redesign path.",
       "That is especially helpful for engagement rings with worn prongs, watches that need a battery and seal review, necklaces or bracelets with repeated break points, and older heirlooms that may not tolerate aggressive repair shortcuts.",
-      "For La Porte customers, the intake often has a coastal-wear angle too. Humidity, water exposure, boating weekends, refinery or plant workdays, and daily commute timing can all affect whether a stopped watch, worn clasp, or loose ring should be treated as routine or risk-sensitive.",
       "For La Porte families bringing in inherited jewelry, the value is often in preserving trust while making the piece wearable again. That is where an in-house workshop offers a better experience than generic intake and off-site handling.",
     ],
     commonRepairsHeading: "Common repairs we see from La Porte customers",
     commonRepairsBody: [
       "Watch battery replacement, ring sizing, stone tightening, cleaning and polishing, chain repair, and heirloom restoration are some of the most common needs from La Porte customers. These are practical repairs tied to daily wear, gift timing, and sentimental preservation.",
-      "A stopped watch may only need a battery, but it can also signal gasket wear or deeper movement issues if it was exposed to moisture, sweat, heat, or a loose crown. A bent prong may look cosmetic, but it can mean the stone is one snag away from falling out.",
-      "For rings and chains worn through hands-on workdays, the useful details are where the piece catches, whether the clasp has opened unexpectedly, whether the ring has started spinning, and whether a stone moves under light pressure. A quick local inspection helps separate minor fixes from urgent repairs.",
+      "A stopped watch may only need a battery, but it can also signal gasket wear or deeper movement issues. A bent prong may look cosmetic, but it can mean the stone is one snag away from falling out. A quick local inspection helps separate minor fixes from urgent repairs.",
       "For custom or heirloom work, La Porte customers also come in when they want to reuse stones or gold in a stronger design instead of repeatedly repairing a fragile setting.",
     ],
     visitHeading: "Planning a visit from La Porte",
     visitBody: [
-      "If you are coming from La Porte, start with the service page that matches the problem or send a quote request with one or two photos. That is the fastest way to get pointed toward ring sizing, watch repair, heirloom restoration, or custom work without guessing.",
-      "For the quote note, include whether the piece is daily workwear, weekend/event jewelry, or inherited. For watches, mention water, sweat, heat, or impact history. For heirlooms, mention what you want preserved before any polishing, rebuilding, or redesign is discussed.",
+      "If you are coming from La Porte, start with the service page that matches the problem or book a repair. If you only need pricing first, send one or two photos first. That is the fastest way to get pointed toward ring sizing, watch repair, heirloom restoration, or custom work without guessing.",
       "When you arrive, we inspect the item, explain the safest path forward, and confirm the starting price and likely timeline before work begins. That makes the trip more efficient and keeps the decision grounded in the actual condition of the piece.",
       "If the repair is simple, it may follow the Same Day/Next Day pattern. If it is more complex, you will still leave with a clearer plan and a real recommendation rather than a vague estimate.",
     ],
-    localScenarios: [
-      {
-        title: "Coastal watch concern",
-        body:
-          "Especially relevant for La Porte watch owners when a stopped watch may also need gasket, crown, or moisture-related attention, not only a quick battery swap.",
-      },
-      {
-        title: "Workwear ring or chain",
-        body:
-          "Useful when a daily-wear ring, clasp, chain, or bracelet may need more than a spot repair because the stress pattern keeps repeating.",
-      },
-      {
-        title: "Repair versus redesign",
-        body:
-          "Useful when inherited jewelry is sentimental but structurally tired and the better answer may be strengthening or redesigning the piece.",
-      },
-    ],
-    repairPathGuide: {
-      heading: "How La Porte customers can triage the repair before driving over",
-      intro:
-        "A short photo quote helps us separate quick work from risk-sensitive repairs before a La Porte customer makes the Pasadena trip. These are the details that change the recommendation most often.",
-      items: [
-        {
-          situation: "Stopped watch after water, sweat, heat, or a loose crown",
-          likelyPath: "Battery plus seal or diagnostic review",
-          nextStep:
-            "Send a dial photo, a case-back photo, and a note about water or heat exposure so we do not treat a moisture-risk watch like a routine kiosk battery job.",
-        },
-        {
-          situation: "Ring or bracelet worn during plant, refinery, or hands-on work",
-          likelyPath: "Structural check before a spot repair",
-          nextStep:
-            "Include a close photo of the worn area and say whether the piece catches, spins, opens, or feels thinner than it used to.",
-        },
-        {
-          situation: "Inherited piece that needs to stay recognizable",
-          likelyPath: "Preservation-first restoration or redesign plan",
-          nextStep:
-            "Tell us what must be preserved before polishing, stone resetting, soldering, or redesign options are discussed.",
-        },
-      ],
-    },
     faqs: [
       {
         question: "Do you offer watch battery replacement for La Porte customers?",
@@ -332,25 +184,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         question: "Should I request a quote before driving from La Porte?",
         answer:
-          "Yes, especially if you have photos. A quote request helps us direct you to the right service and sets expectations before you make the trip.",
-      },
-    ],
-    helpfulReads: [
-      {
-        label: "Where to get a watch battery replaced near Pasadena",
-        href: "/blog/watch-battery-replacement",
-      },
-      {
-        label: "Does my watch need a battery or deeper repair?",
-        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
-      },
-      {
-        label: "Heirloom restoration planning guide",
-        href: "/blog/heirloom-restoration-planning-guide",
-      },
-      {
-        label: "Necklace chain repair weak-point service",
-        href: "/services/necklace-repair",
+          "If you are ready to come in, booking is the best path. If you only need pricing first, photos help us direct you to the right service and set expectations before you make the trip.",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "heirloom-restoration", "custom-design"],
@@ -358,12 +192,11 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
   {
     slug: "webster",
     city: "Webster",
-    title: "Jewelry Repair Near Webster, TX | Fast Quote-First Pasadena Service",
+    title: "Jewelry Repair Near Webster, TX | Booking-First Pasadena Service",
     description:
       "Need jewelry or watch repair near Webster? Work with our Pasadena in-house workshop for ring sizing, watch batteries, prong repair, cleanings, and heirloom restoration with clear approvals.",
     cardDescription:
-      "Use this route if you are coming from Webster for watch service, ring sizing, or quote-first repair planning.",
-    heroHeading: "Jewelry repair near Webster for watch, ring, and before-you-drive triage.",
+      "Use this route if you are coming from Webster for watch service, ring sizing, or booking-first repair planning.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "Watch and jewelry repair guidance for Webster clients",
     intro:
@@ -375,40 +208,21 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     ],
     whyHeading: "Why Webster customers choose a nearby in-house repair shop",
     whyBody: [
-      "The main advantage is clarity before the drive. If your ring is loose, your watch stopped, or a sentimental piece needs inspection, you can start with a quote request and arrive with a more realistic next step instead of guessing whether the repair is simple or structural.",
-      "That matters for Webster customers balancing Bay Area schedules around work, school pickup, medical appointments, Baybrook errands, or the NASA/Clear Lake corridor. A quick battery swap, ring sizing assessment, or prong inspection is easier when the shop can explain what is urgent, what is routine, and what can wait until a more convenient visit.",
+      "The main advantage is clarity. If your ring is loose, your watch stopped, or a sentimental piece needs inspection, you can book a repair and arrive with a more realistic next step instead of guessing whether the repair is simple or structural.",
+      "That matters for Webster customers balancing tight schedules. A quick battery swap, ring sizing assessment, or prong inspection is easier when the shop can explain what is urgent, what is routine, and what can wait until a more convenient visit.",
       "Because the work stays in-house, you do not lose visibility once the piece leaves the counter. You are dealing with one local team from intake to pickup.",
     ],
     commonRepairsHeading: "Common jewelry and watch repairs from the Webster area",
     commonRepairsBody: [
       "The most common Webster requests are watch battery service, ring sizing, prong repair, chain repair, and jewelry cleaning. These are practical repairs tied to daily wear and the need to get a piece safely wearable again.",
-      "Many Webster customers come in because a watch stopped before work, an engagement ring suddenly feels loose, or a chain failed before a weekend event. These are the kinds of repairs where a nearby in-house workshop is more useful than a generic intake counter because the first question is whether the item is safe to keep wearing.",
-      "For watch requests, the useful intake detail is whether the watch simply stopped, started jumping seconds, fogged under the crystal, or has a crown that feels loose. For ring requests, the useful detail is whether the fit changed, a stone moves, or a prong catches fabric. Those details help separate a routine visit from a repair that should be inspected before normal wear continues.",
-      "If the issue turns out to be more structural, the quote-first process helps you understand whether the better answer is a spot repair, a rebuild, or a redesign path.",
+      "Many Webster customers come in because a watch stopped before work, an engagement ring suddenly feels loose, or a chain failed at exactly the wrong time. These are the kinds of repairs where a nearby in-house workshop is more useful than a generic intake counter.",
+      "If the issue turns out to be more structural, the booking-first process helps you understand whether the better answer is a spot repair, a rebuild, or a redesign path.",
     ],
     visitHeading: "Planning a visit from Webster",
     visitBody: [
-      "If you are coming from Webster, the most efficient path is to start with photos and a fast quote request. That helps us tell you whether you are likely dealing with a quick battery replacement, a ring sizing appointment, or a more detailed repair assessment.",
-      "Include one close photo of the problem area and one wider photo of the full piece. For watches, add the brand and whether the watch stopped after water, impact, or sitting unused. For rings, add whether the piece is worn daily and whether any stone movement is visible. That makes the Webster-to-Pasadena trip more focused.",
+      "If you are coming from Webster, the most efficient path is to book a repair. If you only need pricing first, start with photos. That helps us tell you whether you are likely dealing with a quick battery replacement, a ring sizing appointment, or a more detailed repair assessment.",
       "When you arrive, we inspect the item, confirm the likely timeline, and explain the starting price before work begins. That keeps the trip focused and avoids unnecessary back-and-forth.",
       "If the repair is straightforward, it may fit the Same Day/Next Day pattern. If it is more complex, you still leave with a clear plan from the same shop that will handle the work.",
-    ],
-    localScenarios: [
-      {
-        title: "Bay Area workday watch issue",
-        body:
-          "A practical fit when a watch stops before work, Baybrook errands, or a NASA/Clear Lake-area appointment and you need to know whether it is a simple battery path or a deeper repair issue.",
-      },
-      {
-        title: "Before-you-drive triage",
-        body:
-          "Useful when Webster customers want a photo-based first answer before deciding whether the trip should be for a quote, a booking, or a later visit with more time set aside.",
-      },
-      {
-        title: "Loose ring or stone",
-        body:
-          "The better path when something suddenly feels wrong and the safest move is to inspect it before normal daily wear continues.",
-      },
     ],
     faqs: [
       {
@@ -419,30 +233,12 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         question: "What should I do before driving from Webster for a repair?",
         answer:
-          "Start with a fast quote and photos if possible. That helps us guide you toward the right service before you make the trip.",
+          "Start by booking a repair. If pricing is the only question first, send photos with a quote request and we will guide you toward the right service before you make the trip.",
       },
       {
         question: "Can standard repairs still be same-day for Webster customers?",
         answer:
           "Many standard repairs still follow our Same Day/Next Day pattern, depending on the item, the damage, and current bench load.",
-      },
-    ],
-    helpfulReads: [
-      {
-        label: "Does my watch need a battery or deeper repair?",
-        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
-      },
-      {
-        label: "Watch intake details before you make the drive",
-        href: "/blog/watch-battery-replacement",
-      },
-      {
-        label: "Gold ring resizing cost and timing guide",
-        href: "/blog/cost-to-resize-gold-ring-pasadena",
-      },
-      {
-        label: "Stone security checklist before you keep wearing a ring",
-        href: "/blog/stone-security-checklist",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "stone-setting"],
@@ -454,8 +250,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     description:
       "Looking for jewelry repair near Friendswood? Visit our Pasadena in-house workshop for ring sizing, prong repair, heirloom restoration, jewelry cleaning, and custom guidance with clear approvals.",
     cardDescription:
-      "Friendswood customers can start here for heirloom repair, ring work, and safer quote-first guidance before visiting the shop.",
-    heroHeading: "Jewelry repair near Friendswood for heirlooms and engagement-ring confidence.",
+      "Friendswood customers can start here for heirloom repair, ring work, and safer booking-first guidance before visiting the shop.",
     heroImage: "/images/about/storefront.jpg",
     heroAlt: "In-house jewelry repair guidance for Friendswood clients",
     intro:
@@ -469,39 +264,19 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     whyBody: [
       "The biggest reason is trust. Meaningful pieces are easier to hand over when you know the work stays local and the person inspecting the issue can explain whether the item needs a quick repair, a structural rebuild, or a redesign conversation.",
       "That matters for Friendswood customers bringing in inherited jewelry, delicate side-stone rings, worn prongs, or sentimental chains that have already been repaired once before. The goal is not just to patch the issue. It is to return the piece in a safer, longer-lasting condition.",
-      "Friendswood visits also tend to be planned around family schedules, school events, church weekends, weddings, or a longer errand loop toward Pasadena. A quote-first intake helps separate a quick ring or chain fix from a more careful heirloom appointment before you make the drive.",
-      "A quote-first workflow also reduces guesswork. You can start with photos, understand the likely path, and decide whether the trip is for a same-day fix or a deeper bench assessment.",
+      "A booking-first workflow also reduces guesswork. You can start with photos, understand the likely path, and decide whether the trip is for a same-day fix or a deeper bench assessment.",
     ],
     commonRepairsHeading: "Common repairs we see from Friendswood customers",
     commonRepairsBody: [
       "Friendswood customers most often come in for ring sizing, stone security work, chain repair, jewelry cleaning, and heirloom restoration. These are high-trust repairs because they affect how safely the piece can be worn and whether the original look can be preserved.",
       "A loose diamond, worn prong, thin shank, or inherited ring with accumulated wear is exactly the kind of problem that benefits from an in-house inspection before anyone promises a quick fix.",
-      "For engagement rings, the useful intake detail is whether the ring spins, feels tight by the end of the day, catches on clothing, or has side stones that no longer sit evenly. For heirlooms, the useful detail is what should be preserved: engraving, patina, original stones, family metal, or the overall silhouette.",
       "For pieces with sentimental value, the right answer is sometimes restoration and sometimes redesign. We help make that distinction before work begins.",
     ],
     visitHeading: "What to expect if you are visiting from Friendswood",
     visitBody: [
-      "If you are coming from Friendswood, the easiest workflow is to start with a photo and quote request, especially for ring or heirloom work. That helps us point you toward the right service before you arrive.",
-      "Send one close photo of the damage, one full-piece photo, and a short note about whether the piece is daily wear, event-driven, or sentimental. If it is an inherited piece, include any loose stones, missing parts, or past repair history so the first conversation is not too vague.",
+      "If you are coming from Friendswood, the easiest workflow is to book a repair, especially for ring or heirloom work. If you only need pricing first, a photo and quote request can still point you toward the right service before you arrive.",
       "Once you are in the shop, we inspect the piece, confirm whether the issue is cosmetic or structural, and walk through starting price and timing before any repair begins.",
       "That keeps the visit useful whether you need a quick ring fix or a more thoughtful heirloom restoration plan.",
-    ],
-    localScenarios: [
-      {
-        title: "Engagement ring confidence check",
-        body:
-          "A strong fit when a ring needs sizing, prong work, or stone security reviewed before it is worn daily again.",
-      },
-      {
-        title: "Inherited jewelry decision",
-        body:
-          "Useful when a family piece needs a careful recommendation on preservation, reinforcement, or redesign rather than a generic repair answer.",
-      },
-      {
-        title: "Event or heirloom deadline",
-        body:
-          "Best when photos can help establish whether the trip is likely to be a straightforward fix, an event-driven repair, or a deeper restoration conversation.",
-      },
     ],
     faqs: [
       {
@@ -510,32 +285,14 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
           "Yes. Heirloom restoration and structural inspection are common needs for nearby Friendswood customers.",
       },
       {
-        question: "Is a quote request worth doing before I drive from Friendswood?",
+        question: "Should I book before I drive from Friendswood?",
         answer:
-          "Yes. A quote request with photos often helps us tell you whether the piece likely needs basic repair, structural work, or redesign planning.",
+          "Yes. Booking is the best path if you are ready to visit. If you only need pricing first, photos often help us tell you whether the piece likely needs basic repair, structural work, or redesign planning.",
       },
       {
         question: "Do you handle engagement-ring style repairs for Friendswood customers?",
         answer:
           "Yes. Ring sizing, prong repair, stone tightening, and related engagement-ring work are common requests.",
-      },
-    ],
-    helpfulReads: [
-      {
-        label: "Heirloom restoration planning guide",
-        href: "/blog/heirloom-restoration-planning-guide",
-      },
-      {
-        label: "Gold ring resizing cost and timing guide",
-        href: "/blog/cost-to-resize-gold-ring-pasadena",
-      },
-      {
-        label: "How to choose a jeweler for repair work",
-        href: "/blog/how-to-choose-a-jeweler",
-      },
-      {
-        label: "Stone security checklist before a loose stone becomes a loss",
-        href: "/blog/stone-security-checklist",
       },
     ],
     helpfulReadServiceSlugs: ["ring-sizing", "stone-setting", "heirloom-restoration"],
@@ -546,81 +303,36 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
     areaSchemaType: "Place",
     title: "Jewelry Repair Near Clear Lake, TX | Nearby Pasadena In-House Workshop",
     description:
-      "Need jewelry or watch repair near Clear Lake? Our Pasadena in-house workshop handles ring sizing, watch batteries, prong repair, jewelry cleaning, and heirloom restoration with clear quote-first guidance.",
+      "Need jewelry or watch repair near Clear Lake? Our Pasadena in-house workshop handles ring sizing, watch batteries, prong repair, jewelry cleaning, and heirloom restoration with clear booking-first guidance.",
     cardDescription:
-      "Clear Lake customers can start here for nearby watch repair, ring work, and quote-first service from the Pasadena workshop.",
-    heroHeading: "Jewelry repair near Clear Lake for watch moisture, ring fit, and stone-risk questions.",
+      "Clear Lake customers can start here for nearby watch repair, ring work, and booking-first service from the Pasadena workshop.",
     heroImage: "/images/services/watch-repair-hero.jpg",
     heroAlt: "Jewelry and watch repair guidance for Clear Lake clients",
     intro:
-      "Clear Lake customers usually want a nearby repair shop that feels more reliable than a kiosk and easier than shipping a meaningful piece away. Our Pasadena workshop serves that need with in-house work, clear approvals, and a straightforward quote-first process.",
+      "Clear Lake customers usually want a nearby repair shop that feels more reliable than a kiosk and easier than shipping a meaningful piece away. Our Pasadena workshop serves that need with in-house work, clear approvals, and a straightforward booking-first process.",
     trustPoints: [
       "Nearby in-house Pasadena workshop for Clear Lake clients",
       "Good fit for watch, ring, and heirloom questions",
-      "Fast quote-first path before you visit",
+      "Fast booking path before you visit",
     ],
     whyHeading: "Why Clear Lake customers use a Pasadena in-house jeweler",
     whyBody: [
-      "The value is not just proximity. It is being able to get a real recommendation on whether the piece needs a battery, a simple repair, structural reinforcement, or a redesign conversation before you build the trip around it.",
-      "That is especially useful for Clear Lake customers working around NASA-area schedules, Bay Area Boulevard errands, school pickup, or a weekend event near the water. A stopped watch, a ring that no longer fits, or a stone that feels exposed should be sorted by repair risk before the piece goes back into normal wear.",
+      "The value is not just proximity. It is being able to get a real recommendation on whether the piece needs a battery, a simple repair, structural reinforcement, or a redesign conversation.",
+      "That is especially useful for Clear Lake customers who are trying to solve a practical problem quickly, like a stopped watch, a ring that no longer fits, or a stone that feels exposed.",
       "Because the repair stays with one local team, the handoff is cleaner and the advice is easier to trust than a chain intake model.",
     ],
     commonRepairsHeading: "Common repairs from Clear Lake customers",
     commonRepairsBody: [
       "The most common requests from the Clear Lake area are watch battery replacement, ring sizing, prong repair, jewelry cleaning, and heirloom inspection. These are repairs where early action matters because small issues can become expensive losses.",
-      "A loose stone, tired clasp, bent prong, or dead watch may look minor at first. For Clear Lake watch requests, water exposure, humidity, fog under the crystal, and a weak crown matter because those symptoms can turn a battery request into a seal or movement concern.",
-      "For rings and daily-wear jewelry, the useful intake detail is whether the piece is catching on clothing, spinning more than usual, or showing one prong that looks flatter than the others. In many cases, a quick local inspection is what prevents a lost diamond, a broken chain, or a more expensive repair later.",
+      "A loose stone, tired clasp, bent prong, or dead watch may look minor at first. In many cases, a quick local inspection is what prevents a lost diamond, a broken chain, or a more expensive movement issue later.",
       "For sentimental pieces, Clear Lake customers also use the shop when they need help deciding between cleaning, structural repair, restoration, or redesign.",
     ],
     visitHeading: "Planning a repair visit from Clear Lake",
     visitBody: [
-      "If you are coming from Clear Lake, start with a fast quote if you can share photos. That helps us tell you whether the issue is likely straightforward or whether the piece needs a deeper in-house assessment.",
-      "For watches, include whether the watch stopped after water, sweat, heat, or sitting unused. For rings, include a close photo of the prongs, side stones, or shank plus one wider photo of the full piece. Those details make the Pasadena visit more focused.",
+      "If you are coming from Clear Lake, start by booking a repair. If you only need pricing first, a photo-based quote can still help us tell you whether the issue is likely straightforward or whether the piece needs a deeper in-house assessment.",
       "When you arrive, we inspect the item, explain the safest next step, and confirm the likely timing and starting price before any work begins.",
       "That makes the trip more worthwhile, especially when you are trying to solve the repair without guessing which service category applies.",
     ],
-    localScenarios: [
-      {
-        title: "Water or humidity watch decision",
-        body:
-          "Helpful when you need to separate a routine battery issue from a Clear Lake-area watch problem that may involve moisture, seals, or deeper diagnosis before more time passes.",
-      },
-      {
-        title: "Daily-wear stone check",
-        body:
-          "Useful when a prong, clasp, or setting feels questionable and the priority is avoiding a more expensive loss before the ring goes back into daily wear.",
-      },
-      {
-        title: "Category clarification",
-        body:
-          "Best when the issue is real but not obvious yet and you want the Pasadena visit to start with the right service path.",
-      },
-    ],
-    repairPathGuide: {
-      heading: "How Clear Lake customers can triage the repair before making the trip",
-      intro:
-        "Clear Lake repair questions often start with uncertainty: is the watch only dead, is the ring still safe to wear, or is the piece too sentimental for a quick cosmetic answer? These details help us sort the first recommendation before you drive over.",
-      items: [
-        {
-          situation: "Watch stopped after boating, humidity, sweat, or fog under the crystal",
-          likelyPath: "Battery plus moisture and seal review",
-          nextStep:
-            "Send a dial photo, case-back photo, and crown-side photo, and mention any water, steam, sweat, or fog history before assuming it is battery-only.",
-        },
-        {
-          situation: "Ring, prong, clasp, or chain feels questionable during daily wear",
-          likelyPath: "Stone-security or stress-point inspection",
-          nextStep:
-            "Include one close photo of the worn area and one full-piece photo so we can tell whether the piece looks safe to wear or needs bench attention first.",
-        },
-        {
-          situation: "Inherited or older piece needs cleaning, repair, or redesign direction",
-          likelyPath: "Preservation-first condition review",
-          nextStep:
-            "Tell us what should stay original before polishing, resetting, soldering, or redesign options are discussed.",
-        },
-      ],
-    },
     faqs: [
       {
         question: "Do you serve Clear Lake customers even though the shop is in Pasadena?",
@@ -635,25 +347,7 @@ export const SERVICE_AREA_PAGES: ServiceAreaPage[] = [
       {
         question: "Should I request a quote before visiting from Clear Lake?",
         answer:
-          "Yes. A quote request with photos gives you the fastest path into the right repair conversation before you drive over.",
-      },
-    ],
-    helpfulReads: [
-      {
-        label: "Where to get a watch battery replaced near Pasadena",
-        href: "/blog/watch-battery-replacement",
-      },
-      {
-        label: "Does my watch need a battery or deeper repair?",
-        href: "/blog/does-my-watch-need-battery-or-repair-pasadena",
-      },
-      {
-        label: "Gold ring resizing cost and timing guide",
-        href: "/blog/cost-to-resize-gold-ring-pasadena",
-      },
-      {
-        label: "Necklace chain repair weak-point service",
-        href: "/services/necklace-repair",
+          "If you are ready to visit, booking is the fastest path. If you only need pricing first, photos help move you into the right repair conversation before you drive over.",
       },
     ],
     helpfulReadServiceSlugs: ["watch-repair", "ring-sizing", "heirloom-restoration"],

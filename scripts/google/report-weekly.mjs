@@ -27,7 +27,9 @@ function mdTable(headers, rows) {
 async function main() {
   const localEnv = loadLocalEnv();
   const { webmasters, analyticsAdmin, analyticsData } = await createGoogleClients(localEnv);
-  const { startDate, endDate } = getDateRange(7);
+  const defaultRange = getDateRange(7);
+  const startDate = process.env.REPORT_START_DATE || defaultRange.startDate;
+  const endDate = process.env.REPORT_END_DATE || defaultRange.endDate;
 
   const targetSite =
     getEnv(localEnv, "SEARCH_CONSOLE_PROPERTY") || "https://www.susiesjewelryrepair.com/";

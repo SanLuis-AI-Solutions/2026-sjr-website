@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
 import { formatTimeEstimate } from "@/lib/format";
-import { TrackedLink } from "@/components/analytics/tracked-link";
 
 type ServiceItem = {
   slug?: string;
@@ -57,7 +57,7 @@ export function ServicesGrid({
 
   return (
     <section
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#f6e4d7_0%,#efd1be_100%)] py-14 md:py-24"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#f6e4d7_0%,#efd1be_100%)] py-16 md:py-24"
       id={id}
     >
       <div className="pointer-events-none absolute -left-32 top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(209,184,130,0.25),_transparent_70%)]" />
@@ -80,7 +80,7 @@ export function ServicesGrid({
           </header>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {services.map((service, index) => {
             if (!service) return null;
             const slug = service.slug || "unavailable";
@@ -89,39 +89,34 @@ export function ServicesGrid({
             const image = service.image || service.image_url || svgDataUri(name);
             const timeEstimateRaw = service.time_estimate ?? service.timeEstimate ?? null;
             const timeEstimate = formatTimeEstimate(timeEstimateRaw);
-            const startingPriceRaw = service.starting_price ?? service.startingPrice ?? null;
-            const startingPrice = startingPriceRaw != null
-              ? (String(startingPriceRaw).startsWith("$") ? String(startingPriceRaw) : `$${startingPriceRaw}`)
-              : null;
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
-            const mobileVisibilityClass = index > 3 ? "hidden sm:block" : "";
-            const cardClass = `reveal-on-scroll ${delayClass} ${mobileVisibilityClass} group relative block overflow-hidden rounded-3xl border border-brand-burgundy/15 bg-white shadow-[0_18px_42px_rgba(58,25,16,0.14)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] hover:border-brand-gold/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
+            const cardClass = `reveal-on-scroll ${delayClass} group relative block overflow-hidden rounded-2xl border border-brand-burgundy/15 bg-white shadow-[0_18px_44px_rgba(58,25,16,0.14)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_32px_70px_rgba(58,25,16,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:rounded-3xl md:shadow-[0_24px_60px_rgba(58,25,16,0.18)]`;
             const cardBody = (
-              <>
-                <div className="relative hidden aspect-[4/3] w-full overflow-hidden sm:block">
+              <div className="grid grid-cols-[7.25rem_minmax(0,1fr)] md:block">
+                <div className="relative min-h-48 w-full overflow-hidden md:aspect-[4/3]">
                   <Image
                     src={image}
                     alt={name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    width={1200}
+                    height={900}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent" />
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.12] to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" aria-hidden="true" />
                 </div>
 
-                <div className="p-5 md:p-8">
-                  <h3 className="font-serif text-xl text-neutral-900 md:text-2xl">
+                <div className="p-4 md:p-8">
+                  <h3 className="font-serif text-[1.35rem] leading-tight text-neutral-900 md:text-2xl">
                     {name}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                  <p className="mt-2 text-sm leading-6 text-stone-600 md:mt-3 md:leading-relaxed">
                     {summary}
                   </p>
 
                   {timeEstimate ? (
                     <div className="mt-4 flex flex-wrap gap-4 border-t border-stone-200 pt-4 md:mt-6 md:pt-6">
                       <div className="flex flex-col">
-                        <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600">Turnaround</span>
+                        <span className="text-[10px] uppercase tracking-widest text-stone-600">Turnaround</span>
                         <span className="font-sans text-sm font-semibold text-neutral-900">
                           {timeEstimate}
                         </span>
@@ -129,39 +124,31 @@ export function ServicesGrid({
                     </div>
                   ) : null}
 
-                  {startingPrice ? (
-                    <div className="mt-4 md:mt-6">
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-stone-600">Starting at</span>
-                      <p className="font-sans text-sm font-semibold text-neutral-900">{startingPrice}</p>
-                    </div>
-                  ) : null}
-
-                  <div className="mt-5 flex items-center text-xs font-bold uppercase tracking-[0.3em] text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep md:mt-8">
+                  <div className="mt-5 flex items-center text-xs font-bold uppercase tracking-widest text-brand-burgundy transition-colors group-hover:text-brand-burgundy-deep md:mt-8">
                     Explore Details
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="ml-2 h-3 w-3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                     </svg>
                   </div>
                 </div>
-              </>
+              </div>
             );
 
             return (
               service.slug ? (
-                <TrackedLink
+                <Link
                   key={slug}
                   href={`/services/${slug}`}
-                  eventName="service_card_click"
-                  eventParams={{
-                    service_slug: slug,
-                    service_name: name,
-                    placement: id,
-                  }}
+                  data-track-event="service_card_click"
+                  data-track-slug={slug}
+                  data-track-placement={id}
+                  data-track-target="service_details"
                   className={cardClass}
                   id={`service-${slug}`}
+                  aria-label={`Explore details for ${name}`}
                 >
                   {cardBody}
-                </TrackedLink>
+                </Link>
               ) : (
                 <article
                   key={slug}
@@ -174,41 +161,6 @@ export function ServicesGrid({
             );
           })}
         </div>
-
-        {services.length > 4 ? (
-          <div className="mt-5 rounded-3xl border border-brand-burgundy/15 bg-white/82 p-4 shadow-[0_14px_34px_rgba(58,25,16,0.12)] sm:hidden">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
-              More repair services
-            </p>
-            <div className="mt-3 grid gap-2">
-              {services.slice(4).map((service) => {
-                const slug = service.slug || "unavailable";
-                const name = service.name || "Untitled Service";
-                if (!service.slug) return null;
-
-                return (
-                  <TrackedLink
-                    key={slug}
-                    href={`/services/${slug}`}
-                    eventName="service_card_click"
-                    eventParams={{
-                      service_slug: slug,
-                      service_name: name,
-                      placement: `${id}_mobile_compact`,
-                    }}
-                    className="inline-flex min-h-12 items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                    aria-label={`Explore details for ${name}`}
-                  >
-                    <span>{name}</span>
-                    <span aria-hidden className="text-brand-burgundy">
-                      →
-                    </span>
-                  </TrackedLink>
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
       </div>
     </section>
   );

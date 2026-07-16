@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   title: page?.title || "Jewelry Repair Near Clear Lake, TX | Susie's Jewelry Repair",
   description:
     page?.description ||
-    "Nearby Pasadena jewelry and watch repair for Clear Lake customers with quote-first guidance, in-house work, and clear approvals.",
+    "Nearby Pasadena jewelry and watch repair for Clear Lake customers with booking-first guidance, in-house work, and clear approvals.",
   canonical: "/services/clear-lake",
 });
 

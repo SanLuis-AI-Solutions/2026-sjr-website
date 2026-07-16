@@ -17,12 +17,6 @@
   --stone-600: #4a3a3c;
   /* Neutrals - Subtext */
 
-  /* Section Background Scale */
-  --warm-surface: #f5ede2;
-  /* Mid-warm section backgrounds */
-  --warm-deep: #f1e4d7;
-  /* Deeper warm section backgrounds */
-
   /* Glass-morphism Defaults */
   --glass-bg: rgba(250, 247, 242, 0.7);
   --glass-border: rgba(209, 184, 130, 0.2);
@@ -36,8 +30,6 @@
   --color-brand-gold: var(--brand-gold);
   --color-stone-200: var(--stone-200);
   --color-stone-600: var(--stone-600);
-  --color-warm-surface: var(--warm-surface);
-  --color-warm-deep: var(--warm-deep);
 
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
@@ -50,6 +42,12 @@ body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input[type="date"] {
+  color-scheme: light;
+  background-color: #ffffff;
+  color: #181112;
 }
 
 /* Typography Enhancements */
@@ -65,13 +63,9 @@ h4,
 
 /* Stabilize above-the-fold text LCP by avoiding delayed webfont swaps. */
 .lcp-heading {
-  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-
-.lcp-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* Luxury UI Utilities */
@@ -138,8 +132,8 @@ h4,
 
 .micro-interaction {
   transition-property: transform, filter, background-color, color, border-color, box-shadow;
-  transition-duration: 0.32s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(122, 46, 58, 0.18);
 }
@@ -147,10 +141,6 @@ h4,
 .micro-interaction:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
-}
-
-.micro-interaction:active {
-  transform: translateY(0) scale(0.98);
 }
 
 /* Animations */
@@ -177,31 +167,30 @@ h4,
 }
 
 .animate-fade-up {
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: none;
+  opacity: 1;
+  transform: none;
 }
 
 .animate-slow-zoom {
-  animation: slow-zoom 20s ease-in-out infinite alternate;
+  animation: none;
 }
 
 .reveal-ready .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 .reveal-ready .reveal-on-scroll.reveal-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @supports (animation-timeline: view()) {
   html:not(.reveal-ready):not(.reveal-disabled) .reveal-on-scroll {
-    opacity: 0;
-    animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 35%;
+    opacity: 1;
+    animation: none;
   }
 }
 
@@ -210,15 +199,6 @@ html.reveal-disabled .reveal-on-scroll {
   transform: none;
   transition: none;
   animation: none;
-}
-
-/* Grain texture overlay — use as an absolute child div with aria-hidden */
-.grain-layer {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px;
-  opacity: 0.042;
-  pointer-events: none;
 }
 
 .cv-auto {
@@ -247,36 +227,17 @@ html.reveal-disabled .reveal-on-scroll {
   animation-delay: 0.24s;
 }
 
-.reveal-delay-5 {
-  animation-delay: 0.32s;
-}
-
-.reveal-delay-6 {
-  animation-delay: 0.40s;
-}
-
 @media (max-width: 767px) {
   .home-hero-mobile-static {
     animation: none;
     opacity: 1;
     transform: none;
   }
-
-  .cv-section {
-    content-visibility: visible;
-    contain-intrinsic-size: auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  details.mobile-flow-disclosure:not([open]) > :not(summary) {
-    display: block;
-  }
 }
 
 @media (min-width: 768px) {
   .parallax-hero {
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 }
 

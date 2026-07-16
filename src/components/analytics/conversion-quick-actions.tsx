@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { trackGaEvent } from "./ga-tracker";
 import {
@@ -44,14 +44,21 @@ export function ConversionQuickActions({
   className,
 }: ConversionQuickActionsProps) {
   const pathname = usePathname();
-  const variant = useMemo<CtaVariant>(() => {
-    if (typeof window === "undefined") return "control";
-    const existing = resolveCtaVariant(window.sessionStorage.getItem(getCtaVariantStorageKey()));
-    if (existing) return existing;
+  const [variant, setVariant] = useState<CtaVariant>("control");
 
-    const selected = pickVariant();
-    window.sessionStorage.setItem(getCtaVariantStorageKey(), selected);
-    return selected;
+  useEffect(() => {
+    let active = true;
+    const existing = resolveCtaVariant(window.sessionStorage.getItem(getCtaVariantStorageKey()));
+    const selected = existing || pickVariant();
+    if (!existing) window.sessionStorage.setItem(getCtaVariantStorageKey(), selected);
+
+    window.requestAnimationFrame(() => {
+      if (active) setVariant(selected);
+    });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -82,24 +89,24 @@ export function ConversionQuickActions({
     if (tone === "dark") {
       if (variant === "primary_focus") {
         return secondaryTone === "default"
-          ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
-          : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
+          ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
+          : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
       }
 
       return secondaryTone === "default"
-        ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
-        : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 md:inline-flex ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
+        ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold hover:bg-brand-gold/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`
+        : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10 ${baseFocus} focus-visible:ring-offset-brand-burgundy-deep`;
     }
 
     if (variant === "primary_focus") {
       return secondaryTone === "default"
-        ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 md:inline-flex ${baseFocus}`
-        : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 md:inline-flex ${baseFocus}`;
+        ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300/80 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 ${baseFocus}`
+        : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-600 hover:bg-stone-100 ${baseFocus}`;
     }
 
     return secondaryTone === "default"
-      ? `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 md:inline-flex ${baseFocus}`
-      : `micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 md:inline-flex ${baseFocus}`;
+      ? `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 ${baseFocus}`
+      : `micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-700 hover:bg-stone-100 ${baseFocus}`;
   };
 
   const onTrack = (target: string) => {

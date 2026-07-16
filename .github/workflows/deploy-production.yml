@@ -118,31 +118,7 @@ jobs:
           VERCEL_ORG_ID: team_WhqqnF14OMjd8EfHj7lVzx7A
           VERCEL_PROJECT_ID: prj_a7IPNCaE1nzmcO8ojPqyDLP0wIti
         run: |
-          set +e
-          deploy_output=$(npx -y vercel@50.15.1 deploy --prod --yes --token="$VERCEL_TOKEN" 2>&1)
-          deploy_status=$?
-          set -e
-          printf '%s\n' "$deploy_output"
-
-          if [ "$deploy_status" -eq 0 ]; then
-            exit 0
-          fi
-
-          deployment_url=$(printf '%s\n' "$deploy_output" | grep -Eo 'https://[^ ]+\.vercel\.app' | tail -n1)
-          if [ -z "$deployment_url" ]; then
-            exit "$deploy_status"
-          fi
-
-          echo "Vercel deploy command exited $deploy_status. Inspecting $deployment_url before failing..."
-          inspect_output=$(npx -y vercel@50.15.1 inspect "$deployment_url" --token="$VERCEL_TOKEN")
-          printf '%s\n' "$inspect_output"
-
-          if printf '%s\n' "$inspect_output" | grep -Eq 'status[[:space:]].*Ready'; then
-            echo "Deployment is Ready despite the deploy command exit status."
-            exit 0
-          fi
-
-          exit "$deploy_status"
+          npx -y vercel@50.15.1 deploy --prod --yes --token="$VERCEL_TOKEN"
 
       - name: Wait for production alias propagation
         if: steps.changes.outputs.deploy_relevant == 'true'

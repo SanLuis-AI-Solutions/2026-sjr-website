@@ -15,12 +15,6 @@ export type BlogNextStep = {
   href: string;
 };
 
-export type BlogDecisionSignal = {
-  signal: string;
-  meaning: string;
-  nextAction: string;
-};
-
 type BlogDiscoverySurface = "blogFeatured" | "serviceHub" | "geoHelpfulReads";
 
 export type BlogPost = {
@@ -41,7 +35,6 @@ export type BlogPost = {
   nextStepsHeading?: string;
   nextStepsIntro?: string;
   nextSteps?: BlogNextStep[];
-  decisionSignals?: BlogDecisionSignal[];
   relatedServiceSlugs: string[];
   discoveryBoosts?: Partial<Record<BlogDiscoverySurface, number>>;
 };
@@ -55,7 +48,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/how-to-choose-a-jeweler-cover.jpg",
     topics: ["Trust & Buying", "Heirloom Care"],
     publishedAt: "2026-02-17",
-    reviewedAt: "2026-05-13",
+    reviewedAt: "2026-02-18",
     readTime: "4 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -85,81 +78,8 @@ export const BLOG_POSTS: BlogPost[] = [
           "The best outcome is not just a finished repair; it is a piece that wears safely. We verify fit, setting security, and overall finish before you ever leave the shop.",
         ],
       },
-      {
-        heading: "The counter-level questions that separate a repair shop from a sales counter",
-        body: [
-          "A strong repair intake should get more specific than 'we can fix that.' For a ring, the jeweler should ask whether it spins, catches on clothing, has a loose stone, was resized before, or needs to keep an engraving intact. For a watch, they should separate a simple battery stop from moisture, corrosion, crown, or movement symptoms before promising timing.",
-          "For inherited jewelry, the conversation should slow down even more. The right shop should ask whether you want to preserve the original look, reuse stones, match missing pieces, or redesign only if the structure is too worn for normal wear.",
-          "If you are comparing jewelers near Pasadena, bring one close photo, one full-piece photo, and the exact moment the problem started. A trustworthy jeweler can use those details to explain the likely repair path, what still needs bench inspection, and what should not be promised from a quick glance.",
-        ],
-      },
-      {
-        heading: "Our Pasadena repair-intake checklist before we quote",
-        body: [
-          "For a ring repair, we want to know whether the shank is thin at the palm side, whether any prong catches hair or clothing, whether a stone turns under light pressure, and whether the ring was resized or soldered before. Those details change whether the safer path is sizing, prong work, stone setting, or a broader rebuild.",
-          "For a chain or bracelet, we look for the exact failure point: clasp tongue, spring ring, jump ring, hollow link, solder seam, or a repeated break near an old repair. A shop that treats every broken chain as the same reconnect is skipping the part that prevents the next failure.",
-          "For heirlooms, the first decision is preservation. We ask what cannot change: original stones, engraving, patina, family metal, profile height, or the overall look. That question matters before cleaning, polishing, resetting, or redesign is discussed.",
-        ],
-      },
-      {
-        heading: "Photo evidence that helps us give a better first answer",
-        body: [
-          "The fastest useful quote usually needs three photos: one full-piece photo for scale, one close photo of the failing area, and one side-angle photo that shows height, bend, clasp condition, crown position, or stone setting depth. Those views tell us far more than a single straight-on glamour shot.",
-          "If you are choosing between repair shops, ask whether the team can explain what those photos do and do not prove. A trustworthy jeweler should be clear about what can be estimated from photos and what still requires bench inspection before final approval.",
-        ],
-      },
-    ],
-    faqHeading: "Questions to ask before choosing a repair jeweler",
-    faqs: [
-      {
-        question: "What is the first question I should ask a jewelry repair shop?",
-        answer:
-          "Ask whether the repair is handled in-house and who approves the final scope before work starts. That answer tells you whether your piece stays accountable to one local team or moves through a third-party handoff.",
-      },
-      {
-        question: "What photos help a jeweler give a better quote?",
-        answer:
-          "Send one full-piece photo, one close photo of the damage, and one side-angle photo that shows prong height, clasp condition, shank thickness, crown position, or the part that failed.",
-      },
-      {
-        question: "When should I avoid a quick repair promise?",
-        answer:
-          "Be cautious if the piece has loose stones, prior repairs, old solder, moisture exposure, a thin shank, or sentimental value and the shop promises a final answer without inspection.",
-      },
-    ],
-    nextStepsHeading: "Best next step if you are choosing who should repair it",
-    nextStepsIntro:
-      "If the piece is sentimental or already showing a specific symptom, start with the service path that matches the risk instead of treating every jeweler comparison like a generic shopping decision.",
-    nextSteps: [
-      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "See Stone Setting Service", href: "/services/stone-setting" },
-      { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
-      { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Book a Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "The shop cannot say who will do the repair",
-        meaning: "Your piece may be handed off or outsourced, which makes approvals and accountability harder.",
-        nextAction: "Ask whether the repair stays in-house and who confirms the final scope.",
-      },
-      {
-        signal: "The estimate sounds final without inspection",
-        meaning: "The quote may be guessing around hidden wear, stone security, prior repairs, or metal condition.",
-        nextAction: "Ask what still needs bench inspection before you approve work.",
-      },
-      {
-        signal: "The piece is sentimental or inherited",
-        meaning: "Preservation goals matter as much as the repair itself.",
-        nextAction: "Ask what can be reinforced without changing the original character.",
-      },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "stone-setting", "ring-sizing", "watch-repair"],
-    discoveryBoosts: {
-      blogFeatured: 6,
-      serviceHub: 7,
-      geoHelpfulReads: 8,
-    },
   },
   {
     slug: "ring-sizing-guide",
@@ -216,7 +136,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "Basic ring sizing often starts around the lower end of our pricing range, while complex sizing starts higher once stone checks, metal additions, wide shanks, or structural reinforcement are involved. The final number depends on the metal, the direction of the size change, the design constraints, and whether finishing work like rhodium is needed afterward.",
           "Most straightforward jobs still follow our Same Day/Next Day pattern, but some rings naturally need more care. If the ring is for a proposal, wedding, anniversary, or upcoming event, that should be part of the first conversation so timing can be planned around the real deadline instead of guessed afterward.",
-          "The easiest next step is to start with a fast quote or bring the ring in for a fit and structure assessment. That gives you a real answer on timing and scope before the work begins.",
+          "The easiest next step is to book a repair or bring the ring in for a fit and structure assessment. If you only need pricing first, a quote is still available. That gives you a real answer on timing and scope before the work begins.",
         ],
       },
     ],
@@ -240,13 +160,13 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     nextStepsHeading: "Best next step if your ring fit still feels uncertain",
     nextStepsIntro:
-      "If you want a clear answer on safety, pricing, and timing, start with ring sizing service details or request a fast quote before committing to the resize.",
+      "If you want a clear answer on safety, pricing, and timing, book a ring sizing assessment or review the ring sizing service details before committing to the resize.",
     nextSteps: [
+      { label: "Book Ring Sizing", href: "/book?from=blog&service=ring-sizing" },
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting", "jewelry-cleaning"],
   },
@@ -258,8 +178,8 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Preventive Care"],
     publishedAt: "2026-02-17",
-    reviewedAt: "2026-05-14",
-    readTime: "8 min read",
+    reviewedAt: "2026-02-18",
+    readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
@@ -304,16 +224,8 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Timing, local convenience, and the best next step",
         body: [
           "Most standard battery replacements still follow our Same Day/Next Day pattern, and many can be handled quickly when the watch is straightforward. More complicated cases take longer for the right reasons: careful opening, seal review, parts condition, or a broader diagnosis if the battery is not the true issue.",
-          "For customers coming from Pasadena, Deer Park, La Porte, Webster, or Clear Lake, the easiest move is to start with a quick quote or bring the watch in for a direct in-house assessment. That keeps the process local, transparent, and under one roof.",
+          "For customers coming from Pasadena, Deer Park, La Porte, Webster, or Clear Lake, the easiest move is to book a repair or bring the watch in for a direct in-house assessment. If you only need pricing first, a quote is still available. That keeps the process local, transparent, and under one roof.",
           "If the watch matters to you, do not wait until it has sat too long with an aging battery. Early service usually protects both the movement and the long-term cost of ownership.",
-        ],
-      },
-      {
-        heading: "The same-day watch battery intake before you drive over",
-        body: [
-          "For a local same-day visit, the fastest intake starts with the watch brand, whether the case back screws down or snaps on, when it stopped, and whether the crystal has ever fogged. Those details help separate a likely while-you-wait battery swap from a watch that needs slower opening, gasket review, or repair diagnosis.",
-          "If you are coming from Deer Park, Pasadena, Clear Lake, or La Porte, send a quick photo of the dial and the back of the case before you leave if the watch is unusual, luxury, vintage, or water-resistant. That gives the bench a better first read and prevents treating a diagnostic watch like a kiosk battery job.",
-          "The goal is still speed, but not careless speed. A good same-day battery service should protect the case, check the seal condition, and tell you when the symptom points beyond a battery before the watch is closed back up.",
         ],
       },
     ],
@@ -334,23 +246,15 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Yes. Moisture, corrosion, stem issues, or other movement problems can look like a battery issue, so the watch may need a deeper check than a battery swap alone.",
       },
-      {
-        question: "Do you offer same-day watch battery replacement near Deer Park and Pasadena?",
-        answer:
-          "Yes. Most straightforward quartz watch battery replacements are same-day, and many can be completed while you wait depending on the watch style, case condition, and bench load.",
-      },
     ],
     nextStepsHeading: "Best next step if your watch just stopped",
     nextStepsIntro:
-      "If you want a local answer before the problem gets bigger, start with the watch repair page or request a fast quote for battery service and condition review.",
+      "If you want a local answer before the problem gets bigger, start with the watch repair page or book a repair for battery service and condition review.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Decide Battery vs Repair", href: "/blog/does-my-watch-need-battery-or-repair-pasadena" },
-      { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
-      { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
       { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair", "bracelet-repair", "heirloom-restoration"],
   },
@@ -362,7 +266,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Preventive Care"],
     publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-02-18",
     readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -405,17 +309,9 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: "The stone-security bench check we want before quoting repair",
-        body: [
-          "A useful loose-stone inspection should identify which part of the setting is failing: worn prong tips, a bent prong, a shallow seat, a loose side stone, a thin shank, or an older head that no longer supports daily wear.",
-          "That distinction changes the quote. Tightening one prong is different from retipping several prongs, rebuilding the head, checking side stones after sizing, or recommending a stronger setting because the original mounting is too tired to trust.",
-          "Before you request a quote, include one close photo from above, one side-view photo showing prong height, and a note about whether the ring recently hit something, started snagging, was resized, or is worn every day. Those details make the first recommendation more useful than a generic 'loose stone' estimate.",
-        ],
-      },
-      {
         heading: "The lowest-risk next step for a ring you do not fully trust",
         body: [
-          "If a ring already feels questionable, do not wait for a special occasion to test it. Bring it in for a quote-first inspection and let the condition decide whether the piece needs immediate work or simply closer monitoring.",
+          "If a ring already feels questionable, do not wait for a special occasion to test it. Bring it in for an in-house inspection and let the condition decide whether the piece needs immediate work or simply closer monitoring.",
           "For Pasadena customers, the value is not only the repair itself. It is knowing the jewelry stays in-house, the risks are explained clearly, and the next decision is based on what the setting actually needs rather than on guesswork.",
           "That makes stone-security checks one of the easiest preventive services to justify. A small repair now is usually the cheaper decision compared with replacing a missing diamond later.",
         ],
@@ -446,38 +342,192 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "The stone clicks or rattles",
-        meaning: "The setting is no longer holding the stone consistently.",
-        nextAction: "Stop wearing it and request a stone-setting inspection before cleaning or resizing.",
-      },
-      {
-        signal: "A prong catches on fabric",
-        meaning: "The prong may be lifted, worn flat, or bent away from the stone.",
-        nextAction: "Ask whether the prong needs tightening, retipping, or rebuilding.",
-      },
-      {
-        signal: "The ring took an impact recently",
-        meaning: "The stone can still look centered while the seat or prong structure is stressed.",
-        nextAction: "Bring the piece in before daily wear turns impact damage into a missing-stone repair.",
-      },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["stone-setting", "jewelry-cleaning", "heirloom-restoration"],
-    discoveryBoosts: {
-      blogFeatured: 7,
-      serviceHub: 8,
-      geoHelpfulReads: 8,
-    },
+  },
+  {
+    slug: "chain-repair-weak-points",
+    title: "Chain Repair 101: Necklace and Bracelet Weak Points",
+    excerpt:
+      "Where chains usually fail, how clasps and jump rings wear out, and what makes one repair last longer than a quick temporary fix.",
+    image: "/images/blog/chain-repair-weak-points-cover.jpg",
+    topics: ["Chain Repair", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Jump rings, clasp connections, and thin chain segments are the most common weak points.",
+      "A lasting repair depends on matching the chain style, the solder work, and the clasp condition instead of only closing the broken spot.",
+      "It is usually smarter to fix a weak chain before it fails again and risks losing the piece altogether.",
+    ],
+    sections: [
+      {
+        heading: "Where chains usually break first",
+        body: [
+          "Most chain failures happen at predictable stress points: the jump ring near the clasp, the clasp itself, and the thinnest links in the area that takes the most daily pull. That pattern holds for both necklaces and bracelets because those are the points where tension, twisting, and repeated opening-and-closing tend to collect.",
+          "Humidity, sweat, lotions, and everyday movement do not destroy a chain on their own, but over time they can contribute to wear on small joints that are already taking repeated stress. The result is usually a chain that looks fine from a distance until one weak link finally opens or snaps.",
+          "Catching those weak points early is one of the easiest ways to prevent a bigger loss, especially if the chain carries a sentimental pendant or is part of your everyday routine.",
+        ],
+      },
+      {
+        heading: "Necklace weak points and bracelet weak points are not always the same",
+        body: [
+          "Necklaces often fail at the clasp connection, the jump ring, or in a fine segment that kinks repeatedly near the front or side. Bracelets can face the same issues, but they also tend to take more abrupt impact during typing, lifting, carrying bags, and normal wrist movement.",
+          "That difference matters because a bracelet that catches on counters or desks may need a stronger clasp or a more durable repair strategy than a necklace that mainly suffers from fine-link fatigue.",
+          "At Susie's, we treat both categories as in-house repair work, but the most durable fix depends on how the piece is actually worn and where the stress is occurring.",
+        ],
+      },
+      {
+        heading: "Why clasps deserve more attention than most customers give them",
+        body: [
+          "A chain can be professionally repaired and still feel unreliable if the clasp is worn, bent, or difficult to close. In many cases the clasp is not just an accessory part. It is one of the core structural weak points in the entire piece.",
+          "That is why clasp replacement or an upgrade is often part of the repair conversation, especially on pieces that have already failed once. If the clasp feels weak in your fingers, pops open too easily, or no longer lines up well, it is worth addressing before the chain comes back into rotation.",
+          "For a customer, that can feel like an extra step. In reality, it is what helps turn a quick repair into a repair that actually lasts.",
+        ],
+      },
+      {
+        heading: "What makes one chain repair last longer than another",
+        body: [
+          "A durable repair is not just about reconnecting a broken point. It depends on using the right method for the chain style, applying controlled heat where appropriate, keeping the repair clean in appearance, and checking whether nearby links or the clasp are also becoming weak.",
+          "If only the obvious break is closed while the surrounding links stay thin or distorted, the chain often fails again close to the original repair. That is why reinforcement and inspection matter as much as the actual solder point.",
+          "At Susie's, the goal is a clean finish that looks natural and feels comfortable to wear, not a bulky or mismatched spot that solves today's break and creates tomorrow's failure.",
+        ],
+      },
+      {
+        heading: "Timing, local service, and the best next step",
+        body: [
+          "Most chain repairs still fit our Same Day/Next Day pattern when the issue is straightforward and the needed parts are standard. If a premium clasp, uncommon chain style, or more delicate reconstruction is involved, the scope should be explained before the work starts.",
+          "For Pasadena customers, the easiest next step is to book a repair intake time or bring the piece in for a direct in-house assessment. That is the fastest way to learn whether the chain needs a simple link repair, a clasp replacement, or a broader reinforcement plan.",
+          "If the chain already broke once, do not assume the weak point is gone. Ask whether the clasp and nearby links should be addressed too so the repair actually lasts.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about weak chains and clasp issues",
+    faqs: [
+      {
+        question: "What part of a chain usually breaks first?",
+        answer:
+          "The most common weak points are the jump ring near the clasp, the clasp itself, and the thinnest links in the section that takes the most daily stress.",
+      },
+      {
+        question: "Should I replace the clasp if the chain already broke once?",
+        answer:
+          "Often yes. If the clasp feels weak, misaligned, or unreliable, replacing or upgrading it can be part of making the repair last longer.",
+      },
+      {
+        question: "How long does chain repair usually take?",
+        answer:
+          "Most straightforward chain repairs follow our Same Day/Next Day pattern, but timing can stretch if the chain is delicate, needs an uncommon clasp, or requires broader reinforcement.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your chain already feels unreliable",
+    nextStepsIntro:
+      "If the chain has a broken link, weak clasp, or repeat failure point, book a repair intake or start with the repair service that matches the piece.",
+    nextSteps: [
+      { label: "Book Chain or Bracelet Repair", href: "/book?from=blog&service=necklace-repair" },
+      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
+      { label: "See Bracelet Repair Service", href: "/services/bracelet-repair" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+    ],
+    relatedServiceSlugs: ["necklace-repair", "bracelet-repair", "heirloom-restoration"],
+  },
+  {
+    slug: "pearl-restringing-timing-guide",
+    title: "Pearl Restringing Timing: When to Restring and Why",
+    excerpt:
+      "A practical guide to when pearls should be restrung, what warning signs matter, and how to avoid strand failure before an important event.",
+    image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
+    topics: ["Pearl Care", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Many frequently worn strands benefit from restringing every 1-2 years.",
+      "Visible gaps, fuzzy string, discoloration, and fraying near the clasp are early warning signs.",
+      "Hand-knotting and clasp inspection are part of what makes professional restringing safer than waiting for failure.",
+    ],
+    sections: [
+      {
+        heading: "Why timely restringing matters",
+        body: [
+          "Pearls and beads usually do not fail without warning. The string stretches, knots loosen, or the clasp area starts to fray long before the whole strand breaks. The problem is that many owners notice the issue only after the necklace already feels risky to wear.",
+          "In our Pasadena workshop, pearl restringing is treated as preventive care rather than emergency cleanup. A strand that still looks mostly intact is often the best candidate for service because the pearls can be restrung, cleaned, and returned to a comfortable drape before anything is lost.",
+          "That matters even more if you wear the strand for church, work, weddings, anniversaries, or family gatherings. Waiting until the necklace snaps usually creates a more stressful repair and can mean searching for missing pearls or dealing with a damaged clasp at the same time.",
+        ],
+      },
+      {
+        heading: "How often should pearls be restrung?",
+        body: [
+          "A practical baseline for many pearl strands is every 1-2 years if they are worn often. That recommendation changes based on how the strand is stored, how frequently it is worn, and how much strain the clasp area sees when it is put on and taken off.",
+          "A special-occasion strand that comes out only a few times a year may last longer. A favorite strand worn weekly usually needs closer attention. The important thing is not chasing a calendar date; it is noticing whether the string still looks clean, firm, and evenly spaced.",
+          "If you are unsure whether your pearls are still safe, bring them in before an event rather than after. An in-house assessment is more useful than guessing from one small section of string at home.",
+        ],
+      },
+      {
+        heading: "Signs it is time to restring now",
+        body: [
+          "The clearest warning signs are visible gaps between pearls, string discoloration, fuzzy or frayed silk, uneven knot spacing, and wear near the clasp. If the strand no longer sits evenly, that usually means the string has already stretched beyond its ideal tension.",
+          "Another overlooked warning sign is when the necklace feels different against the neck. If the drape looks looser than it used to or the clasp area feels twisted, the strand may not be distributing tension evenly anymore.",
+          "These are the kinds of details we look for during pearl restringing quotes in Pasadena. Catching them early is usually the difference between a simple preventive restring and a higher-stress situation after a break.",
+        ],
+      },
+      {
+        heading: "What professional restringing includes",
+        body: [
+          "At Susie's, restringing is more than sliding pearls onto fresh thread. The service typically includes fresh silk stringing, hand-knotting between pearls, clasp inspection, and length adjustment if needed. Hand-knotting helps protect pearls from rubbing against each other and keeps spacing more consistent along the strand.",
+          "The clasp is worth paying attention to as well. A strand can be perfectly restrung and still feel unreliable if the clasp is worn, dirty, or difficult to close. That is why clasp cleaning, inspection, and possible replacement are part of the same conversation.",
+          "If the strand is part of a bigger refresh, this is also the right moment to ask about cleaning, length changes, or a clasp upgrade. Combining those decisions into one visit keeps the repair plan clearer and prevents repeat handling of the same piece.",
+        ],
+      },
+      {
+        heading: "What to expect on timing and cost",
+        body: [
+          "Most pearl restringing work follows our Same Day/Next Day pattern when the strand is straightforward and does not need unusual clasp work. More complex strands, very long pieces, or projects that need extra matching or adjustments can take longer, but timing is confirmed before work starts.",
+          "Pricing is usually shaped by strand length, knot count, and clasp condition rather than one flat number for every necklace. That is why the best quote happens after we see the actual strand, not from a vague description alone.",
+          "If your pearls matter to you, the safest move is not waiting for failure. Bring the strand in while it is still wearable enough to evaluate calmly, then let the quote and condition check tell you whether service should happen now.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about pearl restringing timing",
+    faqs: [
+      {
+        question: "How often should pearls be restrung if I wear them regularly?",
+        answer:
+          "Many frequently worn strands benefit from restringing every 1-2 years, but the real trigger is condition. If the string looks stretched, frayed, discolored, or uneven, it is time to bring the strand in.",
+      },
+      {
+        question: "Do you knot between each pearl?",
+        answer:
+          "Yes. Hand-knotting helps reduce rubbing between pearls, keeps spacing cleaner, and adds protection if part of the strand is stressed.",
+      },
+      {
+        question: "Can you replace or upgrade the clasp during restringing?",
+        answer:
+          "Often, yes. We can inspect, clean, replace, or upgrade the clasp during the same service so the whole strand feels secure when it goes back into rotation.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your strand already looks stretched or uneven",
+    nextStepsIntro:
+      "If you want a real assessment before the strand fails, start with the pearl restringing service or book a repair. If you only need pricing first, send photos for a quote recommendation.",
+    nextSteps: [
+      { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
+      { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+    ],
+    relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
   },
   {
     slug: "custom-design-timeline-guide",
     title: "Custom Jewelry Design Timeline: From Idea to Finished Piece",
     excerpt:
-      "How long does custom jewelry take near Pasadena? See the real timeline — consultations, approvals, and benchmarks — so your piece is ready for proposals, anniversaries, or gifts.",
+      "What the custom design timeline actually looks like, where approvals happen, and how to plan around proposals, anniversaries, and other important deadlines.",
     image: "/images/blog/custom-design-timeline-guide-cover.jpg",
     topics: ["Custom Design", "Pricing & Timing"],
     publishedAt: "2026-02-18",
@@ -556,10 +606,99 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Custom Design", href: "/services/custom-design" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "ring-sizing", "stone-setting"],
+  },
+  {
+    slug: "professional-cleaning-vs-home-care",
+    title: "Professional Jewelry Cleaning vs. At-Home Cleaning",
+    excerpt:
+      "When gentle home cleaning is enough, when a piece should be professionally cleaned instead, and how to avoid accidental damage to stones, settings, and vintage jewelry.",
+    image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
+    topics: ["Cleaning & Polish", "Preventive Care"],
+    publishedAt: "2026-02-18",
+    reviewedAt: "2026-02-18",
+    readTime: "7 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Home cleaning works best for sturdy jewelry and only with mild, low-risk methods.",
+      "Professional cleaning is about structure and safety, not just making a piece look brighter.",
+      "Vintage jewelry, fragile settings, and white gold often benefit from in-house care instead of stronger home methods.",
+    ],
+    sections: [
+      {
+        heading: "When home cleaning is enough",
+        body: [
+          "For many standard everyday pieces, a simple at-home routine is enough. Mild dish soap, lukewarm water, a short soak, and a very soft brush are usually the safest baseline for removing normal buildup without introducing unnecessary risk.",
+          "The important part is knowing what home cleaning can and cannot do. It can remove surface residue and restore some sparkle, but it cannot tell you whether a prong is thinning, whether a seat is opening up, or whether a white gold ring needs more than soap and water to look finished again.",
+          "At-home care is best treated as maintenance for sturdy jewelry, not as a replacement for inspection. If the piece is valuable, delicate, sentimental, or already showing signs of wear, home cleaning should stay conservative.",
+        ],
+      },
+      {
+        heading: "When home cleaning becomes risky",
+        body: [
+          "The biggest problems usually come from harsh products or from cleaning a piece that already has a structural issue. Bleach, strong ammonia, abrasive compounds, and aggressive scrubbing can all create damage that customers do not notice until prongs weaken, finishes dull, or older metal starts showing stress.",
+          "Vintage and heirloom pieces deserve extra caution because they often have thinner prongs, older solder seams, and more fragile details than modern jewelry. The wrong cleaner or too much force can turn a piece that only needed safe cleaning into a restoration problem.",
+          "If a ring already has a loose-feeling stone, an open-looking prong, or delicate gallery work, stop trying to clean it at home until it is inspected. Shine is never more important than security.",
+        ],
+      },
+      {
+        heading: "What professional cleaning adds that home cleaning cannot",
+        body: [
+          "Professional cleaning at Susie's is not just about brightness. It is also a chance to inspect prongs, settings, seams, and overall wear so hidden issues can be caught early. That matters because customers often think a piece only needs polishing when it actually needs a security check first.",
+          "Professional service also gives better control over finish decisions. Some customers want a piece polished to a ready-to-wear shine, while others want to preserve more of the vintage character rather than strip everything back to a newer look.",
+          "In-house cleaning is especially valuable for white gold, heirlooms, and pieces that have not been inspected in a while. It keeps the conversation local and lets the same team evaluate whether the jewelry only needs cleaning or whether it is time to address a structural concern too.",
+        ],
+      },
+      {
+        heading: "Special cases: white gold, heirlooms, and stone security",
+        body: [
+          "White gold often needs more than basic home cleaning because the ring's color and finish can look uneven after years of wear or after bench work like sizing. A professional clean and polish can be the moment to decide whether rhodium refinishing is the better next step.",
+          "Heirloom jewelry should be treated more like preservation work than routine maintenance. The question is not only how to make it shine. It is how to clean it without erasing the character or stressing the structure that makes it sentimental in the first place.",
+          "Stone security is another reason professional cleaning matters. A cleaning appointment is one of the easiest opportunities to catch loose settings early, before the customer experiences the much worse version of the problem: a missing stone.",
+        ],
+      },
+      {
+        heading: "How to decide which path is right for your piece",
+        body: [
+          "If the jewelry is sturdy, modern, and free from visible wear, a gentle home routine may be enough between visits. If the piece is vintage, white gold, stone-heavy, or simply too important to gamble with, professional cleaning is usually the better decision.",
+          "At Susie's, the advantage is not just that the piece gets cleaned. It is that the same in-house team can tell you whether the jewelry should stay on a cleaning track, move into repair, or be handled more carefully because of age or structural wear.",
+          "The safest next step is to choose based on the piece itself, not on a one-size-fits-all cleaning rule.",
+        ],
+      },
+    ],
+    faqHeading: "Quick answers about home cleaning versus professional cleaning",
+    faqs: [
+      {
+        question: "What is the safest way to clean jewelry at home?",
+        answer:
+          "For many sturdy pieces, the safest method is mild dish soap, lukewarm water, and a very soft brush. Skip harsh chemicals and aggressive scrubbing.",
+      },
+      {
+        question: "When should I stop cleaning jewelry at home and bring it in?",
+        answer:
+          "Bring it in if the piece is vintage, has a loose-feeling stone, delicate details, or a finish issue that home care will not solve safely.",
+      },
+      {
+        question: "Does professional cleaning include more than polishing?",
+        answer:
+          "Yes. Professional cleaning also gives the jeweler a chance to inspect settings, seams, and wear so small structural issues can be caught before they become bigger repairs.",
+      },
+    ],
+    nextStepsHeading: "Best next step if the piece matters too much to guess",
+    nextStepsIntro:
+      "If you want to know whether a piece only needs safe cleaning or also needs a security check, start with professional cleaning or an heirloom-focused inspection.",
+    nextSteps: [
+      { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
+      { label: "See Stone Setting Service", href: "/services/stone-setting" },
+      { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+    ],
+    relatedServiceSlugs: ["jewelry-cleaning", "stone-setting", "ring-sizing"],
   },
   {
     slug: "heirloom-restoration-planning-guide",
@@ -569,7 +708,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/heirloom-restoration-planning-guide-cover.jpg",
     topics: ["Heirloom Care", "Trust & Buying"],
     publishedAt: "2026-02-18",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-02-18",
     readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -593,14 +732,6 @@ export const BLOG_POSTS: BlogPost[] = [
           "Bring the heirloom itself, any missing parts, and any details you already know about its history. If the piece has been repaired before, that context helps us understand where weak points may already exist.",
           "It also helps to bring photos of how you want to wear it now. Is this something you want to keep for special occasions only, or do you want to return it to regular daily wear? The safest repair plan changes depending on how the piece will actually be used.",
           "If timing matters, say so clearly. A family event, anniversary, or estate-related handoff can affect how we prioritize the consultation and whether the safest next step is immediate stabilization, full restoration, or simply a staged plan.",
-        ],
-      },
-      {
-        heading: "The bench-intake checklist that prevents vague restoration quotes",
-        body: [
-          "Before a sentimental piece reaches the bench, we want the consultation to answer six practical questions: what must stay original, what can be reinforced, what should not be polished away, whether any stones move, whether the piece is intended for daily wear, and whether a date-driven event changes the safest order of work.",
-          "That checklist matters because heirloom repair decisions can drift if the only instruction is 'make it look better.' A better intake note is more specific: preserve the engraving, keep the old finish soft, stabilize the center stone first, avoid reshaping the gallery, or make the piece safe enough for occasional wear only.",
-          "If the inherited piece includes loose stones, a split shank, missing accent stones, stretched pearl or bead sections, or a clasp that no longer feels trustworthy, bring every loose part with the piece. Small parts often change whether the first visit is a repair, a restoration plan, or a redesign conversation.",
         ],
       },
       {
@@ -652,32 +783,10 @@ export const BLOG_POSTS: BlogPost[] = [
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "You want to preserve the original look",
-        meaning: "Restoration should start with structural safety and finish restraint, not a full redesign.",
-        nextAction: "Ask what can be stabilized while keeping the piece's original character.",
-      },
-      {
-        signal: "The mounting is fragile or no longer wearable",
-        meaning: "The piece may need reinforcement or redesign before it can safely return to regular wear.",
-        nextAction: "Bring any missing parts and ask for a restoration-versus-redesign recommendation.",
-      },
-      {
-        signal: "There is a deadline or family event",
-        meaning: "The safest plan may need to be staged so urgent stabilization is separated from full restoration.",
-        nextAction: "Share the date during the quote request so timing is evaluated before approval.",
-      },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["heirloom-restoration", "custom-design", "stone-setting"],
-    discoveryBoosts: {
-      blogFeatured: 8,
-      serviceHub: 9,
-      geoHelpfulReads: 9,
-    },
   },
   {
     slug: "cost-to-resize-gold-ring-pasadena",
@@ -725,7 +834,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "Most standard gold ring sizings follow our Same Day/Next Day pattern, depending on the ring style and shop workload. The most straightforward jobs can move quickly, but complex sizing should not be rushed if the ring needs structural reinforcement or stone tightening.",
           "If you need the ring for a proposal, anniversary dinner, trip, or weekend event, tell the team that up front. Timeline planning is part of the service, and it is easier to protect both quality and deadline when expectations are clear before work starts.",
-          "For customers coming from Deer Park, La Porte, or southeast Houston, the easiest path is to request a fast quote online first, then bring the ring in for a confirmed assessment."
+          "For customers coming from Deer Park, La Porte, or southeast Houston, the easiest path is to book a repair intake time first, then bring the ring in for a confirmed fit, price, and pickup assessment."
         ]
       }
     ],
@@ -749,13 +858,13 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     nextStepsHeading: "Best next step if your ring feels too loose or too tight",
     nextStepsIntro:
-      "If you want a confirmed Pasadena quote instead of a rough estimate, start with the ring sizing service page or send the ring details for review.",
+      "If you want a confirmed Pasadena answer instead of a rough estimate, book a ring sizing intake or start with the ring sizing service page.",
     nextSteps: [
+      { label: "Book Ring Sizing", href: "/book?from=blog&service=ring-sizing" },
       { label: "See Ring Sizing Service", href: "/services/ring-sizing" },
       { label: "Get Deer Park Repair Guidance", href: "/services/deer-park" },
       { label: "See Friendswood Ring Repair Guidance", href: "/services/friendswood" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["ring-sizing", "stone-setting"],
     discoveryBoosts: {
@@ -767,11 +876,11 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "can-a-severely-bent-ring-prong-be-fixed",
     title: "Can a severely bent ring prong be fixed, or do I need a new setting?",
-    excerpt: "Bent prong on your engagement ring? Learn when re-tipping fixes it vs. when a full new setting is the only safe option — before your diamond is at risk.",
+    excerpt: "Discover when a bent prong can be safely repaired and when replacing the entire setting is the only way to save your diamond.",
     image: "/images/blog/stone-security-checklist-cover.jpg",
     topics: ["Stone Safety", "Ring Care"],
     publishedAt: "2026-03-01",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-03-01",
     readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -836,29 +945,109 @@ export const BLOG_POSTS: BlogPost[] = [
       "Start with a stone-setting inspection if the ring has a loose or damaged prong. If the setting is beyond repair, the custom design path is the right follow-up conversation.",
     nextSteps: [
       { label: "See Stone Setting Service", href: "/services/stone-setting" },
-      { label: "Run the Stone Security Checklist", href: "/blog/stone-security-checklist" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Webster Ring Repair Guidance", href: "/services/webster" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["stone-setting", "custom-design"]
   },
   {
+    slug: "where-to-get-watch-battery-replaced-pasadena",
+    title: "Where to get a watch battery replaced today near Deer Park / Pasadena?",
+    excerpt: "Looking for same-day watch battery replacement in Pasadena? Here is what you need to know about our fast, in-house service.",
+    image: "/images/blog/watch-battery-replacement-cover.jpg",
+    topics: ["Watch Service", "Pricing & Timing"],
+    publishedAt: "2026-03-01",
+    reviewedAt: "2026-03-01",
+    readTime: "6 min read",
+    authorName: "Susie’s In-House Team",
+    authorRole: "Master Craftsmanship Team",
+    keyTakeaways: [
+      "Susie's Jewelry Repair offers same-day and while-you-wait watch battery replacements.",
+      "We stock batteries for 99% of quartz watches, from everyday brands to luxury timepieces.",
+      "Our service always includes a seal check to protect against moisture damage."
+    ],
+    sections: [
+      {
+        heading: "Where can I get a watch battery replaced today in Pasadena?",
+        body: [
+          "If your quartz watch has stopped ticking, you can get a same-day battery replacement at Susie's Jewelry Repair, conveniently located near the Deer Park and Pasadena border on Fairmont Pkwy. We handle everything from basic fashion watches to high-end Swiss quartz models.",
+          "Unlike mall kiosks, our master craftsmen carefully open the case back to prevent scratching, swap in a fresh, high-quality battery, and ensure the internal gaskets are properly seated before closing.",
+          "That matters for local customers who need the watch back today for work, school, travel, or everyday wear. The goal is not just to make the hands move again. It is to return the watch clean, protected, and ready to wear."
+        ]
+      },
+      {
+        heading: "Do you pressure test water-resistant watches?",
+        body: [
+          "For standard everyday wear, our visual seal check ensures basic splash resistance. If your watch is a professional dive watch and you plan on submerging it, we recommend discussing a full pressure test and reseal with our team to guarantee its original depth rating."
+        ]
+      },
+      {
+        heading: "How long does a watch battery replacement take?",
+        body: [
+          "Most battery replacements are same-day and many are completed while you wait, depending on the watch style and how busy the bench is. Straightforward quartz watches are usually fast. Specialty backs, luxury cases, and watches with stripped screws can take longer because they need more careful handling.",
+          "If you are coming from Deer Park, La Porte, or southeast Houston, call or book a repair first if you have a brand-specific concern. If you only need pricing first, a quote can still help us tell you whether your model needs a standard battery swap, gasket replacement, or a deeper diagnostic."
+        ]
+      },
+      {
+        heading: "When a dead watch may be more than a battery",
+        body: [
+          "Not every stopped watch only needs a fresh cell. Battery leakage, coil issues, damaged stems, and moisture intrusion can all mimic a simple dead-battery symptom.",
+          "If a watch recently lost time, fogged under the crystal, or stopped after sitting with an old battery for too long, inspection matters. Replacing the battery without checking the movement can hide the real cause and shorten the life of the watch.",
+          "This is especially important for sentimental or higher-end watches. A quick diagnosis now is cheaper than a full movement repair later."
+        ]
+      }
+    ],
+    faqHeading: "Quick answers about same-day watch battery service",
+    faqs: [
+      {
+        question: "Do you offer same-day watch battery replacement in Pasadena?",
+        answer:
+          "Yes. Most quartz watch battery replacements are same-day, and many can be completed while you wait depending on the watch style and bench load.",
+      },
+      {
+        question: "Do you replace batteries in luxury or Swiss watches?",
+        answer:
+          "Yes. We handle everyday watches and many higher-end models, but some luxury cases require slower opening, seal work, or additional diagnostics.",
+      },
+      {
+        question: "Do you check the seal after replacing the battery?",
+        answer:
+          "Yes. We visually inspect seals and gasket condition during service. If the watch needs a deeper reseal or pressure test, we will tell you before the work is finalized.",
+      },
+    ],
+    nextStepsHeading: "Best next step if your watch stopped today",
+    nextStepsIntro:
+      "If it is likely a battery issue, start with watch repair service details or book a repair before you drive over.",
+    nextSteps: [
+      { label: "See Watch Repair Service", href: "/services/watch-repair" },
+      { label: "Get Deer Park Watch Repair Help", href: "/services/deer-park" },
+      { label: "Get Clear Lake Watch Repair Help", href: "/services/clear-lake" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
+    ],
+    relatedServiceSlugs: ["watch-repair"],
+    discoveryBoosts: {
+      serviceHub: 7,
+      geoHelpfulReads: 7,
+    },
+  },
+  {
     slug: "safe-to-clean-vintage-diamond-ring-at-home",
     title: "Is it safe to clean my vintage diamond ring with household products?",
-    excerpt: "How to clean vintage jewelry safely, when home care should stop, and when a sentimental ring needs inspection before shine.",
+    excerpt: "Vintage rings are delicate. Learn which household cleaners are safe, which will destroy your metals, and how to safely restore the sparkle.",
     image: "/images/blog/professional-cleaning-vs-home-care-cover.jpg",
     topics: ["Cleaning & Polish", "Heirloom Care"],
     publishedAt: "2026-03-01",
-    reviewedAt: "2026-05-14",
-    readTime: "8 min read",
+    reviewedAt: "2026-03-01",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Mild dish soap and warm water are the only consistently safe household cleaners for vintage jewelry.",
       "Harsh chemicals like bleach and ammonia can cause gold alloys to stress-crack and break.",
-      "Stop home cleaning when a stone clicks, a prong catches, old solder is visible, or the piece is sentimental enough that inspection matters first."
+      "Vintage settings often have hidden wear, making aggressive scrubbing risky."
     ],
     sections: [
       {
@@ -876,14 +1065,6 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       },
       {
-        heading: "Direct answer: clean only if the structure is boring",
-        body: [
-          "Home cleaning is reasonable when the jewelry has a simple structure, secure stones, no snagging, no visible thinning, and no sentimental or vintage risk. In that case, mild soap, lukewarm water, and a soft brush are usually enough between professional visits.",
-          "Stop and request an inspection first if anything about the piece is not boring: a stone shifts or clicks, a prong catches fabric, the shank looks thin, the clasp opens too easily, old solder is visible, pearls or opals are present, or the piece is inherited and you do not know its repair history.",
-          "That is the decision we want Pasadena-area customers to make before polishing. The question is not simply whether the jewelry is dirty. It is whether cleaning pressure could turn an existing weak point into a repair problem.",
-        ],
-      },
-      {
         heading: "Which at-home methods are safest for older rings?",
         body: [
           "The safest at-home approach is simple: lukewarm water, mild dish soap, a short soak, and a very soft brush used gently around the setting. Rinse carefully and pat dry with a lint-free cloth instead of rubbing aggressively.",
@@ -898,22 +1079,6 @@ export const BLOG_POSTS: BlogPost[] = [
           "A ring can look beautiful on top while hiding thin shanks, weakened galleries, or loose accent stones underneath. That is why older rings should be evaluated for structure, not just shine.",
           "If the ring has sentimental value, the safer strategy is usually to clean it less aggressively at home and use professional cleaning as part of a regular inspection routine."
         ]
-      },
-      {
-        heading: "The vintage-ring red flags we want checked before any stronger cleaner",
-        body: [
-          "Do not escalate beyond mild soap if the ring has blackened seams, a stone that clicks, prongs that feel flat on top, a thin lower shank, missing side stones, previous solder work, or filigree that traps residue. Those details can turn cleaning pressure into a repair problem.",
-          "A vintage diamond can tolerate more than the mounting around it. The diamond may be durable, but old gold, solder joints, accent stones, and under-gallery details may not be ready for ultrasonic vibration, steam, ammonia, or abrasive scrubbing.",
-          "For a quote-first check, send a top photo, a side photo of the prongs, and a note about whether the ring is inherited, worn daily, recently resized, or already snagging. That gives the jeweler enough context to recommend cleaning, stone-security inspection, or heirloom restoration before damage gets worse.",
-        ],
-      },
-      {
-        heading: "The cleaning-intake check we want before polishing anything sentimental",
-        body: [
-          "Before a sentimental piece is cleaned or polished, the first question should be whether the jewelry is structurally safe enough to handle normally. We want to know if the ring has a loose stone, a bent prong, a thin shank, old solder, a worn clasp, pearl or opal accents, or finish details the customer wants preserved.",
-          "That intake changes the cleaning path. A sturdy modern ring may only need a professional clean and polish. A vintage diamond ring with worn prongs may need stone-security review before shine. An heirloom with hand engraving or patina may need a lighter preservation approach instead of aggressive polishing.",
-          "For a quote-first recommendation, send one close photo of the worn or dirty area, one side photo that shows prong height or clasp condition, one full-piece photo, and a note about whether the jewelry is vintage, inherited, recently resized, clicking, loose, or catching on clothing. Those details help separate safe cleaning from cleaning that should wait until the structure is inspected.",
-        ],
       },
     ],
     faqHeading: "Quick answers about cleaning vintage rings safely",
@@ -933,51 +1098,18 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Skip home cleaning if the ring is antique, has filigree, foil-backed stones, pearls, opals, loose prongs, or any sign of wear. Those rings are safer with a professional inspection and non-destructive cleaning.",
       },
-      {
-        question: "What photos help with a cleaning or inspection quote?",
-        answer:
-          "Send one full-piece photo, one close photo of the dirty or worn area, and one side photo that shows prong height, clasp condition, or the setting profile.",
-      },
     ],
     nextStepsHeading: "Best next step for a fragile or sentimental ring",
     nextStepsIntro:
       "If you are not fully confident in the ring's condition, start with professional cleaning or an heirloom-focused inspection before trying a stronger home-cleaning routine.",
     nextSteps: [
       { label: "See Jewelry Cleaning Service", href: "/services/jewelry-cleaning" },
-      { label: "Run the Stone Security Checklist", href: "/blog/stone-security-checklist" },
       { label: "See La Porte Heirloom Guidance", href: "/services/la-porte" },
       { label: "See Friendswood Heirloom Guidance", href: "/services/friendswood" },
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
     ],
-    decisionSignals: [
-      {
-        signal: "The piece is vintage, inherited, or stone-heavy",
-        meaning: "Cleaning risk depends on hidden structure, not only surface dirt.",
-        nextAction: "Request inspection before stronger cleaning, ultrasonic, steam, or polishing.",
-      },
-      {
-        signal: "The ring has filigree, old solder, or a thin shank",
-        meaning: "The mounting may be more fragile than the diamond itself.",
-        nextAction: "Skip stronger cleaners until a jeweler checks the structure.",
-      },
-      {
-        signal: "A prong is flat, short, or snagging",
-        meaning: "Cleaning pressure can worsen an already weak stone setting.",
-        nextAction: "Request stone-security review before home cleaning or polishing.",
-      },
-      {
-        signal: "You want to preserve age and character",
-        meaning: "Aggressive polishing may erase details you actually value.",
-        nextAction: "Ask for a preservation-focused cleaning plan instead of a make-it-new polish.",
-      },
-    ],
-    relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"],
-    discoveryBoosts: {
-      blogFeatured: 7,
-      serviceHub: 8,
-      geoHelpfulReads: 8,
-    },
+    relatedServiceSlugs: ["jewelry-cleaning", "heirloom-restoration"]
   },
   {
     slug: "heirloom-jewelry-restoration-repair-or-redesign",
@@ -986,7 +1118,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/heirloom-restoration-planning-guide-cover.jpg",
     topics: ["Heirloom Care", "Custom Design"],
     publishedAt: "2026-03-01",
-    reviewedAt: "2026-05-12",
+    reviewedAt: "2026-03-01",
     readTime: "7 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -1050,12 +1182,10 @@ export const BLOG_POSTS: BlogPost[] = [
       "If you want to preserve the original piece, start with heirloom restoration. If you already know the current style is not right for you, the custom design path is the better starting point.",
     nextSteps: [
       { label: "Explore Heirloom Restoration", href: "/services/heirloom-restoration" },
-      { label: "Plan an Heirloom Restoration Visit", href: "/blog/heirloom-restoration-planning-guide" },
-      { label: "Choose a Trustworthy Jeweler", href: "/blog/how-to-choose-a-jeweler" },
       { label: "See La Porte Repair Guidance", href: "/services/la-porte" },
       { label: "See Clear Lake Heirloom Guidance", href: "/services/clear-lake" },
       { label: "Explore Custom Design", href: "/services/custom-design" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["custom-design", "heirloom-restoration"],
     discoveryBoosts: {
@@ -1072,14 +1202,14 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/pearl-restringing-timing-guide-cover.jpg",
     topics: ["Pearl Care", "Pricing & Timing"],
     publishedAt: "2026-04-01",
-    reviewedAt: "2026-05-14",
-    readTime: "8 min read",
+    reviewedAt: "2026-04-01",
+    readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
     keyTakeaways: [
       "Pearl restringing cost usually depends on strand length, knot count, clasp condition, and whether the strand needs cleanup or matching work.",
       "A straight restring is different from a restring plus clasp replacement, length change, or rebuilding a strand after breakage.",
-      "Timing should be judged from strand condition and event deadline, not from a generic same-day promise.",
+      "The clearest quote comes after an in-house look or clear photos, not from guessing at strand length over the phone.",
     ],
     sections: [
       {
@@ -1087,7 +1217,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "Pearl restringing is not usually priced from one flat number because not every strand takes the same amount of work. Length, pearl count, knotting style, clasp condition, and how much cleanup the strand needs all influence the final quote.",
           "A straightforward strand that only needs fresh silk and clean hand-knotting is a different job from a strand that already snapped, has a failing clasp, or needs spacing corrected because the old string stretched unevenly. The more the strand has drifted from a simple preventive restring, the more the quote tends to reflect bench time rather than just materials.",
-          "For Pasadena customers, the fastest way to get a real answer is a photo-first quote or an in-house assessment. That lets us judge whether the piece is still a clean restring candidate or whether clasp work and strand correction should be part of the same visit.",
+          "For Pasadena customers, the fastest way to get a real answer is an in-house assessment or clear photos before intake. That lets us judge whether the piece is still a clean restring candidate or whether clasp work and strand correction should be part of the same visit.",
         ],
       },
       {
@@ -1111,23 +1241,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           "Many straightforward pearl restringing jobs still fit our Same Day/Next Day pattern, especially when the strand is intact and the clasp is serviceable. Timing stretches when the strand is unusually long, the clasp needs replacement, or the necklace needs broader cleanup after a break.",
           "If you need the pearls for an event, say that up front. That helps us tell you whether a same-day path is realistic or whether the smarter move is to leave enough room for careful knotting and clasp work without rushing the finish.",
-          "For most customers, the best next step is either a fast photo quote or bringing the strand in before it fails completely. That is what gives you the clearest pricing conversation and the safest recommendation on whether to restring now or wait.",
-        ],
-      },
-      {
-        heading: "When to restring before the strand fails",
-        body: [
-          "The clearest timing signals are visible gaps between pearls, string discoloration, fuzzy or frayed silk, uneven knot spacing, and wear near the clasp. If the strand no longer sits evenly, that usually means the string has already stretched beyond its ideal tension.",
-          "A practical baseline for frequently worn pearl strands is every 1-2 years, but condition matters more than the calendar. A strand worn weekly usually needs closer attention than one saved for occasional events.",
-          "Catching those signs early is usually the difference between a calm preventive restring and a more stressful repair after breakage, missing pearls, or clasp failure.",
-        ],
-      },
-      {
-        heading: "The pearl-strand timing check we want before an event deadline",
-        body: [
-          "If the necklace is needed for a wedding, church service, anniversary, graduation, or trip, the intake question is not only whether it can be restrung. It is whether the strand is still intact enough for a clean same-day path or whether clasp work, missing pearls, re-sorting, or heavy stretch will make rushing the job risky.",
-          "Before requesting a quote, check three areas: the first few knots beside the clasp, the widest visible gap between pearls, and whether the strand twists or hangs unevenly when clasped. Those details tell us more about timing than a general description like 'old pearls' or 'needs restringing.'",
-          "For a photo quote, send one full-length photo, one close photo of the clasp and end knots, and the date you need the strand back. That lets the first recommendation separate preventive restringing from repair-after-failure before you make plans around the necklace.",
+          "For most customers, the best next step is booking a repair intake or bringing the strand in before it fails completely. That is what gives you the clearest pricing conversation and the safest recommendation on whether to restring now or wait.",
         ],
       },
     ],
@@ -1148,20 +1262,15 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "Usually, yes. Clear photos often let us give a strong starting recommendation, then we confirm the final scope once we inspect the strand in person.",
       },
-      {
-        question: "How often should pearls be restrung if I wear them regularly?",
-        answer:
-          "Many frequently worn strands benefit from restringing every 1-2 years, but the real trigger is condition. If the string looks stretched, frayed, discolored, or uneven, it is time to bring the strand in.",
-      },
     ],
-    nextStepsHeading: "Best next step if you want a real pearl restringing quote",
+    nextStepsHeading: "Best next step if you want a real pearl restringing answer",
     nextStepsIntro:
-      "If the strand looks stretched, the clasp feels unreliable, or you need pricing before an event, start with pearl restringing details or send photos for a quote-first recommendation.",
+      "If the strand looks stretched, the clasp feels unreliable, or you need pricing before an event, book a pearl restringing intake or start with the service details.",
     nextSteps: [
+      { label: "Book Pearl Restringing", href: "/book?from=blog&service=pearl-restringing" },
       { label: "See Pearl Restringing Service", href: "/services/pearl-restringing" },
       { label: "See Necklace Repair Service", href: "/services/necklace-repair" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
     ],
     relatedServiceSlugs: ["pearl-restringing", "necklace-repair", "bracelet-repair"],
     discoveryBoosts: {
@@ -1177,7 +1286,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog/watch-battery-replacement-cover.jpg",
     topics: ["Watch Service", "Diagnostics"],
     publishedAt: "2026-04-01",
-    reviewedAt: "2026-05-14",
+    reviewedAt: "2026-04-01",
     readTime: "6 min read",
     authorName: "Susie’s In-House Team",
     authorRole: "Master Craftsmanship Team",
@@ -1204,14 +1313,6 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: "Battery-first or repair-first? The quick decision matrix",
-        body: [
-          "Battery-first is usually reasonable when the watch is quartz, stopped recently, has no fog under the crystal, the crown feels normal, and the caseback does not show corrosion or forced-opening marks. That is the lower-risk path because the visible story matches a normal dead-cell pattern.",
-          "Repair-first is safer when the watch stopped after water, steam, heavy sweat, impact, a hard drop, or months of sitting dead in a drawer. Those details move the job out of battery-only territory because moisture, leakage, stripped screws, and crown or stem damage can hide behind the same 'it stopped' symptom.",
-          "The gray zone is a watch that runs briefly after a new battery, loses time immediately, or stops again within days. That pattern should not be priced like a routine battery swap. It needs diagnosis because the battery may be exposing a movement, contact, or consumption problem rather than solving it.",
-        ],
-      },
-      {
         heading: "What an in-house watch assessment should tell you",
         body: [
           "A useful assessment should tell you whether the watch is a clean battery candidate, whether the case and seal condition look stable, and whether there are signs that point toward deeper repair. That is the real value of bringing the piece to an in-house bench instead of treating every stopped watch like the same kiosk-level service.",
@@ -1220,27 +1321,11 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: "The intake details that separate battery service from repair",
-        body: [
-          "The most useful watch intake starts with four details: when the watch stopped, whether it was exposed to water or humidity, whether the second hand jumped before stopping, and whether the crown, stem, or date setting felt different before it died.",
-          "Those answers change the bench path. A clean quartz watch that stopped suddenly may be a straightforward battery service. A watch that fogged under the crystal, sat dead for months, or arrived with a loose crown should be treated as a diagnostic job first because moisture, leakage, or handling damage can look like a dead battery from the outside.",
-          "If you request a quote, include the brand, whether the back is screw-down or snap-back if you know, and a clear photo of the case and crown side. That gives the team a better first read before the watch is opened and helps avoid quoting a battery-only job when the symptoms point to repair.",
-        ],
-      },
-      {
-        heading: "The five-minute Pasadena watch triage we want before opening the case",
-        body: [
-          "Before the back is opened, the most useful check is external: look for fog under the crystal, green or white residue around the crown or caseback, a crown that pulls too far out, hands that drag or do not set cleanly, and a caseback that looks dented, cross-threaded, or previously forced.",
-          "Those signs do not prove the movement is damaged, but they change the first conversation. A clean stopped quartz watch can usually start battery-first. A watch with moisture, corrosion, crown trouble, or evidence of forced opening should start as a diagnostic repair so the owner does not approve the wrong job.",
-          "For photo quotes, the best set is a dial photo, a caseback photo, and a crown-side photo. If the watch stopped after boating, swimming, steam, heavy sweat, or sitting dead in a drawer, say that directly because it changes the risk profile.",
-        ],
-      },
-      {
         heading: "Timing, pricing direction, and the best next step",
         body: [
           "If the watch really is a basic battery job, service often fits the Same Day/Next Day pattern. If the watch shows moisture, stripped screws, crown issues, or signs of corrosion, timing depends on what the inspection finds after intake.",
           "That is why the best commercial-intent question is not only 'how much is a battery?' It is 'am I paying for a battery or for diagnosis plus repair?' A real quote starts by separating those two paths.",
-          "If your watch stopped recently and you want the fastest honest answer, start with watch repair details or send a quote request with a quick note about the symptoms. That is the fastest way to learn whether you are likely dealing with a battery, a seal issue, or something bigger.",
+          "If your watch stopped recently and you want the fastest honest answer, start with watch repair details or book a repair with a quick note about the symptoms. If you only need pricing first, a quote request is still available. That is the fastest way to learn whether you are likely dealing with a battery, a seal issue, or something bigger.",
         ],
       },
     ],
@@ -1261,37 +1346,14 @@ export const BLOG_POSTS: BlogPost[] = [
         answer:
           "In many cases, yes. A same-day intake assessment usually tells you whether the watch fits a straightforward battery path or needs broader repair attention.",
       },
-      {
-        question: "What watch photos should I send before asking for a battery quote?",
-        answer:
-          "Send the dial, the caseback, and the crown side. Also mention water, steam, sweat, impact, sitting unused, jumping seconds, or crown trouble because those details separate battery-only work from repair diagnosis.",
-      },
     ],
     nextStepsHeading: "Best next step if your watch stopped and you do not want to guess",
     nextStepsIntro:
       "If the watch might only need a battery, or might be something bigger, start with watch repair details or send symptoms through the quote form before you drive over.",
     nextSteps: [
       { label: "See Watch Repair Service", href: "/services/watch-repair" },
-      { label: "Plan Same-Day Battery Service", href: "/blog/watch-battery-replacement" },
-      { label: "Book a Repair", href: "/book" },
-      { label: "Book a Repair", href: "/book" },
-    ],
-    decisionSignals: [
-      {
-        signal: "Second hand jumps every few seconds",
-        meaning: "That often points to low battery on many quartz watches, but condition still matters.",
-        nextAction: "Use the watch repair path and mention the jumping-second symptom.",
-      },
-      {
-        signal: "Stopped after water exposure",
-        meaning: "Treat it as a repair risk, not a simple battery request.",
-        nextAction: "Ask for moisture and gasket review before opening the repair approval.",
-      },
-      {
-        signal: "Crown, stem, or hands feel wrong",
-        meaning: "The visible symptom may come from handling damage or movement trouble.",
-        nextAction: "Request an in-house diagnosis instead of asking for battery-only pricing.",
-      },
+      { label: "Need pricing first? Request a quote", href: "/quote" },
+      { label: "Book Repair", href: "/book" },
     ],
     relatedServiceSlugs: ["watch-repair"],
     discoveryBoosts: {
@@ -1309,6 +1371,7 @@ export const BLOG_MOBILE_HERO_IMAGE_BY_SLUG: Record<string, string> = {
   "can-a-severely-bent-ring-prong-be-fixed": "/images/blog/stone-security-checklist-cover-mobile.avif",
   "custom-design-timeline-guide": "/images/blog/custom-design-timeline-guide-cover-mobile.avif",
   "watch-battery-replacement": "/images/blog/watch-battery-replacement-cover-mobile.avif",
+  "where-to-get-watch-battery-replaced-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
   "how-much-does-pearl-restringing-cost-pasadena": "/images/blog/pearl-restringing-timing-guide-cover-mobile.avif",
   "does-my-watch-need-battery-or-repair-pasadena": "/images/blog/watch-battery-replacement-cover-mobile.avif",
 };
@@ -1326,14 +1389,14 @@ const COMMERCIAL_GUIDE_SLUGS = [
   "cost-to-resize-gold-ring-pasadena",
   "how-much-does-pearl-restringing-cost-pasadena",
   "does-my-watch-need-battery-or-repair-pasadena",
-  "stone-security-checklist",
-  "heirloom-restoration-planning-guide",
+  "where-to-get-watch-battery-replaced-pasadena",
 ] as const;
 
 const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   "watch-repair": [
     "watch-battery-replacement",
     "does-my-watch-need-battery-or-repair-pasadena",
+    "where-to-get-watch-battery-replaced-pasadena",
   ],
   "ring-sizing": [
     "cost-to-resize-gold-ring-pasadena",
@@ -1346,9 +1409,14 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
     "cost-to-resize-gold-ring-pasadena",
   ],
   "necklace-repair": [
-    "safe-to-clean-vintage-diamond-ring-at-home",
+    "chain-repair-weak-points",
+    "professional-cleaning-vs-home-care",
     "heirloom-jewelry-restoration-repair-or-redesign",
-    "heirloom-restoration-planning-guide",
+  ],
+  "bracelet-repair": [
+    "chain-repair-weak-points",
+    "professional-cleaning-vs-home-care",
+    "pearl-restringing-timing-guide",
   ],
   "heirloom-restoration": [
     "heirloom-jewelry-restoration-repair-or-redesign",
@@ -1357,7 +1425,8 @@ const HELPFUL_BLOG_POST_SLUGS_BY_SERVICE: Record<string, string[]> = {
   ],
   "pearl-restringing": [
     "how-much-does-pearl-restringing-cost-pasadena",
-    "safe-to-clean-vintage-diamond-ring-at-home",
+    "pearl-restringing-timing-guide",
+    "professional-cleaning-vs-home-care",
   ],
 };
 

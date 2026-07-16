@@ -25,6 +25,38 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    const contentSecurityPolicy = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      "object-src 'none'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://assets.jewelershowcase.com",
+      "style-src 'self' 'unsafe-inline' https:",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data: https:",
+      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://lrzrltjlfvvrdvxqqklm.supabase.co",
+      "frame-src 'self' https://assets.jewelershowcase.com https://www.google.com",
+      "upgrade-insecure-requests",
+    ].join("; ");
+
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: contentSecurityPolicy,
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {
@@ -74,16 +106,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/quote",
-        destination: "/book",
-        permanent: true,
-      },
-      {
-        source: "/quote/:path*",
-        destination: "/book",
-        permanent: true,
-      },
-      {
         source: "/book-online",
         destination: "/book",
         permanent: true,
@@ -116,26 +138,6 @@ const nextConfig: NextConfig = {
       {
         source: "/watch-repair-battery",
         destination: "/services/watch-repair",
-        permanent: true,
-      },
-      {
-        source: "/blog/where-to-get-watch-battery-replaced-pasadena",
-        destination: "/blog/watch-battery-replacement",
-        permanent: true,
-      },
-      {
-        source: "/blog/pearl-restringing-timing-guide",
-        destination: "/blog/how-much-does-pearl-restringing-cost-pasadena",
-        permanent: true,
-      },
-      {
-        source: "/blog/professional-cleaning-vs-home-care",
-        destination: "/blog/safe-to-clean-vintage-diamond-ring-at-home",
-        permanent: true,
-      },
-      {
-        source: "/blog/chain-repair-weak-points",
-        destination: "/services/necklace-repair",
         permanent: true,
       },
       {

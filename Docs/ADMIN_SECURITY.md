@@ -27,6 +27,6 @@ To enable MFA for your account:
 4.  (Coming Soon): A dedicated Security tab in the SJR Content Nexus to manage devices locally.
 
 ## 🛠 Developer Notes for Codex
-*   **Proxy/Middleware**: The Next.js request gate is located in `src/proxy.ts`; the shared Supabase session helper remains in `src/lib/supabase/middleware.ts`.
+*   **Middleware**: Located in `src/middleware.ts` and `src/lib/supabase/middleware.ts`.
 *   **Auth Client**: Use `createClient()` from `@/lib/supabase/client` for client-side and `createServerClient` from `@supabase/ssr` for server-side.
-*   **Deprecated**: Legacy `ADMIN_USER` and `ADMIN_PASS` env vars can be safely removed from production env once Supabase Auth migration is confirmed stable.
+*   **Deprecated**: `src/proxy.ts` has been removed. `ADMIN_USER` and `ADMIN_PASS` env vars can be safely removed from production env once migration is confirmed stable.

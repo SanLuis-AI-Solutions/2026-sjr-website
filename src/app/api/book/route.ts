@@ -12,11 +12,6 @@ import {
 } from "@/lib/booking-schedule";
 import { evaluateLeadSpam } from "@/lib/lead-spam";
 import {
-  appendLeadAttributionBlock,
-  buildLeadAttributionLines,
-  resolveLeadAttributionFromFormData,
-} from "@/lib/lead-attribution";
-import {
   appendServicesFinderLeadContextToUrl,
   prependServicesFinderLeadContext,
   resolveStoredServicesFinderLeadContext,
@@ -45,17 +40,14 @@ export async function POST(request: Request) {
     const time = String(formData.get("time") || "").trim();
     const details = String(formData.get("details") || "").trim();
     finderContext = resolveServicesFinderLeadContextFromFormData(formData);
-    const contextualDetails = prependServicesFinderLeadContext(details, finderContext);
-    const attribution = resolveLeadAttributionFromFormData(formData, request);
-    const attributionLines = buildLeadAttributionLines(attribution);
-    const storedDetails = appendLeadAttributionBlock(contextualDetails, attribution);
+    const storedDetails = prependServicesFinderLeadContext(details, finderContext);
     const storedLeadContext = resolveStoredServicesFinderLeadContext({
       source: finderContext
         ? finderContext.leadSourceContext === "service_area"
           ? SERVICE_AREA_WEBSITE_SOURCE
           : SERVICES_FINDER_WEBSITE_SOURCE
         : "website",
-      details: contextualDetails,
+      details: storedDetails,
     });
     const chatDetailsLine = storedLeadContext.cleanCustomerNotes
       ? `details: ${storedLeadContext.cleanCustomerNotes.slice(0, 500)}`
@@ -95,7 +87,7 @@ export async function POST(request: Request) {
       name,
       email,
       phone,
-      details: contextualDetails,
+      details: storedDetails,
     });
 
     const bookingId = crypto.randomUUID();
@@ -131,7 +123,7 @@ export async function POST(request: Request) {
         phone: phone || undefined,
         date,
         time,
-        details: customerVisibleDetails,
+        details: storedDetails || undefined,
       });
 
       await supabaseUpdateById("booking_requests", bookingId, {
@@ -151,7 +143,6 @@ export async function POST(request: Request) {
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
           ...storedLeadContext.internalSummaryLines,
-          ...attributionLines,
           chatDetailsLine,
         ]
           .filter(Boolean)
@@ -172,7 +163,6 @@ export async function POST(request: Request) {
           `time: ${time}`,
           event?.htmlLink ? `link: ${event.htmlLink}` : null,
           ...storedLeadContext.internalSummaryLines,
-          ...attributionLines,
           emailDetailsLine,
         ]
           .filter(Boolean)
@@ -214,7 +204,6 @@ export async function POST(request: Request) {
           `time: ${time}`,
           `error: ${msg}`,
           ...storedLeadContext.internalSummaryLines,
-          ...attributionLines,
           chatDetailsLine,
         ]
           .filter(Boolean)
@@ -235,7 +224,6 @@ export async function POST(request: Request) {
           `time: ${time}`,
           `error: ${msg}`,
           ...storedLeadContext.internalSummaryLines,
-          ...attributionLines,
           emailDetailsLine,
         ]
           .filter(Boolean)

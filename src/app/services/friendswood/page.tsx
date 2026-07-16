@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   title: page?.title || "Jewelry Repair Near Friendswood, TX | Susie's Jewelry Repair",
   description:
     page?.description ||
-    "In-house jewelry repair near Friendswood, TX for ring sizing, heirloom restoration, prong repair, and quote-first Pasadena service.",
+    "In-house jewelry repair near Friendswood, TX for ring sizing, heirloom restoration, prong repair, and booking-first Pasadena service.",
   canonical: "/services/friendswood",
 });
 

@@ -128,22 +128,6 @@ const SERVICES_HUB_FINDER_CHIPS: ServicesHubFinderChip[] = [
   },
 ] as const;
 
-const RELATED_SERVICE_SLUGS: Record<string, string[]> = {
-  "watch-repair": ["ring-sizing", "stone-setting", "jewelry-cleaning", "bracelet-repair"],
-  "ring-sizing": ["stone-setting", "jewelry-cleaning", "heirloom-restoration", "custom-design"],
-  "stone-setting": ["ring-sizing", "jewelry-cleaning", "heirloom-restoration", "bracelet-repair"],
-  "jewelry-cleaning": ["ring-sizing", "stone-setting", "pearl-restringing", "watch-repair"],
-  "necklace-repair": ["bracelet-repair", "pearl-restringing", "jewelry-cleaning", "stone-setting"],
-  "bracelet-repair": ["necklace-repair", "jewelry-cleaning", "stone-setting", "pearl-restringing"],
-  "pearl-restringing": ["necklace-repair", "bracelet-repair", "heirloom-restoration", "jewelry-cleaning"],
-  "custom-design": ["heirloom-restoration", "ring-sizing", "stone-setting", "jewelry-cleaning"],
-  "heirloom-restoration": ["custom-design", "stone-setting", "ring-sizing", "jewelry-cleaning"],
-};
-
-export function getRelatedServiceSlugs(slug: string): string[] {
-  return RELATED_SERVICE_SLUGS[slug] ?? [];
-}
-
 function normalizeFinderText(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }

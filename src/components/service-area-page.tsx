@@ -8,18 +8,11 @@ import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
 import { getHelpfulBlogPostsForServiceSlugs } from "@/lib/blog";
 import { buildServicesFinderLeadContextHref } from "@/lib/service-lead-context";
 import { getServiceAreaHighlightedServiceSlugs } from "@/lib/service-taxonomy";
+import { localBusinessSchema, organizationSchema } from "@/lib/schema";
 
 type Props = {
   page: ServiceAreaPage;
 };
-
-const PRIORITY_SERVICE_AREA_SLUGS = [
-  "pasadena",
-  "friendswood",
-  "webster",
-  "clear-lake",
-  "la-porte",
-];
 
 export function ServiceAreaLandingPage({ page }: Props) {
   const serviceLookup = new Map(SERVICES.map((service) => [service.slug, service] as const));
@@ -42,19 +35,9 @@ export function ServiceAreaLandingPage({ page }: Props) {
     { name: "Services", href: "/services" },
     { name: page.city, href: `/services/${page.slug}` },
   ];
-  const nearbyAreas = SERVICE_AREA_PAGES.filter((entry) => entry.slug !== page.slug)
-    .sort((a, b) => {
-      const aPriority = PRIORITY_SERVICE_AREA_SLUGS.indexOf(a.slug);
-      const bPriority = PRIORITY_SERVICE_AREA_SLUGS.indexOf(b.slug);
-      const normalizedA = aPriority === -1 ? Number.MAX_SAFE_INTEGER : aPriority;
-      const normalizedB = bPriority === -1 ? Number.MAX_SAFE_INTEGER : bPriority;
-      return normalizedA - normalizedB;
-    })
-    .slice(0, 5);
+  const nearbyAreas = SERVICE_AREA_PAGES.filter((entry) => entry.slug !== page.slug).slice(0, 4);
   const canonicalUrl = `https://www.susiesjewelryrepair.com/services/${page.slug}`;
-  const imageUrl = page.heroImage.startsWith("http")
-    ? page.heroImage
-    : `https://www.susiesjewelryrepair.com${page.heroImage}`;
+  const quoteHref = buildServicesFinderLeadContextHref("/quote", { areaSlug: page.slug });
   const bookingHref = buildServicesFinderLeadContextHref("/book", { areaSlug: page.slug });
 
   const faqSchema = {
@@ -77,37 +60,12 @@ export function ServiceAreaLandingPage({ page }: Props) {
     url: canonicalUrl,
     name: `Jewelry Repair Near ${page.city}, TX`,
     serviceType: "Jewelry repair and watch repair",
-    description: page.description,
-    image: imageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonicalUrl,
-    },
-    audience: {
-      "@type": "Audience",
-      audienceType: `${page.city} jewelry and watch repair customers`,
-    },
     areaServed: {
       "@type": page.areaSchemaType ?? "City",
       name: page.city,
     },
     provider: {
       "@id": "https://www.susiesjewelryrepair.com/#localbusiness",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `Common repair paths for ${page.city}`,
-      itemListElement: highlightedServices.map((service, index) => ({
-        "@type": "Offer",
-        position: index + 1,
-        itemOffered: {
-          "@type": "Service",
-          "@id": `https://www.susiesjewelryrepair.com/services/${service.slug}#service`,
-          url: `https://www.susiesjewelryrepair.com/services/${service.slug}`,
-          name: service.name,
-          description: service.summary,
-        },
-      })),
     },
   };
 
@@ -126,14 +84,12 @@ export function ServiceAreaLandingPage({ page }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
           <div>
-            <div className="hidden sm:block">
-              <BreadcrumbTrail items={breadcrumbItems} className="mb-5" />
-            </div>
+            <BreadcrumbTrail items={breadcrumbItems} className="mb-5" />
             <p className="text-xs uppercase tracking-[0.35em] text-brand-burgundy">
               Service area
             </p>
             <h1 className="lcp-heading mt-4 font-serif text-5xl leading-[1.05] text-stone-900 md:text-6xl">
-              {page.heroHeading ?? `Jewelry repair near ${page.city}, handled in-house.`}
+              Jewelry and watch service near {page.city}, handled in-house.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-stone-700 md:text-lg">
               {page.intro}
@@ -158,6 +114,14 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Book a Repair
+              </TrackedLink>
+              <TrackedLink
+                href={quoteHref}
+                eventName="service_area_cta_click"
+                eventParams={{ area_slug: page.slug, cta_target: "quote" }}
+                className="inline-flex min-h-12 items-center justify-center px-2 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              >
+                Need pricing first? Request a quote
               </TrackedLink>
             </div>
           </div>
@@ -213,48 +177,6 @@ export function ServiceAreaLandingPage({ page }: Props) {
               </div>
             </section>
 
-            {page.repairPathGuide ? (
-              <section className="rounded-3xl border border-brand-gold/30 bg-background p-6 shadow-sm">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                  Local repair triage
-                </p>
-                <h2 className="mt-3 font-serif text-3xl text-stone-900">
-                  {page.repairPathGuide.heading}
-                </h2>
-                <p className="mt-4 text-[15px] leading-8 text-stone-700">
-                  {page.repairPathGuide.intro}
-                </p>
-                <div className="mt-6 divide-y divide-stone-200 overflow-hidden rounded-2xl border border-stone-200 bg-white">
-                  {page.repairPathGuide.items.map((item) => (
-                    <article key={item.situation} className="grid gap-4 p-4 md:grid-cols-[1fr_0.8fr_1fr]">
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
-                          Situation
-                        </p>
-                        <h3 className="mt-2 text-sm font-semibold leading-6 text-stone-900">
-                          {item.situation}
-                        </h3>
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
-                          Likely path
-                        </p>
-                        <p className="mt-2 text-sm font-semibold leading-6 text-brand-burgundy">
-                          {item.likelyPath}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-stone-500">
-                          Next step
-                        </p>
-                        <p className="mt-2 text-sm leading-7 text-stone-700">{item.nextStep}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            ) : null}
-
             <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6">
               <h2 className="font-serif text-3xl text-stone-900">{page.visitHeading}</h2>
               <div className="mt-4 space-y-4">
@@ -265,129 +187,91 @@ export function ServiceAreaLandingPage({ page }: Props) {
                 ))}
               </div>
             </section>
+          </div>
 
-            <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+            <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
               <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                Best starting points for {page.city}
+                Popular with {page.city} customers
               </p>
-              <div className="mt-5 grid gap-4 md:grid-cols-3">
-                {page.localScenarios.map((scenario) => (
-                  <article key={scenario.title} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                    <h2 className="font-serif text-2xl text-stone-900">{scenario.title}</h2>
-                    <p className="mt-3 text-sm leading-7 text-stone-700">{scenario.body}</p>
-                  </article>
+              <p className="mt-3 text-sm leading-7 text-stone-700">
+                These are the repair categories and booking-first service topics we most often point {page.city} customers to before they make the drive to Pasadena.
+              </p>
+              <div className="mt-4 space-y-2">
+                {highlightedServices.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    {service.name}
+                  </Link>
                 ))}
               </div>
             </section>
-          </div>
-
-          <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start lg:space-y-6">
-            <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
-              <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
-                <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
-                  Popular repair paths
-                  <span className="text-brand-burgundy" aria-hidden="true">+</span>
-                </summary>
-                <div className="pt-4 lg:pt-0">
-                  <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
-                    Popular with {page.city} customers
-                  </p>
-                  <p className="text-sm leading-7 text-stone-700 lg:mt-3">
-                    These are the repair categories and quote-first topics we most often point {page.city} customers to before they make the drive to Pasadena.
-                  </p>
-                  <div className="mt-4 space-y-2">
-                    {highlightedServices.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={`/services/${service.slug}`}
-                        className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </details>
-            </section>
 
             {helpfulReads.length ? (
-              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
-                <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
-                  <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
-                    Helpful repair guides
-                    <span className="text-brand-burgundy" aria-hidden="true">+</span>
-                  </summary>
-                  <div className="pt-4 lg:pt-0">
-                    <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
-                      Helpful reads
-                    </p>
-                    <div className="space-y-2 lg:mt-4">
-                      {helpfulReads.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </details>
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Helpful reads
+                </p>
+                <div className="mt-4 space-y-2">
+                  {helpfulReads.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </section>
             ) : null}
 
             {nearbyAreas.length ? (
-              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5 shadow-sm lg:p-6">
-                <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
-                  <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
-                    Nearby cities
-                    <span className="text-brand-burgundy" aria-hidden="true">+</span>
-                  </summary>
-                  <div className="pt-4 lg:pt-0">
-                    <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
-                      Nearby cities we also serve
-                    </p>
-                    <div className="space-y-2 lg:mt-4">
-                      {nearbyAreas.map((area) => (
-                        <Link
-                          key={area.slug}
-                          href={`/services/${area.slug}`}
-                          className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                        >
-                          Jewelry repair near {area.city}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </details>
+              <section className="rounded-3xl border border-stone-200 bg-stone-50 p-6 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                  Nearby cities we also serve
+                </p>
+                <div className="mt-4 space-y-2">
+                  {nearbyAreas.map((area) => (
+                    <Link
+                      key={area.slug}
+                      href={`/services/${area.slug}`}
+                      className="block rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                    >
+                      Jewelry and watch service near {area.city}
+                    </Link>
+                  ))}
+                </div>
               </section>
             ) : null}
 
-            <section className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm lg:p-6">
-              <details className="mobile-flow-disclosure" data-mobile-sidebar-section>
-                <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-stone-900 lg:hidden">
-                  Quick answers
-                  <span className="text-brand-burgundy" aria-hidden="true">+</span>
-                </summary>
-                <div className="pt-4 lg:pt-0">
-                  <p className="hidden text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy lg:block">
-                    Quick answers
-                  </p>
-                  <div className="space-y-4 lg:mt-4">
-                    {page.faqs.map((faq) => (
-                      <div key={faq.question} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                        <h2 className="text-sm font-semibold text-stone-900">{faq.question}</h2>
-                        <p className="mt-2 text-sm leading-7 text-stone-700">{faq.answer}</p>
-                      </div>
-                    ))}
+            <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
+                Quick answers
+              </p>
+              <div className="mt-4 space-y-4">
+                {page.faqs.map((faq) => (
+                  <div key={faq.question} className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                    <h2 className="text-sm font-semibold text-stone-900">{faq.question}</h2>
+                    <p className="mt-2 text-sm leading-7 text-stone-700">{faq.answer}</p>
                   </div>
-                </div>
-              </details>
+                ))}
+              </div>
             </section>
           </aside>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
     </SiteShell>
   );
 }

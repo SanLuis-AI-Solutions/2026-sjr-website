@@ -108,27 +108,10 @@ export function ServiceInteractionTracker({ serviceSlug }: ServiceInteractionTra
 
     document.documentElement.dataset[trackerFlag] = "ready";
 
-    // Capture clicks on plain Link elements that have data-track-event (replacing TrackedLink).
-    const onLinkClick = (event: Event) => {
-      const anchor = (event.target as HTMLElement).closest<HTMLAnchorElement>("a[data-track-event]");
-      if (!anchor) return;
-      const eventName = anchor.dataset.trackEvent;
-      if (!eventName) return;
-      trackGaEvent(eventName, {
-        page_path: pagePath,
-        service_slug: anchor.dataset.trackSlug || serviceSlug,
-        placement: anchor.dataset.trackPlacement || "",
-        cta_target: anchor.dataset.trackTarget || "",
-        destination: anchor.href,
-      });
-    };
-    document.addEventListener("click", onLinkClick, { passive: true });
-
     return () => {
       domObserver.disconnect();
       sectionObserver.disconnect();
       trackedDetails.forEach((details) => details.removeEventListener("toggle", onToggle));
-      document.removeEventListener("click", onLinkClick);
       delete document.documentElement.dataset[trackerFlag];
     };
   }, [pathname, serviceSlug]);

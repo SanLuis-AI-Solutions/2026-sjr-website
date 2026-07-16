@@ -13,12 +13,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     ".agent/**",
+    ".codex/**",
     ".health/**",
-    ".vercel/**",
-    ".worktrees/**",
-    "coverage/**",
-    "playwright-report/**",
-    "test-results/**",
   ]),
 ]);
 

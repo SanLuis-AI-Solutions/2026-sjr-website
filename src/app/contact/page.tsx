@@ -1,9 +1,9 @@
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { GaConversionTracker } from "@/components/analytics/ga-tracker";
 import { LeadFormTracker } from "@/components/analytics/lead-form-tracker";
-import { LeadAttributionFields } from "@/components/analytics/lead-attribution-fields";
+import { ConversionQuickActions } from "@/components/analytics/conversion-quick-actions";
 import { BusinessActionLink } from "@/components/analytics/business-action-link";
-import { FormSubmitInitializer } from "@/components/form-submit-initializer";
 import { BUSINESS } from "@/lib/constants";
 import { Suspense } from "react";
 import { createPageMetadata } from "@/lib/metadata";
@@ -11,19 +11,19 @@ import { createPageMetadata } from "@/lib/metadata";
 const GOOGLE_MAPS_PRIMARY_URL = "https://maps.app.goo.gl/3ZyG1hF1Y9Z9rcQC8";
 
 export const metadata = createPageMetadata({
-  title: "Contact Susie’s Jewelry Repair | Pasadena, TX | (281) 991-6500",
+  title: "Contact Susie’s Jewelry Repair | Call, Email, or Message Us",
   description:
-    "Call, email, or message our in-house Pasadena jewelry and watch repair team. We reply within 1 business day and confirm all options before work begins.",
+    "Talk to our Pasadena in-house repair team by phone, email, or message for jewelry and watch service guidance, next steps, and appointment support.",
   canonical: "/contact",
 });
 
-function ContactSection() {
+async function DeferredContactSection() {
   return (
-    <section className="cv-section relative overflow-hidden bg-stone-100 py-10 md:py-18">
+    <section className="cv-section relative overflow-hidden bg-stone-100 py-14 md:py-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,_rgba(209,184,130,0.2),_transparent_44%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_74%,_rgba(122,46,58,0.11),_transparent_46%)]" />
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="mb-7 hidden rounded-[1.7rem] border border-stone-200 bg-white/85 p-5 shadow-[0_16px_42px_rgba(58,25,16,0.12)] md:block">
+        <div className="reveal-on-scroll mb-7 rounded-[1.7rem] border border-stone-200 bg-white/85 p-5 shadow-[0_16px_42px_rgba(58,25,16,0.12)]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
             Visit experience
           </p>
@@ -35,8 +35,9 @@ function ContactSection() {
             begins.
           </p>
         </div>
+
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="order-2 space-y-4 reveal-on-scroll lg:order-1">
+          <div className="space-y-4 reveal-on-scroll">
             <section className="relative overflow-hidden rounded-[2rem] border border-brand-burgundy/20 bg-brand-burgundy p-6 text-white shadow-[0_20px_55px_rgba(30,20,22,0.3)]">
               <div className="absolute right-[-5rem] top-[-3rem] h-40 w-40 rounded-full bg-brand-gold/20 blur-2xl" />
               <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
@@ -105,7 +106,9 @@ function ContactSection() {
             id="contact-form"
             action="/api/contact"
             method="post"
-            className="order-1 relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7 lg:order-2"
+            aria-label="Contact the shop"
+            aria-describedby="contact-form-help"
+            className="reveal-on-scroll relative overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-6 shadow-[0_24px_60px_rgba(58,25,16,0.18)] md:p-7"
           >
             <div className="absolute left-0 right-0 top-0 h-1.5 bg-gradient-to-r from-brand-burgundy via-brand-gold to-brand-burgundy" />
             <div className="mb-4">
@@ -115,12 +118,15 @@ function ContactSection() {
               <h2 className="mt-3 font-serif text-[1.9rem] leading-tight text-stone-900">
                 Send us a message
               </h2>
-              <p className="mt-2 hidden text-[15px] leading-7 text-stone-600 md:block">
+              <p className="mt-2 text-[15px] leading-7 text-stone-600">
                 Tell us what needs attention and your preferred reply method.
               </p>
             </div>
+            <p id="contact-form-help" className="sr-only">
+              Provide your contact details, preferred reply method, and a short message about the repair or question.
+            </p>
 
-            <div className="mb-5 hidden flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-600 md:flex">
+            <div className="mb-5 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-600">
               <span className="rounded-full border border-stone-300 px-3 py-1">Secure form</span>
               <span className="rounded-full border border-stone-300 px-3 py-1">Local team</span>
               <span className="rounded-full border border-stone-300 px-3 py-1">Fast response</span>
@@ -134,58 +140,81 @@ function ContactSection() {
               autoComplete="off"
               aria-hidden="true"
             />
-            <LeadAttributionFields />
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="group block text-sm font-medium text-stone-700">
+            <fieldset className="grid gap-4 sm:grid-cols-2">
+              <legend className="sr-only">Contact details</legend>
+              <label htmlFor="contact-name" className="block text-xs uppercase tracking-[0.2em] text-stone-600">
                 Name
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   autoComplete="name"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
+                  aria-label="Name"
+                  aria-required="true"
+                  title="Name"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   placeholder="Your name"
                   required
                 />
-                <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=name]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
-                  Please enter your name.
-                </p>
               </label>
-              <label className="group block text-sm font-medium text-stone-700">
+              <label htmlFor="contact-email" className="block text-xs uppercase tracking-[0.2em] text-stone-600">
                 Email
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   autoComplete="email"
-                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 [&:invalid:not(:placeholder-shown):not(:focus)]:border-rose-300 [&:invalid:not(:placeholder-shown):not(:focus)]:bg-rose-50"
+                  aria-label="Email"
+                  aria-required="true"
+                  title="Email"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   placeholder="you@email.com"
                   required
                 />
-                <p className="mt-1 hidden text-xs text-rose-600 group-has-[[name=email]:invalid:not(:placeholder-shown):not(:focus)]:block" role="alert">
-                  Please enter a valid email address.
-                </p>
               </label>
-            </div>
+            </fieldset>
 
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-stone-700">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <label htmlFor="contact-phone" className="block text-xs uppercase tracking-[0.2em] text-stone-600">
                 Phone (optional)
                 <input
+                  id="contact-phone"
                   type="tel"
                   name="phone"
                   autoComplete="tel"
                   inputMode="tel"
+                  aria-label="Phone"
+                  title="Phone"
                   className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   placeholder="(281) 555-1234"
                 />
-                <p className="mt-1 text-xs text-stone-500">We reply by email or text — never by phone call.</p>
+              </label>
+              <label htmlFor="contact-preferred-method" className="block text-xs uppercase tracking-[0.2em] text-stone-600">
+                Preferred contact method
+                <select
+                  id="contact-preferred-method"
+                  name="preferredContact"
+                  defaultValue=""
+                  aria-label="Preferred contact method"
+                  title="Preferred contact method"
+                  className="mt-2 w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  <option value="">No preference</option>
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                </select>
               </label>
             </div>
 
-            <label className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
+            <label htmlFor="contact-message" className="mt-4 block text-xs uppercase tracking-[0.2em] text-stone-600">
               Message
               <textarea
+                id="contact-message"
                 name="message"
+                aria-label="Message"
+                aria-required="true"
+                title="Message"
                 className="mt-2 min-h-[140px] w-full rounded-xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 placeholder="How can we help?"
                 required
@@ -194,10 +223,9 @@ function ContactSection() {
 
             <button
               type="submit"
-              id="contact-submit"
-              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-sm font-semibold text-white hover:bg-brand-burgundy-deep disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+              className="micro-interaction mt-6 w-full rounded-full bg-brand-burgundy px-6 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
-              <span id="contact-submit-text">Send my message</span>
+              Send Message
             </button>
             <div className="mt-4 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-center text-xs text-stone-600">
               Secure form · Local in-house team support.
@@ -208,15 +236,6 @@ function ContactSection() {
                 className="ml-1 inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 Need urgent help? Call now.
-              </BusinessActionLink>
-              <span className="mx-1 text-stone-400">·</span>
-              <BusinessActionLink
-                href={`mailto:${BUSINESS.email}`}
-                action="email_contact"
-                placement="contact_form_notice"
-                className="inline-flex min-h-11 items-center font-semibold text-brand-burgundy hover:text-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                {BUSINESS.email}
               </BusinessActionLink>
             </div>
           </form>
@@ -283,11 +302,16 @@ export default async function ContactPage({
 
   return (
     <SiteShell>
-      <FormSubmitInitializer />
-      <section className="relative overflow-hidden bg-brand-burgundy-deep py-8 text-white md:py-20">
-        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)] md:block" />
-        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)] md:block" />
-        <div className="absolute inset-0 hidden bg-[linear-gradient(110deg,rgba(30,20,22,0.22)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.28)_100%)] md:block" />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Contact", href: "/contact" },
+        ]}
+      />
+      <section className="relative overflow-hidden bg-brand-burgundy-deep py-16 text-white md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_8%,_rgba(209,184,130,0.3),_transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,_rgba(250,247,242,0.14),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(30,20,22,0.3)_0%,rgba(122,46,58,0.05)_55%,rgba(30,20,22,0.35)_100%)]" />
 
         <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div>
@@ -314,43 +338,26 @@ export default async function ContactPage({
             ) : null}
 
             <p className="text-xs uppercase tracking-[0.35em] text-brand-gold">Contact desk</p>
-            <h1
-              className="lcp-sans"
-              style={{
-                marginTop: "0.5rem",
-                maxWidth: "42rem",
-                fontSize: "clamp(1.75rem, 5vw, 3.75rem)",
-                fontWeight: 600,
-                letterSpacing: "-0.025em",
-                lineHeight: "1.08",
-                color: "#fff",
-              }}
-            >
+            <h1 className="lcp-heading mt-3 max-w-2xl text-balance text-[2.35rem] leading-[1.07] text-white md:text-6xl">
               Talk to a local expert
             </h1>
-            <p className="lcp-sans mt-5 hidden max-w-lg text-[15px] leading-6 text-stone-100/90 md:block">
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-stone-100/90 md:text-base">
               Call, email, or send a quick note. We reply with the fastest next step and confirm
               timing before work begins.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-3 md:mt-7" role="region" aria-label="Contact actions">
-              <a
-                href="#contact-form"
-                className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-burgundy shadow-lg hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
-              >
-                Send Message
-              </a>
-              <BusinessActionLink
-                href={`tel:${BUSINESS.phone}`}
-                action="phone_call"
-                placement="contact_hero"
-                className="micro-interaction hidden min-h-12 items-center justify-center rounded-full border border-brand-gold/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-gold hover:bg-brand-gold/10 md:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-burgundy-deep"
-              >
-                Call Now
-              </BusinessActionLink>
-            </div>
+            <ConversionQuickActions
+              page="contact"
+              tone="dark"
+              className="mt-7 flex flex-wrap gap-3"
+              primary={{ href: "/book", label: "Book a Repair" }}
+              secondary={[
+                { href: "#contact-form", label: "Send Message", tone: "muted" },
+                { href: "/quote", label: "Request Quote", tone: "muted" },
+              ]}
+            />
 
-            <div className="mt-8 hidden gap-3 sm:grid-cols-3 md:grid">
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <article className="rounded-2xl border border-white/20 bg-white/10 p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold">
                   Response
@@ -375,7 +382,7 @@ export default async function ContactPage({
             </div>
           </div>
 
-          <aside className="hidden rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)] lg:block">
+          <aside className="rounded-[1.9rem] border border-white/20 bg-white/12 p-6 shadow-[0_28px_60px_rgba(15,9,10,0.28)]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-gold">
               Direct lines
             </p>
@@ -432,7 +439,9 @@ export default async function ContactPage({
         </div>
       </section>
 
-      <ContactSection />
+      <Suspense fallback={null}>
+        <DeferredContactSection />
+      </Suspense>
       <Suspense fallback={null}>
         <GaConversionTracker
           active={submitted}

@@ -1,4 +1,5 @@
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { getServicesWithImages } from "@/lib/content-images";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,11 +17,11 @@ import {
   getServicesHubFinderChips,
   getServicesHubGroups,
 } from "@/lib/service-taxonomy";
+import { localBusinessSchema, organizationSchema } from "@/lib/schema";
 import {
   ServicesHubBrowser,
   type ServicesHubGroupView,
 } from "@/components/services-hub-browser";
-import { PRIORITY_REPAIR_PATHS } from "@/lib/priority-repair-paths";
 
 type ServiceListItem = {
   slug: string;
@@ -37,9 +38,9 @@ type ServiceListItem = {
 };
 
 export const metadata = createPageMetadata({
-  title: "Jewelry & Watch Repair Services in Pasadena, TX | Susie’s",
+  title: "Jewelry & Watch Repair Services | Susie’s Jewelry Repair",
   description:
-    "Ring sizing, watch repair, stone setting, pearl restringing, and heirloom restoration — all in-house in Pasadena, TX with Same Day/Next Day service on most work.",
+    "Find the right in-house jewelry or watch service, then book time with Susie’s Jewelry Repair in Pasadena.",
   canonical: "/services",
 });
 
@@ -106,6 +107,12 @@ export default async function ServicesPage() {
   }));
   return (
     <SiteShell>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+        ]}
+      />
       <div id="top" className="sr-only" />
       <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.18),_transparent_55%)] md:block" />
@@ -115,10 +122,10 @@ export default async function ServicesPage() {
               Services Directory
             </p>
             <h1 className="lcp-heading mt-4 font-serif text-5xl leading-[1.05] text-stone-900 md:text-6xl">
-              A curated menu of in-house repairs.
+              Find the right service, then book the right time.
             </h1>
             <p className="mt-6 max-w-xl text-base text-stone-600 md:text-lg">
-              Compare services quickly, review starting context, and move straight to quote or booking.
+              Start with the problem you need fixed. We will guide you to the right service and booking path quickly.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-stone-600">
@@ -142,6 +149,12 @@ export default async function ServicesPage() {
               >
                 Book a Repair
               </TrackedLink>
+              <a
+                href="#services-finder-heading"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+              >
+                Find Your Repair
+              </a>
             </div>
           </div>
 
@@ -250,12 +263,10 @@ export default async function ServicesPage() {
               Nearby service areas
             </p>
             <h2 className="mt-3 font-serif text-3xl text-stone-900">
-              Repair guidance for nearby cities, not just Pasadena.
+              Service guidance for nearby cities.
             </h2>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
-              If you are coming from a nearby area, start with a city-specific page to see how
-              local customers typically use our Pasadena workshop, which repairs are most common,
-              and the fastest quote-first path before you drive over.
+              If you are coming from a nearby area, these pages give local context after you have found the right service.
             </p>
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {SERVICE_AREA_PAGES.map((area) => (
@@ -270,7 +281,7 @@ export default async function ServicesPage() {
                     {area.city}
                   </p>
                   <h3 className="mt-3 font-serif text-2xl text-stone-900">
-                    Jewelry repair near {area.city}
+                    Jewelry and watch service near {area.city}
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-stone-700">{area.cardDescription}</p>
                 </TrackedLink>
@@ -317,42 +328,17 @@ export default async function ServicesPage() {
               </Link>
             ))}
           </div>
-
-          <div
-            role="region"
-            aria-label="Repair planning paths"
-            className="mt-8 rounded-3xl border border-stone-200 bg-white p-6 shadow-sm"
-          >
-            <div className="max-w-3xl">
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                Repair planning
-              </p>
-              <h3 className="mt-3 font-serif text-3xl text-stone-900">
-                Not sure which repair path fits yet?
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-stone-700">
-                These routes answer the questions customers usually ask before they request a
-                quote: whether the issue is routine, how urgent it is, and what service to start
-                with first.
-              </p>
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {PRIORITY_REPAIR_PATHS.map((path) => (
-                <Link
-                  key={path.href}
-                  href={path.href}
-                  className="rounded-2xl border border-stone-200 bg-stone-50 p-5 transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_18px_44px_rgba(58,25,16,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  <h4 className="font-serif text-2xl text-stone-900">{path.label}</h4>
-                  <p className="mt-3 text-sm leading-7 text-stone-700">{path.description}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
     </SiteShell>
   );
 }

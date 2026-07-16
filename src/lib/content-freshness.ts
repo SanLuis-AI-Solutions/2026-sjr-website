@@ -1,0 +1,2 @@
+export const SITE_LAST_MODIFIED_ISO = "2026-07-10";
+export const SITE_LAST_MODIFIED_HUMAN = "July 10, 2026";

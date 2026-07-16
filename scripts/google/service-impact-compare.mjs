@@ -49,6 +49,24 @@ function deltaPct(current, previous) {
 }
 
 function deriveRanges() {
+  if (
+    process.env.REPORT_START_DATE &&
+    process.env.REPORT_END_DATE &&
+    process.env.PRIOR_REPORT_START_DATE &&
+    process.env.PRIOR_REPORT_END_DATE
+  ) {
+    return {
+      current: {
+        startDate: process.env.REPORT_START_DATE,
+        endDate: process.env.REPORT_END_DATE,
+      },
+      previous: {
+        startDate: process.env.PRIOR_REPORT_START_DATE,
+        endDate: process.env.PRIOR_REPORT_END_DATE,
+      },
+    };
+  }
+
   // Use complete UTC days. Current window ends yesterday.
   const endCurrent = new Date();
   endCurrent.setUTCDate(endCurrent.getUTCDate() - 1);

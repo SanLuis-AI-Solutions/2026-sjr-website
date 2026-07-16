@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   title: page?.title || "Jewelry Repair Near Deer Park, TX | Susie’s Jewelry Repair",
   description:
     page?.description ||
-    "In-house jewelry and watch repair near Deer Park, TX with clear quotes, Same Day/Next Day service on many repairs, and a Pasadena workshop you can visit directly.",
+    "In-house jewelry and watch service near Deer Park, TX with pricing approvals, Same Day/Next Day service on many jobs, and a Pasadena workshop you can visit directly.",
   canonical: "/services/deer-park",
 });
 

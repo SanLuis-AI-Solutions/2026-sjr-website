@@ -12,14 +12,8 @@
   "routes": [
     {
       "path": "/contact",
-      "lcpMs": 2411,
-      "maxRegressionMs": 175,
-      "source": {
-        "workflowRunId": 25839047489,
-        "jobId": 75921309382,
-        "collectedAt": "2026-05-14T03:22:55Z",
-        "reason": "Realigned stale March delta baseline after repeated production guardrail runs showed the current contact layout stabilizing near 2411ms while still passing the absolute 2600ms LCP budget and SEO 100."
-      }
+      "lcpMs": 2130,
+      "maxRegressionMs": 175
     },
     {
       "path": "/quote",
@@ -28,14 +22,8 @@
     },
     {
       "path": "/book",
-      "lcpMs": 2357,
-      "maxRegressionMs": 150,
-      "source": {
-        "workflowRunId": 25856508799,
-        "jobId": 75977153623,
-        "collectedAt": "2026-05-14T11:19:29Z",
-        "reason": "Realigned stale March delta baseline after two production guardrail attempts on 2026-05-14 showed the current booking flow stabilizing around 2345-2357ms while still passing the absolute 2600ms LCP budget and SEO 100. Future regression budget tightened to +150ms."
-      }
+      "lcpMs": 2119,
+      "maxRegressionMs": 225
     }
   ]
 }

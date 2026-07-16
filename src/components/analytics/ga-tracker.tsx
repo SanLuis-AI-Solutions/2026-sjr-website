@@ -4,13 +4,21 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { readCurrentCtaVariant } from "./cta-variant";
 import { isProductionAnalyticsHost } from "@/lib/analytics-host";
-import { readFirstTouch, writeFirstTouch, type FirstTouch } from "@/lib/first-touch";
 import {
   getServicesFinderAnalyticsParams,
   resolveServicesFinderLeadContext,
 } from "@/lib/service-lead-context";
 
 type GtagEventParams = Record<string, string | number | boolean | null | undefined>;
+
+type FirstTouch = {
+  landing_path: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_term: string | null;
+  utm_content: string | null;
+};
 
 declare global {
   interface Window {
@@ -20,7 +28,24 @@ declare global {
   }
 }
 
+const FIRST_TOUCH_KEY = "sjr_first_touch";
 const EVENT_SENT_PREFIX = "sjr_ga4_sent";
+
+function readFirstTouch(): FirstTouch | null {
+  if (typeof window === "undefined") return null;
+  const raw = window.sessionStorage.getItem(FIRST_TOUCH_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as FirstTouch;
+  } catch {
+    return null;
+  }
+}
+
+function writeFirstTouch(firstTouch: FirstTouch) {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.setItem(FIRST_TOUCH_KEY, JSON.stringify(firstTouch));
+}
 
 function getOrCreateFirstTouch(pathname: string, search: URLSearchParams): FirstTouch {
   const existing = readFirstTouch();
@@ -28,19 +53,11 @@ function getOrCreateFirstTouch(pathname: string, search: URLSearchParams): First
 
   const firstTouch: FirstTouch = {
     landing_path: pathname || "/",
-    landing_search: search.toString() ? `?${search.toString()}` : null,
-    referrer: document.referrer || null,
     utm_source: search.get("utm_source"),
     utm_medium: search.get("utm_medium"),
     utm_campaign: search.get("utm_campaign"),
     utm_term: search.get("utm_term"),
     utm_content: search.get("utm_content"),
-    utm_id: search.get("utm_id"),
-    gclid: search.get("gclid"),
-    gbraid: search.get("gbraid"),
-    wbraid: search.get("wbraid"),
-    msclkid: search.get("msclkid"),
-    first_touch_at: new Date().toISOString(),
   };
   writeFirstTouch(firstTouch);
   return firstTouch;
@@ -103,23 +120,15 @@ export function trackGaEvent(eventName: string, params: GtagEventParams = {}) {
   });
 }
 
-export function GaFirstTouchCapture() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const searchKey = searchParams.toString();
-
-  useEffect(() => {
-    getOrCreateFirstTouch(pathname || "/", searchParams);
-  }, [pathname, searchKey, searchParams]);
-
-  return null;
-}
-
-export function GaPageViewTracker() {
+export function SiteAnalytics() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchKey = searchParams.toString();
   const lastPagePathRef = useRef<string>("");
+
+  useEffect(() => {
+    getOrCreateFirstTouch(pathname || "/", searchParams);
+  }, [pathname, searchKey, searchParams]);
 
   useEffect(() => {
     const resolvedPathname = pathname || "/";
@@ -128,6 +137,36 @@ export function GaPageViewTracker() {
     lastPagePathRef.current = pagePath;
     sendPageView(resolvedPathname, searchKey);
   }, [pathname, searchKey, searchParams]);
+
+  useEffect(() => {
+    const pagePath = pathname || "/";
+
+    const onLinkClick = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+
+      const anchor = target.closest<HTMLAnchorElement>("a[data-track-event]");
+      if (!anchor) return;
+
+      const eventName = anchor.dataset.trackEvent;
+      if (!eventName) return;
+
+      trackGaEvent(eventName, {
+        page_path: pagePath,
+        destination: anchor.href,
+        business_action: anchor.dataset.trackBusinessAction || "",
+        placement: anchor.dataset.trackPlacement || "",
+        slug: anchor.dataset.trackSlug || "",
+        cta_target: anchor.dataset.trackTarget || "",
+      });
+    };
+
+    document.addEventListener("click", onLinkClick, { passive: true });
+
+    return () => {
+      document.removeEventListener("click", onLinkClick);
+    };
+  }, [pathname]);
 
   return null;
 }
@@ -162,19 +201,11 @@ export function GaConversionTracker({
       lead_type: leadType,
       lead_status: status,
       landing_path: firstTouch.landing_path,
-      landing_search: firstTouch.landing_search,
-      referrer: firstTouch.referrer,
       utm_source: firstTouch.utm_source,
       utm_medium: firstTouch.utm_medium,
       utm_campaign: firstTouch.utm_campaign,
       utm_term: firstTouch.utm_term,
       utm_content: firstTouch.utm_content,
-      utm_id: firstTouch.utm_id,
-      gclid: firstTouch.gclid,
-      gbraid: firstTouch.gbraid,
-      wbraid: firstTouch.wbraid,
-      msclkid: firstTouch.msclkid,
-      first_touch_at: firstTouch.first_touch_at,
       page_path: pathname || "/",
       cta_variant: readCurrentCtaVariant(),
       ...finderAnalyticsParams,

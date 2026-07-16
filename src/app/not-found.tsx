@@ -35,6 +35,12 @@ export default function NotFoundPage() {
             >
               Book a Repair
             </Link>
+            <Link
+              href="/contact"
+              className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              Contact Us
+            </Link>
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {featuredLinks.map((item) => (

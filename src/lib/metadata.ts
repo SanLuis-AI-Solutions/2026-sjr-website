@@ -33,6 +33,9 @@ export function createPageMetadata({
     description,
     alternates: {
       canonical,
+      types: {
+        "application/rss+xml": `${getSiteUrl()}/rss.xml`,
+      },
     },
     openGraph: {
       type,

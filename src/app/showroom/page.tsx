@@ -1,4 +1,5 @@
 import { ShowroomPageClient } from "@/components/showroom-page-client";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -9,5 +10,15 @@ export const metadata = createPageMetadata({
 });
 
 export default function ShowroomPage() {
-  return <ShowroomPageClient />;
+  return (
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Showroom", href: "/showroom" },
+        ]}
+      />
+      <ShowroomPageClient />
+    </>
+  );
 }

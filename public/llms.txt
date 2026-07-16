@@ -1,0 +1,41 @@
+# Susie’s Jewelry Repair
+
+> In-house jewelry and watch repair shop in Pasadena, Texas, helping customers book repairs for rings, watches, chains, bracelets, necklaces, stones, pearls, heirlooms, and custom jewelry.
+
+Primary action: book a repair appointment. AI discovery: [AI summary](https://www.susiesjewelryrepair.com/ai/summary.json), [service catalog](https://www.susiesjewelryrepair.com/ai/service.json), [FAQ catalog](https://www.susiesjewelryrepair.com/ai/faq.json), and [site guide](https://www.susiesjewelryrepair.com/ai/site-guide).
+
+## Core Pages
+
+- [Book a Repair](https://www.susiesjewelryrepair.com/book): Request a repair appointment and preferred time.
+- [Repair Services](https://www.susiesjewelryrepair.com/services): Overview of available in-house jewelry and watch repair services.
+- [About Susie’s Jewelry Repair](https://www.susiesjewelryrepair.com/about): Local shop background, craftsmanship, and service approach.
+- [Contact](https://www.susiesjewelryrepair.com/contact): Store location, phone, hours, and contact options.
+- [FAQ](https://www.susiesjewelryrepair.com/faq): Common questions about repair timing, appointments, and services.
+
+## Repair Services
+
+- [Watch Repair & Battery Replacement](https://www.susiesjewelryrepair.com/services/watch-repair): Watch batteries, bands, crystals, crowns, stems, and movement assessment.
+- [Ring Sizing & Repair](https://www.susiesjewelryrepair.com/services/ring-sizing): Ring sizing up or down, fit checks, prong inspection, and refinishing guidance.
+- [Stone Replacement & Settings](https://www.susiesjewelryrepair.com/services/stone-setting): Stone tightening, replacement stones, prong repair, and setting work.
+- [Jewelry Cleaning & Polishing](https://www.susiesjewelryrepair.com/services/jewelry-cleaning): Cleaning, polishing, inspection, and care guidance.
+- [Necklace Repair](https://www.susiesjewelryrepair.com/services/necklace-repair): Broken chains, clasps, jump rings, charms, and soldering.
+- [Bracelet Repair](https://www.susiesjewelryrepair.com/services/bracelet-repair): Links, clasps, safety chains, tennis bracelets, and fit adjustments.
+- [Pearl Restringing](https://www.susiesjewelryrepair.com/services/pearl-restringing): Pearl restringing, knotting, clasp checks, and strand repair.
+- [Custom Design](https://www.susiesjewelryrepair.com/services/custom-design): Custom jewelry design, remounting stones, and redesign consultations.
+- [Heirloom Restorations](https://www.susiesjewelryrepair.com/services/heirloom-restoration): Careful restoration for antique and sentimental jewelry.
+
+## Service Areas
+
+- [Pasadena Jewelry Repair](https://www.susiesjewelryrepair.com/services/pasadena)
+- [Deer Park Jewelry Repair](https://www.susiesjewelryrepair.com/services/deer-park)
+- [La Porte Jewelry Repair](https://www.susiesjewelryrepair.com/services/la-porte)
+- [Friendswood Jewelry Repair](https://www.susiesjewelryrepair.com/services/friendswood)
+- [Webster Jewelry Repair](https://www.susiesjewelryrepair.com/services/webster)
+- [Clear Lake Jewelry Repair](https://www.susiesjewelryrepair.com/services/clear-lake)
+
+## Business Details
+
+- Name: Susie’s Jewelry Repair
+- Location: 3910 Fairmont Pkwy #C, Pasadena, TX 77504
+- Phone: (281) 991-6500
+- Primary action: book a repair appointment

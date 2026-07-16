@@ -1,37 +1,34 @@
 import Link from "next/link";
 
-type CtaBandProps = {
-  serviceName?: string;
-};
-
-export function CtaBand({ serviceName }: CtaBandProps = {}) {
-  const headline = serviceName
-    ? `Ready to book your ${serviceName.toLowerCase()}?`
-    : "Schedule your repair today.";
-  const subtext = serviceName
-    ? `Drop off or book online. We confirm ${serviceName.toLowerCase()} options and pricing before any work begins.`
-    : "Drop off, walk in, or book online — we discuss options and confirm pricing before any work begins.";
-
+export function CtaBand() {
   return (
     <section className="bg-stone-100 py-16">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 rounded-2xl border border-stone-200 bg-white px-8 py-12 shadow-sm md:flex-row md:items-center">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-            In-house · Pasadena · Same-day available
+            Free 15‑Minute Assessment
           </p>
           <h3 className="mt-3 font-serif text-3xl text-stone-900">
-            {headline}
+            Book your visit and get clear next steps today.
           </h3>
           <p className="mt-3 text-sm text-stone-600">
-            {subtext}
+            Tell us what you need and we will confirm timing, intake, and what to bring.
           </p>
         </div>
-        <Link
-          href="/book"
-          className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:w-auto"
-        >
-          Book a Repair
-        </Link>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/book"
+            className="rounded-lg bg-brand-burgundy px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-burgundy-deep"
+          >
+            Book a Repair
+          </Link>
+          <Link
+            href="/services"
+            className="rounded-lg border border-brand-gold px-6 py-3 text-sm font-semibold text-brand-burgundy transition hover:bg-brand-gold/10"
+          >
+            View Services
+          </Link>
+        </div>
       </div>
     </section>
   );

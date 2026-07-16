@@ -6,10 +6,6 @@ Run this once per week after:
 npm run google:kpi-weekly-snapshot
 npm run google:reconcile-90d
 npm run google:weekly-seo-health
-npm run google:seo-quick-wins
-npm run google:indexing-status
-npm run google:indexing-manifest
-npm run seo:internal-link-audit
 ```
 
 Automated option:
@@ -41,14 +37,11 @@ Automated option:
 - no new localhost or preview hostnames show up in GA4 hostname reports
 - Search Console is linked to the correct GA4 stream
 - GA4 key events still include:
-  - `quote_form_start`
-  - `booking_form_start`
-  - `contact_form_start`
   - `quote_submit_success`
   - `booking_submit_success`
   - `booking_submit_pending`
   - `contact_submit_success`
-- weekly health reports `Lead form starts` and `Lead outcomes` across quote, booking, and contact flows
+- quote and booking starts are still being captured
 
 ## Search Visibility
 
@@ -58,14 +51,13 @@ Automated option:
 - average position reviewed for unusual drops
 - top landing pages reviewed
 - top landing pages do not show unexpected legacy URLs dominating
-- unresolved indexation queue reviewed with `npm run google:indexing-status`
-- unresolved pages have enough indexed-source internal links in `npm run seo:internal-link-audit`
-- URLs should move from `URL is unknown to Google` to `Discovered - currently not indexed` to indexed search visibility
 
 ## Commercial Intent
 
-- lead form starts reviewed across `/quote`, `/book`, and `/contact`
-- lead outcomes reviewed across `/quote`, `/book`, and `/contact`
+- quote starts reviewed
+- booking starts reviewed
+- quote outcomes reviewed
+- booking outcomes reviewed
 - start -> attempt rate reviewed
 - attempt -> outcome rate reviewed
 - route conversion reviewed for `/quote`, `/book`, and `/contact`
@@ -80,4 +72,4 @@ Escalate immediately if any of these happen:
 - redirected legacy URLs stop resolving
 - Search Console starts surfacing new Wix-era `404` patterns
 - Google clicks rise but the landing pages are mismatched to intent
-- lead form starts or outcomes drop sharply without a known cause
+- quote/booking starts or outcomes drop sharply without a known cause

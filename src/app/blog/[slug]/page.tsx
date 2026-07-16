@@ -15,7 +15,7 @@ import { SERVICES } from "@/lib/constants";
 import { TrackedLink } from "@/components/analytics/tracked-link";
 import { createPageMetadata } from "@/lib/metadata";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
-import { getSiteUrl } from "@/lib/site-url";
+import { localBusinessSchema, organizationSchema } from "@/lib/schema";
 
 type PageProps = {
   params: Promise<{
@@ -31,10 +31,6 @@ function formatPublishedDate(value: string) {
     day: "numeric",
     year: "numeric",
   }).format(date);
-}
-
-function isGenericConversionStep(href: string) {
-  return href === "/book";
 }
 
 export function generateStaticParams() {
@@ -75,17 +71,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
   ).slice(0, 3);
   const relatedReads = getRelatedBlogPosts(post.slug, 2);
   const commercialGuides = getCommercialIntentRelatedPosts(post.slug, 2);
-  const contextualNextSteps = (post.nextSteps ?? []).filter(
-    (item) => !isGenericConversionStep(item.href)
-  );
   const breadcrumbItems = [
     { name: "Home", href: "/" },
     { name: "Blog", href: "/blog" },
     { name: post.title, href: `/blog/${post.slug}` },
   ];
-  const siteUrl = getSiteUrl();
-  const articleUrl = `${siteUrl}/blog/${post.slug}`;
-  const articleImage = post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`;
   const mobileHeroImageSrc = BLOG_MOBILE_HERO_IMAGE_BY_SLUG[post.slug] || null;
   const heroImageSizes = "(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(100vw - 3rem), 1200px";
   const desktopHeroImageProps = getImageProps({
@@ -104,6 +94,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
         sizes: heroImageSizes,
       }).props
     : null;
+  const bylineName =
+    post.authorName === "Susie’s In-House Team" ? "Susie’s Jewelry Repair" : post.authorName;
+  const bylineRole =
+    post.authorName === "Susie’s In-House Team"
+      ? "Pasadena In-House Jewelry & Watch Service Team"
+      : post.authorRole;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -113,39 +109,19 @@ export default async function BlogDetailPage({ params }: PageProps) {
     datePublished: post.publishedAt,
     dateModified: post.reviewedAt,
     author: {
-      "@type": "Person",
-      name: post.authorName,
-      jobTitle: post.authorRole,
-    },
-    reviewedBy: {
       "@type": "Organization",
-      name: post.authorName,
-      description: post.authorRole,
+      "@id": "https://www.susiesjewelryrepair.com/#organization",
+      name: "Susie’s Jewelry Repair",
+      url: "https://www.susiesjewelryrepair.com/about",
     },
     publisher: {
-      "@type": "Organization",
-      name: "Susie’s Jewelry Repair",
-      url: siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/images/brand/sjr-logo.png`,
-      },
+      "@id": "https://www.susiesjewelryrepair.com/#organization",
     },
-    about: post.topics.map((topic) => ({
-      "@type": "Thing",
-      name: topic,
-    })),
-    mentions: relatedServices.map((service) => ({
-      "@type": "Service",
-      "@id": `${siteUrl}/services/${service.slug}#service`,
-      url: `${siteUrl}/services/${service.slug}`,
-      name: service.name,
-    })),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": articleUrl,
+      "@id": `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
     },
-    image: [articleImage],
+    image: [post.image],
   };
 
   const faqSchema =
@@ -163,23 +139,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
           })),
         }
       : null;
-  const decisionSignalSchema =
-    post.decisionSignals && post.decisionSignals.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          "@id": `${articleUrl}#decision-signals`,
-          name: `${post.title} decision signals`,
-          itemListOrder: "https://schema.org/ItemListOrderAscending",
-          itemListElement: post.decisionSignals.map((item, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: item.signal,
-            description: `Likely meaning: ${item.meaning} Best next action: ${item.nextAction}`,
-            url: `${articleUrl}#decision-signal-${index + 1}`,
-          })),
-        }
-      : null;
 
   return (
     <SiteShell>
@@ -193,12 +152,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       ) : null}
-      {decisionSignalSchema ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(decisionSignalSchema) }}
-        />
-      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
       <article className="relative overflow-hidden bg-white pb-16 pt-14">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="relative mx-auto max-w-5xl px-6">
@@ -214,7 +175,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
               ) : null}
               <img
                 {...desktopHeroImageProps}
-                alt={post.title}
                 fetchPriority="high"
                 loading="eager"
                 decoding="async"
@@ -250,8 +210,16 @@ export default async function BlogDetailPage({ params }: PageProps) {
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
               Reviewed by
             </p>
-            <p className="mt-2 font-semibold text-stone-900">{post.authorName}</p>
-            <p className="text-stone-600">{post.authorRole}</p>
+            <Link
+              href="/about"
+              className="mt-2 inline-flex font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              {bylineName}
+            </Link>
+            <p className="text-stone-600">{bylineRole}</p>
+            <p className="mt-2 text-sm text-stone-600">
+              Local in-house team at Susie’s Jewelry Repair in Pasadena.
+            </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {post.topics.map((topic) => (
                 <span
@@ -280,10 +248,10 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     {index === 0 ? (
                       <div className="mt-6 rounded-2xl border border-stone-200 bg-stone-50 p-5">
                         <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-brand-burgundy">
-                          Need a repair estimate?
+                          Need pricing before you visit?
                         </p>
                         <p className="mt-2 text-sm leading-7 text-stone-700">
-                          We can confirm starting-at pricing and timing before you visit.
+                          If you are ready, booking is the fastest path. If you only need pricing first, we can confirm starting-at pricing and timing before you visit.
                         </p>
                         <div className="mt-4 flex flex-wrap gap-3">
                           <TrackedLink
@@ -293,6 +261,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                           >
                             Book a Repair
+                          </TrackedLink>
+                          <TrackedLink
+                            href="/quote"
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: "quote" }}
+                            className="inline-flex min-h-11 items-center justify-center px-2 py-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                          >
+                            Need pricing first? Request a quote
                           </TrackedLink>
                         </div>
                       </div>
@@ -322,59 +298,36 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   </section>
                 ) : null}
 
-                {post.decisionSignals && post.decisionSignals.length > 0 ? (
-                  <section className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
-                      Repair decision guide
-                    </p>
-                    <h2 className="mt-3 font-serif text-2xl text-stone-900">
-                      What the symptom usually means
-                    </h2>
-                    <div className="mt-5 grid gap-4">
-                      {post.decisionSignals.map((item, index) => (
-                        <article
-                          id={`decision-signal-${index + 1}`}
-                          key={item.signal}
-                          className="rounded-2xl border border-stone-200 bg-stone-50 p-5"
-                        >
-                          <h3 className="text-base font-semibold text-stone-900">{item.signal}</h3>
-                          <p className="mt-2 text-sm leading-7 text-stone-700">
-                            <span className="font-semibold text-stone-900">Likely meaning: </span>
-                            {item.meaning}
-                          </p>
-                          <p className="mt-2 text-sm leading-7 text-stone-700">
-                            <span className="font-semibold text-stone-900">Best next action: </span>
-                            {item.nextAction}
-                          </p>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                ) : null}
-
-                {contextualNextSteps.length > 0 ? (
+                {post.nextSteps && post.nextSteps.length > 0 ? (
                   <section className="rounded-3xl border border-brand-gold/40 bg-white p-6 shadow-[0_18px_48px_rgba(58,25,16,0.08)]">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-brand-burgundy">
                       Next step
                     </p>
                     <h2 className="mt-3 font-serif text-2xl text-stone-900">
-                      {post.nextStepsHeading || "Get the right repair path"}
+                      {post.nextStepsHeading || "Get the right service path"}
                     </h2>
                     {post.nextStepsIntro ? (
                       <p className="mt-3 text-sm leading-7 text-stone-700">{post.nextStepsIntro}</p>
                     ) : null}
                     <div className="mt-5 flex flex-wrap gap-3">
-                      {contextualNextSteps.map((item) => (
-                        <TrackedLink
-                          key={item.href}
-                          href={item.href}
-                          eventName="article_mid_cta_click"
-                          eventParams={{ blog_slug: post.slug, cta_target: item.href }}
-                          className="micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-200 bg-stone-50 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-900 hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                        >
-                          {item.label}
-                        </TrackedLink>
-                      ))}
+                      {post.nextSteps.map((item) => {
+                        const isQuote = item.href === "/quote";
+                        return (
+                          <TrackedLink
+                            key={item.href}
+                            href={item.href}
+                            eventName="article_mid_cta_click"
+                            eventParams={{ blog_slug: post.slug, cta_target: item.href }}
+                            className={
+                              isQuote
+                                ? "inline-flex min-h-11 items-center justify-center px-2 py-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                                : "micro-interaction inline-flex min-h-11 items-center justify-center rounded-full border border-stone-200 bg-stone-50 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-stone-900 hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                            }
+                          >
+                            {isQuote ? "Need pricing first? Request a quote" : item.label}
+                          </TrackedLink>
+                        );
+                      })}
                     </div>
                   </section>
                 ) : null}

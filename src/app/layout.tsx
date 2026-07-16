@@ -1,13 +1,12 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import type { Metadata } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 import { defaultShareImagePath } from "@/lib/metadata";
 import { LocalBusinessSchema } from "@/components/local-business-schema";
-import { ScrollRevealManager } from "@/components/scroll-reveal-manager";
-import { GaFirstTouchCapture, GaPageViewTracker } from "@/components/analytics/ga-tracker";
 import { GaHeadScripts } from "@/components/analytics/ga-head-scripts";
+import { NonCriticalClientHelpers } from "@/components/non-critical-client-helpers";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -21,7 +20,7 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  display: "optional",
+  display: 'swap',
 });
 
 const DEFAULT_TITLE = "Susie’s Jewelry Repair | Modern Luxury Master Craftsmanship";
@@ -32,7 +31,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
-  manifest: "/manifest.json",
   openGraph: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
@@ -54,15 +52,6 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [defaultShareImagePath],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -74,20 +63,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-      </head>
+      <head>{gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}</head>
       <body className={`${playfair.variable} ${inter.variable} font-sans antialiased text-foreground bg-background`}>
         {children}
-        <ScrollRevealManager />
         <LocalBusinessSchema />
-        {gaMeasurementId ? (
-          <Suspense fallback={null}>
-            <GaFirstTouchCapture />
-            <GaPageViewTracker />
-          </Suspense>
-        ) : null}
-        {gaMeasurementId ? <GaHeadScripts measurementId={gaMeasurementId} /> : null}
+        <Suspense fallback={null}>
+          <NonCriticalClientHelpers analyticsEnabled={Boolean(gaMeasurementId)} />
+        </Suspense>
       </body>
     </html>
   );

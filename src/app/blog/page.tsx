@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import {
   BLOG_POSTS,
   BLOG_TOPICS,
@@ -12,40 +13,11 @@ import { createPageMetadata } from "@/lib/metadata";
 import { SERVICES } from "@/lib/constants";
 
 export const metadata = createPageMetadata({
-  title: "Jewelry & Watch Repair Guides | Pasadena, TX | Susie’s Blog",
+  title: "Jewelry Repair Tips and Guides | Susie’s Jewelry Repair Blog",
   description:
-    "In-house repair advice from our Pasadena team: watch battery vs. service, ring sizing costs, stone security checks, heirloom restoration, and more.",
+    "Practical repair guidance from our Pasadena in-house team: ring sizing, watch care, stone setting safety, and maintenance tips.",
   canonical: "/blog",
 });
-
-const blogListSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Jewelry & Watch Repair Guides",
-  description: "In-house repair advice from Susie’s Jewelry Repair in Pasadena, TX",
-  url: "https://www.susiesjewelryrepair.com/blog",
-  itemListElement: BLOG_POSTS.map((post, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@type": "BlogPosting",
-      "@id": `https://www.susiesjewelryrepair.com/blog/${post.slug}#article`,
-      url: `https://www.susiesjewelryrepair.com/blog/${post.slug}`,
-      headline: post.title,
-      description: post.excerpt,
-      image: post.image.startsWith("http")
-        ? post.image
-        : `https://www.susiesjewelryrepair.com${post.image}`,
-      datePublished: post.publishedAt,
-      dateModified: post.reviewedAt || post.publishedAt,
-      author: {
-        "@type": "Organization",
-        name: "Susie’s Jewelry Repair",
-        url: "https://www.susiesjewelryrepair.com",
-      },
-    },
-  })),
-};
 
 type BlogPageProps = {
   searchParams?: Promise<{
@@ -72,17 +44,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <SiteShell>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Blog", href: "/blog" },
+        ]}
       />
-      <section className="relative overflow-hidden bg-stone-100 py-14 md:py-16" aria-labelledby="blog-hero-title">
+      <section className="relative overflow-hidden bg-stone-100 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.16),_transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             Blog
           </p>
-          <h1 id="blog-hero-title" className="lcp-heading mt-3 text-4xl text-stone-900 md:text-5xl">
+          <h1 className="lcp-heading mt-3 text-4xl text-stone-900 md:text-5xl">
             Repair tips and local guidance.
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-stone-600">
@@ -96,55 +70,21 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             >
               Book a Repair
             </Link>
+            <Link
+              href="/services"
+              className="micro-interaction inline-flex min-h-12 items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+            >
+              View Services
+            </Link>
           </div>
-          <details
-            className="mt-6 rounded-2xl border border-stone-200 bg-white/80 px-4 py-3 md:hidden"
-            aria-label="Blog topic filters"
-          >
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-stone-900 marker:hidden">
-              Filter repair guides
-              <span aria-hidden="true" className="text-brand-burgundy">
-                +
-              </span>
-            </summary>
-            <div className="mt-3 flex flex-wrap gap-2 border-t border-stone-200 pt-3" aria-label="Blog topics">
-              {selectedTopic ? (
-                <Link
-                  href="/blog"
-                  data-track-event="blog_topic_click"
-                  data-track-topic="all"
-                  data-track-placement="topic_filter"
-                  className="inline-flex min-h-11 items-center rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  All topics
-                </Link>
-              ) : null}
-              {BLOG_TOPICS.map((topic) => (
-                <Link
-                  key={topic}
-                  href={`/blog?topic=${encodeURIComponent(topic)}`}
-                  data-track-event="blog_topic_click"
-                  data-track-topic={topic}
-                  data-track-placement="topic_filter"
-                  className={`inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
-                    selectedTopic === topic
-                      ? "border-brand-burgundy bg-brand-burgundy text-white"
-                      : "border-stone-200 bg-white/85 text-stone-700"
-                  }`}
-                >
-                  {topic}
-                </Link>
-              ))}
-            </div>
-          </details>
-          <div className="mt-6 hidden flex-wrap gap-2 md:flex" aria-label="Blog topics">
+          <div className="mt-6 flex flex-wrap gap-2" aria-label="Blog topics">
             {selectedTopic ? (
               <Link
                 href="/blog"
                 data-track-event="blog_topic_click"
                 data-track-topic="all"
                 data-track-placement="topic_filter"
-                className="inline-flex min-h-11 items-center rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                className="rounded-full border border-brand-burgundy bg-brand-burgundy px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
               >
                 All topics
               </Link>
@@ -156,7 +96,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 data-track-event="blog_topic_click"
                 data-track-topic={topic}
                 data-track-placement="topic_filter"
-                className={`inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+                className={`rounded-full border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
                   selectedTopic === topic
                     ? "border-brand-burgundy bg-brand-burgundy text-white"
                     : "border-stone-200 bg-white/85 text-stone-700"
@@ -171,29 +111,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               Showing topic: {selectedTopic}
             </p>
           ) : null}
-          <details
-            className="mt-5 rounded-2xl border border-stone-200 bg-white/85 px-4 py-3 shadow-sm md:hidden"
-            aria-label="Popular repair pages"
-          >
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-stone-900 marker:hidden">
-              Start with a repair page
-              <span aria-hidden="true" className="text-brand-burgundy">
-                +
-              </span>
-            </summary>
-            <div className="mt-3 grid gap-2 border-t border-stone-200 pt-3">
-              {popularServiceLinks.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="inline-flex min-h-11 items-center rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-                >
-                  {service.name}
-                </Link>
-              ))}
-            </div>
-          </details>
-          <div className="mt-6 hidden rounded-2xl border border-stone-200 bg-white/85 p-4 shadow-sm md:block">
+          <div className="mt-6 rounded-2xl border border-stone-200 bg-white/85 p-4 shadow-sm">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
               Start with a repair page
             </p>
@@ -202,22 +120,18 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="inline-flex min-h-11 items-center rounded-full border border-stone-200 bg-stone-50 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  className="rounded-full border border-stone-200 bg-stone-50 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-700 transition hover:border-brand-gold hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   {service.name}
                 </Link>
               ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-stone-100 pb-16">
-        <div className="mx-auto max-w-6xl px-6">
           {featuredPost ? (
             <Link
               href={`/blog/${featuredPost.slug}`}
-              className="group grid overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_22px_64px_rgba(58,25,16,0.15)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_75px_rgba(58,25,16,0.17)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:grid-cols-[1.1fr_0.9fr]"
+              className="group mt-10 grid overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_22px_64px_rgba(58,25,16,0.15)] transition hover:-translate-y-0.5 hover:border-brand-gold/45 hover:shadow-[0_28px_75px_rgba(58,25,16,0.17)] md:grid-cols-[1.1fr_0.9fr] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
             >
               <div className="relative min-h-[16rem] md:min-h-[22rem]">
                 <Image

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 /*
@@ -15,17 +15,10 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const supabase = useMemo<ReturnType<typeof createClient> | null>(() => {
-        try {
-            return createClient();
-        } catch (e) {
-            console.error("Failed to initialize Supabase:", e);
-            return null;
-        }
-    }, []);
+
+    const supabase = createClient();
 
     const handleLogin = async (e: React.FormEvent) => {
-        if (!supabase) return;
         e.preventDefault();
         setLoading(true);
         setError(null);

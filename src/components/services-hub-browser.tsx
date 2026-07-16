@@ -81,7 +81,10 @@ export function ServicesHubBrowser({
           query: trimmedQuery,
         })
       : null;
-  const zeroStateBookHref = buildServicesFinderLeadContextHref("/book", {
+  const zeroStateQuoteHref = buildServicesFinderLeadContextHref("/quote", {
+    query: trimmedQuery,
+  });
+  const zeroStateBookingHref = buildServicesFinderLeadContextHref("/book", {
     query: trimmedQuery,
   });
 
@@ -149,7 +152,7 @@ export function ServicesHubBrowser({
               Not sure?
             </div>
             <p className="mt-2 text-sm text-stone-600">
-              Send one photo and we will recommend the right next step.
+              Ready to bring it in? Reserve an intake time.
             </p>
             <TrackedLink
               href="/book"
@@ -253,7 +256,7 @@ export function ServicesHubBrowser({
                       </>
                     ) : normalizedQuery ? (
                       <>
-                        {" "}for <span className="font-semibold text-brand-burgundy">&quot;{query.trim()}&quot;</span>
+                        {" "}for <span className="font-semibold text-brand-burgundy">&ldquo;{query.trim()}&rdquo;</span>
                       </>
                     ) : null}
                     .
@@ -275,7 +278,30 @@ export function ServicesHubBrowser({
                         }}
                         className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                       >
-                        Book this repair
+                        Use this for booking
+                      </TrackedLink>
+                    ) : null}
+                    {primaryMatchSlug ? (
+                      <TrackedLink
+                        href={buildServicesFinderLeadContextHref("/quote", {
+                          serviceSlug: primaryMatchSlug,
+                          intentLabel: activeChip?.label ?? null,
+                          query: trimmedQuery,
+                        })}
+                        eventName="services_finder_cta_click"
+                        eventParams={{
+                          page_path: pagePath,
+                          cta_target: "quote",
+                          service_slug: primaryMatchSlug || "",
+                          chip_id: activeChip?.id || "",
+                          chip_label: activeChip?.label || "",
+                          finder_intent: activeChip?.label || "",
+                          finder_query: trimmedQuery || "",
+                          match_count: visibleServiceCount,
+                        }}
+                        className="inline-flex min-h-12 items-center justify-center px-2 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                      >
+                        Need pricing first?
                       </TrackedLink>
                     ) : null}
                   </div>
@@ -290,7 +316,7 @@ export function ServicesHubBrowser({
                     </p>
                   </div>
                   <TrackedLink
-                    href={zeroStateBookHref}
+                    href={zeroStateBookingHref}
                     eventName="services_finder_cta_click"
                     eventParams={{
                       cta_target: "book",
@@ -304,6 +330,22 @@ export function ServicesHubBrowser({
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand-burgundy px-5 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     Book a Repair
+                  </TrackedLink>
+                  <TrackedLink
+                    href={zeroStateQuoteHref}
+                    eventName="services_finder_cta_click"
+                    eventParams={{
+                      cta_target: "quote",
+                      service_slug: "",
+                      chip_id: activeChip?.id || "",
+                      chip_label: activeChip?.label || "",
+                      finder_intent: activeChip?.label || "",
+                      finder_query: trimmedQuery || "",
+                      match_count: visibleServiceCount,
+                    }}
+                    className="inline-flex min-h-12 items-center justify-center px-2 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Need pricing first?
                   </TrackedLink>
                 </div>
               )}
@@ -395,7 +437,7 @@ export function ServicesHubBrowser({
                           <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">
                             Starting at{" "}
                             <span className="font-semibold text-brand-burgundy">
-                              {service.startingAt ?? "After inspection"}
+                              {service.startingAt ?? "Request quote"}
                             </span>
                           </span>
                           <span className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-stone-700">

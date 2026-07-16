@@ -20,7 +20,7 @@ import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ServiceInteractionTracker } from "@/components/analytics/service-interaction-tracker";
 import { createPageMetadata } from "@/lib/metadata";
 import { BreadcrumbTrail } from "@/components/seo/breadcrumb-trail";
-import { getRelatedServiceSlugs } from "@/lib/service-taxonomy";
+import { localBusinessSchema, organizationSchema } from "@/lib/schema";
 
 type PageProps = {
   params: Promise<{
@@ -80,13 +80,6 @@ type MarketSnapshot = {
   summary: string;
   scenarios: MarketScenario[];
   footnote: string;
-};
-
-type DirectAnswerSnapshot = {
-  question: string;
-  answer: string;
-  decision: string;
-  proofPoints: string[];
 };
 
 type HelpfulReadLink = {
@@ -187,9 +180,9 @@ const DECISION_MODULES: Record<string, DecisionModule> = {
     goodCandidate: "Good candidate for restringing: stretched string, visible gaps, fraying near clasp.",
     caution: "Usually not urgent: recently restrung strand with tight knots and clean spacing.",
     checklist: [
-      "Clasp-end knots look loose, fuzzy, or darkened",
-      "The strand twists, sags, or hangs unevenly when clasped",
-      "Visible gaps between pearls are wider in one section than the rest",
+      "Knot spacing is uneven across the strand",
+      "String looks discolored or fuzzy",
+      "Clasp area feels weak or worn",
     ],
   },
   "custom-design": {
@@ -379,59 +372,59 @@ const PROOF_SNIPPETS: Record<string, ProofSnippet[]> = {
 const MARKET_SNAPSHOTS: Record<string, MarketSnapshot> = {
   "watch-repair": {
     label: "Houston market snapshot (provisional)",
-    updated: "Updated Feb 2026",
+    updated: "Updated Jul 2026",
     summary:
-      "Working benchmark ranges for common watch services from Houston market listings and published TX repair examples.",
+      "Working benchmark ranges for watch battery replacement, sealing checks, and common watch repair questions people compare before booking.",
     scenarios: [
       {
         title: "Battery replacement",
         averageStart: "$15",
-        range: "$15 to $25",
-        note: "Most published Houston listings position basic battery service in this starter range.",
+        range: "$15 to $50",
+        note: "Basic battery service is usually the lowest-cost watch request. Watch type, battery access, and function checks can change the final estimate.",
       },
       {
-        title: "Crystal replacement",
-        averageStart: "$60",
-        range: "$60 to $120",
-        note: "Material, watch model, and fitment needs drive the spread above entry pricing.",
+        title: "Seal or water-resistance check",
+        averageStart: "$30",
+        range: "$30 to $95+",
+        note: "Water-resistant watches may need gasket inspection, resealing, or pressure testing after a battery change.",
       },
       {
-        title: "General repair intake",
+        title: "Crystal, crown, or stem repair",
         averageStart: "$50",
         range: "$50 to $180+",
-        note: "Rush or same-day requests can increase pricing above standard rates.",
+        note: "Parts, model, and damage level drive the range beyond a standard battery replacement.",
       },
     ],
     footnote:
-      "Planning benchmark only. Final in-shop estimate depends on watch condition, parts, and approvals.",
+      "Planning benchmark only. Final in-shop estimate depends on watch condition, parts, sealing needs, and your approval before service.",
   },
   "ring-sizing": {
     label: "Houston market snapshot (provisional)",
-    updated: "Updated Feb 2026",
+    updated: "Updated Jul 2026",
     summary:
-      "Current Houston-published ring sizing ranges are broad, so we use segmented starter bands to set expectations.",
+      "Current ring sizing searches center on cost, same-day timing, and whether a specific ring can be resized safely.",
     scenarios: [
       {
-        title: "Basic sizing adjustment",
-        averageStart: "$25",
-        range: "$25 to $75",
-        note: "Typical for straightforward gold/silver sizing with standard finishing.",
+        title: "Simple sizing down",
+        averageStart: "$45",
+        range: "$45 to $75",
+        note: "Usually the most straightforward path for a plain gold, silver, or platinum band with standard finishing.",
       },
       {
-        title: "Complex sizing",
+        title: "Sizing up with added metal",
         averageStart: "$75",
-        range: "$75 to $150",
-        note: "Higher range for larger size moves, stone-adjacent work, or design constraints.",
+        range: "$75 to $150+",
+        note: "Sizing up can require matching metal, blending, and more finish work than sizing down.",
       },
       {
-        title: "Priority turnaround",
+        title: "Stone or design-sensitive sizing",
         averageStart: "$100",
-        range: "1.5x to 2x standard",
-        note: "Market examples show same-day priority work commonly priced above baseline service.",
+        range: "$100 to $200+",
+        note: "Side stones, wide shanks, engraving, white gold rhodium, prior repair work, or eternity-style designs can add inspection and bench time.",
       },
     ],
     footnote:
-      "Planning benchmark only. Final estimate depends on metal type, size delta, and setting safety checks.",
+      "Planning benchmark only. Final estimate depends on metal type, size change, setting safety, finish work, and your approval before service.",
   },
   "stone-setting": {
     label: "Houston market snapshot (provisional)",
@@ -491,87 +484,87 @@ const MARKET_SNAPSHOTS: Record<string, MarketSnapshot> = {
   },
   "necklace-repair": {
     label: "Houston market snapshot (provisional)",
-    updated: "Updated Feb 2026",
+    updated: "Updated Jul 2026",
     summary:
-      "Houston repair listings plus Texas benchmark shops indicate necklace pricing generally starts above cleaning and near basic repair intake levels.",
+      "Necklace repair searches usually center on broken chain repair, clasp replacement, soldering, and whether delicate chains can be repaired safely.",
     scenarios: [
       {
-        title: "Chain break repair",
+        title: "Broken chain repair",
         averageStart: "$30",
-        range: "$30 to $70",
-        note: "Common baseline for simple solder/link repair without major part replacement.",
+        range: "$30 to $100",
+        note: "Simple link or solder repair is usually the starting point. Chain style, metal, and break location drive the final estimate.",
       },
       {
-        title: "Clasp replacement",
+        title: "Clasp or jump ring repair",
         averageStart: "$30",
-        range: "$30 to $75",
-        note: "Final price depends on clasp style, metal, and any reinforcement needed.",
+        range: "$30 to $90+",
+        note: "Worn clasps, weak jump rings, and pendant connections may need replacement or reinforcement.",
       },
       {
-        title: "Priority same-day repair",
-        averageStart: "$50",
-        range: "$50 to $100+",
-        note: "Rush handling in Houston market examples often trends to roughly double standard pricing.",
+        title: "Delicate or hollow chain repair",
+        averageStart: "$60",
+        range: "$60 to $150+",
+        note: "Fine, hollow, kinked, or previously repaired chains need more careful inspection and finishing.",
       },
     ],
     footnote:
-      "Planning benchmark only. Final estimate depends on chain style, metal, and break location.",
+      "Planning benchmark only. Final estimate depends on chain style, metal, break location, parts, and your approval before service.",
   },
   "bracelet-repair": {
     label: "Houston market snapshot (provisional)",
-    updated: "Updated Feb 2026",
+    updated: "Updated Jul 2026",
     summary:
-      "Bracelet repair benchmarks in Houston/TX typically mirror necklace pricing, with additional variation for clasp security and link complexity.",
+      "Bracelet repair searches usually involve broken links, clasp problems, tennis bracelet security, fit adjustments, and safety chain upgrades.",
     scenarios: [
       {
-        title: "Link or solder repair",
+        title: "Broken link repair",
         averageStart: "$30",
-        range: "$30 to $70",
-        note: "Entry range for isolated link issues and standard solder repairs.",
+        range: "$30 to $100",
+        note: "Isolated link or solder repairs start lower, while complex bracelets need more link and movement checks.",
       },
       {
-        title: "Clasp/security work",
+        title: "Clasp or safety chain work",
         averageStart: "$30",
-        range: "$30 to $85",
-        note: "Pricing rises when clasp replacement and safety upgrades are combined.",
+        range: "$30 to $110+",
+        note: "A clasp that pops open is a loss risk. Replacement, adjustment, or safety chain work can be part of the same repair.",
       },
       {
-        title: "Priority turnaround",
-        averageStart: "$50",
-        range: "$50 to $110+",
-        note: "Rush same-day handling is usually priced above standard repair queue rates.",
+        title: "Tennis bracelet assessment",
+        averageStart: "$60",
+        range: "$60 to $180+",
+        note: "Stone seats, link movement, clasp security, and flex points all affect the final repair path.",
       },
     ],
     footnote:
-      "Planning benchmark only. Final estimate depends on bracelet construction, parts, and requested upgrades.",
+      "Planning benchmark only. Final estimate depends on bracelet construction, clasp condition, stones, parts, and your approval before service.",
   },
   "pearl-restringing": {
     label: "Houston market snapshot (provisional)",
-    updated: "Updated Feb 2026",
+    updated: "Updated Jul 2026",
     summary:
-      "Houston bead/pearl pricing is often itemized by strand length and knot count, making per-inch math the clearest planning baseline.",
+      "Pearl restringing cost searches usually compare strand length, knot count, clasp condition, and whether same-day service is realistic.",
     scenarios: [
       {
-        title: "Restring labor",
+        title: "Simple strand restring",
         averageStart: "$36",
-        range: "$2 per inch",
-        note: "An 18-inch strand benchmarks around $36 before knotting or clasp upgrades.",
+        range: "$2 to $5 per inch",
+        note: "Straight restringing is usually the baseline. Final cost depends on strand length, pearl count, and handling needs.",
       },
       {
-        title: "Hand-knot add-on",
+        title: "Hand-knotting",
         averageStart: "$10",
         range: "$0.50 to $1 per knot",
-        note: "Knotting costs scale with pearl count and requested spacing style.",
+        note: "Knotting helps protect pearls and limits loss if a strand breaks. Knot count changes total bench time.",
       },
       {
-        title: "Clasp service",
+        title: "Clasp or breakage work",
         averageStart: "$4",
-        range: "$4 to $40+",
-        note: "Simple clasp attachment can be low-cost; premium clasp replacements increase total.",
+        range: "$10 to $75+",
+        note: "Worn clasps, broken strands, missing pearls, cleanup, or length changes can move the job beyond a simple restring.",
       },
     ],
     footnote:
-      "Planning benchmark only. Final estimate depends on strand length, knot count, clasp type, and pearl condition.",
+      "Planning benchmark only. Final estimate depends on strand length, knot count, clasp condition, pearl condition, cleanup needs, and your approval before service.",
   },
   "custom-design": {
     label: "Houston market snapshot (provisional)",
@@ -631,57 +624,6 @@ const MARKET_SNAPSHOTS: Record<string, MarketSnapshot> = {
   },
 };
 
-const DIRECT_ANSWER_SNAPSHOTS: Record<string, DirectAnswerSnapshot> = {
-  "watch-repair": {
-    question: "Can I get watch repair or battery replacement in Pasadena?",
-    answer:
-      "Yes. Susie’s handles watch battery replacement, band sizing, crystal issues, crown/stem problems, and mechanical watch service in-house at the Pasadena shop.",
-    decision:
-      "Start with a fast quote if the watch stopped, drains batteries quickly, fogs under the crystal, or has a loose crown. Book an assessment if you want intake timing confirmed before visiting.",
-    proofPoints: [
-      "Most quick watch services follow Same Day/Next Day service.",
-      "Parts, pressure testing, and full movement work are confirmed before proceeding.",
-      "The work is handled by the local in-house repair team, not routed through a mail-away flow.",
-    ],
-  },
-  "ring-sizing": {
-    question: "Can my ring be resized safely?",
-    answer:
-      "Usually, yes. Susie’s resizes most gold, silver, and platinum rings after checking the shank, stones, and setting style so the fit improves without weakening the piece.",
-    decision:
-      "Request sizing if the ring spins, slips over the knuckle too easily, pinches, or changed fit after weather, weight, or hand-size changes.",
-    proofPoints: [
-      "Sizing includes fit guidance, seam finishing, and setting checks.",
-      "Continuous patterns, pave, tungsten, and titanium can have limits that are explained before work begins.",
-      "Same Day/Next Day service applies to many straightforward sizing jobs.",
-    ],
-  },
-  "stone-setting": {
-    question: "What should I do if a stone is loose or missing?",
-    answer:
-      "Bring it in before wearing it again. Susie’s checks prongs, seats, bezels, and channels first, then confirms whether the safest fix is tightening, retipping, rebuilding, or replacing the stone.",
-    decision:
-      "Treat movement, clicking, snagging prongs, or an uneven setting as urgent because a loose stone can become a lost stone quickly.",
-    proofPoints: [
-      "Security comes before cosmetic polishing on loose-stone repairs.",
-      "Replacement stones can be matched when an accent stone is already missing.",
-      "Repair scope and pricing are approved before setting work begins.",
-    ],
-  },
-  "pearl-restringing": {
-    question: "When should pearls be restrung?",
-    answer:
-      "Pearls should be restrung when thread stretches, knots gap, the strand hangs unevenly, or the clasp area looks worn. Susie’s can restring pearls and inspect the clasp during the same intake.",
-    decision:
-      "Do not wait for a strand to break. Fraying near the clasp, fuzzy thread, or uneven knot spacing means the strand is already giving warning signs.",
-    proofPoints: [
-      "Hand-knot spacing helps keep pearls separated and reduces loss risk if the strand breaks.",
-      "Clasp wear can be addressed during restringing when needed.",
-      "The team confirms timing and care guidance before pickup.",
-    ],
-  },
-};
-
 function svgDataUri(title: string) {
   const safe = (title || "Service").replace(/&/g, "and").slice(0, 40);
   const svg =
@@ -715,19 +657,44 @@ function buildFallbackFaqs(serviceName: string): FaqItem[] {
         "Yes. All repair work is completed in our Pasadena shop by our in-house team, so your piece is not shipped out.",
     },
     {
-      question: "Can I get a quote before I commit?",
+      question: "Can I get pricing before I commit?",
       answer:
-        "Yes. Use our Fast Quote form or visit the shop for a free assessment, and we will provide clear starting-at pricing before you approve work.",
+        "Yes. Booking or visiting the shop gives us a chance to inspect the piece first, then confirm starting-at pricing before you approve work. If you only need pricing first, the quote form is still available.",
     },
     {
       question: "Do I need an appointment?",
       answer:
-        "Appointments are optional. Walk-ins are welcome, or you can book a time if you prefer a guaranteed slot.",
+        "Appointments are optional, but booking gives you a confirmed intake time for assessment, pricing, and next steps.",
     },
     {
       question: "What should I bring?",
       answer:
         "Bring the item you want serviced and any relevant parts or notes (for example: extra watch links, missing stones, or a quick description of what changed).",
+    },
+  ];
+}
+
+function buildTrustProcessFaqs(): FaqItem[] {
+  return [
+    {
+      question: "Will my repair stay in-house?",
+      answer:
+        "Yes. Your piece is handled by our Pasadena in-house team from intake through final checks, instead of being shipped out to an unknown repair counter.",
+    },
+    {
+      question: "Will I approve the repair before work starts?",
+      answer:
+        "Yes. We review the condition, repair path, pricing, and pickup timing first. If inspection changes the scope, we pause and get approval before continuing.",
+    },
+    {
+      question: "How do you protect my item before pickup?",
+      answer:
+        "We document the intake, inspect weak points, complete the approved work, and run final function, fit, or finish checks before pickup.",
+    },
+    {
+      question: "Is there a warranty on repair workmanship?",
+      answer:
+        "Yes. Repair workmanship is backed by a 90-day workmanship warranty for the specific work performed, excluding new damage, wear, misuse, or unrelated issues.",
     },
   ];
 }
@@ -768,12 +735,12 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "How much does a watch battery replacement cost?",
         answer:
-          "Pricing depends on the watch type, battery, and any sealing work needed. We’ll confirm options and cost during your in-house assessment before you approve service.",
+          "Pricing depends on the watch type, battery access, and whether seals or pressure testing are needed. We confirm your options and cost during the in-house assessment before you approve service.",
       },
       {
         question: "How long does a watch battery replacement take?",
         answer:
-          "Many battery replacements are completed with Same Day/Next Day service. We confirm fit, function, and timing before we begin service.",
+          "Many battery replacements follow Same Day/Next Day service. We confirm fit, function, and timing before work begins so you know when to expect pickup.",
       },
       {
         question: "Can you replace a watch crystal?",
@@ -788,7 +755,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Can you pressure test or check water resistance after service?",
         answer:
-          "When appropriate, we can inspect seals and perform pressure testing to help confirm sealing at the time of service. Water resistance can’t be guaranteed for all watches or future conditions.",
+          "When appropriate, we can inspect seals and perform pressure testing to help confirm sealing at the time of service. Water resistance depends on the watch condition and cannot be guaranteed for all watches or future conditions.",
       },
       {
         question: "Do you service automatic and mechanical watches?",
@@ -798,7 +765,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Do I need an appointment for watch repair?",
         answer:
-          "Appointments are optional. Walk-ins are welcome, or you can book a time if you prefer a guaranteed slot.",
+          "Appointments are optional, but booking gives you a confirmed intake time for assessment, pricing, and next steps.",
       },
     ];
   }
@@ -808,12 +775,12 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "How much does ring sizing cost?",
         answer:
-          "Pricing depends on metal type, how many sizes you need to move, and whether additional work is needed. We confirm your exact estimate before service.",
+          "Pricing depends on metal type, whether the ring is sizing up or down, band width, stone layout, and finish work. We confirm your exact estimate before service.",
       },
       {
         question: "How long does ring sizing take?",
         answer:
-          "Most ring sizing jobs follow our Same Day/Next Day service. If extra metalwork or stone checks are needed, we confirm timing before you approve work.",
+          "Most straightforward ring sizing jobs follow Same Day/Next Day service. If extra metalwork, rhodium, or stone checks are needed, we confirm timing before you approve work.",
       },
       {
         question: "Can you size a ring up or down?",
@@ -833,12 +800,12 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Can eternity or patterned bands be resized?",
         answer:
-          "Some full-eternity, engraved, or alternative-metal bands have resizing limits. We assess safely and suggest the best path before service.",
+          "Some full-eternity, engraved, pave, or alternative-metal bands have resizing limits. We inspect the design and suggest the safest path before service.",
       },
       {
         question: "Do I need an appointment for ring sizing?",
         answer:
-          "Appointments are optional. Walk-ins are welcome, or you can book ahead for a dedicated assessment time.",
+          "Appointments are optional, but booking gives you a confirmed intake time for fit assessment, pricing, and pickup timing.",
       },
     ];
   }
@@ -918,17 +885,17 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Can you repair a broken necklace chain the same day?",
         answer:
-          "Many chain repairs follow Same Day/Next Day service. We confirm method and timing after inspecting metal type and break location.",
+          "Many broken necklace chain repairs follow Same Day/Next Day service. We confirm soldering method, price, and timing after inspecting metal type, chain style, and break location.",
       },
       {
         question: "Do you replace weak or broken clasps?",
         answer:
-          "Yes. We can replace worn clasps and recommend more secure options when your necklace is worn frequently.",
+          "Yes. We repair or replace worn clasps, weak jump rings, and pendant connections, then recommend more secure options when the necklace is worn frequently.",
       },
       {
         question: "Can delicate or hollow chains be repaired safely?",
         answer:
-          "Often, yes. We assess chain construction first and recommend the safest repair path before proceeding.",
+          "Often, yes. We assess delicate, hollow, kinked, or previously repaired chains first and recommend the safest repair path before proceeding.",
       },
       {
         question: "Will soldering affect my pendant area?",
@@ -953,12 +920,12 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Can you rebuild broken links on bracelets?",
         answer:
-          "Yes. We repair and reinforce links in-house, then test movement and closure before pickup.",
+          "Yes. We repair and reinforce bracelet links in-house, then test link movement, clasp closure, and fit before pickup.",
       },
       {
         question: "Can you fix a clasp that keeps opening?",
         answer:
-          "Yes. We can adjust or replace worn clasp components and recommend added safety options where needed.",
+          "Yes. A bracelet clasp that keeps opening is a loss risk. We can adjust or replace worn clasp components and recommend safety-chain options where needed.",
       },
       {
         question: "Can bracelet length be adjusted without extra links?",
@@ -968,7 +935,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Do you repair tennis bracelets?",
         answer:
-          "Yes. We inspect stone seats, link integrity, and clasp function before confirming service scope and pricing.",
+          "Yes. We inspect stone seats, link integrity, flex points, and clasp function before confirming service scope, pricing, and pickup timing.",
       },
       {
         question: "Can you add a safety chain during repair?",
@@ -978,7 +945,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Should I stop wearing a bracelet with a weak clasp?",
         answer:
-          "Yes. Continued wear increases loss risk. Bring it in promptly for an in-house assessment and repair plan.",
+          "Yes. Continued wear increases loss risk. Book or bring it in promptly for an in-house assessment and repair plan.",
       },
     ];
   }
@@ -988,7 +955,7 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "How do I know when pearls need restringing?",
         answer:
-          "Signs include stretched string, visible gaps, fraying near the clasp, or uneven knot spacing.",
+          "Signs include stretched string, visible gaps, fraying near the clasp, discoloration, uneven knot spacing, or a strand that no longer drapes evenly.",
       },
       {
         question: "Do you knot between each pearl?",
@@ -1003,7 +970,12 @@ function buildSupplementalFaqs(slug: string, serviceName: string): FaqItem[] {
       {
         question: "Can you replace a worn clasp while restringing?",
         answer:
-          "Yes. Clasp upgrades or replacements are commonly handled in the same service flow.",
+          "Yes. Clasp cleaning, upgrades, or replacements are commonly handled in the same service flow when the hardware no longer feels secure.",
+      },
+      {
+        question: "How much does pearl restringing cost?",
+        answer:
+          "Cost depends on strand length, knot count, clasp condition, cleanup needs, and whether the strand already broke. We confirm the scope and price before service.",
       },
       {
         question: "Should pearls be cleaned before restringing?",
@@ -1133,6 +1105,9 @@ function canonicalFaqKey(slug: string, question: string): string {
   if (q.includes("appointment") || q.includes("walk in") || q.includes("walk-in") || q.includes("walkins"))
     return `${slug}:appointment`;
   if (q.includes("in-house") || q.includes("outsour")) return `${slug}:in-house`;
+  if (q.includes("approve") || q.includes("approval") || q.includes("commit")) return `${slug}:approval`;
+  if (q.includes("protect") || q.includes("safe") || q.includes("document")) return `${slug}:care-process`;
+  if (q.includes("warranty") || q.includes("workmanship")) return `${slug}:warranty`;
   if (q.includes("bring")) return `${slug}:bring`;
   if (q.includes("same day") || q.includes("next day")) return `${slug}:service-speed`;
 
@@ -1141,11 +1116,22 @@ function canonicalFaqKey(slug: string, question: string): string {
 
 function ensureMinFaqs(baseFaqs: FaqItem[], slug: string, serviceName: string): FaqItem[] {
   const basePool = Array.isArray(baseFaqs) ? baseFaqs : [];
-  const target = SERVICES.some((item) => item.slug === slug) ? 7 : 5;
+  const target = SERVICES.some((item) => item.slug === slug) ? 11 : 6;
+  const trustPool = buildTrustProcessFaqs();
   const pool =
     slug === "watch-repair"
-      ? [...buildSupplementalFaqs(slug, serviceName), ...basePool, ...buildFallbackFaqs(serviceName)]
-      : [...basePool, ...buildSupplementalFaqs(slug, serviceName), ...buildFallbackFaqs(serviceName)];
+      ? [
+          ...buildSupplementalFaqs(slug, serviceName),
+          ...trustPool,
+          ...basePool,
+          ...buildFallbackFaqs(serviceName),
+        ]
+      : [
+          ...buildSupplementalFaqs(slug, serviceName),
+          ...trustPool,
+          ...basePool,
+          ...buildFallbackFaqs(serviceName),
+        ];
 
   const seen = new Set<string>();
   const out: FaqItem[] = [];
@@ -1183,13 +1169,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
 
-  const nearMeSlugs = new Set(["watch-repair", "ring-sizing", "necklace-repair", "bracelet-repair", "stone-setting", "pearl-restringing"]);
-  const titleSuffix = nearMeSlugs.has(slug)
-    ? `Near Me in Pasadena, TX | ${BUSINESS.name}`
-    : `| Jewelry Repair Pasadena, TX | ${BUSINESS.name}`;
-  const title = `${service.name} ${titleSuffix}`;
+  const title =
+    slug === "watch-repair"
+      ? "Watch Battery Replacement in Pasadena, TX | Book Watch Repair"
+      : slug === "ring-sizing"
+        ? "Ring Sizing Near Pasadena, TX | Book Same Day Ring Resizing"
+        : slug === "necklace-repair"
+          ? "Broken Chain & Necklace Repair Near Pasadena, TX"
+          : slug === "bracelet-repair"
+            ? "Bracelet Repair in Pasadena, TX | Broken Clasps, Links & Fit"
+            : slug === "pearl-restringing"
+              ? "Pearl Restringing Cost & Repair Near Pasadena, TX"
+      : `${service.name} | Jewelry Repair Pasadena, TX`;
   const summary = service.summary || service.short_summary || "";
-  const description = `${summary} In-house ${service.name.toLowerCase()} in Pasadena, TX — same-day or next-day service, transparent pricing, no surprises.`;
+  const description =
+    slug === "watch-repair"
+      ? "Book in-house watch battery replacement in Pasadena, TX. We handle batteries, band sizing, crystals, crowns, stems, seal checks, and clear approval before repair."
+      : slug === "ring-sizing"
+        ? "Book ring sizing in Pasadena, TX with in-house fit assessment, stone checks, starting-at pricing, and Same Day/Next Day service for many resizing jobs."
+        : slug === "necklace-repair"
+          ? "Book broken chain, clasp, jump ring, charm, and necklace repair near Pasadena, TX. Same Day/Next Day service for many repairs with clear approval first."
+          : slug === "bracelet-repair"
+            ? "Book bracelet repair in Pasadena, TX for broken clasps, weak links, tennis bracelet issues, safety chains, and fit adjustments with clear approval before work begins."
+            : slug === "pearl-restringing"
+              ? "Book pearl restringing near Pasadena, TX for stretched strands, hand-knotting, broken pearl necklaces, clasp repair, and clear cost approval before service."
+      : `${summary} Local in-house service in Pasadena with clear approvals, transparent pricing, and Same Day/Next Day timing when applicable.`;
 
   return createPageMetadata({
     title,
@@ -1218,11 +1222,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? embeddedFaqs
       : buildFallbackFaqs(service.name);
   const resolvedFaqs = ensureMinFaqs(resolvedFaqsRaw, slug, service.name);
-  const relatedServiceSlugs = getRelatedServiceSlugs(slug);
-  const relatedServicesMap = new Map(SERVICES.map((s) => [s.slug, s]));
-  const relatedServices = relatedServiceSlugs.length > 0
-    ? relatedServiceSlugs.map((s) => relatedServicesMap.get(s)).filter(Boolean) as typeof SERVICES
-    : SERVICES.filter((item) => item.slug !== service.slug).slice(0, 4);
+  const relatedServices = SERVICES
+    .filter((item) => item.slug !== service.slug)
+    .slice(0, 4);
   const helpfulReadPosts = getHelpfulBlogPostsForServiceSlug(slug, 3);
   const helpfulReads: HelpfulReadLink[] = helpfulReadPosts.map((post) => ({
     href: `/blog/${post.slug}`,
@@ -1247,9 +1249,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
   const isWatchRepair = slug === "watch-repair";
   const isRingSizing = slug === "ring-sizing";
-  const hasLongMobileHeroHeading = isWatchRepair || isRingSizing;
-  const isPearlRestringing = slug === "pearl-restringing";
-  const isNecklaceRepair = slug === "necklace-repair";
+  const isBraceletRepair = slug === "bracelet-repair";
   const isCustomDesign = slug === "custom-design";
   const isFlagshipService = true;
   const localServiceConfig = SERVICES.find((item) => item.slug === slug);
@@ -1272,6 +1272,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? "Three steps: assess, approve, complete."
     : isRingSizing
       ? "Three steps for precise fit and clean finishing."
+      : isBraceletRepair
+        ? "Three steps to secure the bracelet before wear causes loss."
       : `Three steps for in-house ${service.name.toLowerCase()} with clear approval before work begins.`;
   const howItWorksSteps = isWatchRepair
     ? [
@@ -1309,6 +1311,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           detail: "We complete your sizing, finish cleanly, and set pickup timing.",
         },
       ]
+      : isBraceletRepair
+        ? [
+          {
+            step: "1",
+            title: "Bring your bracelet",
+            detail: "Walk in or book. Tell us if the issue is the clasp, links, fit, or stone security.",
+          },
+          {
+            step: "2",
+            title: "Clasp and link assessment",
+            detail: "We inspect closure, movement, wear points, and pricing before work begins.",
+          },
+          {
+            step: "3",
+            title: "Approve, then repair",
+            detail: "We secure the bracelet, test wearability, and confirm pickup timing.",
+          },
+        ]
       : [
         {
           step: "1",
@@ -1333,12 +1353,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const heroSupportImage = visualSet.heroSupportImage;
   const heroSupportImageAlt = visualSet.heroSupportImageAlt;
   const mobileHeroImageSrc = SERVICE_MOBILE_HERO_IMAGE_BY_SLUG[slug] || null;
-  const isMobileHeroImageHidden = isWatchRepair || isRingSizing;
   const heroImageSizes =
     "(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc((100vw - 6rem) / 2), 528px";
-  const mobileHeroImageSizes = isCustomDesign
-    ? "(max-width: 767px) 320px, (max-width: 1279px) calc((100vw - 6rem) / 2), 528px"
-    : heroImageSizes;
   const desktopHeroImageProps = getImageProps({
     src: heroImageSrc,
     alt: service.name,
@@ -1352,14 +1368,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         alt: service.name,
         width: 800,
         height: 540,
-        sizes: mobileHeroImageSizes,
-        quality: isCustomDesign ? 58 : undefined,
+        sizes: heroImageSizes,
       }).props
     : null;
   const howItWorksSupportCopy = isWatchRepair
     ? "Pricing and pickup timing are set before service begins."
     : isRingSizing
       ? "Ring size, pricing, and pickup timing are set before work begins."
+      : isBraceletRepair
+        ? "Bracelet scope, pricing, and pickup timing are set before work begins."
       : `${service.name} scope, pricing, and pickup timing are set before work begins.`;
   const processGallery = visualSet.processGallery;
   const expectCards = isWatchRepair
@@ -1434,39 +1451,39 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           ],
         },
       ]
-      : isPearlRestringing
+      : isBraceletRepair
         ? [
           {
-            title: "Thread condition",
-            eyebrow: "Early warning signs",
+            title: "Clasp repair",
+            eyebrow: "When closure feels unreliable",
             copy:
-              "We check for stretched silk, fuzzy thread, visible gaps, and weak clasp-side wear before recommending restringing.",
+              "We adjust or replace worn clasp components so the bracelet closes cleanly and stays secure in daily wear.",
             bullets: [
-              "Fraying near the clasp",
-              "Uneven knot spacing",
-              "Discolored or stretched thread",
+              "Clasp inspection and adjustment",
+              "Closure security check",
+              "Pickup-ready wear test",
             ],
           },
           {
-            title: "Knotting and spacing",
-            eyebrow: "Protecting each pearl",
+            title: "Link and fit work",
+            eyebrow: "When movement or sizing is off",
             copy:
-              "Hand-knotting helps keep pearls from rubbing and limits pearl loss if a strand breaks later.",
+              "We repair weak links, restore movement, and confirm the cleanest fit-adjustment option before service.",
             bullets: [
-              "Fresh silk restringing",
-              "Hand knots between pearls",
-              "Drape and spacing check",
+              "Weak-link repair or reinforcement",
+              "Fit adjustment assessment",
+              "Balanced movement check",
             ],
           },
           {
-            title: "Clasp decisions",
-            eyebrow: "Security at pickup",
+            title: "Tennis bracelet security",
+            eyebrow: "For higher-value bracelets",
             copy:
-              "If the clasp is worn, loose, or hard to close, we review cleaning, adjustment, or replacement during the same service plan.",
+              "We assess settings, clasp reliability, and safety-chain options before returning the bracelet to wear.",
             bullets: [
-              "Clasp inspection",
-              "Optional clasp upgrade",
-              "Length adjustment if needed",
+              "Stone and setting check",
+              "Clasp reliability review",
+              "Safety-chain recommendation if needed",
             ],
           },
         ]
@@ -1506,24 +1523,24 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? "pressure testing helps confirm sealing at the time of service, but water resistance can’t be guaranteed for all watches or future conditions."
     : isRingSizing
       ? "some styles (eternity bands, certain metals, engraved patterns) can have sizing limits. We confirm the safest path before service."
-      : isPearlRestringing
-        ? "final restringing scope depends on strand length, knot count, pearl condition, and whether the clasp should be cleaned, adjusted, or replaced."
+      : isBraceletRepair
+        ? "tennis bracelets, worn clasps, and stretched links can need more structural work. We confirm the safest path before service."
       : isCustomDesign
         ? "custom design work includes approval checkpoints before production so you can confirm direction, materials, and final finish."
         : "timing and scope may vary by condition, materials, or parts availability.";
   const pricingDetailCopy = isWatchRepair
-    ? "Final price depends on parts and condition."
+    ? "Final price depends on battery access, watch condition, seal needs, and any additional parts."
     : isRingSizing
       ? "Final price depends on metal type, size change, and setting checks."
-      : isPearlRestringing
-        ? "Final price depends on strand length, knot count, clasp condition, and any length adjustment."
+      : isBraceletRepair
+        ? "Final price depends on clasp condition, link work, stones, and parts."
       : "Final price depends on materials, condition, and required parts.";
   const turnaroundDetailCopy = isWatchRepair
-    ? "Battery work is often Same Day/Next Day service. Full service varies by parts."
+    ? "Most battery work is Same Day/Next Day service. Seal checks, pressure-related checks, or added parts can extend timing."
     : isRingSizing
       ? "Most sizing jobs follow Same Day/Next Day service. Structural work may add time."
-      : isPearlRestringing
-        ? "Most pearl restringing follows Same Day/Next Day service. Multi-strand layouts or clasp replacements may add time."
+      : isBraceletRepair
+        ? "Many clasp and link repairs follow Same Day/Next Day service. Structural or stone work may add time."
       : isCustomDesign
         ? "Custom design projects typically follow a 7 business day timeline after design approval."
         : "Most requests follow Same Day/Next Day service. Structural work or parts sourcing may add time.";
@@ -1539,17 +1556,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         "Any sizing history or recent fit changes (optional)",
         "If white gold: let us know if you want rhodium refinishing",
       ]
-      : isPearlRestringing
+      : isBraceletRepair
         ? [
-          "The full pearl strand, including any loose pearls or broken thread",
-          "The clasp you want reused, replaced, cleaned, or adjusted",
-          "Your preferred finished length if the strand currently feels too long or short",
-        ]
-      : isNecklaceRepair
-        ? [
-          "The necklace or chain exactly as you wear it",
-          "Any pendant, charm, clasp, jump ring, or broken link still with the piece",
-          "A note on where it failed: clasp, solder joint, pendant connection, or thin link",
+          "The bracelet and a note on the issue: clasp, links, fit, stones, or safety concerns",
+          "Any missing parts or loose pieces (if available)",
+          "Your preferred fit or concern about daily wear security",
         ]
       : isCustomDesign
         ? [
@@ -1562,44 +1573,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           "Any missing parts, notes, or prior service info (if available)",
           "Your preferred timing and any wear concerns to address",
         ];
-  const pearlIntakeChecks = isPearlRestringing
-    ? [
-        {
-          title: "Clasp-end stress",
-          detail:
-            "We look closely at the first knots beside the clasp because fraying usually starts where the strand is opened, closed, and pulled most often.",
-        },
-        {
-          title: "Drape and spacing",
-          detail:
-            "Uneven gaps tell us whether the silk has stretched across the whole strand or whether one section is carrying more tension than the rest.",
-        },
-        {
-          title: "Clasp reuse decision",
-          detail:
-            "A worn clasp can make a newly restrung strand feel unsafe, so we confirm whether to reuse, clean, adjust, or replace it before final approval.",
-        },
-      ]
-    : [];
-  const chainIntakeChecks = isNecklaceRepair
-    ? [
-        {
-          title: "Break location",
-          detail:
-            "We separate a simple open jump ring from a solder joint, hollow link, pendant connection, or section that already looks stretched or flattened.",
-        },
-        {
-          title: "Clasp strength",
-          detail:
-            "A chain can break again if the clasp no longer springs shut or if the jump ring beside it is carrying most of the daily pull.",
-        },
-        {
-          title: "Wear pattern",
-          detail:
-            "Bring the pendant or charm exactly as worn. Its weight often explains why one section keeps taking stress and whether reinforcement is smarter than a spot repair.",
-        },
-      ]
-    : [];
   const whyHeading = isWatchRepair
     ? "In-house service, clear approval, careful finishing."
     : isRingSizing
@@ -1658,11 +1631,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     ? "If parts are needed, we pause and ask before ordering or proceeding."
     : isRingSizing
       ? "If setting reinforcement is recommended, we review options and wait for approval."
+      : isBraceletRepair
+        ? "If clasp parts, link rebuilding, or extra security work is recommended, we review options and wait for approval."
       : `If additional work is recommended, we review options and wait for approval.`;
   const trustBadges = isWatchRepair
     ? ["In-house only", "Clear estimates", "Final checks"]
     : isRingSizing
-      ? ["In-house only", "Fit precision", "Setting checks"]
+      ? ["In-house only", "Fit precision", "Stone safety checks"]
+      : isBraceletRepair
+        ? ["In-house only", "Clasp security", "Final checks"]
       : ["In-house only", "Clear estimates", "Final checks"];
   const decisionModule = DECISION_MODULES[slug] || {
     label: "Decision guide",
@@ -1696,7 +1673,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   ]).slice(0, 3);
   const marketSnapshot =
     MARKET_SNAPSHOTS[slug] || buildDefaultMarketSnapshot(service.name);
-  const directAnswerSnapshot = DIRECT_ANSWER_SNAPSHOTS[slug];
   const schemaBase = SERVICES.find((item) => item.slug === service.slug) || SERVICES[0];
   const schemaService = {
     ...schemaBase,
@@ -1713,106 +1689,103 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   return (
     <SiteShell>
       <BreadcrumbTrail items={breadcrumbItems} className="mx-auto max-w-6xl px-6 pt-10" />
-      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-10 md:py-20">
+      <section data-service-section="hero" className="relative overflow-hidden bg-stone-50 py-14 md:py-20">
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_20%_10%,_rgba(122,46,58,0.08),_transparent_50%)] md:block" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_top,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
-        <div className="relative mx-auto grid max-w-6xl gap-7 px-6 md:grid-cols-2 md:items-center md:gap-12">
-          <div className="order-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
-              In-house service
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-2 md:items-center md:gap-12">
+          <div className="order-1 md:order-1">
+            <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
+              Service Detail
             </p>
             <h1
-              className="lcp-sans"
-              style={{
-                marginTop: "0.65rem",
-                fontSize: hasLongMobileHeroHeading ? "2.12rem" : "2.35rem",
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                lineHeight: hasLongMobileHeroHeading ? "2.18rem" : "2.35rem",
-                color: "#1c1917",
-              }}
+              className="lcp-heading"
+              style={{ marginTop: "0.75rem", fontSize: "2.25rem", lineHeight: "2.5rem", color: "#1c1917" }}
             >
               {service.name}
             </h1>
-            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-stone-700">
+            <p className="mt-4 max-w-2xl text-sm text-stone-700">
               {service.summary || service.short_summary}
             </p>
-            {(startingAt || timeEstimateDisplay) && (
-              <div className="mt-5 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-700">
-                {startingAt && (
-                  <span className="rounded-full border border-stone-200 bg-white px-3.5 py-2 shadow-sm">
-                    Starts at {startingAt}
-                  </span>
-                )}
-                {timeEstimateDisplay && (
-                  <span className="rounded-full border border-stone-200 bg-white px-3.5 py-2 shadow-sm">
-                    Service: {timeEstimateDisplay}
-                  </span>
-                )}
-              </div>
-            )}
-
-            {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
-                href="/book"
+                href={`/book?from=services_finder&service=${slug}`}
                 prefetch={false}
                 data-track-event="service_cta_click"
                 data-track-slug={slug}
                 data-track-placement="hero"
                 data-track-target="book"
-                className="micro-interaction inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_18px_38px_rgba(58,18,28,0.18)] hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full bg-brand-burgundy px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-white shadow-xl hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
               >
-                Book a Repair
+                Book This Repair
               </Link>
-            </div>
-            <div className="mt-5 hidden rounded-2xl bg-white/86 p-4 shadow-[0_12px_34px_rgba(90,55,35,0.08)] ring-1 ring-brand-gold/25 md:block">
-              <p className="text-sm font-semibold text-stone-900">
-                Need {service.name} in {BUSINESS.address.city}?
-              </p>
-              <p className="mt-1.5 text-sm leading-6 text-stone-700">
-                {isWatchRepair
-                  ? "Yes. We service watches in-house with clear options and a confirmed pickup timeline before work begins."
-                  : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing and local pickup at our ${BUSINESS.address.city} shop.`}
-              </p>
+              <a
+                href={`tel:${BUSINESS.phone}`}
+                className="micro-interaction inline-flex w-full items-center justify-center rounded-full border border-brand-gold px-7 py-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 sm:w-auto"
+              >
+                Call the Shop
+              </a>
             </div>
             {primaryHelpfulRead ? (
-              <div className="mt-4 max-w-2xl rounded-2xl bg-white/72 p-4 ring-1 ring-stone-200">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-burgundy">
+              <div className="mt-6 max-w-2xl rounded-2xl border border-brand-gold/30 bg-white/85 p-4 shadow-sm">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
                   Before you book
                 </p>
                 <TrackedLink
                   href={`/blog/${primaryHelpfulRead.slug}`}
                   eventName="service_primary_guide_click"
                   eventParams={{ service_slug: slug, blog_slug: primaryHelpfulRead.slug }}
-                  className="mt-2 inline-flex text-sm font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  className="mt-3 inline-flex text-sm font-semibold text-stone-900 underline decoration-brand-gold/60 decoration-2 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                 >
                   {primaryHelpfulRead.title}
                 </TrackedLink>
+                <p className="mt-2 text-sm leading-7 text-stone-700">
+                  {primaryHelpfulRead.excerpt}
+                </p>
               </div>
             ) : null}
+            {(startingAt || timeEstimateDisplay) && (
+              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-stone-700">
+                {startingAt && (
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
+                    Starts at {startingAt}
+                  </span>
+                )}
+                {timeEstimateDisplay && (
+                  <span className="rounded-full border border-stone-200 bg-white px-4 py-2 shadow-sm">
+                    Service: {timeEstimateDisplay}
+                  </span>
+                )}
+              </div>
+            )}
+            <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-white/85 p-5 shadow-sm">
+              <p className="text-sm font-semibold text-stone-900">
+                Need {service.name} in {BUSINESS.address.city}?
+              </p>
+              <p className="mt-2 text-sm leading-7 text-stone-700">
+                {isWatchRepair
+                  ? "Yes. If you need watch battery replacement or watch repair in Pasadena, we handle batteries, crystals, crowns, stems, and band sizing in-house with clear approval before work begins."
+                  : isRingSizing
+                    ? "Yes. If you need ring sizing in Pasadena, we measure fit, inspect stones, explain the safest sizing method, and confirm timing before work begins."
+                    : isBraceletRepair
+                      ? "Yes. If you need bracelet repair in Pasadena, we handle broken clasps, weak links, tennis bracelet security, and fit adjustments in-house with clear approval before work begins."
+                      : `Yes. We provide in-house ${service.name.toLowerCase()} with transparent pricing, clear timing, and local pickup at our ${BUSINESS.address.city} shop.`}
+              </p>
+            </div>
+
+            {/* "Last updated" removed (adds clutter and doesn't improve conversion). */}
           </div>
-          <div
-            className={`relative order-2 ${
-              isMobileHeroImageHidden || isCustomDesign ? "hidden md:block" : ""
-            }`}
-          >
-            <div
-              className={`relative ${
-                isCustomDesign ? "h-[160px]" : "h-[220px]"
-              } overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]`}
-            >
+          <div className="relative order-2 md:order-2">
+            <div className="relative h-[270px] overflow-hidden rounded-xl md:h-[380px] md:rounded-3xl md:border md:border-stone-200 md:shadow-[0_28px_70px_rgba(58,25,16,0.18)]">
               <picture>
                 {mobileHeroImageProps?.srcSet ? (
                   <source
                     media="(max-width: 767px)"
                     srcSet={mobileHeroImageProps.srcSet}
-                    sizes={mobileHeroImageSizes}
+                    sizes={heroImageSizes}
                   />
                 ) : null}
                 <img
                   {...desktopHeroImageProps}
-                  alt={`${service.name} at Susie's Jewelry Repair`}
                   fetchPriority="high"
                   loading="eager"
                   decoding="async"
@@ -1822,8 +1795,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <div className="absolute inset-0 hidden bg-gradient-to-t from-[#1a0f10]/55 via-transparent to-transparent md:block" />
               <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.20),_transparent_55%)] md:block" />
             </div>
-            <div className="mt-3 rounded-xl bg-white p-4 shadow-[0_12px_30px_rgba(90,55,35,0.08)] ring-1 ring-stone-200 md:absolute md:-bottom-8 md:left-6 md:right-6 md:mt-0">
-              <div className="text-xs uppercase tracking-[0.18em] text-brand-burgundy">
+            <div className="mt-3 rounded-xl border border-stone-200 bg-white p-4 md:absolute md:-bottom-8 md:left-6 md:right-6 md:mt-0 md:shadow-sm">
+              <div className="text-xs uppercase tracking-[0.25em] text-brand-burgundy">
                 In-house assessment
               </div>
               <p className="mt-2 text-sm text-stone-600">
@@ -1834,57 +1807,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {directAnswerSnapshot ? (
-        <section
-          data-service-section="direct-answer"
-          aria-label={`${service.name} direct answer`}
-          className="border-t border-brand-gold/25 bg-[#fffaf3] py-10"
-        >
-          <div className="mx-auto max-w-6xl px-6">
-            <div
-              className="rounded-[2rem] border border-brand-gold/35 bg-white p-5 shadow-[0_18px_42px_rgba(58,25,16,0.10)] md:p-7"
-              data-testid="service-direct-answer"
-            >
-              <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                Direct answer
-              </p>
-              <h2 className="mt-3 font-serif text-2xl leading-tight text-stone-900 md:text-3xl">
-                {directAnswerSnapshot.question}
-              </h2>
-              <p className="mt-4 max-w-3xl text-[15px] leading-7 text-stone-700">
-                {directAnswerSnapshot.answer}
-              </p>
-              <div className="mt-6 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-stone-600">
-                    Best next step
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-stone-700">
-                    {directAnswerSnapshot.decision}
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-stone-600">
-                    Why this matters
-                  </p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-stone-700">
-                    {directAnswerSnapshot.proofPoints.map((point) => (
-                      <li key={point} className="flex items-start gap-3">
-                        <span className="mt-2 inline-flex h-2 w-2 rounded-full bg-brand-gold" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       <Suspense fallback={null}>
         <DeferredServiceSections>
-          <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
+          <section data-service-section="how-it-works" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -1927,7 +1852,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="reveal-on-scroll relative hidden overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm md:block">
+            <div className="reveal-on-scroll relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm">
               <div className="relative h-64">
                 <Image
                   src={heroSupportImage}
@@ -1950,7 +1875,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href="/book"
+                    href={`/book?from=services_finder&service=${slug}`}
                     prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
@@ -1958,14 +1883,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     data-track-target="book"
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Book a Repair
+                    Book This Repair
                   </Link>
+                  <a
+                    href={`tel:${BUSINESS.phone}`}
+                    className="micro-interaction inline-flex items-center justify-center rounded-full border border-brand-gold px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-burgundy hover:bg-brand-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Call the Shop
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-16 hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {processGallery.map((img, index) => {
               const delayClass = `reveal-delay-${(index % 3) + 1}`;
               return (
@@ -2000,7 +1931,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       {isFlagshipService ? (
         <>
-          <section data-service-section="what-to-expect" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-12 md:py-20">
+          <section data-service-section="what-to-expect" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2017,7 +1948,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <article
                       key={block.title}
-                      className={`reveal-on-scroll ${delayClass} ${spanClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
+                      className={`reveal-on-scroll ${delayClass} ${spanClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
                     >
                       <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                         {block.eyebrow}
@@ -2041,7 +1972,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-10 hidden gap-5 md:grid md:grid-cols-2">
+              <div className="mt-10 grid gap-5 md:grid-cols-2">
                 {expectImages.map((img) => (
                   <div
                     key={img.url}
@@ -2068,7 +1999,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section data-service-section="pricing-timing" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
+          <section data-service-section="pricing-timing" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,_rgba(122,46,58,0.06),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2107,7 +2038,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
 
               <div
-                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-5 shadow-sm md:p-6"
+                className="mt-8 reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white p-6 shadow-sm"
                 data-testid="service-market-snapshot"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
@@ -2121,7 +2052,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-700">
                   {marketSnapshot.summary}
                 </p>
-                <div className="mt-5 hidden gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {marketSnapshot.scenarios.map((scenario) => (
                     <article
                       key={scenario.title}
@@ -2163,14 +2094,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Next step
                 </div>
                 <h3 className="mt-2 font-serif text-2xl text-stone-900">
-                  Choose a quick action.
+                  Ready for an in-shop assessment?
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-stone-700">
-                  Book for in-shop assessment with transparent pricing before work begins. Prefer a written range first? Get a quote.
+                  Booking gives us an intake time so we can inspect the piece, confirm the work, and explain next steps clearly.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
-                    href="/book"
+                    href={`/book?from=services_finder&service=${slug}`}
                     prefetch={false}
                     data-track-event="service_cta_click"
                     data-track-slug={slug}
@@ -2178,14 +2109,25 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     data-track-target="book"
                     className="micro-interaction inline-flex items-center justify-center rounded-full bg-brand-burgundy px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-white hover:bg-brand-burgundy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
-                    Book a Repair
+                    Book This Repair
+                  </Link>
+                  <Link
+                    href="/quote"
+                    prefetch={false}
+                    data-track-event="service_cta_click"
+                    data-track-slug={slug}
+                    data-track-placement="pricing_timing"
+                    data-track-target="quote"
+                    className="inline-flex min-h-12 items-center justify-center px-2 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-stone-600 underline decoration-brand-gold/60 underline-offset-4 hover:text-brand-burgundy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                  >
+                    Need pricing first? Request a quote
                   </Link>
                 </div>
               </div>
             </div>
           </section>
 
-          <section data-service-section="before-you-visit" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-12 md:py-20">
+          <section data-service-section="before-you-visit" className="cv-section relative border-t border-stone-200/70 bg-stone-50 py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,_rgba(122,46,58,0.08),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
@@ -2196,7 +2138,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </h2>
 
               <div className="mt-10 grid gap-5 md:grid-cols-2">
-                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
+                <div className="reveal-on-scroll rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     What to bring
                   </div>
@@ -2211,7 +2153,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </div>
 
                 <div
-                  className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-5 shadow-sm md:p-6"
+                  className="reveal-on-scroll reveal-delay-2 rounded-3xl border border-brand-gold/30 bg-gradient-to-br from-[#fffaf3] via-white to-[#f8efe2] p-6 shadow-sm"
                   data-testid="service-decision-module"
                 >
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
@@ -2246,53 +2188,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   </details>
                 </div>
               </div>
-
-              {pearlIntakeChecks.length > 0 ? (
-                <div className="mt-6 rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Pearl intake proof
-                  </div>
-                  <h3 className="mt-3 font-serif text-2xl text-stone-900">
-                    The three checks that shape a restringing quote.
-                  </h3>
-                  <div className="mt-5 grid gap-4 md:grid-cols-3">
-                    {pearlIntakeChecks.map((item) => (
-                      <article
-                        key={item.title}
-                        className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
-                      >
-                        <h4 className="font-serif text-lg text-stone-900">{item.title}</h4>
-                        <p className="mt-2 text-sm leading-6 text-stone-700">{item.detail}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-              {chainIntakeChecks.length > 0 ? (
-                <div className="mt-6 rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
-                    Chain intake proof
-                  </div>
-                  <h3 className="mt-3 font-serif text-2xl text-stone-900">
-                    The chain intake triage we use before recommending a repair.
-                  </h3>
-                  <div className="mt-5 grid gap-4 md:grid-cols-3">
-                    {chainIntakeChecks.map((item) => (
-                      <article
-                        key={item.title}
-                        className="rounded-2xl border border-stone-200 bg-stone-50 p-4"
-                      >
-                        <h4 className="font-serif text-lg text-stone-900">{item.title}</h4>
-                        <p className="mt-2 text-sm leading-6 text-stone-700">{item.detail}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
             </div>
           </section>
 
-          <section data-service-section="why-customers-choose-us" className="cv-section relative border-t border-stone-200/70 bg-white py-12 md:py-20">
+          <section data-service-section="why-customers-choose-us" className="cv-section relative border-t border-stone-200/70 bg-white py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,_rgba(209,184,130,0.14),_transparent_55%)]" />
             <div className="mx-auto max-w-6xl px-6">
               <div className="flex flex-wrap items-end justify-between gap-6">
@@ -2315,7 +2214,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   return (
                     <div
                       key={item.title}
-                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm md:p-6`}
+                      className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-6 shadow-sm`}
                     >
                       <div className="font-serif text-xl text-stone-900">{item.title}</div>
                       <p className="mt-2 text-sm leading-7 text-stone-700">{item.detail}</p>
@@ -2324,8 +2223,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 })}
               </div>
 
-              <div className="mt-8 grid gap-5 md:mt-12 md:grid-cols-[1fr_1.2fr]">
-                <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-5 shadow-sm md:p-6">
+              <div className="mt-12 grid gap-5 md:grid-cols-[1fr_1.2fr]">
+                <div className="reveal-on-scroll rounded-3xl border border-brand-gold/25 bg-white/85 p-6 shadow-sm">
                   <div className="text-[10px] font-bold uppercase tracking-[0.35em] text-brand-burgundy">
                     Trust note
                   </div>
@@ -2343,7 +2242,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <div className="reveal-on-scroll reveal-delay-2 relative hidden overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm md:block">
+                <div className="reveal-on-scroll reveal-delay-2 relative overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
                   <div className="relative h-56 md:h-full">
                     <Image
                       src={whyImageSrc}
@@ -2367,9 +2266,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                     return (
                       <figure
                         key={`${item.quote}-${item.byline}`}
-                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm ${
-                          index > 0 ? "hidden md:block" : ""
-                        }`}
+                        className={`reveal-on-scroll ${delayClass} rounded-3xl border border-stone-200 bg-white p-5 shadow-sm`}
                       >
                         <blockquote className="text-sm leading-7 text-stone-700">
                           &ldquo;{item.quote}&rdquo;
@@ -2421,6 +2318,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       </div>
                     )}
                   </div>
+                  {isRingSizing ? (
+                    <div className="mt-4 rounded-lg border border-stone-200 bg-white/80 px-4 py-4 text-sm leading-7 text-stone-700">
+                      Most ring sizing jobs depend on metal type, number of sizes, and whether stones or prongs need reinforcement. Booking first lets us confirm fit, scope, and timing in one visit.
+                    </div>
+                  ) : null}
                   <div className="mt-6 border-t border-stone-200 pt-4" />
                 </>
               )}
@@ -2457,7 +2359,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   Why customers choose us
                 </div>
                 <ul className="mt-3 space-y-2 text-sm text-stone-600">
-                  <li>• In-house repairs handled on-site start to finish</li>
+                  <li>• In-house bench work handled on-site start to finish</li>
                   <li>• Same Day/Next Day service on most pieces</li>
                   <li>• Clear approval before work starts</li>
                 </ul>
@@ -2504,13 +2406,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </section>
       ) : null}
 
-      <section data-service-section="faqs" className="cv-section bg-white py-12 md:py-16">
+      <section data-service-section="faqs" className="cv-section bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
             FAQs
           </p>
           <h2 className="mt-3 font-serif text-3xl text-stone-900">
-            Answers about {service.name}.
+            Answers before you book {service.name.toLowerCase()}.
           </h2>
           <div className="mt-8 space-y-4">
             {resolvedFaqs.map((faq: FaqItem) => (
@@ -2535,14 +2437,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section data-service-section="related-services" className="cv-section bg-stone-100 py-12 md:py-16">
+      <section data-service-section="related-services" className="cv-section bg-stone-100 py-16">
         <div className="mx-auto max-w-6xl px-6">
           {helpfulReads.length > 0 ? (
             <div className="mb-10">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-brand-burgundy">
-                    Pricing and repair guides
+                    Pricing and service guides
                   </p>
                   <h2 className="mt-2 font-serif text-2xl text-stone-900">
                     Read the key questions customers ask before booking
@@ -2557,22 +2459,18 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </Link>
               </div>
               <div className="mt-6 grid gap-4 md:grid-cols-3">
-                {helpfulReads.map((item, index) => (
+                {helpfulReads.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     prefetch={false}
-                    className={`rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
-                      index > 1 ? "hidden md:block" : ""
-                    }`}
+                    className="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
                   >
                     <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-burgundy">
                       Blog guide
                     </p>
                     <h3 className="mt-3 text-base font-semibold text-stone-900">{item.title}</h3>
-                    <p className="mt-2 hidden text-sm leading-7 text-stone-600 md:block">
-                      {item.excerpt}
-                    </p>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">{item.excerpt}</p>
                   </Link>
                 ))}
               </div>
@@ -2585,7 +2483,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Related services
               </p>
               <h2 className="mt-2 font-serif text-2xl text-stone-900">
-                Compare nearby repair options
+                Compare nearby service options
               </h2>
             </div>
             <Link
@@ -2611,7 +2509,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <CtaBand serviceName={service.name} />
+      <CtaBand />
 
           <ServiceInteractionTracker serviceSlug={slug} />
         </DeferredServiceSections>
@@ -2628,6 +2526,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(serviceFaqSchema(schemaService)),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
       />
 
     </SiteShell>
