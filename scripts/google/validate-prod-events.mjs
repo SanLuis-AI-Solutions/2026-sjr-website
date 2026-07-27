@@ -403,7 +403,7 @@ async function main() {
       page,
       "services_hub_cta_click",
       async () => {
-        const cta = page.locator("main").getByRole("link", { name: /^Get Fast Quote$/i }).first();
+        const cta = page.locator("main").getByRole("link", { name: /^Book a Repair$/i }).first();
         await clickTrackedTarget(cta);
         await page.waitForLoadState("networkidle");
       },
@@ -470,7 +470,7 @@ async function main() {
       "service_cta_click",
       async () => {
         const cta = page
-          .locator('[data-service-section="hero"] a[href="/quote"]')
+          .locator('[data-service-section="hero"] a[data-track-target="book"]')
           .first();
         await clickTrackedTarget(cta);
         await page.waitForLoadState("networkidle");
@@ -534,10 +534,10 @@ async function main() {
       async () => {
         const quickAction = page
           .getByRole("region", { name: /^quick actions$/i })
-          .getByRole("link", { name: /^Get Fast Quote$/i });
+          .getByRole("link", { name: /^Book a Repair$/i });
         await clickTrackedTarget(quickAction);
       },
-      /\/quote(?:\?|$)/,
+      /\/book(?:\?|$)/,
       report
     );
 
